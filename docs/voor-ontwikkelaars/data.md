@@ -40,15 +40,21 @@ from pydantic import BaseModel, Field
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden"
+    gedeeld_met_aantal_adressen: Optional[int] = Field(
+        default=None, alias="gedeeldMetAantalAdressen"
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte met ruimtedetailsoort berging.
+    Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte.
     """
 ```
 
 De task `genereer-vera-bvg-modellen` zal de body van deze classes samenvoegen met de gelijknamige VERA class en zo de toegevoegde attributen beschikbaar maken.
+
+## Lookuptabellen
+
+In lookuptabellen slaan we constanten en variabelen op die nodig zijn om de punten van een stelselgroep te berekenen.
+In de `woningwaardering`-package gebruiken we CSV als bestandsformaat voor lookuptabellen.
+Dat formaat is bewust gekozen: zodra lookuptabeldata uit meerdere rijen bestaat, blijft CSV vaak beter leesbaar dan bijvoorbeeld JSON of YAML.
 
 ## Referentiedata
 

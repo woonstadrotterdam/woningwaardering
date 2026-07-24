@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -80,7 +80,7 @@
       "naam": "Rijksmonument"
     }
   ],
-  "datum_afsluiten_huurovereenkomst": "2019-11-18",
+  "datumAfsluitenHuurovereenkomst": "2019-11-18",
   "ruimten": [
     {
       "id": "Space_74227409",
@@ -159,7 +159,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Closetcombinatie_139398918",
-          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2mJ",
+          "idBimmodel": "3YEo1INuzC2BEoDDa0V2mJ",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -175,7 +175,7 @@
         },
         {
           "id": "Fontein_139398919",
-          "id_bimmodel": "3YEo1INuzC2BEoDDa0V2nj",
+          "idBimmodel": "3YEo1INuzC2BEoDDa0V2nj",
           "naam": "Fontein",
           "soort": {
             "code": "SAN",
@@ -252,7 +252,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Wastafel_74235854",
-          "id_bimmodel": "0RKQxtlv90RvJesGGu10Pr",
+          "idBimmodel": "0RKQxtlv90RvJesGGu10Pr",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -268,7 +268,7 @@
         },
         {
           "id": "Douche_139399416",
-          "id_bimmodel": "0RKQxtlv90RvJesGGu10Pq",
+          "idBimmodel": "0RKQxtlv90RvJesGGu10Pq",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -284,7 +284,7 @@
         },
         {
           "id": "Closetcombinatie_139399417",
-          "id_bimmodel": "0RKQxtlv90RvJesGGu10Pp",
+          "idBimmodel": "0RKQxtlv90RvJesGGu10Pp",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -463,7 +463,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_139399905",
-          "id_bimmodel": "2y8ddfDbb5f8tpBj7Tnoqx",
+          "idBimmodel": "2y8ddfDbb5f8tpBj7Tnoqx",
           "naam": "Aanrecht",
           "soort": {
             "code": "KEU",
@@ -489,7 +489,7 @@
   "bouwkundigeElementen": [
     {
       "id": "23109000031",
-      "id_bimmodel": null,
+      "idBimmodel": null,
       "naam": "Ketel",
       "omschrijving": "Woning collectief ketelhuis",
       "soort": {

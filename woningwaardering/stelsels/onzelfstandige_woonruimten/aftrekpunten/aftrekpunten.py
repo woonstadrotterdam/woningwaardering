@@ -5,16 +5,16 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.criterium_id import CriteriumId
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.onzelfstandige_woonruimten.oppervlakte_van_vertrekken import (
     OppervlakteVanVertrekken,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaardering,
-    WoningwaarderingResultatenWoningwaarderingCriterium,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,35 +43,15 @@ class Aftrekpunten(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criterium_groep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
 
-        woningwaardering_groep.woningwaarderingen = []
-        if (
-            aftrekpunten_oppervlakte_vertrekken
-            := self._aftrekpunten_oppervlakte_vertrekken(
-                eenheid, woningwaardering_resultaat
-            )
-        ):
-            woningwaardering_groep.woningwaarderingen.append(
-                aftrekpunten_oppervlakte_vertrekken
-            )
-
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-                and woningwaardering.criterium is not None
-                and woningwaardering.criterium.bovenliggende_criterium is None
-            )
+        self._aftrekpunten_oppervlakte_vertrekken(
+            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
         )
 
-        woningwaardering_groep.punten = float(punten)
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -80,20 +60,22 @@ class Aftrekpunten(Stelselgroep):
 
     def _aftrekpunten_oppervlakte_vertrekken(
         self,
+        waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: (
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
-    ) -> WoningwaarderingResultatenWoningwaardering | None:
+    ) -> WaarderingBuilder | None:
         """
         Returned 4 punten aftrek indien de totale oppervlakte van de vertrekken minder is dan 8 m2.
 
         Args:
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
             eenheid (EenhedenEenheid): Eenheid om de aftrekpunten voor de oppervlakte van de vertrekken te berekenen
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Woningwaarderingresultaat om de oppervlakte van de vertrekken te berekenen
 
         Returns:
-            WoningwaarderingResultatenWoningwaardering | None: Eventuele aftrekpunten voor de oppervlakte van de vertrekken
+            WaarderingBuilder | None: Eventuele aftrekpunten voor de oppervlakte van de vertrekken
         """
 
         # check of de oppervlakte van de vertrekken al berekend is
@@ -118,14 +100,8 @@ class Aftrekpunten(Stelselgroep):
             ).waardeer(eenheid)
 
         if oppervlakte_resultaat.woningwaarderingen:
-            totale_oppervlakte_vertrekken = sum(
-                Decimal(str(woningwaardering.aantal))
-                for woningwaardering in oppervlakte_resultaat.woningwaarderingen
-                if (
-                    woningwaardering.criterium
-                    and woningwaardering.criterium.bovenliggende_criterium is None
-                    and woningwaardering.aantal is not None
-                )
+            totale_oppervlakte_vertrekken = utils.som_effectieve_aantal_waarderingen(
+                oppervlakte_resultaat.woningwaarderingen
             )
 
             # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
@@ -134,23 +110,16 @@ class Aftrekpunten(Stelselgroep):
                 logger.info(
                     f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
                 )
-                woningwaardering = WoningwaarderingResultatenWoningwaardering(
-                    criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                        naam=f"Totale oppervlakte in Rubriek '{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}' is minder dan 8m2",
-                        id=str(
-                            CriteriumId(
-                                stelselgroep=Woningwaarderingstelselgroep.aftrekpunten,
-                                criterium=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
-                            )
-                        ),
-                        meeteenheid=Meeteenheid.vierkante_meter_m2,
-                    )
+                waardering = waarderingsgroep_builder.met_onderliggend(
+                    id=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
+                    naam=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} is minder dan 8 m²",
+                    punten=aftrekpunten,
+                    meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
-                woningwaardering.aantal = float(
+                waardering.aantal = float(
                     utils.rond_af(totale_oppervlakte_vertrekken, 2)
                 )
-                woningwaardering.punten = aftrekpunten
-                return woningwaardering
+                return waardering
             else:
                 logger.debug(
                     f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken >= 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), geen aftrek hiervoor voor {self.stelselgroep.naam}"
@@ -160,7 +129,7 @@ class Aftrekpunten(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=Aftrekpunten(peildatum=date(2026, 1, 1)),
+        instance=Aftrekpunten(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

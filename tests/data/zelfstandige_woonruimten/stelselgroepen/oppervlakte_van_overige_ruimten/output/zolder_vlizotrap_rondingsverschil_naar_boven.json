@@ -14,10 +14,25 @@
       "punten": 5.25,
       "woningwaarderingen": [
         {
+          "aantal": 9.52,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 7.5
+        },
+        {
           "aantal": 6.85,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_berging",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_berging",
             "naam": "Berging",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -27,8 +42,11 @@
         {
           "aantal": 2.67,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_zolder",
             "naam": "Zolder",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"

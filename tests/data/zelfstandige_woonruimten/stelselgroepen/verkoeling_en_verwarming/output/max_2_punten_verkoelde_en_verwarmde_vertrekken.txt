@@ -1,0 +1,16 @@
+SAMENVATTING 37101000032
+  Verkoeling en verwarming                                                        8.00 pt
+                                                                                ---------
+
+VERKOELING EN VERWARMING
+  Verwarmde vertrekken
+    - Slaapkamer1                                                                 2.00 pt
+    - Slaapkamer2                                                                 2.00 pt
+    - Slaapkamer3                                                                 2.00 pt
+  Verkoelde vertrekken
+    - Slaapkamer1                                                                 1.00 pt
+    - Slaapkamer2                                                                 1.00 pt
+    - Slaapkamer3                                                                 1.00 pt
+    - Maximaal 2 punten                                                          -1.00 pt
+                                                                                ---------
+  Totaal                                                                          8.00 pt

@@ -14,10 +14,19 @@
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__keuken",
+            "naam": "Keuken"
+          }
+        },
+        {
           "aantal": 1000.0,
           "criterium": {
             "id": "keuken__keuken__lengte_aanrecht_aanrecht",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -26,18 +35,41 @@
           "punten": 4.0
         },
         {
+          "criterium": {
+            "id": "keuken__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken"
+            }
+          }
+        },
+        {
           "aantal": 2.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw koelkast (in zelfde ruimte)"
+            "id": "keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "keuken__keuken__extra_voorziening",
-            "naam": "Inbouw oven elektrisch"
+            "id": "keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_oven_elektrisch",
+            "naam": "Inbouw oven elektrisch",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }

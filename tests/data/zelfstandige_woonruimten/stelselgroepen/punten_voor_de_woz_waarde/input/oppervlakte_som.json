@@ -67,7 +67,7 @@
       "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 20,
       "aantal": 2,
-      "gedeeld_met_aantal_eenheden": 4
+      "gedeeldMetAantalAdressen": 4
     },
     {
       "id": "Space_5",
@@ -82,7 +82,7 @@
       "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
       "oppervlakte": 10,
       "aantal": 2,
-      "gedeeld_met_aantal_eenheden": 4
+      "gedeeldMetAantalAdressen": 4
     }
   ]
 }

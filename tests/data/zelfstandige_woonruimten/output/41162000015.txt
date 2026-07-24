@@ -1,62 +1,84 @@
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Groep                             | Naam                                                                        |       Aantal | Meeteenheid         |   Punten |  Opslag |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Badruimte                                                                   |         1.89 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Woonkamer (+1 kast)                                                         |        18.79 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 1 (+1 kast)                                                      |         5.94 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 2 (+1 kast)                                                      |        12.74 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Keuken (+2 kasten)                                                          |         5.39 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 3 (+2 kasten)                                                    |         8.56 | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Totaal                                                                      |        53.31 | Vierkante meter, m2 |    53.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van overige ruimten   | Berging 1                                                                   |         7.78 | Vierkante meter, m2 |          |         |
-| Oppervlakte van overige ruimten   | Berging 2                                                                   |         4.03 | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van overige ruimten   | Totaal                                                                      |        11.81 | Vierkante meter, m2 |     9.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Verwarmde vertrekken                                                        |              |                     |    12.00 |         |
-| Verkoeling en verwarming          |   - Badruimte                                                               |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Woonkamer                                                               |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 1                                                            |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 2                                                            |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Keuken                                                                  |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 3                                                            |              |                     |   [2.00] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Totaal                                                                      |              |                     |    12.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Privé buitenruimten aanwezig                                                |              |                     |     2.00 |         |
-| Buitenruimten                     | Totaal (privé)                                                              |         8.00 | Vierkante meter, m2 |     2.80 |         |
-| Buitenruimten                     |   - Balkon 1                                                                |       [2.81] | Vierkante meter, m2 |          |         |
-| Buitenruimten                     |   - Balkon 2                                                                |        [5.2] | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Totaal                                                                      |              |                     |     4.75 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | C (Energie-index)                                                           |              |                     |    15.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | Totaal                                                                      |              |                     |    15.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Keuken: Lengte aanrecht                                                     |      2010.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Totaal                                                                      |      2010.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Badruimte - Wastafel                                                        |         1.00 |                     |     1.00 |         |
-| Sanitair                          | Badruimte - Douche                                                          |         1.00 |                     |     4.00 |         |
-| Sanitair                          | Toiletruimte - Staand Toilet                                                |         1.00 |                     |     3.00 |         |
-| Sanitair                          | Toiletruimte - Wastafel                                                     |         1.00 |                     |     1.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Totaal                                                                      |              |                     |     9.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2024                                    |    295000.00 |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |    19.24 |         |
-| Punten voor de WOZ-waarde         |   - Factor I                                                                |    [15329.0] |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |    18.75 |         |
-| Punten voor de WOZ-waarde         |   - Oppervlakte van vertrekken en overige ruimten                           |       [65.0] | Vierkante meter, m2 |          |         |
-| Punten voor de WOZ-waarde         |   - Factor II                                                               |      [242.0] |                     |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |    38.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |   148.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-|                                   | Maximale huur                                                               |       967.18 | EUR                 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
+SAMENVATTING 41162000015
+  Oppervlakte van vertrekken                                                     53.00 pt
+  Oppervlakte van overige ruimten                                                 9.00 pt
+  Verkoeling en verwarming                                                       12.00 pt
+  Buitenruimten                                                                   4.75 pt
+  Energieprestatie                                                               15.00 pt
+  Keuken                                                                          7.00 pt
+  Sanitair                                                                        9.00 pt
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                                      38.00 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                                ---------
+  Totaal afgerond op hele punten                                                148.00 pt
+  Maximaal redelijke huur                                           967.18 EUR
+
+OPPERVLAKTE VAN VERTREKKEN
+  Badruimte                                                           1.89 m²
+  Woonkamer (+1 kast)                                                18.79 m²
+  Slaapkamer 1 (+1 kast)                                              5.94 m²
+  Slaapkamer 2 (+1 kast)                                             12.74 m²
+  Keuken (+2 kasten)                                                  5.39 m²
+  Slaapkamer 3 (+2 kasten)                                            8.56 m²
+                                                                ----------      ---------
+  Totaal                                                             53.31 m²    53.00 pt
+
+OPPERVLAKTE VAN OVERIGE RUIMTEN
+  Berging 1                                                           7.78 m²
+  Berging 2                                                           4.03 m²
+                                                                ----------      ---------
+  Totaal                                                             11.81 m²     9.00 pt
+
+VERKOELING EN VERWARMING
+  Verwarmde vertrekken
+    - Badruimte                                                                   2.00 pt
+    - Woonkamer                                                                   2.00 pt
+    - Slaapkamer 1                                                                2.00 pt
+    - Slaapkamer 2                                                                2.00 pt
+    - Keuken                                                                      2.00 pt
+    - Slaapkamer 3                                                                2.00 pt
+                                                                                ---------
+  Totaal                                                                         12.00 pt
+
+BUITENRUIMTEN
+  Privé                                                               8.00 m²     2.80 pt
+    - Balkon 1                                                        2.81 m²
+    - Balkon 2                                                        5.20 m²
+  Privé buitenruimten aanwezig                                                    2.00 pt
+  Afronding op kwartpunten                                                       -0.05 pt
+                                                                                ---------
+  Totaal                                                                          4.75 pt
+
+ENERGIEPRESTATIE
+  C (Energie-index)                                                              15.00 pt
+                                                                                ---------
+  Totaal                                                                         15.00 pt
+
+KEUKEN
+  Keuken
+    - Lengte aanrecht                                              2010.00 mm     7.00 pt
+                                                                                ---------
+  Totaal                                                                          7.00 pt
+
+SANITAIR
+  Badruimte
+    - Wastafel                                                        1.00 st     1.00 pt
+    - Douche                                                          1.00 st     4.00 pt
+  Toiletruimte
+    - Staand Toilet                                                   1.00 st     3.00 pt
+    - Wastafel                                                        1.00 st     1.00 pt
+                                                                                ---------
+  Totaal                                                                          9.00 pt
+
+PUNTEN VOOR DE WOZ-WAARDE
+  WOZ-waarde op waardepeildatum 01-01-2024                       295000.00 EUR
+  Onderdeel I                                                                    19.24 pt
+    - Factor I                                                    15329.00 EUR
+  Onderdeel II                                                                   18.75 pt
+    - Oppervlakte van vertrekken en overige ruimten                  65.00 m²
+    - Factor II                                                     242.00 EUR
+  Afronding op kwartpunten                                                        0.01 pt
+                                                                                ---------
+  Totaal                                                                         38.00 pt

@@ -4,8 +4,8 @@
     "code": "ZEL",
     "naam": "Zelfstandige woonruimte"
   },
-  "begin_bouwdatum": "2023-01-01",
-  "in_exploitatiedatum": "2024-08-01",
+  "beginBouwdatum": "2023-01-01",
+  "inExploitatiedatum": "2024-08-01",
   "klimaatbeheersing": [
     {
       "code": "IND",
@@ -15,7 +15,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "c",
+    "huisnummerToevoeging": "c",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"

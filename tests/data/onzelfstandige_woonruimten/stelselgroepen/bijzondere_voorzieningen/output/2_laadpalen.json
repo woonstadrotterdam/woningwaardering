@@ -17,7 +17,11 @@
           "aantal": 2.0,
           "criterium": {
             "id": "bijzondere_voorzieningen__laadpalen",
-            "naam": "Laadpalen"
+            "naam": "Laadpalen",
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 4.0
         }

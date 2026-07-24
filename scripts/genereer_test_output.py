@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from woningwaardering import Woningwaardering
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -157,12 +157,17 @@ def main() -> int:
             )
             input_updated = _write_text_if_changed(output_file_path, output_content)
 
-            if not _is_stelselgroep_input(input_file_path):
-                txt_path = output_file_path.with_suffix(".txt")
-                txt_content = naar_tabel(woningwaardering_resultaat).get_string() + "\n"
-                input_updated = (
-                    _write_text_if_changed(txt_path, txt_content) or input_updated
-                )
+            txt_path = output_file_path.with_suffix(".txt")
+            txt_content = (
+                naar_rapport(
+                    woningwaardering_resultaat, eenheid_id=eenheid_input.id
+                ).get_string()
+                + "\n"
+            )
+            # Altijd synchroniseren zodat eventuele opmaakwijzigingen van .txt outputs doorgevoerd
+            # worden, ook als JSON output ongewijzigd blijft.
+            if _write_text_if_changed(txt_path, txt_content):
+                input_updated = True
 
             if input_updated:
                 updated += 1

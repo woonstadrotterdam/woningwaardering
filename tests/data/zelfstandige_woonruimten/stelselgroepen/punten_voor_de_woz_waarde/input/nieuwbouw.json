@@ -9,7 +9,7 @@
   "adres": {
     "straatnaam": "Mauritsstraat",
     "huisnummer": "44",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "3012CJ",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -85,7 +85,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Ketel_82123536",
-          "id_bimmodel": "2k22N_pdTCYeGXB4k1S$ti",
+          "idBimmodel": "2k22N_pdTCYeGXB4k1S$ti",
           "naam": "Ketel",
           "soort": {
             "code": "VER",
@@ -143,7 +143,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_82123432",
-          "id_bimmodel": "13pwBguB9DqgURg72nn7P4",
+          "idBimmodel": "13pwBguB9DqgURg72nn7P4",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -159,7 +159,7 @@
         },
         {
           "id": "Wastafel_82123438",
-          "id_bimmodel": "13pwBguB9DqgURg72nn7Sv",
+          "idBimmodel": "13pwBguB9DqgURg72nn7Sv",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -197,7 +197,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_82123576",
-          "id_bimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -250,7 +250,7 @@
           "bouwkundigeElementen": [
             {
               "id": "Ketel_82123536",
-              "id_bimmodel": "2k22N_pdTCYeGXB4k1S$ti",
+              "idBimmodel": "2k22N_pdTCYeGXB4k1S$ti",
               "naam": "Ketel",
               "soort": {
                 "code": "VER",
@@ -498,7 +498,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_82123493",
-          "id_bimmodel": "13pwBguB9DqgURg72nn72C",
+          "idBimmodel": "13pwBguB9DqgURg72nn72C",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -513,7 +513,7 @@
         },
         {
           "id": "Closetcombinatie_82123500",
-          "id_bimmodel": "159rhSKFPCaQkhEgKCsAcx",
+          "idBimmodel": "159rhSKFPCaQkhEgKCsAcx",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",

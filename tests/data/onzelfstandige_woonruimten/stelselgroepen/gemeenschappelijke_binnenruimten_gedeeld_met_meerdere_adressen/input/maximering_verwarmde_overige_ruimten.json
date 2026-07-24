@@ -13,7 +13,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     },
@@ -29,7 +29,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     },
@@ -45,7 +45,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     },
@@ -61,7 +61,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 2,
+      "gedeeldMetAantalAdressen": 2,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     },
@@ -77,7 +77,7 @@
       },
       "naam": "Berging",
       "oppervlakte": 20.0,
-      "gedeeld_met_aantal_eenheden": 3,
+      "gedeeldMetAantalAdressen": 3,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
       "verwarmd": true
     }

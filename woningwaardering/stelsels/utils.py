@@ -1,24 +1,24 @@
 import asyncio
 import warnings
 from datetime import date
-from decimal import ROUND_HALF_UP, Decimal
-from functools import wraps
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
-from typing import Any, Callable, Counter, Iterator, List, Tuple
+from typing import Any, Callable, Counter, List, Tuple
 
 import pandas as pd
 import requests
 from loguru import logger
-from prettytable import PrettyTable
+from pydantic import BaseModel
 
-from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
+    Referentiedata,
     WoningwaarderingResultatenWoningwaardering,
+    WoningwaarderingResultatenWoningwaarderingCriterium,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -34,293 +34,559 @@ from woningwaardering.vera.referentiedata.eenheidmonument import (
     Eenheidmonument,
     EenheidmonumentReferentiedata,
 )
+from woningwaardering.vera.referentiedata.woningwaarderingstelsel import (
+    Woningwaarderingstelsel,
+)
+from woningwaardering.vera.referentiedata.woningwaarderingstelselgroep import (
+    Woningwaarderingstelselgroep,
+)
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-index: int = 0  # nodig voor mypy voor de global index voor de tabel
+_STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
+    {
+        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+        Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,
+    }
+)
 
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
+# Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
+W_NAAM = 60
+W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
+W_EENHEID = 3  # links uitgelijnd na het getal, bijv. "EUR" / "m²" / "st"
+W_PUNTEN = 9  # "XXX.00 pt" (drie cijfers voor de komma)
+W_OPSLAG = 7
+_GAP = "  "
+_INDENT = "  "
+_BULLET = "- "
+# Inschuif aan het begin van elke tabelregel (naamkolom).
+_TABEL_RIJ_INSCHUIF = "  "
+# Spatie tussen getal- en eenheidskolom.
+_GETAL_EENHEID_GAP = " "
 
-def _voeg_onderliggende_woningwaarderingen_toe(
-    table: PrettyTable,
-    stelselgroep_naam: str,
-    woningwaardering: WoningwaarderingResultatenWoningwaardering,
-    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering],
-    aantal_waarderingen: int,
-    indent: int = 0,
-) -> None:
+
+class WoningwaarderingRapport:
+    """Tekstuele weergave van een woningwaarderingresultaat (samenvatting + detailsecties)."""
+
+    def __init__(self, lines: list[str]) -> None:
+        self._lines = lines
+
+    def get_string(self) -> str:
+        return "\n".join(self._lines)
+
+    def __str__(self) -> str:
+        return self.get_string()
+
+
+def _tabel_fmt_num(waarde: float | Decimal | None) -> str:
+    if waarde is None:
+        return ""
+    return (
+        f"{Decimal(str(waarde)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP):.2f}"
+    )
+
+
+_MEETEENHEID_AFKORTING: dict[str, str] = {
+    "M2": "m²",
+    "MIL": "mm",
+    "EUR": "EUR",
+    "STU": "st",
+    "MTR": "m",
+    "M3": "m³",
+    "CM": "cm",
+    "KGR": "kg",
+    "GRM": "g",
+    "LTR": "l",
+    "MIN": "min",
+    "UUR": "uur",
+}
+
+
+def _meeteenheid_afkorting(meeteenheid: Referentiedata | None) -> str:
+    if meeteenheid is None:
+        return ""
+    if meeteenheid.code:
+        return _MEETEENHEID_AFKORTING.get(meeteenheid.code, meeteenheid.code)
+    return meeteenheid.naam or ""
+
+
+def _format_aantal_delen(
+    aantal: float | Decimal | int | None,
+    meeteenheid: Referentiedata | None,
+) -> tuple[str, str]:
+    """Splits aantal in getal- en eenheidstekst voor aparte tabelkolommen."""
+    if aantal is None:
+        return "", ""
+    return _tabel_fmt_num(aantal), _meeteenheid_afkorting(meeteenheid)
+
+
+# Vaste eindpositie (karakterindex) van elke waardekolom, inclusief de rij-inschuif.
+# De naamkolom staat links; getal/punten/opslag worden rechts uitgelijnd, eenheid
+# links in een vaste kolom na het getal — zodat cijfers verticaal uitlijnen.
+_GETAL_KOLOM_EINDE = len(_TABEL_RIJ_INSCHUIF) + W_NAAM + len(_GAP) + W_GETAL
+_EENHEID_KOLOM_EINDE = _GETAL_KOLOM_EINDE + len(_GETAL_EENHEID_GAP) + W_EENHEID
+_PUNTEN_KOLOM_EINDE = _EENHEID_KOLOM_EINDE + len(_GAP) + W_PUNTEN
+_OPSLAG_KOLOM_EINDE = _PUNTEN_KOLOM_EINDE + len(_GAP) + W_OPSLAG
+
+
+def _plaats_rechts(regel: str, tekst: str, kolom_einde: int) -> str:
+    """Plak ``tekst`` rechts uitgelijnd achter ``regel`` zodat het op ``kolom_einde`` eindigt.
+
+    Wanneer ``regel`` al te lang is, schuift ``tekst`` naar rechts met minimaal één spatie.
     """
-    Voeg de onderliggende woningwaarderingen toe aan de tabel.
+    if not tekst:
+        return regel
+    padding = max(1, kolom_einde - len(regel) - len(tekst))
+    return f"{regel}{' ' * padding}{tekst}"
+
+
+def _plaats_eenheid(regel: str, eenheid: str) -> str:
+    """Plak ``eenheid`` links uitgelijnd in de eenheidskolom (direct na het getal)."""
+    if not eenheid:
+        return regel
+    if len(regel) < _GETAL_KOLOM_EINDE:
+        regel = f"{regel}{' ' * (_GETAL_KOLOM_EINDE - len(regel))}"
+    regel = f"{regel}{_GETAL_EENHEID_GAP}{eenheid}"
+    if len(regel) < _EENHEID_KOLOM_EINDE:
+        regel = f"{regel}{' ' * (_EENHEID_KOLOM_EINDE - len(regel))}"
+    return regel
+
+
+def _tabel_regel(
+    naam: str,
+    *,
+    aantal: str = "",
+    eenheid: str = "",
+    punten: str = "",
+    opslag: str = "",
+) -> str:
+    """Formatteer één tabelregel met de gedeelde kolomopmaak.
+
+    Wordt gebruikt voor de regels in de samenvatting, de waarderingen in een
+    stelselgroep en de totaalregels: de naam staat links; getal, punten en opslag
+    lijnen rechts uit op vaste kolomeinden; de eenheid staat in een vaste kolom
+    direct na het getal.
     """
+    regel = _TABEL_RIJ_INSCHUIF + naam
+    regel = _plaats_rechts(regel, aantal, _GETAL_KOLOM_EINDE)
+    regel = _plaats_eenheid(regel, eenheid)
+    regel = _plaats_rechts(regel, punten, _PUNTEN_KOLOM_EINDE)
+    regel = _plaats_rechts(regel, opslag, _OPSLAG_KOLOM_EINDE)
+    return regel.rstrip()
 
-    global index
 
-    if not woningwaardering.criterium or not woningwaardering.criterium.id:
-        return
+def _tabel_scheiding(*, toon_aantal: bool) -> str:
+    """Scheidingsregel boven een totaalregel (onder de getal- en puntenkolom)."""
+    return _tabel_regel(
+        "",
+        aantal="-" * W_GETAL if toon_aantal else "",
+        punten="-" * W_PUNTEN,
+    )
 
-    onderliggende_woningwaarderingen = [
-        onderliggende_woningwaardering
-        for onderliggende_woningwaardering in woningwaarderingen
-        if onderliggende_woningwaardering.criterium is not None
-        and onderliggende_woningwaardering.criterium.bovenliggende_criterium is not None
-        and onderliggende_woningwaardering.criterium.bovenliggende_criterium.id
-        == woningwaardering.criterium.id
+
+def _format_punten_cel(waarde: str) -> str:
+    if not waarde:
+        return ""
+    return f"{waarde} pt"
+
+
+def _waardering_opslag(waardering: WoningwaarderingResultatenWoningwaardering) -> str:
+    if waardering.opslagpercentage is None:
+        return ""
+    return f"{waardering.opslagpercentage:.0%}"
+
+
+def _groep_toon_opslag_kolom(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> bool:
+    if groep.opslagpercentage is not None and groep.opslagpercentage > 0:
+        return True
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.opslagpercentage is not None and waardering.opslagpercentage > 0:
+            return True
+    return False
+
+
+def _waardering_meeteenheid(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> Referentiedata | None:
+    if waardering.criterium is None:
+        return None
+    return waardering.criterium.meeteenheid
+
+
+def _waardering_punten(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> str:
+    if waardering.punten is None:
+        return ""
+    return _format_punten_cel(_tabel_fmt_num(waardering.punten))
+
+
+def _onderliggende_waarderingen(
+    parent: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> list[WoningwaarderingResultatenWoningwaardering]:
+    if parent.criterium is None or parent.criterium.id is None:
+        return []
+    parent_id = parent.criterium.id
+    return [
+        w
+        for w in waarderingen
+        if w.criterium is not None
+        and w.criterium.bovenliggende_criterium is not None
+        and w.criterium.bovenliggende_criterium.id == parent_id
     ]
 
-    for onderliggende_woningwaardering in onderliggende_woningwaarderingen:
-        if onderliggende_woningwaardering.criterium is not None:
-            index += 1
-            table.add_row(
-                [
-                    stelselgroep_naam,
-                    f"{' ' * indent} - {onderliggende_woningwaardering.criterium.naam}",
-                    f"{'[' * indent}{onderliggende_woningwaardering.aantal}{']' * indent}"
-                    if onderliggende_woningwaardering.aantal is not None
-                    else "",
-                    onderliggende_woningwaardering.criterium.meeteenheid.naam
-                    if onderliggende_woningwaardering.criterium.meeteenheid is not None
-                    else "",
-                    f"{'[' * indent}{rond_af(onderliggende_woningwaardering.punten, decimalen=2)}{']' * indent}"
-                    if onderliggende_woningwaardering.punten is not None
-                    else "",
-                    f"{onderliggende_woningwaardering.opslagpercentage:.0%}"
-                    if onderliggende_woningwaardering.opslagpercentage is not None
-                    else "",
-                ],
-                divider=index == aantal_waarderingen,
-            )
 
-        _voeg_onderliggende_woningwaarderingen_toe(
-            table,
-            stelselgroep_naam,
-            onderliggende_woningwaardering,
-            woningwaarderingen,
-            aantal_waarderingen=aantal_waarderingen,
+def _render_waardering_pre_order(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+    regels: list[str],
+    *,
+    toon_opslag_kolom: bool,
+    indent: int = 0,
+) -> None:
+    if waardering.criterium is None:
+        return
+
+    prefix = (_INDENT * indent + _BULLET) if indent > 0 else ""
+    getal, eenheid = _format_aantal_delen(
+        waardering.aantal, _waardering_meeteenheid(waardering)
+    )
+    regels.append(
+        _tabel_regel(
+            prefix + (waardering.criterium.naam or ""),
+            aantal=getal,
+            eenheid=eenheid,
+            punten=_waardering_punten(waardering),
+            opslag=_waardering_opslag(waardering) if toon_opslag_kolom else "",
+        )
+    )
+
+    for kind in _onderliggende_waarderingen(waardering, waarderingen):
+        _render_waardering_pre_order(
+            kind,
+            waarderingen,
+            regels,
+            toon_opslag_kolom=toon_opslag_kolom,
             indent=indent + 1,
         )
 
 
-def naar_tabel(
+def _gedeeld_met_deler(criterium_id: str | None) -> Decimal:
+    """Bepaal waarmee een bruto ``aantal`` gedeeld moet worden (gedeeld-met-deler).
+
+    Output slaat vaak het ongedeelde getal op (bijv. 10 m²) terwijl de
+    gedeeld-met-lagen in de hiërarchie staan. De deler haal je uit de
+    criterium-id: een pad-id met ``__``-segmenten. Elk segment
+    ``gedeeld_met_{n}_…`` (adressen of onzelfstandige woonruimten) levert
+    factor ``n``; meerdere lagen worden vermenigvuldigd (bijv. 4 × 10).
+    Zonder ``gedeeld_met``-segment is de deler 1 (privé).
+    """
+    if criterium_id is None:
+        return Decimal("1")
+    product = Decimal("1")
+    for part in criterium_id.split("__"):
+        if part.startswith("gedeeld_met_"):
+            getal = part[len("gedeeld_met_") :].split("_", 1)[0]
+            try:
+                product *= Decimal(getal)
+            except InvalidOperation:
+                continue
+    return product
+
+
+def _waardering_voor_criterium_id(
+    criterium_id: str | None,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> WoningwaarderingResultatenWoningwaardering | None:
+    if criterium_id is None:
+        return None
+    return next(
+        (
+            w
+            for w in waarderingen
+            if w.criterium is not None and w.criterium.id == criterium_id
+        ),
+        None,
+    )
+
+
+def _effectieve_aantal_bijdrage(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering],
+) -> Decimal | None:
+    if waardering.aantal is None or waardering.criterium is None:
+        return None
+
+    bovenliggend = waardering.criterium.bovenliggende_criterium
+    if bovenliggend is not None and bovenliggend.id is not None:
+        parent = _waardering_voor_criterium_id(bovenliggend.id, waarderingen)
+        if parent is not None and parent.aantal is not None:
+            return None
+        deler = _gedeeld_met_deler(waardering.criterium.id)
+        return rond_af(Decimal(str(waardering.aantal)) / deler, decimalen=2)
+
+    criterium_id = waardering.criterium.id or ""
+    if criterium_id in criteriumsleutel_ids(waarderingen):
+        if waardering.punten is not None:
+            return rond_af(Decimal(str(waardering.aantal)), decimalen=2)
+        return None
+
+    return rond_af(Decimal(str(waardering.aantal)), decimalen=2)
+
+
+def som_effectieve_aantal_waarderingen(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> Decimal:
+    """Som van effectieve hoeveelheden (o.a. gedeelde m² / gedeeld_met), zonder dubbele kop+kind."""
+    bijdragen = [
+        b
+        for w in waarderingen or []
+        if (b := _effectieve_aantal_bijdrage(w, waarderingen or [])) is not None
+    ]
+    if not bijdragen:
+        return Decimal("0")
+    return rond_af(sum(bijdragen), decimalen=2)
+
+
+def groep_toont_subtotaal_aantal(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> bool:
+    """Of de stelselgroep-`Totaal`-regel in tabellen een hoeveelheid mag tonen."""
+    criterium_groep = groep.criterium_groep
+    if (
+        criterium_groep is None
+        or criterium_groep.stelsel is None
+        or criterium_groep.stelselgroep is None
+    ):
+        return False
+    if criterium_groep.stelsel != Woningwaarderingstelsel.zelfstandige_woonruimten:
+        return False
+    return criterium_groep.stelselgroep in _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL
+
+
+def _groep_subtotaal_aantal_delen(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> tuple[str, str]:
+    if not groep_toont_subtotaal_aantal(groep):
+        return "", ""
+
+    waarderingen = groep.woningwaarderingen or []
+    met_aantal = [
+        w
+        for w in waarderingen
+        if w.aantal is not None
+        and w.criterium is not None
+        and w.criterium.meeteenheid is not None
+    ]
+    if not met_aantal:
+        return "", ""
+
+    totaal = som_effectieve_aantal_waarderingen(waarderingen)
+    if totaal == Decimal("0"):
+        return "", ""
+
+    meeteenheid_codes = [
+        w.criterium.meeteenheid.code or ""
+        for w in met_aantal
+        if w.criterium is not None and w.criterium.meeteenheid is not None
+    ]
+    if len(set(meeteenheid_codes)) > 1:
+        return "", ""
+
+    meeteenheid = next(
+        (
+            w.criterium.meeteenheid
+            for w in met_aantal
+            if w.criterium is not None and w.criterium.meeteenheid is not None
+        ),
+        None,
+    )
+    return _format_aantal_delen(float(totaal), meeteenheid)
+
+
+def _render_detail_groep(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> list[str]:
+    waarderingen = groep.woningwaarderingen or []
+    if not waarderingen:
+        return []
+
+    stelselgroep_naam = (
+        groep.criterium_groep
+        and groep.criterium_groep.stelselgroep
+        and groep.criterium_groep.stelselgroep.naam
+        or ""
+    )
+    toon_opslag_kolom = _groep_toon_opslag_kolom(groep)
+
+    regels: list[str] = [stelselgroep_naam.upper()]
+
+    tops = [
+        w
+        for w in waarderingen
+        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
+    ]
+    for waardering in tops:
+        _render_waardering_pre_order(
+            waardering,
+            waarderingen,
+            regels,
+            toon_opslag_kolom=toon_opslag_kolom,
+        )
+
+    subtotaal_aantal, subtotaal_eenheid = _groep_subtotaal_aantal_delen(groep)
+    groep_punten = _tabel_fmt_num(groep.punten) if groep.punten is not None else ""
+    groep_opslag = (
+        f"{groep.opslagpercentage:.0%}"
+        if toon_opslag_kolom and groep.opslagpercentage is not None
+        else ""
+    )
+
+    regels.append(_tabel_scheiding(toon_aantal=bool(subtotaal_aantal)))
+    regels.append(
+        _tabel_regel(
+            "Totaal",
+            aantal=subtotaal_aantal,
+            eenheid=subtotaal_eenheid,
+            punten=_format_punten_cel(groep_punten),
+            opslag=groep_opslag,
+        )
+    )
+    return regels
+
+
+def _render_samenvatting(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> list[str]:
+    lines: list[str] = []
+    for groep in resultaat.groepen or []:
+        stelselgroep_naam = (
+            groep.criterium_groep
+            and groep.criterium_groep.stelselgroep
+            and groep.criterium_groep.stelselgroep.naam
+            or ""
+        )
+        punten = groep.punten
+        waarde = ""
+        if punten is not None and punten != 0:
+            waarde = _format_punten_cel(_tabel_fmt_num(punten))
+        toon_opslag_kolom = _groep_toon_opslag_kolom(groep)
+        opslag = (
+            f"{groep.opslagpercentage:.0%}"
+            if toon_opslag_kolom and groep.opslagpercentage is not None
+            else ""
+        )
+        lines.append(_tabel_regel(stelselgroep_naam, punten=waarde, opslag=opslag))
+
+    lines.append(_tabel_scheiding(toon_aantal=False))
+
+    if resultaat.punten is not None:
+        lines.append(
+            _tabel_regel(
+                "Totaal afgerond op hele punten",
+                punten=_format_punten_cel(_tabel_fmt_num(resultaat.punten)),
+            )
+        )
+
+    opslag_percentage = ""
+    opslag_bedrag = ""
+    if resultaat.opslagpercentage is not None and resultaat.opslagpercentage > 0:
+        opslag_percentage = f"{resultaat.opslagpercentage:.0%}"
+    if resultaat.huurprijsopslag is not None and resultaat.huurprijsopslag > 0:
+        opslag_bedrag = _tabel_fmt_num(resultaat.huurprijsopslag)
+    if opslag_percentage or opslag_bedrag:
+        lines.append(
+            _tabel_regel(
+                "Opslag",
+                aantal=opslag_bedrag,
+                eenheid="EUR" if opslag_bedrag else "",
+                opslag=opslag_percentage,
+            )
+        )
+
+    if resultaat.maximale_huur is not None:
+        lines.append(
+            _tabel_regel(
+                "Maximaal redelijke huur",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur),
+                eenheid="EUR",
+            )
+        )
+
+    if (
+        resultaat.opslagpercentage is not None
+        and resultaat.opslagpercentage > 0
+        and resultaat.maximale_huur_inclusief_opslag is not None
+    ):
+        lines.append(
+            _tabel_regel(
+                "Maximaal redelijke huur inclusief opslag",
+                aantal=_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag),
+                eenheid="EUR",
+            )
+        )
+
+    return lines
+
+
+def naar_rapport(
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat
         | WoningwaarderingResultatenWoningwaarderingGroep
     ),
-) -> PrettyTable:
+    *,
+    eenheid_id: str | None = None,
+) -> WoningwaarderingRapport:
     """
-    Genereer een tabel met de details van een woningwaarderingresultaat.
+    Genereer een rapport met de details van een woningwaarderingresultaat.
 
-    Parameters:
-        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | WoningwaarderingResultatenWoningwaarderingGroep): Het object om de gegevens uit te halen
+    Args:
+        woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | WoningwaarderingResultatenWoningwaarderingGroep): Het object om de gegevens uit te halen.
+        eenheid_id (str | None): Optioneel eenheid-id voor de samenvattingskop.
 
     Returns:
-        PrettyTable: Een tabel met de gegevens van het woningwaarderingresultaat
+        WoningwaarderingRapport: Samenvatting (volledig resultaat) en detailsecties.
     """
-    table = PrettyTable()
-    table.field_names = [
-        "Groep",
-        "Naam",
-        "Aantal",
-        "Meeteenheid",
-        "Punten",
-        "Opslag",
-    ]
-    table.align["Groep"] = "l"
-    table.align["Naam"] = "l"
-    table.align["Aantal"] = "r"
-    table.align["Meeteenheid"] = "l"
-    table.align["Punten"] = "r"
-    table.align["Opslag"] = "r"
-    # prettytable accepteert hier zowel een string als een dict; de type hints in
-    # sommige omgevingen verwachten echter een dict[str, str], daarom construeren we
-    # expliciet een dict om mypy tevreden te houden.
-    table.float_format = {field: ".2" for field in table.field_names}
-
-    table._min_width = {
-        "Groep": 33,
-        "Naam": 75,
-        "Aantal": 12,
-        "Meeteenheid": 19,
-        "Punten": 8,
-        "Opslag": 7,
-    }
-
-    table._max_width = table._min_width
-
-    for woningwaardering_groep in (
-        woningwaardering_resultaat.groepen or []
-        if isinstance(
-            woningwaardering_resultaat,
-            WoningwaarderingResultatenWoningwaarderingResultaat,
-        )
-        else [woningwaardering_resultaat]
+    if isinstance(
+        woningwaardering_resultaat, WoningwaarderingResultatenWoningwaarderingGroep
     ):
-        stelselgroep_naam = (
-            woningwaardering_groep.criterium_groep
-            and woningwaardering_groep.criterium_groep.stelselgroep
-            and woningwaardering_groep.criterium_groep.stelselgroep.naam
-            or ""
-        )
-        stelselgroep_naam = (
-            (stelselgroep_naam[:30] + "...")
-            if len(stelselgroep_naam) > 33
-            else stelselgroep_naam
-        )
-        woningwaarderingen = woningwaardering_groep.woningwaarderingen or []
-        aantal_waarderingen = len(woningwaarderingen)
-        global index
-        index = 0
+        groepen = [woningwaardering_resultaat]
+        toon_samenvatting = False
+        volledig_resultaat: (
+            WoningwaarderingResultatenWoningwaarderingResultaat | None
+        ) = None
+    else:
+        volledig_resultaat = woningwaardering_resultaat
+        groepen = volledig_resultaat.groepen or []
+        toon_samenvatting = True
 
-        for woningwaardering in [
-            woningwaardering
-            for woningwaardering in woningwaarderingen
-            if woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        ]:
-            if (
-                woningwaardering_groep.criterium_groep
-                and woningwaardering_groep.criterium_groep.stelselgroep
-                and woningwaardering.criterium
-            ):
-                index += 1
-                table.add_row(
-                    [
-                        stelselgroep_naam,
-                        woningwaardering.criterium.naam,
-                        woningwaardering.aantal or "",
-                        woningwaardering.criterium.meeteenheid.naam
-                        if woningwaardering.criterium.meeteenheid is not None
-                        else "",
-                        rond_af(woningwaardering.punten, decimalen=2)
-                        if woningwaardering.punten is not None
-                        else "",
-                        f"{woningwaardering.opslagpercentage:.0%}"
-                        if woningwaardering.opslagpercentage is not None
-                        else "",
-                    ],
-                    divider=index == aantal_waarderingen,
-                )
+    detail_secties = [_render_detail_groep(groep) for groep in groepen]
+    heeft_detail_secties = any(detail_secties)
 
-                _voeg_onderliggende_woningwaarderingen_toe(
-                    table,
-                    stelselgroep_naam,
-                    woningwaardering,
-                    woningwaarderingen,
-                    indent=1,
-                    aantal_waarderingen=aantal_waarderingen,
-                )
+    lines: list[str] = []
+    if toon_samenvatting and volledig_resultaat is not None:
+        titel = "SAMENVATTING"
+        if eenheid_id:
+            titel = f"{titel} {eenheid_id}"
+        lines.append(titel)
+        lines.extend(_render_samenvatting(volledig_resultaat))
+        if heeft_detail_secties:
+            lines.append("")
 
-        aantallen = [
-            Decimal(woningwaardering.aantal)
-            for woningwaardering in woningwaarderingen
-            if woningwaardering.aantal is not None
-            and woningwaardering.criterium is not None
-            and woningwaardering.criterium.bovenliggende_criterium is None
-        ]
+    eerste_detail = True
+    for detail in detail_secties:
+        if not detail:
+            continue
+        if not eerste_detail:
+            lines.append("")
+        eerste_detail = False
+        lines.extend(detail)
 
-        subtotaal = rond_af(sum(aantallen), 2) if aantallen else None
-
-        if (
-            (subtotaal is not None or aantal_waarderingen >= 1)
-            and woningwaardering_groep.criterium_groep
-            and woningwaardering_groep.criterium_groep.stelselgroep
-        ):
-            # stukje hieronder is om subtotaal en meeteenheid te bepalen.
-            # indien er meerdere meeteenheden zijn, dan wordt het subtotaal en de meeteenheid leeg bij subtotalen
-            meeteenheden_zonder_nones = [
-                woningwaardering.criterium.meeteenheid.naam or ""
-                for woningwaardering in woningwaarderingen
-                if woningwaardering.criterium is not None
-                and woningwaardering.criterium.meeteenheid is not None
-            ]
-            critera = [
-                woningwaardering.criterium or ""
-                for woningwaardering in woningwaarderingen
-                if woningwaardering.criterium is not None
-            ]
-            verschillende_meeteenheden = len(set(meeteenheden_zonder_nones)) > 1 or len(
-                critera
-            ) != len(meeteenheden_zonder_nones)
-
-            if verschillende_meeteenheden:
-                meeteenheid = ""
-            elif meeteenheden_zonder_nones:
-                meeteenheid = meeteenheden_zonder_nones[0]
-            else:
-                meeteenheid = ""
-
-            table.add_row(
-                [
-                    woningwaardering_groep.criterium_groep.stelselgroep.naam,
-                    "Totaal",
-                    (subtotaal or "") if not verschillende_meeteenheden else "",
-                    meeteenheid if not verschillende_meeteenheden else "",
-                    rond_af(woningwaardering_groep.punten, decimalen=2)
-                    if woningwaardering_groep.punten is not None
-                    else "",
-                    f"{woningwaardering_groep.opslagpercentage:.0%}"
-                    if woningwaardering_groep.opslagpercentage is not None
-                    else "",
-                ],
-                divider=True,
-            )
-    if (
-        isinstance(
-            woningwaardering_resultaat,
-            WoningwaarderingResultatenWoningwaarderingResultaat,
-        )
-        and woningwaardering_resultaat.stelsel
-    ):
-        table.add_row(
-            [
-                woningwaardering_resultaat.stelsel.naam,
-                "Afgerond totaal",
-                "",
-                "",
-                woningwaardering_resultaat.punten,
-                f"{woningwaardering_resultaat.opslagpercentage:.0%}"
-                if woningwaardering_resultaat.opslagpercentage is not None
-                else "",
-            ],
-            divider=True,
-        )
-
-        if woningwaardering_resultaat.maximale_huur is None:
-            return table
-
-        table.add_row(
-            [
-                "",
-                "Maximale huur",
-                woningwaardering_resultaat.maximale_huur,
-                "EUR",
-                "",
-                "",
-            ],
-        )
-        if woningwaardering_resultaat.opslagpercentage is not None:
-            table.add_row(
-                [
-                    "",
-                    f"Huurprijsopslag {woningwaardering_resultaat.opslagpercentage:.0%}",
-                    woningwaardering_resultaat.huurprijsopslag,
-                    "EUR",
-                    "",
-                    "",
-                ],
-                divider=True,
-            )
-            table.add_row(
-                [
-                    "",
-                    "Maximale huur inclusief opslag",
-                    woningwaardering_resultaat.maximale_huur_inclusief_opslag,
-                    "EUR",
-                    "",
-                    "",
-                ],
-            )
-
-    return table
+    return WoningwaarderingRapport(lines)
 
 
 def energieprestatie_met_geldig_label(
@@ -453,6 +719,103 @@ def rond_af_op_kwart(getal: float | None | Decimal) -> Decimal:
     ) * kwart
 
 
+def parent_ids_met_onderliggende_punten(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    ids: set[str] = set()
+    for waardering in waarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        bovenliggend = waardering.criterium.bovenliggende_criterium
+        if bovenliggend is not None and bovenliggend.id is not None:
+            ids.add(bovenliggend.id)
+    return ids
+
+
+def parent_ids_met_onderliggende_aantal(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    ids: set[str] = set()
+    for waardering in waarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        bovenliggend = waardering.criterium.bovenliggende_criterium
+        if bovenliggend is not None and bovenliggend.id is not None:
+            ids.add(bovenliggend.id)
+    return ids
+
+
+def criteriumsleutel_ids(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> set[str]:
+    """Ids die als bovenliggende criteriumsleutel in de waarderingen-graaf voorkomen."""
+    return parent_ids_met_onderliggende_punten(
+        waarderingen
+    ) | parent_ids_met_onderliggende_aantal(waarderingen)
+
+
+def som_punten_waarderingen(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> Decimal:
+    """Som van punten op waarderingen in een groep (zonder kwartafronding)."""
+    if not waarderingen:
+        return Decimal("0")
+    return sum(
+        (Decimal(str(w.punten)) for w in waarderingen if w.punten is not None),
+        Decimal("0"),
+    )
+
+
+def voeg_stelselgroep_afronding_toe(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    *,
+    onafgerond: Decimal,
+    afgerond: Decimal,
+    stelselgroep: Referentiedata,
+) -> None:
+    """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
+
+    Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
+    """
+    waarderingen = groep.woningwaarderingen or []
+    if not any(w.punten is not None for w in waarderingen):
+        return
+
+    delta = afgerond - onafgerond
+    if delta == Decimal("0"):
+        return
+
+    if stelselgroep.name is None:
+        raise ValueError(
+            "Stelselgroep heeft geen naam voor de Afronding-op-kwartpunten-criterium-id."
+        )
+
+    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
+    groep.woningwaarderingen = [
+        *waarderingen,
+        WoningwaarderingResultatenWoningwaardering(
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                naam="Afronding op kwartpunten",
+                id=afronding_id,
+            ),
+            punten=float(delta),
+        ),
+    ]
+
+
+def som_punten_waarderingen_afgerond(
+    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
+) -> float:
+    """Som van punten op alle waarderingen in een groep (afgerond op kwart).
+
+    Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
+    inclusief een eventuele waardering Afronding op kwartpunten.
+    """
+    if not waarderingen:
+        return 0.0
+    return float(rond_af_op_kwart(som_punten_waarderingen(waarderingen)))
+
+
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     """
     Voegt monumentale statussen toe aan een eenheid d.m.v. aanroepen API's.
@@ -545,28 +908,35 @@ def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
             ruimte.naam = f"{ruimte.naam} {nummering_counter[ruimte.naam]}"
 
 
-def _classificeer_ruimte_dec(
-    func: Callable[[EenhedenRuimte], Ruimtesoort | None],
-) -> Callable[[EenhedenRuimte], Ruimtesoort | None]:
-    """Logt de classificatie van de ruimte volgens het Woningwaarderingstelsel"""
-
-    @wraps(func)
-    def wrapper(ruimte: EenhedenRuimte) -> Ruimtesoort | None:
-        ruimtesoort = func(ruimte)
-        if ruimtesoort is not None:
-            logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geclassificeerd als een {ruimtesoort}"
+def waarschuw_dubbele_ids(instance: BaseModel) -> None:
+    """
+    Waarschuw bij dubbele, niet-lege id's binnen dezelfde lijst in dit Pydantic object.
+    """
+    for veld, veld_info in type(instance).model_fields.items():
+        # Deprecated velden overslaan: getattr triggert anders een DeprecationWarning.
+        if veld_info.deprecated:
+            continue
+        waarde = getattr(instance, veld, None)
+        if isinstance(waarde, BaseModel):
+            waarschuw_dubbele_ids(waarde)
+        elif isinstance(waarde, list):
+            items = [item for item in waarde if isinstance(item, BaseModel)]
+            id_counter = Counter(
+                id_waarde
+                for item in items
+                if (id_waarde := getattr(item, "id", None)) is not None
             )
-        else:
-            logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) kan niet worden geclassificeerd als een ruimtesoort."
-            )
-        return ruimtesoort
+            for id_waarde, aantal in id_counter.items():
+                if aantal > 1:
+                    warnings.warn(
+                        f"Id '{id_waarde}' komt {aantal} keer voor in "
+                        f"'{type(instance).__name__}.{veld}'.",
+                        UserWarning,
+                    )
+            for item in items:
+                waarschuw_dubbele_ids(item)
 
-    return wrapper
 
-
-# @_classificeer_ruimte_dec
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
@@ -617,12 +987,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             in [
                 Ruimtedetailsoort.carport,
             ]
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
@@ -659,9 +1029,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte.detail_soort == Ruimtedetailsoort.berging
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
-            aantal_eenheden = ruimte.gedeeld_met_aantal_eenheden or 1
+            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_eenheden))
+                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
             ) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
@@ -684,13 +1054,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
     if (
         ruimte.detail_soort in [Ruimtedetailsoort.garage]
-        and not gedeeld_met_eenheden(
+        and not gedeeld_met_adressen(
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
-            and not gedeeld_met_eenheden(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:
@@ -803,53 +1173,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     return criterium_naam
 
 
-def deel_punten_door_aantal_onzelfstandige_woonruimten(
-    ruimte: EenhedenRuimte,
-    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering]
-    | Iterator[WoningwaarderingResultatenWoningwaardering],
-    update_criterium_naam: bool = True,
-) -> Iterator[WoningwaarderingResultatenWoningwaardering]:
-    """
-    Deelt punten door het aantal onzelfstandige woonruimten.
-
-    Deze functie verdeelt de punten voor woningwaarderingen over het aantal onzelfstandige woonruimten dat een ruimte deelt.
-
-    Args:
-        ruimte (EenhedenRuimte): De ruimte waarvoor de punten verdeeld moeten worden.
-        woningwaarderingen (list[WoningwaarderingResultatenWoningwaardering] | Iterator[WoningwaarderingResultatenWoningwaardering]):
-            Een lijst of iterator van woningwaarderingen waarvan de punten verdeeld moeten worden.
-        update_criterium_naam (bool, optional): Een boolean die aangeeft of de naam van het criterium moet worden aangepast. Default is True.
-
-    Yields:
-        WoningwaarderingResultatenWoningwaardering: Woningwaarderingen met verdeelde punten.
-    """
-    gedeelde_ruimte = gedeeld_met_onzelfstandige_woonruimten(ruimte)
-    for woningwaardering in woningwaarderingen:
-        if (
-            gedeelde_ruimte
-            and woningwaardering.criterium
-            and woningwaardering.punten
-            and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten  # nodig voor mypy
-        ):
-            woningwaardering.criterium.naam = f"{woningwaardering.criterium.naam}"
-            if update_criterium_naam:
-                woningwaardering.criterium.naam += f" (gedeeld met {ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten})"
-
-            woningwaardering.punten = float(
-                utils.rond_af(
-                    utils.rond_af(woningwaardering.punten, decimalen=2)
-                    / ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten,
-                    decimalen=2,
-                )
-            )
-        yield woningwaardering
-
-
-def gedeeld_met_eenheden(ruimte: EenhedenRuimte) -> bool:
-    """Geeft True terug als de ruimte gedeeld is met andere eenheden"""
+def gedeeld_met_adressen(ruimte: EenhedenRuimte) -> bool:
+    """Geeft True terug als de ruimte gedeeld is met andere adressen"""
     return (
-        ruimte.gedeeld_met_aantal_eenheden is not None
-        and ruimte.gedeeld_met_aantal_eenheden >= 2
+        ruimte.gedeeld_met_aantal_adressen is not None
+        and ruimte.gedeeld_met_aantal_adressen >= 2
     )
 
 

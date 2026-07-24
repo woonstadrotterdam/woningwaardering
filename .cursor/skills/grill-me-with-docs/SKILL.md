@@ -28,7 +28,7 @@ If a question can be answered by exploring the codebase, explore the codebase in
 During codebase exploration, also look for existing documentation. In this repo, start with:
 
 - `CONTEXT.md` — gedeelde domeintaal en projectgrenzen
-- `README.md`, `docs/introductie/opzet.md` — opzet, criterium-id's, lookup-tabellen
+- `README.md`, `docs/index.md`, `docs/voor-ontwikkelaars/criteriumstrategie.md` — opzet, criterium-id's, lookup-tabellen
 - `docs/implementatietoelichtingen/` — welke beleidsboekregels wel/niet geïmplementeerd zijn en waarom
 - `docs/voor-ontwikkelaars/` — ontwikkelaarsafspraken
 - `AGENTS.md` — agent-instructies en conventies

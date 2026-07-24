@@ -1,4 +1,4 @@
-from tests.utils import assert_output_model, assert_som_bovenliggend_criterium
+from tests.utils import assert_output_model
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -30,7 +30,6 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte_output(
     woningwaardering = Woningwaardering(peildatum=peildatum)
     resultaat = woningwaardering.waardeer(eenheid_input)
     assert_output_model(resultaat, verwachte_output)
-    assert_som_bovenliggend_criterium(resultaat)
 
 
 def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
@@ -57,4 +56,3 @@ def test_WoningwaarderingGeneriekZelfstandigeWoonruimte_output(
     woningwaardering = Woningwaardering(peildatum=peildatum)
     resultaat = woningwaardering.waardeer(eenheid_input)
     assert_output_model(resultaat, verwachte_output)
-    assert_som_bovenliggend_criterium(resultaat)

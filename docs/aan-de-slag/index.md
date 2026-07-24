@@ -8,11 +8,10 @@
 ## Gebruik
 
 De input voor de woningwaardering-package is een Eenheid object in het formaat van de VERA-standaard. Dit object is definieerbaar in JSON of m.b.v. Python classes.
-Zie onderstaande voorbeelden voor de de input in JSON en Python.
+Zie onderstaande voorbeelden voor de input in JSON en Python.
 
 > [!TIP]
-> Zie de [implementatietoelichtingen](../implementatietoelichtingen/index.md) voor voorbeeld-inputs per stelselgroep.  
-
+> Zie de [implementatietoelichtingen](../implementatietoelichtingen/index.md) voor voorbeeld-inputs per stelselgroep.
 
 ### JSON
 
@@ -24,12 +23,12 @@ from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 
 warnings.simplefilter("default", UserWarning)
 
 wws = Woningwaardering(
-    peildatum=date(2026, 1, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
+    peildatum=date(2026, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
     "tests/data/generiek/input/37101000032.json",
@@ -44,9 +43,9 @@ with open(
             by_alias=True, indent=2, exclude_none=True
         )
     )
-    tabel = naar_tabel(woningwaardering_resultaat)
+    rapport = naar_rapport(woningwaardering_resultaat, eenheid_id=eenheid.id)
 
-    print(tabel)
+    print(rapport)
 ```
 
 <details>
@@ -188,80 +187,79 @@ with open(
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108014589",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014589",
             "naam": "Slaapkamer 1",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108010632",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108010632",
             "naam": "Woonkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108006229",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108014563",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014563",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108017433",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108017433",
             "naam": "Slaapkamer 2",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108017431",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108017431",
             "naam": "Slaapkamer 3",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108014593",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014593",
             "naam": "Slaapkamer 4",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          },
-          "punten": 14.0
         }
       ]
     },
@@ -279,12 +277,24 @@ with open(
       "punten": 15.0,
       "woningwaarderingen": [
         {
+          "aantal": 71.0,
+          "criterium": {
+            "id": "buitenruimten__prive",
+            "naam": "Privé",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 24.85
+        },
+        {
           "aantal": 3.14,
           "criterium": {
-            "id": "buitenruimten__Space_108014713",
+            "id": "buitenruimten__prive__Space_108014713",
             "naam": "Balkon 1",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -295,10 +305,10 @@ with open(
         {
           "aantal": 3.14,
           "criterium": {
-            "id": "buitenruimten__Space_108010812",
+            "id": "buitenruimten__prive__Space_108010812",
             "naam": "Balkon 2",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -309,10 +319,10 @@ with open(
         {
           "aantal": 49.11,
           "criterium": {
-            "id": "buitenruimten__Space_108006357",
+            "id": "buitenruimten__prive__Space_108006357",
             "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -323,10 +333,10 @@ with open(
         {
           "aantal": 15.93,
           "criterium": {
-            "id": "buitenruimten__Space_108006467",
+            "id": "buitenruimten__prive__Space_108006467",
             "naam": "Dakterras",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__totaal__prive"
+              "id": "buitenruimten__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -336,22 +346,10 @@ with open(
         },
         {
           "criterium": {
-            "id": "buitenruimten__aanwezig__prive",
+            "id": "buitenruimten__prive_buitenruimten_aanwezig",
             "naam": "Privé buitenruimten aanwezig"
           },
           "punten": 2.0
-        },
-        {
-          "aantal": 71.0,
-          "criterium": {
-            "id": "buitenruimten__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 24.85
         },
         {
           "criterium": {
@@ -398,10 +396,19 @@ with open(
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken"
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -425,10 +432,23 @@ with open(
       "punten": 15.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_108014563",
+            "naam": "Badruimte"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__staand_toilet",
-            "naam": "Badruimte - Staand Toilet"
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -436,7 +456,14 @@ with open(
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_108014563__wastafel",
-            "naam": "Badruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
@@ -444,15 +471,35 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108014563__bad_en_douche",
-            "naam": "Badruimte - Bad en douche"
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108014563"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 7.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__Space_108006223",
+            "naam": "Toiletruimte"
+          }
         },
         {
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__staand_toilet",
-            "naam": "Toiletruimte - Staand Toilet"
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
@@ -460,7 +507,14 @@ with open(
           "aantal": 1.0,
           "criterium": {
             "id": "sanitair__Space_108006223__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_108006223"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 1.0
         }
@@ -511,33 +565,48 @@ with open(
           "aantal": 694000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
-          }
-        },
-        {
-          "aantal": 15329.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_I",
-            "naam": "Factor I",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 45.27
         },
         {
+          "aantal": 15329.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
+          },
+          "punten": 19.38
+        },
+        {
           "aantal": 148.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -548,19 +617,23 @@ with open(
         {
           "aantal": 242.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
-            "naam": "Onderdeel II"
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
-          "punten": 19.38
+          "punten": 0.1
         }
       ]
     },
@@ -608,87 +681,110 @@ with open(
 </details>
 
 <details>
-<summary>Voorbeeld output in tabel</summary>
+<summary>Voorbeeld output in rapport</summary>
 
 ```text
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Groep                             | Naam                                                                        |       Aantal | Meeteenheid         |   Punten |  Opslag |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Slaapkamer 1                                                                |        21.05 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Woonkamer                                                                   |        41.00 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Keuken                                                                      |        20.37 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Badruimte                                                                   |         7.50 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 2                                                                |        15.98 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 3                                                                |        19.15 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Slaapkamer 4                                                                |        15.82 | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Totaal                                                                      |       140.87 | Vierkante meter, m2 |   141.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van overige ruimten   | Berging                                                                     |         6.65 | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van overige ruimten   | Totaal                                                                      |         6.65 | Vierkante meter, m2 |     5.25 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Verwarmde vertrekken                                                        |              |                     |    14.00 |         |
-| Verkoeling en verwarming          |   - Slaapkamer 1                                                            |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Woonkamer                                                               |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Keuken                                                                  |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Badruimte                                                               |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 2                                                            |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 3                                                            |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Slaapkamer 4                                                            |              |                     |   [2.00] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Totaal                                                                      |              |                     |    14.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Privé buitenruimten aanwezig                                                |              |                     |     2.00 |         |
-| Buitenruimten                     | Totaal (privé)                                                              |        71.00 | Vierkante meter, m2 |    24.85 |         |
-| Buitenruimten                     |   - Balkon 1                                                                |       [3.14] | Vierkante meter, m2 |          |         |
-| Buitenruimten                     |   - Balkon 2                                                                |       [3.14] | Vierkante meter, m2 |          |         |
-| Buitenruimten                     |   - Tuin                                                                    |      [49.11] | Vierkante meter, m2 |          |         |
-| Buitenruimten                     |   - Dakterras                                                               |      [15.93] | Vierkante meter, m2 |          |         |
-| Buitenruimten                     | Maximaal 15 punten                                                          |              |                     |   -11.85 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Totaal                                                                      |              |                     |    15.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | C (Energie-index)                                                           |              |                     |    22.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | Totaal                                                                      |              |                     |    22.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Keuken: Lengte aanrecht                                                     |      2700.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Totaal                                                                      |      2700.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Badruimte - Staand Toilet                                                   |         1.00 |                     |     2.00 |         |
-| Sanitair                          | Badruimte - Wastafel                                                        |         2.00 |                     |     2.00 |         |
-| Sanitair                          | Badruimte - Bad en douche                                                   |         1.00 |                     |     7.00 |         |
-| Sanitair                          | Toiletruimte - Staand Toilet                                                |         1.00 |                     |     3.00 |         |
-| Sanitair                          | Toiletruimte - Wastafel                                                     |         1.00 |                     |     1.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Sanitair                          | Totaal                                                                      |              |                     |    15.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2024                                    |    694000.00 |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |    45.27 |         |
-| Punten voor de WOZ-waarde         |   - Factor I                                                                |    [15329.0] |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |    19.38 |         |
-| Punten voor de WOZ-waarde         |   - Oppervlakte van vertrekken en overige ruimten                           |      [148.0] | Vierkante meter, m2 |          |         |
-| Punten voor de WOZ-waarde         |   - Factor II                                                               |      [242.0] |                     |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |    64.75 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |   284.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-|                                   | Maximale huur                                                               |      1900.64 | EUR                 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
+SAMENVATTING 37101000032
+  Oppervlakte van vertrekken                                          141.00 pt
+  Oppervlakte van overige ruimten                                       5.25 pt
+  Verkoeling en verwarming                                             14.00 pt
+  Buitenruimten                                                        15.00 pt
+  Energieprestatie                                                     22.00 pt
+  Keuken                                                                7.00 pt
+  Sanitair                                                             15.00 pt
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                            64.75 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                      ---------
+  Totaal afgerond op hele punten                                      284.00 pt
+  Maximaal redelijke huur                                1900.64 EUR
+
+OPPERVLAKTE VAN VERTREKKEN
+  Slaapkamer 1                                             21.05 m²
+  Woonkamer                                                41.00 m²
+  Keuken                                                   20.37 m²
+  Badruimte                                                 7.50 m²
+  Slaapkamer 2                                             15.98 m²
+  Slaapkamer 3                                             19.15 m²
+  Slaapkamer 4                                             15.82 m²
+                                                      ----------      ---------
+  Totaal                                                  140.87 m²   141.00 pt
+
+OPPERVLAKTE VAN OVERIGE RUIMTEN
+  Berging                                                   6.65 m²
+                                                      ----------      ---------
+  Totaal                                                    6.65 m²     5.25 pt
+
+VERKOELING EN VERWARMING
+  Verwarmde vertrekken
+    - Slaapkamer 1                                                      2.00 pt
+    - Woonkamer                                                         2.00 pt
+    - Keuken                                                            2.00 pt
+    - Badruimte                                                         2.00 pt
+    - Slaapkamer 2                                                      2.00 pt
+    - Slaapkamer 3                                                      2.00 pt
+    - Slaapkamer 4                                                      2.00 pt
+                                                                      ---------
+  Totaal                                                               14.00 pt
+
+BUITENRUIMTEN
+  Privé                                                    71.00 m²    24.85 pt
+    - Balkon 1                                              3.14 m²
+    - Balkon 2                                              3.14 m²
+    - Tuin                                                 49.11 m²
+    - Dakterras                                            15.93 m²
+  Privé buitenruimten aanwezig                                          2.00 pt
+  Maximaal 15 punten                                                  -11.85 pt
+                                                                      ---------
+  Totaal                                                               15.00 pt
+
+ENERGIEPRESTATIE
+  C (Energie-index)                                                    22.00 pt
+                                                                      ---------
+  Totaal                                                               22.00 pt
+
+KEUKEN
+  Keuken
+    - Lengte aanrecht                                    2700.00 mm     7.00 pt
+                                                                      ---------
+  Totaal                                                                7.00 pt
+
+SANITAIR
+  Badruimte
+    - Staand Toilet                                         1.00 st     2.00 pt
+    - Wastafel                                              2.00 st     2.00 pt
+    - Bad en douche                                         1.00 st     7.00 pt
+  Toiletruimte
+    - Staand Toilet                                         1.00 st     3.00 pt
+    - Wastafel                                              1.00 st     1.00 pt
+                                                                      ---------
+  Totaal                                                               15.00 pt
+
+PUNTEN VOOR DE WOZ-WAARDE
+  WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
+  Onderdeel I                                                          45.27 pt
+    - Factor I                                          15329.00 EUR
+  Onderdeel II                                                         19.38 pt
+    - Oppervlakte van vertrekken en overige ruimten       148.00 m²
+    - Factor II                                           242.00 EUR
+  Afronding op kwartpunten                                              0.10 pt
+                                                                      ---------
+  Totaal                                                               64.75 pt
 ```
+
 
 </details>
 
 ### Python
 
 ```python
+import warnings
 from datetime import date
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_tabel
+from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenAdresseerbaarObjectBasisregistratie,
@@ -712,21 +808,23 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
 )
 
-wws = Woningwaardering(peildatum=date(2026, 1, 1))
+warnings.simplefilter("default", UserWarning)
+
+wws = Woningwaardering(peildatum=date(2026, 7, 1))
 
 eenheid = EenhedenEenheid(
-    id="<id>",
+    id="37101000032",
     bouwjaar=1924,
     woningwaarderingstelsel=Woningwaarderingstelsel.zelfstandige_woonruimten,
     adres=EenhedenEenheidadres(
-        straatnaam="<straatnaam>",
-        huisnummer="<huisnummer>",
+        straatnaam="",
+        huisnummer="",
         huisnummer_toevoeging="",
-        postcode="<postcode>",
+        postcode="",
         woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
     ),
     adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-        id="0599010000485697", bag_identificatie="0599010000485697"
+        id="", bag_identificatie=""
     ),
     panden=[
         EenhedenPand(
@@ -795,19 +893,12 @@ print(
         by_alias=True, indent=2, exclude_none=True
     )
 )
-tabel = naar_tabel(woningwaardering_resultaat)
+rapport = naar_rapport(woningwaardering_resultaat, eenheid_id=eenheid.id)
 
-print(tabel)
+print(rapport)
 ```
 
 De output daarvan is een VERA woningwaarderingstelsel object.
-
-### Output formaten
-
-De woningwaardering package ondersteunt verschillende output formaten:
-
-1. **JSON Output**: Gedetailleerde output in JSON formaat met alle berekende punten en criteria
-2. **Tabel Output**: Een overzichtelijke tabel met de belangrijkste resultaten
 
 <details>
 <summary>Voorbeeld output in JSON</summary>
@@ -881,30 +972,29 @@ De woningwaardering package ondersteunt verschillende output formaten:
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108014589",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108014589",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_108006229",
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__Space_108006229",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
           "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
-            "naam": "Verwarmde vertrekken"
-          },
-          "punten": 4.0
         }
       ]
     },
@@ -966,10 +1056,19 @@ De woningwaardering package ondersteunt verschillende output formaten:
       "punten": 7.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__Space_108006229",
+            "naam": "Keuken"
+          }
+        },
+        {
           "aantal": 2700.0,
           "criterium": {
             "id": "keuken__Space_108006229__lengte_aanrecht_Aanrecht_108006231",
-            "naam": "Keuken: Lengte aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__Space_108006229"
+            },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
@@ -1038,33 +1137,48 @@ De woningwaardering package ondersteunt verschillende output formaten:
           "aantal": 694000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024"
-          }
-        },
-        {
-          "aantal": 15329.0,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_I",
-            "naam": "Factor I",
-            "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I"
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_I",
+            "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
           "punten": 45.27
         },
         {
+          "aantal": 15329.0,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
+            "naam": "Factor I",
+            "bovenliggendeCriterium": {
+              "id": "punten_voor_de_woz_waarde__onderdeel_I"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__onderdeel_II",
+            "naam": "Onderdeel II"
+          },
+          "punten": 69.95
+        },
+        {
           "aantal": 41.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__oppervlakte_vertrekken_en_overige_ruimten",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
             },
             "meeteenheid": {
               "code": "M2",
@@ -1075,19 +1189,23 @@ De woningwaardering package ondersteunt verschillende output formaten:
         {
           "aantal": 242.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__factor_II",
+            "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II"
+              "id": "punten_voor_de_woz_waarde__onderdeel_II"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__onderdeel_II",
-            "naam": "Onderdeel II"
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
           },
-          "punten": 69.95
+          "punten": 0.03
         }
       ]
     },
@@ -1135,48 +1253,108 @@ De woningwaardering package ondersteunt verschillende output formaten:
 </details>
 
 <details>
-<summary>Voorbeeld output in tabel</summary>
+<summary>Voorbeeld output in rapport</summary>
 
 ```text
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Groep                             | Naam                                                                        |       Aantal | Meeteenheid         |   Punten |  Opslag |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Slaapkamer                                                                  |        21.05 | Vierkante meter, m2 |          |         |
-| Oppervlakte van vertrekken        | Keuken                                                                      |        20.37 | Vierkante meter, m2 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Oppervlakte van vertrekken        | Totaal                                                                      |        41.42 | Vierkante meter, m2 |    41.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Verwarmde vertrekken                                                        |              |                     |     4.00 |         |
-| Verkoeling en verwarming          |   - Slaapkamer                                                              |              |                     |   [2.00] |         |
-| Verkoeling en verwarming          |   - Keuken                                                                  |              |                     |   [2.00] |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Verkoeling en verwarming          | Totaal                                                                      |              |                     |     4.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Geen buitenruimten                                                          |              |                     |    -5.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Buitenruimten                     | Totaal                                                                      |              |                     |    -5.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | C (Energie-index)                                                           |              |                     |    22.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Energieprestatie                  | Totaal                                                                      |              |                     |    22.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Keuken: Lengte aanrecht                                                     |      2700.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Keuken                            | Totaal                                                                      |      2700.00 | Millimeter          |     7.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | WOZ-waarde op waardepeildatum 01-01-2024                                    |    694000.00 |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel I                                                                 |              |                     |    45.27 |         |
-| Punten voor de WOZ-waarde         |   - Factor I                                                                |    [15329.0] |                     |          |         |
-| Punten voor de WOZ-waarde         | Onderdeel II                                                                |              |                     |    69.95 |         |
-| Punten voor de WOZ-waarde         |   - Oppervlakte van vertrekken en overige ruimten                           |       [41.0] | Vierkante meter, m2 |          |         |
-| Punten voor de WOZ-waarde         |   - Factor II                                                               |      [242.0] |                     |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Punten voor de WOZ-waarde         | Totaal                                                                      |              |                     |   115.25 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-| Zelfstandige woonruimten          | Afgerond totaal                                                             |              |                     |   184.00 |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
-|                                   | Maximale huur                                                               |      1214.31 | EUR                 |          |         |
-+-----------------------------------+-----------------------------------------------------------------------------+--------------+---------------------+----------+---------+
+SAMENVATTING 37101000032
+  Oppervlakte van vertrekken                                           41.00 pt
+  Oppervlakte van overige ruimten
+  Verkoeling en verwarming                                              4.00 pt
+  Buitenruimten                                                        -5.00 pt
+  Energieprestatie                                                     22.00 pt
+  Keuken                                                                7.00 pt
+  Sanitair
+  Gemeenschappelijke parkeerruimten
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
+  Punten voor de WOZ-waarde                                           115.25 pt
+  Bijzondere voorzieningen
+  Prijsopslag monumenten en nieuwbouw
+                                                                      ---------
+  Totaal afgerond op hele punten                                      184.00 pt
+  Maximaal redelijke huur                                1214.31 EUR
+
+OPPERVLAKTE VAN VERTREKKEN
+  Slaapkamer                                               21.05 m²
+  Keuken                                                   20.37 m²
+                                                      ----------      ---------
+  Totaal                                                   41.42 m²    41.00 pt
+
+VERKOELING EN VERWARMING
+  Verwarmde vertrekken
+    - Slaapkamer                                                        2.00 pt
+    - Keuken                                                            2.00 pt
+                                                                      ---------
+  Totaal                                                                4.00 pt
+
+BUITENRUIMTEN
+  Geen buitenruimten                                                   -5.00 pt
+                                                                      ---------
+  Totaal                                                               -5.00 pt
+
+ENERGIEPRESTATIE
+  C (Energie-index)                                                    22.00 pt
+                                                                      ---------
+  Totaal                                                               22.00 pt
+
+KEUKEN
+  Keuken
+    - Lengte aanrecht                                    2700.00 mm     7.00 pt
+                                                                      ---------
+  Totaal                                                                7.00 pt
+
+PUNTEN VOOR DE WOZ-WAARDE
+  WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
+  Onderdeel I                                                          45.27 pt
+    - Factor I                                          15329.00 EUR
+  Onderdeel II                                                         69.95 pt
+    - Oppervlakte van vertrekken en overige ruimten        41.00 m²
+    - Factor II                                           242.00 EUR
+  Afronding op kwartpunten                                              0.03 pt
+                                                                      ---------
+  Totaal                                                              115.25 pt
 ```
 
+
 </details>
+
+## Warnings
+
+Bij incomplete of onjuiste inputdata genereert de package een `UserWarning`. Standaard leidt dat tot een error, zodat duidelijk is dat invoer ontbreekt of onjuist is.
+
+Met `warnings.simplefilter("default", UserWarning)` blijft de waarschuwing zichtbaar, maar faalt de package niet: je krijgt dan wel een woningwaarderingresultaat. Zie [Gebruik](#gebruik) voor een concreet voorbeeld.
+
+Een `DeprecationWarning` (bijvoorbeeld voor tijdelijk nog ondersteunde, verouderde velden) wordt wel getoond en gelogd, maar leidt niet tot een error.
+
+### Criterium-id's
+
+Elke waardering heeft een criterium met een uniek id. Dat id is een pad-id: het beschrijft zowel de identiteit van het criterium als de plek in de hiërarchie. Segmenten worden met een dubbele underscore (`__`) gekoppeld.
+
+Een waardering direct onder de stelselgroep krijgt het id `{stelselgroep}__{segment}`. Een waardering onder een andere waardering krijgt `{bovenliggende_id}__{segment}`.
+
+Voor gedeeld-met-lagen gelden vaste segmentnamen: `prive` bij een aantal van ten hoogste 1, en `gedeeld_met_{n}_{soort}` bij een aantal groter dan 1. Indien een ruimte in een stelselgroep nooit _gedeeld met_ kan zijn (zoals bij `Oppervlakte van Vertrekken` voor een zelfstandige woonruimte), ontbreekt de gedeeld-met laag bewust, en staat er dus ook geen privé, want de ruimte is per definitie privé in die stelselgroep.
+
+In de eerste voorbeeldoutput ziet Buitenruimten er zo uit:
+
+```text
+BUITENRUIMTEN
+  Privé                                                    71.00 m²    24.85 pt
+    - Balkon 1                                              3.14 m²
+    - Balkon 2                                              3.14 m²
+    - Tuin                                                 49.11 m²
+    - Dakterras                                            15.93 m²
+  Privé buitenruimten aanwezig                                          2.00 pt
+  Maximaal 15 punten                                                  -11.85 pt
+```
+
+De bijbehorende criterium-id's:
+
+| Tabelregel | Criterium-id |
+| --- | --- |
+| Privé | `buitenruimten__prive` |
+| Balkon 1 | `buitenruimten__prive__Space_108014713` |
+| Tuin | `buitenruimten__prive__Space_108006357` |
+| Privé buitenruimten aanwezig | `buitenruimten__prive_buitenruimten_aanwezig` |
+| Maximaal 15 punten | `buitenruimten__maximering` |
+
+`buitenruimten__prive` is de gedeeld-met-laag direct onder de stelselgroep. De ruimtes hangen daaronder: hun id begint met `buitenruimten__prive__`. De overige twee regels staan weer direct onder de stelselgroep.
+

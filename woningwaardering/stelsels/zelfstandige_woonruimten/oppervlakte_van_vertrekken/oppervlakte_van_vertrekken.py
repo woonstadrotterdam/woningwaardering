@@ -4,18 +4,18 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
+from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
-    gedeeld_met_eenheden,
+    gedeeld_met_adressen,
     rond_af,
     rond_af_op_kwart,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -43,25 +43,22 @@ class OppervlakteVanVertrekken(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        woningwaardering_groep = WoningwaarderingResultatenWoningwaarderingGroep(
-            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
-                stelsel=self.stelsel,
-                stelselgroep=self.stelselgroep,
-            )
+        waarderingsgroep_builder = WaarderingsgroepBuilder(
+            self.stelsel, self.stelselgroep
         )
-
-        woningwaardering_groep.woningwaarderingen = []
 
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if not gedeeld_met_eenheden(ruimte)
+            if not gedeeld_met_adressen(ruimte)
         ]
 
         for ruimte in ruimten:
-            woningwaardering_groep.woningwaarderingen.extend(
-                waardeer_oppervlakte_van_vertrek(ruimte)
+            waardeer_oppervlakte_van_vertrek(
+                ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
+
+        woningwaardering_groep = waarderingsgroep_builder.build()
 
         punten = rond_af_op_kwart(
             rond_af(
@@ -87,7 +84,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
 
 if __name__ == "__main__":  # pragma: no cover
     with DevelopmentContext(
-        instance=OppervlakteVanVertrekken(peildatum=date(2026, 1, 1)),
+        instance=OppervlakteVanVertrekken(peildatum=date(2026, 7, 1)),
         strict=False,  # False is log warnings, True is raise warnings
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:

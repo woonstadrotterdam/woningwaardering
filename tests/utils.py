@@ -1,7 +1,6 @@
 import difflib
 from dataclasses import dataclass
 from datetime import date
-from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
@@ -10,7 +9,7 @@ from pytest import fail
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_tabel, normaliseer_ruimte_namen
+from woningwaardering.stelsels.utils import naar_rapport, normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -39,6 +38,27 @@ def get_stelselgroep_resultaten(
     return resultaten
 
 
+def _gesorteerd_op_criterium_id(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> WoningwaarderingResultatenWoningwaarderingResultaat:
+    """Geef een kopie waarin de waarderingen per groep op criterium-id zijn gesorteerd.
+
+    Hiermee wordt de JSON-vergelijking ongevoelig voor de (functioneel irrelevante)
+    volgorde van waarderingen binnen een groep.
+    """
+    gesorteerd = resultaat.model_copy(deep=True)
+    for groep in gesorteerd.groepen or []:
+        if groep.woningwaarderingen:
+            groep.woningwaarderingen.sort(
+                key=lambda waardering: (
+                    waardering.criterium.id
+                    if waardering.criterium and waardering.criterium.id
+                    else ""
+                )
+            )
+    return gesorteerd
+
+
 def assert_output_model(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     verwacht_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -59,8 +79,8 @@ def assert_output_model(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=naar_tabel(verwacht_resultaat).get_string().split("\n"),
-            b=naar_tabel(resultaat).get_string().split("\n"),
+            a=naar_rapport(verwacht_resultaat).get_string().split("\n"),
+            b=naar_rapport(resultaat).get_string().split("\n"),
             lineterm="",
             n=3,
         )
@@ -71,14 +91,20 @@ def assert_output_model(
     if colored_diff != "":
         fail(reason=f"Output komt niet overeen\n{colored_diff}", pytrace=False)
 
+    # De volgorde van waarderingen binnen een groep is functioneel niet relevant
+    # (de hiërarchie ligt vast in ``criterium.id`` en ``bovenliggende_criterium``).
+    # We sorteren daarom op criterium-id voordat we de JSON vergelijken, zodat de
+    # diff aantoont dat enkel de volgorde verschilt en niet de punten/aantallen.
     difflines_json = list(
         difflib.unified_diff(
             fromfile="verwacht",
             tofile="testresultaat",
-            a=verwacht_resultaat.model_dump_json(indent=2, exclude_none=True).split(
-                "\n"
-            ),
-            b=resultaat.model_dump_json(indent=2, exclude_none=True).split("\n"),
+            a=_gesorteerd_op_criterium_id(verwacht_resultaat)
+            .model_dump_json(indent=2, exclude_none=True)
+            .split("\n"),
+            b=_gesorteerd_op_criterium_id(resultaat)
+            .model_dump_json(indent=2, exclude_none=True)
+            .split("\n"),
             lineterm="",
             n=3,
         )
@@ -132,7 +158,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
 @dataclass
 class WarningConfig:
     file: str
-    peildatum: date
     warnings: dict[type[Warning], str]
 
 
@@ -144,12 +169,9 @@ def assert_stelselgroep_warnings(
 
     Args:
         warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
-        peildatum (date): peildatum
+        peildatum (date): peildatum waarop de stelselgroep wordt gewaardeerd
         stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
     """
-    if peildatum < warning_config.peildatum:
-        pytest.skip(f"Warning is niet van toepassing op peildatum: {peildatum}")
-
     with open(warning_config.file, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
@@ -191,8 +213,6 @@ def assert_stelselgroep_output(
         stelselgroep.stelselgroep,
     )
 
-    assert_som_bovenliggend_criterium(resultaat)
-
 
 def assert_stelselgroep_specifiek_output(
     specifieke_input_en_output_model: tuple[
@@ -221,8 +241,6 @@ def assert_stelselgroep_specifiek_output(
         stelselgroep.stelselgroep,
     )
 
-    assert_som_bovenliggend_criterium(resultaat)
-
 
 def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
     """
@@ -246,62 +264,82 @@ def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fix
     return specifieke_input_en_output_model
 
 
+def assert_geen_dubbele_aantal_in_hierarchie(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Geen structurele ouder met aantal wanneer onderliggende waarderingen ook aantal hebben."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        parent_ids = utils.parent_ids_met_onderliggende_aantal(waarderingen)
+        for waardering in waarderingen:
+            if (
+                waardering.aantal is None
+                or waardering.criterium is None
+                or waardering.criterium.id is None
+            ):
+                continue
+            if waardering.criterium.id not in parent_ids:
+                continue
+            if waardering.punten is not None:
+                continue
+            assert False, (
+                f"Waardering {waardering.criterium.id} heeft aantal terwijl onderliggende "
+                f"waarderingen ook aantal hebben "
+                f"(groep "
+                f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam})"
+            )
+
+
+def assert_geen_dubbele_punten_in_hierarchie(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Geen ouder met punten wanneer een onderliggende waardering ook punten heeft."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        parent_ids = utils.parent_ids_met_onderliggende_punten(waarderingen)
+        for waardering in waarderingen:
+            if (
+                waardering.punten is None
+                or waardering.criterium is None
+                or waardering.criterium.id is None
+            ):
+                continue
+            assert waardering.criterium.id not in parent_ids, (
+                f"Waardering {waardering.criterium.id} heeft punten terwijl onderliggende "
+                f"waarderingen ook punten hebben "
+                f"(groep "
+                f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam})"
+            )
+
+
+def assert_groep_punten_is_som_van_waarderingen(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """groep.punten is de som van de waarderingen wanneer die punten tonen."""
+    for groep in resultaat.groepen or []:
+        waarderingen = groep.woningwaarderingen or []
+        if groep.punten is None:
+            continue
+        if not any(w.punten is not None for w in waarderingen):
+            continue
+        verwacht = utils.som_punten_waarderingen(waarderingen)
+        groep_naam = (
+            groep.criterium_groep
+            and groep.criterium_groep.stelselgroep
+            and groep.criterium_groep.stelselgroep.naam
+        )
+        assert groep.punten == verwacht, (
+            f"groep.punten ({groep.punten}) != som van de waarderingen ({verwacht}) "
+            f"in {groep_naam}"
+        )
+
+
 def assert_som_bovenliggend_criterium(
     resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-):
-    """
-    Controleert of de som van de punten van woningwaarderingen met een bovenliggend criterium
-    overeenkomt met de punten van de woningwaardering van het bovenliggende criterium
-    """
-    for groep in resultaat.groepen or []:
-        # Dictionaries voor punten van bovenliggende en onderliggende criteria
-        punten_bovenliggend: dict[str, Decimal] = {}
-        punten_onderliggend: dict[str, Decimal] = {}
-
-        for waardering in groep.woningwaarderingen or []:
-            # Sla waarderingen zonder punten over
-            if waardering.punten is None:
-                continue
-
-            # Als er een bovenliggend criterium is, tel de punten op bij onderliggende punten
-            if waardering.criterium and waardering.criterium.bovenliggende_criterium:
-                bovenliggend_id = waardering.criterium.bovenliggende_criterium.id
-                if bovenliggend_id is None:
-                    continue
-
-                punten_onderliggend[bovenliggend_id] = punten_onderliggend.get(
-                    bovenliggend_id, Decimal("0")
-                ) + Decimal(str(waardering.punten))
-
-            # Als dit een bovenliggend criterium is, sla de punten op
-            if (
-                waardering.criterium
-                and waardering.criterium.id
-                and any(
-                    woningwaardering.criterium
-                    and woningwaardering.criterium.bovenliggende_criterium
-                    and woningwaardering.criterium.bovenliggende_criterium.id
-                    == waardering.criterium.id
-                    for woningwaardering in groep.woningwaarderingen or []
-                )
-            ):
-                punten_bovenliggend[waardering.criterium.id] = Decimal(
-                    str(waardering.punten)
-                )
-
-        # Vergelijk de sommen voor elk bovenliggend criterium
-        for bovenliggend_id, verwachte_punten in punten_bovenliggend.items():
-            if bovenliggend_id in punten_onderliggend:
-                assert (
-                    punten_onderliggend[bovenliggend_id] == verwachte_punten
-                    or utils.rond_af_op_kwart(punten_onderliggend[bovenliggend_id])
-                    == verwachte_punten
-                ), (
-                    f"Punten komen niet overeen voor {bovenliggend_id} "
-                    f"in groep {groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam}: "
-                    f"Som van onderliggende punten ({punten_onderliggend[bovenliggend_id]}) "
-                    f"!= Punten bovenliggend criterium ({verwachte_punten})"
-                )
+) -> None:
+    assert_geen_dubbele_punten_in_hierarchie(resultaat)
+    assert_geen_dubbele_aantal_in_hierarchie(resultaat)
+    assert_groep_punten_is_som_van_waarderingen(resultaat)
 
 
 def assert_punten_afgerond_op_kwarten(

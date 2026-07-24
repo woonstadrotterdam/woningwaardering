@@ -1,6 +1,7 @@
-from typing import Optional
+import warnings
+from typing import Self
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -11,49 +12,76 @@ from woningwaardering.vera.bvg.generated import (
 
 class _EenhedenRuimte(BaseModel):
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden", ge=0
+    gedeeld_met_aantal_adressen: int | None = Field(
+        default=None, alias="gedeeldMetAantalAdressen", ge=0
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
+    Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_adressen groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    # Verouderde naam; blijft ondersteund voor backwards compatibility.
+    # Bij conflict wint gedeeld_met_aantal_adressen.
+    gedeeld_met_aantal_eenheden: int | None = Field(
+        default=None,
+        alias="gedeeldMetAantalEenheden",
+        ge=0,
+        deprecated=True,
+        exclude=True,
+    )
+    """
+    Deprecated: gebruik `gedeeld_met_aantal_adressen`. Het aantal eenheden waarmee deze ruimte wordt gedeeld.
+    """
+
+    @model_validator(mode="after")
+    def _gedeeld_met_aantal_eenheden(self) -> Self:
+        aantal_eenheden = self.__dict__.get("gedeeld_met_aantal_eenheden")
+        if aantal_eenheden is not None:
+            warnings.warn(
+                "`gedeeldMetAantalEenheden`/`gedeeld_met_aantal_eenheden` is deprecated. "
+                "Gebruik `gedeeldMetAantalAdressen`/`gedeeld_met_aantal_adressen`.",
+                DeprecationWarning,
+            )
+            if self.gedeeld_met_aantal_adressen is None:
+                self.gedeeld_met_aantal_adressen = aantal_eenheden
+        return self
+
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
-    bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(
+    bouwkundige_elementen: list[BouwkundigElementenBouwkundigElement] | None = Field(
         default=None, alias="bouwkundigeElementen"
     )
     """
     De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een trap, de lengte van een aanrecht in een keuken en de aanwezigheid van een toilet in een badkamer.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/47
-    verbonden_ruimten: Optional[list[EenhedenRuimte]] = Field(
+    verbonden_ruimten: list[EenhedenRuimte] | None = Field(
         default=None, alias="verbondenRuimten"
     )
     """
     De ruimten die in verbinding staan met deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten.
     """
     # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-    verwarmd: Optional[bool] = Field(default=None, alias="verwarmd")
+    verwarmd: bool | None = Field(default=None, alias="verwarmd")
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-    verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
+    verkoeld: bool | None = Field(default=None, alias="verkoeld")
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
-    installaties: Optional[list[Referentiedata]] = Field(
+    installaties: list[Referentiedata] | None = Field(
         default=None, alias="installaties"
     )
     """
     Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
     """
-    aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
+    aantal: int | None = Field(default=1, alias="aantal", ge=0)
     """
     Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke Parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor 'Gemeenschappelijke Parkeerruimten'.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_onzelfstandige_woonruimten: Optional[int] = Field(
+    gedeeld_met_aantal_onzelfstandige_woonruimten: int | None = Field(
         default=None, alias="gedeeldMetAantalOnzelfstandigeWoonruimten", ge=0
     )
     """

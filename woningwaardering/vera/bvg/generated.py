@@ -9,11 +9,12 @@ import warnings
 from datetime import date
 from functools import reduce
 from operator import getitem
-from typing import Any, Optional, Union
+from typing import Any, Self
 
 from pydantic import (
     AnyUrl,
     AwareDatetime,
+    Base64Str,
     BaseModel,
     ConfigDict,
     Field,
@@ -22,6 +23,7 @@ from pydantic import (
     ValidationInfo,
     ValidatorFunctionWrapHandler,
     field_validator,
+    model_validator,
 )
 
 
@@ -29,29 +31,27 @@ class GebouwSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -61,16 +61,16 @@ class Referentiedata(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken) Bijvoorbeeld NL.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De te tonen waarde van het referentiedata item. Bijvoorbeeld Nederlandse.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/53
-    parent: Optional[Referentiedata] = Field(None, exclude=True)
+    parent: Referentiedata | None = Field(None, exclude=True)
     """
     De bovenliggende referentiedata in het geval er sprake is van een hierarchische relatie tussen referentiedata.
     """
@@ -105,33 +105,31 @@ class ClusterSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de cluster.
     """
@@ -141,29 +139,27 @@ class EenheidSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -173,33 +169,31 @@ class OvereenkomstSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort overeenkomst. Dit kan bijvoorbeeld arbeidsovereenkomst of koopovereenkomst zijn. Referentiedatasoort OVEREENKOMSTSOORT.
     """
@@ -209,37 +203,35 @@ class ContactgegevenSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort communicatie. Bijvoorbeeld: Telefoon, E-mail, .Social media etc. Referentiedatasoort CONTACTGEGEVENSOORT.
     """
-    status: Optional[Referentiedata] = None
+    status: Referentiedata | None = None
     """
     De status van het contactgegeven. Bijv. Aangemaakt, Gevalideerd, Ongeldig etc. Referentiedatasoort CONTACTGEGEVENSTATUS.
     """
@@ -249,29 +241,27 @@ class RelatierolSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -281,29 +271,27 @@ class BouwkundigElementenRelatierol(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort rol van de relatie. Bijvoorbeeld Klant, Prospect, Leverancier, Medewerker, Team etc. Referentiedatasoort RELATIEROLSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de relatie rol.
     """
@@ -313,29 +301,27 @@ class CollectiefObjectSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -345,29 +331,27 @@ class ConditiemetingSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -377,29 +361,27 @@ class GarantieSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -409,37 +391,35 @@ class ClustersEenheid(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     De dienstverlening (soort) die geboden kan worden met de eenheid. Voorbeeld: Woonruimte, Bedrijfsruimte, Parkeergelegenheid. Referentiedatasoort EENHEIDSOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het type van de eenheid. Bijvoorbeeld: Hoekwoning, Tussenwoning, Flat, Maisonnette. Hiervoor wordt de lijst van de waarderingskamer als uitgangspunt genomen. Referentiedatasoort EENHEIDDETAILSOORT.
     """
@@ -449,7 +429,7 @@ class ClustersGeometrieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     soort Geometrie: punt of omtrek Referentiedatasoort GEOMETRIESOORT.
     """
@@ -459,11 +439,11 @@ class ClustersPunt(ClustersGeometrieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    breedtegraad: Optional[float] = None
+    breedtegraad: float | None = None
     """
     De breedtegraad.
     """
-    lengtegraad: Optional[float] = None
+    lengtegraad: float | None = None
     """
     De lengtegraad.
     """
@@ -473,37 +453,35 @@ class ClustersRelatierol(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort rol van de relatie. Bijvoorbeeld Klant, Prospect, Leverancier, Medewerker, Team etc. Referentiedatasoort RELATIEROLSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de relatie rol.
     """
@@ -513,59 +491,57 @@ class EenhedenAdresBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort adres. Bijv. eenheidadres, postadres of buitenlands adres. Referentiedatasoort ADRESSOORT.
     """
-    adres: Optional[str] = None
+    adres: str | None = None
     """
     De samenstelling van de attributen: straatnaam, huisnummer, huisletter en huisnummerToevoeging.
     """
-    huisletter: Optional[str] = None
+    huisletter: str | None = None
     """
     De huisletter door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
     """
-    huisnummer: Optional[str] = None
+    huisnummer: str | None = None
     """
     Het huisnummer dat door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nummering.
     """
-    huisnummer_toevoeging: Optional[str] = Field(
+    huisnummer_toevoeging: str | None = Field(
         default=None, alias="huisnummerToevoeging"
     )
     """
     De huisnummer toevoeging van het adres.
     """
-    postcode: Optional[str] = None
+    postcode: str | None = None
     """
     De postcode van het adres.
     """
-    straatnaam: Optional[str] = None
+    straatnaam: str | None = None
     """
     De straatnaam behorend bij het adres.
     """
@@ -575,29 +551,27 @@ class AdresSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -607,33 +581,31 @@ class GeometrieSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     soort Geometrie: punt of omtrek Referentiedatasoort GEOMETRIESOORT.
     """
@@ -643,49 +615,47 @@ class EenhedenBagPand(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    bag_identificatie: Optional[str] = Field(default=None, alias="bagIdentificatie")
+    bag_identificatie: str | None = Field(default=None, alias="bagIdentificatie")
     """
     Het BAG registratienummer van het pand zoals bekend is bij de BAG.
     """
-    bag_status: Optional[str] = Field(default=None, alias="bagStatus")
+    bag_status: str | None = Field(default=None, alias="bagStatus")
     """
     De fase van de levenscyclus van een pand, waarin het betreffende pand zich bevindt. Dit attribuut is afkomstig uit de BAG.
     """
-    bag_in_onderzoek: Optional[bool] = Field(default=None, alias="bagInOnderzoek")
+    bag_in_onderzoek: bool | None = Field(default=None, alias="bagInOnderzoek")
     """
     De aanduiding waarmee wordt aangegeven dat een onderzoek wordt uitgevoerd naar de juistheid van een of meerdere gegevens van het betreffende object.
     """
-    bag_officieel: Optional[bool] = Field(default=None, alias="bagOfficieel")
+    bag_officieel: bool | None = Field(default=None, alias="bagOfficieel")
     """
     De aanduiding waarmee kan worden aangegeven dat een object in de basisregistratie is opgenomen als gevolg van een feitelijke constatering, zonder dat er op het moment van opname sprake is van een formele grondslag voor deze opname.
     """
-    bag_bouwdatum: Optional[date] = Field(default=None, alias="bagBouwdatum")
+    bag_bouwdatum: date | None = Field(default=None, alias="bagBouwdatum")
     """
     De aanduiding van het jaar waarin een pand oorspronkelijk als bouwkundig gereed is opgeleverd.
     """
@@ -695,33 +665,31 @@ class EenhedenBuurt(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de buurt.
     """
@@ -731,37 +699,35 @@ class EenhedenCluster(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort cluster. Bijvoorbeeld, nieuwbouwcluster, onderhoudscluster, financieel cluster. Referentiedatasoort CLUSTERSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de cluster.
     """
@@ -771,53 +737,51 @@ class EenhedenEenheidcriterium(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort criterium. Bijv. Binding, Groep, Indicatie, Urgentie. Referentiedatasoort EENHEIDCRITERIUMSOORT.
     """
-    detailsoort: Optional[Referentiedata] = None
+    detailsoort: Referentiedata | None = None
     """
     Het soort criterium op basis waarvan de woning passend is of waarop men voorang kan krijgen. Referentiedatasoort EENHEIDCRITERIUMDETAILSOORT.
     """
-    aantal_bovengrens: Optional[float] = Field(default=None, alias="aantalBovengrens")
+    aantal_bovengrens: float | None = Field(default=None, alias="aantalBovengrens")
     """
     Bovengrens, waarbij de eenheid van deze grootheid afhankelijk is van de soort regel, bijvoorbeeld personen, euro's, meters, etc.
     """
-    aantal_exact: Optional[float] = Field(default=None, alias="aantalExact")
+    aantal_exact: float | None = Field(default=None, alias="aantalExact")
     """
     De exacte waarde. De eenheid van deze grootheid is afhankelijk van de soort regel, bijvoorbeeld personen, euro's, vierkante meters, etc.
     """
-    aantal_ondergrens: Optional[float] = Field(default=None, alias="aantalOndergrens")
+    aantal_ondergrens: float | None = Field(default=None, alias="aantalOndergrens")
     """
     Ondergrens, waarbij de eenheid van deze grootheid afhankelijk is van de soort regel, bijvoorbeeld personen, euro's of vierkante meters.
     """
-    doelgroep: Optional[Referentiedata] = None
+    doelgroep: Referentiedata | None = None
     """
     De doelgroep waarop het criterium van toepassing is. Referentiedatasoort DOELGROEP.
     """
-    toepassing: Optional[Referentiedata] = None
+    toepassing: Referentiedata | None = None
     """
     Of het een selectie- of sorteercriterium betreft. Referentiedatasoort EENHEIDCRITERIUMTOEPASSING.
     """
@@ -827,71 +791,67 @@ class EenhedenEenheidVoorwaarden(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    maximum_aantal_personen: Optional[int] = Field(
+    maximum_aantal_personen: int | None = Field(
         default=None, alias="maximumAantalPersonen"
     )
     """
     Het maximaal aantal personen waarvoor de eenheid geschikt is.
     """
-    maximuminkomen: Optional[float] = None
+    maximuminkomen: float | None = None
     """
     Het maximuminkomen dat de bewoner moet hebben om in aanmerking te komen voor de eenheid.
     """
-    maximumleeftijd: Optional[int] = None
+    maximumleeftijd: int | None = None
     """
     De maximumleeftijd waaraan de bewoner moet voldoen om in aanmerking te komen voor de eenheid.
     """
-    maximunleeftijd: Optional[int] = Field(
-        default=None, json_schema_extra={"deprecated": True}
-    )
+    maximunleeftijd: int | None = Field(default=None, deprecated=True)
     """
     De maximumleeftijd waaraan de bewoner moet voldoen om in aanmerking te komen voor de eenheid. OBSOLETE
     """
-    minimum_aantal_personen: Optional[int] = Field(
+    minimum_aantal_personen: int | None = Field(
         default=None, alias="minimumAantalPersonen"
     )
     """
     Het minimum aantal personen waarvoor de eenheid geschikt is.
     """
-    minimuminkomen: Optional[float] = None
+    minimuminkomen: float | None = None
     """
     Het minimuminkomen dat de bewoner moet hebben om in aanmerking te komen voor de eenheid.
     """
-    minimumleeftijd: Optional[int] = None
+    minimumleeftijd: int | None = None
     """
     De minimumleeftijd waaraan de bewoner moet voldoen om in aanmerking te komen voor de eenheid.
     """
-    selectiecriteria: Optional[list[Referentiedata]] = None
+    selectiecriteria: list[Referentiedata] | None = None
     """
     De criteria waaraan men moet voldoen om in aanmerking te komen voor deze eenheid. Referentiedatasoort SELECTIECRITERIA.
     """
-    voorrangscriteria: Optional[list[Referentiedata]] = None
+    voorrangscriteria: list[Referentiedata] | None = None
     """
     De criteria waaraan men moet voldoen om voorrang te krijgen voor deze eenheid. Referentiedatasoort VOORRANGSCRITERIA.
     """
@@ -901,61 +861,59 @@ class EenhedenEnergieprestatie(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort energieprestatie. Bijv. Voorloping Energielabel, Energieprestatieindex,  etc.. Referentiedatasoort ENERGIEPRESTATIESOORT.
     """
-    status: Optional[Referentiedata] = None
+    status: Referentiedata | None = None
     """
     Geeft de status van de energieprestatie aan: Voorlopig of Definitief. Een voorlopige energieprestatie wordt ook wel "pré-label" genoemd. Een definitieve energieprestatie is afgemeld bij de Rijksoverheid. Referentiedatasoort ENERGIEPRESTATIESTATUS.
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De datum die aangeeft vanaf welk moment de energieprestatie geldt. Indien de energieprestatie is vastgesteld door een adviseur dan is deze datum gelijk aan de opnamedatum. Indien het een voorlopige energieprestatie (pré-label) is dan is de begindatum de datum waarop de energieprestatie is berekend op basis van de beschikbare woningkenmerken. De combinatie van start en einddatum geven een sluitende periode waarin een bepaald energielabel.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De datum die aangeeft tot welk moment de energieprestatie geldig is. Indien de energieprestatie een officiële status heft (afgemeld bij de Rijksoverheid) dan is dit de 'Geldig tot'-datum van de registratie. Indien het een voorlopige energieprestatie is, dan kan de einddatum leeg zijn.
     """
-    registratiedatum: Optional[AwareDatetime] = None
+    registratiedatum: AwareDatetime | None = None
     """
     De datum waarop de energieprestatie is geregistreerd bij de Rijksoverheid. Als sprake is van een voorlopige energieprestatie is geen registratiedatum bekend.
     """
-    index: Optional[float] = Field(default=None, json_schema_extra={"deprecated": True})
+    index: float | None = Field(default=None, deprecated=True)
     """
     De energieprestatie index van de eenheid. OBSOLETE
     """
-    label: Optional[Referentiedata] = None
+    label: Referentiedata | None = None
     """
     Het energielabel voor woningen geeft met klassen (A**** tot en met G) en kleuren (groen tot en met rood) aan hoe energiezuinig een huis is ten opzichte van andere soortgelijke woningen. Energielabel A (donkergroen) is zuinig, energielabel G (rood) is onzuinig. Het energielabel is meestal een afgeleide van de waarde van de energieprestatie. Referentiedatasoort ENERGIELABEL.
     """
-    waarde: Optional[str] = None
+    waarde: str | None = None
     """
     De door een adviseur gemeten waarde die hoort bij de energieprestatie. De energieprestatiesoort bepaalt wat deze waarde representeert. Bijvoorbeeld: Energie-index of EP2 (het energielabel  is daarvan dan afgeleid), compactheid of opgewekte duurzame energie. Bij een voorlopig energielabel is geen waarde van toepassing.
     """
@@ -965,41 +923,39 @@ class EenhedenGemeente(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de gemeente.
     """
-    provincie: Optional[Referentiedata] = None
+    provincie: Referentiedata | None = None
     """
     De provincie waar de gemeente onderdeel van is. Referentiedatasoort PROVINCIE.
     """
-    samenwerkingsverband: Optional[Referentiedata] = None
+    samenwerkingsverband: Referentiedata | None = None
     """
     Het regionale samenwerkingsverband waarbinnen de gemeente deelneemt. Referentiedatasoort SAMENWERKINGSVERBAND.
     """
@@ -1009,7 +965,7 @@ class EenhedenGeometrieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     soort Geometrie: punt of omtrek Referentiedatasoort GEOMETRIESOORT.
     """
@@ -1019,71 +975,69 @@ class EenhedenMarktwaarde(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    beheers_kosten: Optional[float] = Field(default=None, alias="beheersKosten")
+    beheers_kosten: float | None = Field(default=None, alias="beheersKosten")
     """
     Beheerkosten op het moment van waarderen zoals toegepast in de martkwaardeberekening.
     """
-    contract_jaarhuur: Optional[float] = Field(default=None, alias="contractJaarhuur")
+    contract_jaarhuur: float | None = Field(default=None, alias="contractJaarhuur")
     """
     De contractueel afgesproken jaarhuur op het moment van waarderen.
     """
-    disconteringsvoet: Optional[float] = None
+    disconteringsvoet: float | None = None
     """
     Disconteringsvoet op het moment van waarderen.
     """
-    doorexploiteren_disconteringsvoet: Optional[float] = Field(
+    doorexploiteren_disconteringsvoet: float | None = Field(
         default=None, alias="doorexploiterenDisconteringsvoet"
     )
     """
     Disconteringsvoet doorexploiteren op het moment van waarderen.
     """
-    leegwaarde: Optional[float] = None
+    leegwaarde: float | None = None
     """
     De geschatte verkoopprijs op basis van de kosten koper, vrij van huur en overige lasten (Handboek MVS).
     """
-    markt_jaarhuur: Optional[float] = Field(default=None, alias="marktJaarhuur")
+    markt_jaarhuur: float | None = Field(default=None, alias="marktJaarhuur")
     """
     Actuele markt jaarhuur op het moment van waarderen.
     """
-    onderhouds_kosten: Optional[float] = Field(default=None, alias="onderhoudsKosten")
+    onderhouds_kosten: float | None = Field(default=None, alias="onderhoudsKosten")
     """
     Onderhoudskosten op het moment van waarderen zoals toegepast in de martkwaardeberekening.
     """
-    verhuurderheffing: Optional[float] = None
+    verhuurderheffing: float | None = None
     """
     De verhuurderheffing voor de volledige DCF-periode. De heffing wordt berekend als een percentage van de WOZ-waarde (Handboek MVS).
     """
-    verslag_jaar: Optional[int] = Field(default=None, alias="verslagJaar")
+    verslag_jaar: int | None = Field(default=None, alias="verslagJaar")
     """
     Het verslagjaar waarop de marktwaarde bepaling betrekking heeft.
     """
-    waarde: Optional[float] = None
+    waarde: float | None = None
     """
     De vastgestelde taxatiewaarde, ook wel marktwaarde in verhuurde staat.
     """
@@ -1093,29 +1047,27 @@ class EenhedenOppervlakte(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort oppervlakte. Bijv. GO (Gebruiksoppervlakte) of BVO (Brutovloeroppervlak) Referentiedatasoort OPPERVLAKTESOORT.
     """
-    waarde: Optional[str] = None
+    waarde: str | None = None
     """
     De waarde van de oppervlakte in vierkante meters (m2)
     """
@@ -1125,37 +1077,35 @@ class EenhedenPand(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort pand. Eengezins of meergezins. Referentiedatasoort PANDSOORT.
     """
-    lift_aanwezig: Optional[bool] = Field(default=None, alias="liftAanwezig")
+    lift_aanwezig: bool | None = Field(default=None, alias="liftAanwezig")
     """
     De aanduiding geeft aan of in het pand in lift aanwezig is.
     """
@@ -1165,63 +1115,59 @@ class EenhedenPrijscomponent(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Geeft aan om welk soort prijscomponent het betreft. Bijvoorbeeld een component voor een eenheid, of een component voor een overeenkomst. Referentiedatasoort PRIJSCOMPONENTSOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Geeft aan om welk detail soort prijscomponent het betreft. Bijvoorbeeld of het om service kosten gaat. Referentiedatasoort PRIJSCOMPONENTDETAILSOORT.
     """
-    begindatum: Optional[AwareDatetime] = None
+    begindatum: AwareDatetime | None = None
     """
     De begindatum van het prijscomponent. Dit is de datum waarop het prijscomponent van toepassing is.
     """
-    einddatum: Optional[AwareDatetime] = None
+    einddatum: AwareDatetime | None = None
     """
     De datum die aangeeft dat het prijscomponent niet meer van toepassing is. Er is dan een nieuwer prijscomponent van toepassing.
     """
-    bedrag: Optional[float] = None
+    bedrag: float | None = None
     """
     Het bedrag in euro's van het prijscomponent exclusief BTW.
     """
-    bedrag_inclusief_btw: Optional[float] = Field(
-        default=None, alias="bedragInclusiefBtw"
-    )
+    bedrag_inclusief_btw: float | None = Field(default=None, alias="bedragInclusiefBtw")
     """
     Het bedrag in euro's van het prijscomponent inclusief BTW.
     """
-    btw: Optional[Referentiedata] = None
+    btw: Referentiedata | None = None
     """
     De BTW van het prijscomponent. Referentiedatasoort BTW.
     """
-    wijzigingsreden: Optional[Referentiedata] = None
+    wijzigingsreden: Referentiedata | None = None
     """
     Geeft aan wat de reden was voor het aanpassen van het prijscomponent. Referentiedatasoort PRIJSCOMPONENTWIJZIGINGSREDEN.
     """
@@ -1231,11 +1177,11 @@ class EenhedenPunt(EenhedenGeometrieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    breedtegraad: Optional[float] = None
+    breedtegraad: float | None = None
     """
     De breedtegraad.
     """
-    lengtegraad: Optional[float] = None
+    lengtegraad: float | None = None
     """
     De lengtegraad.
     """
@@ -1245,37 +1191,35 @@ class EenhedenRelatierol(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort rol van de relatie. Bijvoorbeeld Klant, Prospect, Leverancier, Medewerker, Team etc. Referentiedatasoort RELATIEROLSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de relatie rol.
     """
@@ -1285,41 +1229,39 @@ class EenhedenRenovatie(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van de renovatie(s) behorend bij de eenheid.
     """
-    datum: Optional[date] = None
+    datum: date | None = None
     """
     De datum dat het object is gerenoveerd.
     """
-    bedrag_investering: Optional[float] = Field(default=None, alias="bedragInvestering")
+    bedrag_investering: float | None = Field(default=None, alias="bedragInvestering")
     """
     Bedrag van de investering in de renovatie van de woning.
     """
@@ -1329,116 +1271,141 @@ class EenhedenRuimte(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort ruimte. Ruimtes worden verdeeld in vertrekken die meetellen voor de woningwaardering, buitenruimtes en overige ruimtes. Referentiedatasoort RUIMTESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detailsoort van de ruimte. Bijv. Slaapkamer, Dakteras, Tuin etc. Referentiedatasoort RUIMTEDETAILSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De omschrijving van de ruimte.
     """
-    breedte: Optional[float] = None
+    breedte: float | None = None
     """
     Breedte van de ruimte in milimeter.
     """
-    hoogte: Optional[float] = None
+    hoogte: float | None = None
     """
     Hoogte van de ruimte in milimeter.
     """
-    inhoud: Optional[float] = None
+    inhoud: float | None = None
     """
     De inhoud van de ruimte in m3.
     """
-    klimaatbeheersing: Optional[Referentiedata] = None
+    klimaatbeheersing: Referentiedata | None = None
     """
     Referentiedatasoort EENHEIDKLIMAATBEHEERSING.
     """
-    lengte: Optional[float] = None
+    lengte: float | None = None
     """
     Lengte van de ruimte in milimeter.
     """
-    ligging: Optional[Referentiedata] = None
+    ligging: Referentiedata | None = None
     """
     De ligging van de ruimte. Referentiedatasoort RUIMTELIGGING.
     """
-    oppervlakte: Optional[float] = None
+    oppervlakte: float | None = None
     """
     De oppervlakte van de ruimte
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_eenheden: Optional[int] = Field(
-        default=None, alias="gedeeldMetAantalEenheden", ge=0
+    gedeeld_met_aantal_adressen: int | None = Field(
+        default=None, alias="gedeeldMetAantalAdressen", ge=0
     )
     """
-    Het aantal eenheden waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_eenheden groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
+    Het aantal adressen waarmee deze ruimte wordt gedeeld. Deze waarde wordt gebruikt bij het berekenen van de waardering van een gedeelde ruimte. Wanneer gedeeld_met_aantal_adressen groter is dan 1, dan wordt de ruimte beschouwd als een gedeelde ruimte.
     """
+    # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
+    # Verouderde naam; blijft ondersteund voor backwards compatibility.
+    # Bij conflict wint gedeeld_met_aantal_adressen.
+    gedeeld_met_aantal_eenheden: int | None = Field(
+        default=None,
+        alias="gedeeldMetAantalEenheden",
+        ge=0,
+        deprecated=True,
+        exclude=True,
+    )
+    """
+    Deprecated: gebruik `gedeeld_met_aantal_adressen`. Het aantal eenheden waarmee deze ruimte wordt gedeeld.
+    """
+
+    @model_validator(mode="after")
+    def _gedeeld_met_aantal_eenheden(self) -> Self:
+        eenheden = self.__dict__.get("gedeeld_met_aantal_eenheden")
+        if eenheden is not None:
+            warnings.warn(
+                "`gedeeldMetAantalEenheden`/`gedeeld_met_aantal_eenheden` is deprecated. "
+                "Gebruik `gedeeldMetAantalAdressen`/`gedeeld_met_aantal_adressen`.",
+                DeprecationWarning,
+            )
+            if self.gedeeld_met_aantal_adressen is None:
+                self.gedeeld_met_aantal_adressen = eenheden
+        return self
+
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/46
-    bouwkundige_elementen: Optional[list[BouwkundigElementenBouwkundigElement]] = Field(
+    bouwkundige_elementen: list[BouwkundigElementenBouwkundigElement] | None = Field(
         default=None, alias="bouwkundigeElementen"
     )
     """
     De bouwkundige elementen gerelateerd aan deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering voor een zolder op basis van de aanwezigheid van een trap, de lengte van een aanrecht in een keuken en de aanwezigheid van een toilet in een badkamer.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/47
-    verbonden_ruimten: Optional[list[EenhedenRuimte]] = Field(
+    verbonden_ruimten: list[EenhedenRuimte] | None = Field(
         default=None, alias="verbondenRuimten"
     )
     """
     De ruimten die in verbinding staan met deze ruimte. Dit wordt gebruikt bij het berekenen van de waardering van kasten en verwarming van ruimten.
     """
     # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-    verwarmd: Optional[bool] = Field(default=None, alias="verwarmd")
+    verwarmd: bool | None = Field(default=None, alias="verwarmd")
     """
     Geeft aan of de ruimte verwarmd wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/100
-    verkoeld: Optional[bool] = Field(default=None, alias="verkoeld")
+    verkoeld: bool | None = Field(default=None, alias="verkoeld")
     """
     Geeft aan of de ruimte verkoeld wordt door een onroerende zaak. Dit wordt gebruikt bij het berekenen van de waardering van een ruimte.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/70
-    installaties: Optional[list[Referentiedata]] = Field(
+    installaties: list[Referentiedata] | None = Field(
         default=None, alias="installaties"
     )
     """
     Het soort installaties van de ruimte. Bijvoorbeeld Hangend toilet, Wastafel, Inbouw koelkast, warmkokend water functie etc. Deze installaties zijn van belang voor de woningwaardering. Referentiedatasoort INSTALLATIESOORT.
     """
-    aantal: Optional[int] = Field(default=1, alias="aantal", ge=0)
+    aantal: int | None = Field(default=1, alias="aantal", ge=0)
     """
     Geeft aan hoeveel van deze ruimte er zijn. Dit attribuut is aangemaakt om de rubriek 'Gemeenschappelijke Parkeerruimten' van de woningwaardering te kunnen berekenen en te voorkomen dat alle gedeelde parkeervakken van een parkeerruimten apart meegegeven dienen te worden. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor 'Gemeenschappelijke Parkeerruimten'.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/44
-    gedeeld_met_aantal_onzelfstandige_woonruimten: Optional[int] = Field(
+    gedeeld_met_aantal_onzelfstandige_woonruimten: int | None = Field(
         default=None, alias="gedeeldMetAantalOnzelfstandigeWoonruimten", ge=0
     )
     """
@@ -1450,33 +1417,31 @@ class EenhedenStadsdeel(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van het stadsdeel.
     """
@@ -1486,49 +1451,47 @@ class EenhedenVertrek(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort ruimte. Ruimtes worden verdeeld in vertrekken die meetellen voor de woningwaardering, buitenruimtes en overige ruimtes. Referentiedatasoort RUIMTESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detailsoort van de ruimte. Bijv. Slaapkamer, Dakteras, Tuin etc. Referentiedatasoort RUIMTEDETAILSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De omschrijving van de ruimte.
     """
-    inhoud: Optional[float] = None
+    inhoud: float | None = None
     """
     De inhoud van de ruimte in m3.
     """
-    oppervlakte: Optional[float] = None
+    oppervlakte: float | None = None
     """
     De oppervlakte van de ruimte
     """
@@ -1538,37 +1501,35 @@ class EenhedenWijk(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de wijk.
     """
-    stadsdeel: Optional[EenhedenStadsdeel] = None
+    stadsdeel: EenhedenStadsdeel | None = None
     """
     Het stadsdeel van de wijk.
     """
@@ -1578,33 +1539,31 @@ class EenhedenWoonplaats(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de woonplaats.
     """
@@ -1614,39 +1573,35 @@ class EenhedenWozEenheid(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    vastgestelde_waarde: Optional[float] = Field(
-        default=None, alias="vastgesteldeWaarde"
-    )
+    vastgestelde_waarde: float | None = Field(default=None, alias="vastgesteldeWaarde")
     """
     De WOZ waarde in euro's die eventueel wordt doorberekend aan de eenheid.
     """
-    waardepeildatum: Optional[date] = None
+    waardepeildatum: date | None = None
     """
     De datum waarop de WOZ waarde is vastgesteld.
     """
@@ -1656,29 +1611,27 @@ class WoningwaarderingCriteriumSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -1688,45 +1641,43 @@ class WoningwaarderingResultatenWoningwaarderingCriteriumGroep(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de groep.
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van de groep.
     """
-    stelsel: Optional[Referentiedata] = None
+    stelsel: Referentiedata | None = None
     """
     Het woningwaardering stelsel bevat een apart puntensystemen voor de eenheidssoorten zelfstandige woningen, kamers, woonwagens en woonwagenstandplaatsen. Dit attribuut geeft het toe te passen puntensysteem aan. Referentiedatasoort WONINGWAARDERINGSTELSEL.
     """
-    stelselgroep: Optional[Referentiedata] = None
+    stelselgroep: Referentiedata | None = None
     """
     De naam van de groep binnen het woningwaarderingsstelsel, zoals beschreven in het Besluit huurprijzen woonruimte. Referentiedatasoort WONINGWAARDERINGSTELSELGROEP.
     """
@@ -1736,11 +1687,11 @@ class ExtraAttribuut(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van het niet bestaande attribuut. Bijv. Huurprognose.
     """
-    waarde: Optional[str] = None
+    waarde: str | None = None
     """
     De waarde van het niet bestaande attribuut. Bijv. €850,-.
     """
@@ -1750,29 +1701,27 @@ class InformatieobjectSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
@@ -1782,19 +1731,19 @@ class ZaakobjectSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken).
     """
@@ -1804,19 +1753,19 @@ class Sturingslabel(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     De categorie of groepering van het label. Bijv. dVI samenstelling bezit etc. Referentiedatasoort STURINGSLABELSOORT.
     """
-    label: Optional[Referentiedata] = None
+    label: Referentiedata | None = None
     """
     Het label dat is bepaald op basis van de bijbehorende definitie. Bijv. Zelfstandige huurwoning. Referentiedatasoort STURINGSLABEL.
     """
-    datum: Optional[date] = None
+    datum: date | None = None
     """
     Datum en tijdstip waarop het label is bepaald.
     """
-    bron: Optional[Referentiedata] = None
+    bron: Referentiedata | None = None
     """
     De bron van de definitie van het label. Bijv. dVI 2014, CORA etc. Referentiedatasoort STURINGSLABELBRON.
     """
@@ -1826,76 +1775,49 @@ class Foutbericht(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    code: Optional[str] = None
+    code: str | None = None
     """
     Foutcode
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     Omschrijving van de fout
     """
 
 
 class TijdstipBericht(RootModel[AwareDatetime]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: AwareDatetime
 
 
 class Referentienummer(RootModel[str]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: str
 
 
 class ZenderOrganisatie(RootModel[str]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: str
 
 
 class ZenderAdministratie(RootModel[str]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: str
 
 
 class Aantal(RootModel[int]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: int
 
 
 class AantalPerPagina(RootModel[int]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: int
 
 
 class Paginanummer(RootModel[int]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: int
 
 
 class Cursor(RootModel[str]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: str
 
 
 class PeiltijdstipMaterieel(RootModel[AwareDatetime]):
-    model_config = ConfigDict(
-        populate_by_name=True,
-    )
     root: AwareDatetime
 
 
@@ -1903,33 +1825,31 @@ class PandSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort pand. Eengezins of meergezins. Referentiedatasoort PANDSOORT.
     """
@@ -1939,41 +1859,39 @@ class RelatieSleutels(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort relatie: NatuurlijkPersoon, Relatiegroep of Rechtspersoon. Referentiedatasoort RELATIESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detail van soort relatie: Bijvoorbeeld Huishouden bij een relatiegroep, of de standaard bedrijfsindeling volgens SBI bij een rechtspersoon. Referentiedatasoort RELATIEDETAILSOORT.
     """
-    rollen: Optional[list[RelatierolSleutels]] = None
+    rollen: list[RelatierolSleutels] | None = None
     """
     De rollen behorend bij de relatie. Bijvoorbeeld: Prospect, bewoner.
     """
@@ -1983,45 +1901,43 @@ class ClustersRelatieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort relatie: NatuurlijkPersoon, Relatiegroep of Rechtspersoon. Referentiedatasoort RELATIESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detail van soort relatie: Bijvoorbeeld Huishouden bij een relatiegroep, of de standaard bedrijfsindeling volgens SBI bij een rechtspersoon. Referentiedatasoort RELATIEDETAILSOORT.
     """
-    relaties: Optional[list[RelatieSleutels]] = None
+    relaties: list[RelatieSleutels] | None = None
     """
     De gerelateerde relaties. Bijv. contactpersonen, huishoudleden etc.
     """
-    rollen: Optional[list[ClustersRelatierol]] = None
+    rollen: list[ClustersRelatierol] | None = None
     """
     De rollen behorend bij de relatie. Bijvoorbeeld: Prospect, bewoner.
     """
@@ -2031,83 +1947,81 @@ class EenhedenAdresseerbaarObjectBasisregistratie(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    bag_gebruikers_oppervlakte: Optional[int] = Field(
+    bag_gebruikers_oppervlakte: int | None = Field(
         default=None, alias="bagGebruikersOppervlakte"
     )
     """
     De gebruikersoppervlakte zoals in de BAG beschreven.
     """
-    bag_gebruiksdoelen: Optional[list[Referentiedata]] = Field(
+    bag_gebruiksdoelen: list[Referentiedata] | None = Field(
         default=None, alias="bagGebruiksdoelen"
     )
     """
     De categorisering van de gebruiksdoelen van het betreffende verblijfsobject, zoals dit formeel door de overheid als zodanig is toegestaan. Referentiedatasoort GEBRUIKERSDOEL.
     """
-    bag_hoofdadres: Optional[AdresSleutels] = Field(default=None, alias="bagHoofdadres")
+    bag_hoofdadres: AdresSleutels | None = Field(default=None, alias="bagHoofdadres")
     """
     Het hoofdadres van het adresseerbaar object uit de basisregistratie.
     """
-    bag_identificatie: Optional[str] = Field(default=None, alias="bagIdentificatie")
+    bag_identificatie: str | None = Field(default=None, alias="bagIdentificatie")
     """
     De unieke aanduiding van een adresseerbaar object. (standplaats, ligplaats, of verblijfsobject)
     """
-    bag_in_onderzoek: Optional[bool] = Field(default=None, alias="bagInOnderzoek")
+    bag_in_onderzoek: bool | None = Field(default=None, alias="bagInOnderzoek")
     """
     De aanduiding waarmee wordt aangegeven dat een onderzoek wordt uitgevoerd naar de juistheid van een of meerdere gegevens van het betreffende object.
     """
-    bag_nevenadressen: Optional[list[AdresSleutels]] = Field(
+    bag_nevenadressen: list[AdresSleutels] | None = Field(
         default=None, alias="bagNevenadressen"
     )
     """
     De adressen die gerelateerd zijn aan het adresseerbaar object uit de basisregistratie. Het hoofdadres maakt geen deel uit van deze collectie.
     """
-    bag_officieel: Optional[bool] = Field(default=None, alias="bagOfficieel")
+    bag_officieel: bool | None = Field(default=None, alias="bagOfficieel")
     """
     De aanduiding waarmee kan worden aangegeven dat een object in de basisregistratie is opgenomen als gevolg van een feitelijke constatering, zonder dat er op het moment van opname sprake is van een formele grondslag voor deze opname.
     """
-    bag_oppervlakte_verblijfsobject: Optional[int] = Field(
+    bag_oppervlakte_verblijfsobject: int | None = Field(
         default=None, alias="bagOppervlakteVerblijfsobject"
     )
     """
     De gebruiksoppervlakte van een verblijfsobject in gehele vierkante meters.
     """
-    bag_panden_basisregistratie: Optional[list[EenhedenBagPand]] = Field(
+    bag_panden_basisregistratie: list[EenhedenBagPand] | None = Field(
         default=None, alias="bagPandenBasisregistratie"
     )
     """
     De panden die gerelateerd zijn aan het adresseerbaar object uit de basisregistratie.
     """
-    bag_status: Optional[str] = Field(default=None, alias="bagStatus")
+    bag_status: str | None = Field(default=None, alias="bagStatus")
     """
     De fase van de levenscyclus van een standplaats, ligplaats of verblijfsobject waarin het betreffende object zich bevindt.
     """
-    geometrie: Optional[GeometrieSleutels] = None
+    geometrie: GeometrieSleutels | None = None
     """
     De geometrie van het adresseerbaar object uit de basisregistratie.
     """
@@ -2117,79 +2031,77 @@ class EenhedenBeleidswaarde(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    achterstallig_onderhoud: Optional[float] = Field(
+    achterstallig_onderhoud: float | None = Field(
         default=None, alias="achterstalligOnderhoud"
     )
     """
     Bedrag aan achterstallig onderhoud dat als correctie is toegepast.
     """
-    afkoop_erfpacht: Optional[float] = Field(default=None, alias="afkoopErfpacht")
+    afkoop_erfpacht: float | None = Field(default=None, alias="afkoopErfpacht")
     """
     Het bedrag aan afkoop erfpacht dat als correctie is toegepast.
     """
-    beheer_afslag: Optional[float] = Field(default=None, alias="beheerAfslag")
+    beheer_afslag: float | None = Field(default=None, alias="beheerAfslag")
     """
     Beheer (beheer): eventuele extra beheeruitgaven die gepaard gaan met de sociale doelgroep.
     """
-    beheerskosten: Optional[float] = None
+    beheerskosten: float | None = None
     """
     Beheerkosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.
     """
-    beschikbaarheid_afslag: Optional[float] = Field(
+    beschikbaarheid_afslag: float | None = Field(
         default=None, alias="beschikbaarheidAfslag"
     )
     """
     Beschikbaarheid (doorexploiteren): in stand houden van een sociale portefeuille.
     """
-    betaalbaarheid_afslag: Optional[float] = Field(
+    betaalbaarheid_afslag: float | None = Field(
         default=None, alias="betaalbaarheidAfslag"
     )
     """
     Betaalbaarheid (huur): in stand houden van sociale huurprijzen passend bij de doelgroep.
     """
-    kwaliteit_afslag: Optional[float] = Field(default=None, alias="kwaliteitAfslag")
+    kwaliteit_afslag: float | None = Field(default=None, alias="kwaliteitAfslag")
     """
     Kwaliteit (onderhoud): eventuele extra onderhoudsuitgaven voor het op lange termijn in stand houden van de portefeuille.
     """
-    marktwaarde: Optional[EenhedenMarktwaarde] = None
+    marktwaarde: EenhedenMarktwaarde | None = None
     """
     De verwijzing naar de marktwaarde die ten grondslag ligt aan deze beleidswaarde.
     """
-    onderhoudskosten: Optional[float] = None
+    onderhoudskosten: float | None = None
     """
     Onderhoudskosten op het moment van waarderen zoals toegepast in de beleidswaardeberekening.
     """
-    streefhuur: Optional[float] = None
+    streefhuur: float | None = None
     """
     Actuele streefhuur op het moment van waarderen zoals toegepast in de beleidswaardeberekening.
     """
-    waarde: Optional[float] = None
+    waarde: float | None = None
     """
     De beleidswaarde van de eenheid waarde die rekening houdt met het beleid van de corporatie. Marktwaarde minus de afslagen voor beschikbaarheid, betaalbaarheid, kwaliteit en beheer, vormt de beleidswaarde (bron beleidswaarde WSW). Let op: het verslagjaar waarvoor de beleidswaarde is bepaald is het verslagjaar van de marktwaarde die de grondslag vormt van de beleidswaarde.
     """
@@ -2199,45 +2111,43 @@ class EenhedenRelatieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort relatie: NatuurlijkPersoon, Relatiegroep of Rechtspersoon. Referentiedatasoort RELATIESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detail van soort relatie: Bijvoorbeeld Huishouden bij een relatiegroep, of de standaard bedrijfsindeling volgens SBI bij een rechtspersoon. Referentiedatasoort RELATIEDETAILSOORT.
     """
-    relaties: Optional[list[RelatieSleutels]] = None
+    relaties: list[RelatieSleutels] | None = None
     """
     De gerelateerde relaties. Bijv. contactpersonen, huishoudleden etc.
     """
-    rollen: Optional[list[EenhedenRelatierol]] = None
+    rollen: list[EenhedenRelatierol] | None = None
     """
     De rollen behorend bij de relatie. Bijvoorbeeld: Prospect, bewoner.
     """
@@ -2247,47 +2157,45 @@ class WoningwaarderingResultatenWoningwaarderingCriterium(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van het woningwaardering element.
     """
-    bovenliggende_criterium: Optional[WoningwaarderingCriteriumSleutels] = Field(
+    bovenliggende_criterium: WoningwaarderingCriteriumSleutels | None = Field(
         default=None, alias="bovenliggendeCriterium"
     )
     """
     Het bovenliggende criterium waarvan het vriterium onderdeel van uit maakt. Via deze constructie kunnen optellingen van punten worden vastgelegd.
     """
-    meeteenheid: Optional[Referentiedata] = None
+    meeteenheid: Referentiedata | None = None
     """
     De meeteenheid waarmee het criterium wordt aangeduid. Referentiedatasoort MEETEENHEID.
     """
-    stelsel: Optional[Referentiedata] = None
+    stelsel: Referentiedata | None = None
     """
     Het woningwaardering stelsel bevat een apart puntensystemen voor de eenheidssoorten zelfstandige woningen, kamers, woonwagens en woonwagenstandplaatsen. Dit attribuut geeft het toe te passen puntensysteem aan. Referentiedatasoort WONINGWAARDERINGSTELSEL.
     """
@@ -2297,157 +2205,155 @@ class Informatieobject(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Specificatie van het documenttype. Bijvoorbeeld verslag, rapport etc. Referentiedatasoort INFORMATIEOBJECTSOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Detail specificatie van het documenttype. Bijvoorbeeld notulen, adviesrapport etc. Referentiedatasoort INFORMATIEOBJECTDETAILSOORT.
     """
-    onderwerp: Optional[Referentiedata] = None
+    onderwerp: Referentiedata | None = None
     """
     Onderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTONDERWERP.
     """
-    subonderwerp: Optional[Referentiedata] = None
+    subonderwerp: Referentiedata | None = None
     """
     Subonderwerp van het informatieobject. Referentiedatasoort INFORMATIEOBJECTSUBONDERWERP.
     """
-    titel: Optional[str] = None
+    titel: str | None = None
     """
     Titel van het informatieobject.
     """
-    beschrijving: Optional[str] = None
+    beschrijving: str | None = None
     """
     Beschrijving van het informatieobject. Dit kan ook de (volledige) inhoud zijn van een memo of notitie.
     """
-    status: Optional[Referentiedata] = None
+    status: Referentiedata | None = None
     """
     De fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTSTATUS.
     """
-    detail_status: Optional[Referentiedata] = Field(default=None, alias="detailStatus")
+    detail_status: Referentiedata | None = Field(default=None, alias="detailStatus")
     """
     Detaillering van de fase waarin het informatieobject zich vanuit het perspectief van archivering bevindt. Referentiedatasoort INFORMATIEOBJECTDETAILSTATUS.
     """
-    registratiedatum: Optional[AwareDatetime] = None
+    registratiedatum: AwareDatetime | None = None
     """
     Registratiedatum van het informatieobject.
     """
-    ontvangstdatum: Optional[AwareDatetime] = None
+    ontvangstdatum: AwareDatetime | None = None
     """
     Ontvangstdatum van het informatieobject.
     """
-    publicatiedatum: Optional[AwareDatetime] = None
+    publicatiedatum: AwareDatetime | None = None
     """
     Publicatiedatum of verzenddatum van het informatieobject.
     """
-    archief_actiedatum: Optional[AwareDatetime] = Field(
+    archief_actiedatum: AwareDatetime | None = Field(
         default=None, alias="archiefActiedatum"
     )
     """
     De datum waarop het gearchiveerde informatieobject vernietigd moet worden dan wel overgebracht moet worden naar een archiefbewaarplaats.
     """
-    archiefnominatie: Optional[Referentiedata] = None
+    archiefnominatie: Referentiedata | None = None
     """
     Aanduiding of het informatieobject blijvend bewaard of na een bepaalde termijn vernietigd moet worden. Referentiedatasoort ARCHIEFNOMINATIE.
     """
-    auteur: Optional[str] = None
+    auteur: str | None = None
     """
     De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het informatieobject.
     """
-    bestand: Optional[str] = None
+    bestand: Base64Str | None = None
     """
     De binaire representatie van het informatieobject.
     """
-    bestandsgrootte: Optional[int] = None
+    bestandsgrootte: int | None = None
     """
     Omvang van het bestand in bytes.
     """
-    bestandslocatie: Optional[AnyUrl] = None
+    bestandslocatie: AnyUrl | None = None
     """
     Een link (URI) naar de binaire representatie van het informatieobject.
     """
-    bestandsnaam: Optional[str] = None
+    bestandsnaam: str | None = None
     """
     De naam van het fysieke bestand waarin de inhoud van het informatieobject is vastgelegd.
     """
-    bijlagen: Optional[list[InformatieobjectSleutels]] = None
+    bijlagen: list[InformatieobjectSleutels] | None = None
     """
     De bijlagen behorend bij het informatieobject.
     """
-    externe_publicatie: Optional[bool] = Field(default=None, alias="externePublicatie")
+    externe_publicatie: bool | None = Field(default=None, alias="externePublicatie")
     """
     Aanduiding of dit informatieobject extern gepubliceerd dient te worden.
     """
-    externe_publicatietekst: Optional[str] = Field(
+    externe_publicatietekst: str | None = Field(
         default=None, alias="externePublicatietekst"
     )
     """
     Tekstuele omschrijving ten behoeve van externe publicatie van dit informatieobject.
     """
-    formaat: Optional[Referentiedata] = None
+    formaat: Referentiedata | None = None
     """
     Het digitale formaat (IANA media type) van het informatieobject.  Bijv. code:png naam:image/png. Referentiedatasoort INFORMATIEOBJECTFORMAAT.
     """
-    gebruiksrechten: Optional[str] = None
+    gebruiksrechten: str | None = None
     """
     Informatie omtrent rechten die geassocieerd zijn met het informatieobject zoals intellectueel eigendom.
     """
-    is_bijlage_van: Optional[InformatieobjectSleutels] = Field(
+    is_bijlage_van: InformatieobjectSleutels | None = Field(
         default=None, alias="isBijlageVan"
     )
     """
     Geeft aan dat het informatieobject een bijlage is van een ander informatieobject.
     """
-    objecten: Optional[list[ZaakobjectSleutels]] = None
+    objecten: list[ZaakobjectSleutels] | None = None
     """
     De gegevensobjecten die bij de zaak horen. Kan iedere klasse uit ons model zijn. Bijv. Overeenkomst, Onderhoudsverzoek etc.
     """
-    relaties: Optional[list[RelatieSleutels]] = None
+    relaties: list[RelatieSleutels] | None = None
     """
     Het dossier is gekoppeld aan/heeft betrekking op relatie(s). Bijvoorbeeld huurdersdossier of mutatiedossier.
     """
-    taal: Optional[Referentiedata] = None
+    taal: Referentiedata | None = None
     """
     De taal waarin het informatieobject is opgesteld. Referentiedatasoort TAAL.
     """
-    verantwoordelijke_organisatie: Optional[str] = Field(
+    verantwoordelijke_organisatie: str | None = Field(
         default=None, alias="verantwoordelijkeOrganisatie"
     )
     """
     Het RSIN (Rechtspersonen en Samenwerkingsverbanden Informatienummer) van de organisatie die verantwoordelijk is voor het informatieobject.
     """
-    versie: Optional[float] = None
+    versie: float | None = None
     """
     Het versienummer van het informatieobject.
     """
-    vertrouwelijkheid: Optional[Referentiedata] = None
+    vertrouwelijkheid: Referentiedata | None = None
     """
     De classificatie van het vertrouwelijkheidsniveau van het informatieobject. Referentiedatasoort VERTROUWELIJKHEID.
     """
@@ -2457,45 +2363,43 @@ class BouwkundigElementenBouwdeel(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van het bouwdeel.
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van het bouwdeel.
     """
-    gebouw: Optional[GebouwSleutels] = None
+    gebouw: GebouwSleutels | None = None
     """
     Het gebouw behorend bij het bouwdeel.
     """
-    pand: Optional[PandSleutels] = None
+    pand: PandSleutels | None = None
     """
     Het pand behorend bij het bouwdeel.
     """
@@ -2505,49 +2409,47 @@ class BouwkundigElementenRelatieBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort relatie: NatuurlijkPersoon, Relatiegroep of Rechtspersoon. Referentiedatasoort RELATIESOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detail van soort relatie: Bijvoorbeeld Huishouden bij een relatiegroep, of de standaard bedrijfsindeling volgens SBI bij een rechtspersoon. Referentiedatasoort RELATIEDETAILSOORT.
     """
-    contactgegevens: Optional[list[ContactgegevenSleutels]] = None
+    contactgegevens: list[ContactgegevenSleutels] | None = None
     """
     De contactgegevens van de relatie.
     """
-    relaties: Optional[list[RelatieSleutels]] = None
+    relaties: list[RelatieSleutels] | None = None
     """
     De gerelateerde relaties. Bijv. contactpersonen, huishoudleden etc.
     """
-    rollen: Optional[list[BouwkundigElementenRelatierol]] = None
+    rollen: list[BouwkundigElementenRelatierol] | None = None
     """
     De rollen behorend bij de relatie. Bijvoorbeeld: Prospect, bewoner.
     """
@@ -2557,35 +2459,35 @@ class ClustersNatuurlijkPersoon(ClustersRelatieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    aanhef: Optional[str] = None
+    aanhef: str | None = None
     """
     De aanhef of aanspreking is een (meestal vriendelijke) introducerende zin van een brief of e-mail. Het gaat doorgaans om standaardformuleringen waarmee de schrijver zich tot de geadresseerde richt.
     """
-    aanschrijfnaam: Optional[str] = None
+    aanschrijfnaam: str | None = None
     """
     De achternaam van de natuurlijk persoon zoals deze wenst te worden aangeschreven.
     """
-    achternaam: Optional[str] = None
+    achternaam: str | None = None
     """
     De achternaam van de natuurlijk persoon.
     """
-    initialen: Optional[str] = None
+    initialen: str | None = None
     """
     De initialen van de natuurlijk persoon.
     """
-    roepnaam: Optional[str] = None
+    roepnaam: str | None = None
     """
     De roepnaam van de natuurlijk persoon.
     """
-    tussenvoegsels: Optional[str] = None
+    tussenvoegsels: str | None = None
     """
     De tussenvoegsels behorende bij de naam.
     """
-    voorletters: Optional[str] = None
+    voorletters: str | None = None
     """
     Een voorletter is een afkorting van een voornaam, die in adressering veel wordt gebruikt. De voorletters geven in combinatie met de achternaam meestal een duidelijk onderscheid tussen leden van hetzelfde gezin of dezelfde familie. Indien iemand meerdere voornamen heeft dan worden de voorletters door een punt gescheiden.
     """
-    voornaam: Optional[str] = None
+    voornaam: str | None = None
     """
     De voornaam van de natuurlijk persoon.
     """
@@ -2595,25 +2497,25 @@ class ClustersRechtspersoon(ClustersRelatieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    kvk_nummer: Optional[str] = Field(default=None, alias="kvkNummer")
+    kvk_nummer: str | None = Field(default=None, alias="kvkNummer")
     """
     Het KVK nummer van de rechtspersoon.
     """
-    globaal_locatienummer: Optional[str] = Field(
+    globaal_locatienummer: str | None = Field(
         default=None, alias="globaalLocatienummer"
     )
     """
     Een wereldwijd nummer ter identificatie van een partij of locatie. Het dertiencijferige nummer (GLN) wordt uitgegeven door GS1.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam de rechtspersoon.
     """
-    btw_nummer: Optional[str] = Field(default=None, alias="btwNummer")
+    btw_nummer: str | None = Field(default=None, alias="btwNummer")
     """
     Het BTW nummer van de rechtspersoon.
     """
-    organisatievorm: Optional[Referentiedata] = None
+    organisatievorm: Referentiedata | None = None
     """
     De organisatievorm van de rechtspersoon. Bijvoorbeeld: BV, NV, stichting of vereniging. Ook wel rechtsvorm genoemd. Referentiedatasoort ORGANISATIEVORM.
     """
@@ -2623,27 +2525,27 @@ class EenhedenEenheidadres(EenhedenAdresBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    buurt: Optional[EenhedenBuurt] = None
+    buurt: EenhedenBuurt | None = None
     """
     De buurt behorend bij het adres.
     """
-    gemeente: Optional[EenhedenGemeente] = None
+    gemeente: EenhedenGemeente | None = None
     """
     De gemeente behorend bij het adres.
     """
-    geometrie: Optional[Union[EenhedenPunt, EenhedenGeometrieBasis]] = None
+    geometrie: EenhedenPunt | EenhedenGeometrieBasis | None = None
     """
     De geometrie van het adres.
     """
-    land: Optional[Referentiedata] = None
+    land: Referentiedata | None = None
     """
     Het land waarin het adres zich bevindt. Referentiedatasoort LAND.
     """
-    wijk: Optional[EenhedenWijk] = None
+    wijk: EenhedenWijk | None = None
     """
     De wijk behorend bij het adres.
     """
-    woonplaats: Optional[EenhedenWoonplaats] = None
+    woonplaats: EenhedenWoonplaats | None = None
     """
     De woonplaats waarin het adres zich bevindt.
     """
@@ -2653,35 +2555,35 @@ class EenhedenNatuurlijkPersoon(EenhedenRelatieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    aanhef: Optional[str] = None
+    aanhef: str | None = None
     """
     De aanhef of aanspreking is een (meestal vriendelijke) introducerende zin van een brief of e-mail. Het gaat doorgaans om standaardformuleringen waarmee de schrijver zich tot de geadresseerde richt.
     """
-    aanschrijfnaam: Optional[str] = None
+    aanschrijfnaam: str | None = None
     """
     De achternaam van de natuurlijk persoon zoals deze wenst te worden aangeschreven.
     """
-    achternaam: Optional[str] = None
+    achternaam: str | None = None
     """
     De achternaam van de natuurlijk persoon.
     """
-    initialen: Optional[str] = None
+    initialen: str | None = None
     """
     De initialen van de natuurlijk persoon.
     """
-    roepnaam: Optional[str] = None
+    roepnaam: str | None = None
     """
     De roepnaam van de natuurlijk persoon.
     """
-    tussenvoegsels: Optional[str] = None
+    tussenvoegsels: str | None = None
     """
     De tussenvoegsels behorende bij de naam.
     """
-    voorletters: Optional[str] = None
+    voorletters: str | None = None
     """
     Een voorletter is een afkorting van een voornaam, die in adressering veel wordt gebruikt. De voorletters geven in combinatie met de achternaam meestal een duidelijk onderscheid tussen leden van hetzelfde gezin of dezelfde familie. Indien iemand meerdere voornamen heeft dan worden de voorletters door een punt gescheiden.
     """
-    voornaam: Optional[str] = None
+    voornaam: str | None = None
     """
     De voornaam van de natuurlijk persoon.
     """
@@ -2691,25 +2593,25 @@ class EenhedenRechtspersoon(EenhedenRelatieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    kvk_nummer: Optional[str] = Field(default=None, alias="kvkNummer")
+    kvk_nummer: str | None = Field(default=None, alias="kvkNummer")
     """
     Het KVK nummer van de rechtspersoon.
     """
-    globaal_locatienummer: Optional[str] = Field(
+    globaal_locatienummer: str | None = Field(
         default=None, alias="globaalLocatienummer"
     )
     """
     Een wereldwijd nummer ter identificatie van een partij of locatie. Het dertiencijferige nummer (GLN) wordt uitgegeven door GS1.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam de rechtspersoon.
     """
-    btw_nummer: Optional[str] = Field(default=None, alias="btwNummer")
+    btw_nummer: str | None = Field(default=None, alias="btwNummer")
     """
     Het BTW nummer van de rechtspersoon.
     """
-    organisatievorm: Optional[Referentiedata] = None
+    organisatievorm: Referentiedata | None = None
     """
     De organisatievorm van de rechtspersoon. Bijvoorbeeld: BV, NV, stichting of vereniging. Ook wel rechtsvorm genoemd. Referentiedatasoort ORGANISATIEVORM.
     """
@@ -2719,62 +2621,60 @@ class WoningwaarderingResultatenWoningwaardering(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort onderdeel van de woningwaardering. Bijv. Energielabel, Oppervlakte etc. Referentiedatasoort WONINGWAARDERINGSOORT.
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De datum waarop het woning waardering  onderdeel in gaat of is ingegaan.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De datum waarop het woningwaardering onderdeel niet meer van toepassing is.
     """
-    aantal: Optional[float] = None
+    aantal: float | None = None
     """
     Het aantal van de opgegeven meeteenheid van de bijbehorende woningwaardering criterium.
     """
-    criterium: Optional[WoningwaarderingResultatenWoningwaarderingCriterium] = None
+    criterium: WoningwaarderingResultatenWoningwaarderingCriterium | None = None
     """
     De omschrijving van het woningwaardering onderdeel.
     """
-    punten: Optional[float] = None
+    punten: float | None = None
     """
     Het aantal punten dat is toegekend op basis van het opgegeven aantal, voor de betreffende woningwaardering. Voor bepaalde woningwaarderingGroepen binnen een woningwaarderingstelsel geldt dat het aantal punten op groepsniveau bepaald wordt. In die gevallen kan het attribuut aantal punten in deze klasse leeg blijven
     """
-    waarde: Optional[str] = None
+    waarde: str | None = None
     """
     Bevat een niet numerieke waarde van de woningwaardering.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
-    opslagpercentage: Optional[float] = None
+    opslagpercentage: float | None = None
     """
     Het huurprijsopslagpercentage dat is toegekend.
     """
@@ -2784,58 +2684,54 @@ class WoningwaarderingResultatenWoningwaarderingGroep(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De begindatum van de woningwaardering groep.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De einddatum waarop de waarop de woningwaardering niet meer geldig is.
     """
-    criterium_groep: Optional[
-        WoningwaarderingResultatenWoningwaarderingCriteriumGroep
-    ] = Field(default=None, alias="criteriumGroep")
+    criterium_groep: WoningwaarderingResultatenWoningwaarderingCriteriumGroep | None = (
+        Field(default=None, alias="criteriumGroep")
+    )
     """
     De woningwaardering criterium groep behorend bij de woningwaardering groep.
     """
-    punten: Optional[float] = None
+    punten: float | None = None
     """
     Het aantal woningwaarderingsstelsel punten dat is toegekend.
     """
-    woningwaarderingen: Optional[list[WoningwaarderingResultatenWoningwaardering]] = (
-        None
-    )
+    woningwaarderingen: list[WoningwaarderingResultatenWoningwaardering] | None = None
     """
     De woningwaarderingen behorend bij de woningwaardering groep.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
-    opslagpercentage: Optional[float] = None
+    opslagpercentage: float | None = None
     """
     Het huurprijsopslagpercentage dat is toegekend.
     """
@@ -2845,71 +2741,69 @@ class WoningwaarderingResultatenWoningwaarderingResultaat(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De begindatum van de woningwaardering puntentotaal.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De einddatum waarop de waarop de woningwaardering niet meer geldig is.
     """
-    eenheid: Optional[EenheidSleutels] = None
+    eenheid: EenheidSleutels | None = None
     """
     De eenheid behorend bij de woningwaardering.
     """
-    groepen: Optional[list[WoningwaarderingResultatenWoningwaarderingGroep]] = None
+    groepen: list[WoningwaarderingResultatenWoningwaarderingGroep] | None = None
     """
     De woningwaarderingenGroep behorend bij het woningwaardering puntentotaal.
     """
-    maximale_huur: Optional[float] = Field(default=None, alias="maximaleHuur")
+    maximale_huur: float | None = Field(default=None, alias="maximaleHuur")
     """
     De maximaal redelijke huur in euro's die geregistreerd staat bij de eenheid. De maximale huur is de huurprijs die gevraagd kan worden voor de eenheid op basis van de woningwaarderingspunten.
     """
-    opslagpercentage: Optional[float] = None
+    opslagpercentage: float | None = None
     """
     Het percentage dat boven de maximale huurprijs op basis van punten mag worden gerekend. Bijvoorbeeld bij specifieke monumenten binnen stads of dorpsgezichten van voor 1945 waarbij de corporatie extra onderhoud pleegt aan het monument.
     """
-    punten: Optional[float] = None
+    punten: float | None = None
     """
     Het aantal woningwaarderingsstelsel punten dat is toegekend.
     """
-    stelsel: Optional[Referentiedata] = None
+    stelsel: Referentiedata | None = None
     """
     Het woningwaardering stelsel geeft aan welk puntensysteem voor de eenheid van toepassing is: het puntensysteem voor zelfstandige woonruimten, het puntensysteem voor onzelfstandige woonruimten, of het puntensysteem voor woonwagens en standplaatsen. Referentiedatasoort WONINGWAARDERINGSTELSEL.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
-    huurprijsopslag: Optional[float] = None
+    huurprijsopslag: float | None = None
     """
     De huurprijsopslag in euro's die boven de maximale huurprijs mag worden gerekend.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/65
-    maximale_huur_inclusief_opslag: Optional[float] = Field(
+    maximale_huur_inclusief_opslag: float | None = Field(
         default=None, alias="maximaleHuurInclusiefOpslag"
     )
     """
@@ -2921,17 +2815,17 @@ class BerichtBasis(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    extra_attributen: Optional[list[ExtraAttribuut]] = Field(
+    extra_attributen: list[ExtraAttribuut] | None = Field(
         default=None, alias="extra-attributen"
     )
     """
     Mogelijkheid om het bericht uit te breiden met attributen die nog niet in het logisch datamodel beschikbaar zijn
     """
-    informatieobjecten: Optional[list[Informatieobject]] = None
+    informatieobjecten: list[Informatieobject] | None = None
     """
     Mogelijkheid om het bericht uit te breiden met documentatie. De beschrijving kan de inhoud van een notitie of memo zijn
     """
-    sturingslabels: Optional[list[Sturingslabel]] = None
+    sturingslabels: list[Sturingslabel] | None = None
     """
     Mogelijkheid om het bericht uit te breiden met sturingslabels
     """
@@ -2941,122 +2835,121 @@ class BouwkundigElementenRechtspersoonBasis(BouwkundigElementenRelatieBasis):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    globaal_locatienummer: Optional[str] = Field(
+    globaal_locatienummer: str | None = Field(
         default=None, alias="globaalLocatienummer"
     )
     """
     Een wereldwijd nummer ter identificatie van een partij of locatie. Het dertiencijferige nummer (GLN) wordt uitgegeven door GS1.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam de rechtspersoon.
     """
-    btw_nummer: Optional[str] = Field(default=None, alias="btwNummer")
+    btw_nummer: str | None = Field(default=None, alias="btwNummer")
     """
     Het BTW nummer van de rechtspersoon.
     """
-    kvk_nummer: Optional[str] = Field(default=None, alias="kvkNummer")
+    kvk_nummer: str | None = Field(default=None, alias="kvkNummer")
     """
     Het KVK nummer van de rechtspersoon.
     """
-    organisatievorm: Optional[Referentiedata] = None
+    organisatievorm: Referentiedata | None = None
     """
     De organisatievorm van de rechtspersoon. Bijvoorbeeld: BV, NV, stichting of vereniging. Ook wel rechtsvorm genoemd. Referentiedatasoort ORGANISATIEVORM.
     """
 
 
 class BouwkundigElementenRechtspersoon(BouwkundigElementenRechtspersoonBasis):
-    pass
     model_config = ConfigDict(
         populate_by_name=True,
     )
+
+
+class BouwkundigElementenRelatie(RootModel[BouwkundigElementenRechtspersoon]):
+    root: BouwkundigElementenRechtspersoon
 
 
 class ClustersCluster(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort cluster. Bijvoorbeeld, nieuwbouwcluster, onderhoudscluster, financieel cluster. Referentiedatasoort CLUSTERSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de cluster.
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van de cluster.
     """
-    bovenliggende_cluster: Optional[ClusterSleutels] = Field(
+    bovenliggende_cluster: ClusterSleutels | None = Field(
         default=None, alias="bovenliggendeCluster"
     )
     """
     Het bovenliggende / overkoepelende cluster waar dit cluster eventueel onderdeel van is.
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De begindatum van de cluster.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De einddatum van de cluster.
     """
-    collectieve_objecten: Optional[list[CollectiefObjectSleutels]] = Field(
+    collectieve_objecten: list[CollectiefObjectSleutels] | None = Field(
         default=None, alias="collectieveObjecten"
     )
     """
     De collectieve objecten behorend bij de cluster.
     """
-    conditiemeting: Optional[ConditiemetingSleutels] = None
+    conditiemeting: ConditiemetingSleutels | None = None
     """
     Aan een cluster kunnen meerdere conditiescores conform de NEN 2767 gekoppeld worden (per tijdvak).
     """
-    eenheden: Optional[list[ClustersEenheid]] = None
+    eenheden: list[ClustersEenheid] | None = None
     """
     De eenheden behorend bij de cluster.
     """
-    garanties: Optional[list[GarantieSleutels]] = None
+    garanties: list[GarantieSleutels] | None = None
     """
     De garanties behorend bij de cluster.
     """
-    geometrie: Optional[Union[ClustersPunt, ClustersGeometrieBasis]] = None
+    geometrie: ClustersPunt | ClustersGeometrieBasis | None = None
     """
     De geometrie van de cluster.
     """
-    overeenkomsten: Optional[list[OvereenkomstSleutels]] = None
+    overeenkomsten: list[OvereenkomstSleutels] | None = None
     """
     De onderhoudsovereenkomsten die voor het cluster gelden.
     """
-    relaties: Optional[
-        list[Union[ClustersNatuurlijkPersoon, ClustersRechtspersoon]]
-    ] = None
+    relaties: list[ClustersNatuurlijkPersoon | ClustersRechtspersoon] | None = None
     """
     De relaties die een speciale rol spelen voor het cluster bijvoorbeeld een Vereniging van eigenaren, een onderhoudsbedrijf, projectleider etc.
     """
@@ -3066,336 +2959,328 @@ class EenhedenEenheid(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     De dienstverlening (soort) die geboden kan worden met de eenheid. Voorbeeld: Woonruimte, Bedrijfsruimte, Parkeergelegenheid. Referentiedatasoort EENHEIDSOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het type van de eenheid. Bijvoorbeeld: Hoekwoning, Tussenwoning, Flat, Maisonnette. Hiervoor wordt de lijst van de waarderingskamer als uitgangspunt genomen. Referentiedatasoort EENHEIDDETAILSOORT.
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van de eenheid.
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van de eenheid.
     """
-    bouwnummer: Optional[str] = None
+    bouwnummer: str | None = None
     """
     Het bouwnummer behorende bij de eenheid. Dit wordt aan een eenheid toegekend bij nieuwbouw van de eenheid. Vaak is op dat moment het adres van de eenheid nog niet bepaald.
     """
-    status: Optional[Referentiedata] = None
+    status: Referentiedata | None = None
     """
     De status van de eenheid, bijvoorbeeld: Leegstand, Uit beheer, Renovatie, Verhuurd, Verkocht Referentiedatasoort EENHEIDSTATUS.
     """
-    detail_status: Optional[Referentiedata] = Field(default=None, alias="detailStatus")
+    detail_status: Referentiedata | None = Field(default=None, alias="detailStatus")
     """
     De detailstatus (ook wel substatus) van een status. De detailstatus geeft een extra reden op van de eenheid status die de eenheid heeft. Bijvoorbeeld: de status is Renovatie, de detailstatus geeft aan dat het om planmatig onderhoud gaat. Referentiedatasoort EENHEIDDETAILSTATUS.
     """
-    begin_bouwdatum: Optional[date] = Field(default=None, alias="beginBouwdatum")
+    begin_bouwdatum: date | None = Field(default=None, alias="beginBouwdatum")
     """
     De begindatum van de bouw van de eenheid.
     """
-    bouwjaar: Optional[int] = None
+    bouwjaar: int | None = None
     """
     Het bouwjaar waarin de bouw van de woning is afgerond.
     """
-    opleverdatum: Optional[date] = None
+    opleverdatum: date | None = None
     """
     De opleverdatum van de eenheid. De bouw van de eenheid is dan gereed of de eenheid is beschikbaar voor een volgende gebruiker.
     """
-    in_exploitatiedatum: Optional[date] = Field(
-        default=None, alias="inExploitatiedatum"
-    )
+    in_exploitatiedatum: date | None = Field(default=None, alias="inExploitatiedatum")
     """
     De datum waarop de eenheid in exploitatie is gegaan. We spreken over exploitatie als de eenheid in beheer is met als doel dat er resultaat wordt behaald.
     """
-    uit_exploitatiedatum: Optional[date] = Field(
-        default=None, alias="uitExploitatiedatum"
-    )
+    uit_exploitatiedatum: date | None = Field(default=None, alias="uitExploitatiedatum")
     """
     De datum waarop de eenheid uit exploitatie is gegaan, zowel het beheer als andere activiteiten stoppen.
     """
-    aantal_onzelfstandige_eenheden: Optional[int] = Field(
+    aantal_onzelfstandige_eenheden: int | None = Field(
         default=None, alias="aantalOnzelfstandigeEenheden"
     )
     """
     Het aantal onzelfstandige eenheden (units, kamers) dat binnen de als geheel verhuurde eenheid valt. Bedoeld om het aantal onzelfstandige eenheden te kunnen verantwoorden in (verplichte) rapportages zoals dVi. Het attribuut wordt gebruikt als slechts één eenheid (met één huurovereenkomst) in het administratieve systeem is vastgelegd, in plaats van de (door VERA geadviseerde) registratie van alle eenheden met een bovenliggendeEenheid.
     """
-    aanvullende_doelgroep: Optional[Referentiedata] = Field(
+    aanvullende_doelgroep: Referentiedata | None = Field(
         default=None, alias="aanvullendeDoelgroep"
     )
     """
     De aanvullende doelgroep waarvoor de woning het meest geschikt is en waarvoor meestal ook voorrang wordt verleend. Bijv. Ouderen, Geestelijk gehandicapten, Lichamelijk gehandicapten, GGZ-Patiënten etc. Eventueel te gebruiken in combinatie met doelgroep. Referentiedatasoort AANVULLENDEDOELGROEP.
     """
-    adres: Optional[Union[EenhedenEenheidadres, EenhedenAdresBasis]] = None
+    adres: EenhedenEenheidadres | EenhedenAdresBasis | None = None
     """
     Het adres van de eenheid.
     """
-    adresseerbaar_object_basisregistratie: Optional[
-        EenhedenAdresseerbaarObjectBasisregistratie
-    ] = Field(default=None, alias="adresseerbaarObjectBasisregistratie")
+    adresseerbaar_object_basisregistratie: (
+        EenhedenAdresseerbaarObjectBasisregistratie | None
+    ) = Field(default=None, alias="adresseerbaarObjectBasisregistratie")
     """
     Het adresseerbare object uit de BAG die overeenkomt met de eenheid.
     """
-    beleidswaarde: Optional[list[EenhedenBeleidswaarde]] = None
+    beleidswaarde: list[EenhedenBeleidswaarde] | None = None
     """
     De beleidswaarden behorende bij de eenheid. Vanaf versie 4.0 wordt dit attribuut in meervoud geschreven
     """
-    beoogd_uit_exploitatie_datum: Optional[date] = Field(
+    beoogd_uit_exploitatie_datum: date | None = Field(
         default=None, alias="beoogdUitExploitatieDatum"
     )
     """
     Verwachte datum waarop de eenheid aan het bezit zal worden onttrokken door sloop of verkoop.
     """
-    bestemming: Optional[Referentiedata] = None
+    bestemming: Referentiedata | None = None
     """
     Door de corporatie bepaalde bestemming van de eenheid bij mutatie (sloop, verkoop, huur). In AddresseerbaarObjectRegistratie wordt met het attribuut gebruiksdoel aangegeven wat volgens de gemeente het gebruiksdoel van de eenheid is (wonen, werken, zorg, enz.) Referentiedatasoort BESTEMMING.
     """
-    bovenliggende_eenheid: Optional[EenheidSleutels] = Field(
+    bovenliggende_eenheid: EenheidSleutels | None = Field(
         default=None, alias="bovenliggendeEenheid"
     )
     """
     De bovenliggende eenheid waarvan de eenheid onderdeel van uit maakt.
     """
-    brutohuur: Optional[float] = None
+    brutohuur: float | None = None
     """
     De brutohuur in euro's die geregistreerd staat bij de eenheid. De brutohuur is de netto huur (of kale huur) inclusief alle huurcomponenten en inclusief BTW.
     """
-    clusters: Optional[list[EenhedenCluster]] = None
+    clusters: list[EenhedenCluster] | None = None
     """
     De clusters waar de eenheid onderdeel van uitmaakt.
     """
-    collectieve_objecten: Optional[list[CollectiefObjectSleutels]] = Field(
+    collectieve_objecten: list[CollectiefObjectSleutels] | None = Field(
         default=None, alias="collectieveObjecten"
     )
     """
     De collectieve objecten behorend bij de eenheid.
     """
-    criteria: Optional[list[EenhedenEenheidcriterium]] = Field(
+    criteria: list[EenhedenEenheidcriterium] | None = Field(
         default=None, alias="Criteria"
     )
     """
     De voorwaarden waaraan de bewoner moet voldoen om in aanmerking te komen of voorrang te krijgen voor de eenheid.
     """
-    doelgroep: Optional[Referentiedata] = None
+    doelgroep: Referentiedata | None = None
     """
     De doelgroep waarvoor de eenheid bestemd is, bijv. zorgwoning, jongerenwoning, seniorenwoning, eengezinswoning, starterswoning etc. Eventueel te gebruiken in combinatie met aanvullendeDoelgroep. Referentiedatasoort DOELGROEP.
     """
-    energieprestaties: Optional[list[EenhedenEnergieprestatie]] = None
+    energieprestaties: list[EenhedenEnergieprestatie] | None = None
     """
     De huidige energieprestatie(s) van de eenheid.
     """
-    energievoorzieningen: Optional[list[Referentiedata]] = None
+    energievoorzieningen: list[Referentiedata] | None = None
     """
     Voorzieningen met betrekking tot energie zoals zonnepanelen en oplaadpunten Referentiedatasoort EENHEIDENERGIEVOORZIENING.
     """
-    etage: Optional[int] = None
+    etage: int | None = None
     """
     De etage waarop de eenheid zich bevindt.
     """
-    gebruiksoppervlakte: Optional[int] = None
+    gebruiksoppervlakte: int | None = None
     """
     De gebruiksoppervlakte van een eenheid(verblijfsobject) in gehele vierkante meters, gemeten conform NEN 2580. Te gebruiken voor verantwoording dVi. Naast gebruiksoppervlakte is ook een attribuut totaleOppervlakte beschikbaar.
     """
-    in_exploitatie_reden: Optional[Referentiedata] = Field(
+    in_exploitatie_reden: Referentiedata | None = Field(
         default=None, alias="inExploitatieReden"
     )
     """
     De reden voor het in exploitatie nemen van een eenheid. Bijvoorbeeld: verhuur of beheer namens andere eigenaren. Referentiedatasoort INEXPLOITATIEREDEN.
     """
-    interieur: Optional[list[Referentiedata]] = None
+    interieur: list[Referentiedata] | None = None
     """
     Binnenruimte van de woning zoals gemeubileerd en vloerbedekking in de woonkamer. Referentiedatasoort EENHEIDINTERIEUR.
     """
-    isolatie: Optional[list[Referentiedata]] = None
+    isolatie: list[Referentiedata] | None = None
     """
     Getroffen isolatie maatregelen in de eenheid. Referentiedatasoort EENHEIDISOLATIE.
     """
-    juridisch_eigendomspercentage: Optional[int] = Field(
+    juridisch_eigendomspercentage: int | None = Field(
         default=None, alias="juridischEigendomspercentage"
     )
     """
     Het percentage juridisch eigendom zoals vastgelegd in de eigendomsakte.
     """
-    kadastraal_nummer: Optional[str] = Field(default=None, alias="kadastraalNummer")
+    kadastraal_nummer: str | None = Field(default=None, alias="kadastraalNummer")
     """
     Het kadastraalnummer behorend bij de eenheid.
     """
-    kamers_aantal: Optional[int] = Field(default=None, alias="kamersAantal")
+    kamers_aantal: int | None = Field(default=None, alias="kamersAantal")
     """
     Het aantal leefruimten en slaapkamers behorende bij de eenheid.
     """
-    klimaatbeheersing: Optional[list[Referentiedata]] = None
+    klimaatbeheersing: list[Referentiedata] | None = None
     """
     Verzameling van kenmerken die het binnenklimaat (lucht, warmte en koeling) regelen in de eenheid. Referentiedatasoort EENHEIDKLIMAATBEHEERSING.
     """
-    kwaliteitsniveau: Optional[Referentiedata] = None
+    kwaliteitsniveau: Referentiedata | None = None
     """
     Het kwaliteitsniveau van de eenheid. Referentiedatasoort KWALITEITSNIVEAU.
     """
-    ligging: Optional[list[Referentiedata]] = None
+    ligging: list[Referentiedata] | None = None
     """
     De omschrijving van de situering van de eenheid behorend bij de eenheid. Bijvoorbeeld: Ligt aan drukke weg en vrij uitzicht Referentiedatasoort EENHEIDLIGGING.
     """
-    maatschappelijk_label: Optional[Referentiedata] = Field(
+    maatschappelijk_label: Referentiedata | None = Field(
         default=None, alias="maatschappelijkLabel"
     )
     """
     Het label waarmee het maatschappelijk en economisch belang van de dienstverlening wordt aangegeven: behoort de eenheid tot de DAEB-tak of tot de niet-DAEB-tak. Het label op de eenheid kan afwijken van het maatschappelijk label van de huurovereenkomst. Hiermee kan worden aangegeven dat een eenheid die behoort tot de niet-DAEB tak als DAEB-verhuring verantwoord moet worden. Referentiedatasoort MAATSCHAPPELIJKLABEL.
     """
-    monumenten: Optional[list[Referentiedata]] = None
+    monumenten: list[Referentiedata] | None = None
     """
     De aanduiding die aangeeft of de eenheid een monument is, en ook welke soort monument het is. Bijvoorbeeld rijksmonument, beschermd stadsgezicht etc. Een eenheid kan onder meerdere typen monumenten vallen. Referentiedatasoort EENHEIDMONUMENT.
     """
-    onderhoudslabel: Optional[Referentiedata] = None
+    onderhoudslabel: Referentiedata | None = None
     """
     Het onderhoudslabel geeft aan hoe hoog of laag het onderhoudsniveau van het betreffende eenheid moet zijn. Hierbij wordt rekening gehouden met het soort bewoners en de toekomst van het pand. Referentiedatasoort ONDERHOUDSLABEL.
     """
-    oppervlakten: Optional[list[EenhedenOppervlakte]] = None
+    oppervlakten: list[EenhedenOppervlakte] | None = None
     """
     De verschillende oppervlakten die gedefinieerd zijn (bijv. vanuit de NEN) voor een eenheid. Bijv. het gebruiksoppervlak (GO) of functioneel nuttig oppervlak (FNO).
     """
-    panden: Optional[list[EenhedenPand]] = None
+    panden: list[EenhedenPand] | None = None
     """
     De panden behorend bij een eenheid.
     """
-    prijscomponenten: Optional[list[EenhedenPrijscomponent]] = None
+    prijscomponenten: list[EenhedenPrijscomponent] | None = None
     """
     De prijscomponenten behorend bij de eenheid. Bijvoorbeel huurcomponenten of maandelijkse lasten.
     """
-    rayon: Optional[Referentiedata] = None
+    rayon: Referentiedata | None = None
     """
     Het rayon waar de eenheid in valt. Waarden zijn corporatiespecifiek en daarom niet in de referentiedata beschreven. Referentiedatasoort RAYON.
     """
-    rekenhuur: Optional[float] = None
+    rekenhuur: float | None = None
     """
     De subsidiabele huur in euro's die geregistreerd staat bij de eenheid. De subsidiabele huur is het bedrag van de huur dat in aanmerking komt voor huurtoeslag.
     """
-    relaties: Optional[
-        list[Union[EenhedenNatuurlijkPersoon, EenhedenRechtspersoon]]
-    ] = None
+    relaties: list[EenhedenNatuurlijkPersoon | EenhedenRechtspersoon] | None = None
     """
     Bij.v de eigenaar, beheerder en contactpersonen die gekoppeld zijn aan de eenheid. Met de koppeling naar Relatierol kan de soort rol van de relatie ten opzichte van de eenheid vastgelegd worden.
     """
-    renovatie: Optional[EenhedenRenovatie] = None
+    renovatie: EenhedenRenovatie | None = None
     """
     De details van de laatste renovatie van de eenheid.
     """
-    ruimten: Optional[list[EenhedenRuimte]] = None
+    ruimten: list[EenhedenRuimte] | None = None
     """
     De verschillende ruimtes behorend bij de eenheid Bij. 'Achtertuin' of 'Woonkamer'.
     """
-    sanitair: Optional[list[Referentiedata]] = None
+    sanitair: list[Referentiedata] | None = None
     """
     Sanitaire voorzieningen Referentiedatasoort EENHEIDSANITAIR.
     """
-    streefhuur: Optional[float] = None
+    streefhuur: float | None = None
     """
     De netto huur in euro's waarnaar de woningcorporatie streeft.
     """
-    toegankelijkheidslabel: Optional[Referentiedata] = None
+    toegankelijkheidslabel: Referentiedata | None = None
     """
     Het toegankelijkheidslabel van de eenheid. Bijvoorbeeld, de eenheid is geschikt voor minder validen. Referentiedatasoort TOEGANKELIJKHEIDSLABEL.
     """
-    totaal_inhoud: Optional[float] = Field(default=None, alias="totaalInhoud")
+    totaal_inhoud: float | None = Field(default=None, alias="totaalInhoud")
     """
     De totale inhoud van de eenheid in m3. Zowel bewoonbare als onbewoonbare vertrekken worden hierbij meegeteld.
     """
-    totale_oppervlakte: Optional[float] = Field(
-        default=None, alias="totaleOppervlakte", json_schema_extra={"deprecated": True}
+    totale_oppervlakte: float | None = Field(
+        default=None, alias="totaleOppervlakte", deprecated=True
     )
     """
     De totale oppervlakte van een eenheid. Vertrekken die niet bewoonbaar zijn, worden hierbij meegeteld. Let op: niet te verwarren met de voor de dVi vereiste "gebruiksoppervlakte". OBSOLETE
     """
-    uit_exploitatie_reden: Optional[Referentiedata] = Field(
+    uit_exploitatie_reden: Referentiedata | None = Field(
         default=None, alias="uitExploitatieReden"
     )
     """
     De reden voor het uit exploitatie nemen van een eenheid. Voorbeeld: sloop. Referentiedatasoort UITEXPLOITATIEREDEN.
     """
-    verkoop: Optional[bool] = None
+    verkoop: bool | None = None
     """
     De waarde die aangeeft of de eenheid beschikbaar is voor de verkoop.
     """
-    vertrekken_aantal: Optional[int] = Field(default=None, alias="vertrekkenAantal")
+    vertrekken_aantal: int | None = Field(default=None, alias="vertrekkenAantal")
     """
     Het aantal vertrekken behorende bij de eenheid.
     """
-    verwarmde_vertrekken_aantal: Optional[int] = Field(
+    verwarmde_vertrekken_aantal: int | None = Field(
         default=None, alias="verwarmdeVertrekkenAantal"
     )
     """
     Het aantal verwarmde vertrekken van de eenheid.
     """
-    vestiging: Optional[Referentiedata] = None
+    vestiging: Referentiedata | None = None
     """
     De vestiging van de vastgoedaanbieder die de woning heeft aangeboden. Referentiedatasoort VESTIGING.
     """
-    volgnummer: Optional[str] = None
+    volgnummer: str | None = None
     """
     Het volgnummer van een eenheid, zoals een appartementsaanduiding, of een nummering van garageboxen.
     """
-    vraagprijs: Optional[float] = None
+    vraagprijs: float | None = None
     """
     De vraagprijs voor de verkoop van de eenheid.
     """
-    woningwaarderingstelsel: Optional[Referentiedata] = Field(
+    woningwaarderingstelsel: Referentiedata | None = Field(
         default=None, alias="Woningwaarderingstelsel"
     )
     """
     Het woningwaardering stelsel geeft aan welk puntensysteem voor de eenheid van toepassing is: het puntensysteem voor zelfstandige woonruimten, het puntensysteem voor onzelfstandige woonruimten, of het puntensysteem voor woonwagens en standplaatsen. Referentiedatasoort WONINGWAARDERINGSTELSEL.
     """
-    woonvorm: Optional[Referentiedata] = None
+    woonvorm: Referentiedata | None = None
     """
     De woonvorm van de eenheid. Bijvoorbeeld groepswonen. Referentiedatasoort WOONVORM.
     """
-    woz_eenheden: Optional[list[EenhedenWozEenheid]] = Field(
+    woz_eenheden: list[EenhedenWozEenheid] | None = Field(
         default=None, alias="wozEenheden"
     )
     """
     De WOZ eenheden behorend bij de eenheid. Dit zijn de WOZ waarden behorende bij de eenheid.
     """
-    zelfstandig: Optional[bool] = None
+    zelfstandig: bool | None = None
     """
     Geeft aan of het een zelfstandige of onzelfstandige eenheid betreft. Dit gegeven wordt ook gebruikt bij het bepalen van het woningwaardering volgens het woningwaarderingsstelsel.
     """
-    zorgfaciliteit_omschrijving: Optional[str] = Field(
+    zorgfaciliteit_omschrijving: str | None = Field(
         default=None, alias="zorgfaciliteitOmschrijving"
     )
     """
     De omschrijving van de zorgfaciliteit behorende bij de eenheid.
     """
     # https://github.com/Aedes-datastandaarden/vera-openapi/issues/69
-    datum_afsluiten_huurovereenkomst: Optional[date] = Field(
+    datum_afsluiten_huurovereenkomst: date | None = Field(
         default=None, alias="datumAfsluitenHuurovereenkomst"
     )
     """
@@ -3448,7 +3333,6 @@ class EenhedenEenheid(BaseModel):
 class WoningwaarderingResultatenWoningwaarderingResultaatbericht(
     WoningwaarderingResultatenWoningwaarderingResultaat, BerichtBasis
 ):
-    pass
     model_config = ConfigDict(
         populate_by_name=True,
     )
@@ -3458,45 +3342,43 @@ class BouwkundigElementenGarantie(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van de garantie.
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De begindatum van de garantie.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De einddatum van de garantie.
     """
-    relatie: Optional[BouwkundigElementenRechtspersoon] = None
+    relatie: BouwkundigElementenRelatie | None = None
     """
     De leverancier die het product of dienst heeft geleverd.
     """
@@ -3506,21 +3388,19 @@ class BouwkundigElementenOnderhoudsleverancier(BouwkundigElementenRechtspersoonB
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    specialisme: Optional[Referentiedata] = None
+    specialisme: Referentiedata | None = None
     """
     Het specialisme van de onderhoudsleverancier. Bijv. Schilder, Verwarmingsmonteur, hovenier etc. Referentiedatasoort ONDERHOUDSPECIALISME.
     """
 
 
 class ClustersClusterbericht(ClustersCluster, BerichtBasis):
-    pass
     model_config = ConfigDict(
         populate_by_name=True,
     )
 
 
 class EenhedenEenheidbericht(EenhedenEenheid, BerichtBasis):
-    pass
     model_config = ConfigDict(
         populate_by_name=True,
     )
@@ -3530,149 +3410,145 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
-    id: Optional[str] = None
+    id: str | None = None
     """
     De primaire sleutel van het gegeven in het bronsysteem. Je verstuurt een entiteit altijd met het eigen id. Id kan leeg zijn.
     """
-    id_extern: Optional[str] = Field(default=None, alias="idExtern")
+    id_extern: str | None = Field(default=None, alias="idExtern")
     """
     De primaire sleutel van het gegeven in het doelsysteem. Deze idExtern wisselt om met id afhankelijk van de richting van de gegevensuitwisseling.
     """
-    id_gegevensbeheerder: Optional[str] = Field(
-        default=None, alias="idGegevensbeheerder"
-    )
+    id_gegevensbeheerder: str | None = Field(default=None, alias="idGegevensbeheerder")
     """
     De primaire sleutel van het gegeven van de gegevensbeheerder. Bijv. de overheid of andere standaarden.
     """
-    id_organisatie: Optional[str] = Field(default=None, alias="idOrganisatie")
+    id_organisatie: str | None = Field(default=None, alias="idOrganisatie")
     """
     Dit verwijst naar de organisatie die verantwoordelijk is voor het gegeven. Horende bij de idExtern.
     """
-    id_administratie: Optional[str] = Field(default=None, alias="idAdministratie")
+    id_administratie: str | None = Field(default=None, alias="idAdministratie")
     """
     Dit verwijst naar de administratie waar het gegeven onderdeel van is. Horende bij de idExtern.
     """
-    code: Optional[str] = None
+    code: str | None = None
     """
     De unieke code (Bijvoorbeeld om te tonen of te zoeken)
     """
-    naam: Optional[str] = None
+    naam: str | None = None
     """
     De naam van het bouwkundig element.
     """
-    omschrijving: Optional[str] = None
+    omschrijving: str | None = None
     """
     De omschrijving van het bouwkundig element.
     """
-    serienummer: Optional[str] = None
+    serienummer: str | None = None
     """
     Serienummer van het bouwkundige element.
     """
-    soort: Optional[Referentiedata] = None
+    soort: Referentiedata | None = None
     """
     Het soort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTSOORT.
     """
-    detail_soort: Optional[Referentiedata] = Field(default=None, alias="detailSoort")
+    detail_soort: Referentiedata | None = Field(default=None, alias="detailSoort")
     """
     Het detailsoort bouwkundig element. Referentiedatasoort BOUWKUNDIGELEMENTDETAILSOORT.
     """
-    begindatum: Optional[date] = None
+    begindatum: date | None = None
     """
     De begindatum van het bouwkundige element.
     """
-    einddatum: Optional[date] = None
+    einddatum: date | None = None
     """
     De einddatum het bouwkundige element
     """
-    plaatsingdatum: Optional[AwareDatetime] = None
+    plaatsingdatum: AwareDatetime | None = None
     """
     De datum waarop het bouwkundig element is aangebracht.
     """
-    bouwdeel: Optional[BouwkundigElementenBouwdeel] = None
+    bouwdeel: BouwkundigElementenBouwdeel | None = None
     """
     Het bouwdeel behorend bij het bouwkundig element.
     """
-    brandwerendheid: Optional[Referentiedata] = None
+    brandwerendheid: Referentiedata | None = None
     """
     De brandwerendheidscore van het element vlg de NEN-EN 13501 classificering, indien van toepassing voor het specifieke element. Relatie met IFC codering (FireRating) Referentiedatasoort BRANDWERENDHEIDSCORE.
     """
-    breedte: Optional[float] = None
+    breedte: float | None = None
     """
     Breedte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    cluster: Optional[ClusterSleutels] = None
+    cluster: ClusterSleutels | None = None
     """
     Het cluster waarbinnen het bouwkundig element valt.
     """
-    constructief: Optional[bool] = None
+    constructief: bool | None = None
     """
     Geeft aan of het bouwkundig element onderdeel is van de constructie van de eenheid.
     """
-    diameter: Optional[float] = None
+    diameter: float | None = None
     """
     Diameter van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    diepte: Optional[float] = None
+    diepte: float | None = None
     """
     Diepte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    dikte: Optional[float] = None
+    dikte: float | None = None
     """
     Dikte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    eenheid: Optional[EenheidSleutels] = None
+    eenheid: EenheidSleutels | None = None
     """
     De eenheid waarbinnen het bouwkundig element valt.
     """
-    exterieur: Optional[bool] = None
+    exterieur: bool | None = None
     """
     Geeft aan of het bouwkundig element onderdeel is van het exterieur van de betreffende eenheid.
     """
-    garanties: Optional[list[BouwkundigElementenGarantie]] = None
+    garanties: list[BouwkundigElementenGarantie] | None = None
     """
     De garanties behorend bij het bouwkundig element.
     """
-    hoogte: Optional[float] = None
+    hoogte: float | None = None
     """
     Hoogte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    inhoud: Optional[float] = None
+    inhoud: float | None = None
     """
     Inhoud van het bouwkundig element in kubieke meter, indien van toepassing voor het specifieke element.
     """
-    lengte: Optional[float] = None
+    lengte: float | None = None
     """
     Lengte van het bouwkundig element in milimeter, indien van toepassing voor het specifieke element.
     """
-    locatie: Optional[Referentiedata] = None
+    locatie: Referentiedata | None = None
     """
     De locatie waar het bouwkundig element zich bevindt. Bijvoorbeeld huiskamer of toilet. Referentiedatasoort DEFECTLOCATIE.
     """
-    materiaal_detailsoort: Optional[Referentiedata] = Field(
+    materiaal_detailsoort: Referentiedata | None = Field(
         default=None, alias="materiaalDetailsoort"
     )
     """
     het detailsoort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALDETAILSOORT.
     """
-    materiaal_soort: Optional[Referentiedata] = Field(
-        default=None, alias="materiaalSoort"
-    )
+    materiaal_soort: Referentiedata | None = Field(default=None, alias="materiaalSoort")
     """
     het soort van het materiaal waaruit het element bestaat. Referentiedatasoort MATERIAALSOORT.
     """
-    oppervlakte: Optional[float] = None
+    oppervlakte: float | None = None
     """
     Oppervlakte van het bouwkundig element in vierkante meters, indien van toepassing voor het specifieke element.
     """
-    overeenkomsten: Optional[list[OvereenkomstSleutels]] = None
+    overeenkomsten: list[OvereenkomstSleutels] | None = None
     """
     De onderhoudsovereenkomsten die voor het bouwkundigelement gelden.
     """
-    plaatsing: Optional[Referentiedata] = None
+    plaatsing: Referentiedata | None = None
     """
     Op welke wijze het bouwkundig element is aangebracht. Bijv. bij de bouw, renovatie, onderhoud of door huurder. Referentiedatasoort BOUWKUNDIGELEMENTPLAATSING.
     """
-    relaties: Optional[list[BouwkundigElementenRechtspersoon]] = None
+    relaties: list[BouwkundigElementenRelatie] | None = None
     """
     Bijv. de eigenaar of beheerder van het bouwkundig element, bijvoorbeeld de corporatie, een instelling, particulier of een VvE in een gemengd (verkoop/verhuur) gebouw.
     """
@@ -3681,7 +3557,6 @@ class BouwkundigElementenBouwkundigElement(BaseModel):
 class BouwkundigElementenBouwkundigElementbericht(
     BouwkundigElementenBouwkundigElement, BerichtBasis
 ):
-    pass
     model_config = ConfigDict(
         populate_by_name=True,
     )

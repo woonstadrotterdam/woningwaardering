@@ -14,17 +14,33 @@
       "punten": 2.5,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__Space_246794",
+            "naam": "Toiletruimte"
+          }
+        },
+        {
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_246794__wastafel",
-            "naam": "Toiletruimte - Wastafel"
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_246794"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 2.0
         },
         {
           "criterium": {
             "id": "sanitair__Space_246794__max_punten_wastafel",
-            "naam": "Toiletruimte - Max 1.0 punt voor Wastafel"
+            "naam": "Max 1.0 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_246794"
+            }
           },
           "punten": -1.0
         },
@@ -32,14 +48,24 @@
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__Space_246794__meerpersoonswastafel",
-            "naam": "Toiletruimte - Meerpersoonswastafel"
+            "naam": "Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_246794"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
           },
           "punten": 3.0
         },
         {
           "criterium": {
             "id": "sanitair__Space_246794__max_punten_meerpersoonswastafel",
-            "naam": "Toiletruimte - Max 1.5 punt voor Meerpersoonswastafel"
+            "naam": "Max 1.5 punt voor Meerpersoonswastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__Space_246794"
+            }
           },
           "punten": -1.5
         }

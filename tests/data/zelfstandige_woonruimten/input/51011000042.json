@@ -14,7 +14,7 @@
   "adres": {
     "straatnaam": "",
     "huisnummer": "",
-    "huisnummer_toevoeging": "b",
+    "huisnummerToevoeging": "b",
     "postcode": "",
     "woonplaats": {
       "naam": "ROTTERDAM"
@@ -321,7 +321,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Fontein_82666501",
-          "id_bimmodel": "1$jwypzBf9kgtNCCaUgoIV",
+          "idBimmodel": "1$jwypzBf9kgtNCCaUgoIV",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -336,7 +336,7 @@
         },
         {
           "id": "Closetcombinatie_82666495",
-          "id_bimmodel": "3gALUg0sHDZgD7WaLHIFqB",
+          "idBimmodel": "3gALUg0sHDZgD7WaLHIFqB",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -456,7 +456,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Douche_82667831",
-          "id_bimmodel": "1r5EB4QyjAL9U8aCF5ed7l",
+          "idBimmodel": "1r5EB4QyjAL9U8aCF5ed7l",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -472,7 +472,7 @@
         },
         {
           "id": "Wastafel_82667829",
-          "id_bimmodel": "3gALUg0sHDZgD7WaLHIFqA",
+          "idBimmodel": "3gALUg0sHDZgD7WaLHIFqA",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -550,7 +550,7 @@
       "bouwkundigeElementen": [
         {
           "id": "Aanrecht_82665529",
-          "id_bimmodel": "3gALUg0sHDZgD7WaLHIFtt",
+          "idBimmodel": "3gALUg0sHDZgD7WaLHIFtt",
           "naam": "Aanrecht",
           "omschrijving": "Aanrecht in Keuken",
           "soort": {
@@ -565,7 +565,7 @@
         },
         {
           "id": "Ketel_82665523",
-          "id_bimmodel": "3BLChcU5v039lSe89NR8zj",
+          "idBimmodel": "3BLChcU5v039lSe89NR8zj",
           "naam": "Ketel",
           "soort": {
             "code": "VER",

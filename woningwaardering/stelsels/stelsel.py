@@ -12,6 +12,7 @@ from woningwaardering.stelsels.utils import (
     normaliseer_ruimte_namen,
     rond_af,
     rond_af_op_kwart,
+    waarschuw_dubbele_ids,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -70,6 +71,7 @@ class Stelsel:
         """
 
         normaliseer_ruimte_namen(eenheid)
+        waarschuw_dubbele_ids(eenheid)
 
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
         resultaat.stelsel = self.stelsel

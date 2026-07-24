@@ -87,9 +87,14 @@ class DevelopmentContext:
                 f"{category.__name__}: {message}",
             )
 
+        warnings.filterwarnings(
+            "default",
+            category=DeprecationWarning,
+            module=r"woningwaardering(\.|$)",
+        )
         if not self.strict:
             warnings.filterwarnings("default", category=UserWarning)
-            warnings.showwarning = warning_to_logger
+        warnings.showwarning = warning_to_logger
 
     def _load_eenheid(self, eenheid_input: EenhedenEenheid | str) -> EenhedenEenheid:
         if isinstance(eenheid_input, str):
@@ -117,12 +122,14 @@ class DevelopmentContext:
                 groepen=[resultaat]
             )
 
-        self._print_resultaat(resultaat)
+        self._print_resultaat(resultaat, eenheid.id)
         return resultaat
 
     def _print_resultaat(
-        self, resultaat: WoningwaarderingResultatenWoningwaarderingResultaat
+        self,
+        resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        eenheid_id: str | None = None,
     ) -> None:
         print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-        tabel = utils.naar_tabel(resultaat)
-        print(tabel)
+        rapport = utils.naar_rapport(resultaat, eenheid_id=eenheid_id)
+        print(rapport)

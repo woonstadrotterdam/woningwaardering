@@ -15,100 +15,58 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_976173",
-            "naam": "Verwarmde woonkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 1.0
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_483653",
-            "naam": "Verwarmde keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_795235",
-            "naam": "Verwarmde slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_727114",
-            "naam": "Verwarmde woonkamer/keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_976173",
-            "naam": "Verwarmde woonkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_795235",
-            "naam": "Verwarmde slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__Space_727114",
-            "naam": "Verwarmde woonkamer/keuken",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__open_keuken"
-            }
-          },
-          "punten": 1.0
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
             }
-          },
-          "punten": 4.0
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__open_keuken",
-            "naam": "Open keuken",
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken__Space_976173",
+            "naam": "Woonkamer met open keuken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken"
             }
           },
-          "punten": 3.0
+          "punten": 2.0
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken__Space_483653",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken"
+            }
           },
-          "punten": 7.0
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken__Space_795235",
+            "naam": "Slaapkamer met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken__Space_727114",
+            "naam": "Verwarmde woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
         }
       ]
     }

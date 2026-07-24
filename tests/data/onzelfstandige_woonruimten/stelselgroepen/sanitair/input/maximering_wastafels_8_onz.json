@@ -47,7 +47,7 @@
       "inhoud": 21.5125,
       "oppervlakte": 7.49563,
       "verwarmd": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 8,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
       "installaties": [
         {
           "code": "WAS",
@@ -89,7 +89,7 @@
       "inhoud": 21.5125,
       "oppervlakte": 7.49563,
       "verwarmd": true,
-      "gedeeld_met_aantal_onzelfstandige_woonruimten": 8,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
       "installaties": [
         {
           "code": "WAS",

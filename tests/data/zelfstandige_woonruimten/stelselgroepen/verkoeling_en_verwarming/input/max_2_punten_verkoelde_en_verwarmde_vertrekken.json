@@ -16,8 +16,7 @@
       "inhoud": 38.1247,
       "oppervlakte": 19.1488,
       "verwarmd": true,
-      "verkoeld": true,
-      "gemeenschappelijk": true
+      "verkoeld": true
     },
     {
       "id": "Slaapkamer2",
@@ -33,8 +32,7 @@
       "inhoud": 38.1247,
       "oppervlakte": 19.1488,
       "verwarmd": true,
-      "verkoeld": true,
-      "gemeenschappelijk": true
+      "verkoeld": true
     },
     {
       "id": "Slaapkamer3",
@@ -50,8 +48,7 @@
       "inhoud": 38.1247,
       "oppervlakte": 19.1488,
       "verwarmd": true,
-      "verkoeld": true,
-      "gemeenschappelijk": true
+      "verkoeld": true
     }
   ]
 }

@@ -17,7 +17,7 @@ def log_userwarning(
     file: TextIO | None = None,
     line: str | None = None,
 ) -> None:
-    logger.warning(f"{UserWarning.__name__}: {message}")
+    logger.warning(f"{category.__name__}: {message}")
     _original_showwarning(message, category, filename, lineno, file, line)
 
 

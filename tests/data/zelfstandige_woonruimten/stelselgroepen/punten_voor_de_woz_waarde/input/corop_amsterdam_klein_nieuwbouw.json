@@ -9,7 +9,7 @@
   "adres": {
     "straatnaam": "Damrak",
     "huisnummer": "1",
-    "huisnummer_toevoeging": "",
+    "huisnummerToevoeging": "",
     "postcode": "1012LG",
     "woonplaats": {
       "code": "3594",
@@ -31,11 +31,11 @@
   "wozEenheden": [
     {
       "waardepeildatum": "2023-01-01",
-      "vastgestelde_waarde": 300000
+      "vastgesteldeWaarde": 300000
     },
     {
       "waardepeildatum": "2024-01-01",
-      "vastgestelde_waarde": 310000
+      "vastgesteldeWaarde": 310000
     }
   ],
   "energieprestaties": [

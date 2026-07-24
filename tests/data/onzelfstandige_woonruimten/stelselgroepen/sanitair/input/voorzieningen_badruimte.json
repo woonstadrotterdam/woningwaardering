@@ -16,6 +16,18 @@
       "verwarmd": true,
       "installaties": [
         {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
           "code": "BUB",
           "naam": "Bubbelfunctie van het bad"
         },

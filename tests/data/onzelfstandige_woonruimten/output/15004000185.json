@@ -14,12 +14,18 @@
       "punten": 25.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__prive",
+            "naam": "Privé"
+          }
+        },
+        {
           "aantal": 20.04,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_29425491",
+            "id": "oppervlakte_van_vertrekken__prive__Space_29425491",
             "naam": "Slaapkamer",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__prive"
+              "id": "oppervlakte_van_vertrekken__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -28,12 +34,18 @@
           }
         },
         {
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
           "aantal": 7.5,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_29425492",
+            "id": "oppervlakte_van_vertrekken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425492",
             "naam": "Keuken",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_vertrekken__gedeeld_met_2_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -44,33 +56,11 @@
         {
           "aantal": 1.7,
           "criterium": {
-            "id": "oppervlakte_van_vertrekken__Space_29425496",
+            "id": "oppervlakte_van_vertrekken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425496",
             "naam": "Badruimte",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_vertrekken__gedeeld_met_2_onzelfstandige_woonruimten"
             },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 20.04,
-          "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__prive",
-            "naam": "Totaal (privé)",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          }
-        },
-        {
-          "aantal": 4.6,
-          "criterium": {
-            "id": "oppervlakte_van_vertrekken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)",
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
@@ -108,28 +98,26 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__Space_29425491",
-            "naam": "Slaapkamer",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken"
-            }
-          },
-          "punten": 2.0
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__verwarmde_vertrekken",
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken",
             "naam": "Verwarmde vertrekken",
             "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__totaal__prive"
+              "id": "verkoeling_en_verwarming__prive"
             }
-          },
-          "punten": 2.0
+          }
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__totaal__prive",
-            "naam": "Totaal (privé)"
+            "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__Space_29425491",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
+            }
           },
           "punten": 2.0
         }
@@ -159,6 +147,13 @@
             }
           },
           "punten": 8.58
+        },
+        {
+          "criterium": {
+            "id": "energieprestatie__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.08
         }
       ]
     },
@@ -176,24 +171,32 @@
       "punten": 3.5,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425492",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 2220.0,
           "criterium": {
-            "id": "keuken__Space_29425492__lengte_aanrecht_Aanrecht_29424502",
-            "naam": "Keuken: Lengte aanrecht",
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425492__lengte_aanrecht_Aanrecht_29424502",
+            "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425492"
             },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
             }
-          },
-          "punten": 3.5
-        },
-        {
-          "criterium": {
-            "id": "keuken__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
           },
           "punten": 3.5
         }
@@ -213,33 +216,58 @@
       "punten": 3.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425495",
+            "naam": "Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_29425495__staand_toilet",
-            "naam": "Toilet - Staand Toilet",
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425495__staand_toilet",
+            "naam": "Staand Toilet",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425495"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 1.5
         },
         {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425496",
+            "naam": "Badruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_29425496__douche",
-            "naam": "Badruimte - Douche",
+            "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425496__douche",
+            "naam": "Douche",
             "bovenliggendeCriterium": {
-              "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten"
+              "id": "sanitair__gedeeld_met_2_onzelfstandige_woonruimten__Space_29425496"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
             }
           },
           "punten": 1.5
-        },
-        {
-          "criterium": {
-            "id": "sanitair__totaal__gedeeld_met__2__onzelfstandige_woonruimten",
-            "naam": "Totaal (gedeeld met 2 onzelfstandige woonruimten)"
-          },
-          "punten": 3.0
         }
       ]
     },
@@ -299,22 +327,34 @@
       "punten": 12.0,
       "woningwaarderingen": [
         {
+          "aantal": -0.0711688,
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__percentage_verschil",
+            "naam": "Percentage verschil"
+          },
+          "punten": 12.0
+        },
+        {
           "aantal": 205000.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__woz_waarde",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__woz_waarde",
             "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+              "id": "punten_voor_de_woz_waarde__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "aantal": 58.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__gebruiksoppervlakte",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__gebruiksoppervlakte",
             "naam": "Gebruiksoppervlakte",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+              "id": "punten_voor_de_woz_waarde__percentage_verschil"
             },
             "meeteenheid": {
               "code": "M2",
@@ -325,30 +365,30 @@
         {
           "aantal": 3534.48276,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__woz_waarde_per_m2",
             "naam": "WOZ-waarde per m²",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+              "id": "punten_voor_de_woz_waarde__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
         },
         {
           "aantal": 3537.0,
           "criterium": {
-            "id": "punten_voor_de_woz_waarde__gemiddelde_woz_waarde_per_m2",
+            "id": "punten_voor_de_woz_waarde__percentage_verschil__gemiddelde_woz_waarde_per_m2",
             "naam": "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond",
             "bovenliggendeCriterium": {
-              "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil"
+              "id": "punten_voor_de_woz_waarde__percentage_verschil"
+            },
+            "meeteenheid": {
+              "code": "EUR",
+              "naam": "Euro"
             }
           }
-        },
-        {
-          "aantal": -0.0711688,
-          "criterium": {
-            "id": "punten_voor_de_woz_waarde__totaal__percentage_verschil",
-            "naam": "Percentage verschil"
-          },
-          "punten": 12.0
         }
       ]
     },
