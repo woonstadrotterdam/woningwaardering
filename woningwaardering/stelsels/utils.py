@@ -1031,7 +1031,8 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         ):
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
+                oppervlakte_inclusief_verbonden_kasten(ruimte)
+                / Decimal(str(aantal_adressen))
             ) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
@@ -1105,6 +1106,43 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     return None
 
 
+_VERKEERSRUIMTE_DETAILSOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
+    }
+)
+
+
+def oppervlakte_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Berekent de netto oppervlakte van verbonden vaste kasten voor een ruimte."""
+    if (
+        ruimte.detail_soort is None
+        or ruimte.detail_soort in _VERKEERSRUIMTE_DETAILSOORTEN
+    ):
+        return Decimal("0")
+
+    return sum(
+        (
+            Decimal(str(verbonden_ruimte.oppervlakte))
+            for verbonden_ruimte in ruimte.verbonden_ruimten or []
+            if verbonden_ruimte.detail_soort == Ruimtedetailsoort.kast
+            and verbonden_ruimte.oppervlakte is not None
+        ),
+        start=Decimal("0"),
+    )
+
+
+def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Geeft de oppervlakte van een ruimte inclusief meetellende verbonden kasten."""
+    if ruimte.oppervlakte is None:
+        return Decimal("0")
+
+    return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
+
+
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     """
     Deze functie voegt de oppervlakte van kasten toe aan een ruimte en retourneert de naam van de ruimte inclusief het aantal kasten.
@@ -1132,12 +1170,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     # en bij de oppervlakte van de betreffende ruimte opgeteld.
     # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.hal,
-        Ruimtedetailsoort.overloop,
-        Ruimtedetailsoort.entree,
-        Ruimtedetailsoort.gang,
-    ]:
+    if ruimte.detail_soort not in _VERKEERSRUIMTE_DETAILSOORTEN:
         ruimte_kasten = [
             verbonden_ruimte
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
@@ -1148,13 +1181,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         aantal_ruimte_kasten = len(ruimte_kasten)
 
         if aantal_ruimte_kasten > 0:
-            ruimte.oppervlakte += sum(
-                [
-                    ruimte_kast.oppervlakte
-                    for ruimte_kast in ruimte_kasten
-                    if ruimte_kast.oppervlakte is not None
-                ]
-            )
+            ruimte.oppervlakte += float(oppervlakte_verbonden_kasten(ruimte))
 
             if ruimte.inhoud is not None:
                 ruimte.inhoud += sum(
