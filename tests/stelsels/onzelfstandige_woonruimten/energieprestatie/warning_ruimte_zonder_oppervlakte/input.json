@@ -1,0 +1,21 @@
+{
+  "id": "warning_ruimte_zonder_oppervlakte",
+  "bouwjaar": 1998,
+  "monumenten": [],
+  "energieprestaties": [],
+  "ruimten": [
+    {
+      "id": "Space_01",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "verwarmd": true
+    }
+  ]
+}

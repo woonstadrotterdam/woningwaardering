@@ -46,6 +46,24 @@ warning_configs = [
             UserWarning: "geen WOZ-waarde",
         },
     ),
+    WarningConfig(
+        file=f"{current_file_path}/warning_corop_geen_adres/input.json",
+        warnings={
+            UserWarning: "geen adres gevonden voor COROP-gebied bepaling",
+        },
+    ),
+    WarningConfig(
+        file=f"{current_file_path}/warning_corop_geen_woonplaats/input.json",
+        warnings={
+            UserWarning: "geen woonplaats gevonden voor COROP-gebied bepaling",
+        },
+    ),
+    WarningConfig(
+        file=f"{current_file_path}/warning_corop_geen_gebruiksoppervlakte/input.json",
+        warnings={
+            UserWarning: "geen gebruiksoppervlakte gevonden voor eenheid in COROP-gebied",
+        },
+    ),
 ]
 
 

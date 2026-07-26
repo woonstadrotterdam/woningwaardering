@@ -1,0 +1,40 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 1.75,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen"
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_adressen__Space_gedeeld",
+            "naam": "Tuin",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__gedeeld_met_2_adressen"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 1.75
+        }
+      ]
+    }
+  ]
+}

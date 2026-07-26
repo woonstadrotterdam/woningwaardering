@@ -1,0 +1,13 @@
+{
+  "id": "warning_geen_energieprestatie_of_bouwjaar",
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "energieprestaties": []
+}

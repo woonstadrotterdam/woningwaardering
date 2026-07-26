@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_btr",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon",
+      "lengte": 2,
+      "breedte": 2,
+      "hoogte": 2.5
+    }
+  ]
+}

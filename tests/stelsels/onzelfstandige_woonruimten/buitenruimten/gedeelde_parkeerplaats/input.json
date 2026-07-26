@@ -1,0 +1,21 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_parkeer",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "PAR",
+        "naam": "Parkeerplaats"
+      },
+      "naam": "Parkeerplaats",
+      "oppervlakte": 12,
+      "lengte": 4,
+      "breedte": 3,
+      "hoogte": 2.5,
+      "gedeeldMetAantalAdressen": 2
+    }
+  ]
+}
