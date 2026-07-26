@@ -60,10 +60,8 @@ def waardeer_keuken(
         for waardering in extra_waarderingen
         if waardering.punten is not None
     )
-    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte)
+    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte, stelsel)
 
-    # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
-    # waarmee de ruimte gedeeld wordt.
     if deler > 1:
         for waardering in detail_waarderingen:
             if waardering.punten is not None:
@@ -75,7 +73,6 @@ def waardeer_keuken(
                 )
 
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
-        # Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
         aftrek_ongedeeld = max_punten_voorzieningen - punten_voor_extra_voorzieningen
         aftrek = rond_af(aftrek_ongedeeld / Decimal(deler), decimalen=2)
         logger.info(
@@ -97,15 +94,6 @@ def waardeer_keuken(
 
 
 def _is_keuken(ruimte: EenhedenRuimte) -> bool:
-    """
-    Controleert of de ruimte een keuken is op basis van het aanrecht.
-
-    Args:
-        ruimte (EenhedenRuimte): De ruimte om te controleren.
-
-    Returns:
-        bool: True als de ruimte een keuken is, anders False.
-    """
     aanrecht_aantal = len(
         [
             aanrecht
@@ -132,19 +120,16 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
                 UserWarning,
             )
-            return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
-        return True  # ruimte is een keuken met een valide aanrecht
+            return False
+        return True
     if ruimte.detail_soort not in [
         Ruimtedetailsoort.woonkamer,
         Ruimtedetailsoort.woon_en_of_slaapkamer,
         Ruimtedetailsoort.slaapkamer,
     ]:
-        return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
-
-    if aanrecht_aantal == 0:  # ruimte is geen keuken want heeft geen valide aanrecht
         return False
 
-    return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
+    return aanrecht_aantal > 0
 
 
 def _waardeer_aanrecht(
@@ -152,17 +137,6 @@ def _waardeer_aanrecht(
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    """
-    Waardeert de aanrechten van een keuken.
-
-    Args:
-        ruimte (EenhedenRuimte): De keuken waarvan de aanrechten gewaardeerd worden.
-        stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
-        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
-
-    Yields:
-        WaarderingBuilder: De gewaardeerde aanrechten.
-    """
     for element in ruimte.bouwkundige_elementen or []:
         if not element.detail_soort:
             warnings.warn(
@@ -177,35 +151,7 @@ def _waardeer_aanrecht(
                     UserWarning,
                 )
                 continue
-            if element.lengte < 1000:
-                aanrecht_punten = 0
-            elif (
-                element.lengte >= 2000
-                and (
-                    (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
-                        not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                    )
-                    or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
-                        gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and element.lengte <= 3000
-                    )
-                )
-            ):
-                aanrecht_punten = 7
-            elif (
-                element.lengte > 3000
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
-            ):
-                aanrecht_punten = 13
-            elif (
-                element.lengte > 3000
-                and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-            ):
-                aanrecht_punten = 10
-
-            else:
-                aanrecht_punten = 4
+            aanrecht_punten = _bereken_aanrecht_punten(element.lengte, ruimte, stelsel)
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
@@ -218,29 +164,48 @@ def _waardeer_aanrecht(
             )
 
 
-def _max_punten_voorzieningen(ruimte: EenhedenRuimte) -> Decimal:
-    totaal_lengte_aanrechten = sum(
-        Decimal(str(element.lengte or "0"))
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+def _bereken_aanrecht_punten(
+    lengte: float,
+    ruimte: EenhedenRuimte,
+    stelsel: WoningwaarderingstelselReferentiedata,
+) -> int:
+    if lengte < 1000:
+        return 0
+    if lengte >= 2000 and (
+        not gedeeld_met_onzelfstandige_woonruimten(ruimte)
+        or (gedeeld_met_onzelfstandige_woonruimten(ruimte) and lengte <= 3000)
+    ):
+        return 7
+    if (
+        lengte > 3000
+        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
+        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
+    ):
+        return 13
+    if lengte > 3000 and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
+        return 10
+    return 4
+
+
+def _max_punten_voorzieningen(
+    ruimte: EenhedenRuimte,
+    stelsel: WoningwaarderingstelselReferentiedata,
+) -> Decimal:
+    # 2.5.3 Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
+    return Decimal(
+        sum(
+            Decimal(str(_bereken_aanrecht_punten(element.lengte, ruimte, stelsel)))
+            for element in ruimte.bouwkundige_elementen or []
+            if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+            and element.lengte
+        )
     )
-    return Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
 
 
 def _waardeer_extra_voorzieningen(
     ruimte: EenhedenRuimte,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    """
-    Waardeert de extra voorzieningen van een keuken.
-
-    Args:
-        ruimte (EenhedenRuimte): De keuken waarvan de extra voorzieningen gewaardeerd worden.
-        waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
-
-    Yields:
-        WaarderingBuilder: De gewaardeerde extra voorzieningen.
-    """
     punten_per_installatie: dict[Referentiedata, float] = {
         Installatiesoort.inbouw_afzuiginstallatie: 0.75,
         Installatiesoort.inbouw_kookplaat_inductie: 1.75,
@@ -248,6 +213,8 @@ def _waardeer_extra_voorzieningen(
         Installatiesoort.inbouw_kookplaat_gas: 0.5,
         Installatiesoort.inbouw_koelkast: 1.0,
         Installatiesoort.inbouw_vrieskast: 0.75,
+        # 2.5.4 Eén voorziening met twee functies worden als twee losse voorzieningen gewaardeerd.
+        Installatiesoort.inbouw_koelvriescombinatie: 1.75,
         Installatiesoort.inbouw_oven_elektrisch: 1.0,
         Installatiesoort.inbouw_oven_gas: 0.5,
         Installatiesoort.inbouw_magnetron: 1.0,
