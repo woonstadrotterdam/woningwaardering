@@ -52,9 +52,11 @@ def bereken_zolder_correctie(
 
 
 def is_zolder_zonder_vaste_trap(ruimte: EenhedenRuimte) -> bool:
+    # 2.2.2.3 Zolderruimte zonder vaste trap
     return (
         ruimte.detail_soort == Ruimtedetailsoort.zolder
         and ruimte.oppervlakte is not None
+        and not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
         and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
         and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
     )
