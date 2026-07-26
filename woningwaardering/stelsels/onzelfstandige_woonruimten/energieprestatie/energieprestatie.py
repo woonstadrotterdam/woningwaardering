@@ -310,8 +310,10 @@ class Energieprestatie(Stelselgroep):
         Returns:
             float: Oppervlakte van de vertrekken.
         """
-        oppervlakte_gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(
-            Decimal
+        # Groepeer op beide delers zodat ruimten met verschillende (onz, adressen)
+        # die tot hetzelfde product leiden niet vóór afronden worden samengevoegd.
+        oppervlakte_gedeeld_met_counter: defaultdict[tuple[int, int], Decimal] = (
+            defaultdict(Decimal)
         )
 
         for ruimte in eenheid.ruimten or []:
@@ -323,20 +325,30 @@ class Energieprestatie(Stelselgroep):
                 continue
 
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                oppervlakte_gedeeld_met_counter[
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += utils.rond_af(
-                    Decimal(str(ruimte.oppervlakte)), decimalen=2
+                # 2.4.4 / 2.2 / 2.9: toe te rekenen m² van gemeenschappelijke
+                # vertrekken delen door aantal onzelfstandige wooneenheden én,
+                # bij meerdere adressen, door aantal adressen.
+                aantal_onz = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+                aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
+                oppervlakte_gedeeld_met_counter[(aantal_onz, aantal_adressen)] += (
+                    utils.rond_af(Decimal(str(ruimte.oppervlakte)), decimalen=2)
                 )  # beleidsboek geeft expliciet aan dat moet worden afgerond op 2 decimalen
 
         return float(
             sum(
                 utils.rond_af(
-                    # op hele m2 afronden per categorie (aantal gedeeld met)
-                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str(aantal))),
+                    # op hele m2 afronden per categorie, daarna delen
+                    (
+                        utils.rond_af(oppervlakte, decimalen=0)
+                        / Decimal(str(aantal_onz))
+                        / Decimal(str(aantal_adressen))
+                    ),
                     decimalen=2,
                 )
-                for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
+                for (
+                    aantal_onz,
+                    aantal_adressen,
+                ), oppervlakte in oppervlakte_gedeeld_met_counter.items()
             )
         )
 

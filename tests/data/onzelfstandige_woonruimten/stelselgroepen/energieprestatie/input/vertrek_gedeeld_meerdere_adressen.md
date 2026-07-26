@@ -1,0 +1,1 @@
+Gemeenschappelijke woonkamer van 40 m² gedeeld met 2 adressen en 2 onzelfstandige woonruimten. Toe te rekenen oppervlakte: 40/2/2 = 10 m²; label A → 6,5 punten. Zonder adresdeling zou dit ten onrechte 20 m² zijn.

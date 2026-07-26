@@ -570,6 +570,9 @@ Het puntenaantal voor de energieprestatie wordt dan als volgt berekend:
 
 ==}
 
+> [!NOTE]
+> Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld, tellen voor energieprestatie mee als toe te rekenen m²: eerst delen door het aantal adressen en daarna door het aantal onzelfstandige wooneenheden op het adres (zelfde verdeelsleutel als in [§2.9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)).
+
 De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenaantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
 
 | **Energielabel NTA 8800 (afgegeven op of na 1 januari 2021)**    | **Punten per m²** |
