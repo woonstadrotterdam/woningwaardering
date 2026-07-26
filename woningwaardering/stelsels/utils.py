@@ -1105,6 +1105,38 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     return None
 
 
+_VERKEERSRUIMTE_DETAILSOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
+    }
+)
+
+
+def oppervlakte_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    if (
+        ruimte.detail_soort is None
+        or ruimte.detail_soort in _VERKEERSRUIMTE_DETAILSOORTEN
+    ):
+        return Decimal("0")
+    return sum(
+        (
+            Decimal(str(k.oppervlakte))
+            for k in ruimte.verbonden_ruimten or []
+            if k.detail_soort == Ruimtedetailsoort.kast and k.oppervlakte is not None
+        ),
+        start=Decimal("0"),
+    )
+
+
+def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    if ruimte.oppervlakte is None:
+        return Decimal("0")
+    return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
+
+
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     """
     Deze functie voegt de oppervlakte van kasten toe aan een ruimte en retourneert de naam van de ruimte inclusief het aantal kasten.
