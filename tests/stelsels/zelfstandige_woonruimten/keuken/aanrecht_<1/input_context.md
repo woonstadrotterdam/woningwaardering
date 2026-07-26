@@ -7,7 +7,7 @@ Test dat een aanrecht korter dan 1 meter (900 mm) niet voldoet aan de basiseisen
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.2 Punten voor basisvoorzieningen keuken](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#252-punten-voor-basisvoorzieningen-keuken)
-- Beleidsboek (quote): "Minder dan 1 meter" aanrechtblad levert 0 punten op. "Een aanrecht met spoelbak dat korter is dan 1 meter voldoet niet aan de basisvoorzieningen en krijgt daarom géén punten in de rubriek keuken."
+- Beleidsboek (quote): "Een aanrecht met spoelbak dat korter is dan 1 meter voldoet _niet_ aan de basisvoorzieningen en krijgt daarom géén punten in de rubriek keuken."
 
 ## Handmatige berekening
 

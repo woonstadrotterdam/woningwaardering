@@ -8,7 +8,7 @@ Zolder met vlizotrap; minpunten buitenruimten (−5) door ontbrekende privé-bui
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2.3 Zolderruimte zonder vaste trap](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap); [§2.8.6 Minpunten bij geen buitenruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#285-minpunten-bij-geen-enkele-buitenruimte)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vertrek', maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend."
 
 ## Handmatige berekening
 

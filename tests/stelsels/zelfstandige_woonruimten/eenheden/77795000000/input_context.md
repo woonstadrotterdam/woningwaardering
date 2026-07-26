@@ -8,7 +8,7 @@ Nieuwbouwwoning met hoge energieprestatie (41 punten) en veel overige ruimten (2
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.4 Punten voor geldige energieprestaties](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#244-punten-voor-geldige-energieprestaties)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Bij de puntentoekenning voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen)."
 
 ## Handmatige berekening
 

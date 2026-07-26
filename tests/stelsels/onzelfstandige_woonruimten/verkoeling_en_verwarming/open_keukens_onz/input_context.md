@@ -7,7 +7,10 @@ Test dat een open keuken en het aangrenzende vertrek afzonderlijk verwarmingspun
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.3.2 Open keuken in een vertrek of overige ruimte](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#232-open-keuken-in-een-vertrek-of-overige-ruimte)
-- Beleidsboek (quote): "2 punten per verwarmd privévertrek, 1 punt per verwarmde privé overige ruimte (max. 4), en 1 extra punt per verwarmd én verkoeld privévertrek (max. 2)."
+- Beleidsboek (quote):
+  "Zowel de open keuken als het vertrek of overige ruimte waarmee de open verbinding bestaat, wordt voor deze rubriek namelijk individueel gewaardeerd met punten indien deze verwarmd zijn."
+  (...)
+  "Een privé verwarmde woonkamer met open keuken wordt dus gewaardeerd met 4 punten."
 
 ## Handmatige berekening
 

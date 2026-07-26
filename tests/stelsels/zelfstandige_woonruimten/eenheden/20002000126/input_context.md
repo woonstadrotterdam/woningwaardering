@@ -8,7 +8,7 @@ Compacte eenheid met berging als overige ruimte; energielabel F levert minpunten
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.4 Punten voor geldige energieprestaties](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#244-punten-voor-geldige-energieprestaties); [§2.8.6 Minpunten bij geen buitenruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#285-minpunten-bij-geen-enkele-buitenruimte)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Bij de puntentoekenning voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen)."
 
 ## Handmatige berekening
 

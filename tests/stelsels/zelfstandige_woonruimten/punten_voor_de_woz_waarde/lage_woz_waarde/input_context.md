@@ -7,7 +7,7 @@ Test de standaard WOZ-berekening voor een woning met lage WOZ-waarde (€ 79.999
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.11.2 Punten voor de WOZ-waarde](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2112-punten-voor-de-woz-waarde-taxatiewaarde-of-minimum-woz-waarde)
-- Beleidsboek (quote): "1 punt voor iedere € 15.329 van de laatstelijk vastgestelde WOZ-waarde"
+- Beleidsboek (quote): "1 punt voor iedere € 16.954 van de **laatstelijk vastgestelde WOZ-waarde**"
 
 ## Handmatige berekening
 

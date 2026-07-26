@@ -92,11 +92,23 @@ De testbestanden staan naast de cases in dezelfde stelselgroep-map, bijvoorbeeld
 
 ### input_context.md
 
-Elke case-map met `input.json` heeft een `input_context.md` met minimaal `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), bijvoorbeeld:
+Elke case-map met `input.json` heeft een `input_context.md` met minimaal `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), en minstens één **letterlijk** beleidsboekcitaat uit die gelinkte sectie:
 
 ```markdown
 ## Beleidsbron
 - Implementatietoelichting: [§2.6 Rubriek 6: Sanitair](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#26-rubriek-6-sanitair)
+- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal."
 ```
+
+Niet-aaneengesloten stukken uit dezelfde sectie in één blok, met `(...)` als weglating:
+
+```markdown
+- Beleidsboek (quote):
+  "Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:"
+  (...)
+  "Wanneer de totale oppervlakte van het onderdeel vertrekken minder is dan 8 m²."
+```
+
+Elk `"..."`-segment moet letterlijk in de gelinkte sectie voorkomen (in documentvolgorde). Geen parafrases, geen `…` midden in een string, geen `"A" en "B"` op één regel. `tests/test_test_context.py` controleert dit.
 
 Voorbeeld stelselgroep-case: `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/gedeelde_berging/` — een gedeelde berging om specifieke regels in oppervlakte_van_vertrekken te testen.

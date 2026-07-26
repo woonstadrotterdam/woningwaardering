@@ -7,7 +7,7 @@ Test waardering van een spoelbak in een aanrecht korter dan 1 m als wastafel (2.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Punten voor sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Indien een aanrecht met een lengte korter dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak."
 
 ## Handmatige berekening
 

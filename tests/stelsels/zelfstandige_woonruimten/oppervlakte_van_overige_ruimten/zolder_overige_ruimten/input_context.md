@@ -7,7 +7,7 @@ Test waardering van zolders als overige ruimte: alleen zolders met trap of vlizo
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2.3 Zolderruimte zonder vaste trap](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap)
-- Beleidsboek (quote): "Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend."
+- Beleidsboek (quote): "Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vertrek', maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend."
 
 ## Handmatige berekening
 

@@ -7,7 +7,7 @@ Test extra sanitaire voorzieningen in een badruimte met wastafel en bad: basis 7
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.2 Extra sanitaire voorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen)
-- Beleidsboek (quote): "Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaantal punten voor de douche, het bad en/of bad/douche gezamenlijk."
+- Beleidsboek (quote): "Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaal aantal punten voor de douche, het bad en/of bad/douche gezamenlijk."
 
 ## Handmatige berekening
 

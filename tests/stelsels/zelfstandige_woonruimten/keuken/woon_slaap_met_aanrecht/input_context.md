@@ -7,7 +7,7 @@ Test dat een aanrecht (≥ 1000 mm) in diverse vertrektypes als impliciete keuke
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.2 Punten voor basisvoorzieningen keuken](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#252-punten-voor-basisvoorzieningen-keuken)
-- Beleidsboek (quote): "Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken" (zie ook [§2.3.2](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#232-open-keuken-in-een-vertrek-of-overige-ruimte) voor verwarming/verkoeling).
+- Beleidsboek (quote): "Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad, volgens de onderstaande tabel:"
 
 ## Handmatige berekening
 

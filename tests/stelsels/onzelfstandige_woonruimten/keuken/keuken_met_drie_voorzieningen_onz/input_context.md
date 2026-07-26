@@ -7,7 +7,7 @@ Test dat keukenvoorzieningen buiten de keukenruimte niet meetellen voor extra pu
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.3 Punten voor extra voorzieningen keuken](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#253-punten-voor-extra-voorzieningen-keuken)
-- Beleidsboek (quote): "Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad; de punten worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen."
 
 ## Handmatige berekening
 

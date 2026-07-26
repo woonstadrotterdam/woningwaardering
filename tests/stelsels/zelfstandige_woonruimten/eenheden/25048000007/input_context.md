@@ -8,7 +8,7 @@ De VERA-export bevat geen sanitaire bouwkundige elementen; rubriek sanitair leve
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Punten voor sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte én binnen de woonruimte ligt."
 
 ## Handmatige berekening
 

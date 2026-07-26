@@ -7,4 +7,4 @@ Test dat een energielabel zonder `code` (alleen `naam`) niet als geldige energie
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.3 Energieprestaties die niet geldig zijn](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#243-energieprestaties-die-_niet_-geldig-zijn-voor-de-woningwaardering)
-- Beleidsboek (quote): "Energieprestaties die niet geldig zijn voor de woningwaardering."
+- Beleidsboek (quote): "Staat er enkel een energie-index zonder die toevoeging, dan worden hier geen punten voor toegekend."

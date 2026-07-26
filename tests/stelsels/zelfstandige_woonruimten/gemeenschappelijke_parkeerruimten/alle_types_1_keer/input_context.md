@@ -9,7 +9,10 @@ Verwacht totaal: **2 punten** (0,9 + 0,6 + 0,4 na afronding per rubriek).
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.10.3 Punten per soort parkeerplek](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2103-punten-per-soort-parkeerplek), [§2.10.4 Rekenmethode](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2104-rekenmethode)
-- Beleidsboek (quote): "Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang en gebruiksrecht heeft."
+- Beleidsboek (quote):
+  "Type I: een parkeerplek in een afgesloten parkeergarage behorende tot een complex"
+  (...)
+  "Type III: een parkeerplek buiten behorende tot het complex of de woning zonder dak"
 
 ## Handmatige berekening
 

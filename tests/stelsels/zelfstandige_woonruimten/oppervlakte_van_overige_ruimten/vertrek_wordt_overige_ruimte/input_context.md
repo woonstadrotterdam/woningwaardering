@@ -7,7 +7,7 @@ Test dat een vertrek (`Ruimtesoort.vertrek`) met oppervlakte tussen 2 en 4 m² (
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2.2 De voorwaarden van een overige ruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2222-de-voorwaarden-van-een-overige-ruimte)
-- Beleidsboek (quote): "Een ruimte met Ruimtesoort vertrek komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is."
+- Beleidsboek (quote): "Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is."
 
 ## Handmatige berekening
 

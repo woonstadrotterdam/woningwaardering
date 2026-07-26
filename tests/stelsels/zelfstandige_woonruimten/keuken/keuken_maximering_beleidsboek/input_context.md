@@ -7,7 +7,7 @@ Test het beleidsboekvoorbeeld voor maximering van extra keukenvoorzieningen: aan
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.3 Punten voor extra voorzieningen keuken](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#253-punten-voor-extra-voorzieningen-keuken)
-- Beleidsboek (quote): "Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (die aanrechtlengte)."
+- Beleidsboek (quote): "Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte)."
 
 ## Handmatige berekening
 

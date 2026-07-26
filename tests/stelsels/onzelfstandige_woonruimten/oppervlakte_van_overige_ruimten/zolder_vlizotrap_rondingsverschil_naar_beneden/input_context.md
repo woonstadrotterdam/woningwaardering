@@ -7,7 +7,8 @@ Test afronding van het totaaloppervlak naar beneden bij een zoldercorrectie: ber
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2.1 Rekenregels overige ruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2221-rekenregels-vertrekken) en [§2.2.2.3 Zolderruimte zonder vaste trap](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap)
-- Beleidsboek (quote): "Als het getal op minder dan 0,50 m² eindigt: rond af naar beneden."
+- Beleidsboek (quote):
+  "Als het getal eindigt op 0,49 m² of lager wordt naar beneden afgerond. Bijvoorbeeld: 15,43 m² wordt 15 m²."
 
 ## Handmatige berekening
 

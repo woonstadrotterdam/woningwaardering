@@ -7,7 +7,8 @@ Test waardering van gedeelde overige ruimten met verschillende verdeelsleutels p
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2 Overige ruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#222-overige-ruimten)
-- Beleidsboek (quote): "Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter; een zolderruimte zonder vaste trap leidt tot een correctie van maximaal 5 punten."
+- Beleidsboek (quote):
+  "0,75 punt per m² per gemeenschappelijke overige ruimte / onzelfstandige woonruimten met toegang en gebruiksrecht"
 
 ## Handmatige berekening
 

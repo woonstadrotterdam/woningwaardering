@@ -9,7 +9,7 @@ De eenheid bevat veel ingebouwde kasten die met het vertrek moeten worden meeger
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.1.4 Aangrenzende ruimten met een open doorgang](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2214-aangrenzende-ruimten-met-een-open-doorgang); [§2.4.5 Punten zonder geldig energielabel](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#245-punten-energieprestatie-zonder-geldig-energielabel-of-energie-index)
-- Beleidsboek (quote): "Aangrenzende ruimten met een open doorgang worden als één vertrek gewaardeerd."
+- Beleidsboek (quote): "Het kan voorkomen dat twee vertrekken (of overige ruimten) die met elkaar in verbinding staan, als één vertrek (of overige ruimte) gewaardeerd moeten worden."
 
 ## Handmatige berekening
 

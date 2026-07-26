@@ -7,7 +7,7 @@ Test waardering van uitzondering op wastafelmaximering bij 8+ onzelfstandige woo
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Punten voor sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Bij een adres met 8 of meer onzelfstandige woonruimten geldt een uitzonderingsregel: bij 1 ander vertrek (dan de badkamer) of overige ruimte is het maximum van 1 (meerpersoons) wastafel niet van toepassing. Er kunnen in dat geval méér wastafels worden gewaardeerd."
 
 ## Handmatige berekening
 

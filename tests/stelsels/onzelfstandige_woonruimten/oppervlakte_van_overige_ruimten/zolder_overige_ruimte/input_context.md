@@ -7,7 +7,8 @@ Test waardering van een zolder als overige ruimte met vlizotrap en zonder-vaste-
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2 Overige ruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#222-overige-ruimten)
-- Beleidsboek (quote): "Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter; een zolderruimte zonder vaste trap leidt tot een correctie van maximaal 5 punten."
+- Beleidsboek (quote):
+  "Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘vertrek’, maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend."
 
 ## Handmatige berekening
 

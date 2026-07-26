@@ -8,7 +8,7 @@ Uitgebreide woning (25 ruimten) met zolder (vaste trap), dakterras en drie badru
 ## Beleidsbron
 
 - Implementatietoelichting: [Hoofdstuk 2 – Het woningwaarderingsstelsel](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#hoofdstuk-2---het-woningwaarderingsstelsel-voor-een-zelfstandige-woning)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "De waardering vindt plaats per thema of categorie, de zogenoemde rubrieken. Er zijn 12 rubrieken."
 
 ## Handmatige berekening
 

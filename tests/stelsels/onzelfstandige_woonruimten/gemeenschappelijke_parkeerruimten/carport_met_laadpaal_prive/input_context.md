@@ -7,7 +7,7 @@ Test waardering van een carport (type II) met laadpaal die privé is (`gedeeldMe
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.10.5 Laadpalen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2105-laadpalen)
-- Beleidsboek (quote): "Gemeenschappelijke parkeerruimten worden gewaardeerd per type parkeerplek."
+- Beleidsboek (quote): "Als de parkeerplek beschikt over een laadpaal voor elektrisch rijden, die exclusief is voor gebruik door bewoners, dan worden 2 extra punten toegekend, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft."
 
 ## Handmatige berekening
 

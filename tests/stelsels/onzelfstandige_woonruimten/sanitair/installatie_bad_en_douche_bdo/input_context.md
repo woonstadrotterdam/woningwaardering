@@ -7,7 +7,7 @@ Test waardering van een installatie die zowel bad als douche is (BDO) (6 punten 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.2 Punten voor extra sanitaire voorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Maar het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaantal punten voor de douche, het bad en/of bad/douche gezamenlijk."
 
 ## Handmatige berekening
 

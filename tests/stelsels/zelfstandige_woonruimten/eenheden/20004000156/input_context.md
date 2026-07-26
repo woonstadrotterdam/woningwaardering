@@ -8,7 +8,7 @@ Rijksmonument met prijsopslag monumenten (50 punten); drie balkons en een vide.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.13.3 Rijksmonumenten](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2134-rijksmonumenten)
-- Beleidsboek (quote): "Voor een rijksmonument wordt een opslag van 35 procent op de maximale huurprijs toegekend."
+- Beleidsboek (quote): "als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 50 punten extra toegekend."
 
 ## Handmatige berekening
 

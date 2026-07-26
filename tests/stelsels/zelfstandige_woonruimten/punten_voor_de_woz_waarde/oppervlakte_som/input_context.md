@@ -7,7 +7,10 @@ Test dat voor onderdeel II de som van vertrekken en overige ruimten wordt afgero
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.11.2 Punten voor de WOZ-waarde](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2112-punten-voor-de-woz-waarde-taxatiewaarde-of-minimum-woz-waarde)
-- Beleidsboek (quote): "Bereken eerst het aantal m² van de vertrekken (rubriek 1), overige ruimtes (rubriek 2) en parkeerplekken type I (rubriek 10). Rond hierna de oppervlakte af op hele vierkante meters."
+- Beleidsboek (quote):
+  "Bereken eerst het aantal m² van de vertrekken (rubriek 1), overige ruimtes (rubriek 2) en parkeerplekken type I (rubriek 10)."
+  (...)
+  "Rond hierna de oppervlakte af op hele vierkante meters."
 
 ## Handmatige berekening
 

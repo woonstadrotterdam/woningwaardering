@@ -6,8 +6,11 @@ Test dat een keuken die gedeeld is met vier adressen (`gedeeldMetAantalAdressen:
 
 ## Beleidsbron
 
-- Implementatietoelichting: [§2.5 Rubriek 5: Keuken](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#25-rubriek-5-keuken)
-- Beleidsboek (quote): gemeenschappelijke (spoel)keukens worden in rubriek 9 gewaardeerd, niet in rubriek 5.
+- Implementatietoelichting: [§2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#292-punten-voor-voorzieningen-in-gemeenschappelijke-ruimten)
+- Beleidsboek (quote):
+  "Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel."
+  (...)
+  "Het puntenaantal moet vervolgens per rubriek worden gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft tot de ruimte."
 
 ## Handmatige berekening
 

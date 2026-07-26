@@ -8,4 +8,5 @@ De code waardeert extra sanitaire voorzieningen alleen als er een wastafel in de
 
 ## Beleidsbron
 
-- Implementatietoelichting: [§2.6](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md) (rond regel 971-972).
+- Implementatietoelichting: [§2.6.2 Extra sanitaire voorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen)
+- Beleidsboek (quote): "Voor de sanitaire basisvoorzieningen worden dus in totaal 11 punten toegekend (7 + 4)."

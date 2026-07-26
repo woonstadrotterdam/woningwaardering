@@ -7,7 +7,10 @@ Test de afwijkende WOZ-berekening voor een kleine nieuwbouwwoning (38 m²) in CO
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.11.6 Kleine nieuwbouw COROP Utrecht/Amsterdam](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2116-uitzonderingsregel-waardering-kleine-nieuwbouwwoningen-in-corop-gebied-utrechtamsterdam-opgeleverd-tussen-2018---2022)
-- Beleidsboek (quote): "de woning is kleiner dan 40 m² en, de woning ligt in de COROP-gebieden Amsterdam en Utrecht"
+- Beleidsboek (quote):
+  "de woning is kleiner dan 40 m² en,"
+  (...)
+  "de woning ligt in de COROP-gebieden Amsterdam of Utrecht"
 
 ## Handmatige berekening
 

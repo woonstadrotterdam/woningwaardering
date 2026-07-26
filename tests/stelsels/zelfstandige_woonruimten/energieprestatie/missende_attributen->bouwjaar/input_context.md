@@ -9,7 +9,7 @@ De input bevat een meergezinswoning (bouwjaar 1921) met een energieprestatie zon
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.5 Punten energieprestatie zonder geldig energielabel of energie-index](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#245-punten-energieprestatie-zonder-geldig-energielabel-of-energie-index)
-- Beleidsboek (quote): "Als een woonruimte geen (geldig) energielabel of energie-index heeft bepaalt het bouwjaar van de woning het aantal punten voor de energieprestatie."
+- Beleidsboek (quote): "Als een woonruimte geen (geldig) energielabel of energie-index heeft, bepaalt het bouwjaar van de woning het aantal punten voor de energieprestatie."
 
 ## Handmatige berekening
 

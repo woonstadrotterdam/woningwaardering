@@ -7,4 +7,7 @@ Test dat een keuken altijd als vertrek wordt gewaardeerd, ook wanneer deze als o
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.1 Vertrekken](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#221-vertrekken)
-- Beleidsboek (quote): "Een vertrek wordt gewaardeerd met 1 punt per vierkante meter; een gemeenschappelijk vertrek met 1 punt per m² gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote):
+  "een ruimte die uitsluitend als keuken, badkamer of doucheruimte is bestemd altijd een vertrek is."
+  (...)
+  "Een vertrek wordt gewaardeerd met 1 punt per vierkante meter."

@@ -7,7 +7,7 @@ Test dat rijksmonument en beschermd stadsgezicht niet cumulatief worden toegepas
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.14.3 Rijksmonumenten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2144-rijksmonumenten)
-- Beleidsboek (quote): "Bovenop de maximale huurprijs op basis van punten kan een opslag worden toegepast voor monumenten en beschermde stads- of dorpsgezichten."
+- Beleidsboek (quote): "Sommige woningen zijn geheel of ten dele onderdeel van een Rijksmonument."
 
 ## Opmerkingen
 

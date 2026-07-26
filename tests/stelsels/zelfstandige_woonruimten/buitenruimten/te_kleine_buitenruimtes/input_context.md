@@ -9,7 +9,7 @@ De input bevat drie balkons gedeeld met 2 adressen: één te kort, één te smal
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.8.2 Punten voor een gemeenschappelijke buitenruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#282-punten-voor-een-gemeenschappelijke-buitenruimte)
-- Beleidsboek (quote): "Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal voorwaarden voldoen, namelijk: er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50 meter, 1,50 meter (hoogte, breedte, diepte), en …"
+- Beleidsboek (quote): "er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50 meter, 1,50 meter (hoogte, breedte, diepte), en,"
 
 ## Opmerkingen
 

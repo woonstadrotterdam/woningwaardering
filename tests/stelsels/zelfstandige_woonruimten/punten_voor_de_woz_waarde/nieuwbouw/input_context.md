@@ -7,7 +7,7 @@ Test de uitzonderingsregel voor nieuwbouw (bouwjaar 2016, ≥ 110 punten in rubr
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.11.5 Uitzondering nieuwbouw 2015–2019](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2115-uitzondering-waardering-nieuwbouwwoningen-opgeleverd-tussen-2015---2019)
-- Beleidsboek (quote): "Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering van 40 punten voor de WOZ-waarde."
+- Beleidsboek (quote): "Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering van 40 punten voor de WOZ-waarde:"
 
 ## Handmatige berekening
 

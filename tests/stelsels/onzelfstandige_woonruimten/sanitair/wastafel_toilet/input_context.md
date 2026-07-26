@@ -7,7 +7,7 @@ Test waardering van een wastafel in de toiletruimte (2.5 punten totaal).
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Punten voor sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "| Wastafel in vertrek/overige ruimte | Maximaal 1 per vertrek of overige ruimte\* |"
 
 ## Handmatige berekening
 

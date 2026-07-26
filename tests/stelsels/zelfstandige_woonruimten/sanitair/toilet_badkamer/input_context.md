@@ -7,4 +7,6 @@ Test lagere puntentoekenning voor toiletten in de badkamer: hangend 2,75 + staan
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Hangend toilet in een badkamer — 2,75 punten" en "Toilet (staand) in een badkamer — 2 punten"
+- Beleidsboek (quote):
+  "Toilet (staand) in een badkamer | 2"
+  "Hangend toilet in een badkamer | 2,75"

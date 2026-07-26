@@ -7,7 +7,8 @@ Test afronding van totaaloppervlakte omhoog bij combinatie berging + zolder met 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2 Overige ruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#222-overige-ruimten)
-- Beleidsboek (quote): "Overige ruimten worden gewaardeerd met 0,75 punt per vierkante meter; een zolderruimte zonder vaste trap leidt tot een correctie van maximaal 5 punten."
+- Beleidsboek (quote):
+  "Bij een getal dat eindigt op 0,50 m² wordt afgerond omhoog. Bijvoorbeeld: 28,51 m² wordt 29 m²"
 
 ## Handmatige berekening
 

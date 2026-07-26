@@ -7,7 +7,9 @@ Test combinatie van drempelloze inrijdouche met bad: bad/douche (7) plus apart b
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Bad — 6 punten" en "Bad/douche — 7 punten"
+- Beleidsboek (quote):
+  "Bad | 6"
+  "Bad/douche | 7"
 
 ## Handmatige berekening
 

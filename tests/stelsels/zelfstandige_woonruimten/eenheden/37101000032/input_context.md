@@ -8,7 +8,7 @@ Grote eenheid (33 ruimten) met meer dan 250 punten; triggert aparte berekening b
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.1.6 Aparte berekening bij meer dan 250 punten](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#216-algemene-rekenregel-aparte-berekening-bij-meer-dan-250-punten)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Bij een woonruimte met méér dan 250 punten wordt de maximale huurprijs als volgt berekend:"
 
 ## Handmatige berekening
 

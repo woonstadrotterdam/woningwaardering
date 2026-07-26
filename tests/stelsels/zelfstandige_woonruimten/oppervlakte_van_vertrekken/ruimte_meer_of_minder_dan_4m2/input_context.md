@@ -7,7 +7,10 @@ Test de grens van 4 m² voor reguliere vertrekken versus uitzonderingen: keuken 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.1.2 De voorwaarden van een vertrek](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2212-de-voorwaarden-van-een-vertrek)
-- Beleidsboek (quote): "minimaal 4,00 m² groot zijn" en "een ruimte die uitsluitend als keuken, badkamer of doucheruimte is bestemd altijd een vertrek is."
+- Beleidsboek (quote):
+  "Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de volgende eisen:"
+  (...)
+  "minimaal 4,00 m² groot zijn (een oppervlakte van 3,50 m² of 3,95 m² is onvoldoende);"
 
 ## Handmatige berekening
 

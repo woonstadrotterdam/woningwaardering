@@ -7,7 +7,7 @@ Test waardering van extra sanitaire voorzieningen in de badruimte (13 punten tot
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.2 Punten voor extra sanitaire voorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Maar het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaalaantal punten voor de douche, het bad en/of bad/douche gezamenlijk. Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt."
 
 ## Handmatige berekening
 

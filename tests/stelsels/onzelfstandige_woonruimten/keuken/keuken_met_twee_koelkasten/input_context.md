@@ -7,7 +7,7 @@ Test waardering van twee inbouwkoelkasten in de keuken.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.3 Punten voor extra voorzieningen keuken](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#253-punten-voor-extra-voorzieningen-keuken)
-- Beleidsboek (quote): "Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad; de punten worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Inbouw koelkast" levert 1 punt per stuk op.
 
 ## Handmatige berekening
 

@@ -7,7 +7,7 @@ Test dat aanrechten in woon- en slaapvertrekken (open keuken) afzonderlijk worde
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.3.2 Open keuken in een vertrek of overige ruimte](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#232-open-keuken-in-een-vertrek-of-overige-ruimte)
-- Beleidsboek (quote): "Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad; de punten worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek."
 
 ## Handmatige berekening
 

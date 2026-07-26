@@ -9,7 +9,10 @@ Verwacht totaal: **2,75 punten** (1,5 + 1,25).
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)
-- Beleidsboek (quote): "Een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter. … het puntenaantal per ruimte moet worden gedeeld door het aantal adressen dat exclusieve toegang en gebruiksrecht heeft."
+- Beleidsboek (quote):
+  "Een vertrek krijgt 1 punt per vierkante meter en een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter."
+  (...)
+  "het puntenaantal per ruimte moet worden gedeeld door het aantal adressen dat exclusieve toegang en gebruiksrecht heeft."
 
 ## Handmatige berekening
 

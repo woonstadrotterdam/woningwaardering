@@ -7,7 +7,9 @@ Test dat in de badkamer geen maximum geldt voor wastafels: 2 wastafels (2 × 1) 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Wastafel in badkamer — 1 per wastafel" en "Meerpersoonswastafel in badkamer — 1,50 per meerpersoonswastafel"
+- Beleidsboek (quote):
+  "Wastafel in badkamer | 1 per wastafel"
+  "Meerpersoonswastafel in badkamer | 1,50 per meerpersoonswastafel"
 
 ## Handmatige berekening
 

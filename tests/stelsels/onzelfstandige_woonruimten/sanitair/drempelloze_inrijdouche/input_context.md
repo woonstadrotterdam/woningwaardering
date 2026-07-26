@@ -7,7 +7,7 @@ Test waardering van een drempelloze inrijdouche als extra voorziening (3 punten 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.2 Punten voor extra sanitaire voorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen)
-- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal; gemeenschappelijke voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Het is mogelijk om extra punten te krijgen voor sanitaire voorzieningen die zich bevinden in een bad- of doucheruimte."
 
 ## Handmatige berekening
 

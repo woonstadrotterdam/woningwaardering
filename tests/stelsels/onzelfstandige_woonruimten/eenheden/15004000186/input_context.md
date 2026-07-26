@@ -9,7 +9,10 @@ Verwacht wordt **26 punten** totaal en een maximale huur van **€ 264,95**.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.13 Rubriek 13: Aftrekpunten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#213-rubriek-13-aftrekpunten)
-- Beleidsboek (quote): "Een aftrek van 4 punten wordt toegepast wanneer de totale oppervlakte van het onderdeel vertrekken minder is dan 8 m²."
+- Beleidsboek (quote):
+  "Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:"
+  (...)
+  "Wanneer de totale oppervlakte van het onderdeel vertrekken (rubriek 1) minder is dan 8 m²."
 - Implementatietoelichting: [Hoofdstuk 2 – Het woningwaarderingsstelsel voor een onzelfstandige woning](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#hoofdstuk-2-het-woningwaarderingsstelsel-voor-een-onzelfstandige-woning)
 
 ## Opmerkingen

@@ -8,7 +8,7 @@ Geen energieprestatie in de VERA-export (punten via bouwjaar 1898, −15); rubri
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.5 Punten zonder geldig energielabel](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#245-punten-energieprestatie-zonder-geldig-energielabel-of-energie-index)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Als een woonruimte geen (geldig) energielabel of energie-index heeft, bepaalt het bouwjaar van de woning het aantal punten voor de energieprestatie."
 
 ## Handmatige berekening
 

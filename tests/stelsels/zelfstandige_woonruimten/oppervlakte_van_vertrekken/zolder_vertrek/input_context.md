@@ -7,7 +7,7 @@ Test welke zolderruimten als vertrek meetellen: alleen een zolder ingeschoten al
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.1.3 Zolderruimte als vertrek](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2213-zolderruimte-als-vertrek)
-- Beleidsboek (quote): "Om een zolderruimte als vertrek te kunnen aanmerken moet deze bereikbaar zijn via een vaste trap."
+- Beleidsboek (quote): "de zolderruimte moet bereikbaar zijn via een vaste trap en"
 
 ## Handmatige berekening
 

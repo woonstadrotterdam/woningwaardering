@@ -8,4 +8,7 @@ Test dat de WOZ-cap niet wordt toegepast bij een kleine nieuwbouwwoning (< 40 m�
 
 - Implementatietoelichting: [§2.11.6 Kleine nieuwbouw COROP Utrecht/Amsterdam](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2116-uitzonderingsregel-waardering-kleine-nieuwbouwwoningen-in-corop-gebied-utrechtamsterdam-opgeleverd-tussen-2018---2022)
 - Implementatietoelichting: [§2.11.7 Uitzonderingen op de WOZ-cap](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2117-de-uitzonderingen-op-de-woz-cap)
-- Beleidsboek (quote): "als sprake is van een kleine nieuwbouwwoning (kleiner dan 40 m²) en, die is gelegen in COROP-regio's Amsterdam en Utrecht en, die is opgeleverd in de jaren 2018-2022"
+- Beleidsboek (quote):
+  "de woning is kleiner dan 40 m² en,"
+  (...)
+  "de woning ligt in de COROP-gebieden Amsterdam of Utrecht"

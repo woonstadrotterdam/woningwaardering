@@ -7,7 +7,7 @@ Rekenvoorbeeld uit het beleidsboek: combinatie van privé-buitenruimten met verw
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.8 Rubriek 8: Buitenruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#28-rubriek-8-buitenruimten)
-- Beleidsboek (quote): "Buitenruimten worden gewaardeerd op basis van oppervlakte en type."
+- Beleidsboek (quote): "Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend en vervolgens per vierkante meter 0,35 punt."
 
 ## Handmatige berekening
 

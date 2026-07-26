@@ -8,7 +8,7 @@ Oudere eengezinswoning met hoge energieprestatiepunten (52) in de output.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.4.4 Punten voor geldige energieprestaties](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#244-punten-voor-geldige-energieprestaties)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Bij de puntentoekenning voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen)."
 
 ## Handmatige berekening
 

@@ -7,7 +7,8 @@ Test extra verkoelingspunt (1) bovenop verwarmingspunten (2) voor een vertrek da
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.3.3 Extra punten bij verkoelingsfunctie](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#233-extra-punten-bij-verkoelingsfunctie)
-- Beleidsboek (quote): "2 punten per verwarmd privévertrek, 1 punt per verwarmde privé overige ruimte (max. 4), en 1 extra punt per verwarmd én verkoeld privévertrek (max. 2)."
+- Beleidsboek (quote):
+  "**Alleen vertrekken** komen in aanmerking voor een waardering door een verkoelingsfunctie. Er kan 1 punt worden behaald per vertrek tot een maximum van 2 punten."
 
 ## Handmatige berekening
 

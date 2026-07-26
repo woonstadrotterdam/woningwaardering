@@ -7,7 +7,7 @@ Test de minimale oppervlakte van 2 m² voor overige ruimten: een toiletruimte va
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.2.2 De voorwaarden van een overige ruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2222-de-voorwaarden-van-een-overige-ruimte)
-- Beleidsboek (quote): "De ruimte moet een minimale oppervlakte van 2,00 m² hebben (1,95 m² voldoet hier dus niet aan)."
+- Beleidsboek (quote): "De ruimte moet een minimale oppervlakte van 2,00 m² hebben (1,95 m² voldoet hier dus niet aan);"
 
 ## Handmatige berekening
 

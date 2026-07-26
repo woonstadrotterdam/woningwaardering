@@ -7,7 +7,10 @@ Test dat een woning in een rijksbeschermd stadsgezicht met bouwjaar 1964 (vóór
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.13.5 Beschermd dorps- en stadsgezicht](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2136-beschermd-dorps--en-stadsgezicht)
-- Beleidsboek (quote): "+ 5% op de maximale huurprijs" en "de woonruimte behoort tot een woning die is gebouwd vóór 1965."
+- Beleidsboek (quote):
+  "+ 5% op de maximale huurprijs"
+  (...)
+  "de woonruimte behoort tot een woning die is gebouwd vóór 1965; en"
 
 ## Handmatige berekening
 

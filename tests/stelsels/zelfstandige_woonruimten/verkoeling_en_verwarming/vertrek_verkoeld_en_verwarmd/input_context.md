@@ -7,7 +7,10 @@ Test dat een verwarmd én verkoeld vertrek punten krijgt voor beide functies: 2 
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.3.1 Verwarmde ruimtes](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#231-punten-voor-verwarmde-ruimtes), [§2.3.3 Verkoelingsfunctie](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#233-extra-punten-bij-verkoelingsfunctie)
-- Beleidsboek (quote): "2 punten per verwarmd vertrek" en "1 punt per verwarmd én verkoeld vertrek (tot maximaal 2 punten)"
+- Beleidsboek (quote):
+  "Punten voor verwarming en verkoeling in een vertrek, overige ruimte of verkeersruimte worden alleen toegekend als de verwarming (of de voorziening met zowel een verwarmingsfunctie als verkoelingsfunctie) tot de woning behoort"
+  (...)
+  "Dit is het geval bij radiatoren als deze zijn bevestigd aan de muur of in de grond."
 
 ## Handmatige berekening
 

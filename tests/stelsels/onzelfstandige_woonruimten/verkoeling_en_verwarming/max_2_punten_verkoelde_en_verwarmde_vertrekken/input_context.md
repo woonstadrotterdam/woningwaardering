@@ -7,7 +7,10 @@ Test maximering van 2 punten voor verkoelde én verwarmde vertrekken.
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.3 Rubriek 3: Verwarming en verkoeling](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#23-rubriek-3-verwarming-en-verkoeling)
-- Beleidsboek (quote): "2 punten per verwarmd privévertrek, 1 punt per verwarmde privé overige ruimte (max. 4), en 1 extra punt per verwarmd én verkoeld privévertrek (max. 2)."
+- Beleidsboek (quote):
+  "2 punten per verwarmd privévertrek"
+  "1 punt per verwarmde privé overige ruimte of privé verkeersruimte (tot maximaal 4 punten)"
+  "1 punt extra per verwarmd én verkoeld privévertrek (tot maximaal 2 punten)"
 
 ## Handmatige berekening
 

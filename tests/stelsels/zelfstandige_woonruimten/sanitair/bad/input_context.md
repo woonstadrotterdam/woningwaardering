@@ -7,7 +7,7 @@ Test dat een bad in de badkamer als sanitaire basisvoorziening **6 punten** ople
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Bad — 6 punten"
+- Beleidsboek (quote): "Bad | 6"
 
 ## Handmatige berekening
 

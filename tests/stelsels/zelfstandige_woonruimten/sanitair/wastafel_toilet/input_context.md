@@ -7,7 +7,7 @@ Test maximering van wastafels in een toiletruimte: 2 wastafels en 2 meerpersoons
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
-- Beleidsboek (quote): "Wastafel in vertrek/overige ruimte — Maximaal 1 per vertrek of overige ruimte"
+- Beleidsboek (quote): "Wastafel in vertrek/overige ruimte | Maximaal 1 per vertrek of overige ruimte"
 
 ## Handmatige berekening
 

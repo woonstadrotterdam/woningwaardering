@@ -7,4 +7,4 @@ Test dat een aanrecht korter dan 1 meter geen punten krijgt (basisvoorziening ni
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.5.2 Punten voor basisvoorzieningen keuken](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#252-punten-voor-basisvoorzieningen-keuken)
-- Beleidsboek (quote): "Het aantal punten hangt af van de lengte van het waterdichte aanrechtblad; de punten worden gedeeld door het aantal onzelfstandige woonruimten met toegang en gebruiksrecht."
+- Beleidsboek (quote): "Een aanrecht met spoelbak dat korter is dan 1 meter voldoet niet aan de basisvoorzieningen en krijgt daarom géén punten in de rubriek keuken."

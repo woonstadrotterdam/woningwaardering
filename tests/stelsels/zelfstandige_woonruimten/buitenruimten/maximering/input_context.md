@@ -9,7 +9,7 @@ De input bevat een privétuin (30 m²) en een balkon (15 m²). Het ongecappeerde
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.8.1 Punten voor privé-buitenruimte](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#281-punten-voor-privé-buitenruimte), [§2.8.8 Rekenmethode](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#287-rekenmethode)
-- Beleidsboek (quote): "Voor de aanwezigheid van een privé-buitenruimte worden 2 punten toegekend en vervolgens per vierkante meter 0,35 punt. … In totaal kan maximaal 15 punten worden toegekend."
+- Beleidsboek (quote): "Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend en vervolgens per vierkante meter 0,35 punt."
 
 ## Handmatige berekening
 

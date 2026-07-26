@@ -7,7 +7,7 @@ Test dat een eenheid zonder monumentstatus geen prijsopslag krijgt: lege of ontb
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.13 Opslagen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#213-opslagen)
-- Beleidsboek (quote): opslagen gelden alleen wanneer aan de voorwaarden per soort monument of nieuwbouw is voldaan.
+- Beleidsboek (quote): "Het is onvoldoende om alleen te vermelden dat de woning om een van bovenstaande redenen in aanmerking dient te komen voor een opslag."
 
 ## Handmatige berekening
 

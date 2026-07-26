@@ -8,7 +8,7 @@ Vijf ingebouwde kasten en negatieve energieprestatiepunten (label/index).
 ## Beleidsbron
 
 - Implementatietoelichting: [§2.2.1.4 Aangrenzende ruimten met een open doorgang](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2214-aangrenzende-ruimten-met-een-open-doorgang)
-- Beleidsboek (quote): "Integratietest over alle rubrieken; geen enkele paragraaf."
+- Beleidsboek (quote): "Het kan voorkomen dat twee vertrekken (of overige ruimten) die met elkaar in verbinding staan, als één vertrek (of overige ruimte) gewaardeerd moeten worden."
 
 ## Handmatige berekening
 
