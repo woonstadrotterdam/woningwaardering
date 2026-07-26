@@ -122,15 +122,14 @@ def assert_output_model(
 
 
 def laad_specifiek_input_en_output_model(
-    module_path: Path,
-    output_json_path: Path,
+    case_dir: Path,
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    file_name = output_json_path.name
-    input_path = module_path / f"input/{file_name}"
+    input_path = case_dir / "input.json"
+    output_path = case_dir / "output.json"
     with open(input_path, "r+") as f:
         eenheid_input = EenhedenEenheid.model_validate_json(f.read())
 
-    with open(output_json_path, "r+") as f:
+    with open(output_path, "r+") as f:
         eenheid_output = (
             WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
                 f.read()
@@ -253,13 +252,13 @@ def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fix
         pytest.fixture: Een pytest fixture die een tuple van input en output model retourneert
     """
 
-    @pytest.fixture(params=[str(p) for p in (base_path / "output").rglob("*.json")])
+    case_dirs = [
+        p.parent for p in base_path.glob("*/input.json") if p.parent.name != "eenheden"
+    ]
+
+    @pytest.fixture(params=[str(p) for p in case_dirs])
     def specifieke_input_en_output_model(request):
-        current_file_path = Path(request.fspath).parent
-        output_file_path = request.param
-        return laad_specifiek_input_en_output_model(
-            current_file_path, Path(output_file_path)
-        )
+        return laad_specifiek_input_en_output_model(Path(request.param))
 
     return specifieke_input_en_output_model
 

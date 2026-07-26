@@ -1,0 +1,25 @@
+{
+  "id": "warning_geen_pandsoort",
+  "bouwjaar": 1990,
+  "monumenten": [],
+  "panden": [],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2021-03-27",
+      "einddatum": "2031-03-27",
+      "label": {
+        "code": "C",
+        "naam": "C"
+      },
+      "waarde": "170"
+    }
+  ]
+}

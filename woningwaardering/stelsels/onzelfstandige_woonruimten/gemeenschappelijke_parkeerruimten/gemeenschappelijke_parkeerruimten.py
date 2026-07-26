@@ -66,5 +66,5 @@ if __name__ == "__main__":  # pragma: no cover
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer(
-            "tests/data/onzelfstandige_woonruimten/stelselgroepen/gemeenschappelijke_parkeerruimten/input/voorbeeld_beleidsboek.json"
+            "tests/stelsels/onzelfstandige_woonruimten/gemeenschappelijke_parkeerruimten/voorbeeld_beleidsboek/input.json"
         )

@@ -100,5 +100,5 @@ if __name__ == "__main__":  # pragma: no cover
         log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
     ) as context:
         context.waardeer(
-            "tests/data/onzelfstandige_woonruimten/stelselgroepen/verkoeling_en_verwarming/input/vertrek_verkoeld_en_verwarmd_onz.json"
+            "tests/stelsels/onzelfstandige_woonruimten/verkoeling_en_verwarming/vertrek_verkoeld_en_verwarmd_onz/input.json"
         )

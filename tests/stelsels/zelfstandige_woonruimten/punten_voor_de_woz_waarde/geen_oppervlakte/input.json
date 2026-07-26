@@ -1,0 +1,25 @@
+{
+  "id": "geen_oppervlakte",
+  "bouwjaar": 1990,
+  "panden": [
+    {
+      "soort": {
+        "code": "MGW",
+        "naam": "Meergezinswoning"
+      }
+    }
+  ],
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 200000
+    },
+    {
+      "waardepeildatum": "2025-01-01",
+      "vastgesteldeWaarde": 220000
+    }
+  ],
+  "energieprestaties": [],
+  "monumenten": [],
+  "ruimten": []
+}

@@ -31,7 +31,7 @@ wws = Woningwaardering(
     peildatum=date(2026, 7, 1)  # bij niet meegeven wordt de huidige dag gebruikt.
 )
 with open(
-    "tests/data/generiek/input/37101000032.json",
+    "tests/stelsels/zelfstandige_woonruimten/eenheden/37101000032/input.json",
     "r+",
 ) as file:
     eenheid = EenhedenEenheid.model_validate_json(file.read())

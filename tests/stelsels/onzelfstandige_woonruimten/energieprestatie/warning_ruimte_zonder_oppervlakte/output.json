@@ -1,0 +1,31 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 0.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 0.0,
+          "criterium": {
+            "id": "energieprestatie__bouwjaar",
+            "naam": "Bouwjaar 1998",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 0.0
+        }
+      ]
+    }
+  ]
+}

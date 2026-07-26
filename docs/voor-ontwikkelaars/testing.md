@@ -21,15 +21,15 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 ## Expected test outputs genereren
 
-Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/stelsels/**/output.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
 
 ```bash
 task genereer-test-output
 ```
 
-Dit draait `scripts/genereer_test_output.py` en overschrijft alle expected outputs onder `tests/data/**/output/` en `tests/docs/output_json_*.json`.
+Dit draait `scripts/genereer_test_output.py` en overschrijft per case-map onder `tests/stelsels/` de bestanden `output.json` en `output.txt` (plus `output.log` voor review), en daarnaast `tests/docs/output_json_*.json`.
 
-Voor unit-inputs onder `tests/data/<stelsel>/input/` (niet voor `stelselgroepen/`) schrijft het script naast JSON ook een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
+`output.txt` bevat de woningwaardering in leesbaar rapportformaat en is bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
 
 > ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren hoe expected outputs veranderd zijn na de code-changes die je hebt doorgevoerd. Zo kun je achterhalen of de code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
 
@@ -69,6 +69,74 @@ def test_OppervlakteVanVertrekken() -> None:
 
 ## Test modellen
 
-Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te waarborgen.
+Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er VERA-eenheidmodellen toegevoegd onder `tests/stelsels/`. Elke testcase is een map met vaste bestandsnamen:
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen. 
+```
+<case_naam>/
+  input.json
+  output.json
+  output.log      # gegenereerd (review)
+  output.txt      # gegenereerd (leesbare tabel)
+  input_context.md # verplicht; secties hangen af van testtype
+```
+
+**Eenheidtest** (stelsel-ketentest, volledige woningwaardering per eenheid):
+
+`tests/stelsels/{stelsel}/eenheden/{vera_id}/`
+
+**Stelselgroeptest** (één stelselgroep / beleidsbranch):
+
+`tests/stelsels/{stelsel}/{stelselgroep}/{case_naam}/`
+
+De testbestanden staan naast de cases in dezelfde stelselgroep-map, bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/sanitair/test_Sanitair.py`.
+
+### input_context.md
+
+Elke case-map met `input.json` heeft een `input_context.md`. Welke secties verplicht zijn, hangt af van het testtype. Noem **geen maximale huur** (eurobedrag) in `input_context.md`: die wordt jaarlijks geïndexeerd. De beleidsterm **maximale huurprijs** in quotes of bij prijsopslag-% mag wel.
+
+#### Eenheidtest
+
+Verplicht is `## Opmerkingen`: scenario, bijzonderheden en het verwachte **puntentotaal**. `## Doel` is optioneel. `## Beleidsbron` en `## Handmatige berekening` zijn niet nodig (ketentests dekken het hele stelsel; detailregels horen bij stelselgroeptests).
+
+```markdown
+# 15004000185
+
+## Opmerkingen
+
+Stelsel-ketentest voor onzelfstandige woonruimten. De eenheid heeft één privé
+slaapkamer en deelt keuken en badruimte met één andere onzelfstandige woonruimte.
+Verwacht wordt **54 punten** totaal.
+```
+
+#### Stelselgroeptest
+
+Verplicht zijn `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), en minstens één **letterlijk** beleidsboekcitaat uit die gelinkte sectie. De quote-set moet de **specifieke beleidsregel die de case test** dekken — niet alleen een algemene zin uit dezelfde rubriek.
+
+```markdown
+## Beleidsbron
+- Implementatietoelichting: [§2.6 Rubriek 6: Sanitair](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#26-rubriek-6-sanitair)
+- Beleidsboek (quote): "Privé sanitaire voorzieningen krijgen het volledige puntenaantal."
+```
+
+Niet-aaneengesloten stukken uit dezelfde sectie in één blok, met `(...)` als weglating:
+
+```markdown
+- Beleidsboek (quote):
+  "Een aftrek van 4 punten wordt toegepast in ieder van de volgende situaties:"
+  (...)
+  "Wanneer de totale oppervlakte van het onderdeel vertrekken minder is dan 8 m²."
+```
+
+Elk `"..."`-segment moet letterlijk in de gelinkte sectie voorkomen (in documentvolgorde). Geen parafrases, geen `…` midden in een string, geen `"A" en "B"` op één regel. `tests/test_test_context.py` controleert letterlijkheid en aanwezigheid; relevantie voor de case-branch is een review-afspraak.
+
+Bij cases met een puntenuitkomst hoort `## Handmatige berekening`:
+
+- Tabel met onderdelen en tussenresultaten
+- Footer-rij **Totaal** alleen als er **≥2 onderdelen** zijn die je moet sommeren (of afronding/maximering als aparte regels). Bij één datarij is een footer overbodig — het puntental staat al op die rij (of in een kolom **Totaal**)
+- Heeft de tabel een kolom **Totaal** (naast bijv. “Punten per stuk”), dan hoort het somtotaal in die kolom, niet onder “Punten per stuk”
+- Afronding zichtbaar wanneer de ruwe waarde afwijkt van de toegekende punten op hetzelfde veld (bijv. `1,84 → 1,75`). Gebruik `→` niet voor vermenigvuldiging (`per stuk × aantal`); dat hoort in kolom **Totaal**
+- Bij gedeelde of gemeenschappelijke onderdelen: de deel-factoren **in de tabel**, als aparte kolommen **Adressen** en/of **Onz.** (niet alleen in Opmerkingen, en niet als label in de Onderdeel-cel). Gebruik `—` wanneer die factor niet geldt. Voorbeeld: `| Balkon | 4.5 | — | 4 | 0.84 |` met koppen `Onderdeel | Aantal | Adressen | Onz. | Punten`. Bij zelfstandige woonruimten volstaat vaak alleen **Adressen**
+
+Pure warning- of 0-puntencases zonder berekening: een korte zin in plaats van een lege tabel.
+
+Voorbeeld stelselgroep-case: `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/gedeelde_berging/` — een gedeelde berging om specifieke regels in oppervlakte_van_vertrekken te testen.

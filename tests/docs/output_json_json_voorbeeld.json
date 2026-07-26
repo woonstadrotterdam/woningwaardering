@@ -223,7 +223,7 @@
       "punten": 15.0,
       "woningwaarderingen": [
         {
-          "aantal": 71.0,
+          "aantal": 22.0,
           "criterium": {
             "id": "buitenruimten__prive",
             "naam": "Privé",
@@ -232,7 +232,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 24.85
+          "punten": 7.7
         },
         {
           "aantal": 3.14,
@@ -263,10 +263,10 @@
           }
         },
         {
-          "aantal": 49.11,
+          "aantal": 15.93,
           "criterium": {
-            "id": "buitenruimten__prive__Space_108006357",
-            "naam": "Tuin",
+            "id": "buitenruimten__prive__Space_108006467",
+            "naam": "Dakterras",
             "bovenliggendeCriterium": {
               "id": "buitenruimten__prive"
             },
@@ -277,12 +277,24 @@
           }
         },
         {
-          "aantal": 15.93,
+          "aantal": 49.0,
           "criterium": {
-            "id": "buitenruimten__prive__Space_108006467",
-            "naam": "Dakterras",
+            "id": "buitenruimten__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 18.375
+        },
+        {
+          "aantal": 49.11,
+          "criterium": {
+            "id": "buitenruimten__gedeeld_met_2_adressen__Space_108006357",
+            "naam": "Tuin",
             "bovenliggendeCriterium": {
-              "id": "buitenruimten__prive"
+              "id": "buitenruimten__gedeeld_met_2_adressen"
             },
             "meeteenheid": {
               "code": "M2",
@@ -302,7 +314,7 @@
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -11.85
+          "punten": -13.075
         }
       ]
     },

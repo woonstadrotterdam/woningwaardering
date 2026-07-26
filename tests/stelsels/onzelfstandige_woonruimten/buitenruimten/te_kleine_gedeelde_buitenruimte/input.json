@@ -1,0 +1,21 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_klein",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "oppervlakte": 10,
+      "hoogte": 1.5,
+      "lengte": 1.0,
+      "breedte": 1.0,
+      "gedeeldMetAantalAdressen": 2
+    }
+  ]
+}

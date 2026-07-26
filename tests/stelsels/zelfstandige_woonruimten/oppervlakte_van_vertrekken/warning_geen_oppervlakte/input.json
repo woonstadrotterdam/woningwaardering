@@ -1,0 +1,18 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_01",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "verwarmd": true,
+      "afsluitbaar": true
+    }
+  ]
+}
