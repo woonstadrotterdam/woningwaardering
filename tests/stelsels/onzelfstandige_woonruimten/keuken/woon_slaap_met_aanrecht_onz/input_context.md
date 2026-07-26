@@ -11,13 +11,13 @@ Test dat aanrechten in woon- en slaapvertrekken (open keuken) afzonderlijk worde
 
 ## Handmatige berekening
 
-| Onderdeel       | Aantal | Punten   |
-| --------------- | ------ | -------- |
-| Lengte aanrecht | 2000   | 3.5      |
-| Lengte aanrecht | 1000   | 2        |
-| Lengte aanrecht | 2000   | 1.75     |
-| Lengte aanrecht | 1000   | 1        |
-| **Totaal**      |        | **8.25** |
+| Onderdeel       | Aantal | Adressen | Onz. | Punten   |
+| --------------- | ------ | -------- | ---- | -------- |
+| Lengte aanrecht | 2000   | —        | 2    | 3.5      |
+| Lengte aanrecht | 1000   | —        | 2    | 2        |
+| Lengte aanrecht | 2000   | —        | 2    | 1.75     |
+| Lengte aanrecht | 1000   | —        | 2    | 1        |
+| **Totaal**      |        |          |      | **8.25** |
 
 ## Opmerkingen
 

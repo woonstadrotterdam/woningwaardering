@@ -12,9 +12,9 @@ Rekenvoorbeeld uit het beleidsboek voor oppervlakte van vertrekken.
 
 ## Handmatige berekening
 
-| Onderdeel                          | Oppervlakte | Punten |
-| ---------------------------------- | ----------- | ------ |
-| Slaapkamer (privé)                 | 15,49 m²    | 15     |
-| Keuken (gedeeld /3 onzelfstandige) | 11,24 m²    | 3,75   |
-| Afronding                          |             | 0,25   |
-| **Totaal**                         |             | **19** |
+| Onderdeel          | Oppervlakte | Adressen | Onz. | Punten |
+| ------------------ | ----------- | -------- | ---- | ------ |
+| Slaapkamer (privé) | 15,49 m²    | —        | —    | 15     |
+| Keuken             | 11,24 m²    | —        | 3    | 3,75   |
+| Afronding          |             |          |      | 0,25   |
+| **Totaal**         |             |          |      | **19** |

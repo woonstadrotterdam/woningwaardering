@@ -11,9 +11,9 @@ Test aanrechtpunten (3m_8) in een gedeelde keuken, verdeeld over 8 onzelfstandig
 
 ## Handmatige berekening
 
-| Onderdeel       | Aantal | Punten      |
-| --------------- | ------ | ----------- |
-| Lengte aanrecht | 3001   | 1.63 → 1.75 |
+| Onderdeel       | Aantal | Adressen | Onz. | Punten      |
+| --------------- | ------ | -------- | ---- | ----------- |
+| Lengte aanrecht | 3001   | —        | 8    | 1.63 → 1.75 |
 
 ## Opmerkingen
 

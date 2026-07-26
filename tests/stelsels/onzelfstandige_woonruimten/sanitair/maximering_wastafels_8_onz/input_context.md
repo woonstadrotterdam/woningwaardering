@@ -11,18 +11,18 @@ Test waardering van uitzondering op wastafelmaximering bij 8+ onzelfstandige woo
 
 ## Handmatige berekening
 
-| Onderdeel                              | Aantal | Punten   |
-| -------------------------------------- | ------ | -------- |
-| Wastafel                               | 2      | 2        |
-| Meerpersoonswastafel                   | 2      | 3        |
-| Wastafel                               | 3      | 0.38     |
-| Meerpersoonswastafel                   | 3      | 0.56     |
-| Wastafel                               | 2      | 0.25     |
-| Meerpersoonswastafel                   | 2      | 0.38     |
-| Max 1 punt voor Wastafel               | —      | -0.13    |
-| Max 1.5 punt voor Meerpersoonswastafel | —      | -0.19    |
-| **Totaal**                             |        | **6.25** |
+| Onderdeel                              | Aantal | Adressen | Onz. | Punten   |
+| -------------------------------------- | ------ | -------- | ---- | -------- |
+| Wastafel (privé, badkamer)             | 2      | —        | —    | 2        |
+| Meerpersoonswastafel (privé, badkamer) | 2      | —        | —    | 3        |
+| Wastafel                               | 3      | —        | 8    | 0.38     |
+| Meerpersoonswastafel                   | 3      | —        | 8    | 0.56     |
+| Wastafel                               | 2      | —        | 8    | 0.25     |
+| Meerpersoonswastafel                   | 2      | —        | 8    | 0.38     |
+| Max 1 punt voor Wastafel               | —      |          |      | -0.13    |
+| Max 1.5 punt voor Meerpersoonswastafel | —      |          |      | -0.19    |
+| **Totaal**                             |        |          |      | **6.25** |
 
 ## Opmerkingen
 
-- Gedeeld met 8 onzelfstandige woonruimten; punten worden verdeeld.
+- Badkamer-wastafels zijn privé; overige wastafels worden gedeeld met 8 onzelfstandige woonruimten.

@@ -13,4 +13,4 @@ Test dat een gedeelde berging kleiner dan 2 m² niet meetelt in de waardering va
 
 ## Handmatige berekening
 
-Berging kleiner dan 2,00 m² → geen waardering als overige ruimte → 0 punten.
+Berging kleiner dan 2,00 m² → geen waardering als overige ruimte → 0 punten (zou gedeeld worden over 10 adressen en 2 onzelfstandige).

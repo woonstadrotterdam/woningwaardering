@@ -11,12 +11,12 @@ Test dat keukenvoorzieningen buiten de keukenruimte niet meetellen voor extra pu
 
 ## Handmatige berekening
 
-| Onderdeel              | Aantal | Punten  |
-| ---------------------- | ------ | ------- |
-| Lengte aanrecht        | 1000   | 2       |
-| Inbouw koelkast        | 2      | 1       |
-| Inbouw oven elektrisch | 1      | 0.5     |
-| **Totaal**             |        | **3.5** |
+| Onderdeel              | Aantal | Adressen | Onz. | Punten  |
+| ---------------------- | ------ | -------- | ---- | ------- |
+| Lengte aanrecht        | 1000   | —        | 2    | 2       |
+| Inbouw koelkast        | 2      | —        | 2    | 1       |
+| Inbouw oven elektrisch | 1      | —        | 2    | 0.5     |
+| **Totaal**             |        |          |      | **3.5** |
 
 ## Opmerkingen
 

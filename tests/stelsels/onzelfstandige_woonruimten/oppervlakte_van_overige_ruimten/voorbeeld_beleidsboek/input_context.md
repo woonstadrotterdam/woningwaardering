@@ -12,8 +12,8 @@ Rekenvoorbeeld uit het beleidsboek voor oppervlakte van overige ruimten.
 
 ## Handmatige berekening
 
-| Onderdeel                                | Aantal | Punten   |
-| ---------------------------------------- | ------ | -------- |
-| Privé                                    | —      | 3        |
-| Gedeeld met 3 onzelfstandige woonruimten | —      | 6.25     |
-| **Totaal**                               |        | **9.25** |
+| Onderdeel      | Aantal | Adressen | Onz. | Punten   |
+| -------------- | ------ | -------- | ---- | -------- |
+| Privé          | —      | —        | —    | 3        |
+| Overige ruimte | —      | —        | 3    | 6.25     |
+| **Totaal**     |        |          |      | **9.25** |

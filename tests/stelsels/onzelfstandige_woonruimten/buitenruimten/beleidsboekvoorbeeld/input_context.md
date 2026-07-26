@@ -11,15 +11,15 @@ Rekenvoorbeeld uit het beleidsboek: combinatie van privé-buitenruimten met verw
 
 ## Handmatige berekening
 
-| Onderdeel                    | Aantal | Punten   |
-| ---------------------------- | ------ | -------- |
-| Klein balkon                 | 1      | 0.35     |
-| Privé buitenruimten aanwezig | —      | 2        |
-| Balkon                       | 4.5    | 0.84375  |
-| Dakterras                    | 52     | 1.95     |
-| Afronding                    |        | 0.11     |
-| **Totaal**                   |        | **5.25** |
+| Onderdeel                    | Aantal | Adressen | Onz. | Punten   |
+| ---------------------------- | ------ | -------- | ---- | -------- |
+| Klein balkon                 | 1      | —        | —    | 0.35     |
+| Privé buitenruimten aanwezig | —      | —        | —    | 2        |
+| Balkon                       | 4.5    | —        | 4    | 0.84375  |
+| Dakterras                    | 52     | 5        | 4    | 1.95     |
+| Afronding                    |        |          |      | 0.11     |
+| **Totaal**                   |        |          |      | **5.25** |
 
 ## Opmerkingen
 
-- Gedeeld met 4 onzelfstandige woonruimten; punten worden verdeeld.
+- Privé-buitenruimten (klein balkon + aanwezigheidsbonus) worden niet gedeeld; balkon en dakterras wel.

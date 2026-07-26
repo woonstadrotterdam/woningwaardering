@@ -14,16 +14,16 @@ Rekenvoorbeeld uit het beleidsboek voor gedeelde gemeenschappelijke vertrekken, 
 
 ## Handmatige berekening
 
-| Onderdeel                       | Aantal | Punten   |
-| ------------------------------- | ------ | -------- |
-| Oppervlakte van vertrekken      | —      | 1.25     |
-| Oppervlakte van overige ruimten | —      | 0.09375  |
-| Keuken                          | —      | 0.125    |
-| Lengte aanrecht                 | 2999   | 0.4375   |
-| Inbouw koelkast                 | 1      | 0.0625   |
-| Inbouw oven elektrisch          | 1      | 0.0625   |
-| Inbouw magnetron                | 1      | 0.0625   |
-| Hangend toilet                  | 1      | 0.234375 |
-| Wastafel                        | 1      | 0.0625   |
-| Afronding                       |        | 0.11     |
-| **Totaal**                      |        | **2.5**  |
+| Onderdeel                       | Aantal | Adressen | Onz. | Punten   |
+| ------------------------------- | ------ | -------- | ---- | -------- |
+| Oppervlakte van vertrekken      | —      | 4        | 4    | 1.25     |
+| Oppervlakte van overige ruimten | —      | 4        | 4    | 0.09375  |
+| Keuken — verwarmd               | —      | 4        | 4    | 0.125    |
+| Lengte aanrecht                 | 2999   | 4        | 4    | 0.4375   |
+| Inbouw koelkast                 | 1      | 4        | 4    | 0.0625   |
+| Inbouw oven elektrisch          | 1      | 4        | 4    | 0.0625   |
+| Inbouw magnetron                | 1      | 4        | 4    | 0.0625   |
+| Hangend toilet                  | 1      | 4        | 4    | 0.234375 |
+| Wastafel                        | 1      | 4        | 4    | 0.0625   |
+| Afronding                       |        |          |      | 0.11     |
+| **Totaal**                      |        |          |      | **2.5**  |

@@ -14,16 +14,16 @@ Test dat een open keuken en het aangrenzende vertrek afzonderlijk verwarmingspun
 
 ## Handmatige berekening
 
-| Onderdeel                  | Aantal | Punten |
-| -------------------------- | ------ | ------ |
-| Verwarmde woonkamer        | —      | 1      |
-| Verwarmde keuken           | —      | 1      |
-| Verwarmde slaapkamer       | —      | 1      |
-| Verwarmde woonkamer/keuken | —      | 1      |
-| Verwarmde woonkamer        | —      | 1      |
-| Verwarmde slaapkamer       | —      | 1      |
-| Verwarmde woonkamer/keuken | —      | 1      |
-| **Totaal**                 |        | **7**  |
+| Onderdeel                  | Aantal | Adressen | Onz. | Punten |
+| -------------------------- | ------ | -------- | ---- | ------ |
+| Verwarmde woonkamer        | —      | —        | 2    | 1      |
+| Verwarmde keuken           | —      | —        | 2    | 1      |
+| Verwarmde slaapkamer       | —      | —        | 2    | 1      |
+| Verwarmde woonkamer/keuken | —      | —        | 2    | 1      |
+| Verwarmde woonkamer        | —      | —        | 2    | 1      |
+| Verwarmde slaapkamer       | —      | —        | 2    | 1      |
+| Verwarmde woonkamer/keuken | —      | —        | 2    | 1      |
+| **Totaal**                 |        |          |      | **7**  |
 
 ## Opmerkingen
 

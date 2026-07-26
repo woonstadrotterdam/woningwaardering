@@ -14,16 +14,16 @@ Test maximering van 2 punten voor verkoelde én verwarmde vertrekken.
 
 ## Handmatige berekening
 
-| Onderdeel         | Aantal | Punten |
-| ----------------- | ------ | ------ |
-| Slaapkamer1       | —      | 1      |
-| Slaapkamer2       | —      | 1      |
-| Slaapkamer3       | —      | 1      |
-| Slaapkamer1       | —      | 0.5    |
-| Slaapkamer2       | —      | 0.5    |
-| Slaapkamer3       | —      | 0.5    |
-| Maximaal 2 punten | —      | -0.5   |
-| **Totaal**        |        | **4**  |
+| Onderdeel         | Aantal | Adressen | Onz. | Punten |
+| ----------------- | ------ | -------- | ---- | ------ |
+| Slaapkamer1       | —      | —        | 2    | 1      |
+| Slaapkamer2       | —      | —        | 2    | 1      |
+| Slaapkamer3       | —      | —        | 2    | 1      |
+| Slaapkamer1       | —      | —        | 2    | 0.5    |
+| Slaapkamer2       | —      | —        | 2    | 0.5    |
+| Slaapkamer3       | —      | —        | 2    | 0.5    |
+| Maximaal 2 punten | —      |          |      | -0.5   |
+| **Totaal**        |        |          |      | **4**  |
 
 ## Opmerkingen
 

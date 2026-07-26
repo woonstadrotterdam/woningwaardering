@@ -135,7 +135,7 @@ Bij cases met een puntenuitkomst hoort `## Handmatige berekening`:
 - Footer-rij **Totaal** alleen als er **≥2 onderdelen** zijn die je moet sommeren (of afronding/maximering als aparte regels). Bij één datarij is een footer overbodig — het puntental staat al op die rij (of in een kolom **Totaal**)
 - Heeft de tabel een kolom **Totaal** (naast bijv. “Punten per stuk”), dan hoort het somtotaal in die kolom, niet onder “Punten per stuk”
 - Afronding zichtbaar wanneer de ruwe waarde afwijkt van de toegekende punten op hetzelfde veld (bijv. `1,84 → 1,75`). Gebruik `→` niet voor vermenigvuldiging (`per stuk × aantal`); dat hoort in kolom **Totaal**
-- Bij gedeelde of gemeenschappelijke onderdelen: de deel-factoren (aantal onzelfstandige woonruimten en/of adressen)
+- Bij gedeelde of gemeenschappelijke onderdelen: de deel-factoren **in de tabel**, als aparte kolommen **Adressen** en/of **Onz.** (niet alleen in Opmerkingen, en niet als label in de Onderdeel-cel). Gebruik `—` wanneer die factor niet geldt. Voorbeeld: `| Balkon | 4.5 | — | 4 | 0.84 |` met koppen `Onderdeel | Aantal | Adressen | Onz. | Punten`. Bij zelfstandige woonruimten volstaat vaak alleen **Adressen**
 
 Pure warning- of 0-puntencases zonder berekening: een korte zin in plaats van een lege tabel.
 

@@ -14,15 +14,15 @@ Test maximering van 4 punten voor verwarmde overige ruimten.
 
 ## Handmatige berekening
 
-| Onderdeel         | Aantal | Punten |
-| ----------------- | ------ | ------ |
-| Berging           | —      | 0.5    |
-| Berging2          | —      | 0.5    |
-| Berging3          | —      | 0.5    |
-| Berging4          | —      | 0.5    |
-| Berging5          | —      | 0.5    |
-| Maximaal 4 punten | —      | -0.5   |
-| **Totaal**        |        | **2**  |
+| Onderdeel         | Aantal | Adressen | Onz. | Punten |
+| ----------------- | ------ | -------- | ---- | ------ |
+| Berging           | —      | —        | 2    | 0.5    |
+| Berging2          | —      | —        | 2    | 0.5    |
+| Berging3          | —      | —        | 2    | 0.5    |
+| Berging4          | —      | —        | 2    | 0.5    |
+| Berging5          | —      | —        | 2    | 0.5    |
+| Maximaal 4 punten | —      |          |      | -0.5   |
+| **Totaal**        |        |          |      | **2**  |
 
 ## Opmerkingen
 

@@ -13,11 +13,11 @@ Test waardering van gedeelde buitenruimten: punten per m² worden verdeeld over 
 
 ## Handmatige berekening
 
-| Onderdeel                           | Aantal | Punten   |
-| ----------------------------------- | ------ | -------- |
-| Tuin (gedeeld met 2 onzelfstandige) | 6      | 1.05     |
-| Tuin (gedeeld met 3 onzelfstandige) | 6      | 0.7      |
-| **Totaal**                          |        | **1.75** |
+| Onderdeel  | Aantal | Adressen | Onz. | Punten   |
+| ---------- | ------ | -------- | ---- | -------- |
+| Tuin       | 6      | —        | 2    | 1.05     |
+| Tuin       | 6      | —        | 3    | 0.7      |
+| **Totaal** |        |          |      | **1.75** |
 
 ## Opmerkingen
 

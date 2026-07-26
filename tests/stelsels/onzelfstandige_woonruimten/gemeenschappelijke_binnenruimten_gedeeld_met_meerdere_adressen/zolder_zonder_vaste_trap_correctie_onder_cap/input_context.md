@@ -15,8 +15,8 @@ Test zoldercorrectie (max. 5 punten) bij een gedeelde zolder zonder vaste trap i
 
 ## Handmatige berekening
 
-| Onderdeel                           | Aantal | Punten   |
-| ----------------------------------- | ------ | -------- |
-| Subtotaal                           | 12.33  | 4.5      |
-| Correctie: zolder zonder vaste trap | —      | -2.25    |
-| **Totaal**                          |        | **2.25** |
+| Onderdeel                           | Aantal | Adressen | Onz. | Punten   |
+| ----------------------------------- | ------ | -------- | ---- | -------- |
+| Subtotaal                           | 12.33  | 2        | —    | 4.5      |
+| Correctie: zolder zonder vaste trap | —      | 2        | —    | -2.25    |
+| **Totaal**                          |        |          |      | **2.25** |

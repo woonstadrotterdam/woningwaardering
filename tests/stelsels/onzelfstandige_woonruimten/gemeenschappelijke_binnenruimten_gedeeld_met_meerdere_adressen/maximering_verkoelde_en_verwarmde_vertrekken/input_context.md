@@ -12,18 +12,16 @@ Test maximering van verwarmings- of verkoelingspunten binnen gemeenschappelijke 
 
 ## Handmatige berekening
 
-Alle gemeenschappelijke ruimten gedeeld met 2 adressen en 2 onzelfstandige woonruimten.
-
-| Onderdeel                                                | Aantal | Punten |
-| -------------------------------------------------------- | ------ | ------ |
-| Oppervlakte van vertrekken (gedeeld /2 adressen /2 onz.) | —      | 15     |
-| Woonkamer — verwarmd (gedeeld /2 /2)                     | —      | 0.5    |
-| Keuken 1 — verwarmd (gedeeld /2 /2)                      | —      | 0.5    |
-| Keuken 2 — verwarmd (gedeeld /2 /2)                      | —      | 0.5    |
-| Woonkamer — verkoeld (gedeeld /2 /2)                     | —      | 0.25   |
-| Keuken 1 — verkoeld (gedeeld /2 /2)                      | —      | 0.25   |
-| Keuken 2 — verkoeld (gedeeld /2 /2)                      | —      | 0.25   |
-| Maximaal 2 punten                                        | —      | -0.25  |
-| Lengte aanrecht keuken 1 (gedeeld /2 /2)                 | 3001   | 2.5    |
-| Lengte aanrecht keuken 2 (gedeeld /2 /2)                 | 3001   | 2.5    |
-| **Totaal**                                               |        | **22** |
+| Onderdeel                  | Aantal | Adressen | Onz. | Punten |
+| -------------------------- | ------ | -------- | ---- | ------ |
+| Oppervlakte van vertrekken | —      | 2        | 2    | 15     |
+| Woonkamer — verwarmd       | —      | 2        | 2    | 0.5    |
+| Keuken 1 — verwarmd        | —      | 2        | 2    | 0.5    |
+| Keuken 2 — verwarmd        | —      | 2        | 2    | 0.5    |
+| Woonkamer — verkoeld       | —      | 2        | 2    | 0.25   |
+| Keuken 1 — verkoeld        | —      | 2        | 2    | 0.25   |
+| Keuken 2 — verkoeld        | —      | 2        | 2    | 0.25   |
+| Maximaal 2 punten          | —      |          |      | -0.25  |
+| Lengte aanrecht keuken 1   | 3001   | 2        | 2    | 2.5    |
+| Lengte aanrecht keuken 2   | 3001   | 2        | 2    | 2.5    |
+| **Totaal**                 |        |          |      | **22** |

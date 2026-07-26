@@ -14,11 +14,11 @@ Verwacht totaal: **5,75 punten**.
 
 ## Handmatige berekening
 
-| Component                              | Berekening                     | Punten   |
-| -------------------------------------- | ------------------------------ | -------- |
-| Subtotaal oppervlakte (6 + 16 m², / 2) | (0,75 × 22) / 2                | 8,25     |
-| Correctie zolder zonder vaste trap     | min(5, zolderpunten bruto) / 2 | −2,5     |
-| **Totaal**                             |                                | **5,75** |
+| Component                          | Berekening                 | Adressen | Onz. | Punten   |
+| ---------------------------------- | -------------------------- | -------- | ---- | -------- |
+| Subtotaal oppervlakte (6 + 16 m²)  | 0,75 × 22                  | 2        | —    | 8,25     |
+| Correctie zolder zonder vaste trap | min(5, zolderpunten bruto) | 2        | —    | −2,5     |
+| **Totaal**                         |                            |          |      | **5,75** |
 
 ## Opmerkingen
 
