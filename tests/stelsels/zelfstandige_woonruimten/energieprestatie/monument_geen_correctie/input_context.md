@@ -16,7 +16,6 @@ De input bevat een rijksmonument als eengezinswoning met geldige energie-index (
 | Situatie                            | Punten |
 | ----------------------------------- | ------ |
 | EPV eengezinswoning (rijksmonument) | 32     |
-| **Totaal**                          | **32** |
 
 ## Opmerkingen
 

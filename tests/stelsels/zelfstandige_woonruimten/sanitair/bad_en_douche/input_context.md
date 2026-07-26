@@ -14,4 +14,3 @@ Test dat een bad/douchecombinatie als één voorziening **7 punten** oplevert.
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 7      |
-| **Totaal**    |        | **7**  |

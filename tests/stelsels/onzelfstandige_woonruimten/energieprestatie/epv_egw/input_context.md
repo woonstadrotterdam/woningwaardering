@@ -14,4 +14,3 @@ Test waardering in rubriek energieprestatie voor Energieprestatievergoeding (tot
 | Onderdeel                  | Aantal | Punten      |
 | -------------------------- | ------ | ----------- |
 | Energieprestatievergoeding | 3.67   | 1.84 → 1.75 |
-| **Totaal**                 |        | **1.75**    |

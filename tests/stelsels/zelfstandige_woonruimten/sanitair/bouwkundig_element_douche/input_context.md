@@ -11,7 +11,6 @@ Test waardering van een douche als bouwkundig element in een doucheruimte: **4 p
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Douche     | 1      | 4      |
-| **Totaal** |        | **4**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Douche    | 1      | 4      |

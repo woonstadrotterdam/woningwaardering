@@ -16,10 +16,9 @@ De input bevat één woonkamer met installatiecode `ABF`. Verwacht wordt één w
 
 ## Handmatige berekening
 
-| Voorziening                                 | Punten   |
-| ------------------------------------------- | -------- |
-| Aanbelfunctie met video- en audioverbinding | 0,25     |
-| **Totaal**                                  | **0,25** |
+| Voorziening                                 | Punten |
+| ------------------------------------------- | ------ |
+| Aanbelfunctie met video- en audioverbinding | 0,25   |
 
 ## Opmerkingen
 

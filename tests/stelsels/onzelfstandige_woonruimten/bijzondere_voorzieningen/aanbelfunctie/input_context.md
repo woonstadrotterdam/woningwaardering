@@ -12,7 +12,6 @@ Test dat een aanbelfunctie met video- en audioverbinding wordt gewaardeerd met 0
 
 ## Handmatige berekening
 
-| Onderdeel                                   | Aantal | Punten   |
-| ------------------------------------------- | ------ | -------- |
-| Aanbelfunctie met video- en audioverbinding | —      | 0.25     |
-| **Totaal**                                  |        | **0.25** |
+| Onderdeel                                   | Aantal | Punten |
+| ------------------------------------------- | ------ | ------ |
+| Aanbelfunctie met video- en audioverbinding | —      | 0.25   |

@@ -11,7 +11,6 @@ Test waardering in rubriek energieprestatie voor A (totaal 2.5 punten).
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten     |
-| ---------- | ------ | ---------- |
-| A          | 3.67   | 2.39 → 2.5 |
-| **Totaal** |        | **2.5**    |
+| Onderdeel | Aantal | Punten     |
+| --------- | ------ | ---------- |
+| A         | 3.67   | 2.39 → 2.5 |

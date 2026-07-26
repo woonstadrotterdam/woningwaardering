@@ -15,4 +15,3 @@ Test WOZ-punten wanneer de WOZ-waarde per m² meer dan 10% lager is dan het regi
 | Onderdeel           | Aantal   | Punten |
 | ------------------- | -------- | ------ |
 | Percentage verschil | -61.9783 | 10     |
-| **Totaal**          |          | **10** |

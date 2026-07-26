@@ -11,7 +11,6 @@ Test waardering van extra sanitaire voorzieningen in de toiletruimte (3.75 punte
 
 ## Handmatige berekening
 
-| Onderdeel      | Aantal | Punten   |
-| -------------- | ------ | -------- |
-| Hangend toilet | 1      | 3.75     |
-| **Totaal**     |        | **3.75** |
+| Onderdeel      | Aantal | Punten |
+| -------------- | ------ | ------ |
+| Hangend toilet | 1      | 3.75   |

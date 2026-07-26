@@ -16,7 +16,6 @@ Geen puntentoeslag in deze stelselgroep; de nieuwbouwopslag is een percentage op
 | Criterium                | Opslag |
 | ------------------------ | ------ |
 | Nieuwbouw (middensector) | 10%    |
-| **Totaal**               | **0**  |
 
 ## Opmerkingen
 

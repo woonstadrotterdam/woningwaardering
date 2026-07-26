@@ -11,7 +11,6 @@ Test dat een douche in een slaapkamer (niet alleen badkamer/toiletruimte) **4 pu
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Douche     | 1      | 4      |
-| **Totaal** |        | **4**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Douche    | 1      | 4      |

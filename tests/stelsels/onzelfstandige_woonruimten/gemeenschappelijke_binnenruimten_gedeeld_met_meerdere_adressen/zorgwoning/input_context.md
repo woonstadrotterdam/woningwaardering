@@ -15,4 +15,3 @@ Test waardering van gemeenschappelijke ruimten in een zorgwoning.
 | Onderdeel  | Aantal | Punten |
 | ---------- | ------ | ------ |
 | Zorgwoning | —      | 3      |
-| **Totaal** |        | **3**  |

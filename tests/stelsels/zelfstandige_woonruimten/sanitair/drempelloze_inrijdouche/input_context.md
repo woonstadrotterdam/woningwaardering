@@ -14,7 +14,6 @@ Test dat een drempelloze inrijdouche als douche wordt gewaardeerd: **4 punten**.
 | Onderdeel               | Aantal | Punten |
 | ----------------------- | ------ | ------ |
 | Drempelloze inrijdouche | 1      | 4      |
-| **Totaal**              |        | **4**  |
 
 ## Opmerkingen
 

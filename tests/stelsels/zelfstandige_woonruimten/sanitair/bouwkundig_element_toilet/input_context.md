@@ -14,4 +14,3 @@ Test waardering van een staand toilet als bouwkundig element in een toiletruimte
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Staand Toilet | 1      | 3      |
-| **Totaal**    |        | **3**  |

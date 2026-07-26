@@ -14,7 +14,6 @@ Test dat een drempelloze inrijdouche samen met een bad als bad/douchecombinatie 
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 7      |
-| **Totaal**    |        | **7**  |
 
 ## Opmerkingen
 

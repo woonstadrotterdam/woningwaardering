@@ -11,7 +11,6 @@ Test dat een keuken met een aanrecht van 2000 mm (2 meter) **7 punten** krijgt v
 
 ## Handmatige berekening
 
-| Onderdeel  | Lengte  | Punten |
-| ---------- | ------- | ------ |
-| Aanrecht   | 2000 mm | 7      |
-| **Totaal** |         | **7**  |
+| Onderdeel | Lengte  | Punten |
+| --------- | ------- | ------ |
+| Aanrecht  | 2000 mm | 7      |

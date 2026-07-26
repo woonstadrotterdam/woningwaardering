@@ -14,7 +14,6 @@ Test dat een rijksmonument met huurovereenkomst op of na 1 juli 2024 (`datumAfsl
 | Criterium     | Datum overeenkomst | Opslag     |
 | ------------- | ------------------ | ---------- |
 | Rijksmonument | 2024 → 0           | 35% (0,35) |
-| **Totaal**    | **0**              |            |
 
 ## Opmerkingen
 

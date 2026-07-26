@@ -14,7 +14,6 @@ Test rijksmonument overeenkomst voor 20240701 met verwachte puntentoeslag van 10
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Rijksmonument | —      | 10     |
-| **Totaal**    |        | **10** |
 
 ## Opmerkingen
 

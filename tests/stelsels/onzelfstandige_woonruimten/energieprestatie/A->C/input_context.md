@@ -14,4 +14,3 @@ Test correctie van energielabel A naar C op basis van de energie-index in de reg
 | Onderdeel              | Aantal | Punten      |
 | ---------------------- | ------ | ----------- |
 | A -> C (Energie-index) | 3.67   | 1.28 → 1.25 |
-| **Totaal**             |        | **1.25**    |

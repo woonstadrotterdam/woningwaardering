@@ -17,4 +17,3 @@ Test dat een aftrek van 4 punten wordt toegepast wanneer de totale oppervlakte v
 | Onderdeel                                                                    | Aantal | Punten |
 | ---------------------------------------------------------------------------- | ------ | ------ |
 | Totale oppervlakte in Rubriek 'Oppervlakte van vertrekken' is minder dan 8m2 | 7      | -4     |
-| **Totaal**                                                                   |        | **-4** |

@@ -14,7 +14,6 @@ Test grensgevallen voor minimale oppervlakte van overige ruimten (2 m² en 4 m²
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten   |
-| ---------- | ------ | -------- |
-| Privé      | —      | 3.75     |
-| **Totaal** |        | **3.75** |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Privé     | —      | 3.75   |

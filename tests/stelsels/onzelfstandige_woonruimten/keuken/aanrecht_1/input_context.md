@@ -14,4 +14,3 @@ Test aanrechtpunten voor een privé-keuken met aanrecht 1.
 | Onderdeel       | Aantal | Punten |
 | --------------- | ------ | ------ |
 | Lengte aanrecht | 1000   | 4      |
-| **Totaal**      |        | **4**  |

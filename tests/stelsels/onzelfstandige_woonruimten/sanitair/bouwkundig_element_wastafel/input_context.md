@@ -11,7 +11,6 @@ Test waardering van sanitair via bouwkundig element (wastafel) (1 punten totaal)
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Wastafel   | 1      | 1      |
-| **Totaal** |        | **1**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Wastafel  | 1      | 1      |

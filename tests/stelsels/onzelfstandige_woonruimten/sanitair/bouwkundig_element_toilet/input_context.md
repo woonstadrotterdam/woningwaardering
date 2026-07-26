@@ -14,4 +14,3 @@ Test waardering van sanitair via bouwkundig element (toilet) (3 punten totaal).
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Staand Toilet | 1      | 3      |
-| **Totaal**    |        | **3**  |

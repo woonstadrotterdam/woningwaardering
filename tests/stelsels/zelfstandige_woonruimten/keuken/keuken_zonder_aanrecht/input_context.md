@@ -14,7 +14,6 @@ Test dat een keukenruimte zonder aanrecht niet voldoet aan de basiseisen en **0 
 | Onderdeel              | Punten |
 | ---------------------- | ------ |
 | Keuken zonder aanrecht | 0      |
-| **Totaal**             | **0**  |
 
 ## Opmerkingen
 

@@ -11,7 +11,6 @@ Test waardering van een bad via `bouwkundigeElementen` (detailsoort bad) in plaa
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Bad        | 1      | 6      |
-| **Totaal** |        | **6**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Bad       | 1      | 6      |

@@ -14,4 +14,3 @@ Test waardering van een bad/douchecombinatie als bouwkundig element: **7 punten*
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 7      |
-| **Totaal**    |        | **7**  |

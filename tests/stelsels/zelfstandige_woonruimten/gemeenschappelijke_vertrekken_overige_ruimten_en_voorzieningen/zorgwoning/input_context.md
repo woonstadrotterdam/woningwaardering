@@ -16,7 +16,6 @@ De input bevat `doelgroep` Zorg en een woonkamer (zonder gemeenschappelijke ruim
 | Situatie             | Punten |
 | -------------------- | ------ |
 | Zorgwoning (forfait) | 3      |
-| **Totaal**           | **3**  |
 
 ## Opmerkingen
 

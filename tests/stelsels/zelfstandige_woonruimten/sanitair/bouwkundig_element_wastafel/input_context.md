@@ -11,7 +11,6 @@ Test waardering van een wastafel als bouwkundig element in de badkamer: **1 punt
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Wastafel   | 1      | 1      |
-| **Totaal** |        | **1**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Wastafel  | 1      | 1      |

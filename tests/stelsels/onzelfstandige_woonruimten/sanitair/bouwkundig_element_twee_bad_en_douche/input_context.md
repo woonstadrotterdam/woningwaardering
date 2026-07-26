@@ -14,4 +14,3 @@ Test waardering van twee bad/douche-installaties via bouwkundige elementen (12 p
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 2      | 12     |
-| **Totaal**    |        | **12** |

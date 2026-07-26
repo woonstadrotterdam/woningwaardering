@@ -13,10 +13,9 @@ Verwacht wordt **7,5 punten** onder **Gedeeld met 3 adressen**.
 
 ## Handmatige berekening
 
-| Buitenruimte                  | Oppervlakte | Adressen | Berekening      | Punten  |
-| ----------------------------- | ----------- | -------- | --------------- | ------- |
-| Dakterras (gemeenschappelijk) | 30 m²       | 3        | (0,75 × 30) / 3 | 7,5     |
-| **Totaal**                    |             |          |                 | **7,5** |
+| Buitenruimte                  | Oppervlakte | Adressen | Berekening      | Punten |
+| ----------------------------- | ----------- | -------- | --------------- | ------ |
+| Dakterras (gemeenschappelijk) | 30 m²       | 3        | (0,75 × 30) / 3 | 7,5    |
 
 ## Opmerkingen
 

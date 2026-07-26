@@ -11,7 +11,6 @@ Test dat een waarschuwing volgt wanneer een gedeelde buitenruimte geen lengte en
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten   |
-| ---------- | ------ | -------- |
-| Tuin       | 10     | 1.75     |
-| **Totaal** |        | **1.75** |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Tuin      | 10     | 1.75   |

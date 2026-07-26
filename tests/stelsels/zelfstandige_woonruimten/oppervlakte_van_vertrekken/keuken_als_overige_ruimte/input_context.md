@@ -14,7 +14,6 @@ Test dat een keuken (`Ruimtedetailsoort.keuken`) altijd als vertrek wordt gewaar
 | Ruimte                                  | Oppervlakte | Punten (1 p/m²) |
 | --------------------------------------- | ----------- | --------------- |
 | Keuken (als overige ruimte ingeschoten) | 1,00 m²     | 1               |
-| **Totaal**                              |             | **1**           |
 
 ## Opmerkingen
 

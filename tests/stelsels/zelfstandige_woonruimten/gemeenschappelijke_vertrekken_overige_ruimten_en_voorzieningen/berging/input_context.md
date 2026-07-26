@@ -13,10 +13,9 @@ De input bevat twee bergingen (5 en 6 adressen); de verwachte output bevat allee
 
 ## Handmatige berekening
 
-| Ruimte     | Type           | Oppervlakte | Adressen | Berekening      | Punten  |
-| ---------- | -------------- | ----------- | -------- | --------------- | ------- |
-| Berging    | Overige ruimte | 10 m²       | 5        | (0,75 × 10) / 5 | 1,5     |
-| **Totaal** |                |             |          |                 | **1,5** |
+| Ruimte  | Type           | Oppervlakte | Adressen | Berekening      | Punten |
+| ------- | -------------- | ----------- | -------- | --------------- | ------ |
+| Berging | Overige ruimte | 10 m²       | 5        | (0,75 × 10) / 5 | 1,5    |
 
 ## Opmerkingen
 

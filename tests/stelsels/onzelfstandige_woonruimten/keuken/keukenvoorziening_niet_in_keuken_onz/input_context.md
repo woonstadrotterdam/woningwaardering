@@ -16,7 +16,6 @@ Test dat keukenvoorzieningen buiten de keukenruimte niet meetellen voor extra pu
 | Onderdeel       | Aantal | Punten |
 | --------------- | ------ | ------ |
 | Lengte aanrecht | 1000   | 2      |
-| **Totaal**      |        | **2**  |
 
 ## Opmerkingen
 

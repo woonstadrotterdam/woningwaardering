@@ -14,4 +14,3 @@ Test aanrechtpunten voor een privé-keuken met aanrecht 2.
 | Onderdeel       | Aantal | Punten |
 | --------------- | ------ | ------ |
 | Lengte aanrecht | 2000   | 7      |
-| **Totaal**      |        | **7**  |

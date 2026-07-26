@@ -14,7 +14,6 @@ Test dat een gemeentelijk monument een prijsopslag van **15%** op de maximale hu
 | Criterium                            | Opslag     |
 | ------------------------------------ | ---------- |
 | Gemeentelijk of provinciaal monument | 15% (0,15) |
-| **Totaal**                           | **0**      |
 
 ## Opmerkingen
 

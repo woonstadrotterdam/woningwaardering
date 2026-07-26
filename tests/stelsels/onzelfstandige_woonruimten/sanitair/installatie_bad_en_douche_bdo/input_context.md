@@ -14,4 +14,3 @@ Test waardering van een installatie die zowel bad als douche is (BDO) (6 punten 
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 6      |
-| **Totaal**    |        | **6**  |

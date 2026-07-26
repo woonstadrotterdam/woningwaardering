@@ -14,4 +14,3 @@ Test waardering via installatiecodes (bad én douche aanwezig) als bad/douchecom
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 7      |
-| **Totaal**    |        | **7**  |

@@ -14,4 +14,3 @@ Test waardering van sanitair via bouwkundig element (bad/douche) (6 punten totaa
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 6      |
-| **Totaal**    |        | **6**  |

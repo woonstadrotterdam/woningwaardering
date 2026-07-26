@@ -14,4 +14,3 @@ Test waardering van een bad/douchecombinatie (6 punten totaal).
 | Onderdeel     | Aantal | Punten |
 | ------------- | ------ | ------ |
 | Bad en douche | 1      | 6      |
-| **Totaal**    |        | **6**  |

@@ -15,4 +15,3 @@ Test dat bij ontbrekende WOZ-waarde het minimum van 10 punten wordt toegepast.
 | Onderdeel              | Aantal | Punten |
 | ---------------------- | ------ | ------ |
 | Geen WOZ-waarde bekend | —      | 10     |
-| **Totaal**             |        | **10** |

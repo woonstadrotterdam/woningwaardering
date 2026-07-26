@@ -11,7 +11,6 @@ Test waardering van sanitair via bouwkundig element (bad) (5 punten totaal).
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Bad        | 1      | 5      |
-| **Totaal** |        | **5**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Bad       | 1      | 5      |

@@ -11,10 +11,9 @@ Test dat een keuken met een aanrecht zonder opgegeven lengte niet gewaardeerd wo
 
 ## Handmatige berekening
 
-| Onderdeel  | Lengte    | Punten |
-| ---------- | --------- | ------ |
-| Aanrecht   | ontbreekt | 0      |
-| **Totaal** |           | **0**  |
+| Onderdeel | Lengte    | Punten |
+| --------- | --------- | ------ |
+| Aanrecht  | ontbreekt | 0      |
 
 ## Opmerkingen
 

@@ -14,4 +14,3 @@ Test waardering in rubriek energieprestatie voor Bouwjaar 1921 (totaal -0.5 punt
 | Onderdeel     | Aantal | Punten       |
 | ------------- | ------ | ------------ |
 | Bouwjaar 1921 | 3.67   | -0.55 → -0.5 |
-| **Totaal**    |        | **-0.5**     |

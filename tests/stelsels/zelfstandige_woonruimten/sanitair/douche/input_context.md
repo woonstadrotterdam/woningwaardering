@@ -11,7 +11,6 @@ Test dat een douche in de badkamer **4 punten** oplevert.
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Douche     | 1      | 4      |
-| **Totaal** |        | **4**  |
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Douche    | 1      | 4      |

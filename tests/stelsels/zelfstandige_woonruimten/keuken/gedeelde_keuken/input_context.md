@@ -19,7 +19,6 @@ Geen punten in rubriek 5: de keuken is gedeeld met 4 adressen.
 | Onderdeel                    | Punten |
 | ---------------------------- | ------ |
 | Gedeelde keuken (4 adressen) | 0      |
-| **Totaal**                   | **0**  |
 
 ## Opmerkingen
 

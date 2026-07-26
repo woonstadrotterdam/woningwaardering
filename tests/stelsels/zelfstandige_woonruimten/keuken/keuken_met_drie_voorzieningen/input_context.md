@@ -17,7 +17,7 @@ Test dat extra keukenvoorzieningen worden opgeteld wanneer het totaal onder de m
 | Inbouw koelkast        | 2      | 1               | 2      |
 | Inbouw oven elektrisch | 1      | 1               | 1      |
 | Afronding              |        | 1               |        |
-| **Totaal**             |        | **7**           | **7**  |
+| **Totaal**             |        |                 | **7**  |
 
 ## Opmerkingen
 

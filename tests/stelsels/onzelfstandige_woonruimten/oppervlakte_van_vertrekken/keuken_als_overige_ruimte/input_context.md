@@ -17,4 +17,3 @@ Test dat een keuken altijd als vertrek wordt gewaardeerd, ook wanneer deze als o
 | Onderdeel                               | Oppervlakte | Punten |
 | --------------------------------------- | ----------- | ------ |
 | Keuken (ingeschoten als overige ruimte) | 1 m²        | 1      |
-| **Totaal**                              |             | **1**  |
