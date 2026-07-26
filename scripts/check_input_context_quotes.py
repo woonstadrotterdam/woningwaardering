@@ -3,47 +3,53 @@
 
 from __future__ import annotations
 
+import importlib.util
 import sys
 from pathlib import Path
+from types import ModuleType
 
 REPO = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO / "tests"))
-from test_test_context import (  # noqa: E402
-    STELSELS_DIR,
-    _normalize_beleids_text,
-    _normalize_quote_segment,
-    _parse_quote_blocks,
-    _primary_implementatietoelichting,
-    _section_text_for_anchor,
-)
+
+
+def _load_test_module() -> ModuleType:
+    path = REPO / "tests" / "test_test_context.py"
+    spec = importlib.util.spec_from_file_location("test_test_context", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Kan {path} niet laden")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_ctx = _load_test_module()
 
 
 def check_case(rel: str) -> list[str]:
-    case_dir = STELSELS_DIR / rel
+    case_dir = _ctx.STELSELS_DIR / rel
     context_path = case_dir / "input_context.md"
     errors: list[str] = []
     if not context_path.exists():
         return [f"missing {context_path}"]
     content = context_path.read_text()
-    blocks = _parse_quote_blocks(content)
+    blocks = _ctx._parse_quote_blocks(content)
     if not blocks:
         errors.append("geen quote-blok")
     if any(not b for b in blocks):
         errors.append("leeg quote-blok")
-    primary = _primary_implementatietoelichting(content, context_path)
+    primary = _ctx._primary_implementatietoelichting(content, context_path)
     if not primary or not primary[1]:
         errors.append("geen implementatietoelichting-link met anker")
         return errors
     target, anchor = primary
-    section = _section_text_for_anchor(target, anchor)
+    section = _ctx._section_text_for_anchor(target, anchor)
     if section is None:
         errors.append(f"sectie {anchor} niet gevonden")
         return errors
-    norm = _normalize_beleids_text(section)
+    norm = _ctx._normalize_beleids_text(section)
     for block in blocks:
         search_from = 0
         for segment in block:
-            ns = _normalize_quote_segment(segment)
+            ns = _ctx._normalize_quote_segment(segment)
             pos = norm.find(ns, search_from)
             if pos == -1:
                 errors.append(f"segment niet gevonden (volgorde): {segment!r}")
