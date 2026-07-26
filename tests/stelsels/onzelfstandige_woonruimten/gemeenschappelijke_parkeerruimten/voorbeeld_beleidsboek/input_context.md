@@ -1,0 +1,16 @@
+# voorbeeld_beleidsboek
+
+## Doel
+
+Rekenvoorbeeld uit het beleidsboek voor gemeenschappelijke parkeerruimten.
+
+## Beleidsbron
+
+- Implementatietoelichting: [§2.10 Rubriek 10: Gemeenschappelijk parkeerruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#210-rubriek-10-gemeenschappelijke-parkeerruimten)
+- Beleidsboek (quote): "Gemeenschappelijke parkeerruimten worden gewaardeerd per type parkeerplek."
+
+## Handmatige berekening
+
+| Onderdeel | Aantal | Punten |
+| --------- | ------ | ------ |
+| Type III  | 5      | 0.5    |

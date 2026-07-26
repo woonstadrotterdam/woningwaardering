@@ -1,0 +1,22 @@
+# maximering
+
+## Doel
+
+Test de maximale waardering van 15 punten voor privé-buitenruimten, ook wanneer de som van individuele ruimten hoger uitvalt.
+
+## Beleidsbron
+
+- Implementatietoelichting: [§2.8 Rubriek 8: Buitenruimten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#28-rubriek-8-buitenruimten)
+- Beleidsboek (quote): "Buitenruimten worden gewaardeerd op basis van oppervlakte en type."
+
+## Handmatige berekening
+
+| Onderdeel          | Aantal | Punten |
+| ------------------ | ------ | ------ |
+| Tuin               | 30     | 11.25  |
+| Balkon             | 15     | 5.625  |
+| Maximaal 15 punten | —      | -2     |
+
+## Opmerkingen
+
+- Gedeeld met 2 onzelfstandige woonruimten; punten worden verdeeld.

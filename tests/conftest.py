@@ -9,7 +9,37 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 BASE_DIR = Path(__file__).parent.parent
-DATA_DIR = BASE_DIR / "tests/data"
+STELSELS_DIR = BASE_DIR / "tests/stelsels"
+
+STELSELS = ("zelfstandige_woonruimten", "onzelfstandige_woonruimten")
+
+
+def _eenheid_case_dirs(stelsel: str) -> list[Path]:
+    eenheden_dir = STELSELS_DIR / stelsel / "eenheden"
+    if not eenheden_dir.exists():
+        return []
+    return sorted(p.parent for p in eenheden_dir.glob("*/input.json"))
+
+
+def _laad_eenheid(case_dir: Path) -> EenhedenEenheid:
+    with open(case_dir / "input.json", "r+") as f:
+        return EenhedenEenheid.model_validate_json(f.read())
+
+
+def _laad_eenheid_en_output(
+    case_dir: Path,
+) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
+    with open(case_dir / "input.json", "r+") as f:
+        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+
+    with open(case_dir / "output.json", "r+") as f:
+        eenheid_output = (
+            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
+                f.read()
+            )
+        )
+
+    return eenheid_input, eenheid_output
 
 
 @pytest.fixture()
@@ -17,86 +47,42 @@ def peildatum():
     return REFERENTIE_PEILDATUM
 
 
-@pytest.fixture(
-    params=[
-        str(p) for p in (DATA_DIR / "zelfstandige_woonruimten/input").glob("*.json")
-    ]
-)
+@pytest.fixture(params=[str(p) for p in _eenheid_case_dirs("zelfstandige_woonruimten")])
 def zelfstandige_woonruimten_inputmodel(request):
-    file_path = request.param
-    with open(file_path, "r+") as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-    return eenheid
+    return _laad_eenheid(Path(request.param))
 
 
 @pytest.fixture(
     params=[
         str(p)
-        for p in (DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json")
-        if ".unverified" not in str(p)
+        for p in _eenheid_case_dirs("zelfstandige_woonruimten")
+        if (p / "output.json").exists() and ".unverified" not in str(p)
     ]
 )
 def zelfstandige_woonruimten_input_en_outputmodel(
     request,
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    output_file_path = request.param
-    file_name = Path(output_file_path).name
-    input_file_path = DATA_DIR / "zelfstandige_woonruimten/input" / file_name
-
-    # get input model
-    with open(input_file_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    # get output model
-    with open(output_file_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
+    return _laad_eenheid_en_output(Path(request.param))
 
 
 @pytest.fixture(
-    params=[
-        str(p) for p in (DATA_DIR / "onzelfstandige_woonruimten/input").glob("*.json")
-    ]
+    params=[str(p) for p in _eenheid_case_dirs("onzelfstandige_woonruimten")]
 )
 def onzelfstandige_woonruimten_inputmodel(request):
-    file_path = request.param
-    with open(file_path, "r+") as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-    return eenheid
+    return _laad_eenheid(Path(request.param))
 
 
 @pytest.fixture(
     params=[
         str(p)
-        for p in (DATA_DIR / "onzelfstandige_woonruimten/output").rglob("*.json")
-        if ".unverified" not in str(p)
+        for p in _eenheid_case_dirs("onzelfstandige_woonruimten")
+        if (p / "output.json").exists() and ".unverified" not in str(p)
     ]
 )
 def onzelfstandige_woonruimten_input_en_outputmodel(
     request,
 ) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    output_file_path = request.param
-    file_name = Path(output_file_path).name
-    input_file_path = DATA_DIR / "onzelfstandige_woonruimten/input" / file_name
-
-    # get input model
-    with open(input_file_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    # get output model
-    with open(output_file_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
+    return _laad_eenheid_en_output(Path(request.param))
 
 
 @pytest.fixture()

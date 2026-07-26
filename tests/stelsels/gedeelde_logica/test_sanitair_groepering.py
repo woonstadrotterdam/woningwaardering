@@ -12,7 +12,7 @@ from woningwaardering.vera.referentiedata import (
 
 INPUT = (
     Path(__file__).parents[2]
-    / "data/zelfstandige_woonruimten/stelselgroepen/sanitair/input/douche.json"
+    / "stelsels/zelfstandige_woonruimten/sanitair/douche/input.json"
 )
 
 

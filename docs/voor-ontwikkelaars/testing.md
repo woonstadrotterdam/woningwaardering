@@ -21,15 +21,15 @@ Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
 ## Expected test outputs genereren
 
-Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
+Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/stelsels/**/output.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:
 
 ```bash
 task genereer-test-output
 ```
 
-Dit draait `scripts/genereer_test_output.py` en overschrijft alle expected outputs onder `tests/data/**/output/` en `tests/docs/output_json_*.json`.
+Dit draait `scripts/genereer_test_output.py` en overschrijft per case-map onder `tests/stelsels/` de bestanden `output.json` en `output.txt` (plus `output.log` voor review), en daarnaast `tests/docs/output_json_*.json`.
 
-Voor unit-inputs onder `tests/data/<stelsel>/input/` (niet voor `stelselgroepen/`) schrijft het script naast JSON ook een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
+`output.txt` bevat de woningwaardering in leesbaar rapportformaat en is bedoeld om output-wijzigingen in PRs te reviewen; pytest vergelijkt alleen de JSONs.
 
 > ⚠️ Let op: als je de expected output-jsons opnieuw genereert na code-changes zullen alle tests slagen. Het is dus belangrijk om te analyseren hoe expected outputs veranderd zijn na de code-changes die je hebt doorgevoerd. Zo kun je achterhalen of de code-changes wel het gewenste effect hebben gehad en niet ook nog ongewenste neveneffecten.
 
@@ -69,6 +69,34 @@ def test_OppervlakteVanVertrekken() -> None:
 
 ## Test modellen
 
-Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te waarborgen.
+Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er VERA-eenheidmodellen toegevoegd onder `tests/stelsels/`. Elke testcase is een map met vaste bestandsnamen:
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen. 
+```
+<case_naam>/
+  input.json
+  output.json
+  output.log      # gegenereerd (review)
+  output.txt      # gegenereerd (leesbare tabel)
+  input_context.md # verplicht: doel en beleidsbron
+```
+
+**Stelsel-ketentests** (volledige woningwaardering per eenheid):
+
+`tests/stelsels/{stelsel}/eenheden/{vera_id}/`
+
+**Stelselgroep-specifieke tests:**
+
+`tests/stelsels/{stelsel}/{stelselgroep}/{case_naam}/`
+
+De testbestanden staan naast de cases in dezelfde stelselgroep-map, bijvoorbeeld `tests/stelsels/zelfstandige_woonruimten/sanitair/test_Sanitair.py`.
+
+### input_context.md
+
+Elke case-map met `input.json` heeft een `input_context.md` met minimaal `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), bijvoorbeeld:
+
+```markdown
+## Beleidsbron
+- Implementatietoelichting: [§2.6 Rubriek 6: Sanitair](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#26-rubriek-6-sanitair)
+```
+
+Voorbeeld stelselgroep-case: `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/gedeelde_berging/` — een gedeelde berging om specifieke regels in oppervlakte_van_vertrekken te testen.

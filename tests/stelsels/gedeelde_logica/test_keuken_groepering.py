@@ -10,7 +10,7 @@ from woningwaardering.vera.referentiedata import (
 
 INPUT = (
     Path(__file__).parents[2]
-    / "data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_1.json"
+    / "stelsels/zelfstandige_woonruimten/keuken/aanrecht_1/input.json"
 )
 
 

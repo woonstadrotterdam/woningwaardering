@@ -28,11 +28,19 @@ def _write_text_if_changed(path: Path, content: str) -> bool:
 
 
 def _is_stelselgroep_input(input_file_path: Path) -> bool:
-    return input_file_path.parent.parent.parent.name == "stelselgroepen"
+    return input_file_path.parent.parent.name != "eenheden"
+
+
+def _stelsel_naam(input_file_path: Path) -> str:
+    return input_file_path.parent.parent.parent.name
+
+
+def _stelselgroep_naam(input_file_path: Path) -> str:
+    return input_file_path.parent.parent.name
 
 
 def _output_path_for_input(input_file_path: Path) -> Path:
-    return Path(str(input_file_path).replace("/input/", "/output/"))
+    return input_file_path.parent / "output.json"
 
 
 def _genereer_docs_outputs(peildatum: date) -> int:
@@ -86,91 +94,89 @@ def main() -> int:
     logger.remove()
     stdout_id = logger.add(sys.stdout, level="INFO")
 
-    data_dir = Path("tests/data")
+    stelsels_dir = Path("tests/stelsels")
 
     updated = 0
     errors = 0
 
-    for stelsel_naam in STELSELS:
-        input_file_paths = (data_dir / stelsel_naam).rglob("**/input/*.json")
-        for input_file_path in input_file_paths:
-            output_file_path = _output_path_for_input(input_file_path)
-            output_file_path.parent.mkdir(parents=True, exist_ok=True)
+    input_file_paths = sorted(stelsels_dir.rglob("**/input.json"))
+    for input_file_path in input_file_paths:
+        output_file_path = _output_path_for_input(input_file_path)
+        output_file_path.parent.mkdir(parents=True, exist_ok=True)
+        stelsel_naam = _stelsel_naam(input_file_path)
 
-            with open(input_file_path, "r+") as f:
-                try:
-                    eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-                except ValidationError as e:
-                    logger.error(f"Error in inputmodel van {input_file_path.name}: {e}")
-                    errors += 1
-                    continue
-
-            handler_id = logger.add(
-                output_file_path.with_suffix(".log"), level="TRACE", mode="w"
-            )
-            logger.remove(stdout_id)
-
+        with open(input_file_path, "r+") as f:
             try:
-                if _is_stelselgroep_input(input_file_path):
-                    stelselgroep_naam = input_file_path.parent.parent.name
-                    stelselgroep_class = import_module(
-                        f"woningwaardering.stelsels.{stelsel_naam}." + stelselgroep_naam
-                    )
-                    stelselgroep: Stelselgroep = getattr(
-                        stelselgroep_class,
-                        string.capwords(stelselgroep_naam.replace("_", " ")).replace(
-                            " ", ""
-                        ),
-                    )(peildatum=peildatum)
-                    woningwaardering_resultaat = (
-                        WoningwaarderingResultatenWoningwaarderingResultaat(
-                            groepen=[stelselgroep.waardeer(eenheid_input)]
-                        )
-                    )
-                else:
-                    stelsel_class = import_module(
-                        f"woningwaardering.stelsels.{stelsel_naam}.{stelsel_naam}"
-                    )
-                    stelsel = getattr(
-                        stelsel_class,
-                        string.capwords(stelsel_naam.replace("_", " ")).replace(
-                            " ", ""
-                        ),
-                    )(peildatum=peildatum)
-                    woningwaardering_resultaat = stelsel.waardeer(eenheid_input)
-            except Exception:
-                logger.exception(f"Fout bij waarderen van {input_file_path}")
+                eenheid_input = EenhedenEenheid.model_validate_json(f.read())
+            except ValidationError as e:
+                logger.error(f"Error in inputmodel van {input_file_path.name}: {e}")
                 errors += 1
                 continue
-            finally:
-                stdout_id = logger.add(sys.stdout, level="INFO")
-                logger.remove(handler_id)
 
-            logger.info(
-                f"Resultaat voor {input_file_path.name} is opgenomen in {output_file_path}, inclusief logs in {output_file_path.with_suffix('.log')}"
-            )
-            output_content = (
-                woningwaardering_resultaat.model_dump_json(
-                    by_alias=True, indent=2, exclude_none=True
+        handler_id = logger.add(
+            input_file_path.parent / "output.log", level="TRACE", mode="w"
+        )
+        logger.remove(stdout_id)
+
+        try:
+            if _is_stelselgroep_input(input_file_path):
+                stelselgroep_naam = _stelselgroep_naam(input_file_path)
+                stelselgroep_class = import_module(
+                    f"woningwaardering.stelsels.{stelsel_naam}." + stelselgroep_naam
                 )
-                + "\n"
-            )
-            input_updated = _write_text_if_changed(output_file_path, output_content)
+                stelselgroep: Stelselgroep = getattr(
+                    stelselgroep_class,
+                    string.capwords(stelselgroep_naam.replace("_", " ")).replace(
+                        " ", ""
+                    ),
+                )(peildatum=peildatum)
+                woningwaardering_resultaat = (
+                    WoningwaarderingResultatenWoningwaarderingResultaat(
+                        groepen=[stelselgroep.waardeer(eenheid_input)]
+                    )
+                )
+            else:
+                stelsel_class = import_module(
+                    f"woningwaardering.stelsels.{stelsel_naam}.{stelsel_naam}"
+                )
+                stelsel = getattr(
+                    stelsel_class,
+                    string.capwords(stelsel_naam.replace("_", " ")).replace(" ", ""),
+                )(peildatum=peildatum)
+                woningwaardering_resultaat = stelsel.waardeer(eenheid_input)
+        except Exception:
+            logger.exception(f"Fout bij waarderen van {input_file_path}")
+            errors += 1
+            continue
+        finally:
+            stdout_id = logger.add(sys.stdout, level="INFO")
+            logger.remove(handler_id)
 
-            txt_path = output_file_path.with_suffix(".txt")
-            txt_content = (
-                naar_rapport(
-                    woningwaardering_resultaat, eenheid_id=eenheid_input.id
-                ).get_string()
-                + "\n"
+        logger.info(
+            f"Resultaat voor {input_file_path.parent.name} is opgenomen in {output_file_path}, inclusief logs in {input_file_path.parent / 'output.log'}"
+        )
+        output_content = (
+            woningwaardering_resultaat.model_dump_json(
+                by_alias=True, indent=2, exclude_none=True
             )
-            # Altijd synchroniseren zodat eventuele opmaakwijzigingen van .txt outputs doorgevoerd
-            # worden, ook als JSON output ongewijzigd blijft.
-            if _write_text_if_changed(txt_path, txt_content):
-                input_updated = True
+            + "\n"
+        )
+        input_updated = _write_text_if_changed(output_file_path, output_content)
 
-            if input_updated:
-                updated += 1
+        txt_path = input_file_path.parent / "output.txt"
+        txt_content = (
+            naar_rapport(
+                woningwaardering_resultaat, eenheid_id=eenheid_input.id
+            ).get_string()
+            + "\n"
+        )
+        # Altijd synchroniseren zodat eventuele opmaakwijzigingen van .txt outputs doorgevoerd
+        # worden, ook als JSON output ongewijzigd blijft.
+        if _write_text_if_changed(txt_path, txt_content):
+            input_updated = True
+
+        if input_updated:
+            updated += 1
 
     updated += _genereer_docs_outputs(peildatum)
 
