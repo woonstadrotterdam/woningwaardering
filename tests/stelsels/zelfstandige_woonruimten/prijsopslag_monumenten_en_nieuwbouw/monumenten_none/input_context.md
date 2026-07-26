@@ -14,3 +14,4 @@ Test dat een eenheid zonder monumentstatus geen prijsopslag krijgt: lege of ontb
 | Criterium               | Opslag |
 | ----------------------- | ------ |
 | Geen monument opgegeven | 0%     |
+| **Totaal**              | **0**  |

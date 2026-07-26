@@ -8,3 +8,10 @@ Test dat een douche in de badkamer **4 punten** oplevert.
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
 - Beleidsboek (quote): "Douche | 4"
+
+## Handmatige berekening
+
+| Onderdeel  | Aantal | Punten |
+| ---------- | ------ | ------ |
+| Douche     | 1      | 4      |
+| **Totaal** |        | **4**  |

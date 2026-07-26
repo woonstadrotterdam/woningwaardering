@@ -12,7 +12,8 @@ Test afronding van totaaloppervlakte omhoog bij combinatie berging + zolder met 
 
 ## Handmatige berekening
 
-| Onderdeel                           | Aantal | Punten |
-| ----------------------------------- | ------ | ------ |
-| Subtotaal                           | 9.52   | 7.5    |
-| Correctie: zolder zonder vaste trap | —      | -2.25  |
+| Onderdeel                           | Aantal | Punten   |
+| ----------------------------------- | ------ | -------- |
+| Subtotaal                           | 9.52   | 7.5      |
+| Correctie: zolder zonder vaste trap | —      | -2.25    |
+| **Totaal**                          |        | **5.25** |

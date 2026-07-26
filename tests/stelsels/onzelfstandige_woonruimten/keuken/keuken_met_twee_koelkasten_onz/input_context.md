@@ -15,6 +15,7 @@ Test waardering van twee inbouwkoelkasten in de keuken.
 | --------------- | ------ | ------ |
 | Lengte aanrecht | 1000   | 2      |
 | Inbouw koelkast | 2      | 1      |
+| **Totaal**      |        | **3**  |
 
 ## Opmerkingen
 

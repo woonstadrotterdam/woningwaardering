@@ -11,9 +11,10 @@ Test dat een keuken met een aanrecht van 1000 mm (1 meter) **4 punten** krijgt v
 
 ## Handmatige berekening
 
-| Onderdeel | Lengte  | Punten |
-| --------- | ------- | ------ |
-| Aanrecht  | 1000 mm | 4      |
+| Onderdeel  | Lengte  | Punten |
+| ---------- | ------- | ------ |
+| Aanrecht   | 1000 mm | 4      |
+| **Totaal** |         | **4**  |
 
 ## Opmerkingen
 

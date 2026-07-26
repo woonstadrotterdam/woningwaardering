@@ -11,10 +11,10 @@ Test het overgangsrecht voor rijksmonumenten: een huurovereenkomst vóór 1 juli
 
 ## Handmatige berekening
 
-| Criterium        | Datum overeenkomst | Waardering |
-| ---------------- | ------------------ | ---------- |
-| Rijksmonument    | 2024-01-01         | 50 punten  |
-| Opslagpercentage |                    | 0%         |
+| Criterium     | Datum overeenkomst | Waardering |
+| ------------- | ------------------ | ---------- |
+| Rijksmonument | 2024-01-01         | 50 punten  |
+| **Totaal**    |                    | **50**     |
 
 ## Opmerkingen
 

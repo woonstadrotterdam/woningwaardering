@@ -16,3 +16,4 @@ Test de uitzonderingsregel voor nieuwbouw (bouwjaar 2016, ≥ 110 punten in rubr
 | Berekende WOZ-punten        | 34,75  |
 | Minimum nieuwbouw 2015–2019 | 40,00  |
 | Correctie                   | +5,25  |
+| **Totaal**                  | **40** |

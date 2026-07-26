@@ -16,3 +16,4 @@ Test maximering van verwarmde overige ruimten: 5 verwarmde bergingen (5 × 1) wo
 | 5 verwarmde bergingen | 5,00   |
 | Maximum               | 4,00   |
 | Correctie             | −1,00  |
+| **Totaal**            | **4**  |

@@ -12,8 +12,10 @@ Test waardering van een zolder als overige ruimte met vlizotrap en zonder-vaste-
 
 ## Handmatige berekening
 
-| Onderdeel                           | Aantal | Punten |
-| ----------------------------------- | ------ | ------ |
-| Privé                               | —      | 7.5    |
-| Subtotaal                           | 10     | 2.5    |
-| Correctie: zolder zonder vaste trap | —      | -1.67  |
+| Onderdeel                           | Aantal | Punten   |
+| ----------------------------------- | ------ | -------- |
+| Privé                               | —      | 7.5      |
+| Subtotaal                           | 10     | 2.5      |
+| Correctie: zolder zonder vaste trap | —      | -1.67    |
+| Afronding                           |        | -0.08    |
+| **Totaal**                          |        | **8.25** |

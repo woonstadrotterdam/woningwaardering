@@ -22,3 +22,4 @@ Test maximering van verwarmings- of verkoelingspunten binnen gemeenschappelijke 
 | Oppervlakte van overige ruimten | —      | 2.5       |
 | Berging                         | —      | 0.166667  |
 | Maximaal 4 punten               | —      | -0.166667 |
+| **Totaal**                      |        | **18.5**  |

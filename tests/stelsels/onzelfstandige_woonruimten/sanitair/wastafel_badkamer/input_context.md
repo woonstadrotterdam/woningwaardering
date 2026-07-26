@@ -15,3 +15,4 @@ Test waardering van een wastafel in de badkamer (5 punten totaal).
 | -------------------- | ------ | ------ |
 | Wastafel             | 2      | 2      |
 | Meerpersoonswastafel | 2      | 3      |
+| **Totaal**           |        | **5**  |

@@ -21,7 +21,7 @@ Verwacht totaal: **4,75 punten**.
 | Type II carport      | 5      | 6           | 10       | (6 × 5) / 10 | 3,0      |
 | Laadpaal bij carport | 5      | 2           | 10       | (2 × 5) / 10 | 1,0      |
 | Type III buiten      | 2      | 4           | 10       | (4 × 2) / 10 | 0,8      |
-| **Totaal**           |        |             |          |              | **4,75** |
+| **Totaal**           |        | **4.75**    |          |              | **4,75** |
 
 ## Opmerkingen
 

@@ -13,4 +13,5 @@ Test dat twee bad/douchecombinaties als bouwkundige elementen elk apart worden g
 
 | Voorziening | Aantal | Punten per stuk | Totaal |
 | ----------- | ------ | --------------- | ------ |
-| Bad/douche  | 2      | 7               | 14     |
+| Bad/douche  | 2      | 7 → 14          | 14     |
+| **Totaal**  |        | **14**          |        |

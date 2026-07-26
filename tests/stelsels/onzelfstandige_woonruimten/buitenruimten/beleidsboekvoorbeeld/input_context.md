@@ -11,12 +11,14 @@ Rekenvoorbeeld uit het beleidsboek: combinatie van privé-buitenruimten met verw
 
 ## Handmatige berekening
 
-| Onderdeel                    | Aantal | Punten  |
-| ---------------------------- | ------ | ------- |
-| Klein balkon                 | 1      | 0.35    |
-| Privé buitenruimten aanwezig | —      | 2       |
-| Balkon                       | 4.5    | 0.84375 |
-| Dakterras                    | 52     | 1.95    |
+| Onderdeel                    | Aantal | Punten   |
+| ---------------------------- | ------ | -------- |
+| Klein balkon                 | 1      | 0.35     |
+| Privé buitenruimten aanwezig | —      | 2        |
+| Balkon                       | 4.5    | 0.84375  |
+| Dakterras                    | 52     | 1.95     |
+| Afronding                    |        | 0.11     |
+| **Totaal**                   |        | **5.25** |
 
 ## Opmerkingen
 

@@ -11,7 +11,8 @@ Test waardering van een carport (type II) met laadpaal die niet gedeeld wordt me
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| Type II   | 1      | 3      |
-| Laadpaal  | 1      | 1      |
+| Onderdeel  | Aantal | Punten |
+| ---------- | ------ | ------ |
+| Type II    | 1      | 3      |
+| Laadpaal   | 1      | 1      |
+| **Totaal** |        | **4**  |

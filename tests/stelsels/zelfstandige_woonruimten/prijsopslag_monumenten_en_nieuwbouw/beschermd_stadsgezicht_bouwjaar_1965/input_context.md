@@ -13,7 +13,8 @@ Test dat een woning in een rijksbeschermd stadsgezicht met bouwjaar 1965 géén 
 
 | Criterium                   | Bouwjaar | Opslag |
 | --------------------------- | -------- | ------ |
-| Rijksbeschermd stadsgezicht | 1965     | 0%     |
+| Rijksbeschermd stadsgezicht | 1965 → 0 | 0%     |
+| **Totaal**                  | **0**    |        |
 
 ## Opmerkingen
 

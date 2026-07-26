@@ -16,3 +16,4 @@ Test de WOZ-cap: maximaal 33% van het totale puntenaantal mag uit WOZ-waarde bes
 | Berekende WOZ-punten (I + II) | 82,33  |
 | Maximaal 33% van 200 totaal   | 66,00  |
 | Correctie                     | −16,33 |
+| **Totaal**                    | **66** |

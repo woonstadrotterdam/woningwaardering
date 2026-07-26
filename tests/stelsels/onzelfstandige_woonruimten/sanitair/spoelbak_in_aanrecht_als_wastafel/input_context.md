@@ -11,10 +11,11 @@ Test waardering van een spoelbak in een aanrecht korter dan 1 m als wastafel (2.
 
 ## Handmatige berekening
 
-| Onderdeel                              | Aantal | Punten |
-| -------------------------------------- | ------ | ------ |
-| Wastafel (spoelbak in aanrecht < 1m)   | 1      | 1      |
-| Wastafel                               | 2      | 2      |
-| Max 1.0 punt voor Wastafel             | —      | -2     |
-| Meerpersoonswastafel                   | 2      | 3      |
-| Max 1.5 punt voor Meerpersoonswastafel | —      | -1.5   |
+| Onderdeel                              | Aantal | Punten  |
+| -------------------------------------- | ------ | ------- |
+| Wastafel (spoelbak in aanrecht < 1m)   | 1      | 1       |
+| Wastafel                               | 2      | 2       |
+| Max 1.0 punt voor Wastafel             | —      | -2      |
+| Meerpersoonswastafel                   | 2      | 3       |
+| Max 1.5 punt voor Meerpersoonswastafel | —      | -1.5    |
+| **Totaal**                             |        | **2.5** |

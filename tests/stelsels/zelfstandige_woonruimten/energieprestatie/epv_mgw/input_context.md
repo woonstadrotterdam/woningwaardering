@@ -16,3 +16,4 @@ De input bevat een meergezinswoning met geldige energie-index (label C) en prijs
 | Situatie             | Punten |
 | -------------------- | ------ |
 | EPV meergezinswoning | 28     |
+| **Totaal**           | **28** |

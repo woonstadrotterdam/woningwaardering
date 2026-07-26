@@ -16,3 +16,4 @@ De input bevat geen ruimten. Verwacht wordt één waarderingsregel **Geen buiten
 | Situatie           | Punten |
 | ------------------ | ------ |
 | Geen buitenruimten | −5     |
+| **Totaal**         | **-5** |

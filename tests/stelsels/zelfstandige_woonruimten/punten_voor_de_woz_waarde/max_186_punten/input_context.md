@@ -11,8 +11,9 @@ Test de uitzondering op de WOZ-cap: als de woning zonder cap ≥ 187 punten zou 
 
 ## Handmatige berekening
 
-| Stap                          | Punten |
-| ----------------------------- | ------ |
-| Berekende WOZ-punten (I + II) | 95,74  |
-| Na maximering tot 186 totaal  | 65,75  |
-| Correctie                     | −30,00 |
+| Stap                          | Punten    |
+| ----------------------------- | --------- |
+| Berekende WOZ-punten (I + II) | 95,74     |
+| Na maximering tot 186 totaal  | 65,75     |
+| Correctie                     | −30,00    |
+| **Totaal**                    | **65,75** |

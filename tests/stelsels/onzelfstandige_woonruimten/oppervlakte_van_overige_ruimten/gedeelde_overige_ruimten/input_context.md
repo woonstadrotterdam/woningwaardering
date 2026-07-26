@@ -12,7 +12,8 @@ Test waardering van gedeelde overige ruimten met verschillende verdeelsleutels p
 
 ## Handmatige berekening
 
-| Onderdeel                                | Aantal | Punten |
-| ---------------------------------------- | ------ | ------ |
-| Gedeeld met 5 onzelfstandige woonruimten | —      | 1.5    |
-| Gedeeld met 6 onzelfstandige woonruimten | —      | 1.25   |
+| Onderdeel                                | Aantal | Punten   |
+| ---------------------------------------- | ------ | -------- |
+| Gedeeld met 5 onzelfstandige woonruimten | —      | 1.5      |
+| Gedeeld met 6 onzelfstandige woonruimten | —      | 1.25     |
+| **Totaal**                               |        | **2.75** |

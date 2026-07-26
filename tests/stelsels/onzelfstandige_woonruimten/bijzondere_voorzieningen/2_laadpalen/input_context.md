@@ -15,7 +15,8 @@ De input bevat één garage met twee `bouwkundigeElementen` van detailsoort laad
 
 | Voorziening | Aantal | Punten per stuk | Totaal |
 | ----------- | ------ | --------------- | ------ |
-| Laadpaal    | 2      | 2               | 4      |
+| Laadpaal    | 2      | 2 → 4           | 4      |
+| **Totaal**  |        | **4**           |        |
 
 ## Opmerkingen
 

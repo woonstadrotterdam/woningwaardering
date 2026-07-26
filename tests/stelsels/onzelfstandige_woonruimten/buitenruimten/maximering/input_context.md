@@ -16,6 +16,8 @@ Test de maximale waardering van 15 punten voor privé-buitenruimten, ook wanneer
 | Tuin               | 30     | 11.25  |
 | Balkon             | 15     | 5.625  |
 | Maximaal 15 punten | —      | -2     |
+| Afronding          |        | 0.12   |
+| **Totaal**         |        | **15** |
 
 ## Opmerkingen
 

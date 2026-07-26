@@ -62,7 +62,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 - Voeg passende tests toe bij nieuwe of gewijzigde code.
 - Spiegel de package-structuur waar praktisch: tests voor `woningwaardering/.../module.py` horen onder `tests/.../test_module.py`.
 - Laat testfuncties beginnen met `test_`.
-- Gebruik `tests/stelsels/...` voor VERA-realistische eenheidmodellen en handmatig nagerekende verwachte output (`input.json`, `output.json`, `input_context.md` per case-map).
+- Gebruik `tests/stelsels/...` voor VERA-realistische eenheidmodellen en handmatig nagerekende verwachte output (`input.json`, `output.json`, `input_context.md` per case-map). Secties in `input_context.md` verschillen per eenheidtest vs stelselgroeptest; zie `docs/voor-ontwikkelaars/testing.md`.
 - Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
 

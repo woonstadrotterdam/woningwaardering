@@ -11,6 +11,7 @@ Rekenvoorbeeld uit het beleidsboek voor gemeenschappelijke parkeerruimten.
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| Type III  | 5      | 0.5    |
+| Onderdeel  | Aantal | Punten  |
+| ---------- | ------ | ------- |
+| Type III   | 5      | 0.5     |
+| **Totaal** |        | **0.5** |

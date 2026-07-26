@@ -8,3 +8,12 @@ Test dat een waarschuwing volgt wanneer COROP-regels mogelijk van toepassing zij
 
 - Implementatietoelichting: [§2.11.6 Kleine nieuwbouw COROP Utrecht/Amsterdam](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#2116-uitzonderingsregel-waardering-kleine-nieuwbouwwoningen-in-corop-gebied-utrechtamsterdam-opgeleverd-tussen-2018---2022)
 - Beleidsboek (quote): "de woning ligt in de COROP-gebieden Amsterdam of Utrecht"
+
+## Handmatige berekening
+
+| Onderdeel                | Aantal | Punten    |
+| ------------------------ | ------ | --------- |
+| Onderdeel I              | —      | 20.22     |
+| Onderdeel II             | —      | 36.6      |
+| Afronding op kwartpunten | —      | -0.07     |
+| **Totaal**               |        | **56.75** |

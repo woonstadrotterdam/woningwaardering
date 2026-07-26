@@ -17,3 +17,4 @@ Test dat aanrechten in woon- en slaapvertrekken (open keuken) afzonderlijk worde
 | Lengte aanrecht | 1000   | 4      |
 | Lengte aanrecht | 2000   | 7      |
 | Lengte aanrecht | 1000   | 4      |
+| **Totaal**      |        | **22** |

@@ -11,9 +11,10 @@ Test dat een vertrek (`Ruimtesoort.vertrek`) met oppervlakte tussen 2 en 4 m² (
 
 ## Handmatige berekening
 
-| Ruimte     | Ingeschoten als | Oppervlakte | Punten              |
-| ---------- | --------------- | ----------- | ------------------- |
-| Slaapkamer | vertrek         | 3 m²        | 3 × 0,75 = **2,25** |
+| Ruimte     | Ingeschoten als | Oppervlakte | Punten   |
+| ---------- | --------------- | ----------- | -------- |
+| Slaapkamer | vertrek         | 3 m²        | 3 → 2,25 |
+| **Totaal** |                 |             | **2,25** |
 
 ## Opmerkingen
 

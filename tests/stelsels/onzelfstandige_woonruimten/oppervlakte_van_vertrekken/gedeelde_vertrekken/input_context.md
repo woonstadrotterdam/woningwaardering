@@ -11,3 +11,11 @@ Test waardering van gedeelde vertrekken: 1 punt per m² gedeeld door het aantal 
   "Een vertrek wordt gewaardeerd met 1 punt per vierkante meter."
   (...)
   "Een gemeenschappelijk vertrek wordt ook gewaardeerd met 1 punt per vierkante meter, gedeeld door het aantal onzelfstandige woonruimten die toegang en gebruiksrecht hebben tot de gemeenschappelijke ruimte."
+
+## Handmatige berekening
+
+| Vertrek    | Oppervlakte | Gedeeld           | Punten |
+| ---------- | ----------- | ----------------- | ------ |
+| Slaapkamer | 10 m²       | /5 onzelfstandige | 2      |
+| Woonkamer  | 10 m²       | /6 onzelfstandige | 2      |
+| **Totaal** |             |                   | **4**  |

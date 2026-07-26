@@ -14,9 +14,12 @@ Test dat een keuken die gedeeld is met vier adressen (`gedeeldMetAantalAdressen:
 
 ## Handmatige berekening
 
-| Onderdeel                                          | Waardering in rubriek 5 |
-| -------------------------------------------------- | ----------------------- |
-| Gedeelde keuken (aanrecht 3150 mm + voorzieningen) | 0 punten                |
+Geen punten in rubriek 5: de keuken is gedeeld met 4 adressen.
+
+| Onderdeel                    | Punten |
+| ---------------------------- | ------ |
+| Gedeelde keuken (4 adressen) | 0      |
+| **Totaal**                   | **0**  |
 
 ## Opmerkingen
 

@@ -25,3 +25,5 @@ Rekenvoorbeeld uit het beleidsboek voor gedeelde gemeenschappelijke vertrekken, 
 | Inbouw magnetron                | 1      | 0.0625   |
 | Hangend toilet                  | 1      | 0.234375 |
 | Wastafel                        | 1      | 0.0625   |
+| Afronding                       |        | 0.11     |
+| **Totaal**                      |        | **2.5**  |

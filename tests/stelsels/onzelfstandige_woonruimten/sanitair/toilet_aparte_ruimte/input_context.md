@@ -14,7 +14,8 @@ Test waardering van een toilet in een aparte toiletruimte (6.75 punten totaal).
 
 ## Handmatige berekening
 
-| Onderdeel      | Aantal | Punten |
-| -------------- | ------ | ------ |
-| Hangend toilet | 1      | 3.75   |
-| Staand Toilet  | 1      | 3      |
+| Onderdeel      | Aantal | Punten   |
+| -------------- | ------ | -------- |
+| Hangend toilet | 1      | 3.75     |
+| Staand Toilet  | 1      | 3        |
+| **Totaal**     |        | **6.75** |

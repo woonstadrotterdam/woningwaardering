@@ -11,6 +11,7 @@ Test energieprestatie op basis van een NTA-8800-label (2021) voor een woning met
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| F         | 9      | -0.9   |
+| Onderdeel  | Aantal | Punten    |
+| ---------- | ------ | --------- |
+| F          | 9      | -0.9 → -1 |
+| **Totaal** |        | **-1**    |

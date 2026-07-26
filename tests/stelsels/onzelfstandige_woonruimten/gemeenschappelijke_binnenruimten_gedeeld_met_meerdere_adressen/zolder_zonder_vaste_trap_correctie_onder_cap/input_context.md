@@ -6,15 +6,17 @@ Test zoldercorrectie (max. 5 punten) bij een gedeelde zolder zonder vaste trap i
 
 ## Beleidsbron
 
-- Implementatietoelichting: [§2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)
+- Implementatietoelichting: [§2.2.2.3 Zolderruimte zonder vaste trap](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap)
+- Zie ook: [§2.9 Rubriek 9: Gemeenschappelijke vertrekken, overige ruimten en voorzieningen](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)
 - Beleidsboek (quote):
-  "Een gemeenschappelijk vertrek krijgt 1 punt per vierkante meter en een gemeenschappelijke overige ruimte wordt gewaardeerd met 0,75 punt per vierkante meter."
+  "Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘vertrek’, maar wel als overige ruimte kan worden aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend."
   (...)
-  "Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moeten worden berekend door het puntenaantal voor de oppervlakte eerst te delen door de meerdere adressen en daarna nog gedeeld door het aantal onzelfstandige woonruimten op het adres waar het gehuurde onderdeel van uitmaakt."
+  "Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is."
 
 ## Handmatige berekening
 
-| Onderdeel                           | Aantal | Punten |
-| ----------------------------------- | ------ | ------ |
-| Subtotaal                           | 12.33  | 4.5    |
-| Correctie: zolder zonder vaste trap | —      | -2.25  |
+| Onderdeel                           | Aantal | Punten   |
+| ----------------------------------- | ------ | -------- |
+| Subtotaal                           | 12.33  | 4.5      |
+| Correctie: zolder zonder vaste trap | —      | -2.25    |
+| **Totaal**                          |        | **2.25** |

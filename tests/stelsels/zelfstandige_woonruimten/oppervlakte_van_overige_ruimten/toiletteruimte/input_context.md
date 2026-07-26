@@ -16,6 +16,7 @@ Test de minimale oppervlakte van 2 m² voor overige ruimten: een toiletruimte va
 | Space_1      | 1,9 m²      | nee                |
 | Space_2      | 2,1 m²      | ja → 2 m² afgerond |
 | **Punten**   | 2 × 0,75    | **1,5**            |
+| **Totaal**   | **1,5**     |                    |
 
 ## Opmerkingen
 

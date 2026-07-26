@@ -9,7 +9,8 @@ import pytest
 REPO_ROOT = Path(__file__).parent.parent
 STELSELS_DIR = REPO_ROOT / "tests/stelsels"
 
-VERPLICHTE_HEADINGS = ("## Doel", "## Beleidsbron")
+VERPLICHTE_HEADINGS_STELSELGROEP = ("## Doel", "## Beleidsbron")
+VERPLICHTE_HEADINGS_EENHEID = ("## Opmerkingen",)
 IMPLEMENTATIETOELICHTING_LINK = re.compile(
     r"\[([^\]]+)\]\(([^)]*docs/implementatietoelichtingen/[^)#]+\.md)(#[^)]+)?\)"
 )
@@ -19,6 +20,7 @@ QUOTE_BLOCK_START = re.compile(
 QUOTED_SEGMENT = re.compile(r'"([^"]*)"')
 ELLIPSIS_ONLY = re.compile(r"^\s*\(\.\.\.\)\s*$")
 HEADING_LINE = re.compile(r"^(#{1,6})\s+(.+)$")
+MAXIMALE_HUUR = re.compile(r"maximale\s+huur(?!prijs)", re.IGNORECASE)
 
 
 def _resolve_implementatietoelichting(context_path: Path, rel_path: str) -> Path:
@@ -29,6 +31,12 @@ def _resolve_implementatietoelichting(context_path: Path, rel_path: str) -> Path
 
 def _case_dirs() -> list[Path]:
     return sorted(p.parent for p in STELSELS_DIR.rglob("input.json"))
+
+
+def _is_eenheidtest(case_dir: Path) -> bool:
+    """True voor tests/stelsels/{stelsel}/eenheden/{id}/."""
+    parts = case_dir.relative_to(STELSELS_DIR).parts
+    return len(parts) >= 2 and parts[1] == "eenheden"
 
 
 def _heading_anchor(title: str) -> str:
@@ -146,17 +154,7 @@ def _primary_implementatietoelichting(
     return None
 
 
-@pytest.mark.parametrize(
-    "case_dir", _case_dirs(), ids=lambda p: str(p.relative_to(STELSELS_DIR))
-)
-def test_test_context_aanwezig_en_volledig(case_dir: Path) -> None:
-    context_path = case_dir / "input_context.md"
-    assert context_path.exists(), f"Geen input_context.md in {case_dir}"
-
-    content = context_path.read_text()
-    for heading in VERPLICHTE_HEADINGS:
-        assert heading in content, f"{heading} ontbreekt in {context_path}"
-
+def _assert_implementatietoelichting_links(content: str, context_path: Path) -> None:
     for match in IMPLEMENTATIETOELICHTING_LINK.finditer(content):
         rel_path = match.group(2)
         anchor = match.group(3) or ""
@@ -169,6 +167,8 @@ def test_test_context_aanwezig_en_volledig(case_dir: Path) -> None:
                 target
             ), f"Anchor {anchor} niet gevonden in {rel_path}"
 
+
+def _assert_quotes_tegen_toelichting(content: str, context_path: Path) -> None:
     quote_blocks = _parse_quote_blocks(content)
     assert quote_blocks, f"Geen Beleidsboek (quote)-blok in {context_path}"
     assert all(
@@ -195,3 +195,31 @@ def test_test_context_aanwezig_en_volledig(case_dir: Path) -> None:
                 f"van {target.name} ({context_path}): {segment!r}"
             )
             search_from = pos + len(normalized_segment)
+
+
+@pytest.mark.parametrize(
+    "case_dir", _case_dirs(), ids=lambda p: str(p.relative_to(STELSELS_DIR))
+)
+def test_test_context_aanwezig_en_volledig(case_dir: Path) -> None:
+    context_path = case_dir / "input_context.md"
+    assert context_path.exists(), f"Geen input_context.md in {case_dir}"
+
+    content = context_path.read_text()
+    assert not MAXIMALE_HUUR.search(
+        content
+    ), f"Geen maximale huur noemen in {context_path}"
+
+    eenheidtest = _is_eenheidtest(case_dir)
+    verplichte = (
+        VERPLICHTE_HEADINGS_EENHEID if eenheidtest else VERPLICHTE_HEADINGS_STELSELGROEP
+    )
+    for heading in verplichte:
+        assert heading in content, f"{heading} ontbreekt in {context_path}"
+
+    _assert_implementatietoelichting_links(content, context_path)
+
+    quote_blocks = _parse_quote_blocks(content)
+    if eenheidtest and not quote_blocks:
+        return
+
+    _assert_quotes_tegen_toelichting(content, context_path)

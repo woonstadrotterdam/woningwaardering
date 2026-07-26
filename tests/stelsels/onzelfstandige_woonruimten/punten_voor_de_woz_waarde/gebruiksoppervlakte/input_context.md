@@ -15,3 +15,4 @@ Test berekening van WOZ-punten op basis van WOZ-waarde per m² ten opzichte van 
 | Onderdeel           | Aantal     | Punten |
 | ------------------- | ---------- | ------ |
 | Percentage verschil | -0.0711688 | 12     |
+| **Totaal**          |            | **12** |

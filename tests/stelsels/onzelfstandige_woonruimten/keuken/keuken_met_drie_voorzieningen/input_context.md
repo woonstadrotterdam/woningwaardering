@@ -16,3 +16,4 @@ Test dat keukenvoorzieningen buiten de keukenruimte niet meetellen voor extra pu
 | Lengte aanrecht        | 1000   | 4      |
 | Inbouw koelkast        | 2      | 2      |
 | Inbouw oven elektrisch | 1      | 1      |
+| **Totaal**             |        | **7**  |

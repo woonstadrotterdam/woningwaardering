@@ -15,6 +15,7 @@ Test dat bij twee aanrechten in één keuken alleen het aanrecht met `detailSoor
 | ---------------------- | ------- | ----------- | ------ |
 | Aanrecht 1             | 2000 mm | AAN         | 7      |
 | Aanrecht 2 (genegeerd) | 2000 mm | ontbreekt   | —      |
+| **Totaal**             |         |             | **7**  |
 
 ## Opmerkingen
 

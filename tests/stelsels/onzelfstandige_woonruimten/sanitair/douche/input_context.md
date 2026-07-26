@@ -11,6 +11,7 @@ Test waardering van een douche (3 punten totaal).
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| Douche    | 1      | 3      |
+| Onderdeel  | Aantal | Punten |
+| ---------- | ------ | ------ |
+| Douche     | 1      | 3      |
+| **Totaal** |        | **3**  |

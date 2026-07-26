@@ -14,7 +14,8 @@ Test waardering van een toilet in de badkamer (4.75 punten totaal).
 
 ## Handmatige berekening
 
-| Onderdeel      | Aantal | Punten |
-| -------------- | ------ | ------ |
-| Hangend toilet | 1      | 2.75   |
-| Staand Toilet  | 1      | 2      |
+| Onderdeel      | Aantal | Punten   |
+| -------------- | ------ | -------- |
+| Hangend toilet | 1      | 2.75     |
+| Staand Toilet  | 1      | 2        |
+| **Totaal**     |        | **4.75** |

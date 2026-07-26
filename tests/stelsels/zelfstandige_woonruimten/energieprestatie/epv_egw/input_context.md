@@ -16,3 +16,4 @@ De input bevat een eengezinswoning met geldige energie-index (label C) en prijsc
 | Situatie            | Punten |
 | ------------------- | ------ |
 | EPV eengezinswoning | 32     |
+| **Totaal**          | **32** |

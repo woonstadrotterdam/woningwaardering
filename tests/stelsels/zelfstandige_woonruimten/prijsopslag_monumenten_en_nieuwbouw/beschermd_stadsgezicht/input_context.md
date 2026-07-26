@@ -17,6 +17,7 @@ Test dat een woning in een rijksbeschermd stadsgezicht met bouwjaar 1964 (vóór
 | Criterium                             | Opslag    |
 | ------------------------------------- | --------- |
 | Rijksbeschermd stads- of dorpsgezicht | 5% (0,05) |
+| **Totaal**                            | **0**     |
 
 ## Opmerkingen
 

@@ -14,6 +14,7 @@ Test aanrechtpunten (3m) in een gedeelde keuken, verdeeld over 2 onzelfstandige 
 | Onderdeel       | Aantal | Punten |
 | --------------- | ------ | ------ |
 | Lengte aanrecht | 3001   | 5      |
+| **Totaal**      |        | **5**  |
 
 ## Opmerkingen
 

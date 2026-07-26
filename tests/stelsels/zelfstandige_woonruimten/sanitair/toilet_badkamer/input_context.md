@@ -10,3 +10,11 @@ Test lagere puntentoekenning voor toiletten in de badkamer: hangend 2,75 + staan
 - Beleidsboek (quote):
   "Toilet (staand) in een badkamer | 2"
   "Hangend toilet in een badkamer | 2,75"
+
+## Handmatige berekening
+
+| Onderdeel      | Aantal | Punten   |
+| -------------- | ------ | -------- |
+| Hangend toilet | 1      | 2.75     |
+| Staand Toilet  | 1      | 2        |
+| **Totaal**     |        | **4.75** |

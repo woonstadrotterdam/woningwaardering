@@ -12,3 +12,12 @@ Test dat de WOZ-cap niet wordt toegepast bij een kleine nieuwbouwwoning (< 40 m�
   "de woning is kleiner dan 40 m² en,"
   (...)
   "de woning ligt in de COROP-gebieden Amsterdam of Utrecht"
+
+## Handmatige berekening
+
+| Onderdeel                | Aantal | Punten    |
+| ------------------------ | ------ | --------- |
+| Onderdeel I              | —      | 46.57     |
+| Onderdeel II             | —      | 198.03    |
+| Afronding op kwartpunten | —      | -0.1      |
+| **Totaal**               |        | **244.5** |

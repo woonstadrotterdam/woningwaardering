@@ -15,8 +15,12 @@ Test waardering van alle parkeertypes (I, II, III) in één testcase.
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| Type I    | 1      | 0.45   |
-| Type II   | 1      | 0.3    |
-| Type III  | 1      | 0.2    |
+Gedeeld met 10 adressen en 2 onzelfstandige woonruimten (9 / 10 / 6 / 10 / 4 / 10 per type).
+
+| Onderdeel                               | Aantal | Punten |
+| --------------------------------------- | ------ | ------ |
+| Type I (gedeeld /10 adressen /2 onz.)   | 1      | 0.45   |
+| Type II (gedeeld /10 adressen /2 onz.)  | 1      | 0.3    |
+| Type III (gedeeld /10 adressen /2 onz.) | 1      | 0.2    |
+| Afronding                               |        | 0.05   |
+| **Totaal**                              |        | **1**  |

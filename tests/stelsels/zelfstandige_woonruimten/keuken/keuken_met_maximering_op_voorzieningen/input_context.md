@@ -18,4 +18,4 @@ Test maximering wanneer extra voorzieningen het aanrecht overstijgen: aanrecht 1
 | Inbouw oven elektrisch        | 1      | 1               | 1      |
 | Subtotaal extra voorzieningen |        |                 | 5      |
 | Maximering (aftrek)           |        |                 | −1     |
-| **Totaal**                    |        |                 | **8**  |
+| **Totaal**                    |        | **8**           | **8**  |

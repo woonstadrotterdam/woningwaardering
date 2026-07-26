@@ -13,10 +13,11 @@ De input combineert `doelgroep` Zorg, `monumenten` rijksmonument en een woonkame
 
 ## Handmatige berekening
 
-| Component                        | Berekening                         | Punten |
-| -------------------------------- | ---------------------------------- | ------ |
-| Basispuntentotaal rubrieken 1–11 | (zelfde als testcase `zorgwoning`) | 40,71  |
-| Zorgwoning 35%                   | 40,71 × 0,35                       | 14,25  |
+| Component                        | Berekening                         | Punten    |
+| -------------------------------- | ---------------------------------- | --------- |
+| Basispuntentotaal rubrieken 1–11 | (zelfde als testcase `zorgwoning`) | 40,71     |
+| Zorgwoning 35%                   | 40,71 × 0,35                       | 14,25     |
+| **Totaal**                       |                                    | **14,25** |
 
 ## Opmerkingen
 

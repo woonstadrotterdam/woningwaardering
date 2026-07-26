@@ -16,6 +16,7 @@ Test dat keukenvoorzieningen (2× inbouwkoelkast) in een badkamer niet meetellen
 | Keuken               | Aanrecht 1000 mm   | 4                 |
 | Badkamer             | 2× inbouw koelkast | 0 (buiten keuken) |
 | **Totaal rubriek 5** |                    | **4**             |
+| **Totaal**           |                    | **4**             |
 
 ## Opmerkingen
 

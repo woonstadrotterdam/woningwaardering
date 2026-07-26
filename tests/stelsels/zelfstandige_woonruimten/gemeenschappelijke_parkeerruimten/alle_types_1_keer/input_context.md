@@ -21,7 +21,7 @@ Verwacht totaal: **2 punten** (0,9 + 0,6 + 0,4 na afronding per rubriek).
 | I          | PIP (inpandige garage) | 9           | 1      | 10       | 9 / 10     | 0,9     |
 | II         | CAR (carport)          | 6           | 1      | 10       | 6 / 10     | 0,6     |
 | III        | PBC (buiten)           | 4           | 1      | 10       | 4 / 10     | 0,4     |
-| **Totaal** |                        |             |        |          |            | **2,0** |
+| **Totaal** |                        | **2**       |        |          |            | **2,0** |
 
 ## Opmerkingen
 

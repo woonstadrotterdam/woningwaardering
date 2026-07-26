@@ -14,6 +14,7 @@ Test dat een schuur die als vertrek is ingeschoten (`Ruimtesoort.vertrek`, opper
 | Ruimte             | Oppervlakte | Punten |
 | ------------------ | ----------- | ------ |
 | Schuur als vertrek | 6 m²        | 6      |
+| **Totaal**         |             | **6**  |
 
 ## Opmerkingen
 

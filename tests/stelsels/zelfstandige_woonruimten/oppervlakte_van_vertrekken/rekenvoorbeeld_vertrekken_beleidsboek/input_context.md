@@ -17,6 +17,7 @@ Test het rekenvoorbeeld uit het beleidsboek voor afronding van vertrekoppervlakt
 | Keuken     | 11,24 m²                  |
 | Som        | 26,73 m² → 27 m²          |
 | **Punten** | **27** (1 p/m²)           |
+| **Totaal** | **27**                    |
 
 ## Opmerkingen
 

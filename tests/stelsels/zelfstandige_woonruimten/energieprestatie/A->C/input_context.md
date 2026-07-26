@@ -19,3 +19,4 @@ De input bevat een eengezinswoning met energie-index waarde 1,48 en label A. De 
 | Energie-index                  | 1,48            |
 | Klasse (EI 1,4–1,8)            | C               |
 | Punten eengezinswoning label C | 22              |
+| **Totaal**                     | **22**          |

@@ -77,14 +77,14 @@ Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er VERA-ee
   output.json
   output.log      # gegenereerd (review)
   output.txt      # gegenereerd (leesbare tabel)
-  input_context.md # verplicht: doel en beleidsbron
+  input_context.md # verplicht; secties hangen af van testtype
 ```
 
-**Stelsel-ketentests** (volledige woningwaardering per eenheid):
+**Eenheidtest** (stelsel-ketentest, volledige woningwaardering per eenheid):
 
 `tests/stelsels/{stelsel}/eenheden/{vera_id}/`
 
-**Stelselgroep-specifieke tests:**
+**Stelselgroeptest** (één stelselgroep / beleidsbranch):
 
 `tests/stelsels/{stelsel}/{stelselgroep}/{case_naam}/`
 
@@ -92,7 +92,25 @@ De testbestanden staan naast de cases in dezelfde stelselgroep-map, bijvoorbeeld
 
 ### input_context.md
 
-Elke case-map met `input.json` heeft een `input_context.md` met minimaal `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), en minstens één **letterlijk** beleidsboekcitaat uit die gelinkte sectie:
+Elke case-map met `input.json` heeft een `input_context.md`. Welke secties verplicht zijn, hangt af van het testtype. Noem **geen maximale huur** (eurobedrag) in `input_context.md`: die wordt jaarlijks geïndexeerd. De beleidsterm **maximale huurprijs** in quotes of bij prijsopslag-% mag wel.
+
+#### Eenheidtest
+
+Verplicht is `## Opmerkingen`: scenario, bijzonderheden en het verwachte **puntentotaal**. `## Doel` is optioneel. `## Beleidsbron` en `## Handmatige berekening` zijn niet nodig (ketentests dekken het hele stelsel; detailregels horen bij stelselgroeptests).
+
+```markdown
+# 15004000185
+
+## Opmerkingen
+
+Stelsel-ketentest voor onzelfstandige woonruimten. De eenheid heeft één privé
+slaapkamer en deelt keuken en badruimte met één andere onzelfstandige woonruimte.
+Verwacht wordt **54 punten** totaal.
+```
+
+#### Stelselgroeptest
+
+Verplicht zijn `## Doel` en `## Beleidsbron`. Link naar de implementatietoelichting met een pad relatief aan de case-map (zodat klikken in de editor werkt), en minstens één **letterlijk** beleidsboekcitaat uit die gelinkte sectie. De quote-set moet de **specifieke beleidsregel die de case test** dekken — niet alleen een algemene zin uit dezelfde rubriek.
 
 ```markdown
 ## Beleidsbron
@@ -109,6 +127,15 @@ Niet-aaneengesloten stukken uit dezelfde sectie in één blok, met `(...)` als w
   "Wanneer de totale oppervlakte van het onderdeel vertrekken minder is dan 8 m²."
 ```
 
-Elk `"..."`-segment moet letterlijk in de gelinkte sectie voorkomen (in documentvolgorde). Geen parafrases, geen `…` midden in een string, geen `"A" en "B"` op één regel. `tests/test_test_context.py` controleert dit.
+Elk `"..."`-segment moet letterlijk in de gelinkte sectie voorkomen (in documentvolgorde). Geen parafrases, geen `…` midden in een string, geen `"A" en "B"` op één regel. `tests/test_test_context.py` controleert letterlijkheid en aanwezigheid; relevantie voor de case-branch is een review-afspraak.
+
+Bij cases met een puntenuitkomst hoort `## Handmatige berekening`:
+
+- Tabel met onderdelen en tussenresultaten
+- Rij **Totaal** die overeenkomt met `output.json` (na afronding)
+- Afronding zichtbaar wanneer de ruwe waarde afwijkt van de toegekende punten (bijv. `1,84 → 1,75`)
+- Bij gedeelde of gemeenschappelijke onderdelen: de deel-factoren (aantal onzelfstandige woonruimten en/of adressen)
+
+Pure warning- of 0-puntencases zonder berekening: een korte zin in plaats van een lege tabel.
 
 Voorbeeld stelselgroep-case: `tests/stelsels/zelfstandige_woonruimten/oppervlakte_van_vertrekken/gedeelde_berging/` — een gedeelde berging om specifieke regels in oppervlakte_van_vertrekken te testen.

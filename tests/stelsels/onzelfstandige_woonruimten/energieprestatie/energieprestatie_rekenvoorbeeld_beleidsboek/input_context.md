@@ -11,6 +11,7 @@ Rekenvoorbeeld uit het beleidsboek voor energieprestatie met verwacht totaal van
 
 ## Handmatige berekening
 
-| Onderdeel | Aantal | Punten |
-| --------- | ------ | ------ |
-| A         | 30     | 19.5   |
+| Onderdeel  | Aantal | Punten   |
+| ---------- | ------ | -------- |
+| A          | 30     | 19.5     |
+| **Totaal** |        | **19.5** |

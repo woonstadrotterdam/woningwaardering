@@ -31,7 +31,12 @@ def check_case(rel: str) -> list[str]:
     if not context_path.exists():
         return [f"missing {context_path}"]
     content = context_path.read_text()
+    if _ctx.MAXIMALE_HUUR.search(content):
+        errors.append("maximale huur genoemd")
+    eenheidtest = _ctx._is_eenheidtest(case_dir)
     blocks = _ctx._parse_quote_blocks(content)
+    if eenheidtest and not blocks:
+        return errors
     if not blocks:
         errors.append("geen quote-blok")
     if any(not b for b in blocks):

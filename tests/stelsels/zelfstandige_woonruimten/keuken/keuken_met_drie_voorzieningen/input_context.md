@@ -16,7 +16,8 @@ Test dat extra keukenvoorzieningen worden opgeteld wanneer het totaal onder de m
 | Aanrecht 1000 mm       | 1      | 4               | 4      |
 | Inbouw koelkast        | 2      | 1               | 2      |
 | Inbouw oven elektrisch | 1      | 1               | 1      |
-| **Totaal**             |        |                 | **7**  |
+| Afronding              |        | 1               |        |
+| **Totaal**             |        | **7**           | **7**  |
 
 ## Opmerkingen
 

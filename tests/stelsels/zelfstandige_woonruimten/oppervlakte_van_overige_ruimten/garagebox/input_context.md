@@ -16,6 +16,7 @@ Test dat twee privé garageboxen (elk 15 m², `Ruimtesoort.overige_ruimte`) word
 | Garagebox 1  | 15 m²       | (in totaal)          |
 | Garagebox 2  | 15 m²       |                      |
 | Som afgerond | 30 m²       | 30 × 0,75 = **22,5** |
+| **Totaal**   |             | **22,5**             |
 
 ## Opmerkingen
 

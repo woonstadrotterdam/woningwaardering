@@ -14,3 +14,4 @@ Test dat een bad in de badkamer als sanitaire basisvoorziening **6 punten** ople
 | Voorziening | Aantal | Punten per stuk | Totaal |
 | ----------- | ------ | --------------- | ------ |
 | Bad         | 1      | 6               | 6      |
+| **Totaal**  |        | **6**           |        |

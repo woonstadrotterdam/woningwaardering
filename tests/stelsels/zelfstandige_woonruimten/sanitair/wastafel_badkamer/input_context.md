@@ -17,4 +17,4 @@ Test dat in de badkamer geen maximum geldt voor wastafels: 2 wastafels (2 × 1) 
 | -------------------- | ------ | --------------- | ------ |
 | Wastafel             | 2      | 1               | 2      |
 | Meerpersoonswastafel | 2      | 1,50            | 3      |
-| **Totaal**           |        |                 | 5      |
+| **Totaal**           |        | **5**           | 5      |

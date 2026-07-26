@@ -13,10 +13,11 @@ De input bevat `doelgroep.code` `ZOR` en een woonkamer. Verwacht wordt één waa
 
 ## Handmatige berekening
 
-| Component                        | Berekening                                            | Punten |
-| -------------------------------- | ----------------------------------------------------- | ------ |
-| Basispuntentotaal rubrieken 1–11 | (afgeleid uit overige stelselgroepen voor deze input) | 40,71  |
-| Zorgwoning 35%                   | 40,71 × 0,35                                          | 14,25  |
+| Component                        | Berekening                                            | Punten    |
+| -------------------------------- | ----------------------------------------------------- | --------- |
+| Basispuntentotaal rubrieken 1–11 | (afgeleid uit overige stelselgroepen voor deze input) | 40,71     |
+| Zorgwoning 35%                   | 40,71 × 0,35                                          | 14,25     |
+| **Totaal**                       |                                                       | **14,25** |
 
 ## Opmerkingen
 

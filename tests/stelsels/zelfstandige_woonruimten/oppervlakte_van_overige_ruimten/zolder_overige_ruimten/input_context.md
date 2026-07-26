@@ -16,10 +16,7 @@ Test waardering van zolders als overige ruimte: alleen zolders met trap of vlizo
 | Met vaste trap | ja    | 10 m²       | ja                 |
 | Zonder trap    | nee   | 10 m²       | nee                |
 | Met vlizotrap  | vlizo | 10 m²       | ja (met correctie) |
-
-Subtotaal: 20 m² → 20 × 0,75 = 15 punten  
-Correctie vlizotrap: min(5, (20−10) × 0,75) = −5 punten  
-**Totaal: 10 punten**
+| **Totaal**     |       | **10**      |                    |
 
 ## Opmerkingen
 

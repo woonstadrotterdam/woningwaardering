@@ -15,6 +15,7 @@ Test dat bij twee aanrechten alleen het aanrecht met een opgegeven lengte meetel
 | ---------------------- | --------- | ------ |
 | Aanrecht 1             | 2000 mm   | 7      |
 | Aanrecht 2 (genegeerd) | ontbreekt | —      |
+| **Totaal**             |           | **7**  |
 
 ## Opmerkingen
 

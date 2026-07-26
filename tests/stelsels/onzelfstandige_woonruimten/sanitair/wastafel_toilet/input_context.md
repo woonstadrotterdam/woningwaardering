@@ -11,9 +11,10 @@ Test waardering van een wastafel in de toiletruimte (2.5 punten totaal).
 
 ## Handmatige berekening
 
-| Onderdeel                              | Aantal | Punten |
-| -------------------------------------- | ------ | ------ |
-| Wastafel                               | 2      | 2      |
-| Max 1.0 punt voor Wastafel             | —      | -1     |
-| Meerpersoonswastafel                   | 2      | 3      |
-| Max 1.5 punt voor Meerpersoonswastafel | —      | -1.5   |
+| Onderdeel                              | Aantal | Punten  |
+| -------------------------------------- | ------ | ------- |
+| Wastafel                               | 2      | 2       |
+| Max 1.0 punt voor Wastafel             | —      | -1      |
+| Meerpersoonswastafel                   | 2      | 3       |
+| Max 1.5 punt voor Meerpersoonswastafel | —      | -1.5    |
+| **Totaal**                             |        | **2.5** |

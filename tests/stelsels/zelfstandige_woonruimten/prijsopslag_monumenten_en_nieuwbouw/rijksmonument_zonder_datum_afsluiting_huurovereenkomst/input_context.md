@@ -11,9 +11,10 @@ Test het fallback-gedrag wanneer `datumAfsluitenHuurovereenkomst` ontbreekt bij 
 
 ## Handmatige berekening
 
-| Criterium     | Datum overeenkomst | Fallback             | Opslag     |
-| ------------- | ------------------ | -------------------- | ---------- |
-| Rijksmonument | ontbreekt          | peildatum 2026-01-01 | 35% (0,35) |
+| Criterium     | Datum overeenkomst | Fallback | Opslag     |
+| ------------- | ------------------ | -------- | ---------- |
+| Rijksmonument | ontbreekt          | 2026 → 0 | 35% (0,35) |
+| **Totaal**    |                    | **0**    |            |
 
 ## Opmerkingen
 

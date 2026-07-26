@@ -14,3 +14,4 @@ Test waardering van een drempelloze inrijdouche als extra voorziening (3 punten 
 | Onderdeel               | Aantal | Punten |
 | ----------------------- | ------ | ------ |
 | Drempelloze inrijdouche | 1      | 3      |
+| **Totaal**              |        | **3**  |

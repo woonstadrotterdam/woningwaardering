@@ -12,10 +12,11 @@ Test extra verkoelingspunt (1) bovenop verwarmingspunten (2) voor een vertrek da
 
 ## Handmatige berekening
 
-| Onderdeel  | Aantal | Punten |
-| ---------- | ------ | ------ |
-| Slaapkamer | —      | 1      |
-| Slaapkamer | —      | 0.5    |
+| Onderdeel  | Aantal | Punten  |
+| ---------- | ------ | ------- |
+| Slaapkamer | —      | 1       |
+| Slaapkamer | —      | 0.5     |
+| **Totaal** |        | **1.5** |
 
 ## Opmerkingen
 

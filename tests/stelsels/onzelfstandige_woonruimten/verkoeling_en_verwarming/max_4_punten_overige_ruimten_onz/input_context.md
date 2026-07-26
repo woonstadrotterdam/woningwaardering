@@ -22,6 +22,7 @@ Test maximering van 4 punten voor verwarmde overige ruimten.
 | Berging4          | —      | 0.5    |
 | Berging5          | —      | 0.5    |
 | Maximaal 4 punten | —      | -0.5   |
+| **Totaal**        |        | **2**  |
 
 ## Opmerkingen
 

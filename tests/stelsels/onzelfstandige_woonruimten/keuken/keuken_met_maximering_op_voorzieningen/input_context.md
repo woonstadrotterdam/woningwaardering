@@ -17,3 +17,4 @@ Test dat keukenvoorzieningen buiten de keukenruimte niet meetellen voor extra pu
 | Inbouw koelkast                       | 4      | 4      |
 | Inbouw oven elektrisch                | 1      | 1      |
 | Maximaal evenveel punten als aanrecht | —      | -1     |
+| **Totaal**                            |        | **8**  |

@@ -11,9 +11,10 @@ Test aanrechtpunten (2) in een gedeelde keuken, verdeeld over 2 onzelfstandige w
 
 ## Handmatige berekening
 
-| Onderdeel       | Aantal | Punten |
-| --------------- | ------ | ------ |
-| Lengte aanrecht | 2000   | 3.5    |
+| Onderdeel       | Aantal | Punten  |
+| --------------- | ------ | ------- |
+| Lengte aanrecht | 2000   | 3.5     |
+| **Totaal**      |        | **3.5** |
 
 ## Opmerkingen
 

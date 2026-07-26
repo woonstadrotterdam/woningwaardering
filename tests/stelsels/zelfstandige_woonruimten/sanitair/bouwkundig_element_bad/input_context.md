@@ -8,3 +8,10 @@ Test waardering van een bad via `bouwkundigeElementen` (detailsoort bad) in plaa
 
 - Implementatietoelichting: [§2.6.1 Sanitaire basisvoorzieningen](../../../../../docs/implementatietoelichtingen/zelfstandige-woonruimten.md#261-punten-voor-sanitaire-basisvoorzieningen)
 - Beleidsboek (quote): "Bad | 6"
+
+## Handmatige berekening
+
+| Onderdeel  | Aantal | Punten |
+| ---------- | ------ | ------ |
+| Bad        | 1      | 6      |
+| **Totaal** |        | **6**  |

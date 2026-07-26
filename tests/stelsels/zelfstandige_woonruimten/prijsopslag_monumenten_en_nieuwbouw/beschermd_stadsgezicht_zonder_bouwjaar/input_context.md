@@ -14,6 +14,7 @@ Test dat een rijksbeschermd stadsgezicht zonder opgegeven bouwjaar geen opslag o
 | Criterium                   | Bouwjaar  | Opslag |
 | --------------------------- | --------- | ------ |
 | Rijksbeschermd stadsgezicht | ontbreekt | 0%     |
+| **Totaal**                  |           | **0**  |
 
 ## Opmerkingen
 

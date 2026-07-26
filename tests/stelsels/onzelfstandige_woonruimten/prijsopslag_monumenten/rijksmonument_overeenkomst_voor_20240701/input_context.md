@@ -9,6 +9,13 @@ Test rijksmonument overeenkomst voor 20240701 met verwachte puntentoeslag van 10
 - Implementatietoelichting: [§2.14.3 Rijksmonumenten](../../../../../docs/implementatietoelichtingen/onzelfstandige-woonruimten.md#2144-rijksmonumenten)
 - Beleidsboek (quote): "Als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 10 punten extra toegekend."
 
+## Handmatige berekening
+
+| Onderdeel     | Aantal | Punten |
+| ------------- | ------ | ------ |
+| Rijksmonument | —      | 10     |
+| **Totaal**    |        | **10** |
+
 ## Opmerkingen
 
 - De datum van afsluiten huurovereenkomst bepaalt of percentage- of puntentoeslag geldt.

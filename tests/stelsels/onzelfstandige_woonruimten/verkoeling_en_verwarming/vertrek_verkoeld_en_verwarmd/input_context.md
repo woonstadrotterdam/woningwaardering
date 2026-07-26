@@ -16,6 +16,7 @@ Test extra verkoelingspunt (1) bovenop verwarmingspunten (2) voor een vertrek da
 | ---------- | ------ | ------ |
 | Slaapkamer | —      | 2      |
 | Slaapkamer | —      | 1      |
+| **Totaal** |        | **3**  |
 
 ## Opmerkingen
 

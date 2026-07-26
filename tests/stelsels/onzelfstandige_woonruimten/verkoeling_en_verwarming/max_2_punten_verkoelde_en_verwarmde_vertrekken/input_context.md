@@ -23,6 +23,7 @@ Test maximering van 2 punten voor verkoelde én verwarmde vertrekken.
 | Slaapkamer2       | —      | 1      |
 | Slaapkamer3       | —      | 1      |
 | Maximaal 2 punten | —      | -1     |
+| **Totaal**        |        | **8**  |
 
 ## Opmerkingen
 

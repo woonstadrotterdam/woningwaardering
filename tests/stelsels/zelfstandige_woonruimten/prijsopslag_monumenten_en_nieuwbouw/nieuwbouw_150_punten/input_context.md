@@ -11,9 +11,12 @@ Test dat een nieuwbouwwoning die in de middensector valt (volledige eenheid met 
 
 ## Handmatige berekening
 
-| Criterium                                                    | Opslag     |
-| ------------------------------------------------------------ | ---------- |
-| Nieuwbouw (`beginBouwdatum` 2023, `inExploitatiedatum` 2024) | 10% (0,10) |
+Geen puntentoeslag in deze stelselgroep; de nieuwbouwopslag is een percentage op de maximale huurprijs.
+
+| Criterium                | Opslag |
+| ------------------------ | ------ |
+| Nieuwbouw (middensector) | 10%    |
+| **Totaal**               | **0**  |
 
 ## Opmerkingen
 

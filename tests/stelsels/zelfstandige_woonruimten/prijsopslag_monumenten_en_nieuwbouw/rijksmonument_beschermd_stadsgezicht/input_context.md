@@ -11,11 +11,13 @@ Test dat bij cumulatie van rijksmonument en beschermd stadsgezicht alleen de hoo
 
 ## Handmatige berekening
 
-| Monumentstatus                              | Opslag            |
-| ------------------------------------------- | ----------------- |
-| Rijksmonument                               | 35%               |
-| Rijksbeschermd stadsgezicht (bouwjaar 1964) | niet cumuleerbaar |
-| **Totaal**                                  | **35%**           |
+Geen puntentoeslag in deze stelselgroep; de opslag is een percentage op de maximale huurprijs.
+
+| Monumentstatus              | Opslag            | Punten |
+| --------------------------- | ----------------- | ------ |
+| Rijksmonument               | 35%               | —      |
+| Rijksbeschermd stadsgezicht | niet cumuleerbaar | —      |
+| **Totaal**                  |                   | **0**  |
 
 ## Opmerkingen
 

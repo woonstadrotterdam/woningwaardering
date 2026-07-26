@@ -11,11 +11,11 @@ Test maximering van wastafels in een vertrek (niet-badkamer): 2 wastafels + 2 me
 
 ## Handmatige berekening
 
-| Voorziening          | Bruto | Max | Netto |
-| -------------------- | ----- | --- | ----- |
-| Wastafel             | 2,0   | 1,0 | 1,0   |
-| Meerpersoonswastafel | 3,0   | 1,5 | 1,5   |
-| Totaal               |       |     | 2,5   |
+| Voorziening          | Bruto   | Max | Netto |
+| -------------------- | ------- | --- | ----- |
+| Wastafel             | 2,0     | 1,0 | 1,0   |
+| Meerpersoonswastafel | 3,0     | 1,5 | 1,5   |
+| Totaal               | **2,5** |     | 2,5   |
 
 ## Opmerkingen
 

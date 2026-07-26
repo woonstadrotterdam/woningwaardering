@@ -23,6 +23,7 @@ Test dat een open keuken en het aangrenzende vertrek afzonderlijk verwarmingspun
 | Verwarmde woonkamer        | —      | 1      |
 | Verwarmde slaapkamer       | —      | 1      |
 | Verwarmde woonkamer/keuken | —      | 1      |
+| **Totaal**                 |        | **7**  |
 
 ## Opmerkingen
 

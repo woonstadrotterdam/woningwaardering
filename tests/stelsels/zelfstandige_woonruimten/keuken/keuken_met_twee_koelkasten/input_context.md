@@ -15,4 +15,5 @@ Test dat meerdere identieke extra voorzieningen (2× inbouwkoelkast) elk afzonde
 | ---------------- | ------ | --------------- | ------ |
 | Aanrecht 1000 mm | 1      | 4               | 4      |
 | Inbouw koelkast  | 2      | 1               | 2      |
-| **Totaal**       |        |                 | **6**  |
+| Afronding        |        | 1               |        |
+| **Totaal**       |        | **6**           | **6**  |

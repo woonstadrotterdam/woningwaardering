@@ -11,9 +11,10 @@ Test dat een aanrecht korter dan 1 meter (900 mm) niet voldoet aan de basiseisen
 
 ## Handmatige berekening
 
-| Onderdeel | Lengte | Punten |
-| --------- | ------ | ------ |
-| Aanrecht  | 900 mm | 0      |
+| Onderdeel  | Lengte | Punten |
+| ---------- | ------ | ------ |
+| Aanrecht   | 900 mm | 0      |
+| **Totaal** |        | **0**  |
 
 ## Opmerkingen
 

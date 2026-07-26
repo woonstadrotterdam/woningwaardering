@@ -18,3 +18,4 @@ De input bevat een meergezinswoning (bouwjaar 1921) met een energieprestatie zon
 | Woningtype | Meergezinswoning     |
 | Bouwjaar   | 1921 (1976 of ouder) |
 | Punten     | −15                  |
+| **Totaal** | **-15**              |

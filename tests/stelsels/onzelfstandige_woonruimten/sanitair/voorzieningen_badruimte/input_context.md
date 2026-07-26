@@ -25,3 +25,4 @@ Test waardering van extra sanitaire voorzieningen in de badruimte (13 punten tot
 | Éénhandsmengkraan                               | 1      | 0.25   |
 | Thermostatische mengkraan                       | 1      | 0.5    |
 | Max verdubbeling punten bad en douche           | —      | -0.25  |
+| **Totaal**                                      |        | **13** |
