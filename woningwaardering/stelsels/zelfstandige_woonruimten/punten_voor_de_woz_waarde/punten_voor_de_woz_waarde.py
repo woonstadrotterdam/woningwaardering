@@ -145,19 +145,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             eenheid, factoren, woningwaardering_resultaat
         )
 
-        punten_onderdeel_I = utils.rond_af(
-            (woz_waarde / factor_onderdeel_I), decimalen=2
-        )
-        punten_onderdeel_II = utils.rond_af(
-            woz_waarde / oppervlakte / factor_onderdeel_II,
-            decimalen=2,
-        )
+        # §2.11.2 [ZEL]: onderdeel I en II niet tussentijds afronden; alleen totaal op kwart.
+        punten_onderdeel_I = woz_waarde / factor_onderdeel_I
+        punten_onderdeel_II = woz_waarde / oppervlakte / factor_onderdeel_II
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I:.2f}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I}"
         )
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II:.2f}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II}"
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten
@@ -281,12 +277,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             0,
         )
 
-        totaal_punten_zonder_cap = overige_punten + utils.rond_af(woz_punten, 0)
+        totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
         correctie_punten = self._cap_punten(
             eenheid, woz_punten, overige_punten, woningwaardering_resultaat
         )
 
-        if correctie_punten is not None and minimum_woz_punten == 0.0:
+        if correctie_punten is not None:
             totaal_punten_met_cap = totaal_punten_zonder_cap + correctie_punten
 
             logger.debug(
@@ -343,7 +339,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         """
         drempel_cap_woz = Decimal("187")
 
-        totaal_punten_zonder_cap = overige_punten + utils.rond_af(woz_punten, 0)
+        # §2.11.7 / §2.1.4 [ZEL]: 187-drempel op totaal na kwartafronding, niet op afgeronde WOZ.
+        totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
 
         if totaal_punten_zonder_cap < drempel_cap_woz:
             logger.info(
