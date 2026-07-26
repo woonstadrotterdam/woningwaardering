@@ -163,7 +163,6 @@ def _waardeer_toiletten(
         Ruimtedetailsoort.toiletruimte,
         Ruimtedetailsoort.badkamer,
         Ruimtedetailsoort.badkamer_met_toilet,
-        Ruimtedetailsoort.doucheruimte,
     ]:
         for toiletsoort in [
             Installatiesoort.hangend_toilet,
@@ -418,6 +417,7 @@ def _waardeer_installaties(
     bad_en_of_douche_aanwezig = (
         installaties[Installatiesoort.bad]
         + installaties[Installatiesoort.douche]
+        + installaties[Installatiesoort.drempelloze_inrijdouche]
         + installaties[Installatiesoort.bad_en_douche]
     ) > 0
 
