@@ -14,6 +14,7 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
+    adres_met_8_of_meer_onzelfstandige_woonruimten,
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
@@ -307,6 +308,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
         ] = []
 
+        adres_met_8 = adres_met_8_of_meer_onzelfstandige_woonruimten(ruimten)
+
         for ruimte in ruimten:
             if ruimte.soort is None:
                 warnings.warn(f"Geen soort gevonden voor ruimte {ruimte.id}")
@@ -330,6 +333,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 self.stelsel,
                 waarderingsgroep_builder=sanitair_subgroep,
                 deler=1,
+                adres_met_8_of_meer_onzelfstandige_woonruimten=adres_met_8,
             )
             if not waarderingen:
                 continue

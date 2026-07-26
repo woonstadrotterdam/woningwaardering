@@ -10,6 +10,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    adres_met_8_of_meer_onzelfstandige_woonruimten,
     maximeer_wastafels,
     waardeer_sanitair,
 )
@@ -54,6 +55,8 @@ class Sanitair(Stelselgroep):
             if not utils.gedeeld_met_adressen(ruimte)
         ]
 
+        adres_met_8 = adres_met_8_of_meer_onzelfstandige_woonruimten(ruimten)
+
         # Waardeer elke ruimte onder het bijbehorende gedeeld-met-criterium.
         ruimte_waarderingen: list[
             tuple[
@@ -74,6 +77,7 @@ class Sanitair(Stelselgroep):
                 self.stelsel,
                 waarderingsgroep_builder=gedeeld_met,
                 deler=1,
+                adres_met_8_of_meer_onzelfstandige_woonruimten=adres_met_8,
             )
             if not waarderingen:
                 continue
