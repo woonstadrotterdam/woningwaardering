@@ -1,0 +1,34 @@
+{
+  "id": "woonkamer_aanrecht_zonder_lengte",
+  "ruimten": [
+    {
+      "id": "woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 20.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          }
+        }
+      ],
+      "verwarmd": true,
+      "aantal": 1
+    }
+  ]
+}

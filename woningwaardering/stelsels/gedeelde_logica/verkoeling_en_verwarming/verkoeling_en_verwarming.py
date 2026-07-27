@@ -19,7 +19,7 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
+from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
@@ -62,16 +62,34 @@ def waardeer_verkoeling_en_verwarming(
     yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
 
 
-def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
-    return ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken or (
-        ruimte.detail_soort
-        in [
-            Ruimtedetailsoort.woonkamer,
-            Ruimtedetailsoort.woon_en_of_slaapkamer,
-            Ruimtedetailsoort.slaapkamer,
-        ]
-        and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.aanrecht)
+_OPEN_KEUKEN_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer_en_of_keuken,
+    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+)
+
+_VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer,
+    Ruimtedetailsoort.woon_en_of_slaapkamer,
+    Ruimtedetailsoort.slaapkamer,
+)
+
+
+def _heeft_aanrecht_langer_dan_1m(ruimte: EenhedenRuimte) -> bool:
+    # §2.3.2 ZEL NOTE: aanrecht langer dan 1 meter telt als open keuken.
+    return any(
+        element.lengte is not None and element.lengte > 1000
+        for element in get_bouwkundige_elementen(
+            ruimte, Bouwkundigelementdetailsoort.aanrecht
+        )
     )
+
+
+def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
+    if ruimte.detail_soort in _OPEN_KEUKEN_DETAIL_SOORTEN:
+        return True
+    if ruimte.detail_soort in _VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
+        return _heeft_aanrecht_langer_dan_1m(ruimte)
+    return False
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -154,7 +172,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             naam = ruimte.naam or ruimte.id or ""
             if (
                 heeft_open_keuken
-                and ruimte.detail_soort != Ruimtedetailsoort.woonkamer_en_of_keuken
+                and ruimte.detail_soort not in _OPEN_KEUKEN_DETAIL_SOORTEN
             ):
                 naam = f"{naam} met open keuken"
 
