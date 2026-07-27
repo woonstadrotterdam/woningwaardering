@@ -191,9 +191,12 @@ class Buitenruimten(Stelselgroep):
 
         waardering = WoningwaarderingResultatenWoningwaardering()
         waardering.aantal = float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
-        # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
-        # De in ieder geval 2 punten worden verderop toegevoegd.
-        if gedeeld_met_onzelfstandige_woonruimten(ruimte):
+        # 2.8.1 Privé: 0,35 punt per m² (+ 2 aanwezigheidspunten verderop).
+        # 2.8.2 Gemeenschappelijk (gedeeld met adressen en/of onzelfstandige
+        # woonruimten): 0,75 punt per m² / adressen / onzelfstandige woonruimten.
+        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+            ruimte
+        ):
             deler = Decimal(
                 (ruimte.gedeeld_met_aantal_adressen or 1)
                 * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
@@ -203,9 +206,7 @@ class Buitenruimten(Stelselgroep):
             )
         else:
             waardering.punten = float(
-                Decimal(str(ruimte.oppervlakte))
-                * Decimal("0.35")
-                / Decimal(str(ruimte.gedeeld_met_aantal_adressen or 1))
+                Decimal(str(ruimte.oppervlakte)) * Decimal("0.35")
             )
         yield waardering
 
