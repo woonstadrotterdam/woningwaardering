@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 3.0,
+      "punten": 1.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -45,6 +45,16 @@
         },
         {
           "criterium": {
+            "id": "sanitair__prive__slaapkamer__max_punten_wastafel",
+            "naam": "Max 1.0 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__slaapkamer"
+            }
+          },
+          "punten": -2.0
+        },
+        {
+          "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 8 onzelfstandige woonruimten"
           }
@@ -72,23 +82,6 @@
             }
           },
           "punten": 0.25
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte__max_punten_wastafel",
-            "naam": "Maximering voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte"
-            }
-          },
-          "punten": -0.13
-        },
-        {
-          "criterium": {
-            "id": "sanitair__afronding_op_kwartpunten",
-            "naam": "Afronding op kwartpunten"
-          },
-          "punten": -0.12
         }
       ]
     }
