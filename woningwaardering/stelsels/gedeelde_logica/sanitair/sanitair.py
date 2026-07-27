@@ -348,6 +348,13 @@ def _waardeer_baden_en_douches(
     aantal_bad_en_douches = (
         aantal_bad_en_douches_gekoppeld + aantal_bad_en_douche_expliciet
     )
+    aantal_gewone_douches_gekoppeld = min(
+        installaties[Installatiesoort.douche],
+        aantal_bad_en_douches_gekoppeld,
+    )
+    aantal_drempelloze_douches_gekoppeld = (
+        aantal_bad_en_douches_gekoppeld - aantal_gewone_douches_gekoppeld
+    )
 
     if aantal_bad_en_douches > 0:
         punten = rond_af(
@@ -366,12 +373,25 @@ def _waardeer_baden_en_douches(
             aantal=aantal_bad_en_douches,
         )
 
+    resterende_installaties = {
+        Installatiesoort.bad: (
+            installaties[Installatiesoort.bad] - aantal_bad_en_douches_gekoppeld
+        ),
+        Installatiesoort.douche: (
+            installaties[Installatiesoort.douche] - aantal_gewone_douches_gekoppeld
+        ),
+        Installatiesoort.drempelloze_inrijdouche: (
+            installaties[Installatiesoort.drempelloze_inrijdouche]
+            - aantal_drempelloze_douches_gekoppeld
+        ),
+    }
+
     for installatiesoort in [
         Installatiesoort.bad,
         Installatiesoort.douche,
         Installatiesoort.drempelloze_inrijdouche,
     ]:
-        aantal = installaties[installatiesoort] - aantal_bad_en_douches
+        aantal = resterende_installaties[installatiesoort]
         if aantal > 0:
             punten = rond_af(
                 Decimal(str(aantal)) * Decimal(str(punten_sanitair[installatiesoort])),
