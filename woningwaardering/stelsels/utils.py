@@ -937,6 +937,32 @@ def waarschuw_dubbele_ids(instance: BaseModel) -> None:
                 waarschuw_dubbele_ids(item)
 
 
+def _kastoppervlakte(ruimte: EenhedenRuimte) -> float:
+    """Berekent de totale oppervlakte van verbonden kasten zonder de ruimte te muteren.
+
+    §2.2.4 Kasten: de netto oppervlakte van een kast die in een vertrek uitkomt,
+    telt mee bij de oppervlakte van dat vertrek. Kasten op verkeersruimten niet.
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte waarvan de kasten worden bekeken.
+
+    Returns:
+        float: De totale kastoppervlakte.
+    """
+    if ruimte.detail_soort in (
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
+    ):
+        return 0.0
+    return sum(
+        vr.oppervlakte
+        for vr in ruimte.verbonden_ruimten or []
+        if vr.detail_soort == Ruimtedetailsoort.kast and vr.oppervlakte is not None
+    )
+
+
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
@@ -1037,14 +1063,17 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             else:
                 return None
 
+        # §2.2.4 Kasten: kastoppervlakte telt mee bij de drempeltoets.
+        opp_met_kasten = ruimte.oppervlakte + _kastoppervlakte(ruimte)
+
         if ruimte.soort == Ruimtesoort.vertrek:
-            if ruimte.oppervlakte >= 4:
+            if opp_met_kasten >= 4:
                 return Ruimtesoort.vertrek
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= 2:
                 return Ruimtesoort.overige_ruimten
 
         if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= 2:
                 return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort == Ruimtedetailsoort.toiletruimte:
