@@ -147,11 +147,21 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        if gedeeld_met_adressen(ruimte):
-            # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
+        # 2.8.2 Punten voor een gemeenschappelijke buitenruimte
+        # Gemeenschappelijke buitenruimten zijn ruimtes die worden gebruikt door:
+        # - meerdere bewoners die wonen op hetzelfde adres
+        # - bewoners van meerdere adressen, maar waarbij die adressen onderdeel
+        #   zijn van hetzelfde woongebouw.
+        # Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan
+        # voorwaarden voldoen, namelijk:
+        # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
+        #    meter, 1,50 meter (hoogte, breedte, diepte)
+        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+            ruimte
+        ):
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
                     UserWarning,
                 )
             if (
@@ -160,7 +170,7 @@ class Buitenruimten(Stelselgroep):
                 or (ruimte.breedte and ruimte.breedte < 1.5)
             ):
                 logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                 )
                 return
 
