@@ -5,7 +5,7 @@ SAMENVATTING 2400mm
 KEUKEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Keuken
-      - Subtotaal                                                  2400.00 mm     3.50 pt
+      - Totale aanrechtlengte                                      2400.00 mm     3.50 pt
         - Lengte aanrecht                                          1500.00 mm
         - Lengte aanrecht                                           900.00 mm
       - Extra voorzieningen

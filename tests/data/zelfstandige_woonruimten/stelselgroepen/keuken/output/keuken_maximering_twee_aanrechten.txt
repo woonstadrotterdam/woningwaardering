@@ -4,7 +4,7 @@ SAMENVATTING keuken_maximering_twee_aanrechten
 
 KEUKEN
   Keuken
-    - Subtotaal                                                    2000.00 mm     7.00 pt
+    - Totale aanrechtlengte                                        2000.00 mm     7.00 pt
       - Lengte aanrecht                                            1000.00 mm
       - Lengte aanrecht                                            1000.00 mm
     - Extra voorzieningen

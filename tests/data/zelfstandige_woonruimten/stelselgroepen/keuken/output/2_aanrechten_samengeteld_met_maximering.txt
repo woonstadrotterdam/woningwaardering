@@ -4,7 +4,7 @@ SAMENVATTING 2400mm
 
 KEUKEN
   Keuken
-    - Subtotaal                                                    2400.00 mm     7.00 pt
+    - Totale aanrechtlengte                                        2400.00 mm     7.00 pt
       - Lengte aanrecht                                            1500.00 mm
       - Lengte aanrecht                                             900.00 mm
     - Extra voorzieningen

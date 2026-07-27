@@ -23,7 +23,7 @@
           "aantal": 2000.0,
           "criterium": {
             "id": "keuken__keuken__subtotaal",
-            "naam": "Subtotaal",
+            "naam": "Totale aanrechtlengte",
             "bovenliggendeCriterium": {
               "id": "keuken__keuken"
             },

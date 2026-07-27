@@ -217,7 +217,7 @@ def _waardeer_aanrecht(
     )
     subtotaal = waarderingsgroep_builder.met_onderliggend(
         id="subtotaal",
-        naam="Subtotaal",
+        naam="Totale aanrechtlengte",
         meeteenheid=Meeteenheid.millimeter,
         aantal=totaal_lengte_aanrechten,
         punten=aanrecht_punten,

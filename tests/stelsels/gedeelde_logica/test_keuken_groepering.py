@@ -68,7 +68,7 @@ def test_waardeer_keuken_gebruikt_subtotaal_bij_meerdere_aanrechten():
     subtotaal = next(w for w in waarderingen if w.segment == "subtotaal")
     details = [w for w in waarderingen if w.segment.startswith("lengte_aanrecht_")]
 
-    assert subtotaal.naam == "Subtotaal"
+    assert subtotaal.naam == "Totale aanrechtlengte"
     assert subtotaal.aantal == 1900
     assert subtotaal.punten == 4
     assert len(details) == 2
