@@ -616,7 +616,6 @@ def energieprestatie_met_geldig_label(
         ("status", lambda ep: ep.status is not None),
         ("begindatum", lambda ep: ep.begindatum is not None),
         ("einddatum", lambda ep: ep.einddatum is not None),
-        ("label", lambda ep: ep.label is not None),
     ]
 
     for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
@@ -659,6 +658,25 @@ def energieprestatie_met_geldig_label(
         if energieprestatie.status != Energieprestatiestatus.definitief:
             logger.debug(
                 f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
+            )
+            continue
+
+        if (
+            begindatum >= date(2015, 1, 1)
+            and begindatum < date(2021, 1, 1)
+            and energieprestatie.soort != Energieprestatiesoort.energie_index
+        ):
+            logger.debug(
+                f"Eenheid ({eenheid.id}): energielabel in periode 2015-2021 is geen geldige energieprestatie voor de woningwaardering."
+            )
+            continue
+
+        if (
+            energieprestatie.soort != Energieprestatiesoort.energie_index
+            and energieprestatie.label is None
+        ):
+            logger.debug(
+                f"Eenheid ({eenheid.id}): energieprestatie zonder label is onbruikbaar voor labelwaardering."
             )
             continue
 
