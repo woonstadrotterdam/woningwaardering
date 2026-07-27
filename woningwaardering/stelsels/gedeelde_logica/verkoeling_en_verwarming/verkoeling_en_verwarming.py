@@ -50,8 +50,8 @@ def waardeer_verkoeling_en_verwarming(
     """Classificeer ruimten, pas maximering toe en bouw waarderingen op hun plek.
 
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
-    verkoelde vertrekken) telt over álle meegegeven ruimten samen en wordt hier in
-    één doorloop met lokale tellers toegepast.
+    verkoelde vertrekken) telt privé en gemeenschappelijk apart; per categorie
+    wordt hier in één doorloop met lokale tellers gemaximeerd.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
@@ -89,7 +89,8 @@ def _waardeer_verwarmde_overige_ruimte(
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
-    totaal_punten = 0
+    totaal_punten_prive = 0
+    totaal_punten_gedeeld = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
             continue
@@ -110,19 +111,34 @@ def _waardeer_verwarmde_overige_ruimte(
                     punten=1.0,
                 ),
             )
-            totaal_punten += 1
-            if totaal_punten > 4:
-                yield (
-                    ruimte,
-                    _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
-                        id="max_aantal_punten",
-                        naam=maximering_naam(
-                            gedeeld=_ruimte_gedeeld(ruimte),
-                            met_puntental="Maximaal 4 punten",
+            if _ruimte_gedeeld(ruimte):
+                totaal_punten_gedeeld += 1
+                if totaal_punten_gedeeld > 4:
+                    yield (
+                        ruimte,
+                        _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
+                            id="max_aantal_punten",
+                            naam=maximering_naam(
+                                gedeeld=True,
+                                met_puntental="Maximaal 4 punten",
+                            ),
+                            punten=-1,
                         ),
-                        punten=-1,
-                    ),
-                )
+                    )
+            else:
+                totaal_punten_prive += 1
+                if totaal_punten_prive > 4:
+                    yield (
+                        ruimte,
+                        _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
+                            id="max_aantal_punten",
+                            naam=maximering_naam(
+                                gedeeld=False,
+                                met_puntental="Maximaal 4 punten",
+                            ),
+                            punten=-1,
+                        ),
+                    )
 
 
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
@@ -143,7 +159,8 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    totaal_punten_verkoeld = 0
+    totaal_punten_verkoeld_prive = 0
+    totaal_punten_verkoeld_gedeeld = 0
     for ruimte in ruimten:
         if not ruimte.verwarmd:
             continue
@@ -175,7 +192,6 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             )
 
             if ruimte.verkoeld:
-                totaal_punten_verkoeld += 1
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
                 )
@@ -189,20 +205,41 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         punten=1,
                     ),
                 )
-                if totaal_punten_verkoeld > 2:
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden ({totaal_punten_verkoeld} > 2). Een aftrek van 1 punt wordt toegepast."
-                    )
-                    yield (
-                        ruimte,
-                        _subgroep(
-                            subgroep, ruimte, "verkoelde_vertrekken"
-                        ).met_onderliggend(
-                            id="max_aantal_punten",
-                            naam=maximering_naam(
-                                gedeeld=_ruimte_gedeeld(ruimte),
-                                met_puntental="Maximaal 2 punten",
+                if _ruimte_gedeeld(ruimte):
+                    totaal_punten_verkoeld_gedeeld += 1
+                    if totaal_punten_verkoeld_gedeeld > 2:
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden ({totaal_punten_verkoeld_gedeeld} > 2). Een aftrek van 1 punt wordt toegepast."
+                        )
+                        yield (
+                            ruimte,
+                            _subgroep(
+                                subgroep, ruimte, "verkoelde_vertrekken"
+                            ).met_onderliggend(
+                                id="max_aantal_punten",
+                                naam=maximering_naam(
+                                    gedeeld=True,
+                                    met_puntental="Maximaal 2 punten",
+                                ),
+                                punten=-1,
                             ),
-                            punten=-1,
-                        ),
-                    )
+                        )
+                else:
+                    totaal_punten_verkoeld_prive += 1
+                    if totaal_punten_verkoeld_prive > 2:
+                        logger.info(
+                            f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden ({totaal_punten_verkoeld_prive} > 2). Een aftrek van 1 punt wordt toegepast."
+                        )
+                        yield (
+                            ruimte,
+                            _subgroep(
+                                subgroep, ruimte, "verkoelde_vertrekken"
+                            ).met_onderliggend(
+                                id="max_aantal_punten",
+                                naam=maximering_naam(
+                                    gedeeld=False,
+                                    met_puntental="Maximaal 2 punten",
+                                ),
+                                punten=-1,
+                            ),
+                        )

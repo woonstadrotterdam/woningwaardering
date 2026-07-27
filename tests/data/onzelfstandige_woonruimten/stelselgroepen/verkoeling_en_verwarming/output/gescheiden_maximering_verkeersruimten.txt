@@ -1,0 +1,17 @@
+SAMENVATTING
+  Verkoeling en verwarming                                                        4.50 pt
+                                                                                ---------
+
+VERKOELING EN VERWARMING
+  Privé
+    - Verwarmde overige en verkeersruimten
+      - prive-1                                                                   1.00 pt
+      - prive-2                                                                   1.00 pt
+      - prive-3                                                                   1.00 pt
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Verwarmde overige en verkeersruimten
+      - gedeeld-1                                                                 0.50 pt
+      - gedeeld-2                                                                 0.50 pt
+      - gedeeld-3                                                                 0.50 pt
+                                                                                ---------
+  Totaal                                                                          4.50 pt
