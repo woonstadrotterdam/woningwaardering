@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 5.75,
+      "punten": 6.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -72,6 +72,21 @@
             }
           },
           "punten": 0.75
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__thermostatische_mengkraan",
+            "naam": "Thermostatische mengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
         }
       ]
     }

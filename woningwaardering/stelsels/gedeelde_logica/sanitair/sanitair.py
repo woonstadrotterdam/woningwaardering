@@ -156,13 +156,20 @@ def _waardeer_toiletten(
             Installatiesoort.hangend_toilet: 2.75,
             Installatiesoort.staand_toilet: 2.0,
         },
+        # Een VERA-doucheruimte telt voor toiletwaardering mee als badkamer.
+        Ruimtedetailsoort.doucheruimte: {
+            Installatiesoort.hangend_toilet: 2.75,
+            Installatiesoort.staand_toilet: 2.0,
+        },
     }
 
-    # Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor waardering.
+    # Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor
+    # waardering. Doucheruimte telt hierbij mee als badkamer.
     if ruimte.detail_soort in [
         Ruimtedetailsoort.toiletruimte,
         Ruimtedetailsoort.badkamer,
         Ruimtedetailsoort.badkamer_met_toilet,
+        Ruimtedetailsoort.doucheruimte,
     ]:
         for toiletsoort in [
             Installatiesoort.hangend_toilet,

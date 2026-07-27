@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 4.0,
+      "punten": 6.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -27,6 +27,21 @@
               "id": "sanitair__prive"
             }
           }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__prive__doucheruimte__staand_toilet",
+            "naam": "Staand Toilet",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__doucheruimte"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 2.0
         },
         {
           "aantal": 1.0,
