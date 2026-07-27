@@ -1,0 +1,34 @@
+{
+  "id": "gemeenschappelijke_berging_drempel_met_kast",
+  "ruimten": [
+    {
+      "id": "berging",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimtes"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 3.0,
+      "verbondenRuimten": [
+        {
+          "id": "kast",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "oppervlakte": 2.0
+        }
+      ],
+      "gedeeldMetAantalAdressen": 2
+    }
+  ]
+}

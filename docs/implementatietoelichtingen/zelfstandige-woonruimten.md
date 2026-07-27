@@ -430,6 +430,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 > - Een zolderruimte groter dan 2m2 met het `Bouwkundigelement` `vlizotrap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
 > - Een zolderruimte groter dan 2m2 maar kleiner dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
 > - Zolderruimte groter dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - De aftrek van maximaal 5 punten geldt alleen als er <u>geen</u> vaste trap is. Een zolder met zowel vaste trap als vlizotrap krijgt dus geen correctie.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
@@ -476,6 +477,9 @@ _Kasten_
 De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de vertrekken behorende kasten moeten worden meegerekend.
 
 Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoort. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
+
+> [!NOTE]
+> De kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte` (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor onder meer energieprestatie, gemeenschappelijke ruimten en zoldercorrecties. Kasten op verkeersruimten tellen niet mee.
 
 ~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties_~~  
 ~~Vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren telt mee bij het bepalen van de totale oppervlakte van de ruimte. De oppervlakte van het vertrek of overige ruimte wordt dus bijvoorbeeld niet verminderd door de oppervlakte van een douchecabine.~~
@@ -1820,9 +1824,12 @@ Indien aan de voorwaarden wordt voldaan wordt de maximale huurprijs vermeerderd 
 
 Sommige woonruimten die in de middensector vallen, komen binnen het woningwaarderingsstelsel in aanmerking voor een nieuwbouwopslag. Hieronder volgen daarom een eerst aantal definities:
 
-- _nieuwbouw_: nieuwbouw houdt in dat een volledig nieuw pand met nieuwe woonruimten neergezet wordt.
-- _bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (dus bovenop de bestaande woning).
-- _transformatie_: transformatie betekent dat een nieuwe woonruimte ontstaat door een functiewijziging van een bestaand verblijfsobject. Een voorbeeld is een transformatie van een winkelruimte of kantoorruimte naar een woonruimte.
+- ~~_nieuwbouw_: nieuwbouw houdt in dat een volledig nieuw pand met nieuwe woonruimten neergezet wordt.~~
+- ~~_bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (dus bovenop de bestaande woning).~~
+- ~~_transformatie_: transformatie betekent dat een nieuwe woonruimte ontstaat door een functiewijziging van een bestaand verblijfsobject. Een voorbeeld is een transformatie van een winkelruimte of kantoorruimte naar een woonruimte.~~
+
+> [!NOTE]
+> De package maakt voor de nieuwbouwopslag geen expliciet onderscheid tussen nieuwbouw, bijbouw en transformatie. We toetsen alleen de beschikbare invoer die we hiervoor in het model hebben: `begin_bouwdatum`, `inExploitatiedatum`, de 20-jaarstermijn, het puntenbereik voor de middensector en `inExploitatieReden == splitsing` als uitsluitingsgrond.
 
 ##### 2.13.7.1 Voorwaarden voor de nieuwbouwopslag
 
