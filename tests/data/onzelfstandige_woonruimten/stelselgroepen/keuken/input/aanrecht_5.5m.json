@@ -1,5 +1,5 @@
 {
-  "id": "3001mm",
+  "id": "5500mm",
   "ruimten": [
     {
       "id": "keuken",
@@ -16,7 +16,6 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
       "bouwkundigeElementen": [
         {
           "id": "aanrecht",
@@ -31,7 +30,7 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 3001
+          "lengte": 5500
         }
       ]
     }
