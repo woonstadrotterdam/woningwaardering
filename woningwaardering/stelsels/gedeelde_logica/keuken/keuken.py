@@ -9,10 +9,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.utils import (
-    gedeeld_met_onzelfstandige_woonruimten,
-    rond_af,
-)
+from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -60,7 +57,14 @@ def waardeer_keuken(
         for waardering in extra_waarderingen
         if waardering.punten is not None
     )
-    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte)
+    # 2.5.3 Punten voor extra voorzieningen keuken
+    # Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het
+    # aantal punten voor de basisvoorzieningen (de aanrechtlengte).
+    max_punten_voorzieningen = sum(
+        Decimal(str(waardering.punten))
+        for waardering in aanrecht_waarderingen
+        if waardering.punten is not None
+    )
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
@@ -177,35 +181,31 @@ def _waardeer_aanrecht(
                     UserWarning,
                 )
                 continue
+            # 2.5.2 Punten voor basisvoorzieningen keuken
+            # Zelfstandig: Tussen 1 en 2 meter → 4; Langer dan 2 meter → 7
+            # Onzelfstandig: Tussen 1 en 2 meter → 4; Tussen 2 en 3 meter → 7;
+            # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
+            # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
+            # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
             if element.lengte < 1000:
                 aanrecht_punten = 0
-            elif (
-                element.lengte >= 2000
-                and (
-                    (  # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
-                        not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                    )
-                    or (  # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
-                        gedeeld_met_onzelfstandige_woonruimten(ruimte)
-                        and element.lengte <= 3000
-                    )
-                )
-            ):
-                aanrecht_punten = 7
-            elif (
-                element.lengte > 3000
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-                and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
-            ):
-                aanrecht_punten = 13
-            elif (
-                element.lengte > 3000
-                and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-            ):
-                aanrecht_punten = 10
-
+            elif stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
+                if (
+                    element.lengte > 5000
+                    and (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 0) >= 8
+                ):
+                    aanrecht_punten = 13
+                elif element.lengte > 3000:
+                    aanrecht_punten = 10
+                elif element.lengte >= 2000:
+                    aanrecht_punten = 7
+                else:
+                    aanrecht_punten = 4
             else:
-                aanrecht_punten = 4
+                if element.lengte >= 2000:
+                    aanrecht_punten = 7
+                else:
+                    aanrecht_punten = 4
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
             )
@@ -216,15 +216,6 @@ def _waardeer_aanrecht(
                 punten=aanrecht_punten,
                 aantal=element.lengte,
             )
-
-
-def _max_punten_voorzieningen(ruimte: EenhedenRuimte) -> Decimal:
-    totaal_lengte_aanrechten = sum(
-        Decimal(str(element.lengte or "0"))
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-    )
-    return Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
 
 
 def _waardeer_extra_voorzieningen(

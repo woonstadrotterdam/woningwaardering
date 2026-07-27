@@ -1,0 +1,89 @@
+{
+  "id": "keuken_geen_maximering_aanrecht_5500_8_onz",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 5500
+        }
+      ],
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ]
+    }
+  ]
+}
