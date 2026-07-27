@@ -1,20 +1,20 @@
 {
+  "id": "laadpaal_gedeeld_met_4_onzelfstandige_woonruimten",
   "ruimten": [
     {
+      "id": "Tuin",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
+        "code": "BTR",
+        "naam": "Buitenruimte"
       },
       "detailSoort": {
-        "code": "GAR",
-        "naam": "Garage"
+        "code": "TUI",
+        "naam": "Tuin"
       },
+      "naam": "Tuin",
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
       "bouwkundigeElementen": [
         {
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
           "detailSoort": {
             "code": "LAA",
             "naam": "Laadpaal"
@@ -23,7 +23,7 @@
       ]
     }
   ],
-  "Woningwaarderingstelsel": {
+  "woningwaarderingstelsel": {
     "code": "ONZ",
     "naam": "Onzelfstandige woonruimten"
   }
