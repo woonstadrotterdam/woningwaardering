@@ -144,6 +144,28 @@ def _opslag_zorgwoning(
         )
     )
 
+    # §2.12 voetnoot 13: rubriek 11.2 (nieuwbouwminimum) telt niet mee in de 35%-grondslag
+    if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
+        woz_groep = next(
+            (
+                groep
+                for groep in woningwaardering_resultaat.groepen or []
+                if groep.criterium_groep
+                and groep.criterium_groep.stelselgroep
+                == Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
+            ),
+            None,
+        )
+        if woz_groep:
+            for waardering in woz_groep.woningwaarderingen or []:
+                if (
+                    waardering.criterium
+                    and waardering.criterium.id
+                    and waardering.criterium.id.endswith("nieuwbouw_minimum_punten")
+                    and waardering.punten is not None
+                ):
+                    puntentotaal -= Decimal(str(waardering.punten))
+
     logger.info(
         f"Eenheid ({eenheid.id}): Puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel is {puntentotaal}"
     )
