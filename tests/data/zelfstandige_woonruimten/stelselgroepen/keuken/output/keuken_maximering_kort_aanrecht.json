@@ -1,0 +1,89 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 8.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "keuken__keuken",
+            "naam": "Keuken"
+          }
+        },
+        {
+          "aantal": 1500.0,
+          "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht_1",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "aantal": 600.0,
+          "criterium": {
+            "id": "keuken__keuken__lengte_aanrecht_aanrecht_2",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 0.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 8.0,
+          "criterium": {
+            "id": "keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 8.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
+            "naam": "Maximaal evenveel punten als aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__extra_voorzieningen"
+            }
+          },
+          "punten": -4.0
+        }
+      ]
+    }
+  ]
+}
