@@ -15,7 +15,6 @@
       "naam": "Slaapkamer",
       "oppervlakte": 5,
       "verwarmd": true,
-      "gemeenschappelijk": false,
       "gedeeldMetAantalAdressen": 1
     }
   ]
