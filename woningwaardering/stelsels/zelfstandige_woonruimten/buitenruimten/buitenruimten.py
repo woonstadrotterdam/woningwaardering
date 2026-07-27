@@ -15,7 +15,6 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-    gedeeld_met_adressen,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -62,9 +61,11 @@ class Buitenruimten(Stelselgroep):
             ):
                 pass
 
-        # minimaal 2 punten bij aanwezigheid van privé buitenruimten
-        # 5 aftrekpunten bij geen buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
+        # minimaal 2 punten bij aanwezigheid van gewaardeerde privé buitenruimten
+        # 5 aftrekpunten bij geen gewaardeerde buitenruimten
+        self._prive_buitenruimten_aanwezig(
+            waarderingsgroep_builder, eenheid, totaal_criteria
+        )
 
         som_aantal: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal("0"))
         for waardering in waarderingsgroep_builder.alle_waarderingen():
@@ -187,13 +188,16 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
+        totaal_criteria: dict[WaarderingBuilder, int],
     ) -> None:
-        if not any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.5 Minpunten bij geen enkele buitenruimte
+        # Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk
+        # buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
+        # Alleen gewaardeerde buitenruimten tellen mee (niet te kleine gedeelde
+        # of ruimten zonder oppervlakte).
+        if not totaal_criteria:
             logger.info(
-                f"Eenheid ({eenheid.id}) heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
+                f"Eenheid ({eenheid.id}) heeft geen gewaardeerde buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
             )
             waarderingsgroep_builder.met_onderliggend(
                 id="geen_buitenruimten",
@@ -202,11 +206,9 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        if any(waarderingsgroep_builder.alle_waarderingen()) and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.1 Punten voor privé-buitenruimte
+        # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend.
+        if any(aantal_adressen < 2 for aantal_adressen in totaal_criteria.values()):
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
