@@ -13,6 +13,7 @@ from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Meeteenheid,
     Ruimtedetailsoort,
+    Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
@@ -54,6 +55,8 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     Voorwaarden:
     - De oppervlakte moet minimaal 12m² zijn
+    - Zelfstandige woonruimten: alleen waarderen bij gedeeld_met_aantal_adressen >= 2
+      (§2.10.2); privé-parkeerplekken horen in rubriek 2 of 8
     - Het aantal punten wordt gedeeld door het aantal adressen en (bij onzelfstandig)
       het aantal onzelfstandige woonruimten op het adres
     - De ruimte moet van één van de volgende detailsoorten zijn:
@@ -106,11 +109,24 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst
-    # exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2 (bijvoorbeeld een
-    # garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief
-    # behorende tot de woning). Zie ook de implementatietoelichting voor privé-parkeerplekken
-    # die met onzelfstandige woonruimten gedeeld worden.
+    # 2.10.2 / wettekst: een gemeenschappelijke parkeerruimte is toegankelijk voor
+    # bewoners van ten minste twee adressen. Voor zelfstandige woonruimten hoort een
+    # parkeerruimte voor één adres in rubriek 2 (binnen) of rubriek 8 (buiten), niet
+    # in rubriek 10. Zie #306. Onzelfstandig: zie implementatietoelichting §2.8.3 /
+    # §2.10 (specifieke parkeer-detailsoorten ook privé of alleen gedeeld met
+    # onzelfstandige woonruimten op hetzelfde adres → rubriek 10).
+    if (
+        waarderingsgroep_builder.stelsel
+        == Woningwaarderingstelsel.zelfstandige_woonruimten
+        and not utils.gedeeld_met_adressen(ruimte)
+    ):
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen gemeenschappelijke "
+            f"parkeerruimte (gedeeld_met_aantal_adressen < 2) en wordt niet "
+            f"gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
+        )
+        return
+
     aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
     aantal_onzelfstandige_woonruimten = (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
@@ -120,9 +136,8 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
     )
 
-    # 2.10.4 Rekenmethode: delen door aantal adressen; bij privé parkeerplek voor
-    # één adres delen door 1. Onzelfstandig: daarna delen door aantal
-    # onzelfstandige woonruimten op het adres.
+    # 2.10.4 Rekenmethode: delen door aantal adressen. Onzelfstandig: daarna delen
+    # door aantal onzelfstandige woonruimten op het adres.
     deler = Decimal(aantal_adressen * aantal_onzelfstandige_woonruimten)
     heeft_laadpaal = heeft_bouwkundig_element(
         ruimte, Bouwkundigelementdetailsoort.laadpaal
