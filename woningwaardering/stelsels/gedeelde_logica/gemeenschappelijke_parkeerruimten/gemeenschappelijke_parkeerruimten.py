@@ -17,15 +17,6 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
-SPECIFIEKE_PARKEER_DETAILSOORTEN = frozenset(
-    {
-        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
-        Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
-        Ruimtedetailsoort.carport,
-        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
-    }
-)
-
 parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage: {
         "Type I": Decimal("9.0")
@@ -40,8 +31,14 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 }
 
 
-def is_specifieke_parkeer_detailsoort(detail_soort: Referentiedata | None) -> bool:
-    return detail_soort in SPECIFIEKE_PARKEER_DETAILSOORTEN
+def is_parkeertype_detailsoort(detail_soort: Referentiedata | None) -> bool:
+    """Of de detailsoort een Type I/II/III-parkeerplek is (§2.10).
+
+    Dit zijn de detailsoorten in ``parkeertype_punten_mapping`` (carport, in-/uitpandige
+    parkeergarage, parkeerplek buiten behorend bij complex). Een generieke
+    ``parkeerplaats`` hoort hier niet bij.
+    """
+    return detail_soort in parkeertype_punten_mapping
 
 
 def waardeer_gemeenschappelijke_parkeerruimte(
@@ -92,7 +89,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    if ruimte.detail_soort not in SPECIFIEKE_PARKEER_DETAILSOORTEN:
+    if not is_parkeertype_detailsoort(ruimte.detail_soort):
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )
