@@ -1,0 +1,85 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 20.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woonkamer_aanrecht_500mm",
+            "naam": "Woonkamer met aanrecht 500mm",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woonkamer_aanrecht_zonder_lengte",
+            "naam": "Woonkamer met aanrecht zonder lengte",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woonkamer_aanrecht_1000mm",
+            "naam": "Woonkamer met aanrecht 1000mm met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woonkamer_aanrecht_1001mm",
+            "naam": "Woonkamer met aanrecht 1001mm met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woonkamer_en_of_keuken",
+            "naam": "Woonkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__woon_en_of_slaapkamer_en_of_keuken",
+            "naam": "Woon-/slaapkamer/keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
+    }
+  ]
+}

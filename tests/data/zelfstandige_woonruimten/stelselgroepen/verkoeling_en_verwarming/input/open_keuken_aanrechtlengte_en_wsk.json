@@ -1,0 +1,132 @@
+{
+  "id": "eenheid_open_keuken_aanrechtlengte_en_wsk",
+  "ruimten": [
+    {
+      "id": "woonkamer_aanrecht_500mm",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer met aanrecht 500mm",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_500",
+          "naam": "Aanrecht",
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 500
+        }
+      ]
+    },
+    {
+      "id": "woonkamer_aanrecht_zonder_lengte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer met aanrecht zonder lengte",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_zonder_lengte",
+          "naam": "Aanrecht",
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          }
+        }
+      ]
+    },
+    {
+      "id": "woonkamer_aanrecht_1000mm",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer met aanrecht 1000mm",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_1000",
+          "naam": "Aanrecht",
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000
+        }
+      ]
+    },
+    {
+      "id": "woonkamer_aanrecht_1001mm",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer met aanrecht 1001mm",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_1001",
+          "naam": "Aanrecht",
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1001
+        }
+      ]
+    },
+    {
+      "id": "woonkamer_en_of_keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOK",
+        "naam": "Woonkamer/keuken"
+      },
+      "naam": "Woonkamer/keuken",
+      "oppervlakte": 20.0,
+      "verwarmd": true
+    },
+    {
+      "id": "woon_en_of_slaapkamer_en_of_keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WSK",
+        "naam": "Woon-/slaapkamer/keuken"
+      },
+      "naam": "Woon-/slaapkamer/keuken",
+      "oppervlakte": 20.0,
+      "verwarmd": true
+    }
+  ]
+}

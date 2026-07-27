@@ -477,6 +477,9 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
+> [!NOTE]
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter (minimaal 1 m, gelijk aan de keuken-basisvoorziening) als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
 De Huurcommissie waardeert 2 soorten situaties wat betreft de verkoeling van de woonruimte, namelijk:

@@ -19,13 +19,25 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
+from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
     "verkoelde_vertrekken": "Verkoelde vertrekken",
     "verwarmde_overige_en_verkeersruimten": "Verwarmde overige en verkeersruimten",
 }
+
+# Ruimtedetailsoorten die de keukenfunctie al in zich hebben (geen aparte
+# aanrechtlengte-check nodig voor de open-keukenbonus).
+_OPEN_KEUKEN_DETAILSOORTEN = (
+    Ruimtedetailsoort.woonkamer_en_of_keuken,
+    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+)
+
+# Minimale aanrechtlengte voor open-keukenbonus in een woon-/slaapvertrek,
+# gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5:
+# "aanrechtblad met een aaneengesloten lengte van minimaal 1 m").
+_MINIMALE_AANRECHTLENGTE_OPEN_KEUKEN_MM = 1000
 
 
 def _subgroep(
@@ -63,14 +75,34 @@ def waardeer_verkoeling_en_verwarming(
 
 
 def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
-    return ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken or (
-        ruimte.detail_soort
-        in [
-            Ruimtedetailsoort.woonkamer,
-            Ruimtedetailsoort.woon_en_of_slaapkamer,
-            Ruimtedetailsoort.slaapkamer,
-        ]
-        and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.aanrecht)
+    """Of een vertrek een open keuken heeft voor rubriek verkoeling en verwarming.
+
+    2.3.2 Open keuken in een vertrek of overige ruimte
+    "Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open
+    keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte
+    en de rest van het vertrek."
+
+    Omdat we niet (kunnen) controleren op keukenkastjes, geldt de aanname dat
+    een aanrecht vanaf 1 meter (minimaal 1 m, gelijk aan de keuken-
+    basisvoorziening) als open keuken telt. Detailsoorten die de keuken al in
+    zich hebben (WOK, WSK) tellen altijd als open keuken.
+    """
+    if ruimte.detail_soort in _OPEN_KEUKEN_DETAILSOORTEN:
+        return True
+
+    if ruimte.detail_soort not in (
+        Ruimtedetailsoort.woonkamer,
+        Ruimtedetailsoort.woon_en_of_slaapkamer,
+        Ruimtedetailsoort.slaapkamer,
+    ):
+        return False
+
+    return any(
+        aanrecht.lengte is not None
+        and aanrecht.lengte >= _MINIMALE_AANRECHTLENGTE_OPEN_KEUKEN_MM
+        for aanrecht in get_bouwkundige_elementen(
+            ruimte, Bouwkundigelementdetailsoort.aanrecht
+        )
     )
 
 
@@ -154,7 +186,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             naam = ruimte.naam or ruimte.id or ""
             if (
                 heeft_open_keuken
-                and ruimte.detail_soort != Ruimtedetailsoort.woonkamer_en_of_keuken
+                and ruimte.detail_soort not in _OPEN_KEUKEN_DETAILSOORTEN
             ):
                 naam = f"{naam} met open keuken"
 
