@@ -9,6 +9,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
+from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
+    NIEUWBOUW_MINIMUM_PUNTEN_ID,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -157,11 +160,14 @@ def _opslag_zorgwoning(
             None,
         )
         if woz_groep:
+            nieuwbouw_minimum_criterium_id = (
+                f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}"
+                f"__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
+            )
             for waardering in woz_groep.woningwaarderingen or []:
                 if (
                     waardering.criterium
-                    and waardering.criterium.id
-                    and waardering.criterium.id.endswith("nieuwbouw_minimum_punten")
+                    and waardering.criterium.id == nieuwbouw_minimum_criterium_id
                     and waardering.punten is not None
                 ):
                     puntentotaal -= Decimal(str(waardering.punten))
