@@ -1093,6 +1093,9 @@ Er is een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
 
 Gedeelde buitenruimten die als parkeerplek voor auto's bedoeld zijn, worden gewaardeerd volgens [rubriek 10](#210-gemeenschappelijke-parkeerruimten). Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
+> [!NOTE]
+> Parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij een complex) worden altijd in rubriek 10 gewaardeerd, ook wanneer ze privé zijn (`gedeeldMetAantalAdressen` 0 of 1). Dit volgt Type I–III in §2.10.3 en sluit aan bij de huurprijscheck. Een generieke `Ruimtedetailsoort.parkeerplaats` wordt in deze rubriek (8) als buitenruimte gewaardeerd, tenzij deze met meerdere adressen wordt gedeeld. Een laadpaal op een specifieke parkeer-detailsoort telt mee via rubriek 10 (§2.10.5), niet opnieuw in rubriek 12.
+
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia's
 
 Balkons, dakterrassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze moeten:

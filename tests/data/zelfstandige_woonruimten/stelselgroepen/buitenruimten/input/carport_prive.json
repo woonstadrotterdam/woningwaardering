@@ -1,0 +1,22 @@
+{
+  "id": "carport_prive",
+  "ruimten": [
+    {
+      "id": "carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "breedte": 3.0,
+      "lengte": 4.0,
+      "oppervlakte": 12.0,
+      "gedeeldMetAantalAdressen": 1,
+      "aantal": 1
+    }
+  ]
+}

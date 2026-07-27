@@ -17,6 +17,17 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import heeft_bouwkundig_element
 
+# 2.10.3 / implementatietoelichting §2.8.3: specifieke parkeer-detailsoorten
+# worden altijd in rubriek 10 gewaardeerd (ook privé), nooit in rubriek 8.
+SPECIFIEKE_PARKEER_DETAILSOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+        Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
+        Ruimtedetailsoort.carport,
+        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
+    }
+)
+
 parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage: {
         "Type I": Decimal("9.0")
@@ -29,6 +40,10 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
         "Type III": Decimal("4.0")
     },
 }
+
+
+def is_specifieke_parkeer_detailsoort(detail_soort: Referentiedata | None) -> bool:
+    return detail_soort in SPECIFIEKE_PARKEER_DETAILSOORTEN
 
 
 def waardeer_gemeenschappelijke_parkeerruimte(
@@ -79,12 +94,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,  # Type I
-        Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,  # Type II
-        Ruimtedetailsoort.carport,  # Type II
-        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,  # Type III
-    ]:
+    if ruimte.detail_soort not in SPECIFIEKE_PARKEER_DETAILSOORTEN:
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )
@@ -106,11 +116,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    # Een parkeerruimte waartoe bewoners van één adres op grond van de huurovereenkomst
-    # exclusieve toegang hebben, wordt gewaardeerd volgens rubriek 2 (bijvoorbeeld een
-    # garagebox behorende tot de woning) of rubriek 8 (bijvoorbeeld een oprit exclusief
-    # behorende tot de woning). Zie ook de implementatietoelichting voor privé-parkeerplekken
-    # die met onzelfstandige woonruimten gedeeld worden.
+    # Specifieke parkeer-detailsoorten (carport, PIP/PUP/PBC) vallen onder rubriek 10,
+    # ook bij gedeeld_met_aantal_adressen 0 of 1. Generieke privé-parkeerplaatsen
+    # (binnen: rubriek 2; buiten: rubriek 8) horen hier niet.
     aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
     aantal_onzelfstandige_woonruimten = (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1

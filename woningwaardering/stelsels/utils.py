@@ -967,33 +967,24 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     if ruimte.soort == Ruimtesoort.verkeersruimte:
         return Ruimtesoort.verkeersruimte
 
-    if (
-        ruimte.detail_soort
-        in [  # deze ruimten zijn sowieso buitenruimten
-            Ruimtedetailsoort.atrium_en_of_patio,
-            Ruimtedetailsoort.achtertuin,
-            Ruimtedetailsoort.balkon,
-            Ruimtedetailsoort.zijtuin,
-            Ruimtedetailsoort.voortuin,
-            Ruimtedetailsoort.dakterras,
-            Ruimtedetailsoort.terras,
-            Ruimtedetailsoort.tuin,
-            Ruimtedetailsoort.tuin_rondom,
-            Ruimtedetailsoort.loggia,
-            Ruimtedetailsoort.overige_buitenruimte,
-        ]
-        or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
-            ruimte.detail_soort
-            in [
-                Ruimtedetailsoort.carport,
-            ]
-            and not gedeeld_met_adressen(ruimte)
-        )
-        or (
-            ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
-            and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-        )
+    if ruimte.detail_soort in [  # deze ruimten zijn sowieso buitenruimten
+        Ruimtedetailsoort.atrium_en_of_patio,
+        Ruimtedetailsoort.achtertuin,
+        Ruimtedetailsoort.balkon,
+        Ruimtedetailsoort.zijtuin,
+        Ruimtedetailsoort.voortuin,
+        Ruimtedetailsoort.dakterras,
+        Ruimtedetailsoort.terras,
+        Ruimtedetailsoort.tuin,
+        Ruimtedetailsoort.tuin_rondom,
+        Ruimtedetailsoort.loggia,
+        Ruimtedetailsoort.overige_buitenruimte,
+    ] or (
+        # Generieke privé-parkeerplaats buiten → rubriek 8.
+        # Specifieke types (carport e.d.) vallen onder rubriek 10 (§2.10.3).
+        ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
+        and ruimte.soort == Ruimtesoort.buitenruimte
+        and not gedeeld_met_adressen(ruimte)
     ):
         return Ruimtesoort.buitenruimte
 

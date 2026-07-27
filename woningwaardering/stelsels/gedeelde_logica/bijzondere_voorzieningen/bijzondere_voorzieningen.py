@@ -8,6 +8,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    is_specifieke_parkeer_detailsoort,
+)
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -212,10 +215,12 @@ def _prive_laadpaal(
         WaarderingBuilder | None: De woningwaardering met 2 punten
         als de eenheid een laadpaal heeft, anders None.
     """
+    # 2.10.5 / 2.12: laadpaal op specifieke parkeer-detailsoort → rubriek 10
     aantal_laadpalen = sum(
         aantal_bouwkundige_elementen(ruimte, Bouwkundigelementdetailsoort.laadpaal)
         for ruimte in eenheid.ruimten or []
         if not gedeeld_met_adressen(ruimte)
+        and not is_specifieke_parkeer_detailsoort(ruimte.detail_soort)
     )
 
     if aantal_laadpalen == 0:
