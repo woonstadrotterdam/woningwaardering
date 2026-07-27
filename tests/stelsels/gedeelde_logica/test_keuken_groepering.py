@@ -43,3 +43,34 @@ def test_waardeer_keuken_groepeert_per_ruimte():
         assert detail.bovenliggende_id == ruimte_ouder_id
         assert detail.punten is not None
         assert ruimte.naam not in (detail.naam or "")
+
+
+def test_waardeer_keuken_gebruikt_subtotaal_bij_meerdere_aanrechten():
+    with INPUT.open() as f:
+        eenheid = EenhedenEenheid.model_validate_json(f.read())
+
+    ruimte = eenheid.ruimten[0]
+    extra_aanrecht = ruimte.bouwkundige_elementen[0].model_copy(deep=True)
+    extra_aanrecht.id = "aanrecht_extra"
+    extra_aanrecht.lengte = 900
+    ruimte.bouwkundige_elementen.append(extra_aanrecht)
+
+    waarderingsgroep_builder = WaarderingsgroepBuilder(
+        Woningwaarderingstelsel.zelfstandige_woonruimten,
+        Woningwaarderingstelselgroep.keuken,
+    )
+    waarderingen = waardeer_keuken(
+        ruimte,
+        Woningwaarderingstelsel.zelfstandige_woonruimten,
+        waarderingsgroep_builder=waarderingsgroep_builder,
+    )
+
+    subtotaal = next(w for w in waarderingen if w.segment == "subtotaal")
+    details = [w for w in waarderingen if w.segment.startswith("lengte_aanrecht_")]
+
+    assert subtotaal.naam == "Subtotaal"
+    assert subtotaal.aantal == 1900
+    assert subtotaal.punten == 4
+    assert len(details) == 2
+    assert all(detail.punten is None for detail in details)
+    assert all(detail.bovenliggende_id == subtotaal.criterium_id for detail in details)

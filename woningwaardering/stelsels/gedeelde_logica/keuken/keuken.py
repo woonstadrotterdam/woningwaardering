@@ -1,7 +1,7 @@
 import warnings
 from collections import Counter
 from decimal import Decimal
-from typing import Iterator
+from typing import Iterator, cast
 
 from loguru import logger
 
@@ -49,7 +49,9 @@ def waardeer_keuken(
         or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
     )
 
-    aanrecht_waarderingen = list(_waardeer_aanrecht(ruimte, stelsel, ruimte_criterium))
+    aanrecht_waarderingen, punten_voor_aanrecht = _waardeer_aanrecht(
+        ruimte, stelsel, ruimte_criterium
+    )
     extra_waarderingen = list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium))
     detail_waarderingen = [*aanrecht_waarderingen, *extra_waarderingen]
     if not detail_waarderingen:
@@ -60,7 +62,7 @@ def waardeer_keuken(
         for waardering in extra_waarderingen
         if waardering.punten is not None
     )
-    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte, stelsel)
+    max_punten_voorzieningen = punten_voor_aanrecht
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
@@ -75,6 +77,7 @@ def waardeer_keuken(
                 )
 
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
+        # Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
         aftrek_ongedeeld = max_punten_voorzieningen - punten_voor_extra_voorzieningen
         aftrek = rond_af(aftrek_ongedeeld / Decimal(deler), decimalen=2)
         logger.info(
@@ -150,7 +153,7 @@ def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
-) -> Iterator[WaarderingBuilder]:
+) -> tuple[list[WaarderingBuilder], Decimal]:
     """
     Waardeert de aanrechten van een keuken.
 
@@ -159,9 +162,11 @@ def _waardeer_aanrecht(
         stelsel (WoningwaarderingstelselReferentiedata): Het stelsel waarvoor de aanrechten gewaardeerd worden.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
-    Yields:
-        WaarderingBuilder: De gewaardeerde aanrechten.
+    Returns:
+        tuple[list[WaarderingBuilder], Decimal]: De gewaardeerde aanrechten en de
+        basispunten voor de gesommeerde aanrechtlengte.
     """
+    aanrechten_met_lengte = []
     for element in ruimte.bouwkundige_elementen or []:
         if not element.detail_soort:
             warnings.warn(
@@ -176,55 +181,87 @@ def _waardeer_aanrecht(
                     UserWarning,
                 )
                 continue
-            aanrecht_punten = _bereken_aanrecht_punten(element.lengte, ruimte, stelsel)
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(element.lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
-            )
-            yield waarderingsgroep_builder.met_onderliggend(
+            aanrechten_met_lengte.append(element)
+
+    if not aanrechten_met_lengte:
+        return [], Decimal("0")
+
+    totaal_lengte_aanrechten = sum(
+        (Decimal(str(element.lengte)) for element in aanrechten_met_lengte),
+        start=Decimal("0"),
+    )
+    aanrecht_punten = _punten_voor_aanrechtlengte(
+        totaal_lengte_aanrechten,
+        ruimte,
+        stelsel,
+    )
+
+    if len(aanrechten_met_lengte) == 1:
+        element = aanrechten_met_lengte[0]
+        lengte = cast(float, element.lengte)
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+        )
+        return [
+            waarderingsgroep_builder.met_onderliggend(
                 id=f"lengte_aanrecht_{element.id}",
                 naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
                 meeteenheid=Meeteenheid.millimeter,
                 punten=aanrecht_punten,
-                aantal=element.lengte,
+                aantal=lengte,
             )
+        ], aanrecht_punten
+
+    logger.info(
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {len(aanrechten_met_lengte)} aanrechten tellen samen {int(totaal_lengte_aanrechten)}mm mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+    )
+    subtotaal = waarderingsgroep_builder.met_onderliggend(
+        id="subtotaal",
+        naam="Subtotaal",
+        meeteenheid=Meeteenheid.millimeter,
+        aantal=totaal_lengte_aanrechten,
+        punten=aanrecht_punten,
+    )
+    waarderingen = [subtotaal]
+    for element in aanrechten_met_lengte:
+        detail = waarderingsgroep_builder.met_onderliggend(
+            id=f"lengte_aanrecht_{element.id}",
+            naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+            meeteenheid=Meeteenheid.millimeter,
+            aantal=element.lengte,
+        )
+        detail.verplaats_naar(subtotaal)
+        waarderingen.append(detail)
+    return waarderingen, aanrecht_punten
 
 
-def _bereken_aanrecht_punten(
-    lengte: float,
+def _punten_voor_aanrechtlengte(
+    lengte: Decimal,
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
-) -> int:
+) -> Decimal:
     if lengte < 1000:
-        return 0
+        return Decimal("0")
     if lengte >= 2000 and (
-        not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-        or (gedeeld_met_onzelfstandige_woonruimten(ruimte) and lengte <= 3000)
+        (
+            # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
+            not gedeeld_met_onzelfstandige_woonruimten(ruimte)
+        )
+        or (
+            # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
+            gedeeld_met_onzelfstandige_woonruimten(ruimte) and lengte <= 3000
+        )
     ):
-        return 7
+        return Decimal("7")
     if (
         lengte > 3000
         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
     ):
-        return 13
+        return Decimal("13")
     if lengte > 3000 and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
-        return 10
-    return 4
-
-
-def _max_punten_voorzieningen(
-    ruimte: EenhedenRuimte,
-    stelsel: WoningwaarderingstelselReferentiedata,
-) -> Decimal:
-    # 2.5.3 Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
-    return Decimal(
-        sum(
-            Decimal(str(_bereken_aanrecht_punten(element.lengte, ruimte, stelsel)))
-            for element in ruimte.bouwkundige_elementen or []
-            if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-            and element.lengte
-        )
-    )
+        return Decimal("10")
+    return Decimal("4")
 
 
 def _waardeer_extra_voorzieningen(
@@ -248,8 +285,6 @@ def _waardeer_extra_voorzieningen(
         Installatiesoort.inbouw_kookplaat_gas: 0.5,
         Installatiesoort.inbouw_koelkast: 1.0,
         Installatiesoort.inbouw_vrieskast: 0.75,
-        # 2.5.4 Eén voorziening met twee functies worden als twee losse voorzieningen gewaardeerd.
-        Installatiesoort.inbouw_koelvriescombinatie: 1.75,
         Installatiesoort.inbouw_oven_elektrisch: 1.0,
         Installatiesoort.inbouw_oven_gas: 0.5,
         Installatiesoort.inbouw_magnetron: 1.0,

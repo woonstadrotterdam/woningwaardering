@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 16.0,
+      "punten": 14.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -20,10 +20,10 @@
           }
         },
         {
-          "aantal": 1000.0,
+          "aantal": 2000.0,
           "criterium": {
-            "id": "keuken__keuken__lengte_aanrecht_aanrecht_1",
-            "naam": "Lengte aanrecht",
+            "id": "keuken__keuken__subtotaal",
+            "naam": "Subtotaal",
             "bovenliggendeCriterium": {
               "id": "keuken__keuken"
             },
@@ -32,22 +32,35 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 4.0
+          "punten": 7.0
         },
         {
           "aantal": 1000.0,
           "criterium": {
-            "id": "keuken__keuken__lengte_aanrecht_aanrecht_2",
+            "id": "keuken__keuken__subtotaal__lengte_aanrecht_aanrecht_1",
             "naam": "Lengte aanrecht",
             "bovenliggendeCriterium": {
-              "id": "keuken__keuken"
+              "id": "keuken__keuken__subtotaal"
             },
             "meeteenheid": {
               "code": "MIL",
               "naam": "Millimeter"
             }
-          },
-          "punten": 4.0
+          }
+        },
+        {
+          "aantal": 1000.0,
+          "criterium": {
+            "id": "keuken__keuken__subtotaal__lengte_aanrecht_aanrecht_2",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          }
         },
         {
           "criterium": {
@@ -72,6 +85,16 @@
             }
           },
           "punten": 8.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
+            "naam": "Maximaal evenveel punten als aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__keuken__extra_voorzieningen"
+            }
+          },
+          "punten": -1.0
         }
       ]
     }

@@ -20,7 +20,7 @@
           }
         },
         {
-          "aantal": 2100.0,
+          "aantal": 2400.0,
           "criterium": {
             "id": "keuken__keuken__subtotaal",
             "naam": "Subtotaal",
@@ -49,7 +49,7 @@
           }
         },
         {
-          "aantal": 600.0,
+          "aantal": 900.0,
           "criterium": {
             "id": "keuken__keuken__subtotaal__lengte_aanrecht_aanrecht_2",
             "naam": "Lengte aanrecht",

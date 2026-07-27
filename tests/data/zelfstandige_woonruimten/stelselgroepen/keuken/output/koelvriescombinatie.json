@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 8.75,
+      "punten": 7.0,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -33,30 +33,6 @@
             }
           },
           "punten": 7.0
-        },
-        {
-          "criterium": {
-            "id": "keuken__keuken__extra_voorzieningen",
-            "naam": "Extra voorzieningen",
-            "bovenliggendeCriterium": {
-              "id": "keuken__keuken"
-            }
-          }
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "id": "keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelvriescombinatie",
-            "naam": "Inbouw koelvriescombinatie",
-            "bovenliggendeCriterium": {
-              "id": "keuken__keuken__extra_voorzieningen"
-            },
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 1.75
         }
       ]
     }

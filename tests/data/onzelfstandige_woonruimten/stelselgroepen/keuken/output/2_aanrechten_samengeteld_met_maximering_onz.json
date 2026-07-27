@@ -1,0 +1,111 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "KEU",
+          "naam": "Keuken"
+        }
+      },
+      "punten": 7.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 2400.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__subtotaal",
+            "naam": "Subtotaal",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 3.5
+        },
+        {
+          "aantal": 1500.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__subtotaal__lengte_aanrecht_aanrecht_1",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          }
+        },
+        {
+          "aantal": 900.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__subtotaal__lengte_aanrecht_aanrecht_2",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 8.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
+            "naam": "Maximaal evenveel punten als aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+            }
+          },
+          "punten": -0.5
+        }
+      ]
+    }
+  ]
+}

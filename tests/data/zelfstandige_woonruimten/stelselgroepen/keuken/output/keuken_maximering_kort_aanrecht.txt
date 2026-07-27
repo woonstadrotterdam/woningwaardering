@@ -1,13 +1,14 @@
 SAMENVATTING keuken_maximering_kort_aanrecht
-  Keuken                                                                          8.00 pt
+  Keuken                                                                         14.00 pt
                                                                                 ---------
 
 KEUKEN
   Keuken
-    - Lengte aanrecht                                              1500.00 mm     4.00 pt
-    - Lengte aanrecht                                               600.00 mm     0.00 pt
+    - Subtotaal                                                    2100.00 mm     7.00 pt
+      - Lengte aanrecht                                            1500.00 mm
+      - Lengte aanrecht                                             600.00 mm
     - Extra voorzieningen
       - Inbouw koelkast                                               8.00 st     8.00 pt
-      - Maximaal evenveel punten als aanrecht                                    -4.00 pt
+      - Maximaal evenveel punten als aanrecht                                    -1.00 pt
                                                                                 ---------
-  Totaal                                                                          8.00 pt
+  Totaal                                                                         14.00 pt
