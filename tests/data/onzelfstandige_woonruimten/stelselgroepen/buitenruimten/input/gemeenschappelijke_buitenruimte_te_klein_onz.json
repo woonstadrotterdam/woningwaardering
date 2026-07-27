@@ -1,0 +1,22 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_108017429",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "oppervlakte": 6,
+      "hoogte": 2.5,
+      "lengte": 1.0,
+      "breedte": 1.0,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ]
+}
