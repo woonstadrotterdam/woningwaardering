@@ -1,0 +1,22 @@
+{
+  "id": "carport_gedeeld_met_adressen",
+  "ruimten": [
+    {
+      "id": "carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "lengte": 4,
+      "breedte": 3,
+      "aantal": 1,
+      "gedeeldMetAantalAdressen": 1
+    }
+  ]
+}

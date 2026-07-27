@@ -11,6 +11,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    is_specifieke_parkeer_detailsoort,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -164,6 +167,12 @@ class Buitenruimten(Stelselgroep):
                 )
                 return
 
+        if is_specifieke_parkeer_detailsoort(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een specifieke parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
+            )
+            return
+
         # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
         if (
             ruimte.detail_soort
@@ -216,6 +225,7 @@ class Buitenruimten(Stelselgroep):
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+            and not is_specifieke_parkeer_detailsoort(ruimte.detail_soort)
             and not gedeeld_met_adressen(ruimte)
             and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
