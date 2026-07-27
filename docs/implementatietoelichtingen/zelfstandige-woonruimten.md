@@ -1824,12 +1824,9 @@ Indien aan de voorwaarden wordt voldaan wordt de maximale huurprijs vermeerderd 
 
 Sommige woonruimten die in de middensector vallen, komen binnen het woningwaarderingsstelsel in aanmerking voor een nieuwbouwopslag. Hieronder volgen daarom een eerst aantal definities:
 
-- ~~_nieuwbouw_: nieuwbouw houdt in dat een volledig nieuw pand met nieuwe woonruimten neergezet wordt.~~
-- ~~_bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (dus bovenop de bestaande woning).~~
-- ~~_transformatie_: transformatie betekent dat een nieuwe woonruimte ontstaat door een functiewijziging van een bestaand verblijfsobject. Een voorbeeld is een transformatie van een winkelruimte of kantoorruimte naar een woonruimte.~~
-
-> [!NOTE]
-> De package maakt voor de nieuwbouwopslag geen expliciet onderscheid tussen nieuwbouw, bijbouw en transformatie. We toetsen alleen de beschikbare invoer die we hiervoor in het model hebben: `begin_bouwdatum`, `inExploitatiedatum`, de 20-jaarstermijn, het puntenbereik voor de middensector en `inExploitatieReden == splitsing` als uitsluitingsgrond.
+- _nieuwbouw_: nieuwbouw houdt in dat een volledig nieuw pand met nieuwe woonruimten neergezet wordt.
+- _bijbouw_: bijbouw betekent dat al sprake is van bebouwing waarbij geheel nieuwe woningen worden bijgebouwd. Bijvoorbeeld door nieuwe woningen tegen de bestaande bebouwing aan te bouwen of door optoppen (dus bovenop de bestaande woning).
+- _transformatie_: transformatie betekent dat een nieuwe woonruimte ontstaat door een functiewijziging van een bestaand verblijfsobject. Een voorbeeld is een transformatie van een winkelruimte of kantoorruimte naar een woonruimte.
 
 ##### 2.13.7.1 Voorwaarden voor de nieuwbouwopslag
 

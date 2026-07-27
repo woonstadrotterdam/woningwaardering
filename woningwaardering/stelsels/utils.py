@@ -1047,7 +1047,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     ]:
         return Ruimtesoort.vertrek
 
-    # §2.2.4 Kasten: kastoppervlakte telt mee bij de drempeltoets.
+    # §2.2.4 Kasten: kastoppervlakte telt mee voor drempeltoets van minimale oppervlakte voor vertrek/overige ruimte.
     opp_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
 
     if ruimte.detail_soort in [
