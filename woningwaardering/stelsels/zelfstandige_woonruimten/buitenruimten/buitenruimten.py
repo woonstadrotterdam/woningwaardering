@@ -193,8 +193,11 @@ class Buitenruimten(Stelselgroep):
         # 2.8.5 Minpunten bij geen enkele buitenruimte
         # Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk
         # buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
+        # Wettekst (Bijlage I onder A, rubriek 8): «indien in het geheel géén
+        # punten in deze rubriek (geen buitenruimte): af: 5 punten»
+        # https://wetten.overheid.nl/BWBR0003237/2026-01-01
         # Alleen gewaardeerde buitenruimten tellen mee (niet te kleine gedeelde
-        # of ruimten zonder oppervlakte).
+        # of ruimten zonder oppervlakte) — dan zijn er ook geen punten.
         if not totaal_criteria:
             logger.info(
                 f"Eenheid ({eenheid.id}) heeft geen gewaardeerde buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
