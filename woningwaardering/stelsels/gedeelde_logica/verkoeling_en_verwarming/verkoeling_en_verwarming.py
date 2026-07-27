@@ -74,10 +74,11 @@ _VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
 )
 
 
-def _heeft_aanrecht_langer_dan_1m(ruimte: EenhedenRuimte) -> bool:
-    # §2.3.2 ZEL NOTE: aanrecht langer dan 1 meter telt als open keuken.
+def _heeft_aanrecht_vanaf_1m(ruimte: EenhedenRuimte) -> bool:
+    # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter (minimaal 1 m),
+    # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
     return any(
-        element.lengte is not None and element.lengte > 1000
+        element.lengte is not None and element.lengte >= 1000
         for element in get_bouwkundige_elementen(
             ruimte, Bouwkundigelementdetailsoort.aanrecht
         )
@@ -88,7 +89,7 @@ def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
     if ruimte.detail_soort in _OPEN_KEUKEN_DETAIL_SOORTEN:
         return True
     if ruimte.detail_soort in _VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
-        return _heeft_aanrecht_langer_dan_1m(ruimte)
+        return _heeft_aanrecht_vanaf_1m(ruimte)
     return False
 
 
