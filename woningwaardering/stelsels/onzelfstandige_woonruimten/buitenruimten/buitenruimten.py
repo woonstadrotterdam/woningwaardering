@@ -129,7 +129,8 @@ class Buitenruimten(Stelselgroep):
         0.35 punten per m2 voor privé buitenruimten.
 
         Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
-        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+        Type I/II/III-parkeerplekken horen altijd in rubriek 10 en tellen hier niet mee.
+        Generieke parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
 
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
@@ -140,6 +141,14 @@ class Buitenruimten(Stelselgroep):
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
+            )
+            return
+
+        # Type I/II/III-parkeerplekken horen altijd in rubriek 10, nooit in rubriek 8.
+        # Early-exit vóór oppervlakte-/afmetingschecks om irrelevante rubriek-8-warnings te vermijden.
+        if is_parkeertype_detailsoort(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 
@@ -176,12 +185,6 @@ class Buitenruimten(Stelselgroep):
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                 )
                 return
-
-        if is_parkeertype_detailsoort(ruimte.detail_soort):
-            logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
-            )
-            return
 
         # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
         if (
