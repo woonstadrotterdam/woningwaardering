@@ -130,7 +130,8 @@ class Buitenruimten(Stelselgroep):
 
         Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
         Type I/II/III-parkeerplekken horen altijd in rubriek 10 en tellen hier niet mee.
-        Generieke parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+        Een ``Ruimtedetailsoort.parkeerplaats`` telt niet mee als deze met andere adressen
+        is gedeeld.
 
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
