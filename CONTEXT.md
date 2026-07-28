@@ -12,7 +12,7 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, repository-structuur, naamgeving, tests, data, logging, releases en de criteriumstrategie (builders).
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
-- [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte)
+- [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte). Een lokale XML-kopie van deze versie staat in `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml`.
 
 Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
 
