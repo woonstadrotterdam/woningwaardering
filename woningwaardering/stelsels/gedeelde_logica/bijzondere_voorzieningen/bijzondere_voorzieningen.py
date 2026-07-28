@@ -9,9 +9,6 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
-from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
-    NIEUWBOUW_MINIMUM_PUNTEN_ID,
-)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -34,6 +31,7 @@ def waardeer_bijzondere_voorzieningen(
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
+    uitgesloten_zorgwoning_grondslag_criterium_ids: list[str] | None = None,
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     woningwaardering_resultaat: (
@@ -47,6 +45,7 @@ def waardeer_bijzondere_voorzieningen(
         eenheid (EenhedenEenheid): De eenheid.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): De stelselgroepen die niet moeten worden opgehoogd met zorgwoning opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
+        uitgesloten_zorgwoning_grondslag_criterium_ids (list[str] | None): De criterium-id's die niet meetellen in de zorgwoninggrondslag.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
 
@@ -59,6 +58,7 @@ def waardeer_bijzondere_voorzieningen(
             eenheid,
             stelselgroepen_zonder_opslag,
             stelsel,
+            uitgesloten_zorgwoning_grondslag_criterium_ids,
             waarderingsgroep_builder,
             woningwaardering_resultaat,
         ),
@@ -74,6 +74,7 @@ def _opslag_zorgwoning(
     eenheid: EenhedenEenheid,
     stelselgroepen_zonder_opslag: list[WoningwaarderingstelselgroepReferentiedata],
     stelsel: WoningwaarderingstelselReferentiedata,
+    uitgesloten_zorgwoning_grondslag_criterium_ids: list[str] | None,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
@@ -88,6 +89,7 @@ def _opslag_zorgwoning(
         eenheid (EenhedenEenheid): De eenheid die wordt gewaardeerd.
         stelselgroepen_zonder_opslag (list[WoningwaarderingstelselgroepReferentiedata]): Lijst van stelselgroepen die niet worden meegenomen in de opslag.
         stelsel (WoningwaarderingstelselReferentiedata): Het type woningwaarderingsstelsel.
+        uitgesloten_zorgwoning_grondslag_criterium_ids (list[str] | None): De criterium-id's die niet meetellen in de zorgwoninggrondslag.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het bestaande waarderingsresultaat, indien aanwezig.
 
@@ -137,6 +139,9 @@ def _opslag_zorgwoning(
                 f"Invalid stelsel {stelsel}. Bijzondere voorzieningen zijn alleen gedefinieerd voor {Woningwaarderingstelsel.zelfstandige_woonruimten.naam} en {Woningwaarderingstelsel.onzelfstandige_woonruimten.naam}"
             )
 
+    uitgesloten_criterium_ids = set(
+        uitgesloten_zorgwoning_grondslag_criterium_ids or []
+    )
     puntentotaal = sum(
         Decimal(str(groep.punten or "0")) or Decimal()
         for groep in woningwaardering_resultaat.groepen or []
@@ -147,33 +152,28 @@ def _opslag_zorgwoning(
         )
     )
 
-    # §2.12 voetnoot 13: rubriek 11.2 (nieuwbouwminimum) telt niet mee in de 35%-grondslag
-    if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
-        woz_groep = next(
+    if uitgesloten_criterium_ids:
+        # Voor zelfstandige zorgwoningen telt rubriek 11.2 niet mee in de 35%-grondslag
+        # (§2.12 voetnoot 13), dus trekken we die onderliggende criteria hier af.
+        puntentotaal -= sum(
             (
-                groep
+                Decimal(str(waardering.punten))
                 for groep in woningwaardering_resultaat.groepen or []
-                if groep.criterium_groep
-                and groep.criterium_groep.stelselgroep
-                == Woningwaarderingstelselgroep.punten_voor_de_woz_waarde
-            ),
-            None,
-        )
-        if woz_groep:
-            nieuwbouw_minimum_criterium_id = (
-                f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}"
-                f"__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
-            )
-            for waardering in woz_groep.woningwaarderingen or []:
+                for waardering in groep.woningwaarderingen or []
                 if (
-                    waardering.criterium
-                    and waardering.criterium.id == nieuwbouw_minimum_criterium_id
-                    and waardering.punten is not None
-                ):
-                    puntentotaal -= Decimal(str(waardering.punten))
+                    waardering.punten is not None
+                    and waardering.criterium is not None
+                    and waardering.criterium.id in uitgesloten_criterium_ids
+                )
+            ),
+            start=Decimal("0"),
+        )
 
+    grondslag_label = (
+        "1 tot en met 11.1" if uitgesloten_criterium_ids else "1 tot en met 11"
+    )
     logger.info(
-        f"Eenheid ({eenheid.id}): Puntentotaal van de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel is {puntentotaal}"
+        f"Eenheid ({eenheid.id}): Puntentotaal van de rubrieken {grondslag_label} van het woningwaarderingsstelsel is {puntentotaal}"
     )
 
     verhoging = utils.rond_af_op_kwart(puntentotaal * Decimal("0.35"))

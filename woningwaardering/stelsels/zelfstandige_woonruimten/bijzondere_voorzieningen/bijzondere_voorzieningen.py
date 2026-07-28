@@ -18,6 +18,10 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
+UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS = [
+    "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten"
+]
+
 
 class BijzondereVoorzieningen(Stelselgroep):
     def __init__(
@@ -47,6 +51,7 @@ class BijzondereVoorzieningen(Stelselgroep):
                 self.stelselgroep,
             ],
             stelsel=self.stelsel,
+            uitgesloten_zorgwoning_grondslag_criterium_ids=UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS,
             waarderingsgroep_builder=waarderingsgroep_builder,
             woningwaardering_resultaat=woningwaardering_resultaat,
         )
