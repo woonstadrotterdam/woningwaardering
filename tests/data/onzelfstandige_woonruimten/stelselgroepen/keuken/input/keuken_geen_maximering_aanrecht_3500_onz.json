@@ -1,5 +1,5 @@
 {
-  "id": "3001mm",
+  "id": "keuken_geen_maximering_aanrecht_3500_onz",
   "ruimten": [
     {
       "id": "keuken",
@@ -31,7 +31,41 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 3001
+          "lengte": 3500
+        }
+      ],
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
         }
       ]
     }
