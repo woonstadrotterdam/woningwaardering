@@ -30,6 +30,10 @@ LOOKUP_TABEL_FOLDER = (
 
 DATUM_FORMAT = "%d-%m-%Y"
 
+# Criterium-id-segment voor rubriek 11.2 (nieuwbouwminimum); ook gebruikt in
+# bijzondere_voorzieningen bij de 35%-zorgwoning-grondslag (§2.12 voetnoot 13).
+NIEUWBOUW_MINIMUM_PUNTEN_ID = "nieuwbouw_minimum_punten"
+
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
@@ -265,7 +269,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if 0.0 < woz_punten < minimum_woz_punten:
             waarderingsgroep_builder.met_onderliggend(
-                id="nieuwbouw_minimum_punten",
+                id=NIEUWBOUW_MINIMUM_PUNTEN_ID,
                 naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
                 punten=float(minimum_woz_punten - woz_punten),
             )
