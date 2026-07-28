@@ -57,7 +57,14 @@ def waardeer_keuken(
         for waardering in extra_waarderingen
         if waardering.punten is not None
     )
-    max_punten_voorzieningen = _max_punten_voorzieningen(ruimte)
+    # 2.5.3 Punten voor extra voorzieningen keuken
+    # Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het
+    # aantal punten voor de basisvoorzieningen (de aanrechtlengte).
+    max_punten_voorzieningen = sum(
+        Decimal(str(waardering.punten))
+        for waardering in aanrecht_waarderingen
+        if waardering.punten is not None
+    )
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
@@ -209,15 +216,6 @@ def _waardeer_aanrecht(
                 punten=aanrecht_punten,
                 aantal=element.lengte,
             )
-
-
-def _max_punten_voorzieningen(ruimte: EenhedenRuimte) -> Decimal:
-    totaal_lengte_aanrechten = sum(
-        Decimal(str(element.lengte or "0"))
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-    )
-    return Decimal("7") if totaal_lengte_aanrechten >= Decimal("2000") else Decimal("4")
 
 
 def _waardeer_extra_voorzieningen(
