@@ -1148,13 +1148,14 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     """
-    Deze functie voegt de oppervlakte van kasten toe aan een ruimte en retourneert de naam van de ruimte inclusief het aantal kasten.
+    Deze functie retourneert de naam van de ruimte inclusief het aantal verbonden
+    kasten dat meetelt voor de oppervlaktewaardering.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waar kasten aan toegevoegd moeten worden.
 
     Returns:
-        str: De naam van de ruimte inclusief het aantal toegevoegde kasten.
+        str: De naam van de ruimte inclusief het aantal meetellende kasten.
     """
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
@@ -1184,19 +1185,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         aantal_ruimte_kasten = len(ruimte_kasten)
 
         if aantal_ruimte_kasten > 0:
-            ruimte.oppervlakte += float(oppervlakte_verbonden_kasten(ruimte))
-
-            if ruimte.inhoud is not None:
-                ruimte.inhoud += sum(
-                    [
-                        ruimte_kast.inhoud
-                        for ruimte_kast in ruimte_kasten
-                        if ruimte_kast.inhoud is not None
-                    ]
-                )
-
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van "
+                f"{aantal_ruimte_kasten} verbonden "
+                f"{'kast' if aantal_ruimte_kasten == 1 else 'kasten'} telt mee "
+                "voor de oppervlaktewaardering."
             )
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"

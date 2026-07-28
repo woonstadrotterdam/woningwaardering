@@ -92,3 +92,23 @@ def test_classificeer_ruimte_telt_kast_mee_bij_vertrekdrempel():
         ],
     )
     assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
+
+
+def test_verbonden_kast_wordt_na_naamhelper_niet_dubbel_geteld():
+    ruimte = EenhedenRuimte(
+        id="slaapkamer",
+        naam="Slaapkamer",
+        oppervlakte=3.5,
+        soort=Ruimtesoort.vertrek,
+        detail_soort=Ruimtedetailsoort.slaapkamer,
+        verbonden_ruimten=[
+            EenhedenRuimte(oppervlakte=0.5, detail_soort=Ruimtedetailsoort.kast)
+        ],
+    )
+
+    criterium_naam = utils.voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
+    assert criterium_naam == "Slaapkamer (+1 kast)"
+    assert ruimte.oppervlakte == 3.5
+    assert utils.oppervlakte_inclusief_verbonden_kasten(ruimte) == Decimal("4.0")
+    assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
