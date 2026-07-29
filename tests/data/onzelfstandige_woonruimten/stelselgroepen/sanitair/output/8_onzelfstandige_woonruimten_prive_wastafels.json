@@ -1,0 +1,89 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 1.25,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive__slaapkamer",
+            "naam": "Slaapkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "sanitair__prive__slaapkamer__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__slaapkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 3.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive__slaapkamer__max_punten_wastafel",
+            "naam": "Max 1.0 punt voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__slaapkamer"
+            }
+          },
+          "punten": -2.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte",
+            "naam": "Bergruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.25
+        }
+      ]
+    }
+  ]
+}
