@@ -6,27 +6,8 @@ from woningwaardering.vera.bvg.generated import (
     Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     BouwkundigelementdetailsoortReferentiedata,
 )
-
-# Bijlage I A rubriek 5 / §2.3.2 NOTE: minimaal 1 meter aanrechtblad.
-AANRECHT_MINIMALE_LENGTE_MM = 1000
-
-
-def heeft_valide_aanrecht_lengte(lengte: float | int | None) -> bool:
-    """Controleert of een aanrechtlengte minimaal 1 meter bedraagt."""
-    return lengte is not None and lengte >= AANRECHT_MINIMALE_LENGTE_MM
-
-
-def heeft_valide_aanrecht(ruimte: EenhedenRuimte) -> bool:
-    """Controleert of een ruimte minstens één aanrecht vanaf 1 meter heeft."""
-    return any(
-        heeft_valide_aanrecht_lengte(element.lengte)
-        for element in get_bouwkundige_elementen(
-            ruimte, Bouwkundigelementdetailsoort.aanrecht
-        )
-    )
 
 
 def get_bouwkundige_elementen(

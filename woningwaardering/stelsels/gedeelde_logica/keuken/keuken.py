@@ -9,6 +9,10 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    AANRECHT_MINIMALE_LENGTE_MM,
+    is_valide_aanrechtlengte,
+)
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -23,11 +27,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import (
-    AANRECHT_MINIMALE_LENGTE_MM,
-    get_bouwkundige_elementen,
-    heeft_valide_aanrecht_lengte,
-)
+from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 
 def waardeer_keuken(
@@ -119,7 +119,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
         for aanrecht in get_bouwkundige_elementen(
             ruimte, Bouwkundigelementdetailsoort.aanrecht
         )
-        if heeft_valide_aanrecht_lengte(aanrecht.lengte)
+        if is_valide_aanrechtlengte(aanrecht.lengte)
     )
 
     if not ruimte.detail_soort:
@@ -189,7 +189,7 @@ def _waardeer_aanrecht(
             # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
             # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
             # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
-            if not heeft_valide_aanrecht_lengte(element.lengte):
+            if not is_valide_aanrechtlengte(element.lengte):
                 aanrecht_punten = 0
             elif stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
                 if (

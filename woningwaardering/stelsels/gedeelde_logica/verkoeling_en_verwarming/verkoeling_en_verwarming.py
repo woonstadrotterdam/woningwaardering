@@ -6,6 +6,7 @@ from loguru import logger
 
 from woningwaardering.stelsels.builders import WaarderingBuilder
 from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import heeft_valide_aanrecht
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
@@ -19,7 +20,6 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_valide_aanrecht
 
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
