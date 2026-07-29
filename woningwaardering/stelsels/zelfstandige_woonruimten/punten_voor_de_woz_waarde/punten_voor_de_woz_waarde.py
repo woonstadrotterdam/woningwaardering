@@ -10,6 +10,7 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import voeg_stelselgroep_afronding_toe
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -148,12 +149,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # §2.11.2 [ZEL]: onderdeel I en II niet tussentijds afronden; alleen totaal op kwart.
         punten_onderdeel_I = woz_waarde / factor_onderdeel_I
         punten_onderdeel_II = woz_waarde / oppervlakte / factor_onderdeel_II
+        woz_punten_onafgerond = punten_onderdeel_I + punten_onderdeel_II
 
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is {woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is "
+            f"{woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {utils.rond_af(punten_onderdeel_I, 2)}"
         )
         logger.info(
-            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is {woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = {punten_onderdeel_II}"
+            f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is "
+            f"{woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = "
+            f"{utils.rond_af(punten_onderdeel_II, 2)}"
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten
@@ -173,7 +178,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         onderdeel_i = waarderingsgroep_builder.met_onderliggend(
-            id="onderdeel_I", naam="Onderdeel I", punten=float(punten_onderdeel_I)
+            id="onderdeel_I",
+            naam="Onderdeel I",
+            punten=float(utils.rond_af(punten_onderdeel_I, 2)),
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -192,7 +199,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         onderdeel_ii = waarderingsgroep_builder.met_onderliggend(
-            id="onderdeel_II", naam="Onderdeel II", punten=float(punten_onderdeel_II)
+            id="onderdeel_II",
+            naam="Onderdeel II",
+            punten=float(utils.rond_af(punten_onderdeel_II, 2)),
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -218,10 +227,16 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         self._corrigeer_woz_punten(
-            waarderingsgroep_builder, eenheid, woningwaardering_resultaat
+            waarderingsgroep_builder,
+            eenheid,
+            woningwaardering_resultaat,
+            woz_punten_onafgerond,
         )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
+        self._stel_woz_totaal_in(
+            woningwaardering_groep, punten_onderdeel_I, punten_onderdeel_II
+        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -234,31 +249,32 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woz_punten_onafgerond: Decimal,
     ) -> None:
         """
-        Controleert of de punten voor de stelselgroep WOZ-waarde voldoen aan de minimum punten en de maximum hoeveelheid punten.
-        Een correctie vindt plaats wanneer:
-            - Een nieuwbouwwoning niet het minimum aantal punten heeft.
-            - De punten voor WOZ-waarde meer dan 33.33% van het totaal aantal punten bedraagt en geen nieuwbouwwoning is.
+        Past WOZ-correcties toe: nieuwbouwminimum (§2.11.5) en daarna de 33%-cap (§2.11.7).
+
+        Pipeline:
+            1. Onafgeronde onderdelen I + II.
+            2. Nieuwbouwminimum (2015-2019, ≥110 punten op rubrieken 1-10/12) wanneer
+               WOZ < 40 punten; daarna geen cap (26,6% → geen aftopping).
+            3. Anders: 33%-cap wanneer totaal na kwartafronding ≥ 187 punten, tenzij COROP
+               of minimum WOZ-waarde van toepassing is.
 
         Args:
-            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep
+            waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep.
             eenheid (EenhedenEenheid): De eenheid.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): Woningwaarderingresultaten.
+            woz_punten_onafgerond (Decimal): Som van onafgeronde onderdelen I en II.
         """
 
-        woz_punten = Decimal(
-            sum(
-                Decimal(str(waardering.punten))
-                for waardering in waarderingsgroep_builder.alle_waarderingen()
-                if waardering.punten is not None
-            )
-        )
+        woz_punten = woz_punten_onafgerond
 
         minimum_woz_punten = self._bereken_minimum_punten_nieuwbouw(
             eenheid, woningwaardering_resultaat
         )
 
+        # §2.11.5 [ZEL]: nieuwbouwminimum; na toepassing geen cap (§2.11.7, 26,6%).
         if 0.0 < woz_punten < minimum_woz_punten:
             waarderingsgroep_builder.met_onderliggend(
                 id="nieuwbouw_minimum_punten",
@@ -277,9 +293,14 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             0,
         )
 
+        # §2.11.7 / §2.1.4 [ZEL]: 187-drempel op totaal na kwartafronding, niet op afgeronde WOZ.
         totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
         correctie_punten = self._cap_punten(
-            eenheid, woz_punten, overige_punten, woningwaardering_resultaat
+            eenheid,
+            woz_punten,
+            overige_punten,
+            woningwaardering_resultaat,
+            totaal_punten_zonder_cap,
         )
 
         if correctie_punten is not None:
@@ -312,12 +333,56 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     punten=utils.rond_af(correctie_punten, 2),
                 )
 
+    def _stel_woz_totaal_in(
+        self,
+        groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        punten_onderdeel_I: Decimal,
+        punten_onderdeel_II: Decimal,
+    ) -> None:
+        """Zet groepspunten en afronding op basis van onafgeronde I/II en weergavecriteria.
+
+        Onderdeel I en II worden in de output op 2 decimalen getoond (§2.11.2),
+        maar het rubriektotaal volgt de onafgeronde som vóór kwartafronding.
+        """
+        correctie_ids = {
+            f"{self.stelselgroep.name}__nieuwbouw_minimum_punten",
+            f"{self.stelselgroep.name}__maximering_woz_punten",
+        }
+        afronding_id = f"{self.stelselgroep.name}__afronding_op_kwartpunten"
+
+        correcties = Decimal("0")
+        display_onafgerond = Decimal("0")
+        waarderingen_zonder_afronding = []
+
+        for waardering in groep.woningwaarderingen or []:
+            if waardering.criterium and waardering.criterium.id == afronding_id:
+                continue
+            waarderingen_zonder_afronding.append(waardering)
+            if waardering.punten is None:
+                continue
+            punten = Decimal(str(waardering.punten))
+            display_onafgerond += punten
+            if waardering.criterium and waardering.criterium.id in correctie_ids:
+                correcties += punten
+
+        onafgerond = punten_onderdeel_I + punten_onderdeel_II + correcties
+        afgerond = utils.rond_af_op_kwart(onafgerond)
+        groep.punten = float(afgerond)
+        groep.woningwaarderingen = waarderingen_zonder_afronding
+        voeg_stelselgroep_afronding_toe(
+            groep,
+            onafgerond=display_onafgerond,
+            afgerond=afgerond,
+            stelselgroep=self.stelselgroep,
+        )
+
     def _cap_punten(
         self,
         eenheid: EenhedenEenheid,
         woz_punten: Decimal,
         overige_punten: Decimal,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        totaal_punten_zonder_cap: Decimal,
     ) -> Decimal | None:
         """
         Berekent de cap op de WOZ. Maximaal 33% van het
@@ -333,14 +398,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
             overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            totaal_punten_zonder_cap (Decimal): Totaal na kwartafronding vóór cap.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
         drempel_cap_woz = Decimal("187")
-
-        # §2.11.7 / §2.1.4 [ZEL]: 187-drempel op totaal na kwartafronding, niet op afgeronde WOZ.
-        totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
 
         if totaal_punten_zonder_cap < drempel_cap_woz:
             logger.info(
