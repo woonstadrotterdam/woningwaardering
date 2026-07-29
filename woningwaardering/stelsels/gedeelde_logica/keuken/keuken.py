@@ -9,10 +9,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.utils import (
-    gedeeld_met_onzelfstandige_woonruimten,
-    rond_af,
-)
+from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -62,6 +59,9 @@ def waardeer_keuken(
         for waardering in extra_waarderingen
         if waardering.punten is not None
     )
+    # 2.5.3 Punten voor extra voorzieningen keuken
+    # Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het
+    # aantal punten voor de basisvoorzieningen (de aanrechtlengte).
     max_punten_voorzieningen = punten_voor_aanrecht
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
@@ -240,27 +240,27 @@ def _punten_voor_aanrechtlengte(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
 ) -> Decimal:
+    # 2.5.2 Punten voor basisvoorzieningen keuken
+    # Zelfstandig: Tussen 1 en 2 meter → 4; Langer dan 2 meter → 7
+    # Onzelfstandig: Tussen 1 en 2 meter → 4; Tussen 2 en 3 meter → 7;
+    # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
+    # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
+    # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
     if lengte < 1000:
         return Decimal("0")
-    if lengte >= 2000 and (
-        (
-            # zelfstandige keuken met aanrecht boven 2000mm is 7 punten
-            not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-        )
-        or (
-            # onzelfstandige keuken met aanrecht tussen 2000mm en 3000mm is 7 punten
-            gedeeld_met_onzelfstandige_woonruimten(ruimte) and lengte <= 3000
-        )
-    ):
+    if stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
+        if (
+            lengte > 5000
+            and (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 0) >= 8
+        ):
+            return Decimal("13")
+        if lengte > 3000:
+            return Decimal("10")
+        if lengte >= 2000:
+            return Decimal("7")
+        return Decimal("4")
+    if lengte >= 2000:
         return Decimal("7")
-    if (
-        lengte > 3000
-        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
-        and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 8
-    ):
-        return Decimal("13")
-    if lengte > 3000 and stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
-        return Decimal("10")
     return Decimal("4")
 
 
@@ -285,6 +285,8 @@ def _waardeer_extra_voorzieningen(
         Installatiesoort.inbouw_kookplaat_gas: 0.5,
         Installatiesoort.inbouw_koelkast: 1.0,
         Installatiesoort.inbouw_vrieskast: 0.75,
+        # 2.5.4 Eén voorziening met twee functies worden als twee losse voorzieningen gewaardeerd.
+        Installatiesoort.inbouw_koelvriescombinatie: 1.75,
         Installatiesoort.inbouw_oven_elektrisch: 1.0,
         Installatiesoort.inbouw_oven_gas: 0.5,
         Installatiesoort.inbouw_magnetron: 1.0,
