@@ -49,10 +49,14 @@ _BADKAMERACHTIGE_RUIMTES: tuple[RuimtedetailsoortReferentiedata, ...] = (
     Ruimtedetailsoort.badkamer_met_toilet,
     Ruimtedetailsoort.doucheruimte,
 )
-_BAD_OF_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
-    Installatiesoort.bad,
+# Een drempelloze inrijdouche telt als een gewone douche.
+_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
     Installatiesoort.douche,
     Installatiesoort.drempelloze_inrijdouche,
+)
+_BAD_OF_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
+    Installatiesoort.bad,
+    *_DOUCHE_INSTALLATIES,
     Installatiesoort.bad_en_douche,
 )
 # 2.6.1 Punten voor sanitaire basisvoorzieningen — Toilet
@@ -72,14 +76,12 @@ _WASTAFEL_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
 # 2.6.1 Punten voor sanitaire basisvoorzieningen — Bad en douche
 _BAD_EN_DOUCHE_PUNTEN_ZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.douche: 4.0,
-    # VERA-drempelloze inrijdouche telt als Douche.
     Installatiesoort.drempelloze_inrijdouche: 4.0,
     Installatiesoort.bad: 6.0,
     Installatiesoort.bad_en_douche: 7.0,
 }
 _BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.douche: 3.0,
-    # VERA-drempelloze inrijdouche telt als Douche.
     Installatiesoort.drempelloze_inrijdouche: 3.0,
     Installatiesoort.bad: 5.0,
     Installatiesoort.bad_en_douche: 6.0,
@@ -129,11 +131,7 @@ def _bad_en_douche_punten(
 
 def _aantal_douches(installaties: Counter[Referentiedata]) -> int:
     return sum(
-        installaties[installatiesoort]
-        for installatiesoort in (
-            Installatiesoort.douche,
-            Installatiesoort.drempelloze_inrijdouche,
-        )
+        installaties[installatiesoort] for installatiesoort in _DOUCHE_INSTALLATIES
     )
 
 
@@ -467,15 +465,30 @@ def _waardeer_baden_en_douches(
 ) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
     punten_bad_en_douche = _bad_en_douche_punten(stelsel)
-    aantal_douches = _aantal_douches(installaties)
     aantal_baden = installaties[Installatiesoort.bad]
 
-    # Gekoppelde bad+douche: losse BAD met DOU/DRD op dezelfde ruimte
-    aantal_bad_en_douches_gekoppeld = min(aantal_douches, aantal_baden)
-    # Expliciete referentie BDO (bad en douche als één installatie)
-    aantal_bad_en_douche_expliciet = installaties[Installatiesoort.bad_en_douche]
+    # Bijlage I, onder A, toelichting rubriek 6.1 (Besluit huurprijzen woonruimte)
+    # "Indien in de badruimte behalve het bad tevens een afzonderlijke douche is
+    # aangebracht, geldt een waardering van zeven punten." Een los bad met een losse
+    # douche in dezelfde ruimte waarderen we daarom samen als bad/douche. Voor
+    # onzelfstandige woonruimten geldt dezelfde regel met een eigen puntenaantal
+    # (bijlage I, onder B, rubriek 6).
+    aantal_gekoppeld = min(_aantal_douches(installaties), aantal_baden)
+
+    # Welk douchetype aan een bad wordt gekoppeld maakt voor de punten niet uit, maar
+    # wel voor de naam van de resterende waardering. De volgorde van
+    # _DOUCHE_INSTALLATIES is daarin een implementatiekeuze, geen beleidsregel.
+    resterende_installaties = {Installatiesoort.bad: aantal_baden - aantal_gekoppeld}
+    nog_te_koppelen = aantal_gekoppeld
+    for douchesoort in _DOUCHE_INSTALLATIES:
+        gekoppeld = min(installaties[douchesoort], nog_te_koppelen)
+        nog_te_koppelen -= gekoppeld
+        resterende_installaties[douchesoort] = installaties[douchesoort] - gekoppeld
+
+    # Een bad_en_douche is zelf al de combinatie van een bad met een afzonderlijke
+    # douche en wordt daarom niet van de losse installaties afgetrokken.
     aantal_bad_en_douches = (
-        aantal_bad_en_douches_gekoppeld + aantal_bad_en_douche_expliciet
+        aantal_gekoppeld + installaties[Installatiesoort.bad_en_douche]
     )
 
     if aantal_bad_en_douches > 0:
@@ -495,12 +508,7 @@ def _waardeer_baden_en_douches(
             aantal=aantal_bad_en_douches,
         )
 
-    for installatiesoort in [
-        Installatiesoort.bad,
-        Installatiesoort.douche,
-        Installatiesoort.drempelloze_inrijdouche,
-    ]:
-        aantal = installaties[installatiesoort] - aantal_bad_en_douches
+    for installatiesoort, aantal in resterende_installaties.items():
         if aantal > 0:
             punten = rond_af(
                 Decimal(str(aantal))
