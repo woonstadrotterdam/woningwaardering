@@ -75,7 +75,7 @@ _VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
 
 
 def _heeft_aanrecht_vanaf_1m(ruimte: EenhedenRuimte) -> bool:
-    # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter (minimaal 1 m),
+    # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
     # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
     return any(
         element.lengte is not None and element.lengte >= 1000
