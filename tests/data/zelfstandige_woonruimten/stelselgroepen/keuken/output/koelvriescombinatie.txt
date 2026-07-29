@@ -1,9 +1,11 @@
 SAMENVATTING koelvriescombinatie
-  Keuken                                                                          7.00 pt
+  Keuken                                                                          8.75 pt
                                                                                 ---------
 
 KEUKEN
   Keuken
     - Lengte aanrecht                                              2500.00 mm     7.00 pt
+    - Extra voorzieningen
+      - Inbouw koelvriescombinatie                                    1.00 st     1.75 pt
                                                                                 ---------
-  Totaal                                                                          7.00 pt
+  Totaal                                                                          8.75 pt

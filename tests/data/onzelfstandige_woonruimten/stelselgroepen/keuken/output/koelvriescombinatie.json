@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 3.5,
+      "punten": 4.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -42,6 +42,37 @@
             }
           },
           "punten": 3.5
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelvriescombinatie",
+            "naam": "Inbouw koelvriescombinatie",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.88
+        },
+        {
+          "criterium": {
+            "id": "keuken__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.12
         }
       ]
     }
