@@ -82,6 +82,10 @@ Een lokale uitbreiding op gegenereerde VERA-modellen wanneer de standaard onvold
 
 Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntberekeningen. CSV wordt gebruikt wanneer tabeldata in code, JSON of YAML minder leesbaar zou zijn.
 
+### Test-case
+
+Vermijd de term _fixture(s)_ in de context van testing. Gebruik hiervoor _test-case(s)_.
+
 ### Criterium-id
 
 Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/index.md` voor de gebruikersgerichte uitleg van de outputstructuur en `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de builders.
