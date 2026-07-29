@@ -976,6 +976,9 @@ Als aan de bovenstaande eisen wordt voldaan, kunnen alleen voor de volgende onde
 
 Het aantal punten voor extra voorzieningen kan niet meer zijn dan het totaal aantal punten voor de douche, het bad en/of bad/douche gezamenlijk. Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt. Zie het voorbeeld hieronder.
 
+> [!NOTE]
+> We interpreteren «gezamenlijk» als het **eenheidstotaal** van alle douche-/bad-/bad-douchepunten, niet als het totaal binnen dezelfde ruimte. Extra voorzieningen worden daarom na de ruimtelijke waardering op eenheidsniveau afgetopt (#298).
+
 {==
 
 **VOORBEELD**  

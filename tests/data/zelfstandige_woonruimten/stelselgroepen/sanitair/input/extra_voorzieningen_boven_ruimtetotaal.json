@@ -1,0 +1,117 @@
+{
+  "id": "extra_voorzieningen_boven_ruimtetotaal",
+  "ruimten": [
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.0,
+      "oppervlakte": 8.0,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BDO",
+          "naam": "Bad en douche"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "BUB",
+          "naam": "Bubbelfunctie van het bad"
+        },
+        {
+          "code": "DOW",
+          "naam": "Douchewand"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "IKW",
+          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "KAS",
+          "naam": "Kastruimte"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "STW",
+          "naam": "Stopcontact bij wastafel"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "EHM",
+          "naam": "Éénhandsmengkraan"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        }
+      ],
+      "aantal": 1
+    },
+    {
+      "id": "slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "inhoud": 21.0,
+      "oppervlakte": 8.0,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ],
+      "aantal": 1
+    }
+  ]
+}
