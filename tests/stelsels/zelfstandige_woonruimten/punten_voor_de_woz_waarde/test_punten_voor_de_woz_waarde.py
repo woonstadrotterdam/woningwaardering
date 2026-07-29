@@ -91,9 +91,7 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     )
     woz_punten_onafgerond = Decimal("82.33")
 
-    svc._corrigeer_woz_punten(
-        builder, eenheid, resultaat, woz_punten_onafgerond
-    )
+    svc._corrigeer_woz_punten(builder, eenheid, resultaat, woz_punten_onafgerond)
 
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
