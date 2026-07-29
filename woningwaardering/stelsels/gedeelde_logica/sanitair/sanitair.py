@@ -609,18 +609,6 @@ def _maximeer_wastafels_in_ruimte(
     if totaal_aantal <= 1:
         return
 
-    laatste_index: int | None = None
-    for index, woningwaardering in enumerate(waarderingen):
-        if (
-            woningwaardering.bovenliggende is ruimte_criterium
-            and woningwaardering.segment == soort.name
-            and woningwaardering.aantal is not None
-        ):
-            laatste_index = index
-
-    if laatste_index is None:
-        return
-
     logger.info(
         f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {totaal_aantal} {soort.naam}. Maximaal {maximum} punt voor {soort.naam}."
     )
@@ -628,8 +616,7 @@ def _maximeer_wastafels_in_ruimte(
         maximum - Decimal(str(totaal_aantal)) * maximum,
         decimalen=2,
     )
-    waarderingen.insert(
-        laatste_index + 1,
+    waarderingen.append(
         ruimte_criterium.met_onderliggend(
             id=f"max_punten_{soort.name}",
             naam=maximering_naam(
@@ -638,7 +625,7 @@ def _maximeer_wastafels_in_ruimte(
                 gedeelde_naam=f"Maximering voor {soort.naam}",
             ),
             punten=float(correctie),
-        ),
+        )
     )
 
 
