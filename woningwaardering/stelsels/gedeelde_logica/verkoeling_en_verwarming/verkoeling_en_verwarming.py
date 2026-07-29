@@ -15,12 +15,11 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import get_bouwkundige_elementen
+from woningwaardering.vera.utils import heeft_valide_aanrecht
 
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
@@ -75,17 +74,6 @@ _VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
 )
 
 
-def _heeft_aanrecht_vanaf_1m(ruimte: EenhedenRuimte) -> bool:
-    # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
-    # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
-    return any(
-        element.lengte is not None and element.lengte >= 1000
-        for element in get_bouwkundige_elementen(
-            ruimte, Bouwkundigelementdetailsoort.aanrecht
-        )
-    )
-
-
 class _OpenKeukenSoort(Enum):
     geen = "geen"
     inherente_keuken = "inherente_keuken"
@@ -96,7 +84,9 @@ def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort:
     if ruimte.detail_soort in _OPEN_KEUKEN_DETAIL_SOORTEN:
         return _OpenKeukenSoort.inherente_keuken
     if ruimte.detail_soort in _VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
-        if _heeft_aanrecht_vanaf_1m(ruimte):
+        # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
+        # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
+        if heeft_valide_aanrecht(ruimte):
             return _OpenKeukenSoort.impliciete_open_keuken
     return _OpenKeukenSoort.geen
 

@@ -28,7 +28,7 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import get_bouwkundige_elementen
+from woningwaardering.vera.utils import get_bouwkundige_elementen, heeft_valide_aanrecht_lengte
 
 # Op de ruimte met de meeste (meerpersoons)wastafels, m.u.v. de badkamer, wordt
 # bij >= 8 onzelfstandige woonruimten geen maximering toegepast.
@@ -226,7 +226,9 @@ def _waardeer_wastafels(
         ):
             for element in ruimte.bouwkundige_elementen or []:
                 if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht:
-                    if element.lengte is not None and element.lengte < 1000:
+                    if element.lengte is not None and not heeft_valide_aanrecht_lengte(
+                        element.lengte
+                    ):
                         logger.info(
                             f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
