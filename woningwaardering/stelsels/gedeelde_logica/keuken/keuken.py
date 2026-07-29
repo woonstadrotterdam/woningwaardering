@@ -1,7 +1,7 @@
 import warnings
 from collections import Counter
 from decimal import Decimal
-from typing import Iterator, cast
+from typing import Iterator
 
 from loguru import logger
 
@@ -46,9 +46,7 @@ def waardeer_keuken(
         or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
     )
 
-    aanrecht_waarderingen, punten_voor_aanrecht = _waardeer_aanrecht(
-        ruimte, stelsel, ruimte_criterium
-    )
+    aanrecht_waarderingen = _waardeer_aanrecht(ruimte, stelsel, ruimte_criterium)
     extra_waarderingen = list(_waardeer_extra_voorzieningen(ruimte, ruimte_criterium))
     detail_waarderingen = [*aanrecht_waarderingen, *extra_waarderingen]
     if not detail_waarderingen:
@@ -62,7 +60,11 @@ def waardeer_keuken(
     # 2.5.3 Punten voor extra voorzieningen keuken
     # Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het
     # aantal punten voor de basisvoorzieningen (de aanrechtlengte).
-    max_punten_voorzieningen = punten_voor_aanrecht
+    max_punten_voorzieningen = sum(
+        Decimal(str(waardering.punten))
+        for waardering in aanrecht_waarderingen
+        if waardering.punten is not None
+    )
 
     # De punten van een gedeelde ruimte worden gedeeld door het aantal woonruimten
     # waarmee de ruimte gedeeld wordt.
@@ -153,7 +155,7 @@ def _waardeer_aanrecht(
     ruimte: EenhedenRuimte,
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
-) -> tuple[list[WaarderingBuilder], Decimal]:
+) -> list[WaarderingBuilder]:
     """
     Waardeert de aanrechten van een keuken.
 
@@ -163,8 +165,9 @@ def _waardeer_aanrecht(
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Returns:
-        tuple[list[WaarderingBuilder], Decimal]: De gewaardeerde aanrechten en de
-        basispunten voor de gesommeerde aanrechtlengte.
+        list[WaarderingBuilder]: De gewaardeerde aanrechten. Bij meerdere aanrechten
+        staan de basispunten op een subtotaalregel; de detailregels hebben geen
+        punten. Bij één aanrecht staan de basispunten op die detailregel.
     """
     aanrechten_met_lengte = []
     for element in ruimte.bouwkundige_elementen or []:
@@ -184,7 +187,7 @@ def _waardeer_aanrecht(
             aanrechten_met_lengte.append(element)
 
     if not aanrechten_met_lengte:
-        return [], Decimal("0")
+        return []
 
     totaal_lengte_aanrechten = sum(
         (Decimal(str(element.lengte)) for element in aanrechten_met_lengte),
@@ -196,25 +199,26 @@ def _waardeer_aanrecht(
         stelsel,
     )
 
-    if len(aanrechten_met_lengte) == 1:
-        element = aanrechten_met_lengte[0]
-        lengte = cast(float, element.lengte)
-        logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): een aanrecht van {int(lengte)}mm telt mee voor {Woningwaarderingstelselgroep.keuken.naam}"
-        )
-        return [
-            waarderingsgroep_builder.met_onderliggend(
-                id=f"lengte_aanrecht_{element.id}",
-                naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
-                meeteenheid=Meeteenheid.millimeter,
-                punten=aanrecht_punten,
-                aantal=lengte,
-            )
-        ], aanrecht_punten
-
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {len(aanrechten_met_lengte)} aanrechten tellen samen {int(totaal_lengte_aanrechten)}mm mee voor {Woningwaarderingstelselgroep.keuken.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}): {len(aanrechten_met_lengte)} "
+        f"aanrecht(en) van samen {int(totaal_lengte_aanrechten)}mm tellen mee voor "
+        f"{Woningwaarderingstelselgroep.keuken.naam}"
     )
+
+    details = [
+        waarderingsgroep_builder.met_onderliggend(
+            id=f"lengte_aanrecht_{element.id}",
+            naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
+            meeteenheid=Meeteenheid.millimeter,
+            aantal=element.lengte,
+        )
+        for element in aanrechten_met_lengte
+    ]
+
+    if len(details) == 1:
+        details[0].punten = aanrecht_punten
+        return details
+
     subtotaal = waarderingsgroep_builder.met_onderliggend(
         id="subtotaal",
         naam="Totale aanrechtlengte",
@@ -222,17 +226,9 @@ def _waardeer_aanrecht(
         aantal=totaal_lengte_aanrechten,
         punten=aanrecht_punten,
     )
-    waarderingen = [subtotaal]
-    for element in aanrechten_met_lengte:
-        detail = waarderingsgroep_builder.met_onderliggend(
-            id=f"lengte_aanrecht_{element.id}",
-            naam=f"Lengte {element.naam.lower() if element.naam else 'aanrecht'}",
-            meeteenheid=Meeteenheid.millimeter,
-            aantal=element.lengte,
-        )
+    for detail in details:
         detail.verplaats_naar(subtotaal)
-        waarderingen.append(detail)
-    return waarderingen, aanrecht_punten
+    return [subtotaal, *details]
 
 
 def _punten_voor_aanrechtlengte(
