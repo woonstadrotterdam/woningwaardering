@@ -849,6 +849,12 @@ Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zitho
 | Bad            | 5      |
 | Bad/douche     | 6      |
 
+> [!NOTE]
+> Een losse `bad` met een losse `douche` of `drempelloze_inrijdouche` in dezelfde ruimte waarderen we als `bad/douche`. Overige stortbadinstallaties blijven als douche meetellen. Bij meerdere douchetypes verbruiken we eerst reguliere douches voor de koppeling.
+
+> [!NOTE]
+> Testdata met meerdere baden en/of douches in dezelfde badkamer (bijv. `twee_baden_en_douche`) zijn bewust onwaarschijnlijke randgevallen. Ze pinne de koppelingsregels (#310), niet een realistische woningindeling.
+
 #### 2.6.2 Punten voor extra sanitaire voorzieningen
 
 > [!TIP]

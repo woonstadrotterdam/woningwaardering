@@ -335,14 +335,25 @@ def _waardeer_baden_en_douches(
         Installatiesoort.bad: 6.0 if zelfstandige_woonruimte else 5.0,
         Installatiesoort.bad_en_douche: 7.0 if zelfstandige_woonruimte else 6.0,
     }
-    aantal_douches = (
-        installaties[Installatiesoort.douche]
-        + installaties[Installatiesoort.drempelloze_inrijdouche]
-    )
+    aantal_douches_regulier = installaties[Installatiesoort.douche]
+    aantal_drempelloze_inrijdouche = installaties[
+        Installatiesoort.drempelloze_inrijdouche
+    ]
     aantal_baden = installaties[Installatiesoort.bad]
 
-    # Gekoppelde bad+douche: losse BAD met DOU/DRD op dezelfde ruimte
+    # 2.6.1 Bad / douche / bad/douche
+    # "Een bad met (hand)douche telt als bad/douche; overige stortbadinstallaties
+    # blijven douches." Een drempelloze inrijdouche telt mee als douche voor deze
+    # koppeling. Verbruik eerst reguliere douches, daarna drempelloze inrijdouches,
+    # zodat een resterend douchetype niet ten onrechte verdwijnt (#310).
+    aantal_douches = aantal_douches_regulier + aantal_drempelloze_inrijdouche
     aantal_bad_en_douches_gekoppeld = min(aantal_douches, aantal_baden)
+    gekoppelde_reguliere_douches = min(
+        aantal_douches_regulier, aantal_bad_en_douches_gekoppeld
+    )
+    gekoppelde_drempelloze_inrijdouches = (
+        aantal_bad_en_douches_gekoppeld - gekoppelde_reguliere_douches
+    )
     # Expliciete referentie BDO (bad en douche als één installatie)
     aantal_bad_en_douche_expliciet = installaties[Installatiesoort.bad_en_douche]
     aantal_bad_en_douches = (
@@ -366,12 +377,13 @@ def _waardeer_baden_en_douches(
             aantal=aantal_bad_en_douches,
         )
 
-    for installatiesoort in [
-        Installatiesoort.bad,
-        Installatiesoort.douche,
-        Installatiesoort.drempelloze_inrijdouche,
-    ]:
-        aantal = installaties[installatiesoort] - aantal_bad_en_douches
+    resterende_installaties = {
+        Installatiesoort.bad: aantal_baden - aantal_bad_en_douches_gekoppeld,
+        Installatiesoort.douche: aantal_douches_regulier - gekoppelde_reguliere_douches,
+        Installatiesoort.drempelloze_inrijdouche: aantal_drempelloze_inrijdouche
+        - gekoppelde_drempelloze_inrijdouches,
+    }
+    for installatiesoort, aantal in resterende_installaties.items():
         if aantal > 0:
             punten = rond_af(
                 Decimal(str(aantal)) * Decimal(str(punten_sanitair[installatiesoort])),
