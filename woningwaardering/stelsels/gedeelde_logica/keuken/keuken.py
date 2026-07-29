@@ -285,7 +285,6 @@ def _waardeer_extra_voorzieningen(
         Installatiesoort.inbouw_kookplaat_gas: 0.5,
         Installatiesoort.inbouw_koelkast: 1.0,
         Installatiesoort.inbouw_vrieskast: 0.75,
-        # 2.5.4 Eén voorziening met twee functies worden als twee losse voorzieningen gewaardeerd.
         Installatiesoort.inbouw_koelvriescombinatie: 1.75,
         Installatiesoort.inbouw_oven_elektrisch: 1.0,
         Installatiesoort.inbouw_oven_gas: 0.5,
