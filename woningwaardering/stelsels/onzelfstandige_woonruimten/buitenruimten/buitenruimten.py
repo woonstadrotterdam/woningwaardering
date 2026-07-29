@@ -147,11 +147,21 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        if gedeeld_met_adressen(ruimte):
-            # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
+        # 2.8.2 Punten voor een gemeenschappelijke buitenruimte
+        # Gemeenschappelijke buitenruimten zijn ruimtes die worden gebruikt door:
+        # - meerdere bewoners die wonen op hetzelfde adres
+        # - bewoners van meerdere adressen, maar waarbij die adressen onderdeel
+        #   zijn van hetzelfde woongebouw.
+        # Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan
+        # voorwaarden voldoen, namelijk:
+        # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
+        #    meter, 1,50 meter (hoogte, breedte, diepte)
+        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+            ruimte
+        ):
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
                     UserWarning,
                 )
             if (
@@ -160,7 +170,7 @@ class Buitenruimten(Stelselgroep):
                 or (ruimte.breedte and ruimte.breedte < 1.5)
             ):
                 logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {ruimte.gedeeld_met_aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
                 )
                 return
 
@@ -181,9 +191,12 @@ class Buitenruimten(Stelselgroep):
 
         waardering = WoningwaarderingResultatenWoningwaardering()
         waardering.aantal = float(utils.rond_af(ruimte.oppervlakte, decimalen=2))
-        # Voor privé-buitenruimten worden in ieder geval 2 punten toegekend en vervolgens per vierkante meter 0,75 punt.
-        # De in ieder geval 2 punten worden verderop toegevoegd.
-        if gedeeld_met_onzelfstandige_woonruimten(ruimte):
+        # 2.8.1 Privé: 0,35 punt per m² (+ 2 aanwezigheidspunten verderop).
+        # 2.8.2 Gemeenschappelijk (gedeeld met adressen en/of onzelfstandige
+        # woonruimten): 0,75 punt per m² / adressen / onzelfstandige woonruimten.
+        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
+            ruimte
+        ):
             deler = Decimal(
                 (ruimte.gedeeld_met_aantal_adressen or 1)
                 * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
@@ -193,9 +206,7 @@ class Buitenruimten(Stelselgroep):
             )
         else:
             waardering.punten = float(
-                Decimal(str(ruimte.oppervlakte))
-                * Decimal("0.35")
-                / Decimal(str(ruimte.gedeeld_met_aantal_adressen or 1))
+                Decimal(str(ruimte.oppervlakte)) * Decimal("0.35")
             )
         yield waardering
 

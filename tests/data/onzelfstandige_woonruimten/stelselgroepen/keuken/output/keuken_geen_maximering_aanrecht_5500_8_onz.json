@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 1.25,
+      "punten": 3.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -29,7 +29,7 @@
           }
         },
         {
-          "aantal": 3001.0,
+          "aantal": 5500.0,
           "criterium": {
             "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
             "naam": "Lengte aanrecht",
@@ -41,7 +41,38 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 1.25
+          "punten": 1.63
+        },
+        {
+          "criterium": {
+            "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+            "naam": "Inbouw koelkast",
+            "bovenliggendeCriterium": {
+              "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "keuken__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.12
         }
       ]
     }

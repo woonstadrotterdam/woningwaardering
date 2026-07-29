@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 1.25,
+      "punten": 1.75,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -29,7 +29,7 @@
           }
         },
         {
-          "aantal": 3001.0,
+          "aantal": 5500.0,
           "criterium": {
             "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
             "naam": "Lengte aanrecht",
@@ -41,7 +41,14 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 1.25
+          "punten": 1.63
+        },
+        {
+          "criterium": {
+            "id": "keuken__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.12
         }
       ]
     }
