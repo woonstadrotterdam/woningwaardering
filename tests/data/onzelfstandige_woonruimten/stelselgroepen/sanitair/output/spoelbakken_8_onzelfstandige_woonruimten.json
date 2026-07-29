@@ -1,0 +1,105 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 0.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__wastafel",
+            "naam": "Wastafel (spoelbak in aanrecht < 1m)",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.13
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__wastafel",
+            "naam": "Wastafel (spoelbak in aanrecht < 1m)",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.13
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__max_punten_wastafel",
+            "naam": "Maximering voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
+            }
+          },
+          "punten": -0.13
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte",
+            "naam": "Bergruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.38
+        },
+        {
+          "criterium": {
+            "id": "sanitair__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.01
+        }
+      ]
+    }
+  ]
+}
