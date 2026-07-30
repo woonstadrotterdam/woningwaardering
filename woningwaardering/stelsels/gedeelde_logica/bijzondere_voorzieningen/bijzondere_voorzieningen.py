@@ -224,9 +224,14 @@ def _prive_laadpaal(
         if gedeeld_met_adressen(ruimte):
             continue
 
-        # 2.10.2 / 2.12.3 ONZ
-        # Parkeerplekken die in rubriek 10 daadwerkelijk punten krijgen: laadpaal
-        # sluit dan aan bij die berekeningsmethode en wordt hier overgeslagen.
+        # §2.12.3 ONZ: een laadpaal wordt hier gewaardeerd, tenzij de parkeerplek
+        # zelf een "gemeenschappelijke parkeerruimte" is (§2.10.2, >=2 adressen)
+        # die daadwerkelijk in rubriek 10 kwalificeert. In dat geval sluit de
+        # laadpaal aan bij rubriek 10 (aldaar al verrekend) en wordt hij hier
+        # overgeslagen om dubbeltelling te voorkomen. Een niet-kwalificerende
+        # privé-parkeerplek (bijv. carport <12m²) is geen "gemeenschappelijke
+        # parkeerruimte" in de zin van §2.10.2, dus geldt de algemene regel:
+        # 2 punten via rubriek 12.
         if (
             stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
             and kwalificeert_voor_gemeenschappelijke_parkeerruimte(ruimte)
