@@ -8,8 +8,8 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten.gemeenschappelijke_parkeerruimten import (
-    parkeertype_punten_mapping,
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    kwalificeert_voor_gemeenschappelijke_parkeerruimte,
 )
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
@@ -225,16 +225,11 @@ def _prive_laadpaal(
             continue
 
         # 2.10.2 / 2.12.3 ONZ
-        # Parkeerplekken met een specifieke parkeer-detailsoort worden in deze
-        # package in rubriek 10 gewaardeerd wanneer ze aan de eisen daarvoor
-        # voldoen (≥ 12 m², gedeeld_met_aantal_adressen ingevuld). Alleen dan
-        # sluit de berekeningsmethode voor de laadpaal aan bij rubriek 10.
+        # Parkeerplekken die in rubriek 10 daadwerkelijk punten krijgen: laadpaal
+        # sluit dan aan bij die berekeningsmethode en wordt hier overgeslagen.
         if (
             stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-            and ruimte.detail_soort in parkeertype_punten_mapping
-            and ruimte.oppervlakte is not None
-            and ruimte.oppervlakte >= 12.0
-            and ruimte.gedeeld_met_aantal_adressen is not None
+            and kwalificeert_voor_gemeenschappelijke_parkeerruimte(ruimte)
         ):
             continue
 

@@ -1,6 +1,9 @@
 from .bijzondere_voorzieningen import waardeer_bijzondere_voorzieningen
 from .gedeeld_met import GedeeldeRuimtegroepsleutel, GedeeldMet
 from .gemeenschappelijke_parkeerruimten import (
+    is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten,
+    kwalificeert_voor_gemeenschappelijke_parkeerruimte,
+    parkeertype_punten_mapping,
     waardeer_gemeenschappelijke_parkeerruimte,
 )
 from .keuken import waardeer_keuken
@@ -31,5 +34,8 @@ __all__ = [
     "waardeer_sanitair",
     "maximeer_wastafels",
     "waardeer_verkoeling_en_verwarming",
+    "is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten",
+    "kwalificeert_voor_gemeenschappelijke_parkeerruimte",
+    "parkeertype_punten_mapping",
     "waardeer_gemeenschappelijke_parkeerruimte",
 ]
