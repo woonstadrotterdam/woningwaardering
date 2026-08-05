@@ -45,6 +45,12 @@ jobs:
       - name: Install dependencies
         run: uv sync --extra test
 
+      - name: Set up task
+        uses: arduino/setup-task@v2
+        with:
+          version: "3.x"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN_TOMER }}
@@ -53,6 +59,7 @@ jobs:
             {
               "permissions": {
                 "allow": [
+                  "Bash(task check*)",
                   "Bash(uv run pytest*)",
                   "Bash(uv run pre-commit*)",
                   "Bash(uv run python -m pytest*)"
