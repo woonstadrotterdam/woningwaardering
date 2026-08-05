@@ -12,7 +12,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
+    energieprestatie_met_geldig_label,
     get_energieprestatievergoeding,
+    in_vereenvoudigd_label_periode,
     monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -116,7 +118,7 @@ class Energieprestatie(Stelselgroep):
         waarderings_label: str | None = label
 
         if (
-            utils.in_vereenvoudigd_label_periode(energieprestatie.begindatum)
+            in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is None:
@@ -228,9 +230,7 @@ class Energieprestatie(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
-        energieprestatie = utils.energieprestatie_met_geldig_label(
-            self.peildatum, eenheid
-        )
+        energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         if eenheid.monumenten is None:
             warnings.warn(
