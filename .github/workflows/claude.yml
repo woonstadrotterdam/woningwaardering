@@ -43,7 +43,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: uv sync --extra test
+        run: uv sync --frozen --extra test
 
       - name: Set up task
         uses: arduino/setup-task@v2
