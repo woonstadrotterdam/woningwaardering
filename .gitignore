@@ -167,3 +167,6 @@ scripts/eenheid_input.py
 
 # managing-commits skill runtime cache (local working state, not source)
 .agent-cache/github-workflows/
+
+# graphify skill output (generated knowledge graph, not source)
+graphify-out/
