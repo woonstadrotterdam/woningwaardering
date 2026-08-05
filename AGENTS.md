@@ -85,6 +85,8 @@ Gebruik [`skills/grill-me-with-docs/SKILL.md`](skills/grill-me-with-docs/SKILL.m
 
 Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
 
+[`skills/graphify/SKILL.md`](skills/graphify/SKILL.md) biedt `/graphify` voor codebase-verkenning via een knowledge graph. Dit is optioneel en vereist een lokale installatie van de externe `graphifyy`-CLI (`uv tool install graphifyy`); zonder die installatie doet de skill niets. De bijbehorende PreToolUse-hooks van `graphify install` worden bewust **niet** gedeeld gecommit in `.claude/settings.json` — die zouden Grep/Read/Bash-aanroepen laten falen voor iedereen zonder `graphifyy` lokaal. Wie de hooks wil, installeert ze zelf lokaal in `.claude/settings.local.json` (niet gecommit), bijvoorbeeld via `graphify install --project`.
+
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
