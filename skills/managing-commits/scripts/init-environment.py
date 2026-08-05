@@ -16,8 +16,8 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-# Environment file location (in .cursor for project-specific storage)
-ENV_DIR = ".cursor/github-workflows"
+# Environment file location (tool-neutral, shared by .cursor/skills and .claude/skills)
+ENV_DIR = ".agent-cache/github-workflows"
 ENV_FILE = "env.json"
 
 
@@ -268,7 +268,7 @@ def get_suggested_scopes():
         "build",
         "coverage",
         ".git",
-        ".cursor",
+        ".claude",
         "__pycache__",
         ".venv",
         "venv",
