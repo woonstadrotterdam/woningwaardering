@@ -24,8 +24,8 @@ def get_eenheid():
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            soort=Ruimtesoort.buitenruimte,
-            detail_soort=Ruimtedetailsoort.carport,
+            soort=Ruimtesoort.overige_ruimten,
+            detail_soort=Ruimtedetailsoort.garage,
             bouwkundige_elementen=[
                 BouwkundigElementenBouwkundigElement(
                     soort=Bouwkundigelementsoort.voorziening,

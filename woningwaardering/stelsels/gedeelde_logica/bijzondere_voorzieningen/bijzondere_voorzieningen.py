@@ -8,6 +8,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    kwalificeert_voor_gemeenschappelijke_parkeerruimte,
+)
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -60,7 +63,7 @@ def waardeer_bijzondere_voorzieningen(
             woningwaardering_resultaat,
         ),
         _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_builder),
-        _prive_laadpaal(eenheid, waarderingsgroep_builder),
+        _prive_laadpaal(eenheid, stelsel, waarderingsgroep_builder),
     ]
 
     return [waardering for waardering in woningwaarderingen if waardering is not None]
@@ -200,6 +203,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
 
 def _prive_laadpaal(
     eenheid: EenhedenEenheid,
+    stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> WaarderingBuilder | None:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
@@ -207,25 +211,56 @@ def _prive_laadpaal(
 
     Args:
         eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
+        stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
     Returns:
         WaarderingBuilder | None: De woningwaardering met 2 punten
         als de eenheid een laadpaal heeft, anders None.
     """
-    aantal_laadpalen = sum(
-        aantal_bouwkundige_elementen(ruimte, Bouwkundigelementdetailsoort.laadpaal)
-        for ruimte in eenheid.ruimten or []
-        if not gedeeld_met_adressen(ruimte)
-    )
+    aantal_laadpalen = 0
+    punten_laadpalen = Decimal("0")
+
+    for ruimte in eenheid.ruimten or []:
+        if gedeeld_met_adressen(ruimte):
+            continue
+
+        # §2.12.3 ONZ: een laadpaal wordt hier gewaardeerd, tenzij de parkeerplek
+        # zelf een "gemeenschappelijke parkeerruimte" is (§2.10.2, >=2 adressen)
+        # die daadwerkelijk in rubriek 10 kwalificeert. In dat geval sluit de
+        # laadpaal aan bij rubriek 10 (aldaar al verrekend) en wordt hij hier
+        # overgeslagen om dubbeltelling te voorkomen. Een niet-kwalificerende
+        # privé-parkeerplek (bijv. carport <12m²) is geen "gemeenschappelijke
+        # parkeerruimte" in de zin van §2.10.2, dus geldt de algemene regel:
+        # 2 punten via rubriek 12.
+        if (
+            stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
+            and kwalificeert_voor_gemeenschappelijke_parkeerruimte(ruimte)
+        ):
+            continue
+
+        aantal_laadpalen_in_ruimte = aantal_bouwkundige_elementen(
+            ruimte, Bouwkundigelementdetailsoort.laadpaal
+        )
+        if aantal_laadpalen_in_ruimte == 0:
+            continue
+
+        deler = 1
+        if stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
+            deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+
+        aantal_laadpalen += aantal_laadpalen_in_ruimte
+        punten_laadpalen += (
+            Decimal(aantal_laadpalen_in_ruimte) * Decimal("2") / Decimal(deler)
+        )
 
     if aantal_laadpalen == 0:
         logger.debug(f"Eenheid ({eenheid.id}) heeft geen privé laadpaal")
         return None
 
-    punten_laadpalen = aantal_laadpalen * 2
+    punten_afgerond = utils.rond_af(punten_laadpalen, decimalen=2)
 
     logger.info(
-        f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_laadpalen} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_afgerond} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
     )
 
     return waarderingsgroep_builder.met_onderliggend(
@@ -233,5 +268,5 @@ def _prive_laadpaal(
         naam="Laadpalen",
         meeteenheid=Meeteenheid.stuks,
         aantal=aantal_laadpalen,
-        punten=punten_laadpalen,
+        punten=float(punten_afgerond),
     )

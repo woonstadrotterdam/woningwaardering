@@ -31,6 +31,31 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 }
 
 
+def is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
+    detail_soort: Referentiedata | None,
+) -> bool:
+    """Of het detailsoort een van de specifieke parkeer-detailsoorten van rubriek 10 is."""
+    return detail_soort in parkeertype_punten_mapping
+
+
+def kwalificeert_voor_gemeenschappelijke_parkeerruimte(
+    ruimte: EenhedenRuimte,
+) -> bool:
+    """Of de ruimte in rubriek 10 daadwerkelijk punten krijgt.
+
+    Naast een specifieke parkeer-detailsoort vereist rubriek 10 een oppervlakte
+    van minimaal 12 m² en een ingevuld `gedeeld_met_aantal_adressen`.
+    """
+    return (
+        is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
+            ruimte.detail_soort
+        )
+        and ruimte.oppervlakte is not None
+        and ruimte.oppervlakte >= 12.0
+        and ruimte.gedeeld_met_aantal_adressen is not None
+    )
+
+
 def waardeer_gemeenschappelijke_parkeerruimte(
     ruimte: EenhedenRuimte,
     *,
@@ -73,18 +98,23 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
         Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
     ]:
+        detailsoorten = list(parkeertype_punten_mapping)
+        if len(detailsoorten) > 1:
+            geaccepteerde_detailsoorten = (
+                ", ".join(str(detailsoort) for detailsoort in detailsoorten[:-1])
+                + f" of {detailsoorten[-1]}"
+            )
+        else:
+            geaccepteerde_detailsoorten = str(detailsoorten[0])
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {geaccepteerde_detailsoorten} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
             UserWarning,
         )
         return
 
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,  # Type I
-        Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,  # Type II
-        Ruimtedetailsoort.carport,  # Type II
-        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,  # Type III
-    ]:
+    if not is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
+        ruimte.detail_soort
+    ):
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )

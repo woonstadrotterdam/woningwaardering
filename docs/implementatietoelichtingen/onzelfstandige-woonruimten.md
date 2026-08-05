@@ -1357,6 +1357,11 @@ Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door d
 
 Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
 
+> [!NOTE]
+> Parkeerplekken met een specifieke parkeer-detailsoort die in rubriek 10 worden gewaardeerd (oppervlakte ≥ 12 m² en `gedeeld_met_aantal_adressen` ingevuld), krijgen hun laadpaalpunten daar en niet opnieuw in deze rubriek. Voldoet zo'n parkeerplek niet aan die eisen, dan blijft de laadpaal hier gewaardeerd — anders zouden er stilzwijgend 0 punten overblijven.
+>
+> Deze uitzondering geldt alleen als de parkeerplek een "gemeenschappelijke parkeerruimte" is in de zin van [§2.10.2](#2102-definitie-gemeenschappelijke-parkeerruimte) (toegankelijk voor bewoners van ≥ 2 adressen). Deze paragraaf (§2.12.3) kent zelf geen oppervlakte-eis voor de laadpaal — die eis (≥ 12 m², afgebakend vak) staat alleen in [§2.10.3](#2103-punten-per-soort-parkeerplek) en geldt voor de puntentabel van rubriek 10, niet voor de laadpaalregel. Een privé-parkeerplek die niet aan de rubriek-10-eisen voldoet (bijv. een carport < 12 m²) is dus geen "gemeenschappelijke parkeerruimte", en de laadpaal blijft hier gewoon gewaardeerd met 2 punten.
+
 ### 2.13 Rubriek 13: Aftrekpunten
 
 {==

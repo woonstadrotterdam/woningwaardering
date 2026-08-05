@@ -1,0 +1,41 @@
+{
+  "id": "carport_met_laadpaal_via_rubriek_10",
+  "ruimten": [
+    {
+      "id": "1",
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "aantal": 1,
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ],
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}
