@@ -43,7 +43,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: uv sync --extra test
+        run: uv sync --frozen --extra test
 
       - name: Set up task
         uses: arduino/setup-task@v2
@@ -60,7 +60,6 @@ jobs:
               "permissions": {
                 "allow": [
                   "Bash(task check*)",
-                  "Bash(uv run pytest*)",
                   "Bash(uv run pre-commit*)",
                   "Bash(uv run python -m pytest*)"
                 ]
