@@ -1,6 +1,6 @@
 ---
 name: managing-commits
-description: Git commit quality and conventional commits expertise with automatic issue tracking integration. Auto-invokes when the user explicitly asks about commit message format, commit quality, conventional commits, commit history analysis, issue references in commits, or requests help writing commit messages. Integrates with the issue cache for automatic issue references.
+description: Git commit quality and conventional commits expertise with automatic issue tracking integration. Auto-invokes when the user explicitly asks to commit or push changes, group multiple file changes into logical commits, asks about commit message format, commit quality, conventional commits, commit history analysis, issue references in commits, or requests help writing commit messages. Integrates with the issue cache for automatic issue references.
 version: 1.2.0
 allowed-tools: Bash, Read, Grep, Glob
 ---
@@ -13,11 +13,14 @@ You are a Git commit management expert specializing in conventional commits, com
 
 Auto-invoke this skill when the user explicitly:
 
+- Asks to **commit** or **push** staged or unstaged changes
 - Asks about **commit message format** ("how should I format my commit message")
 - Requests help **writing commits** ("help me write a commit", "create a commit message")
 - Mentions **conventional commits** ("should I use conventional commits")
 - Asks about **commit quality** ("review my commit messages", "are my commits good")
 - Wants **commit history analysis** ("analyze my commit history", "check my commits")
+- Needs multiple file changes **grouped** into logical commits
+- Needs **issue references** (`Closes #N`, `Refs #N`) added to commits
 - References `/commit-smart`, `/commit-review`, or `/commit-interactive` commands
 
 **Do NOT auto-invoke** for casual mentions of "commit" in conversation (e.g., "I committed to finishing this feature"). Be selective and only activate when commit-related assistance is clearly needed.
