@@ -1,0 +1,37 @@
+{
+  "id": "woz_zonder_tussentijdse_afronding",
+  "bouwjaar": 1980,
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "26"
+    }
+  ],
+  "ruimten": [
+    {
+      "id": "kamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Kamer",
+      "inhoud": 65.0,
+      "oppervlakte": 26.0,
+      "verwarmd": true,
+      "aantal": 1
+    }
+  ],
+  "wozEenheden": [
+    {
+      "vastgesteldeWaarde": 50000.0,
+      "waardepeildatum": "2025-01-01"
+    }
+  ]
+}
