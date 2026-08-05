@@ -4,13 +4,18 @@ from loguru import logger
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
-from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.gedeelde_logica import (
+    maximeer_extra_voorzieningen,
     waardeer_sanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -48,10 +53,28 @@ class Sanitair(Stelselgroep):
             if not utils.gedeeld_met_adressen(ruimte)
         ]
 
+        ruimte_waarderingen: list[
+            tuple[
+                EenhedenRuimte,
+                WaarderingBuilder,
+                list[WaarderingBuilder],
+            ]
+        ] = []
+
         for ruimte in ruimten:
-            waardeer_sanitair(
-                ruimte, self.stelsel, waarderingsgroep_builder=waarderingsgroep_builder
+            waarderingen = waardeer_sanitair(
+                ruimte,
+                self.stelsel,
+                waarderingsgroep_builder=waarderingsgroep_builder,
+                maximeer_extra_voorzieningen_per_ruimte=False,
             )
+            if not waarderingen:
+                continue
+
+            ruimte_criterium = waarderingen[0]
+            ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
+
+        maximeer_extra_voorzieningen(ruimte_waarderingen)
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 

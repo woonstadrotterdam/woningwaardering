@@ -1,0 +1,225 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 23.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__badkamer",
+            "naam": "Badkamer"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__wastafel",
+            "naam": "Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__bad_en_douche",
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 7.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen",
+            "naam": "Extra voorzieningen",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__bubbelfunctie_van_het_bad",
+            "naam": "Bubbelfunctie van het bad",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__douchewand",
+            "naam": "Douchewand",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.25
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__handdoekenradiator",
+            "naam": "Handdoekenradiator",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 9.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__ingebouwd_kastje_met_in_of_opgebouwde_wastafel",
+            "naam": "Ingebouwd kastje met in- of opgebouwde wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__kastruimte",
+            "naam": "Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__max_punten_kastruimte",
+            "naam": "Max 0.75 punten voor Kastruimte",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            }
+          },
+          "punten": -0.75
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__stopcontact_bij_wastafel",
+            "naam": "Stopcontact bij wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 2.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__eenhandsmengkraan",
+            "naam": "Éénhandsmengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__thermostatische_mengkraan",
+            "naam": "Thermostatische mengkraan",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "sanitair__badkamer__extra_voorzieningen__maximering_punten_voorzieningen",
+            "naam": "Max verdubbeling punten bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer__extra_voorzieningen"
+            }
+          },
+          "punten": -4.0
+        },
+        {
+          "criterium": {
+            "id": "sanitair__slaapkamer",
+            "naam": "Slaapkamer"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__slaapkamer__douche",
+            "naam": "Douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__slaapkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
+    }
+  ]
+}
