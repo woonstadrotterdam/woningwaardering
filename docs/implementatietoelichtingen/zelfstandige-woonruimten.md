@@ -613,6 +613,11 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 > Voor het bepalen van de geldigheid van energielabels (2.4.3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
 
+> [!NOTE]
+>
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2). Deze vlag wordt daarom niet gecontroleerd; een energie-index in de periode 2015-2021 wordt als geldig behandeld zodra `soort`, `status`, `begindatum` en `einddatum` aan de overige voorwaarden voldoen.
+> - Een energie-index in die periode zonder bruikbare `waarde`, of een energieprestatie van een ander soort dan energie-index in die periode, telt niet mee voor de energieprestatie (2.4.3, punt 4); de woonruimte valt dan terug op het bouwjaar (2.4.5).
+
 #### 2.4.4 Punten voor geldige energieprestaties
 
 Bij de puntentoekenning voor de energieprestatie wordt onderscheid gemaakt tussen eengezinswoningen en meergezinswoningen (ook wel: duplexwoningen). Het verschil tussen deze woningen is dat bij een eengezinswoning geen andere woningen aanwezig zijn boven of onder de woning. Een eengezinswoning is dus bijvoorbeeld om een rijtjeshuis, twee-onder-een-kapwoning of vrijstaande woning. Alle woningen die geen eengezinswoning zijn, zijn meergezinswoningen.
