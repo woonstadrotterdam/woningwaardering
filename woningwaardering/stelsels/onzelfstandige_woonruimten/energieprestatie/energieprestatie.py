@@ -322,6 +322,15 @@ class Energieprestatie(Stelselgroep):
                 )
                 continue
 
+            # Gemeenschappelijke vertrekken gedeeld met meerdere adressen
+            # (§2.9 / rubriek 9) tellen niet mee voor energieprestatie.
+            # Bhw Bijlage I B rubriek 4: energieprestatie over m² die volgens
+            # rubriek 1 aan de huurder zijn toe te rekenen. Rubriek 1 dekt
+            # alleen privé- en zelfde-adres gemeenschappelijke vertrekken.
+            # Huurprijscheck volgt dezelfde interpretatie.
+            if utils.gedeeld_met_adressen(ruimte):
+                continue
+
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 oppervlakte_gedeeld_met_counter[
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
