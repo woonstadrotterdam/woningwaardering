@@ -199,8 +199,7 @@ class Energieprestatie(Stelselgroep):
         waarderings_label = label
 
         if (
-            energieprestatie.begindatum >= date(2015, 1, 1)
-            and energieprestatie.begindatum < date(2021, 1, 1)
+            utils.in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is None:

@@ -589,6 +589,35 @@ def naar_rapport(
     return WoningwaarderingRapport(lines)
 
 
+# 2.4.3.4 Energielabel afgegeven in de periode 1 januari 2015 tot 1 januari 2021
+# Een energielabel dat is afgegeven in de periode van 1 januari 2015 tot 1 januari
+# 2021 krijgt geen punten in het woningwaarderingsstelsel. Dit zijn namelijk de
+# zogenaamde 'vereenvoudigde energielabels'. Alleen energie-indexen die in de
+# genoemde periode zijn afgegeven komen in aanmerking voor waardering.
+VEREENVOUDIGD_LABEL_PERIODE_START = date(2015, 1, 1)
+VEREENVOUDIGD_LABEL_PERIODE_EINDE = date(2021, 1, 1)
+
+
+def in_vereenvoudigd_label_periode(begindatum: date) -> bool:
+    """
+    Of ``begindatum`` valt in de periode van de 'vereenvoudigde energielabels' (2.4.3.4).
+
+    In deze periode (1 januari 2015 tot 1 januari 2021) telt alleen een energie-index
+    mee voor de woningwaardering; een energielabel uit die periode krijgt geen punten.
+
+    Args:
+        begindatum (date): Begindatum van de energieprestatie.
+
+    Returns:
+        bool: True als ``begindatum`` in de periode valt, anders False.
+    """
+    return (
+        VEREENVOUDIGD_LABEL_PERIODE_START
+        <= begindatum
+        < VEREENVOUDIGD_LABEL_PERIODE_EINDE
+    )
+
+
 def energieprestatie_met_geldig_label(
     peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:
@@ -662,8 +691,7 @@ def energieprestatie_met_geldig_label(
             continue
 
         if (
-            begindatum >= date(2015, 1, 1)
-            and begindatum < date(2021, 1, 1)
+            in_vereenvoudigd_label_periode(begindatum)
             and energieprestatie.soort != Energieprestatiesoort.energie_index
         ):
             logger.debug(

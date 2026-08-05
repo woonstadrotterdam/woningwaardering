@@ -118,8 +118,7 @@ class Energieprestatie(Stelselgroep):
 
         if (
             lookup_key == "label_ei"
-            and energieprestatie.begindatum >= date(2015, 1, 1)
-            and energieprestatie.begindatum < date(2021, 1, 1)
+            and utils.in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is None:
