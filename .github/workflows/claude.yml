@@ -37,7 +37,25 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --extra test
+
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN_TOMER }}
           trigger_phrase: "@claude"
+          settings: |
+            {
+              "permissions": {
+                "allow": [
+                  "Bash(uv run pytest*)",
+                  "Bash(uv run pre-commit*)",
+                  "Bash(uv run python -m pytest*)"
+                ]
+              }
+            }
