@@ -103,8 +103,7 @@ class Energieprestatie(Stelselgroep):
             )
             return None
 
-        lookup_key = "label_ei"
-        df = Energieprestatie.lookup_mapping[lookup_key]
+        df = Energieprestatie.lookup_mapping["label_ei"]
         label = (
             getattr(
                 Energielabel,
@@ -117,8 +116,7 @@ class Energieprestatie(Stelselgroep):
         waarderings_label: str | None = label
 
         if (
-            lookup_key == "label_ei"
-            and utils.in_vereenvoudigd_label_periode(energieprestatie.begindatum)
+            utils.in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
             if energieprestatie.waarde is None:
