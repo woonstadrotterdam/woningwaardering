@@ -24,6 +24,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Inexploitatiereden,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -137,6 +138,13 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         Returns:
             WaarderingBuilder | None: De waardering met prijsopslag, of None als niet aan de voorwaarden wordt voldaan
         """
+        # 2.13.7.4 In geval van opsplitsen van woningen (woningvormen) wordt geen opslag gerekend.
+        if eenheid.in_exploitatie_reden == Inexploitatiereden.splitsing:
+            logger.debug(
+                f"Eenheid ({eenheid.id}) is ontstaan door splitsing: geen nieuwbouwopslag voor {self.stelselgroep.naam}"
+            )
+            return None
+
         if (
             eenheid.begin_bouwdatum is not None
             and eenheid.begin_bouwdatum < date(2028, 1, 1)
