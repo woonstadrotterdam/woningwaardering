@@ -54,8 +54,13 @@ class Buitenruimten(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
+        heeft_gewaardeerde_prive_buitenruimte = False
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
+                if not gedeeld_met_adressen(
+                    ruimte
+                ) and not gedeeld_met_onzelfstandige_woonruimten(ruimte):
+                    heeft_gewaardeerde_prive_buitenruimte = True
                 laag = waarderingsgroep_builder.gedeeld_met(
                     aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                     aantal_onzelfstandige_woonruimten=(
@@ -70,8 +75,12 @@ class Buitenruimten(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
 
-        # twee 2 punten voor de aanwezigheid van privé buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
+        # 2 punten voor de aanwezigheid van gewaardeerde privé buitenruimten
+        self._prive_buitenruimten_aanwezig(
+            waarderingsgroep_builder,
+            eenheid,
+            heeft_gewaardeerde_prive_buitenruimte,
+        )
 
         # maximaal 15 punten
         self._maximering(waarderingsgroep_builder, eenheid)
@@ -214,23 +223,25 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
+        heeft_gewaardeerde_prive_buitenruimte: bool,
     ) -> WaarderingBuilder | None:
-        """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
+        """Kent 2 punten toe bij de aanwezigheid van gewaardeerde privé buitenruimten.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de waardering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+            heeft_gewaardeerde_prive_buitenruimte (bool): Of er minstens één privé-buitenruimte is gewaardeerd.
 
         Returns:
-            WaarderingBuilder | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
+            WaarderingBuilder | None: Woningwaardering met 2 punten als er gewaardeerde privé buitenruimten aanwezig zijn.
         """
-        # 2 punten bij de aanwezigheid van privé buitenruimten
-        if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.1 Punten voor privé-buitenruimte
+        # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend
+        # en vervolgens per vierkante meter 0,35 punt.
+        if heeft_gewaardeerde_prive_buitenruimte:
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
+            )
             prive_laag = waarderingsgroep_builder.gedeeld_met()
             return prive_laag.met_onderliggend(
                 id="prive_buitenruimten_aanwezig",
