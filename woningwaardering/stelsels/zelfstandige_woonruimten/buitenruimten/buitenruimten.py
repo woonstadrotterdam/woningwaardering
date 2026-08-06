@@ -15,6 +15,7 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    gedeeld_met_adressen,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -53,18 +54,23 @@ class Buitenruimten(Stelselgroep):
         )
 
         totaal_criteria: dict[WaarderingBuilder, int] = {}
+        heeft_gewaardeerde_prive_buitenruimte = False
 
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
             for _ in self._punten_voor_buitenruimte(
                 waarderingsgroep_builder, ruimte, totaal_criteria
             ):
-                pass
+                if not gedeeld_met_adressen(ruimte):
+                    heeft_gewaardeerde_prive_buitenruimte = True
 
         # minimaal 2 punten bij aanwezigheid van gewaardeerde privé buitenruimten
         # 5 aftrekpunten bij geen gewaardeerde buitenruimten
         self._prive_buitenruimten_aanwezig(
-            waarderingsgroep_builder, eenheid, totaal_criteria
+            waarderingsgroep_builder,
+            eenheid,
+            totaal_criteria,
+            heeft_gewaardeerde_prive_buitenruimte,
         )
 
         som_aantal: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal("0"))
@@ -189,6 +195,7 @@ class Buitenruimten(Stelselgroep):
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
         totaal_criteria: dict[WaarderingBuilder, int],
+        heeft_gewaardeerde_prive_buitenruimte: bool,
     ) -> None:
         # 2.8.5 Minpunten bij geen enkele buitenruimte
         # Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk
@@ -211,7 +218,7 @@ class Buitenruimten(Stelselgroep):
 
         # 2.8.1 Punten voor privé-buitenruimte
         # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend.
-        if any(aantal_adressen < 2 for aantal_adressen in totaal_criteria.values()):
+        if heeft_gewaardeerde_prive_buitenruimte:
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
