@@ -75,12 +75,11 @@ _VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
 
 
 class _OpenKeukenSoort(Enum):
-    geen = "geen"
     inherente_keuken = "inherente_keuken"
     impliciete_open_keuken = "impliciete_open_keuken"
 
 
-def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort:
+def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None:
     if ruimte.detail_soort in _OPEN_KEUKEN_DETAIL_SOORTEN:
         return _OpenKeukenSoort.inherente_keuken
     if ruimte.detail_soort in _VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
@@ -88,7 +87,7 @@ def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort:
         # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
         if heeft_valide_aanrecht(ruimte):
             return _OpenKeukenSoort.impliciete_open_keuken
-    return _OpenKeukenSoort.geen
+    return None
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -175,7 +174,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
-            if open_keuken != _OpenKeukenSoort.geen:
+            if open_keuken is not None:
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
                 )
@@ -184,7 +183,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
                     id=ruimte.id,
                     naam=naam,
-                    punten=4 if open_keuken != _OpenKeukenSoort.geen else 2,
+                    punten=4 if open_keuken is not None else 2,
                 ),
             )
 
