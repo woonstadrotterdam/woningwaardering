@@ -9,6 +9,10 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    AANRECHT_MINIMALE_LENGTE_MM,
+    is_valide_aanrechtlengte,
+)
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -110,14 +114,12 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     Returns:
         bool: True als de ruimte een keuken is, anders False.
     """
-    aanrecht_aantal = len(
-        [
-            aanrecht
-            for aanrecht in get_bouwkundige_elementen(
-                ruimte, Bouwkundigelementdetailsoort.aanrecht
-            )
-            if aanrecht.lengte and aanrecht.lengte >= 1000
-        ]
+    aanrecht_aantal = sum(
+        1
+        for aanrecht in get_bouwkundige_elementen(
+            ruimte, Bouwkundigelementdetailsoort.aanrecht
+        )
+        if is_valide_aanrechtlengte(aanrecht.lengte)
     )
 
     if not ruimte.detail_soort:
@@ -133,7 +135,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     ]:
         if aanrecht_aantal == 0:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >={AANRECHT_MINIMALE_LENGTE_MM}mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
                 UserWarning,
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
@@ -187,7 +189,7 @@ def _waardeer_aanrecht(
             # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
             # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
             # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
-            if element.lengte < 1000:
+            if not is_valide_aanrechtlengte(element.lengte):
                 aanrecht_punten = 0
             elif stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
                 if (

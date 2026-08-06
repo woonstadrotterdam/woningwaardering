@@ -10,6 +10,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import is_valide_aanrechtlengte
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
@@ -226,7 +227,9 @@ def _waardeer_wastafels(
         ):
             for element in ruimte.bouwkundige_elementen or []:
                 if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht:
-                    if element.lengte is not None and element.lengte < 1000:
+                    if element.lengte is not None and not is_valide_aanrechtlengte(
+                        element.lengte
+                    ):
                         logger.info(
                             f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
                         )
