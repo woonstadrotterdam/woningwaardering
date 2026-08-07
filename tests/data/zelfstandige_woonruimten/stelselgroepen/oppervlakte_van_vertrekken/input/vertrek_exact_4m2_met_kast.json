@@ -1,0 +1,29 @@
+{
+  "id": "vertrek_exact_4m2_met_kast",
+  "ruimten": [
+    {
+      "id": "Slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 3.5,
+      "verbondenRuimten": [
+        {
+          "id": "Kast",
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "oppervlakte": 0.5
+        }
+      ]
+    }
+  ]
+}

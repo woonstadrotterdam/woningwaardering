@@ -2,10 +2,12 @@ from decimal import Decimal
 
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
+    EenhedenRuimte,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
+from woningwaardering.vera.referentiedata import Ruimtedetailsoort, Ruimtesoort
 
 
 def _waardering(
@@ -65,3 +67,48 @@ def test_som_effectieve_aantal_waarderingen_twee_gedeeld_met_lagen() -> None:
         ),
     ]
     assert utils.som_effectieve_aantal_waarderingen(waarderingen) == Decimal("1.00")
+
+
+def test_oppervlakte_inclusief_verbonden_kasten():
+    ruimte = EenhedenRuimte(
+        oppervlakte=3.5,
+        detail_soort=Ruimtedetailsoort.slaapkamer,
+        verbonden_ruimten=[
+            EenhedenRuimte(oppervlakte=0.5, detail_soort=Ruimtedetailsoort.kast)
+        ],
+    )
+    assert utils.oppervlakte_inclusief_verbonden_kasten(ruimte) == Decimal("4.0")
+
+
+def test_classificeer_ruimte_telt_kast_mee_bij_vertrekdrempel():
+    ruimte = EenhedenRuimte(
+        id="slaapkamer",
+        naam="Slaapkamer",
+        oppervlakte=3.5,
+        soort=Ruimtesoort.vertrek,
+        detail_soort=Ruimtedetailsoort.slaapkamer,
+        verbonden_ruimten=[
+            EenhedenRuimte(oppervlakte=0.5, detail_soort=Ruimtedetailsoort.kast)
+        ],
+    )
+    assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
+
+
+def test_verbonden_kast_wordt_na_naamhelper_niet_dubbel_geteld():
+    ruimte = EenhedenRuimte(
+        id="slaapkamer",
+        naam="Slaapkamer",
+        oppervlakte=3.5,
+        soort=Ruimtesoort.vertrek,
+        detail_soort=Ruimtedetailsoort.slaapkamer,
+        verbonden_ruimten=[
+            EenhedenRuimte(oppervlakte=0.5, detail_soort=Ruimtedetailsoort.kast)
+        ],
+    )
+
+    criterium_naam = utils.voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+
+    assert criterium_naam == "Slaapkamer (+1 kast)"
+    assert ruimte.oppervlakte == 3.5
+    assert utils.oppervlakte_inclusief_verbonden_kasten(ruimte) == Decimal("4.0")
+    assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek

@@ -74,7 +74,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 )
                 totaal_oppervlakte_per_gedeeld_met_aantal[gedeeld_met_aantal] += (
-                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    utils.rond_af(
+                        utils.oppervlakte_inclusief_verbonden_kasten(ruimte),
+                        decimalen=2,
+                    )
                 )
 
         for ruimte in eenheid.ruimten or []:

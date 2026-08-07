@@ -18,6 +18,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
+    oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     rond_af_op_kwart,
     som_punten_waarderingen_afgerond,
@@ -64,7 +65,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         totaal_oppervlakte = sum(
             (
-                rond_af(ruimte.oppervlakte, decimalen=2)
+                rond_af(oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2)
                 for ruimte in ruimten
                 if ruimte.oppervlakte is not None
                 and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
