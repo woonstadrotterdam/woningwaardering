@@ -1093,6 +1093,9 @@ Er is een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
 
 Gedeelde buitenruimten die als parkeerplek voor auto's bedoeld zijn, worden gewaardeerd volgens [rubriek 10](#210-gemeenschappelijke-parkeerruimten). Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
+> [!NOTE]
+> Voor zelfstandige woonruimten geldt: een privé-parkeerplek in de buitenlucht, waaronder een privé-`carport` (`gedeeldMetAantalAdressen` 0 of 1), wordt niet als gemeenschappelijke parkeerruimte gewaardeerd. Rubriek 10 is alleen van toepassing wanneer de parkeerplek ligt in een parkeerruimte waartoe bewoners van ten minste twee adressen exclusief toegang en gebruiksrecht hebben (§2.10.2 / wettekst). Een privé-carport telt daarom via rubriek 8; een met twee of meer adressen gedeelde carport via rubriek 10. Een laadpaal op een privé-carport telt mee via bijzondere voorzieningen, niet via rubriek 10. Dit wijkt af van de ONZ-interpretatie; zie [issue #306](https://github.com/woonstadrotterdam/woningwaardering/issues/306).
+
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia's
 
 Balkons, dakterrassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze moeten:
@@ -1251,6 +1254,9 @@ Punten voor een gemeenschappelijke parkeervoorziening worden ~~alleen~~ toegeken
 Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewoners van ten minste twee adressen die daar exclusief gebruiksrecht op hebben, waarin zich ten minste één parkeerplek bevindt. Zoals bijvoorbeeld een gemeenschappelijke parkeergarage onder een wooncomplex of een gemeenschappelijke parkeerplaats buiten met één of meerdere parkeerplekken.
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
+
+> [!NOTE]
+> In deze package waarderen we voor zelfstandige woonruimten alleen parkeerplekken met `gedeeldMetAantalAdressen >= 2` onder deze rubriek. Een privé-`carport` of andere specifieke parkeer-detailsoort met `gedeeldMetAantalAdressen` 0 of 1 valt hier buiten en wordt — als buitenruimte — via rubriek 8 gewaardeerd (§2.2.2.5, §2.8.1). §2.10.3 (Type I–III) bepaalt het type van een reeds gekwalificeerde gemeenschappelijke parkeerplek, niet of een privé-parkeerplek tot deze rubriek behoort.
 
 #### 2.10.3 Punten per soort parkeerplek
 
@@ -1643,6 +1649,9 @@ Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommun
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, dat niet een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig is.
 
 Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij [rubriek 10](#210-gemeenschappelijke-parkeerruimten).
+
+> [!NOTE]
+> Voor zelfstandige woonruimten telt een laadpaal op een privé-carport (of andere privé-parkeerplek met `gedeeldMetAantalAdressen` 0 of 1) mee via deze rubriek, niet via rubriek 10. Alleen laadpalen op een gemeenschappelijke parkeerruimte (`gedeeldMetAantalAdressen >= 2`) volgen de berekeningsmethode van rubriek 10. Zie [issue #308](https://github.com/woonstadrotterdam/woningwaardering/issues/308).
 
 ### 2.13 Opslagen
 
