@@ -1,0 +1,20 @@
+{
+  "id": "bergruimte_onder_twee_m2_per_adres",
+  "ruimten": [
+    {
+      "id": "bergruimte",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BRG",
+        "naam": "Bergruimte"
+      },
+      "naam": "Bergruimte",
+      "oppervlakte": 19,
+      "gedeeldMetAantalAdressen": 10,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ]
+}
