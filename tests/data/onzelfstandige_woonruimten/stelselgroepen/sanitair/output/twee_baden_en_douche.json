@@ -1,0 +1,64 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 11.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__prive__badkamer",
+            "naam": "Badkamer",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive"
+            }
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__prive__badkamer__bad_en_douche",
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 6.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__prive__badkamer__bad",
+            "naam": "Bad",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__prive__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 5.0
+        }
+      ]
+    }
+  ]
+}

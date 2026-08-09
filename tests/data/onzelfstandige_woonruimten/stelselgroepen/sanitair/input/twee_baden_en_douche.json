@@ -1,0 +1,35 @@
+{
+  "id": "twee_baden_en_douche",
+  "ruimten": [
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.0,
+      "oppervlakte": 8.0,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ],
+      "aantal": 1
+    }
+  ]
+}
