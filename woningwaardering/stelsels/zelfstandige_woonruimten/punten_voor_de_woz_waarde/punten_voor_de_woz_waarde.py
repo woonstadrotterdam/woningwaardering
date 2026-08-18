@@ -30,6 +30,11 @@ LOOKUP_TABEL_FOLDER = (
 
 DATUM_FORMAT = "%d-%m-%Y"
 
+# Criterium-id-segment voor rubriek 11.2 (nieuwbouwminimum).
+NIEUWBOUW_MINIMUM_PUNTEN_ID = "nieuwbouw_minimum_punten"
+# Volledige pad-id voor andere stelselgroepen; niet zelf reconstrueren.
+NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID = f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
+
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
     def __init__(
@@ -265,7 +270,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         if 0.0 < woz_punten < minimum_woz_punten:
             waarderingsgroep_builder.met_onderliggend(
-                id="nieuwbouw_minimum_punten",
+                id=NIEUWBOUW_MINIMUM_PUNTEN_ID,
                 naam=f"Nieuwbouw: min. {minimum_woz_punten} punten",
                 punten=float(minimum_woz_punten - woz_punten),
             )

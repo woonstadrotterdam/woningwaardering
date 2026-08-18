@@ -13,8 +13,7 @@
       },
       "naam": "Kamer",
       "oppervlakte": 15.49,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "keuken",
@@ -28,8 +27,7 @@
       },
       "naam": "Keuken",
       "oppervlakte": 11.24,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     }
   ]
 }
