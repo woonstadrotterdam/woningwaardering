@@ -805,6 +805,9 @@ Het woningwaarderingsstelsel geeft punten aan de hieronder beschreven sanitaire 
 _Toilet_  
 Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte ~~én binnen de woonruimte ligt~~. ~~Een toilet dat buiten de woonruimte, maar binnen het woongebouw ligt wordt alleen gewaardeerd als het gebruik door derden is uit te sluiten~~. Toiletten die buiten toiletruimten en badkamers zijn aangebracht worden niet gewaardeerd.
 
+> [!NOTE]
+> Een VERA-`doucheruimte` telt voor toiletwaardering mee als badkamer. Toiletten in een doucheruimte krijgen daarom de punten voor toilet in een badkamer.
+
 | Voorziening                            | Punten |
 |----------------------------------------|--------|
 | Toilet (staand) in een toiletruimte    | 3      |
