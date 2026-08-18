@@ -11,6 +11,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    is_parkeertype_detailsoort,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -126,7 +129,9 @@ class Buitenruimten(Stelselgroep):
         0.35 punten per m2 voor privé buitenruimten.
 
         Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
-        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+        Type I/II/III-parkeerplekken horen altijd in rubriek 10 en tellen hier niet mee.
+        Een ``Ruimtedetailsoort.parkeerplaats`` telt niet mee als deze met andere adressen
+        is gedeeld.
 
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
@@ -137,6 +142,14 @@ class Buitenruimten(Stelselgroep):
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
+            )
+            return
+
+        # Type I/II/III-parkeerplekken horen altijd in rubriek 10, nooit in rubriek 8.
+        # Early-exit vóór oppervlakte-/afmetingschecks om irrelevante rubriek-8-warnings te vermijden.
+        if is_parkeertype_detailsoort(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 
@@ -227,6 +240,7 @@ class Buitenruimten(Stelselgroep):
         # 2 punten bij de aanwezigheid van privé buitenruimten
         if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
             classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
+            and not is_parkeertype_detailsoort(ruimte.detail_soort)
             and not gedeeld_met_adressen(ruimte)
             and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
             for ruimte in eenheid.ruimten or []
