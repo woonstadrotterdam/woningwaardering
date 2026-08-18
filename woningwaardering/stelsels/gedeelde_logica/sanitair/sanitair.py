@@ -47,6 +47,7 @@ _BAD_OF_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
     Installatiesoort.drempelloze_inrijdouche,
     Installatiesoort.bad_en_douche,
 )
+# 2.6.1 Punten voor sanitaire basisvoorzieningen — Toilet
 _TOILET_PUNTEN_TOILETRUIMTE: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.hangend_toilet: 3.75,
     Installatiesoort.staand_toilet: 3.0,
@@ -54,6 +55,37 @@ _TOILET_PUNTEN_TOILETRUIMTE: dict[InstallatiesoortReferentiedata, float] = {
 _TOILET_PUNTEN_BADKAMER: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.hangend_toilet: 2.75,
     Installatiesoort.staand_toilet: 2.0,
+}
+# 2.6.1 Punten voor sanitaire basisvoorzieningen — Wastafel
+_WASTAFEL_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
+    Installatiesoort.wastafel: 1.0,
+    Installatiesoort.meerpersoonswastafel: 1.5,
+}
+# 2.6.1 Punten voor sanitaire basisvoorzieningen — Bad en douche
+_BAD_EN_DOUCHE_PUNTEN_ZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
+    Installatiesoort.douche: 4.0,
+    # VERA-drempelloze inrijdouche telt als Douche.
+    Installatiesoort.drempelloze_inrijdouche: 4.0,
+    Installatiesoort.bad: 6.0,
+    Installatiesoort.bad_en_douche: 7.0,
+}
+_BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
+    Installatiesoort.douche: 3.0,
+    # VERA-drempelloze inrijdouche telt als Douche.
+    Installatiesoort.drempelloze_inrijdouche: 3.0,
+    Installatiesoort.bad: 5.0,
+    Installatiesoort.bad_en_douche: 6.0,
+}
+# 2.6.2 Punten voor extra sanitaire voorzieningen
+_EXTRA_VOORZIENINGEN_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
+    Installatiesoort.bubbelfunctie_van_het_bad: 1.5,
+    Installatiesoort.douchewand: 1.25,
+    Installatiesoort.handdoekenradiator: 0.75,
+    Installatiesoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel: 1,
+    Installatiesoort.kastruimte: 0.75,
+    Installatiesoort.stopcontact_bij_wastafel: 0.25,
+    Installatiesoort.eenhandsmengkraan: 0.25,
+    Installatiesoort.thermostatische_mengkraan: 0.5,
 }
 
 
@@ -77,6 +109,14 @@ def _toilet_punten(
         return _TOILET_PUNTEN_BADKAMER
 
     return None
+
+
+def _bad_en_douche_punten(
+    stelsel: WoningwaarderingstelselReferentiedata,
+) -> dict[InstallatiesoortReferentiedata, float]:
+    if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
+        return _BAD_EN_DOUCHE_PUNTEN_ZELFSTANDIG
+    return _BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG
 
 
 def _aantal_douches(installaties: Counter[Referentiedata]) -> int:
@@ -118,7 +158,7 @@ def waardeer_sanitair(
 
     detail_waarderingen: list[WaarderingBuilder] = [
         *list(_waardeer_toiletten(ruimte, ruimte_criterium)),
-        *list(_waardeer_wastafels(ruimte, stelsel, ruimte_criterium)),
+        *list(_waardeer_wastafels(ruimte, ruimte_criterium)),
     ]
 
     baden_en_douches_waarderingen = list(
@@ -136,7 +176,6 @@ def waardeer_sanitair(
     voorziening_waarderingen = list(
         _waardeer_installaties(
             ruimte,
-            stelsel,
             ruimte_criterium,
             totaal_punten_bad_en_douche=totaal_punten_bad_en_douche,
         )
@@ -221,20 +260,9 @@ def _waardeer_toiletten(
 
 def _waardeer_wastafels(
     ruimte: EenhedenRuimte,
-    stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    zelfstandige_woonruimte = (
-        stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
-    )
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
-    punten_sanitair = {
-        Installatiesoort.wastafel: 1.0,
-        Installatiesoort.meerpersoonswastafel: 1.5,
-        Installatiesoort.douche: 4.0 if zelfstandige_woonruimte else 3.0,
-        Installatiesoort.bad: 6.0 if zelfstandige_woonruimte else 5.0,
-        Installatiesoort.bad_en_douche: 7.0 if zelfstandige_woonruimte else 6.0,
-    }
 
     totaal_aantal_wastafels = 0
 
@@ -265,14 +293,14 @@ def _waardeer_wastafels(
                             id=wastafelsoort.name,
                             naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                             meeteenheid=Meeteenheid.stuks,
-                            punten=punten_sanitair[wastafelsoort],
+                            punten=_WASTAFEL_PUNTEN[wastafelsoort],
                             aantal=1,
                         )
                         aantal_spoelbakken += 1
 
         totaal_aantal_wastafels += aantal_wastafels
 
-        punten_per_wastafel = Decimal(str(punten_sanitair[wastafelsoort]))
+        punten_per_wastafel = Decimal(str(_WASTAFEL_PUNTEN[wastafelsoort]))
 
         punten_voor_wastafels = rond_af(
             Decimal(str(aantal_wastafels + aantal_spoelbakken)) * punten_per_wastafel,
@@ -348,19 +376,7 @@ def _waardeer_baden_en_douches(
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
-    zelfstandige_woonruimte = (
-        stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten
-    )
-    punten_sanitair = {
-        Installatiesoort.wastafel: 1.0,
-        Installatiesoort.meerpersoonswastafel: 1.5,
-        Installatiesoort.douche: 4.0 if zelfstandige_woonruimte else 3.0,
-        Installatiesoort.drempelloze_inrijdouche: 4.0
-        if zelfstandige_woonruimte
-        else 3.0,
-        Installatiesoort.bad: 6.0 if zelfstandige_woonruimte else 5.0,
-        Installatiesoort.bad_en_douche: 7.0 if zelfstandige_woonruimte else 6.0,
-    }
+    punten_bad_en_douche = _bad_en_douche_punten(stelsel)
     aantal_douches = _aantal_douches(installaties)
     aantal_baden = installaties[Installatiesoort.bad]
 
@@ -375,7 +391,7 @@ def _waardeer_baden_en_douches(
     if aantal_bad_en_douches > 0:
         punten = rond_af(
             Decimal(str(aantal_bad_en_douches))
-            * Decimal(str(punten_sanitair[Installatiesoort.bad_en_douche])),
+            * Decimal(str(punten_bad_en_douche[Installatiesoort.bad_en_douche])),
             decimalen=2,
         )
         logger.info(
@@ -397,7 +413,8 @@ def _waardeer_baden_en_douches(
         aantal = installaties[installatiesoort] - aantal_bad_en_douches
         if aantal > 0:
             punten = rond_af(
-                Decimal(str(aantal)) * Decimal(str(punten_sanitair[installatiesoort])),
+                Decimal(str(aantal))
+                * Decimal(str(punten_bad_en_douche[installatiesoort])),
                 2,
             )
             logger.info(
@@ -414,22 +431,11 @@ def _waardeer_baden_en_douches(
 
 def _waardeer_installaties(
     ruimte: EenhedenRuimte,
-    stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     *,
     totaal_punten_bad_en_douche: Decimal,
 ) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
-    punten_installaties: dict[Referentiedata, float] = {
-        Installatiesoort.bubbelfunctie_van_het_bad: 1.5,
-        Installatiesoort.douchewand: 1.25,
-        Installatiesoort.handdoekenradiator: 0.75,
-        Installatiesoort.ingebouwd_kastje_met_in_of_opgebouwde_wastafel: 1,
-        Installatiesoort.kastruimte: 0.75,
-        Installatiesoort.stopcontact_bij_wastafel: 0.25,
-        Installatiesoort.eenhandsmengkraan: 0.25,
-        Installatiesoort.thermostatische_mengkraan: 0.5,
-    }
 
     totaal_punten_voorzieningen = Decimal("0")
 
@@ -445,7 +451,7 @@ def _waardeer_installaties(
         if detail_soort is None:
             return
         heeft_extra_voorzieningen = any(
-            installatie in punten_installaties for installatie in installaties
+            installatie in _EXTRA_VOORZIENINGEN_PUNTEN for installatie in installaties
         )
 
         if heeft_extra_voorzieningen:
@@ -462,7 +468,7 @@ def _waardeer_installaties(
             elif totaal_aantal_wastafels > 0 and bad_en_of_douche_aanwezig:
                 voorzieningen_criterium: WaarderingBuilder | None = None
 
-                for installatiesoort in punten_installaties:
+                for installatiesoort in _EXTRA_VOORZIENINGEN_PUNTEN:
                     aantal = installaties[installatiesoort]
                     if aantal == 0:
                         continue
@@ -478,7 +484,7 @@ def _waardeer_installaties(
 
                     punten = rond_af(
                         Decimal(str(aantal))
-                        * Decimal(str(punten_installaties[installatiesoort])),
+                        * Decimal(str(_EXTRA_VOORZIENINGEN_PUNTEN[installatiesoort])),
                         decimalen=2,
                     )
 
@@ -522,7 +528,7 @@ def _waardeer_installaties(
                         correctie_aantal = (totaal_aantal_wastafels * 2) - aantal
                         correctie = min(
                             Decimal(str(correctie_aantal))
-                            * Decimal(punten_installaties[installatiesoort]),
+                            * Decimal(_EXTRA_VOORZIENINGEN_PUNTEN[installatiesoort]),
                             Decimal("0"),
                         )
                         if correctie < 0:
