@@ -19,8 +19,7 @@
       },
       "naam": "Woonkamer",
       "oppervlakte": 60,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     }
   ]
 }
