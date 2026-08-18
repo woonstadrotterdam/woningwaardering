@@ -90,12 +90,9 @@ def _aantal_douches(installaties: Counter[Referentiedata]) -> int:
 
 
 def _heeft_bad_of_douche(installaties: Counter[Referentiedata]) -> bool:
-    return (
-        sum(
-            installaties[installatiesoort]
-            for installatiesoort in _BAD_OF_DOUCHE_INSTALLATIES
-        )
-        > 0
+    return any(
+        installaties[installatiesoort]
+        for installatiesoort in _BAD_OF_DOUCHE_INSTALLATIES
     )
 
 
