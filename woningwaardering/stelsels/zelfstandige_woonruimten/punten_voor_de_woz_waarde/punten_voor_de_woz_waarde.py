@@ -32,13 +32,8 @@ DATUM_FORMAT = "%d-%m-%Y"
 
 # Criterium-id-segment voor rubriek 11.2 (nieuwbouwminimum).
 NIEUWBOUW_MINIMUM_PUNTEN_ID = "nieuwbouw_minimum_punten"
-# Volledige pad-id in de VERA-output. Andere stelselgroepen importeren deze
-# constante in plaats van `{stelselgroep.name}__{segment}` te reconstrueren:
-# die conventie zit in de builder en breekt stil bij extra nestingslagen of
-# verwarring tussen `.name` en `.naam`.
-NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID = (
-    "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten"
-)
+# Volledige pad-id voor andere stelselgroepen; niet zelf reconstrueren.
+NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID = f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):

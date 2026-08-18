@@ -21,8 +21,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
-# Importeer de pad-id van de WOZ-stelselgroep; niet zelf samenstellen uit
-# stelselgroep + segment (`{stelselgroep.name}__{id}`).
 UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS = [
     NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
 ]
