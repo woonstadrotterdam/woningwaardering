@@ -30,9 +30,15 @@ LOOKUP_TABEL_FOLDER = (
 
 DATUM_FORMAT = "%d-%m-%Y"
 
-# Criterium-id-segment voor rubriek 11.2 (nieuwbouwminimum); ook gebruikt in
-# bijzondere_voorzieningen bij de 35%-zorgwoning-grondslag (§2.12 voetnoot 13).
+# Criterium-id-segment voor rubriek 11.2 (nieuwbouwminimum).
 NIEUWBOUW_MINIMUM_PUNTEN_ID = "nieuwbouw_minimum_punten"
+# Volledige pad-id in de VERA-output. Andere stelselgroepen importeren deze
+# constante in plaats van `{stelselgroep.name}__{segment}` te reconstrueren:
+# die conventie zit in de builder en breekt stil bij extra nestingslagen of
+# verwarring tussen `.name` en `.naam`.
+NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID = (
+    "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten"
+)
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):

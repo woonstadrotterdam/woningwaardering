@@ -13,6 +13,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen
     UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
+    NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
     NIEUWBOUW_MINIMUM_PUNTEN_ID,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -74,7 +75,7 @@ def test_BijzondereVoorzieningen_zorgwoninggrondslag_sluit_nieuwbouwminimum_uit(
     )
     woz_builder.met_onderliggend(id="woz_basis", naam="WOZ basis", punten=20.0)
     woz_builder.met_onderliggend(
-        id="nieuwbouw_minimum_punten",
+        id=NIEUWBOUW_MINIMUM_PUNTEN_ID,
         naam="Nieuwbouw: min. 30 punten",
         punten=10.0,
     )
@@ -88,7 +89,7 @@ def test_BijzondereVoorzieningen_zorgwoninggrondslag_sluit_nieuwbouwminimum_uit(
     )
 
     assert UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS == [
-        f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
+        NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID
     ]
     assert groep.punten == 49.0
     assert groep.woningwaarderingen is not None

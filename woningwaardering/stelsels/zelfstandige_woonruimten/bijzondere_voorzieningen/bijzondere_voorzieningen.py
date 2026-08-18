@@ -9,7 +9,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
-    NIEUWBOUW_MINIMUM_PUNTEN_ID,
+    NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -21,8 +21,10 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
+# Importeer de pad-id van de WOZ-stelselgroep; niet zelf samenstellen uit
+# stelselgroep + segment (`{stelselgroep.name}__{id}`).
 UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS = [
-    f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
+    NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
 ]
 
 
