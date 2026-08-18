@@ -7,10 +7,10 @@ from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_bijzondere_voorzieningen,
 )
+from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
     NIEUWBOUW_MINIMUM_PUNTEN_ID,
 )
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
