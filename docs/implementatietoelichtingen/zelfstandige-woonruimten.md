@@ -794,6 +794,8 @@ Voor het meten van een aanrecht gelden de volgende regels:
 
 > [!NOTE]
 > De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+> [!NOTE]
+> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is.
 
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
@@ -819,6 +821,9 @@ Voor het meten van een aanrecht gelden de volgende regels:
 > ///
 
 Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt.
+
+> [!NOTE]
+> Bij meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering gebaseerd op de basispunten uit de gesommeerde aanrechtlengte.
 
 {==
 
