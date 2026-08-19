@@ -142,6 +142,7 @@ def waardeer_sanitair(
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     deler: int = 1,
+    maximeer_extra_voorzieningen_per_ruimte: bool = True,
 ) -> list[WaarderingBuilder]:
     if ruimte.detail_soort is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort.")
@@ -178,6 +179,7 @@ def waardeer_sanitair(
             ruimte,
             ruimte_criterium,
             totaal_punten_bad_en_douche=totaal_punten_bad_en_douche,
+            maximeer_extra_voorzieningen_per_ruimte=maximeer_extra_voorzieningen_per_ruimte,
         )
     )
     detail_waarderingen.extend(voorziening_waarderingen)
@@ -434,6 +436,7 @@ def _waardeer_installaties(
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     *,
     totaal_punten_bad_en_douche: Decimal,
+    maximeer_extra_voorzieningen_per_ruimte: bool = True,
 ) -> Iterator[WaarderingBuilder]:
     installaties = Counter([installatie for installatie in ruimte.installaties or []])
 
@@ -544,7 +547,10 @@ def _waardeer_installaties(
 
                 # De punten voor extra voorzieningen tellen mee tot maximaal het
                 # aantal punten voor bad en douche in dezelfde ruimte.
-                if voorzieningen_criterium is not None:
+                if (
+                    voorzieningen_criterium is not None
+                    and maximeer_extra_voorzieningen_per_ruimte
+                ):
                     maximering = min(
                         rond_af(
                             totaal_punten_bad_en_douche - totaal_punten_voorzieningen,
@@ -684,3 +690,109 @@ def maximeer_wastafels(
             max_count=max_meerpersoonswastafels,
             maximum=Decimal("1.5"),
         )
+
+
+_BAD_DOUCHE_SEGMENTEN = frozenset(
+    {
+        Installatiesoort.bad.name,
+        Installatiesoort.douche.name,
+        Installatiesoort.drempelloze_inrijdouche.name,
+        Installatiesoort.bad_en_douche.name,
+    }
+)
+
+
+def _vind_extra_voorzieningen_criterium(
+    waarderingen: list[WaarderingBuilder],
+    ruimte_criterium: WaarderingBuilder,
+) -> WaarderingBuilder | None:
+    for woningwaardering in waarderingen:
+        if (
+            woningwaardering.bovenliggende is ruimte_criterium
+            and woningwaardering.segment == "extra_voorzieningen"
+        ):
+            return woningwaardering
+    return None
+
+
+def _punten_onder_criterium(
+    waarderingen: list[WaarderingBuilder],
+    criterium: WaarderingBuilder,
+) -> Decimal:
+    return Decimal(
+        sum(
+            Decimal(str(woningwaardering.punten))
+            for woningwaardering in waarderingen
+            if woningwaardering.bovenliggende is criterium
+            and woningwaardering.punten is not None
+        )
+    )
+
+
+def maximeer_extra_voorzieningen(
+    ruimte_waarderingen: list[
+        tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
+    ],
+) -> None:
+    totaal_punten_bad_en_douche = Decimal("0")
+    totaal_punten_voorzieningen = Decimal("0")
+    extras_ruimten: list[
+        tuple[EenhedenRuimte, WaarderingBuilder, WaarderingBuilder, Decimal]
+    ] = []
+
+    for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
+        totaal_punten_bad_en_douche += Decimal(
+            sum(
+                Decimal(str(woningwaardering.punten))
+                for woningwaardering in waarderingen
+                if (
+                    woningwaardering.bovenliggende is ruimte_criterium
+                    and woningwaardering.segment in _BAD_DOUCHE_SEGMENTEN
+                    and woningwaardering.punten is not None
+                )
+            )
+        )
+        voorzieningen_criterium = _vind_extra_voorzieningen_criterium(
+            waarderingen, ruimte_criterium
+        )
+        if voorzieningen_criterium is None:
+            continue
+        punten_voorzieningen = _punten_onder_criterium(
+            waarderingen, voorzieningen_criterium
+        )
+        totaal_punten_voorzieningen += punten_voorzieningen
+        extras_ruimten.append(
+            (ruimte, ruimte_criterium, voorzieningen_criterium, punten_voorzieningen)
+        )
+
+    if not extras_ruimten:
+        return
+
+    maximering = min(
+        rond_af(totaal_punten_bad_en_douche - totaal_punten_voorzieningen, 2),
+        Decimal("0"),
+    )
+    if maximering >= 0:
+        return
+
+    _, _, voorzieningen_criterium, _ = max(extras_ruimten, key=lambda item: item[3])
+    ruimte_met_max_extras = next(
+        ruimte
+        for ruimte, _, criterium, _ in extras_ruimten
+        if criterium is voorzieningen_criterium
+    )
+    logger.info(
+        f"Ruimte '{ruimte_met_max_extras.naam}' ({ruimte_met_max_extras.id}): Maximering van {maximering} punten want maximaal evenveel punten voor bad en douche ({totaal_punten_bad_en_douche}) als voor voorzieningen ({totaal_punten_voorzieningen}) in de eenheid."
+    )
+    for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
+        if _vind_extra_voorzieningen_criterium(waarderingen, ruimte_criterium) is (
+            voorzieningen_criterium
+        ):
+            waarderingen.append(
+                voorzieningen_criterium.met_onderliggend(
+                    id="maximering_punten_voorzieningen",
+                    naam="Max verdubbeling punten bad en douche",
+                    punten=float(maximering),
+                )
+            )
+            break
