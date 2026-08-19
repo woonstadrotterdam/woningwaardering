@@ -1,5 +1,5 @@
 import warnings
-from collections import Counter, namedtuple
+from collections import Counter
 from decimal import Decimal
 from typing import Iterator
 
@@ -30,9 +30,11 @@ from woningwaardering.vera.referentiedata import (
 )
 from woningwaardering.vera.utils import get_bouwkundige_elementen
 
-# Op de niet-badkamer-ruimte met de meeste (meerpersoons)wastafels die zelf met
-# >= 8 onzelfstandige woonruimten is gedeeld, wordt geen maximering toegepast.
-MaxCount = namedtuple("MaxCount", ["aantal_wastafels", "ruimte"])
+# Op maximaal één niet-badkamer-ruimte die zelf met >= 8 onzelfstandige
+# woonruimten is gedeeld, wordt geen wastafel-maximering toegepast. Dat is de
+# kandidaat waar de maximering de meeste punten zou afsnijden.
+_PUNTEN_WASTAFEL = Decimal("1")
+_PUNTEN_MEERPERSOONSWASTAFEL = Decimal("1.5")
 
 _RUIMTES_ZONDER_WASTAFEL_MAXIMERING = (
     Ruimtedetailsoort.badkamer,
@@ -53,10 +55,10 @@ def _wastafel_maximering_niet_van_toepassing(ruimte: EenhedenRuimte) -> bool:
     return ruimte.detail_soort in _RUIMTES_ZONDER_WASTAFEL_MAXIMERING
 
 
-def _achtplus_vrijstellingskandidaat(ruimte: EenhedenRuimte) -> bool:
+def _vrijstellingskandidaat(ruimte: EenhedenRuimte) -> bool:
     # Wij interpreteren de 8+-uitzondering op ruimteniveau: alleen niet-badkamer-
     # ruimten met gedeeld_met_aantal_onzelfstandige_woonruimten >= 8 kunnen
-    # vrijgesteld worden van de wastafel-maximering.
+    # de uitzonderingsruimte zijn waar de wastafel-maximering niet geldt.
     return (
         not _wastafel_maximering_niet_van_toepassing(ruimte)
         and (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 0) >= 8
@@ -282,12 +284,13 @@ def _waardeer_wastafels(
         # Wastafels worden gewaardeerd tot een maximum van 1 punt,
         # meerpersoonswastafels tot een maximum van 1,5 punt,
         # per vertrek of overige ruimte, m.u.v. de badkamer.
-        # Voor 8+-vrijstellingskandidaten stellen we maximering uit tot
-        # maximeer_wastafels (één ruimte mag dan vrijgesteld worden).
+        # Voor vrijstellingskandidaten stellen we maximering uit tot
+        # maximeer_wastafels (één uitzonderingsruimte mag dan ongemaximeerd
+        # blijven voor wastafels én meerpersoonswastafels).
         if (
             punten_voor_wastafels > punten_per_wastafel
             and not _wastafel_maximering_niet_van_toepassing(ruimte)
-            and not _achtplus_vrijstellingskandidaat(ruimte)
+            and not _vrijstellingskandidaat(ruimte)
         ):
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {punten_voor_wastafels} punten voor {wastafelsoort.naam} in {ruimte.detail_soort.naam if ruimte.detail_soort else ruimte.naam}. Correctie wordt toegepast ivm maximaal {punten_per_wastafel} punt."
@@ -559,33 +562,60 @@ def _aantal_wastafels(
     )
 
 
-def _bepaal_wastafel_max_tellers(
+def _puntenwinst_wastafel_maximering(
+    aantal_wastafels: int,
+    aantal_meerpersoonswastafels: int,
+    deler: int,
+) -> Decimal:
+    # Punten die de maximering per vertrek/overige ruimte zou afsnijden, gedeeld
+    # door het aantal onzelfstandige woonruimten waarmee de ruimte wordt gedeeld.
+    winst = Decimal("0")
+    if aantal_wastafels > 1:
+        winst += (Decimal(aantal_wastafels) - Decimal("1")) * _PUNTEN_WASTAFEL
+    if aantal_meerpersoonswastafels > 1:
+        winst += (
+            Decimal(aantal_meerpersoonswastafels) - Decimal("1")
+        ) * _PUNTEN_MEERPERSOONSWASTAFEL
+    return winst / Decimal(deler)
+
+
+def _bepaal_uitzonderingsruimte(
     ruimte_waarderingen: list[
         tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
     ],
-) -> tuple[MaxCount, MaxCount]:
-    # Bepaal per (meerpersoons)wastafelsoort de ruimte met het hoogste aantal
-    # binnen 8+-vrijstellingskandidaten.
-    max_wastafels = MaxCount(0, None)
-    max_meerpersoonswastafels = MaxCount(0, None)
+) -> EenhedenRuimte | None:
+    # Bijlage I B, sanitair: maximaal één ruimte, naast de badkamer, mag meer
+    # dan één (meerpersoons)wastafel hebben. We kiezen de vrijstellingskandidaat
+    # met de hoogste puntenwinst; bij gelijke stand de eerste in de input.
+    uitzonderingsruimte: EenhedenRuimte | None = None
+    hoogste_winst: Decimal | None = None
 
     for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
-        if not _achtplus_vrijstellingskandidaat(ruimte):
+        if not _vrijstellingskandidaat(ruimte):
             continue
 
-        aantal_wastafels_count = _aantal_wastafels(
-            waarderingen, ruimte_criterium, Installatiesoort.wastafel
+        winst = _puntenwinst_wastafel_maximering(
+            _aantal_wastafels(
+                waarderingen, ruimte_criterium, Installatiesoort.wastafel
+            ),
+            _aantal_wastafels(
+                waarderingen,
+                ruimte_criterium,
+                Installatiesoort.meerpersoonswastafel,
+            ),
+            ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1,
         )
-        if aantal_wastafels_count > max_wastafels.aantal_wastafels:
-            max_wastafels = MaxCount(aantal_wastafels_count, ruimte)
+        if hoogste_winst is None or winst > hoogste_winst:
+            hoogste_winst = winst
+            uitzonderingsruimte = ruimte
 
-        aantal_meerpersoonswastafels = _aantal_wastafels(
-            waarderingen, ruimte_criterium, Installatiesoort.meerpersoonswastafel
+    if uitzonderingsruimte is not None:
+        logger.info(
+            f"Ruimte '{uitzonderingsruimte.naam}' ({uitzonderingsruimte.id}) "
+            f"is de 8+-uitzonderingsruimte (puntenwinst {hoogste_winst})."
         )
-        if aantal_meerpersoonswastafels > max_meerpersoonswastafels.aantal_wastafels:
-            max_meerpersoonswastafels = MaxCount(aantal_meerpersoonswastafels, ruimte)
 
-    return max_wastafels, max_meerpersoonswastafels
+    return uitzonderingsruimte
 
 
 def _maximeer_wastafels_in_ruimte(
@@ -594,12 +624,11 @@ def _maximeer_wastafels_in_ruimte(
     waarderingen: list[WaarderingBuilder],
     *,
     soort: Referentiedata,
-    max_count: MaxCount,
+    uitzonderingsruimte: EenhedenRuimte | None,
     maximum: Decimal,
 ) -> None:
-    # Maximeer alleen 8+-vrijstellingskandidaten die niet de uitzonderingsruimte
-    # zijn (de kandidaat met de meeste (meerpersoons)wastafels).
-    if not _achtplus_vrijstellingskandidaat(ruimte) or max_count.ruimte == ruimte:
+    # Maximeer alleen vrijstellingskandidaten die niet de uitzonderingsruimte zijn.
+    if not _vrijstellingskandidaat(ruimte) or ruimte == uitzonderingsruimte:
         return
 
     # Tel alle wastafel-criteria in deze ruimte (inclusief spoelbakken in korte
@@ -634,9 +663,7 @@ def maximeer_wastafels(
         tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
     ],
 ) -> None:
-    max_wastafels, max_meerpersoonswastafels = _bepaal_wastafel_max_tellers(
-        ruimte_waarderingen
-    )
+    uitzonderingsruimte = _bepaal_uitzonderingsruimte(ruimte_waarderingen)
 
     for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
         _maximeer_wastafels_in_ruimte(
@@ -644,14 +671,14 @@ def maximeer_wastafels(
             ruimte_criterium,
             waarderingen,
             soort=Installatiesoort.wastafel,
-            max_count=max_wastafels,
-            maximum=Decimal("1"),
+            uitzonderingsruimte=uitzonderingsruimte,
+            maximum=_PUNTEN_WASTAFEL,
         )
         _maximeer_wastafels_in_ruimte(
             ruimte,
             ruimte_criterium,
             waarderingen,
             soort=Installatiesoort.meerpersoonswastafel,
-            max_count=max_meerpersoonswastafels,
-            maximum=Decimal("1.5"),
+            uitzonderingsruimte=uitzonderingsruimte,
+            maximum=_PUNTEN_MEERPERSOONSWASTAFEL,
         )

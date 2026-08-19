@@ -81,8 +81,8 @@ class Sanitair(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-        # pas maximering toe voor wastafels en meerpersoonswastafels m.u.v. één ruimte,
-        # de ruimte met de meeste wastafels/meerpersoonswastafels.
+        # pas maximering toe voor wastafels en meerpersoonswastafels m.u.v. één
+        # uitzonderingsruimte: de 8+-kandidaat met de hoogste puntenwinst.
         maximeer_wastafels(ruimte_waarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
