@@ -1,0 +1,39 @@
+{
+  "id": "koelvriescombinatie",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 9.0,
+      "installaties": [
+        {
+          "code": "IKV",
+          "naam": "Inbouw koelvriescombinatie"
+        }
+      ],
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2500
+        }
+      ]
+    }
+  ]
+}
