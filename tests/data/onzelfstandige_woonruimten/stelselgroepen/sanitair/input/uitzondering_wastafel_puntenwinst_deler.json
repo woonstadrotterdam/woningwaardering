@@ -1,0 +1,66 @@
+{
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    },
+    {
+      "id": "wasruimte",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "WAS",
+        "naam": "Wasruimte"
+      },
+      "naam": "Wasruimte",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 20
+    }
+  ]
+}

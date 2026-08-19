@@ -1,0 +1,16 @@
+SAMENVATTING
+  Sanitair                                                                        0.75 pt
+                                                                                ---------
+
+SANITAIR
+  Gedeeld met 8 onzelfstandige woonruimten
+    - Keuken
+      - Wastafel                                                      2.00 st     0.25 pt
+      - Meerpersoonswastafel                                          2.00 st     0.38 pt
+      - Maximering voor Wastafel                                                 -0.13 pt
+      - Maximering voor Meerpersoonswastafel                                     -0.19 pt
+    - Wasruimte
+      - Wastafel                                                      4.00 st     0.50 pt
+  Afronding op kwartpunten                                                       -0.06 pt
+                                                                                ---------
+  Totaal                                                                          0.75 pt
