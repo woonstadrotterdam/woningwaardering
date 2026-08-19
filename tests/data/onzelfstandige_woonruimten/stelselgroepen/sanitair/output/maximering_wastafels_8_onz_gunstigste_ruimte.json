@@ -1,0 +1,90 @@
+{
+  "groepen": [
+    {
+      "criterium_groep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 0.75,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels",
+            "naam": "WoonkamerMetWastafels",
+            "bovenliggende_criterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels__wastafel",
+            "naam": "Wastafel",
+            "bovenliggende_criterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.38
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels__max_punten_wastafel",
+            "naam": "Maximering voor Wastafel",
+            "bovenliggende_criterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels"
+            }
+          },
+          "punten": -0.25
+        },
+        {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons",
+            "naam": "BergruimteMetMeerpersoonswastafels",
+            "bovenliggende_criterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons__meerpersoonswastafel",
+            "naam": "Meerpersoonswastafel",
+            "bovenliggende_criterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.56
+        },
+        {
+          "criterium": {
+            "id": "sanitair__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.06
+        }
+      ]
+    }
+  ]
+}

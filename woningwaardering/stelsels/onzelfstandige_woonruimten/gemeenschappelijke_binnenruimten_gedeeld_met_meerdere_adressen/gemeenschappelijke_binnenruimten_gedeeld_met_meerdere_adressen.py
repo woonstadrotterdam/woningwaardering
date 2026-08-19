@@ -337,7 +337,13 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-        maximeer_wastafels(ruimte_waarderingen)
+        maximeer_wastafels(
+            ruimte_waarderingen,
+            deler=lambda ruimte: Decimal(
+                (ruimte.gedeeld_met_aantal_adressen or 1)
+                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
+            ),
+        )
 
         for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
             deler = Decimal(
