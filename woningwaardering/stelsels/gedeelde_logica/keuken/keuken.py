@@ -165,9 +165,11 @@ def _waardeer_aanrecht(
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
 
     Returns:
-        list[WaarderingBuilder]: De gewaardeerde aanrechten. Bij meerdere aanrechten
-        staan de basispunten op een subtotaalregel; de detailregels hebben geen
-        punten. Bij één aanrecht staan de basispunten op die detailregel.
+        list[WaarderingBuilder]: De puntdragende aanrechtwaardering, of een lege
+        lijst als er geen geldig aanrecht is. Bij één aanrecht is dat de
+        lengteregel zelf. Bij meerdere aanrechten is dat alleen de
+        subtotaalregel; de lengtedetails hangen daaronder in de boom zonder
+        punten.
     """
     aanrechten_met_lengte = []
     for element in ruimte.bouwkundige_elementen or []:
@@ -228,7 +230,7 @@ def _waardeer_aanrecht(
     )
     for detail in details:
         detail.verplaats_naar(subtotaal)
-    return [subtotaal, *details]
+    return [subtotaal]
 
 
 def _punten_voor_aanrechtlengte(
