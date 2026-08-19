@@ -826,7 +826,9 @@ Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool zijn
 \* Bij een adres met 8 of meer onzelfstandige woonruimten geldt een uitzonderingsregel: bij 1 ander vertrek (dan de badkamer) of overige ruimte is het maximum van 1 (meerpersoons) wastafel niet van toepassing. Er kunnen in dat geval méér wastafels worden gewaardeerd.
 
 > [!NOTE]
-> Wij interpreteren deze 8+-uitzondering op **ruimteniveau**. Alleen een niet-badkamer-ruimte met `gedeeldMetAantalOnzelfstandigeWoonruimten >= 8` kan als uitzonderingsruimte worden gekozen (de ruimte met de meeste wastafels, en apart de ruimte met de meeste meerpersoonswastafels). Privé-ruimten of ruimten met `gedeeldMetAantalOnzelfstandigeWoonruimten < 8` komen niet in aanmerking voor die vrijstelling en blijven gemaximeerd.
+> Wij interpreteren deze 8+-uitzondering op **ruimteniveau**, voor **maximaal één uitzonderingsruimte**. Alleen een niet-badkamer-ruimte met `gedeeldMetAantalOnzelfstandigeWoonruimten >= 8` kan worden gekozen. We kiezen de kandidaat waar de maximering de meeste punten zou afsnijden (puntenwinst van wastafels en meerpersoonswastafels samen, na delen door `gedeeldMetAantalOnzelfstandigeWoonruimten`). In die ruimte vervallen beide maxima. Bij gelijke puntenwinst geldt de eerste ruimte in de input. Privé-ruimten of ruimten met `gedeeldMetAantalOnzelfstandigeWoonruimten < 8` komen niet in aanmerking en blijven gemaximeerd.
+>
+> Dit volgt de wettekst, toelichting sanitair (Bijlage I B): *«Daarnaast geldt er voor adressen met 8 of meer onzelfstandige woonruimten dat er voor maximaal één ruimte, naast de badkamer, een ruimte mag zijn met meer dan één wastafel die voor waardering in aanmerking komt.»* De tabelregel onder zowel wastafel als meerpersoonswastafel lezen we als dezelfde uitzondering, niet als twee quota.
 
 > [!NOTE]
 > Zorg dat wastafels alleen worden meegenomen die voldoen aan de vereisten van een wastafel.
