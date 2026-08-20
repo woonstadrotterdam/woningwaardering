@@ -14,15 +14,18 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
+    bepaal_wastafel_uitzonderingsruimte,
     bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
-    maximeer_wastafels,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
     waardeer_sanitair,
     waardeer_verkoeling_en_verwarming,
+)
+from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
+    converteer_bouwkundige_elementen_naar_installaties,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -58,6 +61,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        converteer_bouwkundige_elementen_naar_installaties(eenheid)
+
         waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
@@ -78,7 +83,13 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             # waarderingen voor de keuken van gedeelde ruimten
             self._keuken_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
             # waarderingen voor sanitair van gedeelde ruimten
-            self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
+            self._sanitair_waarderingen(
+                waarderingsgroep_builder,
+                gedeelde_ruimten,
+                wastafel_uitzonderingsruimte=bepaal_wastafel_uitzonderingsruimte(
+                    eenheid
+                ),
+            )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
@@ -302,6 +313,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimten: list[EenhedenRuimte],
+        *,
+        wastafel_uitzonderingsruimte: EenhedenRuimte | None,
     ) -> None:
         ruimte_waarderingen: list[
             tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
@@ -330,6 +343,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 self.stelsel,
                 waarderingsgroep_builder=sanitair_subgroep,
                 deler=1,
+                wastafel_uitzonderingsruimte=wastafel_uitzonderingsruimte,
             )
             if not waarderingen:
                 continue
@@ -337,15 +351,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-        maximeer_wastafels(
-            ruimte_waarderingen,
-            deler=lambda ruimte: Decimal(
-                (ruimte.gedeeld_met_aantal_adressen or 1)
-                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
-            ),
-        )
-
-        for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
+        for ruimte, _, waarderingen in ruimte_waarderingen:
             deler = Decimal(
                 (ruimte.gedeeld_met_aantal_adressen or 1)
                 * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)

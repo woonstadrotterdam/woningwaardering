@@ -1,7 +1,7 @@
 {
   "groepen": [
     {
-      "criterium_groep": {
+      "criteriumGroep": {
         "stelsel": {
           "code": "ONZ",
           "naam": "Onzelfstandige woonruimten"
@@ -23,7 +23,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten__slaapkamer_hoge_deler",
             "naam": "SlaapkamerHogeDeler",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten"
             }
           }
@@ -33,7 +33,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten__slaapkamer_hoge_deler__wastafel",
             "naam": "Wastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten__slaapkamer_hoge_deler"
             },
             "meeteenheid": {
@@ -47,7 +47,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten__slaapkamer_hoge_deler__max_punten_wastafel",
             "naam": "Maximering voor Wastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_20_onzelfstandige_woonruimten__slaapkamer_hoge_deler"
             }
           },
@@ -63,7 +63,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_lage_deler",
             "naam": "BergruimteLageDeler",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
             }
           }
@@ -73,7 +73,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_lage_deler__meerpersoonswastafel",
             "naam": "Meerpersoonswastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_lage_deler"
             },
             "meeteenheid": {

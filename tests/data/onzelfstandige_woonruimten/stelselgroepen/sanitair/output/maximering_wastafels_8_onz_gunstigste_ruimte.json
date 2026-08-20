@@ -1,7 +1,7 @@
 {
   "groepen": [
     {
-      "criterium_groep": {
+      "criteriumGroep": {
         "stelsel": {
           "code": "ONZ",
           "naam": "Onzelfstandige woonruimten"
@@ -23,7 +23,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels",
             "naam": "WoonkamerMetWastafels",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
             }
           }
@@ -33,7 +33,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels__wastafel",
             "naam": "Wastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels"
             },
             "meeteenheid": {
@@ -47,7 +47,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels__max_punten_wastafel",
             "naam": "Maximering voor Wastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__woonkamer_wastafels"
             }
           },
@@ -57,7 +57,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons",
             "naam": "BergruimteMetMeerpersoonswastafels",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
             }
           }
@@ -67,7 +67,7 @@
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons__meerpersoonswastafel",
             "naam": "Meerpersoonswastafel",
-            "bovenliggende_criterium": {
+            "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__bergruimte_meerpersoons"
             },
             "meeteenheid": {
