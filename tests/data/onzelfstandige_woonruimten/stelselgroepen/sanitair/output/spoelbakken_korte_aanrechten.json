@@ -29,7 +29,7 @@
           }
         },
         {
-          "aantal": 1.0,
+          "aantal": 2.0,
           "criterium": {
             "id": "sanitair__prive__keuken__wastafel",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
@@ -41,22 +41,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 1.0
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "id": "sanitair__prive__keuken__wastafel",
-            "naam": "Wastafel (spoelbak in aanrecht < 1m)",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__prive__keuken"
-            },
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 1.0
+          "punten": 2.0
         },
         {
           "criterium": {

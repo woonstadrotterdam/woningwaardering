@@ -29,7 +29,7 @@
           }
         },
         {
-          "aantal": 1.0,
+          "aantal": 2.0,
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__wastafel",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
@@ -41,22 +41,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.13
-        },
-        {
-          "aantal": 1.0,
-          "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__wastafel",
-            "naam": "Wastafel (spoelbak in aanrecht < 1m)",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
-            },
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 0.13
+          "punten": 0.25
         },
         {
           "criterium": {
@@ -91,13 +76,6 @@
             }
           },
           "punten": 0.38
-        },
-        {
-          "criterium": {
-            "id": "sanitair__afronding_op_kwartpunten",
-            "naam": "Afronding op kwartpunten"
-          },
-          "punten": -0.01
         }
       ]
     }

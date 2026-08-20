@@ -16,6 +16,7 @@ from woningwaardering.stelsels.utils import (
     rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
+    BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     EenhedenRuimte,
     Referentiedata,
@@ -267,7 +268,9 @@ def _waardeer_toiletten(
                 )
 
 
-def _aantal_korte_aanrechten(ruimte: EenhedenRuimte) -> int:
+def _korte_aanrechten(
+    ruimte: EenhedenRuimte,
+) -> list[BouwkundigElementenBouwkundigElement]:
     if ruimte.detail_soort not in (
         Ruimtedetailsoort.keuken,
         Ruimtedetailsoort.woonkamer_en_of_keuken,
@@ -276,15 +279,15 @@ def _aantal_korte_aanrechten(ruimte: EenhedenRuimte) -> int:
         Ruimtedetailsoort.woon_en_of_slaapkamer,
         Ruimtedetailsoort.slaapkamer,
     ):
-        return 0
+        return []
 
-    return sum(
-        1
+    return [
+        element
         for element in ruimte.bouwkundige_elementen or []
         if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
         and element.lengte is not None
         and element.lengte < 1000
-    )
+    ]
 
 
 def _aantal_wastafels_in_ruimte(
@@ -293,7 +296,7 @@ def _aantal_wastafels_in_ruimte(
 ) -> int:
     aantal = Counter(ruimte.installaties or [])[soort]
     if soort == Installatiesoort.wastafel:
-        aantal += _aantal_korte_aanrechten(ruimte)
+        aantal += len(_korte_aanrechten(ruimte))
     return aantal
 
 
@@ -376,27 +379,10 @@ def _waardeer_wastafels(
         # voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd,
         # maar als wastafel.
         aantal_spoelbakken = (
-            _aantal_korte_aanrechten(ruimte)
+            len(_korte_aanrechten(ruimte))
             if wastafelsoort == Installatiesoort.wastafel
             else 0
         )
-        if aantal_spoelbakken:
-            for element in ruimte.bouwkundige_elementen or []:
-                if (
-                    element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
-                    and element.lengte is not None
-                    and element.lengte < 1000
-                ):
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
-                    )
-                    yield waarderingsgroep_builder.met_onderliggend(
-                        id=wastafelsoort.name,
-                        naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
-                        meeteenheid=Meeteenheid.stuks,
-                        punten=_WASTAFEL_PUNTEN[wastafelsoort],
-                        aantal=1,
-                    )
 
         totaal_aantal_wastafels += aantal_wastafels
 
@@ -406,6 +392,21 @@ def _waardeer_wastafels(
             Decimal(str(aantal_wastafels + aantal_spoelbakken)) * punten_per_wastafel,
             decimalen=2,
         )
+
+        if aantal_spoelbakken > 0:
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_spoelbakken}x aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
+            )
+            yield waarderingsgroep_builder.met_onderliggend(
+                id=wastafelsoort.name,
+                naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
+                meeteenheid=Meeteenheid.stuks,
+                punten=rond_af(
+                    aantal_spoelbakken * punten_per_wastafel,
+                    decimalen=2,
+                ),
+                aantal=aantal_spoelbakken,
+            )
 
         if aantal_wastafels > 0:
             logger.info(
