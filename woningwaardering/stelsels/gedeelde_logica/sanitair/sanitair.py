@@ -343,18 +343,17 @@ def bepaal_wastafel_uitzonderingsruimte(
     ):
         return None
 
-    return max(
-        (
-            ruimte
-            for ruimte in eenheid.ruimten or []
-            if _is_wastafel_uitzonderingskandidaat(
-                ruimte,
-                zorgwoning=eenheid.doelgroep == Doelgroep.zorg,
-            )
-        ),
-        key=_netto_winst_wastafelmaximering,
-        default=None,
-    )
+    kandidaten = [
+        ruimte
+        for ruimte in eenheid.ruimten or []
+        if _is_wastafel_uitzonderingskandidaat(
+            ruimte,
+            zorgwoning=eenheid.doelgroep == Doelgroep.zorg,
+        )
+    ]
+    if not kandidaten:
+        return None
+    return max(kandidaten, key=_netto_winst_wastafelmaximering)
 
 
 def _waardeer_wastafels(
