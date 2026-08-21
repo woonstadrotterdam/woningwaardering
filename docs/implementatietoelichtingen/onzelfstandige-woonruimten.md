@@ -835,6 +835,9 @@ Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool zijn
 \* Bij een adres met 8 of meer onzelfstandige woonruimten geldt een uitzonderingsregel: bij 1 ander vertrek (dan de badkamer) of overige ruimte is het maximum van 1 (meerpersoons) wastafel niet van toepassing. Er kunnen in dat geval méér wastafels worden gewaardeerd.
 
 > [!NOTE]
+> Wij interpreteren de 8+-drempel op **adresniveau**. Omdat het VERA-model geen aantal onzelfstandige woonruimten op het adres bevat, geldt als benadering dat ten minste één ruimte `gedeeldMetAantalOnzelfstandigeWoonruimten >= 8` heeft. Vervolgens kiezen we over alle niet-badkamer-ruimten van de eenheid precies één uitzonderingsruimte voor beide wastafelsoorten samen. Deze kan vallen onder Sanitair of onder Gemeenschappelijke binnenruimten gedeeld met meerdere adressen. De kandidaat met de hoogste netto puntenwinst wint, na deling door het aantal adressen en onzelfstandige woonruimten waarmee de ruimte wordt gedeeld; bij gelijke winst wint de eerste ruimte in de inputvolgorde. Ook een privé-ruimte kan de uitzondering krijgen. Bij een zorgwoning tellen ruimten gedeeld met meerdere adressen niet mee, omdat die stelselgroep daar door een vaste waardering wordt vervangen.
+
+> [!NOTE]
 > Zorg dat wastafels alleen worden meegenomen die voldoen aan de vereisten van een wastafel.
 
 Niet als wastafel worden gewaardeerd:

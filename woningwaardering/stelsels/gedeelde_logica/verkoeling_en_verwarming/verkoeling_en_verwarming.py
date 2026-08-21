@@ -63,7 +63,10 @@ def waardeer_verkoeling_en_verwarming(
 
 
 def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
-    return ruimte.detail_soort == Ruimtedetailsoort.woonkamer_en_of_keuken or (
+    return ruimte.detail_soort in (
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+    ) or (
         ruimte.detail_soort
         in [
             Ruimtedetailsoort.woonkamer,
@@ -152,9 +155,9 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
         if ruimtesoort == Ruimtesoort.vertrek:
             heeft_open_keuken = _heeft_open_keuken(ruimte)
             naam = ruimte.naam or ruimte.id or ""
-            if (
-                heeft_open_keuken
-                and ruimte.detail_soort != Ruimtedetailsoort.woonkamer_en_of_keuken
+            if heeft_open_keuken and ruimte.detail_soort not in (
+                Ruimtedetailsoort.woonkamer_en_of_keuken,
+                Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
             ):
                 naam = f"{naam} met open keuken"
 

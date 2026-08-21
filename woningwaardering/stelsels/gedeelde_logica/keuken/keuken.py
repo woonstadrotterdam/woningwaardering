@@ -130,6 +130,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     if ruimte.detail_soort in [
         Ruimtedetailsoort.keuken,
         Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
     ]:
         if aanrecht_aantal == 0:
             warnings.warn(
