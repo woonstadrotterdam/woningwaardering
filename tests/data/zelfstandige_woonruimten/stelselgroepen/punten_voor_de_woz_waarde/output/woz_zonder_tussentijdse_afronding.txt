@@ -1,0 +1,14 @@
+SAMENVATTING woz_zonder_tussentijdse_afronding
+  Punten voor de WOZ-waarde                                                      10.00 pt
+                                                                                ---------
+
+PUNTEN VOOR DE WOZ-WAARDE
+  WOZ-waarde op waardepeildatum 01-01-2025                        50000.00 EUR
+  Onderdeel I                                                                     2.95 pt
+    - Factor I                                                    16954.00 EUR
+  Onderdeel II                                                                    7.18 pt
+    - Oppervlakte van vertrekken en overige ruimten                  26.00 m²
+    - Factor II                                                     268.00 EUR
+  Afronding op kwartpunten                                                       -0.13 pt
+                                                                                ---------
+  Totaal                                                                         10.00 pt

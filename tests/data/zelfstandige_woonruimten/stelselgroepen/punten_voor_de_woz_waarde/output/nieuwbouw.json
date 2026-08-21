@@ -85,7 +85,14 @@
             "id": "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten",
             "naam": "Nieuwbouw: min. 40 punten"
           },
-          "punten": 5.13
+          "punten": 5.1324829
+        },
+        {
+          "criterium": {
+            "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.0024829
         }
       ]
     }
