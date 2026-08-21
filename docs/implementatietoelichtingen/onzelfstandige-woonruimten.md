@@ -734,6 +734,9 @@ Voor het meten van een aanrecht gelden de volgende regels:
 
 ![Meetinstructies lengte aanrechtblad](../afbeeldingen/onzelfstandig-2.5.2-aanrecht.png)
 
+> [!NOTE]
+> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is.
+
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
 > [!TIP]
@@ -758,6 +761,9 @@ Voor het meten van een aanrecht gelden de volgende regels:
 > ///
 
 Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt. De toegekende punten worden gedeeld door het aantal onzelfstandige woningen dat toegang en gebruiksrecht heeft.
+
+> [!NOTE]
+> Bij meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering gebaseerd op de basispunten uit de gesommeerde aanrechtlengte.
 
 {==
 
@@ -805,6 +811,9 @@ Het woningwaarderingsstelsel geeft punten aan de hieronder beschreven sanitaire 
 _Toilet_  
 Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte ~~én binnen de woonruimte ligt~~. ~~Een toilet dat buiten de woonruimte, maar binnen het woongebouw ligt wordt alleen gewaardeerd als het gebruik door derden is uit te sluiten~~. Toiletten die buiten toiletruimten en badkamers zijn aangebracht worden niet gewaardeerd.
 
+> [!NOTE]
+> Een VERA-`doucheruimte` telt voor toiletwaardering mee als badkamer. Toiletten in een doucheruimte krijgen daarom de punten voor toilet in een badkamer.
+
 | Voorziening                            | Punten |
 |----------------------------------------|--------|
 | Toilet (staand) in een toiletruimte    | 3      |
@@ -824,6 +833,9 @@ Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool zijn
 | Meerpersoonswastafel in vertrek/overige ruimte | Maximaal 1,5 per vertrek of overige ruimte\* |
 
 \* Bij een adres met 8 of meer onzelfstandige woonruimten geldt een uitzonderingsregel: bij 1 ander vertrek (dan de badkamer) of overige ruimte is het maximum van 1 (meerpersoons) wastafel niet van toepassing. Er kunnen in dat geval méér wastafels worden gewaardeerd.
+
+> [!NOTE]
+> Wij interpreteren de 8+-drempel op **adresniveau**. Omdat het VERA-model geen aantal onzelfstandige woonruimten op het adres bevat, geldt als benadering dat ten minste één ruimte `gedeeldMetAantalOnzelfstandigeWoonruimten >= 8` heeft. Vervolgens kiezen we over alle niet-badkamer-ruimten van de eenheid precies één uitzonderingsruimte voor beide wastafelsoorten samen. Deze kan vallen onder Sanitair of onder Gemeenschappelijke binnenruimten gedeeld met meerdere adressen. De kandidaat met de hoogste netto puntenwinst wint, na deling door het aantal adressen en onzelfstandige woonruimten waarmee de ruimte wordt gedeeld; bij gelijke winst wint de eerste ruimte in de inputvolgorde. Ook een privé-ruimte kan de uitzondering krijgen. Bij een zorgwoning tellen ruimten gedeeld met meerdere adressen niet mee, omdat die stelselgroep daar door een vaste waardering wordt vervangen.
 
 > [!NOTE]
 > Zorg dat wastafels alleen worden meegenomen die voldoen aan de vereisten van een wastafel.
@@ -1015,9 +1027,9 @@ Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden ge
 > Modelleer een gemeenschappelijke buitenfietsenstalling als `Ruimtedetailsoort.overige_buitenruimte`.
 
 > [!NOTE]
-> Parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij een complex) worden altijd in rubriek 10 gewaardeerd, ook wanneer ze privé zijn of alleen met onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Zie [deze discussie op github](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702). Een generieke `Ruimtedetailsoort.parkeerplaats` wordt in deze rubriek (8) als buitenruimte gewaardeerd, tenzij deze met meerdere adressen wordt gedeeld.
+> Parkeerplekken met een Type I/II/III-parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij een complex) worden altijd in rubriek 10 gewaardeerd, ook wanneer ze privé zijn of alleen met onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Zie [deze discussie op github](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702). Een generieke `Ruimtedetailsoort.parkeerplaats` wordt in deze rubriek (8) als buitenruimte gewaardeerd, tenzij deze met meerdere adressen wordt gedeeld.
 >
-> Let op het randgeval: een `Ruimtedetailsoort.parkeerplaats` die met meerdere adressen wordt gedeeld, telt hier (rubriek 8) niet mee, maar wordt in rubriek 10 ook niet gewaardeerd, omdat rubriek 10 alleen de specifieke hierboven genoemde parkeer-detailsoorten waardeert. Zo'n gedeelde parkeerplek dient daarom met een van die specifieke detailsoorten te worden meegegeven om gewaardeerd te worden.
+> Let op het randgeval: een `Ruimtedetailsoort.parkeerplaats` die met meerdere adressen wordt gedeeld, telt hier (rubriek 8) niet mee, maar wordt in rubriek 10 ook niet gewaardeerd, omdat rubriek 10 alleen de Type I/II/III-parkeer-detailsoorten waardeert. Zo'n gedeelde parkeerplek dient daarom met een van die detailsoorten te worden meegegeven om gewaardeerd te worden.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
 
@@ -1169,7 +1181,7 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van de parkeerruimten de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_adressen` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Voor een voorbeeld, zie onderaan dit hoofdstuk.
 
 > [!NOTE]
-> In deze package waarderen we parkeerplekken met een specifieke parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij complex) altijd in rubriek 10 — ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
+> In deze package waarderen we parkeerplekken met een Type I/II/III-parkeer-detailsoort (carport, in- of uitpandige parkeergarage, parkeerplek buiten behorend bij complex) altijd in rubriek 10 — ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 

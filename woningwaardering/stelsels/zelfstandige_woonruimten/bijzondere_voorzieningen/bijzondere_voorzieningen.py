@@ -8,6 +8,9 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_bijzondere_voorzieningen,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
+    NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -17,6 +20,10 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
+
+UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS = [
+    NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
+]
 
 
 class BijzondereVoorzieningen(Stelselgroep):
@@ -47,6 +54,7 @@ class BijzondereVoorzieningen(Stelselgroep):
                 self.stelselgroep,
             ],
             stelsel=self.stelsel,
+            uitgesloten_zorgwoning_grondslag_criterium_ids=UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS,
             waarderingsgroep_builder=waarderingsgroep_builder,
             woningwaardering_resultaat=woningwaardering_resultaat,
         )
