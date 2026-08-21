@@ -1,3 +1,9 @@
-from .sanitair import maximeer_wastafels, waardeer_sanitair
+from .sanitair import (
+    bepaal_wastafel_uitzonderingsruimte,
+    waardeer_sanitair,
+)
 
-__all__ = ["maximeer_wastafels", "waardeer_sanitair"]
+__all__ = [
+    "bepaal_wastafel_uitzonderingsruimte",
+    "waardeer_sanitair",
+]
