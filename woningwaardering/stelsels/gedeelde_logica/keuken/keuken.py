@@ -28,6 +28,20 @@ from woningwaardering.vera.referentiedata import (
     WoningwaarderingstelselReferentiedata,
 )
 
+# Woon-/slaapvertrek-detailsoorten die de keuken al in de naam hebben.
+# `keuken` zelf hoort hier niet bij: dat is een apart vertrek, geen open keuken.
+OPEN_KEUKEN_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer_en_of_keuken,
+    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+)
+
+# Woon- of slaapvertrekken die een impliciete keuken / open keuken kunnen zijn.
+VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer,
+    Ruimtedetailsoort.woon_en_of_slaapkamer,
+    Ruimtedetailsoort.slaapkamer,
+)
+
 
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
@@ -122,11 +136,10 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
         )
         return False
 
-    if ruimte.detail_soort in [
+    if ruimte.detail_soort in (
         Ruimtedetailsoort.keuken,
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-    ]:
+        *OPEN_KEUKEN_DETAIL_SOORTEN,
+    ):
         if not valide_aanrecht:
             warnings.warn(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >={AANRECHT_MINIMALE_LENGTE_MM}mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
@@ -134,11 +147,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
         return True  # ruimte is een keuken met een valide aanrecht
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.woonkamer,
-        Ruimtedetailsoort.woon_en_of_slaapkamer,
-        Ruimtedetailsoort.slaapkamer,
-    ]:
+    if ruimte.detail_soort not in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
         return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
 
     if not valide_aanrecht:  # ruimte is geen keuken want heeft geen valide aanrecht

@@ -10,7 +10,13 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.criterium import maximering_naam
-from woningwaardering.stelsels.gedeelde_logica.aanrecht import is_valide_aanrechtlengte
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    AANRECHT_MINIMALE_LENGTE_MM,
+)
+from woningwaardering.stelsels.gedeelde_logica.keuken import (
+    OPEN_KEUKEN_DETAIL_SOORTEN,
+    VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+)
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
@@ -274,11 +280,8 @@ def _korte_aanrechten(
 ) -> list[BouwkundigElementenBouwkundigElement]:
     if ruimte.detail_soort not in (
         Ruimtedetailsoort.keuken,
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-        Ruimtedetailsoort.woonkamer,
-        Ruimtedetailsoort.woon_en_of_slaapkamer,
-        Ruimtedetailsoort.slaapkamer,
+        *OPEN_KEUKEN_DETAIL_SOORTEN,
+        *VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
     ):
         return []
 
@@ -287,7 +290,7 @@ def _korte_aanrechten(
         for element in ruimte.bouwkundige_elementen or []
         if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
         and element.lengte is not None
-        and not is_valide_aanrechtlengte(element.lengte)
+        and element.lengte < AANRECHT_MINIMALE_LENGTE_MM
     ]
 
 

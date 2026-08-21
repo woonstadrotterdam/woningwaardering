@@ -7,6 +7,10 @@ from loguru import logger
 from woningwaardering.stelsels.builders import WaarderingBuilder
 from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import heeft_valide_aanrecht
+from woningwaardering.stelsels.gedeelde_logica.keuken import (
+    OPEN_KEUKEN_DETAIL_SOORTEN,
+    VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+)
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
@@ -16,7 +20,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
@@ -62,27 +65,15 @@ def waardeer_verkoeling_en_verwarming(
     yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
 
 
-_OPEN_KEUKEN_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer_en_of_keuken,
-    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-)
-
-_VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer,
-    Ruimtedetailsoort.woon_en_of_slaapkamer,
-    Ruimtedetailsoort.slaapkamer,
-)
-
-
 class _OpenKeukenSoort(Enum):
     inherente_keuken = "inherente_keuken"
     impliciete_open_keuken = "impliciete_open_keuken"
 
 
 def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None:
-    if ruimte.detail_soort in _OPEN_KEUKEN_DETAIL_SOORTEN:
+    if ruimte.detail_soort in OPEN_KEUKEN_DETAIL_SOORTEN:
         return _OpenKeukenSoort.inherente_keuken
-    if ruimte.detail_soort in _VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
+    if ruimte.detail_soort in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
         # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
         # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
         if heeft_valide_aanrecht(ruimte):

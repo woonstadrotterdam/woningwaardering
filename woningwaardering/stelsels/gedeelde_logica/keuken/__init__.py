@@ -1,3 +1,11 @@
-from .keuken import waardeer_keuken
+from .keuken import (
+    OPEN_KEUKEN_DETAIL_SOORTEN,
+    VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+    waardeer_keuken,
+)
 
-__all__ = ["waardeer_keuken"]
+__all__ = [
+    "OPEN_KEUKEN_DETAIL_SOORTEN",
+    "VERTREK_MET_AANRECHT_DETAIL_SOORTEN",
+    "waardeer_keuken",
+]
