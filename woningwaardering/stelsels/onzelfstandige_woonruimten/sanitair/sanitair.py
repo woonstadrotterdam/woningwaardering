@@ -9,8 +9,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.gedeelde_logica import (
-    maximeer_wastafels,
+from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
+    bepaal_wastafel_uitzonderingsruimte,
+    converteer_bouwkundige_elementen_naar_installaties,
     waardeer_sanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -44,6 +45,8 @@ class Sanitair(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        converteer_bouwkundige_elementen_naar_installaties(eenheid)
+
         waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
@@ -53,6 +56,7 @@ class Sanitair(Stelselgroep):
             for ruimte in eenheid.ruimten or []
             if not utils.gedeeld_met_adressen(ruimte)
         ]
+        wastafel_uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
 
         # Waardeer elke ruimte onder het bijbehorende gedeeld-met-criterium.
         ruimte_waarderingen: list[
@@ -74,16 +78,13 @@ class Sanitair(Stelselgroep):
                 self.stelsel,
                 waarderingsgroep_builder=gedeeld_met,
                 deler=1,
+                wastafel_uitzonderingsruimte=wastafel_uitzonderingsruimte,
             )
             if not waarderingen:
                 continue
 
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
-
-        # pas maximering toe voor wastafels en meerpersoonswastafels m.u.v. één ruimte,
-        # de ruimte met de meeste wastafels/meerpersoonswastafels.
-        maximeer_wastafels(ruimte_waarderingen)
 
         # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
         for ruimte, _, waarderingen in ruimte_waarderingen:
