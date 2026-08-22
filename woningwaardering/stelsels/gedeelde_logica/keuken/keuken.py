@@ -42,6 +42,14 @@ VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
     Ruimtedetailsoort.slaapkamer,
 )
 
+# Ruimtedetailsoorten waarin een aanrecht meetelt voor de waardering:
+# vanaf 1 meter als basisvoorziening keuken, korter als wastafel.
+RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.keuken,
+    *OPEN_KEUKEN_DETAIL_SOORTEN,
+    *VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+)
+
 
 def waardeer_keuken(
     ruimte: EenhedenRuimte,
