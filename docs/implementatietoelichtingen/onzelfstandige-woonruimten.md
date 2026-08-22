@@ -573,6 +573,9 @@ Het puntenaantal voor de energieprestatie wordt dan als volgt berekend:
 
 ==}
 
+> [!NOTE]
+> Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld (`gedeeldMetAantalAdressen` ≥ 2) tellen **niet** mee voor de oppervlakte in §2.4.4. Het Bhw (Bijlage I, onder B, rubriek 4) bepaalt dat energieprestatie wordt berekend over de m² die **volgens rubriek 1** aan de huurder zijn toe te rekenen. Rubriek 1 dekt alleen privévertrekken en gemeenschappelijke vertrekken op hetzelfde adres; ruimten gedeeld met meerdere adressen vallen onder rubriek 9 ([§2.9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)), waar energieprestatie niet wordt genoemd. Dit komt overeen met het gedrag van de Huurcommissie-huurprijscheck.
+
 De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenaantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
 
 | **Energielabel NTA 8800 (afgegeven op of na 1 januari 2021)**    | **Punten per m²** |
