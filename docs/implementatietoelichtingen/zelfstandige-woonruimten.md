@@ -430,6 +430,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 > - Een zolderruimte groter dan 2m2 met het `Bouwkundigelement` `vlizotrap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
 > - Een zolderruimte groter dan 2m2 maar kleiner dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
 > - Zolderruimte groter dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - De aftrek van maximaal 5 punten geldt alleen als er <u>geen</u> vaste trap is. Een zolder met zowel vaste trap als vlizotrap krijgt dus geen correctie.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
@@ -476,6 +477,9 @@ _Kasten_
 De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de vertrekken behorende kasten moeten worden meegerekend.
 
 Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoort. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
+
+> [!NOTE]
+> De kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte` (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor onder meer energieprestatie, gemeenschappelijke ruimten en zoldercorrecties. Kasten op verkeersruimten tellen niet mee.
 
 ~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties_~~  
 ~~Vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren telt mee bij het bepalen van de totale oppervlakte van de ruimte. De oppervlakte van het vertrek of overige ruimte wordt dus bijvoorbeeld niet verminderd door de oppervlakte van een douchecabine.~~

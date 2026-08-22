@@ -8,6 +8,7 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     rond_af_op_kwart,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
@@ -52,10 +53,14 @@ def bereken_zolder_correctie(
 
 
 def is_zolder_zonder_vaste_trap(ruimte: EenhedenRuimte) -> bool:
+    # 2.2.2.3 Zolderruimte zonder vaste trap
+    # Correctie als de zolder als overige ruimte meetelt en er geen vaste trap is.
+    # classificeer_ruimte eist al trap of vlizotrap; zonder vaste trap blijft alleen
+    # vlizotrap over.
     return (
         ruimte.detail_soort == Ruimtedetailsoort.zolder
         and ruimte.oppervlakte is not None
-        and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
+        and not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
         and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
     )
 
@@ -66,7 +71,9 @@ def maak_zolder_correctie_waardering(
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> WaarderingBuilder:
-    zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
+    zolder_oppervlakte = rond_af(
+        oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
+    )
     return waarderingsgroep_builder.met_onderliggend(
         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
         naam="Correctie: zolder zonder vaste trap",
@@ -86,9 +93,11 @@ def waardeer_oppervlakte_van_overige_ruimte(
         return []
 
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+    oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
 
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {oppervlakte_met_kasten:.2f}m2 "
+        f"telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam}"
     )
 
     return [
@@ -96,7 +105,7 @@ def waardeer_oppervlakte_van_overige_ruimte(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
-            aantal=float(rond_af(ruimte.oppervlakte, decimalen=2)),
+            aantal=float(rond_af(oppervlakte_met_kasten, decimalen=2)),
         )
     ]
 
