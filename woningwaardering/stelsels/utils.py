@@ -1,9 +1,8 @@
 import asyncio
 import warnings
-from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
-from typing import Any, Callable, Counter, List, Tuple
+from typing import Any, Counter
 
 import pandas as pd
 import requests
@@ -13,7 +12,6 @@ from pydantic import BaseModel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
-    EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
     Referentiedata,
@@ -24,8 +22,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Energieprestatiesoort,
-    Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
     RuimtesoortReferentiedata,
@@ -587,93 +583,6 @@ def naar_rapport(
         lines.extend(detail)
 
     return WoningwaarderingRapport(lines)
-
-
-def energieprestatie_met_geldig_label(
-    peildatum: date, eenheid: EenhedenEenheid
-) -> EenhedenEnergieprestatie | None:
-    """
-    Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
-
-    Args:
-        peildatum (date): De peildatum waarop de energieprestatie geldig moet zijn.
-        eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
-
-    Returns:
-        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
-    """
-    aantal_energieprestaties = len(eenheid.energieprestaties or [])
-    if aantal_energieprestaties == 0:
-        warnings.warn(
-            f"Eenheid ({eenheid.id}): 'energieprestaties' is None", UserWarning
-        )
-        return None
-
-    vereiste_attributen: List[
-        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
-    ] = [
-        ("soort", lambda ep: ep.soort is not None),
-        ("status", lambda ep: ep.status is not None),
-        ("begindatum", lambda ep: ep.begindatum is not None),
-        ("einddatum", lambda ep: ep.einddatum is not None),
-        ("label", lambda ep: ep.label is not None),
-    ]
-
-    for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
-        logger.debug(
-            f"Eenheid ({eenheid.id}): energieprestatie {idx + 1} van {aantal_energieprestaties} wordt gevalideerd."
-        )
-        ontbrekende_attributen = [
-            naam for naam, check in vereiste_attributen if not check(energieprestatie)
-        ]
-        if ontbrekende_attributen:
-            logger.debug(
-                f"Eenheid ({eenheid.id}) mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
-            )
-            continue
-
-        if energieprestatie.soort not in (
-            Energieprestatiesoort.energie_index,
-            Energieprestatiesoort.energielabel_conform_nta8800,
-            Energieprestatiesoort.primair_energieverbruik_woningbouw,
-            Energieprestatiesoort.voorlopig_energielabel,
-        ):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): ongeldige energieprestatiesoort '{energieprestatie.soort}'."
-            )
-            continue
-
-        # 2.4.3 Geldigheid energieprestatie op peildatum (beleidsboek).
-        # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
-        # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
-        begindatum = energieprestatie.begindatum
-        einddatum = energieprestatie.einddatum
-        if begindatum is None or einddatum is None:
-            continue
-        if not (begindatum <= peildatum < einddatum):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
-            )
-            continue
-
-        if energieprestatie.status != Energieprestatiestatus.definitief:
-            logger.debug(
-                f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
-            )
-            continue
-
-        logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
-        logger.debug(
-            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
-            f" status={energieprestatie.status.naam if energieprestatie.status else None}"
-            f" label={energieprestatie.label.naam if energieprestatie.label else None}"
-            f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
-            f" einddatum={energieprestatie.einddatum}"
-        )
-        return energieprestatie
-
-    logger.info(f"Eenheid ({eenheid.id}): geen geldige energieprestatie gevonden.")
-    return None
 
 
 def rond_af(
