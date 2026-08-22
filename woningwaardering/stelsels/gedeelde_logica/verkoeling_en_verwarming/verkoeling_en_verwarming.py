@@ -1,10 +1,16 @@
 from collections.abc import Callable
+from enum import Enum
 from typing import Iterator
 
 from loguru import logger
 
 from woningwaardering.stelsels.builders import WaarderingBuilder
 from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import heeft_valide_aanrecht
+from woningwaardering.stelsels.gedeelde_logica.keuken import (
+    OPEN_KEUKEN_DETAIL_SOORTEN,
+    VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+)
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
@@ -14,12 +20,9 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 SUBGROEPEN: dict[str, str] = {
     "verwarmde_vertrekken": "Verwarmde vertrekken",
@@ -62,19 +65,20 @@ def waardeer_verkoeling_en_verwarming(
     yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
 
 
-def _heeft_open_keuken(ruimte: EenhedenRuimte) -> bool:
-    return ruimte.detail_soort in (
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-    ) or (
-        ruimte.detail_soort
-        in [
-            Ruimtedetailsoort.woonkamer,
-            Ruimtedetailsoort.woon_en_of_slaapkamer,
-            Ruimtedetailsoort.slaapkamer,
-        ]
-        and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.aanrecht)
-    )
+class _OpenKeukenSoort(Enum):
+    inherente_keuken = "inherente_keuken"
+    impliciete_open_keuken = "impliciete_open_keuken"
+
+
+def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None:
+    if ruimte.detail_soort in OPEN_KEUKEN_DETAIL_SOORTEN:
+        return _OpenKeukenSoort.inherente_keuken
+    if ruimte.detail_soort in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
+        # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
+        # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
+        if heeft_valide_aanrecht(ruimte):
+            return _OpenKeukenSoort.impliciete_open_keuken
+    return None
 
 
 def _waardeer_verwarmde_overige_ruimte(
@@ -153,18 +157,15 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
 
         ruimtesoort = classificeer_ruimte(ruimte)
         if ruimtesoort == Ruimtesoort.vertrek:
-            heeft_open_keuken = _heeft_open_keuken(ruimte)
+            open_keuken = _classificeer_open_keuken(ruimte)
             naam = ruimte.naam or ruimte.id or ""
-            if heeft_open_keuken and ruimte.detail_soort not in (
-                Ruimtedetailsoort.woonkamer_en_of_keuken,
-                Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-            ):
+            if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
                 naam = f"{naam} met open keuken"
 
             logger.info(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
-            if heeft_open_keuken:
+            if open_keuken is not None:
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
                 )
@@ -173,7 +174,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
                     id=ruimte.id,
                     naam=naam,
-                    punten=4 if heeft_open_keuken else 2,
+                    punten=4 if open_keuken is not None else 2,
                 ),
             )
 

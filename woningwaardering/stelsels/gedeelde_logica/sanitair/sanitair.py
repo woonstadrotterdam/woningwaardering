@@ -10,6 +10,12 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.criterium import maximering_naam
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    is_valide_aanrechtlengte,
+)
+from woningwaardering.stelsels.gedeelde_logica.keuken import (
+    RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN,
+)
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
@@ -271,22 +277,16 @@ def _waardeer_toiletten(
 def _korte_aanrechten(
     ruimte: EenhedenRuimte,
 ) -> list[BouwkundigElementenBouwkundigElement]:
-    if ruimte.detail_soort not in (
-        Ruimtedetailsoort.keuken,
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-        Ruimtedetailsoort.woonkamer,
-        Ruimtedetailsoort.woon_en_of_slaapkamer,
-        Ruimtedetailsoort.slaapkamer,
-    ):
+    if ruimte.detail_soort not in RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN:
         return []
 
     return [
         element
         for element in ruimte.bouwkundige_elementen or []
         if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+        # een aanrecht zonder lengte telt niet mee als kort aanrecht
         and element.lengte is not None
-        and element.lengte < 1000
+        and not is_valide_aanrechtlengte(element.lengte)
     ]
 
 
