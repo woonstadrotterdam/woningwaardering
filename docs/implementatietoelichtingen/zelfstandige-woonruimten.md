@@ -1123,6 +1123,9 @@ Zeembalkons worden, ~~zolang zij voldoen aan de hiervoor aangegeven eisen van ee
 
 Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
 
+> [!NOTE]
+> De [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Bijlage I onder A, rubriek 8) formuleert dit als aftrek «indien in het geheel géén punten in deze rubriek (geen buitenruimte)». Daarom passen we −5 alleen toe als er geen enkele **gewaardeerde** buitenruimte is (bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen punten en tellen dus niet mee tegen de aftrek).
+
 #### 2.8.6 Meetinstructies buitenruimten
 
 ~~Van de buitenruimten wordt de gehele onbebouwde oppervlakte gemeten, gemeten loodrecht op de voor-, achter- of zijgevel. Bij balkons wordt gemeten vanaf de binnenzijde van het balkonhek. Bij (gedeeltelijk) inpandige balkons wordt bovendien gemeten ten opzichte van het terugliggende deel van de gevel.~~

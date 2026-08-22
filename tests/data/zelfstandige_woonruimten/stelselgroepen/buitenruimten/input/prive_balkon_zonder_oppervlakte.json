@@ -1,0 +1,17 @@
+{
+  "id": "test-eenheid",
+  "ruimten": [
+    {
+      "id": "balkon-zonder-oppervlakte",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Balkon zonder oppervlakte"
+    }
+  ]
+}

@@ -54,17 +54,24 @@ class Buitenruimten(Stelselgroep):
         )
 
         totaal_criteria: dict[WaarderingBuilder, int] = {}
+        heeft_gewaardeerde_prive_buitenruimte = False
 
         # punten per buitenruimte
         for ruimte in eenheid.ruimten or []:
             for _ in self._punten_voor_buitenruimte(
                 waarderingsgroep_builder, ruimte, totaal_criteria
             ):
-                pass
+                if not gedeeld_met_adressen(ruimte):
+                    heeft_gewaardeerde_prive_buitenruimte = True
 
-        # minimaal 2 punten bij aanwezigheid van privé buitenruimten
-        # 5 aftrekpunten bij geen buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
+        # minimaal 2 punten bij aanwezigheid van gewaardeerde privé buitenruimten
+        # 5 aftrekpunten bij geen gewaardeerde buitenruimten
+        self._prive_buitenruimten_aanwezig(
+            waarderingsgroep_builder,
+            eenheid,
+            totaal_criteria,
+            heeft_gewaardeerde_prive_buitenruimte,
+        )
 
         som_aantal: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal("0"))
         for waardering in waarderingsgroep_builder.alle_waarderingen():
@@ -187,13 +194,20 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
+        totaal_criteria: dict[WaarderingBuilder, int],
+        heeft_gewaardeerde_prive_buitenruimte: bool,
     ) -> None:
-        if not any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.5 Minpunten bij geen enkele buitenruimte
+        # Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk
+        # buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
+        # Wettekst (Bijlage I onder A, rubriek 8): «indien in het geheel géén
+        # punten in deze rubriek (geen buitenruimte): af: 5 punten»
+        # https://wetten.overheid.nl/BWBR0003237/2026-01-01
+        # Alleen gewaardeerde buitenruimten tellen mee (niet te kleine gedeelde
+        # of ruimten zonder oppervlakte) — dan zijn er ook geen punten.
+        if not totaal_criteria:
             logger.info(
-                f"Eenheid ({eenheid.id}) heeft geen buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
+                f"Eenheid ({eenheid.id}) heeft geen gewaardeerde buitenruimten of loggia. Vijf minpunten voor geen buitenruimten toegepast."
             )
             waarderingsgroep_builder.met_onderliggend(
                 id="geen_buitenruimten",
@@ -202,11 +216,9 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        if any(waarderingsgroep_builder.alle_waarderingen()) and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.1 Punten voor privé-buitenruimte
+        # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend.
+        if heeft_gewaardeerde_prive_buitenruimte:
             logger.info(
                 f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
             )
