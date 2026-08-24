@@ -31,10 +31,13 @@ parkeertype_punten_mapping: dict[Referentiedata, dict[str, Decimal]] = {
 }
 
 
-def is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
-    detail_soort: Referentiedata | None,
-) -> bool:
-    """Of het detailsoort een van de specifieke parkeer-detailsoorten van rubriek 10 is."""
+def is_parkeertype_detailsoort(detail_soort: Referentiedata | None) -> bool:
+    """Of de detailsoort een Type I/II/III-parkeerplek is (§2.10).
+
+    Dit zijn de detailsoorten in ``parkeertype_punten_mapping`` (carport, in-/uitpandige
+    parkeergarage, parkeerplek buiten behorend bij complex). Een generieke
+    ``parkeerplaats`` hoort hier niet bij.
+    """
     return detail_soort in parkeertype_punten_mapping
 
 
@@ -47,9 +50,7 @@ def kwalificeert_voor_gemeenschappelijke_parkeerruimte(
     van minimaal 12 m² en een ingevuld `gedeeld_met_aantal_adressen`.
     """
     return (
-        is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
-            ruimte.detail_soort
-        )
+        is_parkeertype_detailsoort(ruimte.detail_soort)
         and ruimte.oppervlakte is not None
         and ruimte.oppervlakte >= 12.0
         and ruimte.gedeeld_met_aantal_adressen is not None
@@ -112,9 +113,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    if not is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
-        ruimte.detail_soort
-    ):
+    if not is_parkeertype_detailsoort(ruimte.detail_soort):
         logger.debug(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft detailsoort {ruimte.detail_soort} en wordt niet gewaardeerd voor {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}."
         )
