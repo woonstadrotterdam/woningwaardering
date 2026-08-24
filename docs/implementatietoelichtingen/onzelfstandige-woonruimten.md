@@ -1032,7 +1032,7 @@ Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden ge
 > [!NOTE]
 > Parkeerplekken bij het complex worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III).
 >
-> Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie de regelset bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
+> Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten) voor de typering.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
 
@@ -1184,15 +1184,9 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van de parkeerruimten de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_adressen` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Voor een voorbeeld, zie onderaan dit hoofdstuk.
 
 > [!NOTE]
-> **Eén regelset voor parkeerruimten en laadpalen** (zie [issue #381](https://github.com/woonstadrotterdam/woningwaardering/issues/381)). Deze regels gelden gelijk voor zelfstandige en onzelfstandige woonruimten; alleen de deler verschilt.
+> Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — waarderen we altijd in deze rubriek, ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
 >
-> Een parkeerruimte is **privé** wanneer `gedeeld_met_aantal_adressen` én `gedeeld_met_aantal_onzelfstandige_woonruimten` allebei niet groter zijn dan 1, en anders **gemeenschappelijk**.
->
-> 1. Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — liggen altijd in een gemeenschappelijke parkeergelegenheid en worden daarom altijd in deze rubriek gewaardeerd, privé of gemeenschappelijk.
-> 2. Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die in rubriek 8 gewaardeerd (over de oppervlakte) en gemeenschappelijk hier — een carport als Type II, een parkeerplaats als Type III met een `UserWarning` dat een van de Type-detailsoorten gebruikt hoort te worden.
-> 3. Deze rubriek kent alleen punten toe vanaf 12 m². Die eis geldt niet in rubriek 8.
-> 4. De laadpaal volgt de ruimte: hier wanneer die ruimte hier punten krijgt, anders rubriek 12 Bijzondere voorzieningen — in beide gevallen gedeeld door aantal adressen × aantal onzelfstandige woonruimten.
-> 5. Een parkeerruimte en een laadpaal krijgen daardoor nooit in meer dan één rubriek punten.
+> Een `carport` of `parkeerplaats` hoort bij de woning en waarderen we hier alleen wanneer die gemeenschappelijk is: gedeeld met meer dan één adres of, binnen het adres, met meer dan één onzelfstandige woonruimte. Privé wordt die in [rubriek 8](#28-rubriek-8-buitenruimten) gewaardeerd.
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 
@@ -1214,7 +1208,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 >
 > - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
-> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`).
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
 >
 > `PBD` is een uitbreiding op VERA. Zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden) voor de reden dat `PUP` Type I oplevert en niet Type II.
 
@@ -1384,7 +1378,6 @@ Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berek
 
 > [!NOTE]
 > "Aangesloten bij rubriek 10" lezen we als: de laadpaal deelt de rubriek én de deler van de parkeerruimte waar hij bij hoort. Krijgt die ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle andere gevallen hier, met dezelfde deler (aantal adressen × aantal onzelfstandige woonruimten). Zo krijgt een laadpaal nooit in twee rubrieken punten.
-
 
 ### 2.13 Rubriek 13: Aftrekpunten
 
