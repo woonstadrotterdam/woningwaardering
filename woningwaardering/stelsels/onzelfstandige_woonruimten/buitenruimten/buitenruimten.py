@@ -18,8 +18,6 @@ from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-    gedeeld_met_adressen,
-    gedeeld_met_onzelfstandige_woonruimten,
     is_prive,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -61,9 +59,7 @@ class Buitenruimten(Stelselgroep):
         heeft_gewaardeerde_prive_buitenruimte = False
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
-                if not gedeeld_met_adressen(
-                    ruimte
-                ) and not gedeeld_met_onzelfstandige_woonruimten(ruimte):
+                if is_prive(ruimte):
                     heeft_gewaardeerde_prive_buitenruimte = True
                 laag = waarderingsgroep_builder.gedeeld_met(
                     aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
@@ -180,9 +176,7 @@ class Buitenruimten(Stelselgroep):
         # voorwaarden voldoen, namelijk:
         # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
         #    meter, 1,50 meter (hoogte, breedte, diepte)
-        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
-            ruimte
-        ):
+        if not is_prive(ruimte):
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
@@ -215,9 +209,7 @@ class Buitenruimten(Stelselgroep):
         # 2.8.1 Privé: 0,35 punt per m² (+ 2 aanwezigheidspunten verderop).
         # 2.8.2 Gemeenschappelijk (gedeeld met adressen en/of onzelfstandige
         # woonruimten): 0,75 punt per m² / adressen / onzelfstandige woonruimten.
-        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
-            ruimte
-        ):
+        if not is_prive(ruimte):
             deler = Decimal(
                 (ruimte.gedeeld_met_aantal_adressen or 1)
                 * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
