@@ -1,0 +1,21 @@
+{
+  "id": "vertrek_gedeeld_met_aantal_adressen_1",
+  "bouwjaar": 1924,
+  "ruimten": [
+    {
+      "id": "Space_SLA_5m2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 5,
+      "verwarmd": true,
+      "gedeeldMetAantalAdressen": 1
+    }
+  ]
+}
