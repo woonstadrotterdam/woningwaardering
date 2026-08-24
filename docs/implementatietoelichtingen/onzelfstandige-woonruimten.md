@@ -1030,7 +1030,7 @@ Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden ge
 > Modelleer een gemeenschappelijke buitenfietsenstalling als `Ruimtedetailsoort.overige_buitenruimte`.
 
 > [!NOTE]
-> Parkeerplekken bij het complex worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III).
+> Parkeerplekken bij het complex worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III).
 >
 > Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten) voor de typering.
 
@@ -1184,7 +1184,7 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 > Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening, waarbij de verschillende types geteld worden, met het huidige VERA-model niet mogelijk. Om punten te krijgen voor deze rubriek moeten de type parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van de parkeerruimten de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_adressen` en `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek meegegeven te worden wanneer het een onzelfstandige woonruimte betreft. Voor een voorbeeld, zie onderaan dit hoofdstuk.
 
 > [!NOTE]
-> Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — waarderen we altijd in deze rubriek, ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
+> Parkeerplekken bij het complex — `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III) — waarderen we altijd in deze rubriek, ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek).
 >
 > "Ten minste twee adressen" lezen we als `Eenhedenruimte.gedeeld_met_aantal_adressen` groter dan 1. Voor een onzelfstandige woonruimte telt daarnaast `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` groter dan 1 als gemeenschappelijk: de plek wordt dan binnen het eigen adres gedeeld.
 
@@ -1210,7 +1210,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
 > - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
 >
-> `PBD` is een uitbreiding op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
+> `PIP`, `PUP`, `PBD` en `PBC` zijn uitbreidingen op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
 #### 2.10.4 Rekenmethode
 
