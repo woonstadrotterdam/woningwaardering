@@ -63,6 +63,5 @@ Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruim
 > [!NOTE]
 > Deze vier detailsoorten zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht: de plek kan specifiek aan één adres zijn toegewezen (privé) of gedeeld worden. In beide gevallen staat zij in een gemeenschappelijke parkeergelegenheid en wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd. De omschrijvingen bevatten daarom niet langer de zinsnede "met niet specifiek toegewezen parkeerplekken".
 
-
 > [!NOTE]
 > `Ruimtedetailsoort.parkeerplaats` (`PAR`) is in de VERA-referentiedata omschreven als "Eigen parkeerplaats of oprit bij de woning" en is dus per definitie een privé-plek. Gebruik voor een gemeenschappelijke parkeerplek een van de Type-detailsoorten hierboven. Wordt een `parkeerplaats` toch als gemeenschappelijk meegegeven, dan volgt een `UserWarning` en waarderen we de plek als Type III.

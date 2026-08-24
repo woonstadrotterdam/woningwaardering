@@ -575,8 +575,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek in een
     inpandige, afgesloten parkeergarage behorend tot het complex. Binnen het WWS is
-    dit een parkeerplek Type I: een parkeerplek in een afgesloten parkeergarage
-    behorende tot een complex.
+    dit een parkeerplek Type I.
     """
 
     parkeerplek_in_uitpandige_afgesloten_parkeergarage = (
@@ -589,9 +588,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek in een
     uitpandige, afgesloten parkeergarage behorend tot het complex. Binnen het WWS is
-    dit een parkeerplek Type I: een parkeerplek in een afgesloten parkeergarage
-    behorende tot een complex. De wettekst maakt voor het type geen onderscheid
-    tussen inpandig en uitpandig.
+    dit een parkeerplek Type I.
     """
 
     parkeerplek_buiten_met_dak_behorend_bij_complex = RuimtedetailsoortReferentiedata(
@@ -602,8 +599,7 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Overdekte parkeerplek
     buiten, behorend tot het complex, niet gelegen in een afgesloten parkeergarage.
-    Binnen het WWS is dit een parkeerplek Type II: een parkeerplek buiten behorende
-    tot het complex of de woning met dak.
+    Binnen het WWS is dit een parkeerplek Type II.
     """
 
     parkeerplek_buiten_behorend_bij_complex = RuimtedetailsoortReferentiedata(
@@ -614,6 +610,5 @@ class Ruimtedetailsoort(Referentiedatasoort):
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek buiten zonder
     dak, op een parkeerterrein behorend bij een complex. Binnen het WWS is dit een
-    parkeerplek Type III: een parkeerplek buiten behorende tot het complex of de
-    woning zonder dak.
+    parkeerplek Type III.
     """

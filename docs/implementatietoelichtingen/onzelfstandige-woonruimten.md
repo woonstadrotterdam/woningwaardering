@@ -1210,7 +1210,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
 > - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
 >
-> `PBD` is een uitbreiding op VERA. Zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden) voor de reden dat `PUP` Type I oplevert en niet Type II.
+> `PBD` is een uitbreiding op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
 #### 2.10.4 Rekenmethode
 
