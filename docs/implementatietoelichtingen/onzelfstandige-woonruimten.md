@@ -1186,7 +1186,7 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 > [!NOTE]
 > Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — waarderen we altijd in deze rubriek, ook wanneer ze privé zijn of alleen tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) en [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
 >
-> Een `carport` of `parkeerplaats` hoort bij de woning en waarderen we hier alleen wanneer die gemeenschappelijk is: gedeeld met meer dan één adres of, binnen het adres, met meer dan één onzelfstandige woonruimte. Privé wordt die in [rubriek 8](#28-rubriek-8-buitenruimten) gewaardeerd.
+> "Ten minste twee adressen" lezen we als `Eenhedenruimte.gedeeld_met_aantal_adressen` groter dan 1. Voor een onzelfstandige woonruimte telt daarnaast `Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` groter dan 1 als gemeenschappelijk: de plek wordt dan binnen het eigen adres gedeeld.
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 

@@ -1271,7 +1271,7 @@ De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomple
 > [!NOTE]
 > Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is toegewezen: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie; zie [deze discussie op GitHub](https://github.com/woonstadrotterdam/woningwaardering/pull/261#discussion_r3577557702).
 >
-> Een `carport` of `parkeerplaats` hoort bij de woning en waarderen we hier alleen wanneer die met meerdere adressen wordt gedeeld; privé wordt die in [rubriek 8](#28-rubriek-8-buitenruimten) gewaardeerd.
+> "Ten minste twee adressen" lezen we als `Eenhedenruimte.gedeeld_met_aantal_adressen` groter dan 1. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) voor de rubriek waarin een `carport` of `parkeerplaats` valt.
 
 #### 2.10.3 Punten per soort parkeerplek
 
