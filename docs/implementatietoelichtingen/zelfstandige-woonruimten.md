@@ -534,7 +534,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht langer dan 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -794,6 +794,8 @@ Voor het meten van een aanrecht gelden de volgende regels:
 
 > [!NOTE]
 > De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+> [!NOTE]
+> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is.
 
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
@@ -819,6 +821,9 @@ Voor het meten van een aanrecht gelden de volgende regels:
 > ///
 
 Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt.
+
+> [!NOTE]
+> Bij meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering gebaseerd op de basispunten uit de gesommeerde aanrechtlengte.
 
 {==
 
@@ -885,6 +890,9 @@ Het woningwaarderingsstelsel geeft punten aan de hieronder beschreven sanitaire 
 
 _Toilet_  
 Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte én binnen de woonruimte ligt. Een toilet dat buiten de woonruimte, maar binnen het woongebouw ligt wordt alleen gewaardeerd als het gebruik door derden is uit te sluiten. Toiletten die buiten toiletruimten en badkamers zijn aangebracht worden niet gewaardeerd.
+
+> [!NOTE]
+> Een VERA-`doucheruimte` telt voor toiletwaardering mee als badkamer. Toiletten in een doucheruimte krijgen daarom de punten voor toilet in een badkamer.
 
 | Voorziening                             | Punten   |
 |-----------------------------------------|----------|
@@ -1114,6 +1122,9 @@ Zeembalkons worden, ~~zolang zij voldoen aan de hiervoor aangegeven eisen van ee
 #### 2.8.5 Minpunten bij geen enkele buitenruimte
 
 Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
+
+> [!NOTE]
+> De [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Bijlage I onder A, rubriek 8) formuleert dit als aftrek «indien in het geheel géén punten in deze rubriek (geen buitenruimte)». Daarom passen we −5 alleen toe als er geen enkele **gewaardeerde** buitenruimte is (bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen punten en tellen dus niet mee tegen de aftrek).
 
 #### 2.8.6 Meetinstructies buitenruimten
 
