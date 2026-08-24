@@ -1,0 +1,71 @@
+{
+  "id": "laadpalen_met_verschillende_delers",
+  "ruimten": [
+    {
+      "id": "Garage",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "GAR",
+        "naam": "Garage"
+      },
+      "naam": "Garage",
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Tuin",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin",
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Schuur",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "SCH",
+        "naam": "Schuur"
+      },
+      "naam": "Schuur",
+      "bouwkundigeElementen": [
+        {
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ],
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
+}

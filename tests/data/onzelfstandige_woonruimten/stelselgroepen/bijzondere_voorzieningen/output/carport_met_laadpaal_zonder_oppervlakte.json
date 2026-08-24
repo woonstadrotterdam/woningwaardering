@@ -14,10 +14,19 @@
       "punten": 2.0,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__prive",
+            "naam": "Privé"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "bijzondere_voorzieningen__laadpalen",
+            "id": "bijzondere_voorzieningen__prive__laadpalen",
             "naam": "Laadpalen",
+            "bovenliggendeCriterium": {
+              "id": "bijzondere_voorzieningen__prive"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

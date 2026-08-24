@@ -14,10 +14,19 @@
       "punten": 0.5,
       "woningwaarderingen": [
         {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
           "aantal": 1.0,
           "criterium": {
-            "id": "bijzondere_voorzieningen__laadpalen",
+            "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten__laadpalen",
             "naam": "Laadpalen",
+            "bovenliggendeCriterium": {
+              "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten"
+            },
             "meeteenheid": {
               "code": "STU",
               "naam": "Stuks"

@@ -1,0 +1,82 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BIJ",
+          "naam": "Bijzondere voorzieningen"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "bijzondere_voorzieningen__prive__laadpalen",
+            "naam": "Laadpalen",
+            "bovenliggendeCriterium": {
+              "id": "bijzondere_voorzieningen__prive"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "bijzondere_voorzieningen__gedeeld_met_2_onzelfstandige_woonruimten__laadpalen",
+            "naam": "Laadpalen",
+            "bovenliggendeCriterium": {
+              "id": "bijzondere_voorzieningen__gedeeld_met_2_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten__laadpalen",
+            "naam": "Laadpalen",
+            "bovenliggendeCriterium": {
+              "id": "bijzondere_voorzieningen__gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.5
+        }
+      ]
+    }
+  ]
+}

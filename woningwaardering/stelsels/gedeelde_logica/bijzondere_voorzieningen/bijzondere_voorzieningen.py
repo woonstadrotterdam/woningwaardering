@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -63,10 +64,11 @@ def waardeer_bijzondere_voorzieningen(
             woningwaardering_resultaat,
         ),
         _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_builder),
-        _prive_laadpaal(eenheid, stelsel, waarderingsgroep_builder),
     ]
 
-    return [waardering for waardering in woningwaarderingen if waardering is not None]
+    return [
+        waardering for waardering in woningwaarderingen if waardering is not None
+    ] + _prive_laadpaal(eenheid, stelsel, waarderingsgroep_builder)
 
 
 def _opslag_zorgwoning(
@@ -205,20 +207,24 @@ def _prive_laadpaal(
     eenheid: EenhedenEenheid,
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
-) -> WaarderingBuilder | None:
+) -> list[WaarderingBuilder]:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
     door de bewoners wordt gewaardeerd met 2 punten.
+
+    Bij onzelfstandige woonruimten worden die punten gedeeld door het aantal
+    onzelfstandige woonruimten dat toegang heeft (2.1.4 / 2.1.5). Laadpalen worden
+    daarom per deler gegroepeerd, zodat elke groep onder een eigen
+    gedeeld-met-criterium komt te hangen.
 
     Args:
         eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
         stelsel (WoningwaarderingstelselReferentiedata): Het woningwaarderingsstelsel.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
     Returns:
-        WaarderingBuilder | None: De woningwaardering met 2 punten
-        als de eenheid een laadpaal heeft, anders None.
+        list[WaarderingBuilder]: Per deler een woningwaardering met de punten voor
+        de laadpalen die met dat aantal onzelfstandige woonruimten gedeeld worden.
     """
-    aantal_laadpalen = 0
-    punten_laadpalen = Decimal("0")
+    aantal_laadpalen_per_deler: defaultdict[int, int] = defaultdict(int)
 
     for ruimte in eenheid.ruimten or []:
         if gedeeld_met_adressen(ruimte):
@@ -250,25 +256,35 @@ def _prive_laadpaal(
         if stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
 
-        aantal_laadpalen += aantal_laadpalen_in_ruimte
-        punten_laadpalen += (
-            Decimal(aantal_laadpalen_in_ruimte) * Decimal("2") / Decimal(deler)
+        aantal_laadpalen_per_deler[deler] += aantal_laadpalen_in_ruimte
+
+    if not aantal_laadpalen_per_deler:
+        logger.debug(f"Eenheid ({eenheid.id}) heeft geen privé laadpaal")
+        return []
+
+    waarderingen = []
+
+    for deler, aantal_laadpalen in sorted(aantal_laadpalen_per_deler.items()):
+        punten_afgerond = utils.rond_af(
+            Decimal(aantal_laadpalen) * Decimal("2") / Decimal(deler), decimalen=2
         )
 
-    if aantal_laadpalen == 0:
-        logger.debug(f"Eenheid ({eenheid.id}) heeft geen privé laadpaal")
-        return None
+        logger.info(
+            f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'} gedeeld met {deler} {'onzelfstandige woonruimte' if deler == 1 else 'onzelfstandige woonruimten'}: {punten_afgerond} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
+        )
 
-    punten_afgerond = utils.rond_af(punten_laadpalen, decimalen=2)
+        gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
+            aantal_onzelfstandige_woonruimten=deler,
+        )
 
-    logger.info(
-        f"Eenheid ({eenheid.id}) heeft {aantal_laadpalen} {'laadpaal' if aantal_laadpalen == 1 else 'laadpalen'}: {punten_afgerond} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
-    )
+        waarderingen.append(
+            gedeeld_met_laag.met_onderliggend(
+                id="laadpalen",
+                naam="Laadpalen",
+                meeteenheid=Meeteenheid.stuks,
+                aantal=aantal_laadpalen,
+                punten=float(punten_afgerond),
+            )
+        )
 
-    return waarderingsgroep_builder.met_onderliggend(
-        id="laadpalen",
-        naam="Laadpalen",
-        meeteenheid=Meeteenheid.stuks,
-        aantal=aantal_laadpalen,
-        punten=float(punten_afgerond),
-    )
+    return waarderingen
