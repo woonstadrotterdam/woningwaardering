@@ -1,0 +1,87 @@
+{
+  "id": "prive_carport_en_parkeerplaats",
+  "ruimten": [
+    {
+      "id": "carport_prive",
+      "naam": "Carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "aantal": 1,
+      "oppervlakte": 15,
+      "lengte": 5,
+      "breedte": 3.0,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "parkeerplaats_prive",
+      "naam": "Parkeerplaats",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "PAR",
+        "naam": "Parkeerplaats"
+      },
+      "aantal": 1,
+      "oppervlakte": 15,
+      "lengte": 5,
+      "breedte": 3.0,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "carport_prive_10m2",
+      "naam": "Carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "aantal": 1,
+      "oppervlakte": 10,
+      "lengte": 5,
+      "breedte": 2.0,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
+    }
+  ]
+}

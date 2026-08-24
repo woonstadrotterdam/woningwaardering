@@ -1,0 +1,87 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 40.0,
+          "criterium": {
+            "id": "buitenruimten__prive",
+            "naam": "Privé",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 14.0
+        },
+        {
+          "aantal": 15.0,
+          "criterium": {
+            "id": "buitenruimten__prive__carport_prive",
+            "naam": "Carport",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 15.0,
+          "criterium": {
+            "id": "buitenruimten__prive__parkeerplaats_prive",
+            "naam": "Parkeerplaats",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "buitenruimten__prive__carport_prive_10m2",
+            "naam": "Carport",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__prive_buitenruimten_aanwezig",
+            "naam": "Privé buitenruimten aanwezig"
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__maximering",
+            "naam": "Maximaal 15 punten"
+          },
+          "punten": -1.0
+        }
+      ]
+    }
+  ]
+}

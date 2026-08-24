@@ -12,10 +12,15 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    is_kerntype_parkeerruimte,
+    is_overige_parkeerruimte,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
+    is_prive,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -25,7 +30,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -145,6 +149,22 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
+        # De kerntypen (PIP, PUP, PBC) staan altijd in een gemeenschappelijke
+        # parkeergelegenheid en horen daarom altijd in rubriek 10, nooit hier.
+        if is_kerntype_parkeerruimte(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
+            )
+            return
+
+        # Een carport of parkeerplaats wordt hier alleen als privé-buitenruimte
+        # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10.
+        if is_overige_parkeerruimte(ruimte.detail_soort) and not is_prive(ruimte):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {ruimte.detail_soort.naam if ruimte.detail_soort else ''} en telt daarom niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
+            )
+            return
+
         aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
         if aantal_adressen >= 2:  # gedeelde buitenruimte
             # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
@@ -160,12 +180,6 @@ class Buitenruimten(Stelselgroep):
             ):
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
-                )
-                return
-            # Parkeerplaatsen worden alleen gewaardeerd als privé-buitenruimten
-            if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
-                logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde parkeerplaats en telt niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}"
                 )
                 return
             logger.debug(

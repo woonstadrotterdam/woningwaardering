@@ -54,6 +54,20 @@ warning_configs = [
             UserWarning: "gedeeld_met_aantal_adressen",
         },
     ),
+    WarningConfig(
+        file=f"{current_file_path}/input/gemeenschappelijke_carport_en_parkeerplaats.json",
+        warnings={
+            UserWarning: "Gebruik Type I, II of III",
+        },
+    ),
+    # De waarschuwing hangt aan 'gemeenschappelijk', niet aan 'gewaardeerd': hij
+    # vuurt ook wanneer de plek onder de 12 m2 blijft en nul punten krijgt.
+    WarningConfig(
+        file=f"{current_file_path}/input/gemeenschappelijk_onder_12m2.json",
+        warnings={
+            UserWarning: "Gebruik Type I, II of III",
+        },
+    ),
 ]
 
 

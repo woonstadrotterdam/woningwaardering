@@ -11,14 +11,16 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
-    is_parkeertype_detailsoort,
+from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    is_kerntype_parkeerruimte,
+    is_overige_parkeerruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
+    is_prive,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -29,7 +31,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -154,9 +155,10 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        # Type I/II/III-parkeerplekken horen altijd in rubriek 10, nooit in rubriek 8.
+        # De kerntypen (PIP, PUP, PBC) staan altijd in een gemeenschappelijke
+        # parkeergelegenheid en horen daarom altijd in rubriek 10, nooit hier.
         # Early-exit vóór oppervlakte-/afmetingschecks om irrelevante rubriek-8-warnings te vermijden.
-        if is_parkeertype_detailsoort(ruimte.detail_soort):
+        if is_kerntype_parkeerruimte(ruimte.detail_soort):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
@@ -196,14 +198,11 @@ class Buitenruimten(Stelselgroep):
                 )
                 return
 
-        # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
-        if (
-            ruimte.detail_soort
-            == Ruimtedetailsoort.parkeerplaats  # parkeerplaats heeft als ruimtesoort buitenruimte
-            and gedeeld_met_adressen(ruimte)
-        ):
+        # Een carport of parkeerplaats wordt hier alleen als privé-buitenruimte
+        # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10.
+        if is_overige_parkeerruimte(ruimte.detail_soort) and not is_prive(ruimte):
             logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {ruimte.detail_soort.naam if ruimte.detail_soort else ''} en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 

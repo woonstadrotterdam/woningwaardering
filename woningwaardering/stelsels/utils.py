@@ -987,12 +987,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             in [
                 Ruimtedetailsoort.carport,
             ]
-            and not gedeeld_met_adressen(ruimte)
+            and is_prive(ruimte)
         )
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
+            and is_prive(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
@@ -1060,7 +1060,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
-            and not gedeeld_met_adressen(ruimte)
+            and is_prive(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:
@@ -1188,6 +1188,32 @@ def gedeeld_met_onzelfstandige_woonruimten(
     return (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
+    )
+
+
+def is_prive(ruimte: EenhedenRuimte) -> bool:
+    """Geeft True terug als de ruimte niet gedeeld is.
+
+    Een ruimte is privé wanneer het aantal adressen én het aantal onzelfstandige
+    woonruimten allebei niet groter is dan 1. Ontbrekende aantallen worden als 1
+    gelezen: geen deling.
+    """
+    return not gedeeld_met_adressen(
+        ruimte
+    ) and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
+
+
+def deler(ruimte: EenhedenRuimte) -> Decimal:
+    """De deler waarmee de punten van een gedeelde ruimte worden verdeeld.
+
+    Dit is het aantal adressen maal het aantal onzelfstandige woonruimten dat de
+    ruimte deelt. Bij een zelfstandige woonruimte is het aantal onzelfstandige
+    woonruimten 1, zodat alleen door het aantal adressen wordt gedeeld.
+    Ontbrekende aantallen worden als 1 gelezen.
+    """
+    return Decimal(
+        (ruimte.gedeeld_met_aantal_adressen or 1)
+        * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
     )
 
 

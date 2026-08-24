@@ -46,6 +46,21 @@ Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`
 
 Het attribuut `Eenhedenruimte.aantal` is als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van deze specifieke ruimte er zijn. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor Gemeenschappelijke Parkeerruimten. Hier door is het niet nodig om elk parkeervak van een parkeergarage of parkeerterrein mee te geven aan een eenheid.
 
+> [!NOTE]
+> Een privé-`carport` of privé-`parkeerplaats` wordt niet in rubriek 10 maar in rubriek 8 Buitenruimten gewaardeerd (zie [Parkeergelegenheden](#parkeergelegenheden)), en daar telt `aantal` niet mee: die rubriek waardeert de oppervlakte. Geef meerdere privé-plekken daarom als afzonderlijke ruimten mee, elk met hun eigen oppervlakte.
+
 ## Parkeergelegenheden
 
-Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruimtedetailsoort`) toegevoegd, die overeenkomen met Type I, II en III parkeergelegenheden vanuit het WWS-beleidsboek.
+Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruimtedetailsoort`) toegevoegd, die overeenkomen met Type I, II en III parkeergelegenheden vanuit het WWS-beleidsboek:
+
+| `Ruimtedetailsoort` | Code | Type |
+| --- | --- | --- |
+| `parkeerplek_in_inpandige_afgesloten_parkeergarage` | `PIP` | Type I |
+| `parkeerplek_in_uitpandige_afgesloten_parkeergarage` | `PUP` | Type II |
+| `parkeerplek_buiten_behorend_bij_complex` | `PBC` | Type III |
+
+> [!NOTE]
+> Deze drie detailsoorten zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht: de plek kan specifiek aan één adres zijn toegewezen (privé) of gedeeld worden. In beide gevallen staat zij in een gemeenschappelijke parkeergelegenheid en wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd. De omschrijvingen bevatten daarom niet langer de zinsnede "met niet specifiek toegewezen parkeerplekken".
+
+> [!NOTE]
+> `Ruimtedetailsoort.parkeerplaats` (`PAR`) is in de VERA-referentiedata omschreven als "Eigen parkeerplaats of oprit bij de woning" en is dus per definitie een privé-plek. Gebruik voor een gemeenschappelijke parkeerplek een van de Type-detailsoorten hierboven. Wordt een `parkeerplaats` toch als gemeenschappelijk meegegeven, dan volgt een `UserWarning` en waarderen we de plek als Type III. Deze omschrijving is onderdeel van de VERA-standaard zelf en niet van deze uitbreiding; we kunnen haar hier dus niet aanpassen.

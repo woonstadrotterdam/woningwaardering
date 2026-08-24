@@ -1,0 +1,36 @@
+{
+  "id": "kerntype_onder_12m2",
+  "ruimten": [
+    {
+      "id": "pip_10m2",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
+      },
+      "aantal": 1,
+      "oppervlakte": 10,
+      "lengte": 5,
+      "breedte": 2.0,
+      "gedeeldMetAantalAdressen": 1,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ]
+}

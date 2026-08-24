@@ -574,9 +574,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek in inpandige
-    en afgesloten parkeergarage behorend tot het complex met niet specifiek
-    toegewezen parkeerplekken. Binnen het WWS vallen deze parkeerplekken onder
-    parkeerplek Type I
+    en afgesloten parkeergarage behorend tot het complex. Binnen het WWS vallen deze
+    parkeerplekken onder parkeerplek Type I
     """
 
     parkeerplek_in_uitpandige_afgesloten_parkeergarage = (
@@ -588,9 +587,8 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek in uitpandige
-    en afgesloten parkeergarage behorend tot het complex met niet specifiek
-    toegewezen parkeerplekken. Binnen het WWS vallen deze parkeerplekken onder
-    parkeerplek Type II
+    en afgesloten parkeergarage behorend tot het complex. Binnen het WWS vallen deze
+    parkeerplekken onder parkeerplek Type II
     """
 
     parkeerplek_buiten_behorend_bij_complex = RuimtedetailsoortReferentiedata(
@@ -600,7 +598,6 @@ class Ruimtedetailsoort(Referentiedatasoort):
     )
     """
     Gemeenschappelijke ruimten en voorzieningen: (UITBREIDING) Parkeerplek op een
-    parkeerterrein behorend bij een complex met niet specifiek toegewezen
-    parkeerplekken. Binnen het WWS vallen deze parkeerplekken onder parkeerplek Type
-    III
+    parkeerterrein behorend bij een complex. Binnen het WWS vallen deze
+    parkeerplekken onder parkeerplek Type III
     """

@@ -1,0 +1,69 @@
+{
+  "id": "gedeeld_met_4_onzelfstandige_woonruimten",
+  "ruimten": [
+    {
+      "id": "pip_4_onz",
+      "naam": "Parkeerplek in inpandige afgesloten parkeergarage",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PIP",
+        "naam": "Parkeerplek in inpandige afgesloten parkeergarage"
+      },
+      "aantal": 1,
+      "oppervlakte": 15,
+      "lengte": 5,
+      "breedte": 3.0,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "carport_4_onz",
+      "naam": "Carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "aantal": 1,
+      "oppervlakte": 15,
+      "lengte": 5,
+      "breedte": 3.0,
+      "gedeeldMetAantalAdressen": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ]
+}
