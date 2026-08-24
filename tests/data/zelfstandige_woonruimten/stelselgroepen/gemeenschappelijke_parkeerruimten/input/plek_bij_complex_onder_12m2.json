@@ -1,5 +1,5 @@
 {
-  "id": "kerntype_onder_12m2",
+  "id": "plek_bij_complex_onder_12m2",
   "ruimten": [
     {
       "id": "pip_10m2",
@@ -17,7 +17,6 @@
       "lengte": 5,
       "breedte": 2.0,
       "gedeeldMetAantalAdressen": 1,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
         {
           "id": "laadpaal_1",

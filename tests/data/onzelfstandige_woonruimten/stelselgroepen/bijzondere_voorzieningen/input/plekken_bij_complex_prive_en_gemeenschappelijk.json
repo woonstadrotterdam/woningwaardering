@@ -1,5 +1,5 @@
 {
-  "id": "kerntypen_prive_en_gemeenschappelijk",
+  "id": "plekken_bij_complex_prive_en_gemeenschappelijk",
   "ruimten": [
     {
       "id": "pip_prive",
@@ -114,6 +114,23 @@
       "breedte": 3.0,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
+    },
+    {
+      "id": "pbd_3_adressen",
+      "naam": "Parkeerplek buiten met dak behorend bij complex",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PBD",
+        "naam": "Parkeerplek buiten met dak behorend bij complex"
+      },
+      "aantal": 1,
+      "oppervlakte": 15,
+      "lengte": 5,
+      "breedte": 3.0,
+      "gedeeldMetAantalAdressen": 3
     }
   ]
 }

@@ -39,11 +39,13 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         waarderingsgroep_builder (WaarderingsgroepBuilder): waarderingsgroep waarin
             de hiërarchie wordt opgebouwd.
 
-    De waardering wordt bepaald op basis van het type parkeerplek:
-    - Type I (inpandige afgesloten parkeerplek): 9 punten
-    - Type II (uitpandige afgesloten parkeerplek of gemeenschappelijke carport): 6 punten
-    - Type III (parkeerplek buiten behorend bij een complex of gemeenschappelijke
-      parkeerplaats): 4 punten
+    De waardering wordt bepaald op basis van het type parkeerplek (2.10.3):
+    - Type I (in een afgesloten parkeergarage bij het complex, in- of uitpandig:
+      `PIP`, `PUP`): 9 punten
+    - Type II (buiten bij het complex met dak: `PBD`, of een gemeenschappelijke
+      `carport`): 6 punten
+    - Type III (buiten bij het complex zonder dak: `PBC`, of een
+      gemeenschappelijke `parkeerplaats`): 4 punten
 
     Extra punten:
     - +2 punten bij aanwezigheid van een laadpaal die exclusief is voor gebruik
@@ -52,9 +54,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
       gewaardeerd.
 
     Voorwaarden:
-    - De kerntypen (`PIP`, `PUP`, `PBC`) worden hier altijd gewaardeerd, privé of
-      gemeenschappelijk: zij staan altijd in een gemeenschappelijke
-      parkeergelegenheid.
+    - Parkeerplekken bij het complex (`PIP`, `PUP`, `PBD`, `PBC`) worden hier
+      altijd gewaardeerd, privé of gemeenschappelijk: zij liggen altijd in een
+      gemeenschappelijke parkeergelegenheid.
     - Een `carport` of `parkeerplaats` wordt hier alleen gewaardeerd wanneer zij
       gemeenschappelijk is; privé hoort zij in rubriek 8 Buitenruimten.
     - De oppervlakte moet minimaal 12 m² zijn.
@@ -67,7 +69,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     if ruimte.detail_soort in VERVALLEN_PARKEERGARAGE_DETAILSOORTEN:
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.carport}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft als ruimtedetailsoort {ruimte.detail_soort}. Gebruik {Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex}, {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex} of {Ruimtedetailsoort.carport} als detailsoort om in aanmerking te komen voor een waardering onder {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}.",
             UserWarning,
         )
         return
@@ -95,7 +97,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         and is_gemeenschappelijke_parkeerruimte(ruimte)
     ):
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {Ruimtedetailsoort.parkeerplaats}. Gebruik Type I, II of III ({Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex}) voor een gemeenschappelijke parkeerplek: deze wordt nu gewaardeerd als Type III.",
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {Ruimtedetailsoort.parkeerplaats}. Gebruik Type I, II of III ({Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex}) voor een gemeenschappelijke parkeerplek: deze wordt nu gewaardeerd als Type III.",
             UserWarning,
         )
 

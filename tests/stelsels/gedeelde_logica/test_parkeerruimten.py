@@ -13,9 +13,9 @@ import pytest
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    hoort_altijd_in_gemeenschappelijke_parkeerruimten,
+    hoort_prive_in_buitenruimten,
     is_gemeenschappelijke_parkeerruimte,
-    is_kerntype_parkeerruimte,
-    is_overige_parkeerruimte,
     wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten.bijzondere_voorzieningen import (
@@ -48,13 +48,16 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
 )
 
-KERNTYPEN = [
+# Parkeerplekken bij het complex: altijd rubriek 10, privé of gemeenschappelijk.
+PARKEERPLEKKEN_BIJ_COMPLEX = [
     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
     Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
+    Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex,
     Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
 ]
 
-OVERIGE_PARKEERRUIMTEN = [
+# Parkeerruimten bij de woning: privé rubriek 8, gemeenschappelijk rubriek 10.
+PARKEERRUIMTEN_BIJ_DE_WONING = [
     Ruimtedetailsoort.carport,
     Ruimtedetailsoort.parkeerplaats,
 ]
@@ -93,7 +96,7 @@ def maak_parkeerruimte(
         naam=detailsoort.naam,
         soort=(
             Ruimtesoort.buitenruimte
-            if detailsoort in OVERIGE_PARKEERRUIMTEN
+            if detailsoort in PARKEERRUIMTEN_BIJ_DE_WONING
             else Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen
         ),
         detailSoort=detailsoort,
@@ -190,16 +193,16 @@ def test_is_prive(
     assert is_gemeenschappelijke_parkeerruimte(ruimte) is not verwacht_prive
 
 
-@pytest.mark.parametrize("detailsoort", KERNTYPEN)
-def test_is_kerntype_parkeerruimte(detailsoort) -> None:
-    assert is_kerntype_parkeerruimte(detailsoort) is True
-    assert is_overige_parkeerruimte(detailsoort) is False
+@pytest.mark.parametrize("detailsoort", PARKEERPLEKKEN_BIJ_COMPLEX)
+def test_hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) -> None:
+    assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is True
+    assert hoort_prive_in_buitenruimten(detailsoort) is False
 
 
-@pytest.mark.parametrize("detailsoort", OVERIGE_PARKEERRUIMTEN)
-def test_is_overige_parkeerruimte(detailsoort) -> None:
-    assert is_overige_parkeerruimte(detailsoort) is True
-    assert is_kerntype_parkeerruimte(detailsoort) is False
+@pytest.mark.parametrize("detailsoort", PARKEERRUIMTEN_BIJ_DE_WONING)
+def test_hoort_prive_in_buitenruimten(detailsoort) -> None:
+    assert hoort_prive_in_buitenruimten(detailsoort) is True
+    assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is False
 
 
 def test_deler() -> None:
@@ -211,11 +214,11 @@ def test_deler() -> None:
     assert deler(ruimte) == Decimal("12")
 
 
-@pytest.mark.parametrize("detailsoort", KERNTYPEN)
-def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_kerntypen(
+@pytest.mark.parametrize("detailsoort", PARKEERPLEKKEN_BIJ_COMPLEX)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_complex(
     detailsoort,
 ) -> None:
-    """Kerntypen staan altijd in een gemeenschappelijke parkeergelegenheid (regel 1)."""
+    """Plekken bij het complex liggen altijd in een gemeenschappelijke parkeergelegenheid (regel 1)."""
     prive = maak_parkeerruimte(detailsoort)
     gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
     assert wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(prive) is True
@@ -225,11 +228,11 @@ def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_kerntypen(
     )
 
 
-@pytest.mark.parametrize("detailsoort", OVERIGE_PARKEERRUIMTEN)
-def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_overige(
+@pytest.mark.parametrize("detailsoort", PARKEERRUIMTEN_BIJ_DE_WONING)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_de_woning(
     detailsoort,
 ) -> None:
-    """Overige parkeerruimten gaan privé naar rubriek 8, gemeenschappelijk naar 10 (regel 2)."""
+    """Parkeerruimten bij de woning gaan privé naar rubriek 8, gemeenschappelijk naar 10 (regel 2)."""
     prive = maak_parkeerruimte(detailsoort)
     gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
     gedeeld_met_onzelfstandig = maak_parkeerruimte(
@@ -250,7 +253,7 @@ def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_overige(
 
 # --- Geen dubbeltelling over de rubrieken heen ----------------------------------
 
-DETAILSOORTEN = KERNTYPEN + OVERIGE_PARKEERRUIMTEN
+DETAILSOORTEN = PARKEERPLEKKEN_BIJ_COMPLEX + PARKEERRUIMTEN_BIJ_DE_WONING
 OPPERVLAKTEN = [10.0, 12.0, 15.0]
 AANTALLEN_ADRESSEN = [1, 3]
 AANTALLEN_ONZELFSTANDIGE_WOONRUIMTEN = [1, 4]

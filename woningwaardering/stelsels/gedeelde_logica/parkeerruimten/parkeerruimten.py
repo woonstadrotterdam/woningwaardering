@@ -28,9 +28,9 @@ from woningwaardering.vera.referentiedata import (
 from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 # 2.10.3 Punten per soort parkeerplek
-# | Type I: parkeerplek in een afgesloten parkeergarage behorende tot een complex | 9 |
-# | Type II: parkeerplek buiten behorende tot het complex of de woning met dak    | 6 |
-# | Type III: parkeerplek buiten behorende tot het complex of de woning zonder dak| 4 |
+# | Type I: een parkeerplek in een afgesloten parkeergarage behorende tot een complex | 9 |
+# | Type II: een parkeerplek buiten behorende tot het complex of de woning met dak    | 6 |
+# | Type III: een parkeerplek buiten behorende tot het complex of de woning zonder dak| 4 |
 TYPE_I = "Type I"
 TYPE_II = "Type II"
 TYPE_III = "Type III"
@@ -41,25 +41,32 @@ PARKEERTYPE_PUNTEN: dict[str, Decimal] = {
     TYPE_III: Decimal("4.0"),
 }
 
-# Kerntypen: de detailsoorten die één-op-één een Type I/II/III-parkeerplek zijn.
-# Zij staan altijd in een gemeenschappelijke parkeergelegenheid en worden daarom
-# altijd in rubriek 10 gewaardeerd, ook wanneer de plek zelf privé is.
-KERNTYPE_PARKEERTYPE: dict[Referentiedata, str] = {
+# Parkeerplekken bij het complex. Zij liggen per definitie in een
+# gemeenschappelijke parkeergelegenheid en worden daarom altijd in rubriek 10
+# gewaardeerd, ook wanneer de plek zelf aan één adres is toegewezen.
+#
+# Het type volgt de wettekst: bepalend is of de plek in een afgesloten
+# parkeergarage ligt (Type I) en anders of zij een dak heeft (Type II) of niet
+# (Type III). In- of uitpandig maakt voor het type niets uit, en daarom leveren
+# `PIP` en `PUP` allebei Type I op.
+PARKEERTYPE_BIJ_COMPLEX: dict[Referentiedata, str] = {
     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage: TYPE_I,
-    Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage: TYPE_II,
+    Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage: TYPE_I,
+    Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex: TYPE_II,
     Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex: TYPE_III,
 }
 
-# Overige parkeerruimten: privé horen zij in rubriek 8, gemeenschappelijk in
-# rubriek 10. Een gemeenschappelijke carport telt daar als Type II, een
-# gemeenschappelijke parkeerplaats als Type III (met een UserWarning, omdat
-# `parkeerplaats` een privé-detailsoort is).
-OVERIGE_PARKEERTYPE: dict[Referentiedata, str] = {
+# Parkeerruimten bij de woning: privé horen zij in rubriek 8, gemeenschappelijk
+# in rubriek 10. Een gemeenschappelijke carport telt daar als Type II (2.10.3:
+# "hieronder telt een carport"), een gemeenschappelijke parkeerplaats als Type
+# III (met een UserWarning, omdat `parkeerplaats` een privé-detailsoort is).
+PARKEERTYPE_BIJ_DE_WONING: dict[Referentiedata, str] = {
     Ruimtedetailsoort.carport: TYPE_II,
     Ruimtedetailsoort.parkeerplaats: TYPE_III,
 }
 
-# Deze parkeergelegenheden zijn vervallen en worden vervangen door de kerntypen:
+# Deze parkeergelegenheden zijn vervallen en worden vervangen door de
+# parkeerplekken bij het complex:
 # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
 VERVALLEN_PARKEERGARAGE_DETAILSOORTEN: list[Referentiedata] = [
     Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
@@ -76,28 +83,32 @@ MINIMALE_OPPERVLAKTE_PARKEERVAK = 12.0
 PUNTEN_PER_LAADPAAL = Decimal("2.0")
 
 
-def is_kerntype_parkeerruimte(detail_soort: Referentiedata | None) -> bool:
-    """Of de detailsoort een kerntype (`PIP`, `PUP`, `PBC`) is.
+def hoort_altijd_in_gemeenschappelijke_parkeerruimten(
+    detail_soort: Referentiedata | None,
+) -> bool:
+    """Of de detailsoort een parkeerplek bij het complex is.
 
-    Kerntypen staan altijd in een gemeenschappelijke parkeergelegenheid en
-    worden daarom altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
+    Dit zijn Type I (`PIP`, `PUP`), Type II (`PBD`) en Type III (`PBC`). Zij
+    liggen altijd in een gemeenschappelijke parkeergelegenheid en worden daarom
+    altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
     """
-    return detail_soort in KERNTYPE_PARKEERTYPE
+    return detail_soort in PARKEERTYPE_BIJ_COMPLEX
 
 
-def is_overige_parkeerruimte(detail_soort: Referentiedata | None) -> bool:
-    """Of de detailsoort een overige parkeerruimte (`carport`, `parkeerplaats`) is.
+def hoort_prive_in_buitenruimten(detail_soort: Referentiedata | None) -> bool:
+    """Of de detailsoort een parkeerruimte bij de woning is.
 
-    Deze gaan privé naar rubriek 8 en gemeenschappelijk naar rubriek 10.
+    Dit zijn `carport` en `parkeerplaats`. Zij gaan privé naar rubriek 8 en
+    gemeenschappelijk naar rubriek 10.
     """
-    return detail_soort in OVERIGE_PARKEERTYPE
+    return detail_soort in PARKEERTYPE_BIJ_DE_WONING
 
 
 def is_parkeerruimte(detail_soort: Referentiedata | None) -> bool:
     """Of de detailsoort onder de parkeerregels valt."""
-    return is_kerntype_parkeerruimte(detail_soort) or is_overige_parkeerruimte(
+    return hoort_altijd_in_gemeenschappelijke_parkeerruimten(
         detail_soort
-    )
+    ) or hoort_prive_in_buitenruimten(detail_soort)
 
 
 def is_gemeenschappelijke_parkeerruimte(ruimte: EenhedenRuimte) -> bool:
@@ -124,7 +135,7 @@ def parkeertype(ruimte: EenhedenRuimte) -> str | None:
         or not wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(ruimte)
     ):
         return None
-    return KERNTYPE_PARKEERTYPE.get(detail_soort) or OVERIGE_PARKEERTYPE.get(
+    return PARKEERTYPE_BIJ_COMPLEX.get(detail_soort) or PARKEERTYPE_BIJ_DE_WONING.get(
         detail_soort
     )
 
@@ -134,13 +145,13 @@ def wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
 ) -> bool:
     """Of de ruimte in rubriek 10 hoort (los van de 12 m²-eis).
 
-    Kerntypen horen er altijd in; overige parkeerruimten alleen wanneer ze
-    gemeenschappelijk zijn. Overige ruimtedetailsoorten vallen buiten de
-    parkeerregels.
+    Parkeerplekken bij het complex horen er altijd in; parkeerruimten bij de
+    woning alleen wanneer ze gemeenschappelijk zijn. Overige ruimtedetailsoorten
+    vallen buiten de parkeerregels.
     """
-    if is_kerntype_parkeerruimte(ruimte.detail_soort):
+    if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
         return True
-    if is_overige_parkeerruimte(ruimte.detail_soort):
+    if hoort_prive_in_buitenruimten(ruimte.detail_soort):
         return is_gemeenschappelijke_parkeerruimte(ruimte)
     return False
 

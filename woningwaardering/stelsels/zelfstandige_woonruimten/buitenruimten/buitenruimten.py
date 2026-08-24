@@ -13,8 +13,8 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
-    is_kerntype_parkeerruimte,
-    is_overige_parkeerruimte,
+    hoort_altijd_in_gemeenschappelijke_parkeerruimten,
+    hoort_prive_in_buitenruimten,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -149,17 +149,22 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        # De kerntypen (PIP, PUP, PBC) staan altijd in een gemeenschappelijke
+        # Parkeerplekken bij het complex - Type I (PIP, PUP), Type II (PBD) en
+        # Type III (PBC) - liggen altijd in een gemeenschappelijke
         # parkeergelegenheid en horen daarom altijd in rubriek 10, nooit hier.
-        if is_kerntype_parkeerruimte(ruimte.detail_soort):
+        if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
             )
             return
 
         # Een carport of parkeerplaats wordt hier alleen als privé-buitenruimte
-        # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10.
-        if is_overige_parkeerruimte(ruimte.detail_soort) and not is_prive(ruimte):
+        # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10. Deze guard volgt
+        # `is_prive`, omdat `classificeer_ruimte` deze detailsoorten met datzelfde
+        # criterium als buitenruimte aanmerkt. De gedeeld/privé-splitsing verderop
+        # kijkt alleen naar het aantal adressen: `gedeeld_met_aantal_onzelfstandige_woonruimten`
+        # heeft in het zelfstandige stelsel geen betekenis en hoort leeg te zijn.
+        if hoort_prive_in_buitenruimten(ruimte.detail_soort) and not is_prive(ruimte):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {ruimte.detail_soort.naam if ruimte.detail_soort else ''} en telt daarom niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."
             )

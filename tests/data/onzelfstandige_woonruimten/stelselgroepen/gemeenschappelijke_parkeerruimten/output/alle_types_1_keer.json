@@ -47,7 +47,7 @@
           "aantal": 1.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__2",
-            "naam": "Type II",
+            "naam": "Type I",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
             },
@@ -56,7 +56,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.3
+          "punten": 0.45
         },
         {
           "aantal": 1.0,
@@ -78,7 +78,7 @@
             "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.05
+          "punten": -0.1
         }
       ]
     }
