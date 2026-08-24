@@ -11,30 +11,8 @@
           "naam": "Gemeenschappelijke parkeerruimten"
         }
       },
-      "punten": 8.0,
-      "woningwaarderingen": [
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__prive",
-            "naam": "Privé"
-          }
-        },
-        {
-          "aantal": 2.0,
-          "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__prive__2",
-            "naam": "Type III",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_parkeerruimten__prive"
-            },
-            "meeteenheid": {
-              "code": "STU",
-              "naam": "Stuks"
-            }
-          },
-          "punten": 8.0
-        }
-      ]
+      "punten": 0.0,
+      "woningwaarderingen": []
     }
   ]
 }

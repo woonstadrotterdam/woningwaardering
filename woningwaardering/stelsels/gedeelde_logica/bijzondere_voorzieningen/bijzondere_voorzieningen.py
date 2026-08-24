@@ -11,6 +11,7 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     PUNTEN_PER_LAADPAAL,
+    aantal_laadpalen,
     krijgt_punten_in_gemeenschappelijke_parkeerruimten,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -18,7 +19,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Doelgroep,
     Installatiesoort,
     Meeteenheid,
@@ -27,7 +27,6 @@ from woningwaardering.vera.referentiedata import (
     WoningwaarderingstelselgroepReferentiedata,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 
 def waardeer_bijzondere_voorzieningen(
@@ -256,10 +255,8 @@ def _laadpalen(
     punten_per_laag: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal())
 
     for ruimte in eenheid.ruimten or []:
-        aantal_laadpalen = aantal_bouwkundige_elementen(
-            ruimte, Bouwkundigelementdetailsoort.laadpaal
-        )
-        if aantal_laadpalen == 0:
+        laadpalen = aantal_laadpalen(ruimte)
+        if laadpalen == 0:
             continue
 
         if krijgt_punten_in_gemeenschappelijke_parkeerruimten(ruimte):
@@ -280,9 +277,9 @@ def _laadpalen(
                 naam="Laadpalen",
                 meeteenheid=Meeteenheid.stuks,
             )
-        aantallen[gedeeld_met_laag] += aantal_laadpalen
+        aantallen[gedeeld_met_laag] += laadpalen
         punten_per_laag[gedeeld_met_laag] += (
-            PUNTEN_PER_LAADPAAL * Decimal(aantal_laadpalen) / utils.deler(ruimte)
+            PUNTEN_PER_LAADPAAL * Decimal(laadpalen) / utils.deler(ruimte)
         )
 
     if not waarderingen:

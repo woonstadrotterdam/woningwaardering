@@ -1058,9 +1058,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
+            # Deze tak leidt naar rubriek 4 Oppervlakte van overige ruimten en
+            # valt buiten de parkeerregels van rubriek 8/10/12: hier telt alleen
+            # deling met adressen, niet met onzelfstandige woonruimten.
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
-            and is_prive(ruimte)
+            and not gedeeld_met_adressen(ruimte)
         )
     ):
         if ruimte.oppervlakte >= 2.0:

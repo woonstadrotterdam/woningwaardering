@@ -22,8 +22,10 @@ from woningwaardering.vera.bvg.generated import (
     Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
 )
+from woningwaardering.vera.utils import aantal_bouwkundige_elementen
 
 # 2.10.3 Punten per soort parkeerplek
 # | Type I: parkeerplek in een afgesloten parkeergarage behorende tot een complex | 9 |
@@ -159,7 +161,25 @@ def krijgt_punten_in_gemeenschappelijke_parkeerruimten(ruimte: EenhedenRuimte) -
 
     Dit bepaalt tevens waar de laadpaal wordt gewaardeerd: in rubriek 10 als de
     ruimte daar punten krijgt, anders in rubriek 12.
+
+    Zonder ``gedeeld_met_aantal_adressen`` is de deler onbekend en kent rubriek
+    10 geen punten toe; de laadpaal valt dan terug op rubriek 12.
     """
-    return wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
-        ruimte
-    ) and voldoet_aan_oppervlakte_eis(ruimte)
+    return (
+        wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(ruimte)
+        and ruimte.gedeeld_met_aantal_adressen is not None
+        and voldoet_aan_oppervlakte_eis(ruimte)
+    )
+
+
+def aantal_laadpalen(ruimte: EenhedenRuimte) -> int:
+    """Het aantal laadpalen bij een ruimte, over alle parkeerplekken van die ruimte.
+
+    ``Eenhedenruimte.aantal`` geeft aan hoeveel identieke parkeerplekken de
+    ruimte vertegenwoordigt; de laadpalen worden per plek geteld. Rubriek 10 en
+    rubriek 12 gebruiken dezelfde telling, zodat een plek niet meer of minder
+    laadpaalpunten krijgt door in een andere rubriek te vallen.
+    """
+    return aantal_bouwkundige_elementen(
+        ruimte, Bouwkundigelementdetailsoort.laadpaal
+    ) * int(ruimte.aantal or 1)

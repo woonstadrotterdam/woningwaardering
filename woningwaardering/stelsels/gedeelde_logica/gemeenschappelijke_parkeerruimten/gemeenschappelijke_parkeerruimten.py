@@ -10,6 +10,7 @@ from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     PARKEERTYPE_PUNTEN,
     PUNTEN_PER_LAADPAAL,
     VERVALLEN_PARKEERGARAGE_DETAILSOORTEN,
+    aantal_laadpalen,
     is_gemeenschappelijke_parkeerruimte,
     is_parkeerruimte,
     parkeertype,
@@ -20,12 +21,10 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Meeteenheid,
     Ruimtedetailsoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def waardeer_gemeenschappelijke_parkeerruimte(
@@ -105,12 +104,16 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         return
 
     if ruimte.gedeeld_met_aantal_adressen is None:
-        # De waardering gaat door met 1 adres: het ontbrekende aantal wordt
-        # gelezen als 'niet gedeeld'. Zonder die voortzetting zou de laadpaal
-        # bij deze ruimte in geen enkele rubriek punten krijgen.
+        # Zonder het aantal adressen is de deler onbekend. We kennen hier dan
+        # geen punten toe in plaats van de plek als niet-gedeeld te waarderen:
+        # dat zou bij een in werkelijkheid gedeelde plek het volle puntenaantal
+        # aan elk adres toekennen. De laadpaal valt terug op rubriek 12, omdat
+        # `krijgt_punten_in_gemeenschappelijke_parkeerruimten` deze ruimte niet
+        # als gewaardeerd beschouwt.
         warnings.warn(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_adressen' op 0 of 1 wordt beschouwd als niet gedeeld."
         )
+        return
 
     if not voldoet_aan_oppervlakte_eis(ruimte):
         # 2.10.3 Een parkeerplek heeft een oppervlakte van minimaal 12 m².
@@ -137,8 +140,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     # één adres delen door 1. Onzelfstandig: daarna delen door aantal
     # onzelfstandige woonruimten op het adres.
     deler = utils.deler(ruimte)
+    aantal_plekken = int(ruimte.aantal or 1)
     punten = PARKEERTYPE_PUNTEN[type_parkeerruimte]
-    totaal_punten_type_parkeeruimte = punten * Decimal(str(ruimte.aantal)) / deler
+    totaal_punten_type_parkeeruimte = punten * Decimal(aantal_plekken) / deler
 
     logger.info(
         f"Ruimte '{ruimte.naam}' ({ruimte.id}) wordt gewaardeerd als parkeerplek '{type_parkeerruimte}'."
@@ -148,24 +152,23 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         id=ruimte.id,
         naam=type_parkeerruimte,
         meeteenheid=Meeteenheid.stuks,
-        aantal=ruimte.aantal,
+        aantal=aantal_plekken,
         punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
     )
 
-    # 2.10.5 Laadpalen: 2 extra punten, gedeeld door dezelfde deler.
-    if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.laadpaal):
-        totaal_punten_laadpaal = (
-            PUNTEN_PER_LAADPAAL * Decimal(str(ruimte.aantal)) / deler
-        )
+    # 2.10.5 Laadpalen: 2 extra punten per laadpaal, gedeeld door dezelfde deler.
+    laadpalen = aantal_laadpalen(ruimte)
+    if laadpalen:
+        totaal_punten_laadpaal = PUNTEN_PER_LAADPAAL * Decimal(laadpalen) / deler
 
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een laadpaal bij '{type_parkeerruimte}'."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {laadpalen} laadpaal/laadpalen bij '{type_parkeerruimte}'."
         )
 
         gedeeld_met_laag.met_onderliggend(
             id=f"{ruimte.id}_laadpaal",
             naam="Laadpaal",
             meeteenheid=Meeteenheid.stuks,
-            aantal=ruimte.aantal,
+            aantal=laadpalen,
             punten=utils.rond_af(totaal_punten_laadpaal, decimalen=2),
         )

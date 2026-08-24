@@ -5,6 +5,7 @@ De regelset staat beschreven in https://github.com/woonstadrotterdam/woningwaard
 deler verschilt.
 """
 
+import warnings
 from decimal import Decimal
 from itertools import product
 
@@ -83,6 +84,8 @@ def maak_parkeerruimte(
     aantal_adressen: int = 1,
     aantal_onzelfstandige_woonruimten: int = 1,
     met_laadpaal: bool = False,
+    aantal_laadpalen: int = 1,
+    aantal: int | None = 1,
 ) -> EenhedenRuimte:
     """Maak een parkeerruimte volgens de VERA-standaard."""
     ruimte = EenhedenRuimte(
@@ -97,17 +100,18 @@ def maak_parkeerruimte(
         oppervlakte=oppervlakte,
         lengte=5.0,
         breedte=oppervlakte / 5.0,
-        aantal=1,
+        aantal=aantal,
         gedeeldMetAantalAdressen=aantal_adressen,
         gedeeldMetAantalOnzelfstandigeWoonruimten=aantal_onzelfstandige_woonruimten,
     )
     if met_laadpaal:
         ruimte.bouwkundige_elementen = [
             BouwkundigElementenBouwkundigElement(
-                id="laadpaal_1",
+                id=f"laadpaal_{nummer}",
                 naam="Laadpaal",
                 detailSoort=Bouwkundigelementdetailsoort.laadpaal,
             )
+            for nummer in range(1, aantal_laadpalen + 1)
         ]
     return ruimte
 
@@ -382,3 +386,94 @@ def test_laadpaal_krijgt_altijd_punten(
     assert float(sum(winst.values())) == pytest.approx(
         float(verwachte_punten), abs=0.005
     ), f"Laadpaal levert {winst} op, verwacht {verwachte_punten} in precies één rubriek"
+
+
+# --- Laadpalen tellen in rubriek 10 en 12 gelijk --------------------------------
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+@pytest.mark.parametrize("aantal_laadpalen", [1, 2])
+@pytest.mark.parametrize("aantal", [1, 3])
+def test_laadpaalpunten_zijn_gelijk_aan_weerszijden_van_de_12m2_grens(
+    stelsel, aantal_laadpalen, aantal
+) -> None:
+    """De laadpaal mag niet meer of minder waard worden door de rubriek waarin hij valt.
+
+    Rubriek 10 en rubriek 12 tellen de laadpalen daarom op dezelfde manier:
+    het aantal laadpaal-elementen maal het aantal parkeerplekken van de ruimte.
+    """
+
+    def winst(oppervlakte: float) -> Decimal:
+        gemeenschappelijk = {
+            "aantal_adressen": 2,
+            "aantal": aantal,
+            "oppervlakte": oppervlakte,
+        }
+        zonder = maak_eenheid(
+            maak_referentie_tuin(),
+            maak_parkeerruimte(Ruimtedetailsoort.carport, **gemeenschappelijk),
+        )
+        met = maak_eenheid(
+            maak_referentie_tuin(),
+            maak_parkeerruimte(
+                Ruimtedetailsoort.carport,
+                met_laadpaal=True,
+                aantal_laadpalen=aantal_laadpalen,
+                **gemeenschappelijk,
+            ),
+        )
+        return sum(
+            (
+                som_punten(stelsel, rubriek, met) - som_punten(stelsel, rubriek, zonder)
+                for rubriek in (RUBRIEK_8, RUBRIEK_10, RUBRIEK_12)
+            ),
+            start=Decimal("0"),
+        )
+
+    boven_de_grens = winst(15.0)  # rubriek 10
+    onder_de_grens = winst(10.0)  # rubriek 12
+    verwacht = Decimal("2") * aantal_laadpalen * aantal / Decimal("2")
+
+    assert boven_de_grens == verwacht
+    assert onder_de_grens == verwacht
+
+
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+def test_zonder_aantal_adressen_geen_punten_in_rubriek_10(stelsel) -> None:
+    """Zonder ``gedeeld_met_aantal_adressen`` is de deler onbekend.
+
+    We kennen dan geen punten toe in plaats van de plek als niet-gedeeld te
+    waarderen: dat zou bij een in werkelijkheid gedeelde plek het volle
+    puntenaantal aan elk adres toekennen. De laadpaal valt terug op rubriek 12.
+    """
+    ruimte = maak_parkeerruimte(
+        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
+        aantal=2,
+        met_laadpaal=True,
+    )
+    ruimte.gedeeld_met_aantal_adressen = None
+    eenheid = maak_eenheid(maak_referentie_tuin(), ruimte)
+
+    with pytest.warns(UserWarning, match="gedeeld_met_aantal_adressen"):
+        rubriek_10 = som_punten(stelsel, RUBRIEK_10, eenheid)
+
+    assert rubriek_10 == Decimal("0")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        basis = som_punten(stelsel, RUBRIEK_12, maak_eenheid(maak_referentie_tuin()))
+        rubriek_12 = som_punten(stelsel, RUBRIEK_12, eenheid)
+    assert rubriek_12 - basis == Decimal("4")  # 2 plekken x 1 laadpaal x 2 punten
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+def test_ontbrekend_aantal_laat_de_waardering_niet_crashen(stelsel) -> None:
+    """Een ruimte zonder ``aantal`` telt als één parkeerplek."""
+    ruimte = maak_parkeerruimte(
+        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+        aantal_adressen=2,
+        aantal=None,
+    )
+    eenheid = maak_eenheid(maak_referentie_tuin(), ruimte)
+    assert som_punten(stelsel, RUBRIEK_10, eenheid) == Decimal("4.5")
