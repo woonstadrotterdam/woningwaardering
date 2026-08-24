@@ -48,12 +48,6 @@ warning_configs = [
             UserWarning: "oppervlakte",
         },
     ),
-    WarningConfig(
-        file=f"{current_file_path}/input/warning_gedeeld_met_aantal_adressen.json",
-        warnings={
-            UserWarning: "gedeeld_met_aantal_adressen",
-        },
-    ),
 ]
 
 

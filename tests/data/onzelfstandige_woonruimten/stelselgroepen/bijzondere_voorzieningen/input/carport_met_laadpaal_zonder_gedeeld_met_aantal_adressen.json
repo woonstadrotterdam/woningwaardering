@@ -1,9 +1,10 @@
 {
-  "id": "warning_gedeeld_met_aantal_adressen",
+  "id": "carport_met_laadpaal_zonder_gedeeld_met_aantal_adressen",
   "ruimten": [
     {
       "id": "1",
-      "aantal": 5,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "aantal": 1,
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -30,22 +31,10 @@
           }
         }
       ]
-    },
-    {
-      "id": "2",
-      "aantal": 2,
-      "soort": {
-        "code": "GEM",
-        "naam": "Gemeenschappelijke ruimten en voorzieningen"
-      },
-      "detailSoort": {
-        "code": "PBC",
-        "naam": "Parkeerplek buiten behorend bij complex"
-      },
-      "naam": "Parkeerplek buiten behorend bij complex",
-      "oppervlakte": 12,
-      "breedte": 3,
-      "lengte": 4
     }
-  ]
+  ],
+  "woningwaarderingstelsel": {
+    "code": "ONZ",
+    "naam": "Onzelfstandige woonruimten"
+  }
 }

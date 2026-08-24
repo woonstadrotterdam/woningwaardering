@@ -38,13 +38,16 @@ def is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
     return detail_soort in parkeertype_punten_mapping
 
 
-def kwalificeert_voor_gemeenschappelijke_parkeerruimte(
+def wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
     ruimte: EenhedenRuimte,
 ) -> bool:
     """Of de ruimte in rubriek 10 daadwerkelijk punten krijgt.
 
-    Naast een specifieke parkeer-detailsoort vereist rubriek 10 een oppervlakte
-    van minimaal 12 m² en een ingevuld `gedeeld_met_aantal_adressen`.
+    Dit is nadrukkelijk niet hetzelfde als de vraag of de ruimte een
+    "gemeenschappelijke parkeerruimte" is in de zin van 2.10.2 (toegankelijk voor
+    bewoners van ten minste twee adressen): deze package waardeert een specifieke
+    parkeer-detailsoort altijd in rubriek 10, ook wanneer die privé is. Naast die
+    detailsoort vereist rubriek 10 een oppervlakte van minimaal 12 m² (2.10.3).
     """
     return (
         is_parkeer_detailsoort_voor_gemeenschappelijke_parkeerruimten(
@@ -52,7 +55,6 @@ def kwalificeert_voor_gemeenschappelijke_parkeerruimte(
         )
         and ruimte.oppervlakte is not None
         and ruimte.oppervlakte >= 12.0
-        and ruimte.gedeeld_met_aantal_adressen is not None
     )
 
 
@@ -122,12 +124,6 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     if ruimte.oppervlakte is None:
         warnings.warn(f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte")
-        return
-
-    if ruimte.gedeeld_met_aantal_adressen is None:
-        warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_adressen' op 0 of 1 wordt beschouwd als niet gedeeld."
-        )
         return
 
     if not ruimte.oppervlakte >= 12.0:

@@ -9,7 +9,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
-    kwalificeert_voor_gemeenschappelijke_parkeerruimte,
+    wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten,
 )
 from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
@@ -234,7 +234,7 @@ def _prive_laadpaal(
         # 2 punten via rubriek 12.
         if (
             stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten
-            and kwalificeert_voor_gemeenschappelijke_parkeerruimte(ruimte)
+            and wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(ruimte)
         ):
             continue
 
