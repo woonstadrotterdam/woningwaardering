@@ -1030,15 +1030,9 @@ Gedeelde buitenruimten die als parkeerplek voor auto’s bedoeld zijn, worden ge
 > Modelleer een gemeenschappelijke buitenfietsenstalling als `Ruimtedetailsoort.overige_buitenruimte`.
 
 > [!NOTE]
-> **Eén regelset voor parkeerruimten en laadpalen** (zie [issue #381](https://github.com/woonstadrotterdam/woningwaardering/issues/381)). Deze regels gelden gelijk voor zelfstandige en onzelfstandige woonruimten; alleen de deler verschilt.
+> Parkeerplekken bij het complex worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III).
 >
-> Een parkeerruimte is **privé** wanneer `gedeeld_met_aantal_adressen` én `gedeeld_met_aantal_onzelfstandige_woonruimten` allebei niet groter zijn dan 1, en anders **gemeenschappelijk**.
->
-> 1. De kerntypen `PIP`, `PUP` en `PBC` staan altijd in een gemeenschappelijke parkeergelegenheid en worden daarom altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
-> 2. Een `carport` of `parkeerplaats` wordt privé in rubriek 8 gewaardeerd (over de oppervlakte) en gemeenschappelijk in rubriek 10: een carport als Type II, een parkeerplaats als Type III met een `UserWarning` dat Type I, II of III gebruikt hoort te worden.
-> 3. Rubriek 10 kent alleen punten toe vanaf 12 m². Die eis geldt niet in rubriek 8.
-> 4. De laadpaal volgt de ruimte: rubriek 10 wanneer die ruimte daar punten krijgt, anders rubriek 12 Bijzondere voorzieningen — in beide gevallen gedeeld door aantal adressen × aantal onzelfstandige woonruimten.
-> 5. Een parkeerruimte en een laadpaal krijgen daardoor nooit in meer dan één rubriek punten.
+> Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie de regelset bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia’s
 
@@ -1194,10 +1188,10 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 >
 > Een parkeerruimte is **privé** wanneer `gedeeld_met_aantal_adressen` én `gedeeld_met_aantal_onzelfstandige_woonruimten` allebei niet groter zijn dan 1, en anders **gemeenschappelijk**.
 >
-> 1. De kerntypen `PIP`, `PUP` en `PBC` staan altijd in een gemeenschappelijke parkeergelegenheid en worden daarom altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
-> 2. Een `carport` of `parkeerplaats` wordt privé in rubriek 8 gewaardeerd (over de oppervlakte) en gemeenschappelijk in rubriek 10: een carport als Type II, een parkeerplaats als Type III met een `UserWarning` dat Type I, II of III gebruikt hoort te worden.
-> 3. Rubriek 10 kent alleen punten toe vanaf 12 m². Die eis geldt niet in rubriek 8.
-> 4. De laadpaal volgt de ruimte: rubriek 10 wanneer die ruimte daar punten krijgt, anders rubriek 12 Bijzondere voorzieningen — in beide gevallen gedeeld door aantal adressen × aantal onzelfstandige woonruimten.
+> 1. Parkeerplekken bij het complex — `PIP` en `PUP` (Type I), `PBD` (Type II) en `PBC` (Type III) — liggen altijd in een gemeenschappelijke parkeergelegenheid en worden daarom altijd in deze rubriek gewaardeerd, privé of gemeenschappelijk.
+> 2. Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die in rubriek 8 gewaardeerd (over de oppervlakte) en gemeenschappelijk hier — een carport als Type II, een parkeerplaats als Type III met een `UserWarning` dat een van de Type-detailsoorten gebruikt hoort te worden.
+> 3. Deze rubriek kent alleen punten toe vanaf 12 m². Die eis geldt niet in rubriek 8.
+> 4. De laadpaal volgt de ruimte: hier wanneer die ruimte hier punten krijgt, anders rubriek 12 Bijzondere voorzieningen — in beide gevallen gedeeld door aantal adressen × aantal onzelfstandige woonruimten.
 > 5. Een parkeerruimte en een laadpaal krijgen daardoor nooit in meer dan één rubriek punten.
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
@@ -1216,11 +1210,13 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 | Type III: een parkeerplek buiten behorende tot het complex of de woning zonder dak                          | 4      |
 
 > [!NOTE]
-> Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:  
+> Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
 >
-> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` met code `PIP`  
-> - Type II: `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` met code `PUP` en `Ruimtedetailsoort.carport` met code `CAR`  
-> - Type III: `Ruimtedetailsoort.Parkeerplek_buiten_behorend_bij_complex` met code `PBC`  
+> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
+> - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`).
+>
+> `PBD` is een uitbreiding op VERA. Zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden) voor de reden dat `PUP` Type I oplevert en niet Type II.
 
 #### 2.10.4 Rekenmethode
 
@@ -1384,7 +1380,11 @@ Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommun
 
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, dat niet een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig is.
 
-Een laadpaal wordt in **rubriek 10** gewaardeerd wanneer de parkeerruimte waar hij bij hoort in rubriek 10 punten krijgt; in alle andere gevallen wordt hij hier gewaardeerd. Zo krijgt een laadpaal nooit in twee rubrieken punten. De 2 punten worden in beide gevallen gedeeld door het aantal adressen maal het aantal onzelfstandige woonruimten dat de ruimte deelt. Zie de regelset bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
+Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij [rubriek 10](#210-rubriek-10-gemeenschappelijke-parkeerruimten).
+
+> [!NOTE]
+> "Aangesloten bij rubriek 10" lezen we als: de laadpaal deelt de rubriek én de deler van de parkeerruimte waar hij bij hoort. Krijgt die ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle andere gevallen hier, met dezelfde deler (aantal adressen × aantal onzelfstandige woonruimten). Zo krijgt een laadpaal nooit in twee rubrieken punten.
+
 
 ### 2.13 Rubriek 13: Aftrekpunten
 

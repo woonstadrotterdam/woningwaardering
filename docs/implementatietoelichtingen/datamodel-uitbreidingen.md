@@ -53,14 +53,22 @@ Het attribuut `Eenhedenruimte.aantal` is als uitbreiding op het VERA-model toege
 
 Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruimtedetailsoort`) toegevoegd, die overeenkomen met Type I, II en III parkeergelegenheden vanuit het WWS-beleidsboek:
 
-| `Ruimtedetailsoort` | Code | Type |
-| --- | --- | --- |
-| `parkeerplek_in_inpandige_afgesloten_parkeergarage` | `PIP` | Type I |
-| `parkeerplek_in_uitpandige_afgesloten_parkeergarage` | `PUP` | Type II |
-| `parkeerplek_buiten_behorend_bij_complex` | `PBC` | Type III |
+| `Ruimtedetailsoort` | Code | Wettekst-criterium | Type |
+| --- | --- | --- | --- |
+| `parkeerplek_in_inpandige_afgesloten_parkeergarage` | `PIP` | in een afgesloten parkeergarage bij het complex | Type I |
+| `parkeerplek_in_uitpandige_afgesloten_parkeergarage` | `PUP` | in een afgesloten parkeergarage bij het complex | Type I |
+| `parkeerplek_buiten_met_dak_behorend_bij_complex` | `PBD` | buiten bij het complex, met dak | Type II |
+| `parkeerplek_buiten_behorend_bij_complex` | `PBC` | buiten bij het complex, zonder dak | Type III |
 
 > [!NOTE]
-> Deze drie detailsoorten zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht: de plek kan specifiek aan één adres zijn toegewezen (privé) of gedeeld worden. In beide gevallen staat zij in een gemeenschappelijke parkeergelegenheid en wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd. De omschrijvingen bevatten daarom niet langer de zinsnede "met niet specifiek toegewezen parkeerplekken".
+> Deze vier detailsoorten zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht: de plek kan specifiek aan één adres zijn toegewezen (privé) of gedeeld worden. In beide gevallen staat zij in een gemeenschappelijke parkeergelegenheid en wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd. De omschrijvingen bevatten daarom niet langer de zinsnede "met niet specifiek toegewezen parkeerplekken".
+
+> [!NOTE]
+> **`PUP` levert Type I op, niet Type II.** De wettekst laat het type afhangen van de afgesloten parkeergarage (Type I) of, bij een plek buiten, van de aanwezigheid van een dak (Type II) of het ontbreken daarvan (Type III). In- of uitpandig is geen criterium dat de wettekst kent, dus een plek in een afgesloten parkeergarage is Type I, waar die garage ook staat. Het online beleidsboek zegt hetzelfde.
+>
+> Dat wijkt af van de VERA-collectiefobjectsoort `UAP` (Uitpandige afgesloten parkeergarage), waarvan de omschrijving stelt dat deze plekken onder Type II vallen. Onze uitbreiding volgde die omschrijving aanvankelijk. Omdat de wettekst boven VERA gaat, volgen we nu de wettekst en is deze afwijking hier vastgelegd.
+>
+> `PBD` is toegevoegd omdat Type II daardoor zonder detailsoort kwam te zitten: een overdekte parkeerplek buiten bij een complex is geen `carport` — die omschrijft VERA als een stallingsruimte bij de wóning.
 
 > [!NOTE]
 > `Ruimtedetailsoort.parkeerplaats` (`PAR`) is in de VERA-referentiedata omschreven als "Eigen parkeerplaats of oprit bij de woning" en is dus per definitie een privé-plek. Gebruik voor een gemeenschappelijke parkeerplek een van de Type-detailsoorten hierboven. Wordt een `parkeerplaats` toch als gemeenschappelijk meegegeven, dan volgt een `UserWarning` en waarderen we de plek als Type III. Deze omschrijving is onderdeel van de VERA-standaard zelf en niet van deze uitbreiding; we kunnen haar hier dus niet aanpassen.
