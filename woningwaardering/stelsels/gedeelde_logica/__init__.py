@@ -13,7 +13,10 @@ from .oppervlakte_van_overige_ruimten import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from .oppervlakte_van_vertrekken import waardeer_oppervlakte_van_vertrek
-from .sanitair import maximeer_wastafels, waardeer_sanitair
+from .sanitair import (
+    bepaal_wastafel_uitzonderingsruimte,
+    waardeer_sanitair,
+)
 from .verkoeling_en_verwarming import waardeer_verkoeling_en_verwarming
 
 __all__ = [
@@ -21,6 +24,7 @@ __all__ = [
     "GedeeldeRuimtegroepsleutel",
     "bereken_oppervlakte_punten",
     "bereken_zolder_correctie",
+    "bepaal_wastafel_uitzonderingsruimte",
     "is_zolder_zonder_vaste_trap",
     "maak_zolder_correctie_waardering",
     "structureer_subtotaal_bij_correcties",
@@ -29,7 +33,6 @@ __all__ = [
     "waardeer_oppervlakte_van_overige_ruimte",
     "waardeer_keuken",
     "waardeer_sanitair",
-    "maximeer_wastafels",
     "waardeer_verkoeling_en_verwarming",
     "waardeer_gemeenschappelijke_parkeerruimte",
 ]

@@ -106,9 +106,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 else None
             )
 
-            if gebruiksoppervlakte is None:
+            if gebruiksoppervlakte is None or gebruiksoppervlakte == 0:
                 warnings.warn(
-                    f"Eenheid {eenheid.id}: geen gebruiksoppervlakte van het verblijfsobject gevonden. Dit dient gespecificeerd te worden in het attribuut 'adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte' op de eenheid. Kan punten voor de WOZ-waarde niet bepalen.",
+                    f"Eenheid {eenheid.id}: geen bruikbare gebruiksoppervlakte van het verblijfsobject gevonden. Dit dient gespecificeerd te worden in het attribuut 'adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte' op de eenheid. Kan punten voor de WOZ-waarde niet bepalen.",
                     UserWarning,
                 )
                 return _niet_waardeerbaar()
