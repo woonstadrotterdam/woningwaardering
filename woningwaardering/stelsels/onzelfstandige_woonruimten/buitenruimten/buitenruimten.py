@@ -11,6 +11,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.gemeenschappelijke_parkeerruimten import (
+    is_parkeertype_detailsoort,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -54,8 +57,13 @@ class Buitenruimten(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
+        heeft_gewaardeerde_prive_buitenruimte = False
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
+                if not gedeeld_met_adressen(
+                    ruimte
+                ) and not gedeeld_met_onzelfstandige_woonruimten(ruimte):
+                    heeft_gewaardeerde_prive_buitenruimte = True
                 laag = waarderingsgroep_builder.gedeeld_met(
                     aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                     aantal_onzelfstandige_woonruimten=(
@@ -70,8 +78,12 @@ class Buitenruimten(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
 
-        # twee 2 punten voor de aanwezigheid van privé buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
+        # 2 punten voor de aanwezigheid van gewaardeerde privé buitenruimten
+        self._prive_buitenruimten_aanwezig(
+            waarderingsgroep_builder,
+            eenheid,
+            heeft_gewaardeerde_prive_buitenruimte,
+        )
 
         # maximaal 15 punten
         self._maximering(waarderingsgroep_builder, eenheid)
@@ -126,7 +138,9 @@ class Buitenruimten(Stelselgroep):
         0.35 punten per m2 voor privé buitenruimten.
 
         Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
-        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+        Type I/II/III-parkeerplekken horen altijd in rubriek 10 en tellen hier niet mee.
+        Een ``Ruimtedetailsoort.parkeerplaats`` telt niet mee als deze met andere adressen
+        is gedeeld.
 
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
@@ -137,6 +151,14 @@ class Buitenruimten(Stelselgroep):
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
+            )
+            return
+
+        # Type I/II/III-parkeerplekken horen altijd in rubriek 10, nooit in rubriek 8.
+        # Early-exit vóór oppervlakte-/afmetingschecks om irrelevante rubriek-8-warnings te vermijden.
+        if is_parkeertype_detailsoort(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 
@@ -214,23 +236,25 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
+        heeft_gewaardeerde_prive_buitenruimte: bool,
     ) -> WaarderingBuilder | None:
-        """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
+        """Kent 2 punten toe bij de aanwezigheid van gewaardeerde privé buitenruimten.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de waardering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+            heeft_gewaardeerde_prive_buitenruimte (bool): Of er minstens één privé-buitenruimte is gewaardeerd.
 
         Returns:
-            WaarderingBuilder | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
+            WaarderingBuilder | None: Woningwaardering met 2 punten als er gewaardeerde privé buitenruimten aanwezig zijn.
         """
-        # 2 punten bij de aanwezigheid van privé buitenruimten
-        if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.1 Punten voor privé-buitenruimte
+        # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend
+        # en vervolgens per vierkante meter 0,35 punt.
+        if heeft_gewaardeerde_prive_buitenruimte:
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
+            )
             prive_laag = waarderingsgroep_builder.gedeeld_met()
             return prive_laag.met_onderliggend(
                 id="prive_buitenruimten_aanwezig",

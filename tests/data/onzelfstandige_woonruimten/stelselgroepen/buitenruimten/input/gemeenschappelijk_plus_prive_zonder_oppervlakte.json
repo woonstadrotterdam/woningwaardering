@@ -1,0 +1,33 @@
+{
+  "id": "test-eenheid",
+  "ruimten": [
+    {
+      "id": "tuin",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Gemeenschappelijke tuin",
+      "oppervlakte": 30,
+      "lengte": 10,
+      "breedte": 3,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    },
+    {
+      "id": "balkon",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "BAL",
+        "naam": "Balkon"
+      },
+      "naam": "Privé balkon"
+    }
+  ]
+}
