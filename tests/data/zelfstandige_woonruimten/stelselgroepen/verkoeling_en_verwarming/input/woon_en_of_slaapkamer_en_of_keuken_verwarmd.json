@@ -1,0 +1,20 @@
+{
+  "id": "woon_en_of_slaapkamer_en_of_keuken_verwarmd",
+  "ruimten": [
+    {
+      "id": "wsk",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WSK",
+        "naam": "Woon-/slaapkamer/keuken"
+      },
+      "naam": "Woon-/slaapkamer/keuken",
+      "oppervlakte": 20.0,
+      "verwarmd": true,
+      "aantal": 1
+    }
+  ]
+}

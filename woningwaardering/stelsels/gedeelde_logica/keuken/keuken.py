@@ -9,6 +9,10 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    AANRECHT_MINIMALE_LENGTE_MM,
+    heeft_valide_aanrecht,
+)
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -23,7 +27,28 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import get_bouwkundige_elementen
+
+# Woon-/slaapvertrek-detailsoorten die de keuken al in de naam hebben.
+# `keuken` zelf hoort hier niet bij: dat is een apart vertrek, geen open keuken.
+OPEN_KEUKEN_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer_en_of_keuken,
+    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+)
+
+# Woon- of slaapvertrekken die een impliciete keuken / open keuken kunnen zijn.
+VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.woonkamer,
+    Ruimtedetailsoort.woon_en_of_slaapkamer,
+    Ruimtedetailsoort.slaapkamer,
+)
+
+# Ruimtedetailsoorten waarin een aanrecht meetelt voor de waardering:
+# vanaf 1 meter als basisvoorziening keuken, korter als wastafel.
+RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN = (
+    Ruimtedetailsoort.keuken,
+    *OPEN_KEUKEN_DETAIL_SOORTEN,
+    *VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+)
 
 
 def waardeer_keuken(
@@ -110,15 +135,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     Returns:
         bool: True als de ruimte een keuken is, anders False.
     """
-    aanrecht_aantal = len(
-        [
-            aanrecht
-            for aanrecht in get_bouwkundige_elementen(
-                ruimte, Bouwkundigelementdetailsoort.aanrecht
-            )
-            if aanrecht.lengte and aanrecht.lengte >= 1000
-        ]
-    )
+    valide_aanrecht = heeft_valide_aanrecht(ruimte)
 
     if not ruimte.detail_soort:
         warnings.warn(
@@ -127,26 +144,21 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
         )
         return False
 
-    if ruimte.detail_soort in [
+    if ruimte.detail_soort in (
         Ruimtedetailsoort.keuken,
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-    ]:
-        if aanrecht_aantal == 0:
+        *OPEN_KEUKEN_DETAIL_SOORTEN,
+    ):
+        if not valide_aanrecht:
             warnings.warn(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >=1000mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >={AANRECHT_MINIMALE_LENGTE_MM}mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
                 UserWarning,
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
         return True  # ruimte is een keuken met een valide aanrecht
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.woonkamer,
-        Ruimtedetailsoort.woon_en_of_slaapkamer,
-        Ruimtedetailsoort.slaapkamer,
-    ]:
+    if ruimte.detail_soort not in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
         return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
 
-    if aanrecht_aantal == 0:  # ruimte is geen keuken want heeft geen valide aanrecht
+    if not valide_aanrecht:  # ruimte is geen keuken want heeft geen valide aanrecht
         return False
 
     return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
@@ -245,7 +257,7 @@ def _punten_voor_aanrechtlengte(
     # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
     # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
     # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
-    if lengte < 1000:
+    if lengte < AANRECHT_MINIMALE_LENGTE_MM:
         return Decimal("0")
     if stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
         if (
