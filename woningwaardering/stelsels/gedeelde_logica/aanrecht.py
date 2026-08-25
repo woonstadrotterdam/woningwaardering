@@ -52,8 +52,14 @@ def telt_aanrecht_mee(ruimte: EenhedenRuimte) -> bool:
     Returns:
         bool: True als een aanrecht in deze ruimte meetelt, anders False.
     """
+    # De detailsoort doet hier het werk, niet de soort: een gemeenschappelijke
+    # keuken, een gemeenschappelijk balkon en een gemeenschappelijke parkeerplek
+    # komen alle drie binnen als `Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen`.
+    # Omdat we die soort moeten toelaten voor gemeenschappelijke keukens, kan
+    # alleen de detailsoort ze uit elkaar houden.
     if ruimte.detail_soort in BUITENRUIMTE_DETAIL_SOORTEN:
         return False
     if ruimte.detail_soort in PARKEERPLEK_DETAIL_SOORTEN:
         return False
+    # backstop voor buitenruimte-detailsoorten buiten de lijst hierboven
     return ruimte.soort != Ruimtesoort.buitenruimte
