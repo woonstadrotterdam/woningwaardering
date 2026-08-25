@@ -23,20 +23,37 @@
       "gedeeldMetAantalAdressen": 10,
       "aantal": 1,
       "soort": {
-        "code": "BTR",
-        "naam": "Buitenruimte"
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
-        "code": "CAR",
-        "naam": "Carport"
+        "code": "PUP",
+        "naam": "Parkeerplek in uitpandige afgesloten parkeergarage"
       },
-      "naam": "Carport",
+      "naam": "Parkeerplek in uitpandige afgesloten parkeergarage",
       "oppervlakte": 12,
       "breedte": 3,
       "lengte": 4
     },
     {
       "id": "3",
+      "gedeeldMetAantalAdressen": 10,
+      "aantal": 1,
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
+        "code": "PBD",
+        "naam": "Parkeerplek buiten met dak behorend bij complex"
+      },
+      "naam": "Parkeerplek buiten met dak",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    },
+    {
+      "id": "4",
       "gedeeldMetAantalAdressen": 10,
       "aantal": 1,
       "soort": {

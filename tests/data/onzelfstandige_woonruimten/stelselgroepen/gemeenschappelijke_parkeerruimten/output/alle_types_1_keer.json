@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke parkeerruimten"
         }
       },
-      "punten": 1.0,
+      "punten": 1.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -62,6 +62,21 @@
           "aantal": 1.0,
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__3",
+            "naam": "Type II",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 0.3
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__4",
             "naam": "Type III",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
@@ -78,7 +93,7 @@
             "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.1
+          "punten": 0.1
         }
       ]
     }
