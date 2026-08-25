@@ -51,6 +51,36 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
 
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
+# Detailsoorten die altijd een buitenruimte zijn, ongeacht de aangeleverde soort.
+BUITENRUIMTE_DETAIL_SOORTEN = [
+    Ruimtedetailsoort.atrium_en_of_patio,
+    Ruimtedetailsoort.achtertuin,
+    Ruimtedetailsoort.balkon,
+    Ruimtedetailsoort.zijtuin,
+    Ruimtedetailsoort.voortuin,
+    Ruimtedetailsoort.dakterras,
+    Ruimtedetailsoort.terras,
+    Ruimtedetailsoort.tuin,
+    Ruimtedetailsoort.tuin_rondom,
+    Ruimtedetailsoort.loggia,
+    Ruimtedetailsoort.overige_buitenruimte,
+]
+
+# Detailsoorten die een parkeervoorziening zijn. `garage` hoort hier bewust niet
+# bij: die wordt als privé overige ruimte gewaardeerd en is daarmee een ruimte
+# van de woning zelf.
+PARKEERPLEK_DETAIL_SOORTEN = [
+    Ruimtedetailsoort.carport,
+    Ruimtedetailsoort.parkeerplaats,
+    Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
+    Ruimtedetailsoort.open_parkeergarage_specifieke_plek,
+    Ruimtedetailsoort.parkeergarage_niet_specifieke_plek,
+    Ruimtedetailsoort.specifieke_parkeerplek_in_parkeergarage,
+    Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+    Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
+    Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
+]
+
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
 W_NAAM = 60
 W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
@@ -969,19 +999,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
     if (
         ruimte.detail_soort
-        in [  # deze ruimten zijn sowieso buitenruimten
-            Ruimtedetailsoort.atrium_en_of_patio,
-            Ruimtedetailsoort.achtertuin,
-            Ruimtedetailsoort.balkon,
-            Ruimtedetailsoort.zijtuin,
-            Ruimtedetailsoort.voortuin,
-            Ruimtedetailsoort.dakterras,
-            Ruimtedetailsoort.terras,
-            Ruimtedetailsoort.tuin,
-            Ruimtedetailsoort.tuin_rondom,
-            Ruimtedetailsoort.loggia,
-            Ruimtedetailsoort.overige_buitenruimte,
-        ]
+        in BUITENRUIMTE_DETAIL_SOORTEN  # deze ruimten zijn sowieso buitenruimten
         or (  # privé parkeerplaatsen buiten zijn privé buitenruimten
             ruimte.detail_soort
             in [
