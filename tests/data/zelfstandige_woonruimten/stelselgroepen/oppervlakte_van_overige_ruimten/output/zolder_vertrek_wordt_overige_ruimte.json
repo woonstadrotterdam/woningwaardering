@@ -11,10 +11,10 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 17.5,
+      "punten": 12.25,
       "woningwaarderingen": [
         {
-          "aantal": 30.0,
+          "aantal": 23.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal",
             "naam": "Subtotaal",
@@ -23,13 +23,13 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 22.5
+          "punten": 17.25
         },
         {
-          "aantal": 10.0,
+          "aantal": 3.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_1",
-            "naam": "Zolder overige ruimte met trap",
+            "naam": "Zoldervertrek te klein voor vertrek",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -43,7 +43,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_2",
-            "naam": "Zolder overige ruimte zonder trap",
+            "naam": "Zoldervertrek met vlizotrap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -57,7 +57,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_3",
-            "naam": "Zolder overige ruimte met vlizo trap",
+            "naam": "Zolder met vaste trap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -69,7 +69,7 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
+            "id": "oppervlakte_van_overige_ruimten__Space_2__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
           "punten": -5.0

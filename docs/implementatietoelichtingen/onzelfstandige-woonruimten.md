@@ -240,13 +240,16 @@ Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de vo
 Een zolderruimte kan worden gewaardeerd als een vertrek of een overige ruimte. Om een zolderruimte als vertrek te kunnen aanmerken moet deze aan 2 extra eisen voldoen:
 
 1. de zolderruimte moet bereikbaar zijn via een vaste trap en
-2. ~~het dak van de zolderruimte moet beschoten zijn. Dat betekent dat het dak aan de binnenkant is afgewerkt, waardoor de dakconstructie is afgesloten en de binnenzijde niet open ligt (en er bijvoorbeeld geen dakpannen zichtbaar zijn).~~
+2. het dak van de zolderruimte moet beschoten zijn. Dat betekent dat het dak aan de binnenkant is afgewerkt, waardoor de dakconstructie is afgesloten en de binnenzijde niet open ligt (en er bijvoorbeeld geen dakpannen zichtbaar zijn).
 
 > [!NOTE]
 >
-> - Een zolderruimte groter dan 2m2 met het `Bouwkundigelement` `vlizotrap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
-> - Een zolderruimte groter dan 2m2 maar kleiner dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
-> - Zolderruimte groter dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - De `Ruimtedetailsoort` bepaalt of een zolderruimte een vertrek kan zijn. Alleen een `zoldervertrek` voldoet aan eis 2: VERA omschrijft die als een ruimte "die zowel qua oppervlakte en stahoogte als afwerking geschikt is om als vertrek te worden gekwalificeerd". Een `zolder` is "qua oppervlakte en stahoogte geschikt (...), maar (...) voldoet niet aan de afwerkingseisen" en wordt daarom nooit als vertrek gewaardeerd.
+> - Beide detailsoorten beschrijven volgens VERA een ruimte onder het dak **met** vaste trap. De detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement` `vlizotrap` weerspreekt dat. Staan er zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap leidend.
+> - Een `zoldervertrek` van minimaal 4m2 wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2).
+> - Andersom geldt dit niet: een zolderruimte die is ingeschoten met `ruimtesoort` `overige ruimte` wordt nooit als vertrek gewaardeerd.
+> - Een zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3.
 
 ##### 2.2.1.4 Aangrenzende ruimten met een open doorgang
 

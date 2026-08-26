@@ -11,20 +11,34 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 8.25,
+      "punten": 15.75,
       "woningwaarderingen": [
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__prive",
             "naam": "Privé"
           },
-          "punten": 7.5
+          "punten": 15.0
         },
         {
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__prive__Space_1",
             "naam": "Zolder vertrek met trap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__prive__Space_2",
+            "naam": "Zolder vertrek zonder trap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
             },
