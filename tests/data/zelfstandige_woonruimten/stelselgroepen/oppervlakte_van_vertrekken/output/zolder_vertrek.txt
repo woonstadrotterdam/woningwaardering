@@ -3,7 +3,7 @@ SAMENVATTING
                                                                                 ---------
 
 OPPERVLAKTE VAN VERTREKKEN
-  Zoldervertrek met vaste trap                                       10.00 m²
-  Zoldervertrek zonder trapelement                                   10.00 m²
+  Zoldervertrek met vaste trap als element                           10.00 m²
+  Zoldervertrek                                                      10.00 m²
                                                                 ----------      ---------
   Totaal                                                             20.00 m²    20.00 pt

@@ -23,7 +23,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__prive__Space_1",
-            "naam": "Zoldervertrek met vaste trap",
+            "naam": "Zoldervertrek met vaste trap als element",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__prive"
             },
@@ -37,7 +37,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_vertrekken__prive__Space_2",
-            "naam": "Zoldervertrek zonder trapelement",
+            "naam": "Zoldervertrek",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_vertrekken__prive"
             },

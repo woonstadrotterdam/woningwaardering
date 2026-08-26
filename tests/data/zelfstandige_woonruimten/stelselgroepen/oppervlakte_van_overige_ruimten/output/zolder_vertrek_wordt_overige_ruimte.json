@@ -29,7 +29,7 @@
           "aantal": 3.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_1",
-            "naam": "Zoldervertrek te klein voor vertrek",
+            "naam": "Zoldervertrek",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -57,7 +57,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_3",
-            "naam": "Zolder met vaste trap",
+            "naam": "Zolder aangeleverd als vertrek",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },

@@ -29,7 +29,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_1",
-            "naam": "Zolder overige ruimte met trap",
+            "naam": "Zolder met vaste trap als element",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -43,7 +43,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_2",
-            "naam": "Zolder overige ruimte zonder trap",
+            "naam": "Zolder",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
@@ -57,7 +57,7 @@
           "aantal": 10.0,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_3",
-            "naam": "Zolder overige ruimte met vlizo trap",
+            "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },
