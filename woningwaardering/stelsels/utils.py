@@ -979,6 +979,47 @@ def waarschuw_dubbele_ids(instance: BaseModel) -> None:
                 waarschuw_dubbele_ids(item)
 
 
+_VERKEERSRUIMTE_DETAILSOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
+    }
+)
+
+
+def oppervlakte_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Berekent de netto oppervlakte van verbonden vaste kasten voor een ruimte.
+
+    §2.2.4 Kasten: de netto oppervlakte van een kast die in een vertrek uitkomt,
+    telt mee bij de oppervlakte van dat vertrek. Kasten op verkeersruimten niet.
+    """
+    if (
+        ruimte.detail_soort is None
+        or ruimte.detail_soort in _VERKEERSRUIMTE_DETAILSOORTEN
+    ):
+        return Decimal("0")
+
+    return sum(
+        (
+            Decimal(str(verbonden_ruimte.oppervlakte))
+            for verbonden_ruimte in ruimte.verbonden_ruimten or []
+            if verbonden_ruimte.detail_soort == Ruimtedetailsoort.kast
+            and verbonden_ruimte.oppervlakte is not None
+        ),
+        start=Decimal("0"),
+    )
+
+
+def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Geeft de oppervlakte van een ruimte inclusief meetellende verbonden kasten."""
+    if ruimte.oppervlakte is None:
+        return Decimal("0")
+
+    return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
+
+
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
@@ -1048,6 +1089,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     ]:
         return Ruimtesoort.vertrek
 
+    # §2.2.4 Kasten: kastoppervlakte telt mee voor drempeltoets van minimale oppervlakte voor vertrek/overige ruimte.
+    opp_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
+
     if ruimte.detail_soort in [
         Ruimtedetailsoort.woonkamer,
         Ruimtedetailsoort.woon_en_of_slaapkamer,
@@ -1072,26 +1116,24 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
-            if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
-            ) >= Decimal("2"):
+            if (opp_met_kasten / Decimal(str(aantal_adressen))) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
                 return None
 
         if ruimte.soort == Ruimtesoort.vertrek:
-            if ruimte.oppervlakte >= 4:
+            if opp_met_kasten >= Decimal("4"):
                 return Ruimtesoort.vertrek
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
         if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort == Ruimtedetailsoort.toiletruimte:
         # mag alleen als overige ruimte gewaardeerd worden
-        if ruimte.oppervlakte >= 2:
+        if opp_met_kasten >= Decimal("2"):
             return Ruimtesoort.overige_ruimten
 
     if (
@@ -1108,7 +1150,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             and not gedeeld_met_adressen(ruimte)
         )
     ):
-        if ruimte.oppervlakte >= 2.0:
+        if opp_met_kasten >= Decimal("2"):
             return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort in ZOLDER_DETAIL_SOORTEN:
@@ -1123,7 +1165,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen {Ruimtedetailsoort.zoldervertrek.naam} en voldoet daarmee niet aan de afwerkingseisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
                 )
-            elif heeft_vaste_trap(ruimte) and ruimte.oppervlakte >= 4:
+            elif heeft_vaste_trap(ruimte) and opp_met_kasten >= Decimal("4"):
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is via een vaste trap bereikbaar: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
@@ -1143,7 +1185,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         # een tot woning behorende trap bereikbaar is" (Bijlage I, rubriek 2); een
         # vlizotrap volstaat daarvoor, met de puntenaftrek uit 2.2.2.3 als gevolg.
         if ruimte.soort in [Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten]:
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
             logger.debug(
@@ -1157,13 +1199,14 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
 
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     """
-    Deze functie voegt de oppervlakte van kasten toe aan een ruimte en retourneert de naam van de ruimte inclusief het aantal kasten.
+    Deze functie retourneert de naam van de ruimte inclusief het aantal verbonden
+    kasten dat meetelt voor de oppervlaktewaardering.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waar kasten aan toegevoegd moeten worden.
 
     Returns:
-        str: De naam van de ruimte inclusief het aantal toegevoegde kasten.
+        str: De naam van de ruimte inclusief het aantal meetellende kasten.
     """
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
@@ -1182,12 +1225,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     # en bij de oppervlakte van de betreffende ruimte opgeteld.
     # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.hal,
-        Ruimtedetailsoort.overloop,
-        Ruimtedetailsoort.entree,
-        Ruimtedetailsoort.gang,
-    ]:
+    if ruimte.detail_soort not in _VERKEERSRUIMTE_DETAILSOORTEN:
         ruimte_kasten = [
             verbonden_ruimte
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
@@ -1198,25 +1236,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         aantal_ruimte_kasten = len(ruimte_kasten)
 
         if aantal_ruimte_kasten > 0:
-            ruimte.oppervlakte += sum(
-                [
-                    ruimte_kast.oppervlakte
-                    for ruimte_kast in ruimte_kasten
-                    if ruimte_kast.oppervlakte is not None
-                ]
-            )
-
-            if ruimte.inhoud is not None:
-                ruimte.inhoud += sum(
-                    [
-                        ruimte_kast.inhoud
-                        for ruimte_kast in ruimte_kasten
-                        if ruimte_kast.inhoud is not None
-                    ]
-                )
-
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van "
+                f"{aantal_ruimte_kasten} verbonden "
+                f"{'kast' if aantal_ruimte_kasten == 1 else 'kasten'} telt mee "
+                "voor de oppervlaktewaardering."
             )
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"

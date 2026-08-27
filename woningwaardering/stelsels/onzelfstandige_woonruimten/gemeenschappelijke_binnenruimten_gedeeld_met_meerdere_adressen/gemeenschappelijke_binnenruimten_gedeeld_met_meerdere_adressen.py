@@ -173,7 +173,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ):
             totaal_oppervlakte = sum(
                 (
-                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    utils.rond_af(
+                        utils.oppervlakte_inclusief_verbonden_kasten(ruimte),
+                        decimalen=2,
+                    )
                     for ruimte in groep_ruimten
                     if ruimte.oppervlakte is not None
                 ),
