@@ -534,9 +534,9 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een woon- of slaapvertrek met een aanrecht vanaf 1 meter een open keuken heeft en zo voor verkoeling en verwarming wordt gewaardeerd. Dat zijn `woonkamer`, `woon_en_of_slaapkamer` en `slaapkamer`. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet, en niet als een lijst detailsoorten. Elke ruimte die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken — ook bijvoorbeeld een `serre`, `overig_vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de invoer.
 >
-> Deze rubriek is daarmee enger dan [rubriek 5](#251-de-basiseisen-voor-een-keuken), waar een aanrecht in élke ruimte een keuken oplevert. Het beleidsboek beperkt de aanname hier expliciet tot een "woon- of slaapvertrek", terwijl rubriek 5 geen eis aan de ruimte stelt. Een aanrecht in bijvoorbeeld een `bijkeuken` of `serre` levert dus wél keukenpunten op, maar geen open keuken.
+> Uitgezonderd zijn `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`. Daarin wordt niet gewoond of geslapen, en een `keuken` is bovendien de keuken zelf en telt al als afzonderlijk verwarmd vertrek.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -749,8 +749,6 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 
 > [!NOTE]
 > Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee, dus ook in bijvoorbeeld een `bijkeuken`, `berging`, `garage` of `hal`. Uitgezonderd zijn buitenruimten en parkeerplekken: daar is een aanrecht geen voorziening van de woonruimte. Dezelfde grens geldt voor de spoelbak in een aanrecht korter dan 1 meter, die volgens [paragraaf 2.5.2](#252-punten-voor-basisvoorzieningen-keuken) als wastafel meetelt.
->
-> Dit staat los van rubriek 3: een aanrecht maakt alleen van een woon- of slaapvertrek een open keuken. Zie de note bij [paragraaf 2.3.2](#232-open-keuken-in-een-vertrek-of-overige-ruimte).
 
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
