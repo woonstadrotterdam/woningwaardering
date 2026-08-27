@@ -1,0 +1,49 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 6.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen",
+            "naam": "Gedeeld met 2 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken",
+            "naam": "Oppervlakte van vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen"
+            }
+          },
+          "punten": 6.0
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__woonkamer",
+            "naam": "Woonkamer (+1 kast)",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_vertrekken"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

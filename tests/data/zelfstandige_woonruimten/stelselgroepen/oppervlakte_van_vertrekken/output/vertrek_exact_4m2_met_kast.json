@@ -1,0 +1,30 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OVZ",
+          "naam": "Oppervlakte van vertrekken"
+        }
+      },
+      "punten": 4.0,
+      "woningwaarderingen": [
+        {
+          "aantal": 4.0,
+          "criterium": {
+            "id": "oppervlakte_van_vertrekken__Slaapkamer",
+            "naam": "Slaapkamer (+1 kast)",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
