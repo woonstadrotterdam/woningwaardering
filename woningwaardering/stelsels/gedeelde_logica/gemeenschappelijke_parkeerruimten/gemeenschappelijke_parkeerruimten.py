@@ -14,7 +14,6 @@ from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     PUNTEN_PER_LAADPAAL,
     VERVALLEN_PARKEERGARAGE_DETAILSOORTEN,
     aantal_laadpalen,
-    is_gemeenschappelijke_parkeerruimte,
     is_parkeerruimte,
     parkeertype,
     voldoet_aan_oppervlakte_eis,
@@ -91,9 +90,8 @@ def waardeer_gemeenschappelijke_parkeerruimte(
 
     # Bij een parkeerplaats in een gemeenschappelijke parkeerruimte
     # hoort een Type-detailsoort. De warning vuurt ook onder de 12 m²-eis.
-    if (
-        ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
-        and is_gemeenschappelijke_parkeerruimte(ruimte)
+    if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats and not utils.is_prive(
+        ruimte
     ):
         warnings.warn(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {Ruimtedetailsoort.parkeerplaats}. Gebruik Type I, II of III ({Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage}, {Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex} of {Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex}) voor een gemeenschappelijke parkeerplek: deze wordt nu gewaardeerd als Type III.",

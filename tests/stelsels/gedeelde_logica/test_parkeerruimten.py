@@ -17,7 +17,6 @@ from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     PARKEERTYPE_BUI_OF_GPA,
     hoort_altijd_in_gemeenschappelijke_parkeerruimten,
     hoort_prive_in_buitenruimten,
-    is_gemeenschappelijke_parkeerruimte,
     wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten.bijzondere_voorzieningen import (
@@ -29,7 +28,7 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten.buitenruimten import (
 from woningwaardering.stelsels.onzelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
     GemeenschappelijkeParkeerruimten as GemeenschappelijkeParkeerruimtenOnz,
 )
-from woningwaardering.stelsels.utils import deler, is_prive
+from woningwaardering.stelsels.utils import deler
 from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen import (
     BijzondereVoorzieningen as BijzondereVoorzieningenZel,
 )
@@ -153,32 +152,6 @@ def som_punten(stelsel: str, rubriek: str, eenheid: EenhedenEenheid) -> Decimal:
         ),
         start=Decimal("0"),
     )
-
-
-# --- Privé of gemeenschappelijk -------------------------------------------------
-
-
-@pytest.mark.parametrize(
-    "aantal_adressen, aantal_onzelfstandige_woonruimten, verwacht_prive",
-    [
-        (1, 1, True),
-        (0, 0, True),
-        (None, None, True),
-        (2, 1, False),
-        (1, 2, False),
-        (3, 4, False),
-    ],
-)
-def test_is_prive(
-    aantal_adressen, aantal_onzelfstandige_woonruimten, verwacht_prive
-) -> None:
-    ruimte = maak_parkeerruimte(
-        Ruimtedetailsoort.carport,
-        aantal_adressen=aantal_adressen,
-        aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
-    )
-    assert is_prive(ruimte) is verwacht_prive
-    assert is_gemeenschappelijke_parkeerruimte(ruimte) is not verwacht_prive
 
 
 @pytest.mark.parametrize("detailsoort", PARKEERTYPE_ALTIJD_GPA)

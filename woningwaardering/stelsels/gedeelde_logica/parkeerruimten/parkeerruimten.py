@@ -108,19 +108,6 @@ def is_parkeerruimte(detail_soort: Referentiedata | None) -> bool:
     ) or hoort_prive_in_buitenruimten(detail_soort)
 
 
-def is_gemeenschappelijke_parkeerruimte(ruimte: EenhedenRuimte) -> bool:
-    """Of de parkeerruimte gemeenschappelijk is.
-
-    Gemeenschappelijk betekent dat het aantal adressen en/of het aantal
-    onzelfstandige woonruimten groter is dan 1. Privé is het spiegelbeeld
-    daarvan: ``utils.is_prive``.
-
-    De deler die bij deze indeling hoort is ``utils.deler``: het aantal adressen
-    maal het aantal onzelfstandige woonruimten (2.10.4 Rekenmethode).
-    """
-    return not is_prive(ruimte)
-
-
 def parkeertype(ruimte: EenhedenRuimte) -> str | None:
     """Het Type I/II/III waarmee de ruimte in rubriek 10 wordt gewaardeerd.
 
@@ -149,7 +136,7 @@ def wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
     if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
         return True
     if hoort_prive_in_buitenruimten(ruimte.detail_soort):
-        return is_gemeenschappelijke_parkeerruimte(ruimte)
+        return not is_prive(ruimte)
     return False
 
 
