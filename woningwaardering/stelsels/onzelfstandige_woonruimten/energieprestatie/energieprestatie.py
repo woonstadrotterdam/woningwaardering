@@ -335,7 +335,7 @@ class Energieprestatie(Stelselgroep):
                 oppervlakte_gedeeld_met_counter[
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 ] += utils.rond_af(
-                    Decimal(str(ruimte.oppervlakte)), decimalen=2
+                    utils.oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
                 )  # beleidsboek geeft expliciet aan dat moet worden afgerond op 2 decimalen
 
         return float(

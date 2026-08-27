@@ -52,6 +52,12 @@ warning_configs = [
             UserWarning: "woonplaats",
         },
     ),
+    WarningConfig(
+        file=f"{current_file_path}/input/gebruiksoppervlakte_nul.json",
+        warnings={
+            UserWarning: "bruikbare gebruiksoppervlakte",
+        },
+    ),
 ]
 
 

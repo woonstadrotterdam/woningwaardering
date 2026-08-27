@@ -49,6 +49,48 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
     }
 )
 
+# Detailsoorten die een zolderruimte zijn. Beide vallen onder dezelfde zolderregels:
+# de classificatie als vertrek of overige ruimte (2.2.1.3) én de puntenaftrek voor een
+# zolderruimte zonder vaste trap (2.2.2.3). Classificatie en correctie delen deze
+# definitie, zodat ze niet uit elkaar kunnen lopen.
+#
+# Alleen een `zoldervertrek` kan een vertrek zijn. De VERA-definities dragen de eis uit
+# 2.2.1.3 dat het dak beschoten is: een `zolder` is "qua oppervlakte en stahoogte
+# geschikt om als vertrek te worden gekwalificeerd, maar (...) voldoet niet aan de
+# afwerkingseisen", terwijl een `zoldervertrek` "zowel qua oppervlakte en stahoogte als
+# afwerking geschikt is om als vertrek te worden gekwalificeerd". Een `zolder` valt
+# daarom altijd terug op de waardering als overige ruimte.
+#
+# `vliering` hoort hier bewust niet bij: die is volgens VERA "uitsluitend geschikt voor
+# opslag" en heeft onvoldoende oppervlakte en/of stahoogte voor een verblijfsruimte.
+ZOLDER_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.zolder,
+        Ruimtedetailsoort.zoldervertrek,
+    }
+)
+
+
+def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
+    """Bepaalt of een zolderruimte via een vaste trap bereikbaar is.
+
+    De VERA-detailsoorten `zolder` en `zoldervertrek` beschrijven beide een ruimte onder
+    het dak met een vaste trap. De detailsoort stelt die trap dus; alleen een expliciet
+    gemodelleerde `vlizotrap` weerspreekt dat. Staan er zowel een `trap` als een
+    `vlizotrap` op de ruimte, dan is de vaste trap leidend.
+
+    Args:
+        ruimte (EenhedenRuimte): De zolderruimte om te beoordelen.
+
+    Returns:
+        bool: True wanneer de zolderruimte via een vaste trap bereikbaar is.
+    """
+    if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
+        return True
+
+    return not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
+
+
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
@@ -937,6 +979,47 @@ def waarschuw_dubbele_ids(instance: BaseModel) -> None:
                 waarschuw_dubbele_ids(item)
 
 
+_VERKEERSRUIMTE_DETAILSOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.hal,
+        Ruimtedetailsoort.overloop,
+        Ruimtedetailsoort.entree,
+        Ruimtedetailsoort.gang,
+    }
+)
+
+
+def oppervlakte_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Berekent de netto oppervlakte van verbonden vaste kasten voor een ruimte.
+
+    §2.2.4 Kasten: de netto oppervlakte van een kast die in een vertrek uitkomt,
+    telt mee bij de oppervlakte van dat vertrek. Kasten op verkeersruimten niet.
+    """
+    if (
+        ruimte.detail_soort is None
+        or ruimte.detail_soort in _VERKEERSRUIMTE_DETAILSOORTEN
+    ):
+        return Decimal("0")
+
+    return sum(
+        (
+            Decimal(str(verbonden_ruimte.oppervlakte))
+            for verbonden_ruimte in ruimte.verbonden_ruimten or []
+            if verbonden_ruimte.detail_soort == Ruimtedetailsoort.kast
+            and verbonden_ruimte.oppervlakte is not None
+        ),
+        start=Decimal("0"),
+    )
+
+
+def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
+    """Geeft de oppervlakte van een ruimte inclusief meetellende verbonden kasten."""
+    if ruimte.oppervlakte is None:
+        return Decimal("0")
+
+    return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
+
+
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel
@@ -987,12 +1070,12 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             in [
                 Ruimtedetailsoort.carport,
             ]
-            and not gedeeld_met_adressen(ruimte)
+            and is_prive(ruimte)
         )
         or (
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
+            and is_prive(ruimte)
         )
     ):
         return Ruimtesoort.buitenruimte
@@ -1005,6 +1088,9 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.doucheruimte,
     ]:
         return Ruimtesoort.vertrek
+
+    # §2.2.4 Kasten: kastoppervlakte telt mee voor drempeltoets van minimale oppervlakte voor vertrek/overige ruimte.
+    opp_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
 
     if ruimte.detail_soort in [
         Ruimtedetailsoort.woonkamer,
@@ -1030,26 +1116,24 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             and ruimte.soort == Ruimtesoort.overige_ruimten
         ):
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
-            if (
-                Decimal(str(ruimte.oppervlakte)) / Decimal(str(aantal_adressen))
-            ) >= Decimal("2"):
+            if (opp_met_kasten / Decimal(str(aantal_adressen))) >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
             else:
                 return None
 
         if ruimte.soort == Ruimtesoort.vertrek:
-            if ruimte.oppervlakte >= 4:
+            if opp_met_kasten >= Decimal("4"):
                 return Ruimtesoort.vertrek
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
         if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if ruimte.oppervlakte >= 2:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
     if ruimte.detail_soort == Ruimtedetailsoort.toiletruimte:
         # mag alleen als overige ruimte gewaardeerd worden
-        if ruimte.oppervlakte >= 2:
+        if opp_met_kasten >= Decimal("2"):
             return Ruimtesoort.overige_ruimten
 
     if (
@@ -1058,62 +1142,71 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             ruimte
         )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
         or (
+            # Deze tak leidt naar rubriek 4 Oppervlakte van overige ruimten en
+            # valt buiten de parkeerregels van rubriek 8/10/12: hier telt alleen
+            # deling met adressen, niet met onzelfstandige woonruimten.
             ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
             and ruimte.soort == Ruimtesoort.overige_ruimten
             and not gedeeld_met_adressen(ruimte)
         )
     ):
-        if ruimte.oppervlakte >= 2.0:
+        if opp_met_kasten >= Decimal("2"):
             return Ruimtesoort.overige_ruimten
 
-    if (
-        ruimte.detail_soort == Ruimtedetailsoort.zolder
-        or ruimte.detail_soort == Ruimtedetailsoort.zoldervertrek
-    ):
+    if ruimte.detail_soort in ZOLDER_DETAIL_SOORTEN:
+        # 2.2.1.3 Zolderruimte als vertrek
+        # Om een zolderruimte als vertrek te kunnen aanmerken moet het dak beschoten zijn
+        # en moet de ruimte via een vaste trap bereikbaar zijn. De eerste eis zit in de
+        # VERA-detailsoort: alleen een `zoldervertrek` voldoet aan de afwerkingseisen,
+        # een `zolder` niet. Daarnaast gelden de gewone vertrekeisen, waaronder de
+        # minimale oppervlakte van 4,00 m² (2.2.1.2).
         if ruimte.soort == Ruimtesoort.vertrek:
-            if (
-                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
-                and ruimte.oppervlakte >= 4
-            ):
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+            if ruimte.detail_soort != Ruimtedetailsoort.zoldervertrek:
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen {Ruimtedetailsoort.zoldervertrek.naam} en voldoet daarmee niet aan de afwerkingseisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
+                )
+            elif heeft_vaste_trap(ruimte) and opp_met_kasten >= Decimal("4"):
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is via een vaste trap bereikbaar: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
                 return Ruimtesoort.vertrek
-
             else:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
                 )
 
-        if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if (
-                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
-                or heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
-                )
-            ) and ruimte.oppervlakte >= 2:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
-                )
+        # 2.2.2.3 Zolderruimte zonder vaste trap
+        # Als een zolderruimte niet voldoet aan de vereisten voor waardering als een
+        # 'vertrek', maar wel als overige ruimte kan worden aangemerkt, dan wordt de
+        # ruimte als overige ruimte gewaardeerd. Een zolderruimte die als vertrek is
+        # aangeleverd valt hier dus op terug, net zoals dat voor andere vertrekken
+        # gebeurt die de minimale oppervlakte niet halen (2.2.1.2). De wettekst stelt
+        # voor de waardering als overige ruimte alleen als eis dat "de zolderruimte via
+        # een tot woning behorende trap bereikbaar is" (Bijlage I, rubriek 2); een
+        # vlizotrap volstaat daarvoor, met de puntenaftrek uit 2.2.2.3 als gevolg.
+        if ruimte.soort in [Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten]:
+            if opp_met_kasten >= Decimal("2"):
                 return Ruimtesoort.overige_ruimten
 
-            else:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
-                )
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor "
+                f"{Ruimtesoort.overige_ruimten.naam} (heeft een oppervlakte van minder "
+                "dan 2,00 m²): Ruimte wordt niet gewaardeerd."
+            )
 
     return None
 
 
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     """
-    Deze functie voegt de oppervlakte van kasten toe aan een ruimte en retourneert de naam van de ruimte inclusief het aantal kasten.
+    Deze functie retourneert de naam van de ruimte inclusief het aantal verbonden
+    kasten dat meetelt voor de oppervlaktewaardering.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte waar kasten aan toegevoegd moeten worden.
 
     Returns:
-        str: De naam van de ruimte inclusief het aantal toegevoegde kasten.
+        str: De naam van de ruimte inclusief het aantal meetellende kasten.
     """
 
     criterium_naam = ruimte.naam or "Naamloze ruimte"
@@ -1132,12 +1225,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
     # en bij de oppervlakte van de betreffende ruimte opgeteld.
     # Een kast waarvan de deur uitkomt op een
     # verkeersruimte, wordt niet gewaardeerd
-    if ruimte.detail_soort not in [
-        Ruimtedetailsoort.hal,
-        Ruimtedetailsoort.overloop,
-        Ruimtedetailsoort.entree,
-        Ruimtedetailsoort.gang,
-    ]:
+    if ruimte.detail_soort not in _VERKEERSRUIMTE_DETAILSOORTEN:
         ruimte_kasten = [
             verbonden_ruimte
             for verbonden_ruimte in ruimte.verbonden_ruimten or []
@@ -1148,25 +1236,11 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         aantal_ruimte_kasten = len(ruimte_kasten)
 
         if aantal_ruimte_kasten > 0:
-            ruimte.oppervlakte += sum(
-                [
-                    ruimte_kast.oppervlakte
-                    for ruimte_kast in ruimte_kasten
-                    if ruimte_kast.oppervlakte is not None
-                ]
-            )
-
-            if ruimte.inhoud is not None:
-                ruimte.inhoud += sum(
-                    [
-                        ruimte_kast.inhoud
-                        for ruimte_kast in ruimte_kasten
-                        if ruimte_kast.inhoud is not None
-                    ]
-                )
-
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van {aantal_ruimte_kasten} verbonden {'kast' if aantal_ruimte_kasten == 1 else 'kasten'} is erbij opgeteld."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): de netto oppervlakte van "
+                f"{aantal_ruimte_kasten} verbonden "
+                f"{'kast' if aantal_ruimte_kasten == 1 else 'kasten'} telt mee "
+                "voor de oppervlaktewaardering."
             )
 
             criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"
@@ -1188,6 +1262,32 @@ def gedeeld_met_onzelfstandige_woonruimten(
     return (
         ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten is not None
         and ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten >= 2
+    )
+
+
+def is_prive(ruimte: EenhedenRuimte) -> bool:
+    """Geeft True terug als de ruimte niet gedeeld is.
+
+    Een ruimte is privé wanneer het aantal adressen én het aantal onzelfstandige
+    woonruimten allebei niet groter is dan 1. Ontbrekende aantallen worden als 1
+    gelezen: geen deling.
+    """
+    return not gedeeld_met_adressen(
+        ruimte
+    ) and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
+
+
+def deler(ruimte: EenhedenRuimte) -> Decimal:
+    """De deler waarmee de punten van een gedeelde ruimte worden verdeeld.
+
+    Dit is het aantal adressen maal het aantal onzelfstandige woonruimten dat de
+    ruimte deelt. Bij een zelfstandige woonruimte is het aantal onzelfstandige
+    woonruimten 1, zodat alleen door het aantal adressen wordt gedeeld.
+    Ontbrekende aantallen worden als 1 gelezen.
+    """
+    return Decimal(
+        (ruimte.gedeeld_met_aantal_adressen or 1)
+        * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
     )
 
 
