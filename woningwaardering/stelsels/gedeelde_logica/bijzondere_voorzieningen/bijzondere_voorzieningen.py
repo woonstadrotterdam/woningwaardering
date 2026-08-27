@@ -39,7 +39,7 @@ def waardeer_bijzondere_voorzieningen(
     woningwaardering_resultaat: (
         WoningwaarderingResultatenWoningwaarderingResultaat | None
     ) = None,
-) -> list[WaarderingBuilder]:
+) -> None:
     """Genereert de woningwaarderingen voor bijzondere voorzieningen.
 
     Args:
@@ -50,25 +50,18 @@ def waardeer_bijzondere_voorzieningen(
         uitgesloten_zorgwoning_grondslag_criterium_ids (list[str] | None): De criterium-id's die niet meetellen in de zorgwoninggrondslag.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
         woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat | None): Het woningwaardering resultaat.
-
-    Returns:
-        list[WaarderingBuilder]: De aangemaakte woningwaarderingen.
     """
-    woningwaarderingen = [
-        _opslag_zorgwoning(
-            peildatum,
-            eenheid,
-            stelselgroepen_zonder_opslag,
-            stelsel,
-            uitgesloten_zorgwoning_grondslag_criterium_ids,
-            waarderingsgroep_builder,
-            woningwaardering_resultaat,
-        ),
-        _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_builder),
-    ]
+    _opslag_zorgwoning(
+        peildatum,
+        eenheid,
+        stelselgroepen_zonder_opslag,
+        stelsel,
+        uitgesloten_zorgwoning_grondslag_criterium_ids,
+        waarderingsgroep_builder,
+        woningwaardering_resultaat,
+    )
+    _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_builder)
     _laadpalen(eenheid, waarderingsgroep_builder)
-
-    return [waardering for waardering in woningwaarderingen if waardering is not None]
 
 
 def _opslag_zorgwoning(
