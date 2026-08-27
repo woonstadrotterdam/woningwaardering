@@ -10,7 +10,7 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder overige ruimte met trap",
+      "naam": "Zolder met vaste trap als element",
       "inhoud": 20,
       "oppervlakte": 10,
       "verwarmd": true,
@@ -39,7 +39,7 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder overige ruimte zonder trap",
+      "naam": "Zolder",
       "inhoud": 20,
       "oppervlakte": 10,
       "verwarmd": true
@@ -54,7 +54,7 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder overige ruimte met vlizo trap",
+      "naam": "Zolder met vlizotrap",
       "inhoud": 20,
       "oppervlakte": 10,
       "verwarmd": true,

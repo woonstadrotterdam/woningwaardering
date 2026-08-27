@@ -49,6 +49,48 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
     }
 )
 
+# Detailsoorten die een zolderruimte zijn. Beide vallen onder dezelfde zolderregels:
+# de classificatie als vertrek of overige ruimte (2.2.1.3) én de puntenaftrek voor een
+# zolderruimte zonder vaste trap (2.2.2.3). Classificatie en correctie delen deze
+# definitie, zodat ze niet uit elkaar kunnen lopen.
+#
+# Alleen een `zoldervertrek` kan een vertrek zijn. De VERA-definities dragen de eis uit
+# 2.2.1.3 dat het dak beschoten is: een `zolder` is "qua oppervlakte en stahoogte
+# geschikt om als vertrek te worden gekwalificeerd, maar (...) voldoet niet aan de
+# afwerkingseisen", terwijl een `zoldervertrek` "zowel qua oppervlakte en stahoogte als
+# afwerking geschikt is om als vertrek te worden gekwalificeerd". Een `zolder` valt
+# daarom altijd terug op de waardering als overige ruimte.
+#
+# `vliering` hoort hier bewust niet bij: die is volgens VERA "uitsluitend geschikt voor
+# opslag" en heeft onvoldoende oppervlakte en/of stahoogte voor een verblijfsruimte.
+ZOLDER_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.zolder,
+        Ruimtedetailsoort.zoldervertrek,
+    }
+)
+
+
+def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
+    """Bepaalt of een zolderruimte via een vaste trap bereikbaar is.
+
+    De VERA-detailsoorten `zolder` en `zoldervertrek` beschrijven beide een ruimte onder
+    het dak met een vaste trap. De detailsoort stelt die trap dus; alleen een expliciet
+    gemodelleerde `vlizotrap` weerspreekt dat. Staan er zowel een `trap` als een
+    `vlizotrap` op de ruimte, dan is de vaste trap leidend.
+
+    Args:
+        ruimte (EenhedenRuimte): De zolderruimte om te beoordelen.
+
+    Returns:
+        bool: True wanneer de zolderruimte via een vaste trap bereikbaar is.
+    """
+    if heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap):
+        return True
+
+    return not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
+
+
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
 
 # Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
@@ -1069,41 +1111,46 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         if ruimte.oppervlakte >= 2.0:
             return Ruimtesoort.overige_ruimten
 
-    if (
-        ruimte.detail_soort == Ruimtedetailsoort.zolder
-        or ruimte.detail_soort == Ruimtedetailsoort.zoldervertrek
-    ):
+    if ruimte.detail_soort in ZOLDER_DETAIL_SOORTEN:
+        # 2.2.1.3 Zolderruimte als vertrek
+        # Om een zolderruimte als vertrek te kunnen aanmerken moet het dak beschoten zijn
+        # en moet de ruimte via een vaste trap bereikbaar zijn. De eerste eis zit in de
+        # VERA-detailsoort: alleen een `zoldervertrek` voldoet aan de afwerkingseisen,
+        # een `zolder` niet. Daarnaast gelden de gewone vertrekeisen, waaronder de
+        # minimale oppervlakte van 4,00 m² (2.2.1.2).
         if ruimte.soort == Ruimtesoort.vertrek:
-            if (
-                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
-                and ruimte.oppervlakte >= 4
-            ):
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een vaste trap: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
+            if ruimte.detail_soort != Ruimtedetailsoort.zoldervertrek:
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen {Ruimtedetailsoort.zoldervertrek.naam} en voldoet daarmee niet aan de afwerkingseisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
+                )
+            elif heeft_vaste_trap(ruimte) and ruimte.oppervlakte >= 4:
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is via een vaste trap bereikbaar: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
                 return Ruimtesoort.vertrek
-
             else:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen vaste trap gevonden: Ruimte wordt niet gewaardeerd als {ruimte.soort.naam}."
+                logger.debug(
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
                 )
 
-        if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if (
-                heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
-                or heeft_bouwkundig_element(
-                    ruimte, Bouwkundigelementdetailsoort.vlizotrap
-                )
-            ) and ruimte.oppervlakte >= 2:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft een trap: Ruimte wordt gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
-                )
+        # 2.2.2.3 Zolderruimte zonder vaste trap
+        # Als een zolderruimte niet voldoet aan de vereisten voor waardering als een
+        # 'vertrek', maar wel als overige ruimte kan worden aangemerkt, dan wordt de
+        # ruimte als overige ruimte gewaardeerd. Een zolderruimte die als vertrek is
+        # aangeleverd valt hier dus op terug, net zoals dat voor andere vertrekken
+        # gebeurt die de minimale oppervlakte niet halen (2.2.1.2). De wettekst stelt
+        # voor de waardering als overige ruimte alleen als eis dat "de zolderruimte via
+        # een tot woning behorende trap bereikbaar is" (Bijlage I, rubriek 2); een
+        # vlizotrap volstaat daarvoor, met de puntenaftrek uit 2.2.2.3 als gevolg.
+        if ruimte.soort in [Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten]:
+            if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
 
-            else:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen trap: Ruimte wordt niet gewaardeerd als {Ruimtesoort.overige_ruimten.naam}."
-                )
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor "
+                f"{Ruimtesoort.overige_ruimten.naam} (heeft een oppervlakte van minder "
+                "dan 2,00 m²): Ruimte wordt niet gewaardeerd."
+            )
 
     return None
 
