@@ -1,4 +1,3 @@
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -66,8 +65,8 @@ def waardeer_bijzondere_voorzieningen(
             woningwaardering_resultaat,
         ),
         _aanbelfunctie_met_video_en_audioverbinding(eenheid, waarderingsgroep_builder),
-        *_laadpalen(eenheid, waarderingsgroep_builder),
     ]
+    _laadpalen(eenheid, waarderingsgroep_builder)
 
     return [waardering for waardering in woningwaarderingen if waardering is not None]
 
@@ -232,7 +231,7 @@ def _aanbelfunctie_met_video_en_audioverbinding(
 def _laadpalen(
     eenheid: EenhedenEenheid,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
-) -> list[WaarderingBuilder]:
+) -> None:
     """Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik
     door de bewoners wordt gewaardeerd met 2 punten.
 
@@ -245,54 +244,32 @@ def _laadpalen(
     Args:
         eenheid (EenhedenEenheid): De eenheid waarvoor de waardering berekend wordt.
         waarderingsgroep_builder (WaarderingsgroepBuilder | WaarderingBuilder): waarderingsgroep of bestaande waardering in de hiërarchie.
-
-    Returns:
-        list[WaarderingBuilder]: De woningwaarderingen voor de laadpalen, per
-        gedeeld-met-laag.
     """
-    waarderingen: dict[WaarderingBuilder, WaarderingBuilder] = {}
-    aantallen: dict[WaarderingBuilder, int] = defaultdict(int)
-    punten_per_laag: dict[WaarderingBuilder, Decimal] = defaultdict(lambda: Decimal())
-
     for ruimte in eenheid.ruimten or []:
         laadpalen = aantal_laadpalen(ruimte)
         if laadpalen == 0:
             continue
-
         if krijgt_punten_in_gemeenschappelijke_parkeerruimten(ruimte):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) wordt gewaardeerd in {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam}: de laadpaal telt daar mee en niet in {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}."
             )
             continue
 
-        gedeeld_met_laag = waarderingsgroep_builder.gedeeld_met(
+        waardering = waarderingsgroep_builder.gedeeld_met(
             aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
             aantal_onzelfstandige_woonruimten=(
                 ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             ),
+        ).met_onderliggend(
+            id="laadpalen",
+            naam="Laadpalen",
+            meeteenheid=Meeteenheid.stuks,
+            hergebruik=True,
         )
-        if gedeeld_met_laag not in waarderingen:
-            waarderingen[gedeeld_met_laag] = gedeeld_met_laag.met_onderliggend(
-                id="laadpalen",
-                naam="Laadpalen",
-                meeteenheid=Meeteenheid.stuks,
-            )
-        aantallen[gedeeld_met_laag] += laadpalen
-        punten_per_laag[gedeeld_met_laag] += (
-            PUNTEN_PER_LAADPAAL * Decimal(laadpalen) / utils.deler(ruimte)
-        )
-
-    if not waarderingen:
-        logger.debug(f"Eenheid ({eenheid.id}) heeft geen laadpaal voor deze rubriek")
-        return []
-
-    for gedeeld_met_laag, waardering in waarderingen.items():
-        waardering.aantal = aantallen[gedeeld_met_laag]
-        waardering.punten = utils.rond_af(
-            punten_per_laag[gedeeld_met_laag], decimalen=2
+        waardering.aantal = int(waardering.aantal or 0) + laadpalen
+        waardering.punten = (
+            PUNTEN_PER_LAADPAAL * Decimal(int(waardering.aantal)) / utils.deler(ruimte)
         )
         logger.info(
             f"Eenheid ({eenheid.id}) heeft {waardering.aantal} {'laadpaal' if waardering.aantal == 1 else 'laadpalen'}: {waardering.punten} punten voor {Woningwaarderingstelselgroep.bijzondere_voorzieningen.naam}"
         )
-
-    return list(waarderingen.values())

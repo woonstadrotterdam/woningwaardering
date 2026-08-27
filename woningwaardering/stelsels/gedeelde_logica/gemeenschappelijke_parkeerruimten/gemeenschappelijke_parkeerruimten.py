@@ -210,7 +210,4 @@ def _tel_op(waardering: WaarderingBuilder, *, aantal: int, punten: Decimal) -> N
         punten (Decimal): De punten om op te tellen.
     """
     waardering.aantal = int(waardering.aantal or 0) + aantal
-    waardering.punten = utils.rond_af(
-        Decimal(str(waardering.punten or 0)) + punten,
-        decimalen=2,
-    )
+    waardering.punten = Decimal(str(waardering.punten or 0)) + punten

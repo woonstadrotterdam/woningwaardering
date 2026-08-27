@@ -47,7 +47,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.67
+          "punten": 0.666666667
         },
         {
           "aantal": 1.0,
@@ -62,7 +62,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 1.33
+          "punten": 1.33333333
         },
         {
           "aantal": 1.0,
@@ -77,14 +77,14 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.67
+          "punten": 0.666666667
         },
         {
           "criterium": {
             "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.08
+          "punten": 0.08333333
         }
       ]
     }
