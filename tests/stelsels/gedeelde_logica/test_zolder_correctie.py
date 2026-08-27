@@ -63,7 +63,7 @@ def test_is_zolder_zonder_vaste_trap_niet_bij_vaste_trap(detail_soort):
     "detail_soort", [Ruimtedetailsoort.zolder, Ruimtedetailsoort.zoldervertrek]
 )
 def test_is_zolder_zonder_vaste_trap_niet_bij_trap_en_vlizotrap(detail_soort):
-    """Een expliciete vaste trap wint van een vlizotrap: geen aftrek."""
+    """Een expliciete `trap` wint van een `vlizotrap`: `is_zolder_zonder_vaste_trap` is False."""
     ruimte = maak_ruimte(
         detail_soort, Ruimtesoort.overige_ruimten, 10, [TRAP, VLIZOTRAP]
     )
@@ -75,7 +75,7 @@ def test_is_zolder_zonder_vaste_trap_niet_bij_trap_en_vlizotrap(detail_soort):
     "detail_soort", [Ruimtedetailsoort.zolder, Ruimtedetailsoort.zoldervertrek]
 )
 def test_is_zolder_zonder_vaste_trap_niet_zonder_trap_elementen(detail_soort):
-    """Zonder trap-elementen stelt de detailsoort de vaste trap: geen aftrek."""
+    """Zonder trap-elementen stelt de detailsoort de vaste trap: `is_zolder_zonder_vaste_trap` is False."""
     ruimte = maak_ruimte(detail_soort, Ruimtesoort.overige_ruimten, 10, [])
 
     assert not is_zolder_zonder_vaste_trap(ruimte)
@@ -85,7 +85,7 @@ def test_is_zolder_zonder_vaste_trap_niet_zonder_trap_elementen(detail_soort):
     "detail_soort", [Ruimtedetailsoort.zolder, Ruimtedetailsoort.zoldervertrek]
 )
 def test_is_zolder_zonder_vaste_trap_niet_bij_ongewaardeerde_zolder(detail_soort):
-    """Een zolder die zelf niet gewaardeerd wordt, krijgt ook geen aftrek."""
+    """Onder 2 m² classificeert de ruimte niet als overige ruimte: `is_zolder_zonder_vaste_trap` is False."""
     ruimte = maak_ruimte(detail_soort, Ruimtesoort.overige_ruimten, 1.99, [VLIZOTRAP])
 
     assert not is_zolder_zonder_vaste_trap(ruimte)

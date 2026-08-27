@@ -1120,16 +1120,16 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         # minimale oppervlakte van 4,00 m² (2.2.1.2).
         if ruimte.soort == Ruimtesoort.vertrek:
             if ruimte.detail_soort != Ruimtedetailsoort.zoldervertrek:
-                logger.info(
+                logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is geen {Ruimtedetailsoort.zoldervertrek.naam} en voldoet daarmee niet aan de afwerkingseisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
                 )
             elif heeft_vaste_trap(ruimte) and ruimte.oppervlakte >= 4:
-                logger.info(
+                logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is via een vaste trap bereikbaar: Ruimte wordt gewaardeerd als {Ruimtesoort.vertrek.naam}."
                 )
                 return Ruimtesoort.vertrek
             else:
-                logger.info(
+                logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor {Ruimtesoort.vertrek.naam}: er wordt gekeken of de ruimte als {Ruimtesoort.overige_ruimten.naam} gewaardeerd kan worden."
                 )
 
@@ -1146,7 +1146,7 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
             if ruimte.oppervlakte >= 2:
                 return Ruimtesoort.overige_ruimten
 
-            logger.info(
+            logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) voldoet niet aan de eisen voor "
                 f"{Ruimtesoort.overige_ruimten.naam} (heeft een oppervlakte van minder "
                 "dan 2,00 m²): Ruimte wordt niet gewaardeerd."
