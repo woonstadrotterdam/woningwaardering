@@ -7,7 +7,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.utils import (
+    ZOLDER_DETAIL_SOORTEN,
     classificeer_ruimte,
+    heeft_vaste_trap,
     oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     rond_af_op_kwart,
@@ -17,13 +19,10 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
 )
-from woningwaardering.vera.utils import heeft_bouwkundig_element
 
 
 def bereken_oppervlakte_punten(
@@ -53,14 +52,10 @@ def bereken_zolder_correctie(
 
 
 def is_zolder_zonder_vaste_trap(ruimte: EenhedenRuimte) -> bool:
-    # 2.2.2.3 Zolderruimte zonder vaste trap
-    # Correctie als de zolder als overige ruimte meetelt en er geen vaste trap is.
-    # classificeer_ruimte eist al trap of vlizotrap; zonder vaste trap blijft alleen
-    # vlizotrap over.
     return (
-        ruimte.detail_soort == Ruimtedetailsoort.zolder
+        ruimte.detail_soort in ZOLDER_DETAIL_SOORTEN
         and ruimte.oppervlakte is not None
-        and not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.trap)
+        and not heeft_vaste_trap(ruimte)
         and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
     )
 

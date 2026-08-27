@@ -43,7 +43,7 @@
           "aantal": 4.4,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_zolder",
-            "naam": "Zolder",
+            "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal"
             },

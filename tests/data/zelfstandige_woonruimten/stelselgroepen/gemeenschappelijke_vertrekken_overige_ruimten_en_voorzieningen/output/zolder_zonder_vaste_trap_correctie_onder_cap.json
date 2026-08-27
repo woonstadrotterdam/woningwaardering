@@ -61,7 +61,7 @@
           "aantal": 6.33,
           "criterium": {
             "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal__Space_zolder",
-            "naam": "Zolder",
+            "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal"
             },

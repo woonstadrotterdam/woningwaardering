@@ -1,0 +1,80 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "OOZ",
+          "naam": "Oppervlakte van overige ruimten"
+        }
+      },
+      "punten": 12.25,
+      "woningwaarderingen": [
+        {
+          "aantal": 23.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 17.25
+        },
+        {
+          "aantal": 3.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_1",
+            "naam": "Zoldervertrek",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_2",
+            "naam": "Zoldervertrek met vlizotrap",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__Space_3",
+            "naam": "Zolder aangeleverd als vertrek",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_2__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -5.0
+        }
+      ]
+    }
+  ]
+}
