@@ -1,0 +1,100 @@
+SAMENVATTING parkeerruimten_en_laadpalen
+  Oppervlakte van vertrekken                                                     25.00 pt
+  Oppervlakte van overige ruimten
+  Verkoeling en verwarming                                                        2.00 pt
+  Energieprestatie                                                                8.50 pt
+  Keuken                                                                          3.50 pt
+  Sanitair                                                                        3.00 pt
+  Buitenruimten                                                                  15.00 pt
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+  Gemeenschappelijke parkeerruimten                                              32.50 pt
+  Punten voor de WOZ-waarde                                                      12.00 pt
+  Bijzondere voorzieningen                                                        6.00 pt
+  Aftrekpunten
+  Prijsopslag monumenten
+                                                                                ---------
+  Totaal afgerond op hele punten                                                108.00 pt
+  Maximaal redelijke huur                                           864.55 EUR
+
+OPPERVLAKTE VAN VERTREKKEN
+  Privé
+    - Slaapkamer                                                     20.04 m²
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Keuken                                                          7.50 m²
+    - Badruimte                                                       1.70 m²
+                                                                                ---------
+  Totaal                                                                         25.00 pt
+
+VERKOELING EN VERWARMING
+  Privé
+    - Verwarmde vertrekken
+      - Slaapkamer                                                                2.00 pt
+                                                                                ---------
+  Totaal                                                                          2.00 pt
+
+ENERGIEPRESTATIE
+  Bouwjaar 1998                                                      24.50 m²     8.58 pt
+  Afronding op kwartpunten                                                       -0.08 pt
+                                                                                ---------
+  Totaal                                                                          8.50 pt
+
+KEUKEN
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Keuken
+      - Lengte aanrecht                                            2220.00 mm     3.50 pt
+                                                                                ---------
+  Totaal                                                                          3.50 pt
+
+SANITAIR
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Toilet
+      - Staand Toilet                                                 1.00 st     1.50 pt
+    - Badruimte
+      - Douche                                                        1.00 st     1.50 pt
+                                                                                ---------
+  Totaal                                                                          3.00 pt
+
+BUITENRUIMTEN
+  Privé
+    - Carport 1                                                      15.00 m²     5.25 pt
+    - Parkeerplaats                                                  15.00 m²     5.25 pt
+    - Carport 2                                                      10.00 m²     3.50 pt
+    - Privé buitenruimten aanwezig                                                2.00 pt
+  Maximaal 15 punten                                                             -1.00 pt
+                                                                                ---------
+  Totaal                                                                         15.00 pt
+
+GEMEENSCHAPPELIJKE PARKEERRUIMTEN
+  Privé
+    - Parkeerplek in inpandige afgesloten parkeergarage 1 (Type I)    1.00 st     9.00 pt
+    - Laadpaal                                                        1.00 st     2.00 pt
+    - Parkeerplek in uitpandige afgesloten parkeergarage (Type I)     1.00 st     9.00 pt
+  Gedeeld met 3 adressen
+    - Parkeerplek in inpandige afgesloten parkeergarage 2 (Type I)    1.00 st     3.00 pt
+    - Laadpaal                                                        1.00 st     0.67 pt
+    - Parkeerplek buiten behorend bij complex (Type III)              1.00 st     1.33 pt
+    - Laadpaal                                                        1.00 st     0.67 pt
+    - Parkeerplek buiten met dak behorend bij complex (Type II)       1.00 st     2.00 pt
+  Gedeeld met 4 onzelfstandige woonruimten
+    - Parkeerplek in inpandige afgesloten parkeergarage 4 (Type I)    1.00 st     2.25 pt
+    - Laadpaal                                                        1.00 st     0.50 pt
+    - Carport 3 (Type II)                                             1.00 st     1.50 pt
+    - Laadpaal                                                        1.00 st     0.50 pt
+  Afronding op kwartpunten                                                        0.08 pt
+                                                                                ---------
+  Totaal                                                                         32.50 pt
+
+PUNTEN VOOR DE WOZ-WAARDE
+  Percentage verschil                                                -0.07       12.00 pt
+    - WOZ-waarde op waardepeildatum 01-01-2024                   205000.00 EUR
+    - Gebruiksoppervlakte                                            58.00 m²
+    - WOZ-waarde per m²                                            3534.48 EUR
+    - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond             3537.00 EUR
+                                                                                ---------
+  Totaal                                                                         12.00 pt
+
+BIJZONDERE VOORZIENINGEN
+  Privé
+    - Laadpalen                                                       3.00 st     6.00 pt
+                                                                                ---------
+  Totaal                                                                          6.00 pt

@@ -47,6 +47,24 @@
         "naam": "Gemeenschappelijke ruimten en voorzieningen"
       },
       "detailSoort": {
+        "code": "PBD",
+        "naam": "Parkeerplek buiten met dak behorend bij complex"
+      },
+      "naam": "Parkeerplek buiten met dak",
+      "oppervlakte": 12,
+      "breedte": 3,
+      "lengte": 4
+    },
+    {
+      "id": "4",
+      "gedeeldMetAantalAdressen": 10,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "aantal": 1,
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": {
         "code": "PBC",
         "naam": "Parkeerplek buiten behorend bij complex"
       },
