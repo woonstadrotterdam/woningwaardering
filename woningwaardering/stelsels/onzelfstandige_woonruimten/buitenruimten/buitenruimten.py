@@ -11,11 +11,14 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    hoort_altijd_in_gemeenschappelijke_parkeerruimten,
+    hoort_prive_in_buitenruimten,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-    gedeeld_met_adressen,
-    gedeeld_met_onzelfstandige_woonruimten,
+    is_prive,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -26,7 +29,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -54,8 +56,11 @@ class Buitenruimten(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
+        heeft_gewaardeerde_prive_buitenruimte = False
         for ruimte in eenheid.ruimten or []:
             for bron in self._punten_voor_buitenruimte(ruimte):
+                if is_prive(ruimte):
+                    heeft_gewaardeerde_prive_buitenruimte = True
                 laag = waarderingsgroep_builder.gedeeld_met(
                     aantal_adressen=ruimte.gedeeld_met_aantal_adressen or 1,
                     aantal_onzelfstandige_woonruimten=(
@@ -70,8 +75,12 @@ class Buitenruimten(Stelselgroep):
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
                 )
 
-        # twee 2 punten voor de aanwezigheid van privé buitenruimten
-        self._prive_buitenruimten_aanwezig(waarderingsgroep_builder, eenheid)
+        # 2 punten voor de aanwezigheid van gewaardeerde privé buitenruimten
+        self._prive_buitenruimten_aanwezig(
+            waarderingsgroep_builder,
+            eenheid,
+            heeft_gewaardeerde_prive_buitenruimte,
+        )
 
         # maximaal 15 punten
         self._maximering(waarderingsgroep_builder, eenheid)
@@ -126,7 +135,9 @@ class Buitenruimten(Stelselgroep):
         0.35 punten per m2 voor privé buitenruimten.
 
         Ruimte moet minimaal een afmeting hebben van 2 m x 1,5 m x 1,5 m (hoogte, lengte, breedte).
-        Parkeerplaatsen worden niet meegewaardeerd als ze gedeeld zijn met andere eenheden.
+        Type I/II/III-parkeerplekken horen altijd in rubriek 10 en tellen hier niet mee.
+        Een ``Ruimtedetailsoort.parkeerplaats`` telt niet mee als deze met andere adressen
+        is gedeeld.
 
         Args:
             ruimte (EenhedenRuimte): Ruimte waarvoor de punten berekend worden.
@@ -137,6 +148,15 @@ class Buitenruimten(Stelselgroep):
         if classificeer_ruimte(ruimte) != Ruimtesoort.buitenruimte:
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt niet mee voor {self.stelselgroep.naam}."
+            )
+            return
+
+        # Type-detailsoorten (PIP, PUP, PBD, PBC) horen altijd in rubriek 10,
+        # nooit hier. Early-exit vóór oppervlakte-/afmetingschecks om irrelevante
+        # rubriek-8-warnings te vermijden.
+        if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 
@@ -156,9 +176,7 @@ class Buitenruimten(Stelselgroep):
         # voorwaarden voldoen, namelijk:
         # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
         #    meter, 1,50 meter (hoogte, breedte, diepte)
-        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
-            ruimte
-        ):
+        if not is_prive(ruimte):
             if not (ruimte.lengte and ruimte.breedte):
                 warnings.warn(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
@@ -174,14 +192,11 @@ class Buitenruimten(Stelselgroep):
                 )
                 return
 
-        # Parkeerplaatsen worden alleen gewaardeerd als ze niet gedeeld zijn met andere eenheden
-        if (
-            ruimte.detail_soort
-            == Ruimtedetailsoort.parkeerplaats  # parkeerplaats heeft als ruimtesoort buitenruimte
-            and gedeeld_met_adressen(ruimte)
-        ):
+        # Een carport of parkeerplaats wordt hier alleen als privé-buitenruimte
+        # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10.
+        if hoort_prive_in_buitenruimten(ruimte.detail_soort) and not is_prive(ruimte):
             logger.debug(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde parkeerplaats en telt daarom niet mee voor {self.stelselgroep.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke {ruimte.detail_soort.naam if ruimte.detail_soort else ''} en telt daarom niet mee voor {self.stelselgroep.naam}."
             )
             return
 
@@ -194,15 +209,9 @@ class Buitenruimten(Stelselgroep):
         # 2.8.1 Privé: 0,35 punt per m² (+ 2 aanwezigheidspunten verderop).
         # 2.8.2 Gemeenschappelijk (gedeeld met adressen en/of onzelfstandige
         # woonruimten): 0,75 punt per m² / adressen / onzelfstandige woonruimten.
-        if gedeeld_met_adressen(ruimte) or gedeeld_met_onzelfstandige_woonruimten(
-            ruimte
-        ):
-            deler = Decimal(
-                (ruimte.gedeeld_met_aantal_adressen or 1)
-                * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)
-            )
+        if not is_prive(ruimte):
             waardering.punten = float(
-                Decimal(str(ruimte.oppervlakte)) * Decimal("0.75") / deler
+                Decimal(str(ruimte.oppervlakte)) * Decimal("0.75") / utils.deler(ruimte)
             )
         else:
             waardering.punten = float(
@@ -214,23 +223,25 @@ class Buitenruimten(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         eenheid: EenhedenEenheid,
+        heeft_gewaardeerde_prive_buitenruimte: bool,
     ) -> WaarderingBuilder | None:
-        """Kent 2 punten toe bij de aanwezigheid van privé buitenruimten.
+        """Kent 2 punten toe bij de aanwezigheid van gewaardeerde privé buitenruimten.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder waaraan de waardering wordt toegevoegd.
             eenheid (EenhedenEenheid): Eenheid waarvoor de punten berekend worden.
+            heeft_gewaardeerde_prive_buitenruimte (bool): Of er minstens één privé-buitenruimte is gewaardeerd.
 
         Returns:
-            WaarderingBuilder | None: Woningwaardering met 2 punten als er privé buitenruimten aanwezig zijn.
+            WaarderingBuilder | None: Woningwaardering met 2 punten als er gewaardeerde privé buitenruimten aanwezig zijn.
         """
-        # 2 punten bij de aanwezigheid van privé buitenruimten
-        if next(waarderingsgroep_builder.alle_waarderingen(), None) is not None and any(
-            classificeer_ruimte(ruimte) == Ruimtesoort.buitenruimte
-            and not gedeeld_met_adressen(ruimte)
-            and not gedeeld_met_onzelfstandige_woonruimten(ruimte)
-            for ruimte in eenheid.ruimten or []
-        ):
+        # 2.8.1 Punten voor privé-buitenruimte
+        # Voor de aanwezigheid van privé-buitenruimte(n) worden 2 punten toegekend
+        # en vervolgens per vierkante meter 0,35 punt.
+        if heeft_gewaardeerde_prive_buitenruimte:
+            logger.info(
+                f"Eenheid ({eenheid.id}): privé buitenruimten aanwezig. 2 punten worden toegekend."
+            )
             prive_laag = waarderingsgroep_builder.gedeeld_met()
             return prive_laag.met_onderliggend(
                 id="prive_buitenruimten_aanwezig",

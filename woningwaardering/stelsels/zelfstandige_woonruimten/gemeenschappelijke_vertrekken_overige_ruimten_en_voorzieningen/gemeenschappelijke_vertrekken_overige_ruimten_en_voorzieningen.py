@@ -25,6 +25,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    oppervlakte_inclusief_verbonden_kasten,
     rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -149,9 +150,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # […]
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
-                if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_adressen:
+                oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
+                if oppervlakte_met_kasten and ruimte.gedeeld_met_aantal_adressen:
                     gedeelde_oppervlakte = (
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_adressen
+                        oppervlakte_met_kasten / ruimte.gedeeld_met_aantal_adressen
                     )
                     if gedeelde_oppervlakte < Decimal("2.0"):
                         logger.info(
@@ -181,7 +183,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         ):
             totaal_oppervlakte = sum(
                 (
-                    rond_af(ruimte.oppervlakte, decimalen=2)
+                    rond_af(oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2)
                     for ruimte in ruimten
                     if ruimte.oppervlakte is not None
                 ),

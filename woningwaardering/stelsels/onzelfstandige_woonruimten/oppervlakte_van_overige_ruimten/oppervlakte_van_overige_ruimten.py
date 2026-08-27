@@ -17,6 +17,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import gedeeld_met_adressen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -56,6 +57,14 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         )
         gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
 
+        # Ruimten gedeeld met meerdere adressen worden gewaardeerd volgens Rubriek
+        # "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        ruimten = [
+            ruimte
+            for ruimte in eenheid.ruimten or []
+            if not gedeeld_met_adressen(ruimte)
+        ]
+
         # Bereken vooraf het totale (op 2 decimalen afgeronde) oppervlak van de overige
         # ruimten per gedeeld_met_aantal (sleutel 1 = privé). De zoldercorrectie
         # (vlizotrap) gebruikt het verschil in het op hele m² afgeronde totaal per
@@ -63,9 +72,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         totaal_oppervlakte_per_gedeeld_met_aantal: defaultdict[int, Decimal] = (
             defaultdict(Decimal)
         )
-        for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_adressen:
-                continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
+        for ruimte in ruimten:
             if (
                 ruimte.oppervlakte is not None
                 and utils.classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
@@ -74,13 +81,13 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
                 )
                 totaal_oppervlakte_per_gedeeld_met_aantal[gedeeld_met_aantal] += (
-                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    utils.rond_af(
+                        utils.oppervlakte_inclusief_verbonden_kasten(ruimte),
+                        decimalen=2,
+                    )
                 )
 
-        for ruimte in eenheid.ruimten or []:
-            if ruimte.gedeeld_met_aantal_adressen:
-                continue  # wordt gewaardeerd volgens Rubriek "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
-
+        for ruimte in ruimten:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             gedeeld_met = waarderingsgroep_builder.gedeeld_met(
                 aantal_onzelfstandige_woonruimten=deler,

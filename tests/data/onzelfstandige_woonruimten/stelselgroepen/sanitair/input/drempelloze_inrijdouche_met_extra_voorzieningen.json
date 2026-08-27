@@ -1,0 +1,35 @@
+{
+  "ruimten": [
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "oppervlakte": 6.0,
+      "installaties": [
+        {
+          "code": "DRD",
+          "naam": "Drempelloze inrijdouche"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "HRA",
+          "naam": "Handdoekenradiator"
+        },
+        {
+          "code": "TME",
+          "naam": "Thermostatische mengkraan"
+        }
+      ]
+    }
+  ]
+}

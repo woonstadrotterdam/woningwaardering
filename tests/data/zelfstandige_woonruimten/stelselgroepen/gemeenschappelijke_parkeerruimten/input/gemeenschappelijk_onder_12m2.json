@@ -1,0 +1,67 @@
+{
+  "id": "gemeenschappelijk_onder_12m2",
+  "ruimten": [
+    {
+      "id": "carport_3_adressen_10m2",
+      "naam": "Carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "aantal": 1,
+      "oppervlakte": 10,
+      "lengte": 5,
+      "breedte": 2.0,
+      "gedeeldMetAantalAdressen": 3,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "parkeerplaats_3_adressen_10m2",
+      "naam": "Parkeerplaats",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "PAR",
+        "naam": "Parkeerplaats"
+      },
+      "aantal": 1,
+      "oppervlakte": 10,
+      "lengte": 5,
+      "breedte": 2.0,
+      "gedeeldMetAantalAdressen": 3,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal_1",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "Voo",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "BUI",
+          "naam": "Buitenruimten"
+        }
+      },
+      "punten": 6.25,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "buitenruimten__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "aantal": 12.0,
+          "criterium": {
+            "id": "buitenruimten__prive__parkeerplaats",
+            "naam": "Parkeerplaats",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          },
+          "punten": 4.2
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__prive__prive_buitenruimten_aanwezig",
+            "naam": "Privé buitenruimten aanwezig",
+            "bovenliggendeCriterium": {
+              "id": "buitenruimten__prive"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "buitenruimten__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": 0.05
+        }
+      ]
+    }
+  ]
+}

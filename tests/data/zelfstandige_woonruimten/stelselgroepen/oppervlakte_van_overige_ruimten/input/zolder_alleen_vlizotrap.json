@@ -1,0 +1,29 @@
+{
+  "id": "zolder_alleen_vlizotrap",
+  "ruimten": [
+    {
+      "id": "zolder",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder",
+      "inhoud": 25.0,
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ],
+      "aantal": 1
+    }
+  ]
+}
