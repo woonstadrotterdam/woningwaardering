@@ -29,18 +29,14 @@ from woningwaardering.vera.referentiedata import (
     WoningwaarderingstelselReferentiedata,
 )
 
-# Woon-/slaapvertrek-detailsoorten die de keuken al in de naam hebben.
+# Vertrek-detailsoorten die de keuken al in de naam hebben en daardoor voor
+# rubriek 3 altijd een open keuken zijn, ook zonder aanrecht in de invoer.
 # `keuken` zelf hoort hier niet bij: dat is een apart vertrek, geen open keuken.
-OPEN_KEUKEN_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer_en_of_keuken,
-    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-)
-
-# Woon- of slaapvertrekken die een impliciete keuken / open keuken kunnen zijn.
-VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer,
-    Ruimtedetailsoort.woon_en_of_slaapkamer,
-    Ruimtedetailsoort.slaapkamer,
+OPEN_KEUKEN_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+    }
 )
 
 
@@ -147,10 +143,10 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
             False  # buitenruimte of parkeervoorziening: een aanrecht telt hier niet mee
         )
 
-    if ruimte.detail_soort in (
+    if ruimte.detail_soort in {
         Ruimtedetailsoort.keuken,
         *OPEN_KEUKEN_DETAIL_SOORTEN,
-    ):
+    }:
         if not valide_aanrecht:
             warnings.warn(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >={AANRECHT_MINIMALE_LENGTE_MM}mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
