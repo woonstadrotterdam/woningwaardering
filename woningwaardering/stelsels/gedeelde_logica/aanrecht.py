@@ -12,6 +12,11 @@ from woningwaardering.vera.utils import get_bouwkundige_elementen
 # Wettekst Bijlage I A rubriek 5: aanrechtblad met aaneengesloten lengte van minimaal 1 m
 AANRECHT_MINIMALE_LENGTE_MM = 1000
 
+# Ruimten waarin een aanrecht geen voorziening van de woonruimte is.
+_AANRECHT_TELT_NIET_MEE_DETAIL_SOORTEN = (
+    BUITENRUIMTE_DETAIL_SOORTEN | PARKEERPLEK_DETAIL_SOORTEN
+)
+
 
 def is_valide_aanrechtlengte(lengte: float | None) -> bool:
     """Of een aanrechtlengte voldoet aan de minimale basisvoorziening (vanaf 1 m)."""
@@ -57,9 +62,8 @@ def telt_aanrecht_mee(ruimte: EenhedenRuimte) -> bool:
     # komen alle drie binnen als `Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen`.
     # Omdat we die soort moeten toelaten voor gemeenschappelijke keukens, kan
     # alleen de detailsoort ze uit elkaar houden.
-    if ruimte.detail_soort in BUITENRUIMTE_DETAIL_SOORTEN:
-        return False
-    if ruimte.detail_soort in PARKEERPLEK_DETAIL_SOORTEN:
-        return False
-    # backstop voor buitenruimte-detailsoorten buiten de lijst hierboven
-    return ruimte.soort != Ruimtesoort.buitenruimte
+    return (
+        ruimte.detail_soort not in _AANRECHT_TELT_NIET_MEE_DETAIL_SOORTEN
+        # backstop voor buitenruimte-detailsoorten buiten die verzameling
+        and ruimte.soort != Ruimtesoort.buitenruimte
+    )
