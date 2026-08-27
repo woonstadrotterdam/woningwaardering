@@ -12,7 +12,6 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
     AANRECHT_MINIMALE_LENGTE_MM,
     heeft_valide_aanrecht,
-    telt_aanrecht_mee,
 )
 from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
@@ -119,9 +118,8 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     Controleert of de ruimte een keuken is op basis van het aanrecht.
 
     Wettekst Bijlage I A rubriek 5 stelt eisen aan de keuken zelf, niet aan de
-    ruimte waarin die ligt. Elke ruimte waarin een aanrecht meetelt
-    (zie :func:`telt_aanrecht_mee`) is daarom een keuken zodra er een aanrecht
-    vanaf 1 meter aanwezig is.
+    ruimte waarin die ligt. Élke ruimte is daarom een keuken zodra er een
+    aanrecht vanaf 1 meter in staat, ook een buitenruimte of een parkeerplek.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte om te controleren.
@@ -137,11 +135,6 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
             UserWarning,
         )
         return False
-
-    if not telt_aanrecht_mee(ruimte):
-        return (
-            False  # buitenruimte of parkeervoorziening: een aanrecht telt hier niet mee
-        )
 
     if ruimte.detail_soort in {
         Ruimtedetailsoort.keuken,

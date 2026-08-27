@@ -18,24 +18,6 @@
           "lengte": 800
         }
       ]
-    },
-    {
-      "id": "balkon",
-      "soort": { "code": "BTR", "naam": "Buitenruimte" },
-      "detailSoort": { "code": "BAL", "naam": "Balkon" },
-      "naam": "Balkon",
-      "oppervlakte": 6.0,
-      "verwarmd": false,
-      "bouwkundigeElementen": [
-        {
-          "id": "aanrecht_balkon",
-          "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Balkon",
-          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
-          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
-          "lengte": 800
-        }
-      ]
     }
   ]
 }

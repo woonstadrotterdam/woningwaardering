@@ -12,7 +12,6 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
     is_valide_aanrechtlengte,
-    telt_aanrecht_mee,
 )
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
@@ -275,9 +274,6 @@ def _waardeer_toiletten(
 def _korte_aanrechten(
     ruimte: EenhedenRuimte,
 ) -> list[BouwkundigElementenBouwkundigElement]:
-    if not telt_aanrecht_mee(ruimte):
-        return []
-
     return [
         element
         for element in ruimte.bouwkundige_elementen or []
