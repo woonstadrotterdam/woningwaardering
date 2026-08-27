@@ -95,10 +95,6 @@ def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None
     daarom een open keuken, behalve de vertrekken uit
     :data:`GEEN_OPEN_KEUKEN_DETAIL_SOORTEN`.
 
-    Let op: `badkamer`, `badkamer_met_toilet` en `doucheruimte` zijn volgens
-    §2.2.1 altijd een vertrek, ongeacht hun oppervlakte. Zij staan mede daarom in
-    de uitsluitlijst: zij zouden anders punten krijgen zonder ooit aan de
-    vertrek-eisen van §2.2.1.2 te zijn getoetst.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte om te classificeren.
