@@ -29,7 +29,7 @@ from woningwaardering.vera.referentiedata import (
 )
 
 # Vertrek-detailsoorten die de keuken al in de naam hebben en daardoor voor
-# rubriek 3 altijd een open keuken zijn, ook zonder aanrecht in de invoer.
+# rubriek 3 altijd een open keuken zijn, ook zonder aanrecht in de input.
 # `keuken` zelf hoort hier niet bij: dat is een apart vertrek, geen open keuken.
 OPEN_KEUKEN_DETAIL_SOORTEN = frozenset(
     {
