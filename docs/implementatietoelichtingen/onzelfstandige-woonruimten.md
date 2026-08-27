@@ -692,9 +692,7 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
 > [!NOTE]
-> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in élke ruimte mee, zonder uitzondering: ook in een `bijkeuken`, `berging`, `garage` of `hal`, en ook in een buitenruimte of op een parkeerplek. Dezelfde grens geldt voor de spoelbak in een aanrecht korter dan 1 meter, die volgens [paragraaf 2.5.2](#252-punten-voor-basisvoorzieningen-keuken) als wastafel meetelt.
->
-> Wij leggen dus geen enkele beperking op aan de ruimte, omdat de bron die niet stelt. Een aanrecht van 2 meter op een balkon levert daarmee 7 keukenpunten op, naast de punten die het balkon zelf als buitenruimte krijgt. Twee van de vier eisen uit rubriek 5 — twee inbouwkasten en een waterdichte afwerking vanaf de vloer tot 1,50 meter — zijn buiten in de praktijk niet vervulbaar, maar die eisen kunnen wij niet uit het VERA-model toetsen en worden net als bij een keuken binnen als vervuld aangenomen. Lever een aanrecht daarom alleen aan bij een keuken die aan het basisniveau voldoet.
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
