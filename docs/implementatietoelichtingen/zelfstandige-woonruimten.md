@@ -1102,9 +1102,9 @@ Er is een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
 Gedeelde buitenruimten die als parkeerplek voor auto's bedoeld zijn, worden gewaardeerd volgens [rubriek 10](#210-gemeenschappelijke-parkeerruimten). Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
 > [!NOTE]
-> Parkeerplekken bij het complex worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III).
+> Type-detailsoorten (`PIP`, `PUP`, `PBD`, `PBC`) worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III).
 >
-> Een `carport` of `parkeerplaats` hoort bij de woning: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie [rubriek 10](#210-gemeenschappelijke-parkeerruimten) voor de typering.
+> Een `carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie [rubriek 10](#210-gemeenschappelijke-parkeerruimten) voor de typering.
 
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia's
 
@@ -1269,7 +1269,7 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 
 > [!NOTE]
-> Parkeerplekken bij het complex — `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III) — waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is toegewezen: zij liggen per definitie in een gemeenschappelijke parkeerruimte. Dit sluit aan bij de huurprijscheck van de Huurcommissie.
+> Type-detailsoorten — `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III) — waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is toegewezen. Dit sluit aan bij de huurprijscheck van de Huurcommissie.
 >
 > "Ten minste twee adressen" lezen we als `Eenhedenruimte.gedeeld_met_aantal_adressen` groter dan 1. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) voor de rubriek waarin een `carport` of `parkeerplaats` valt.
 
@@ -1297,7 +1297,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang en gebruiksrecht heeft.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_adressen` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_adressen` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere adressen.
 
 #### 2.10.5 Laadpalen
 

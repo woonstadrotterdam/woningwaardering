@@ -60,8 +60,7 @@ warning_configs = [
             UserWarning: "Gebruik Type I, II of III",
         },
     ),
-    # De waarschuwing hangt aan 'gemeenschappelijk', niet aan 'gewaardeerd': hij
-    # vuurt ook wanneer de plek onder de 12 m2 blijft en nul punten krijgt.
+    # Warning op detailsoort parkeerplaats, ook onder de 12 m²-eis.
     WarningConfig(
         file=f"{current_file_path}/input/gemeenschappelijk_onder_12m2.json",
         warnings={

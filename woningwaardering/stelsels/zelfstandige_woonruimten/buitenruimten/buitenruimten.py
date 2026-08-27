@@ -149,9 +149,8 @@ class Buitenruimten(Stelselgroep):
             )
             return
 
-        # Parkeerplekken bij het complex - Type I (PIP, PUP), Type II (PBD) en
-        # Type III (PBC) - liggen altijd in een gemeenschappelijke
-        # parkeergelegenheid en horen daarom altijd in rubriek 10, nooit hier.
+        # Type-detailsoorten (PIP, PUP, PBD, PBC) horen altijd in rubriek 10,
+        # nooit hier.
         if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
             logger.debug(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een Type I/II/III-parkeerplek en telt daarom niet mee voor {Woningwaarderingstelselgroep.buitenruimten.naam}."

@@ -4,7 +4,10 @@ from decimal import Decimal
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     MINIMALE_OPPERVLAKTE_PARKEERVAK,
     PARKEERTYPE_PUNTEN,
@@ -40,12 +43,10 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             de hiërarchie wordt opgebouwd.
 
     De waardering wordt bepaald op basis van het type parkeerplek (2.10.3):
-    - Type I (in een afgesloten parkeergarage bij het complex, in- of uitpandig:
-      `PIP`, `PUP`): 9 punten
-    - Type II (buiten bij het complex met dak: `PBD`, of een gemeenschappelijke
-      `carport`): 6 punten
-    - Type III (buiten bij het complex zonder dak: `PBC`, of een
-      gemeenschappelijke `parkeerplaats`): 4 punten
+    - Type I (in een afgesloten parkeergarage, in- of uitpandig: `PIP`, `PUP`):
+      9 punten
+    - Type II (`PBD`, of een gemeenschappelijke `carport`): 6 punten
+    - Type III (`PBC`, of een gemeenschappelijke `parkeerplaats`): 4 punten
 
     Extra punten:
     - +2 punten bij aanwezigheid van een laadpaal die exclusief is voor gebruik
@@ -54,11 +55,11 @@ def waardeer_gemeenschappelijke_parkeerruimte(
       gewaardeerd.
 
     Voorwaarden:
-    - Parkeerplekken bij het complex (`PIP`, `PUP`, `PBD`, `PBC`) worden hier
-      altijd gewaardeerd, privé of gemeenschappelijk: zij liggen altijd in een
-      gemeenschappelijke parkeergelegenheid.
-    - Een `carport` of `parkeerplaats` wordt hier alleen gewaardeerd wanneer zij
-      gemeenschappelijk is; privé hoort zij in rubriek 8 Buitenruimten.
+    - Type-detailsoorten (`PIP`, `PUP`, `PBD`, `PBC`) worden hier altijd
+      gewaardeerd, privé of gemeenschappelijk.
+    - Een `carport` of `parkeerplaats` (VERA-buitenruimte) wordt hier alleen
+      gewaardeerd wanneer zij gemeenschappelijk is; privé hoort zij in
+      rubriek 8 Buitenruimten.
     - De oppervlakte moet minimaal 12 m² zijn.
     - Het aantal punten wordt gedeeld door het aantal adressen en het aantal
       onzelfstandige woonruimten op het adres.
@@ -88,10 +89,8 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         )
         return
 
-    # De waarschuwing hangt aan 'gemeenschappelijk', niet aan 'gewaardeerd': een
-    # `parkeerplaats` is per definitie een privé-plek, dus een gemeenschappelijke
-    # plek hoort een van de Type-detailsoorten te krijgen. De waarschuwing vuurt
-    # daarom ook wanneer de plek onder de 12 m² blijft en nul punten krijgt.
+    # Bij een parkeerplaats in een gemeenschappelijke parkeerruimte
+    # hoort een Type-detailsoort. De warning vuurt ook onder de 12 m²-eis.
     if (
         ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
         and is_gemeenschappelijke_parkeerruimte(ruimte)
@@ -106,16 +105,9 @@ def waardeer_gemeenschappelijke_parkeerruimte(
         return
 
     if ruimte.gedeeld_met_aantal_adressen is None:
-        # Zonder het aantal adressen is de deler onbekend. We kennen hier dan
-        # geen punten toe in plaats van de plek als niet-gedeeld te waarderen:
-        # dat zou bij een in werkelijkheid gedeelde plek het volle puntenaantal
-        # aan elk adres toekennen. De laadpaal valt terug op rubriek 12, omdat
-        # `krijgt_punten_in_gemeenschappelijke_parkeerruimten` deze ruimte niet
-        # als gewaardeerd beschouwt.
         warnings.warn(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is. 'gedeeld_met_aantal_adressen' op 0 of 1 wordt beschouwd als niet gedeeld."
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen 'gedeeld_met_aantal_adressen'. De waardering gaat uit van 1 (niet gedeeld). Zet 'gedeeld_met_aantal_adressen' >= 2 wanneer de ruimte gedeeld is."
         )
-        return
 
     if not voldoet_aan_oppervlakte_eis(ruimte):
         # 2.10.3 Een parkeerplek heeft een oppervlakte van minimaal 12 m².
@@ -145,17 +137,23 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     aantal_plekken = int(ruimte.aantal or 1)
     punten = PARKEERTYPE_PUNTEN[type_parkeerruimte]
     totaal_punten_type_parkeeruimte = punten * Decimal(aantal_plekken) / deler
+    weergavenaam = _weergavenaam(ruimte)
+    criterium_id = _parkeer_criterium_id(weergavenaam, type_parkeerruimte)
 
     logger.info(
         f"Ruimte '{ruimte.naam}' ({ruimte.id}) wordt gewaardeerd als parkeerplek '{type_parkeerruimte}'."
     )
 
-    gedeeld_met_laag.met_onderliggend(
-        id=ruimte.id,
-        naam=type_parkeerruimte,
+    plek = gedeeld_met_laag.met_onderliggend(
+        id=criterium_id,
+        naam=f"{weergavenaam} ({type_parkeerruimte})",
         meeteenheid=Meeteenheid.stuks,
+        hergebruik=True,
+    )
+    _tel_op(
+        plek,
         aantal=aantal_plekken,
-        punten=utils.rond_af(totaal_punten_type_parkeeruimte, decimalen=2),
+        punten=totaal_punten_type_parkeeruimte,
     )
 
     # 2.10.5 Laadpalen: 2 extra punten per laadpaal, gedeeld door dezelfde deler.
@@ -167,10 +165,54 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft {laadpalen} laadpaal/laadpalen bij '{type_parkeerruimte}'."
         )
 
-        gedeeld_met_laag.met_onderliggend(
-            id=f"{ruimte.id}_laadpaal",
+        laadpaal = gedeeld_met_laag.met_onderliggend(
+            id=f"{criterium_id}_laadpaal",
             naam="Laadpaal",
             meeteenheid=Meeteenheid.stuks,
-            aantal=laadpalen,
-            punten=utils.rond_af(totaal_punten_laadpaal, decimalen=2),
+            hergebruik=True,
         )
+        _tel_op(laadpaal, aantal=laadpalen, punten=totaal_punten_laadpaal)
+
+
+def _weergavenaam(ruimte: EenhedenRuimte) -> str:
+    """Naam van de parkeerplek in de output: `ruimte.naam`, anders de detailsoort.
+
+    Args:
+        ruimte (EenhedenRuimte): De parkeerruimte.
+
+    Returns:
+        str: De weergavenaam.
+    """
+    if ruimte.naam:
+        return ruimte.naam
+    if ruimte.detail_soort is not None and ruimte.detail_soort.naam:
+        return ruimte.detail_soort.naam
+    return ruimte.id or "onbekend"
+
+
+def _parkeer_criterium_id(weergavenaam: str, type_parkeerruimte: str) -> str:
+    """Stabiel id-segment voor een gegroepeerde parkeerplek (weergavenaam + Type).
+
+    Args:
+        weergavenaam (str): De naam in de output.
+        type_parkeerruimte (str): Type I, II of III.
+
+    Returns:
+        str: Het id-segment.
+    """
+    return f"{weergavenaam}_{type_parkeerruimte}".lower().replace(" ", "_")
+
+
+def _tel_op(waardering: WaarderingBuilder, *, aantal: int, punten: Decimal) -> None:
+    """Tel aantal en punten op bij een bestaande (hergebruikte) waardering.
+
+    Args:
+        waardering (WaarderingBuilder): De waardering die wordt bijgewerkt.
+        aantal (int): Het aantal plekken of laadpalen om op te tellen.
+        punten (Decimal): De punten om op te tellen.
+    """
+    waardering.aantal = int(waardering.aantal or 0) + aantal
+    waardering.punten = utils.rond_af(
+        Decimal(str(waardering.punten or 0)) + punten,
+        decimalen=2,
+    )

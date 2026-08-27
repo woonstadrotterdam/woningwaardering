@@ -22,8 +22,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__1",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__parkeerplek_in_inpandige_afgesloten_parkeergarage_type_i",
+            "naam": "Parkeerplek in inpandige afgesloten parkeergarage (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
@@ -37,8 +37,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__2",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__parkeerplek_in_uitpandige_afgesloten_parkeergarage_type_i",
+            "naam": "Parkeerplek in uitpandige afgesloten parkeergarage (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
@@ -52,8 +52,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__3",
-            "naam": "Type II",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__parkeerplek_buiten_met_dak_type_ii",
+            "naam": "Parkeerplek buiten met dak (Type II)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },
@@ -67,8 +67,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__4",
-            "naam": "Type III",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen__parkeerplek_buiten_type_iii",
+            "naam": "Parkeerplek buiten (Type III)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_10_adressen"
             },

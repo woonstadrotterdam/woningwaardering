@@ -22,8 +22,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__carport_3_adressen",
-            "naam": "Type II",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__carport_type_ii",
+            "naam": "Carport (Type II)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
             },
@@ -37,7 +37,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__carport_3_adressen_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__carport_type_ii_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
@@ -52,8 +52,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplaats_3_adressen",
-            "naam": "Type III",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplaats_type_iii",
+            "naam": "Parkeerplaats (Type III)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
             },
@@ -67,7 +67,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplaats_3_adressen_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplaats_type_iii_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"

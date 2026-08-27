@@ -55,13 +55,15 @@ Als uitbreiding op de referentiedata zijn er verschillende parkeerruimten (`Ruim
 
 | `Ruimtedetailsoort` | Code | Wettekst-criterium | Type |
 | --- | --- | --- | --- |
-| `parkeerplek_in_inpandige_afgesloten_parkeergarage` | `PIP` | in een afgesloten parkeergarage bij het complex | Type I |
-| `parkeerplek_in_uitpandige_afgesloten_parkeergarage` | `PUP` | in een afgesloten parkeergarage bij het complex | Type I |
-| `parkeerplek_buiten_met_dak_behorend_bij_complex` | `PBD` | buiten bij het complex, met dak | Type II |
-| `parkeerplek_buiten_behorend_bij_complex` | `PBC` | buiten bij het complex, zonder dak | Type III |
+| `parkeerplek_in_inpandige_afgesloten_parkeergarage` | `PIP` | in een afgesloten parkeergarage | Type I |
+| `parkeerplek_in_uitpandige_afgesloten_parkeergarage` | `PUP` | in een afgesloten parkeergarage | Type I |
+| `parkeerplek_buiten_met_dak_behorend_bij_complex` | `PBD` | buiten met dak | Type II |
+| `parkeerplek_buiten_behorend_bij_complex` | `PBC` | buiten zonder dak | Type III |
 
 > [!NOTE]
-> `PIP`, `PUP`, `PBD` en `PBC` zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht: de plek kan specifiek aan één adres zijn toegewezen (privé) of gedeeld worden. In beide gevallen staat zij in een gemeenschappelijke parkeergelegenheid en wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd.
+> `PIP`, `PUP`, `PBD` en `PBC` zijn Type-detailsoorten: zij zeggen iets over de **parkeergelegenheid**, niet over het gebruiksrecht. De plek kan aan één adres zijn toegewezen (privé) of gedeeld worden; in beide gevallen wordt zij in [rubriek 10](zelfstandige-woonruimten.md#210-gemeenschappelijke-parkeerruimten) gewaardeerd.
+>
+> Type II/III in de wettekst zijn "buiten behorende tot het complex of de woning". Locatie is geen typecriterium. `carport` en `parkeerplaats` zijn de VERA-buitenruimten daarvoor (privé in rubriek 8, gemeenschappelijk in rubriek 10). `PBD` en `PBC` vullen het gat dat VERA niet dekt: een Type II/III-plek in een gemeenschappelijke parkeergelegenheid. De codes `PBD`/`PBC` blijven staan omdat hernoemen de referentiedata zou breken.
 
 > [!NOTE]
 > `Ruimtedetailsoort.parkeerplaats` (`PAR`) is in de VERA-referentiedata omschreven als "Eigen parkeerplaats of oprit bij de woning" en is dus per definitie een privé-plek. Gebruik voor een gemeenschappelijke parkeerplek een van de Type-detailsoorten hierboven. Wordt een `parkeerplaats` toch als gemeenschappelijk meegegeven, dan volgt een `UserWarning` en waarderen we de plek als Type III.

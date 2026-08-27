@@ -13,6 +13,8 @@ import pytest
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    PARKEERTYPE_ALTIJD_GPA,
+    PARKEERTYPE_BUI_OF_GPA,
     hoort_altijd_in_gemeenschappelijke_parkeerruimten,
     hoort_prive_in_buitenruimten,
     is_gemeenschappelijke_parkeerruimte,
@@ -48,20 +50,6 @@ from woningwaardering.vera.referentiedata import (
     Ruimtesoort,
 )
 
-# Parkeerplekken bij het complex: altijd rubriek 10, privé of gemeenschappelijk.
-PARKEERPLEKKEN_BIJ_COMPLEX = [
-    Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
-    Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
-    Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex,
-    Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
-]
-
-# Parkeerruimten bij de woning: privé rubriek 8, gemeenschappelijk rubriek 10.
-PARKEERRUIMTEN_BIJ_DE_WONING = [
-    Ruimtedetailsoort.carport,
-    Ruimtedetailsoort.parkeerplaats,
-]
-
 RUBRIEK_8 = "buitenruimten"
 RUBRIEK_10 = "gemeenschappelijke_parkeerruimten"
 RUBRIEK_12 = "bijzondere_voorzieningen"
@@ -96,7 +84,7 @@ def maak_parkeerruimte(
         naam=detailsoort.naam,
         soort=(
             Ruimtesoort.buitenruimte
-            if detailsoort in PARKEERRUIMTEN_BIJ_DE_WONING
+            if detailsoort in PARKEERTYPE_BUI_OF_GPA
             else Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen
         ),
         detailSoort=detailsoort,
@@ -193,13 +181,13 @@ def test_is_prive(
     assert is_gemeenschappelijke_parkeerruimte(ruimte) is not verwacht_prive
 
 
-@pytest.mark.parametrize("detailsoort", PARKEERPLEKKEN_BIJ_COMPLEX)
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_ALTIJD_GPA)
 def test_hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) -> None:
     assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is True
     assert hoort_prive_in_buitenruimten(detailsoort) is False
 
 
-@pytest.mark.parametrize("detailsoort", PARKEERRUIMTEN_BIJ_DE_WONING)
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_BUI_OF_GPA)
 def test_hoort_prive_in_buitenruimten(detailsoort) -> None:
     assert hoort_prive_in_buitenruimten(detailsoort) is True
     assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is False
@@ -214,11 +202,11 @@ def test_deler() -> None:
     assert deler(ruimte) == Decimal("12")
 
 
-@pytest.mark.parametrize("detailsoort", PARKEERPLEKKEN_BIJ_COMPLEX)
-def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_complex(
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_ALTIJD_GPA)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_altijd_gpa(
     detailsoort,
 ) -> None:
-    """Plekken bij het complex liggen altijd in een gemeenschappelijke parkeergelegenheid (regel 1)."""
+    """``PARKEERTYPE_ALTIJD_GPA`` horen altijd in rubriek 10 (regel 1)."""
     prive = maak_parkeerruimte(detailsoort)
     gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
     assert wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(prive) is True
@@ -228,11 +216,11 @@ def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_complex(
     )
 
 
-@pytest.mark.parametrize("detailsoort", PARKEERRUIMTEN_BIJ_DE_WONING)
-def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_de_woning(
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_BUI_OF_GPA)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bui_of_gpa(
     detailsoort,
 ) -> None:
-    """Parkeerruimten bij de woning gaan privé naar rubriek 8, gemeenschappelijk naar 10 (regel 2)."""
+    """``PARKEERTYPE_BUI_OF_GPA`` gaan privé naar rubriek 8, gemeenschappelijk naar 10 (regel 2)."""
     prive = maak_parkeerruimte(detailsoort)
     gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
     gedeeld_met_onzelfstandig = maak_parkeerruimte(
@@ -251,9 +239,10 @@ def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bij_de_woning(
     )
 
 
-# --- Geen dubbeltelling over de rubrieken heen ----------------------------------
-
-DETAILSOORTEN = PARKEERPLEKKEN_BIJ_COMPLEX + PARKEERRUIMTEN_BIJ_DE_WONING
+# Cartesisch product van detailsoort × oppervlakte × adressen × onzelfstandige
+# woonruimten: geen combinatie mag in meer dan één rubriek punten krijgen, en
+# een laadpaal valt altijd in precies één rubriek.
+DETAILSOORTEN = list(PARKEERTYPE_ALTIJD_GPA) + list(PARKEERTYPE_BUI_OF_GPA)
 OPPERVLAKTEN = [10.0, 12.0, 15.0]
 AANTALLEN_ADRESSEN = [1, 3]
 AANTALLEN_ONZELFSTANDIGE_WOONRUIMTEN = [1, 4]
@@ -443,12 +432,10 @@ def test_laadpaalpunten_zijn_gelijk_aan_weerszijden_van_de_12m2_grens(
 
 
 @pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
-def test_zonder_aantal_adressen_geen_punten_in_rubriek_10(stelsel) -> None:
-    """Zonder ``gedeeld_met_aantal_adressen`` is de deler onbekend.
+def test_zonder_aantal_adressen_waardeert_als_niet_gedeeld(stelsel) -> None:
+    """Zonder ``gedeeld_met_aantal_adressen`` waarschuwen we en waarderen we met deler 1.
 
-    We kennen dan geen punten toe in plaats van de plek als niet-gedeeld te
-    waarderen: dat zou bij een in werkelijkheid gedeelde plek het volle
-    puntenaantal aan elk adres toekennen. De laadpaal valt terug op rubriek 12.
+    De laadpaal blijft bij de plek in rubriek 10.
     """
     ruimte = maak_parkeerruimte(
         Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
@@ -461,12 +448,12 @@ def test_zonder_aantal_adressen_geen_punten_in_rubriek_10(stelsel) -> None:
     with pytest.warns(UserWarning, match="gedeeld_met_aantal_adressen"):
         rubriek_10 = som_punten(stelsel, RUBRIEK_10, eenheid)
 
-    assert rubriek_10 == Decimal("0")
+    assert rubriek_10 == Decimal("12")  # 2 plekken × 4 pt + 2 laadpalen × 2 pt
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", UserWarning)
         basis = som_punten(stelsel, RUBRIEK_12, maak_eenheid(maak_referentie_tuin()))
         rubriek_12 = som_punten(stelsel, RUBRIEK_12, eenheid)
-    assert rubriek_12 - basis == Decimal("4")  # 2 plekken x 1 laadpaal x 2 punten
+    assert rubriek_12 - basis == Decimal("0")
 
 
 @pytest.mark.filterwarnings("ignore::UserWarning")

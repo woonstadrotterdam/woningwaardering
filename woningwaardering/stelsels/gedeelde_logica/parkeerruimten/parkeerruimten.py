@@ -41,32 +41,32 @@ PARKEERTYPE_PUNTEN: dict[str, Decimal] = {
     TYPE_III: Decimal("4.0"),
 }
 
-# Parkeerplekken bij het complex. Zij liggen per definitie in een
-# gemeenschappelijke parkeergelegenheid en worden daarom altijd in rubriek 10
-# gewaardeerd, ook wanneer de plek zelf aan één adres is toegewezen.
+# `PIP`, `PUP`, `PBD`, `PBC`: altijd GPA (rubriek 10), ook wanneer de plek aan
+# één adres is toegewezen.
 #
 # Het type volgt de wettekst: bepalend is of de plek in een afgesloten
 # parkeergarage ligt (Type I) en anders of zij een dak heeft (Type II) of niet
 # (Type III). In- of uitpandig maakt voor het type niets uit, en daarom leveren
-# `PIP` en `PUP` allebei Type I op.
-PARKEERTYPE_BIJ_COMPLEX: dict[Referentiedata, str] = {
+# `PIP` en `PUP` allebei Type I; `carport` en `parkeerplaats` gaan privé naar BUI of gemeenschappelijk
+# naar GPA (zie `PARKEERTYPE_BUI_OF_GPA`).
+PARKEERTYPE_ALTIJD_GPA: dict[Referentiedata, str] = {
     Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage: TYPE_I,
     Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage: TYPE_I,
     Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex: TYPE_II,
     Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex: TYPE_III,
 }
 
-# Parkeerruimten bij de woning: privé horen zij in rubriek 8, gemeenschappelijk
-# in rubriek 10. Een gemeenschappelijke carport telt daar als Type II (2.10.3:
+# `carport` en `parkeerplaats`: privé BUI (rubriek 8), gemeenschappelijk GPA
+# (rubriek 10). Een gemeenschappelijke carport telt daar als Type II (2.10.3:
 # "hieronder telt een carport"), een gemeenschappelijke parkeerplaats als Type
 # III (met een UserWarning, omdat `parkeerplaats` een privé-detailsoort is).
-PARKEERTYPE_BIJ_DE_WONING: dict[Referentiedata, str] = {
+PARKEERTYPE_BUI_OF_GPA: dict[Referentiedata, str] = {
     Ruimtedetailsoort.carport: TYPE_II,
     Ruimtedetailsoort.parkeerplaats: TYPE_III,
 }
 
 # Deze parkeergelegenheden zijn vervallen en worden vervangen door de
-# parkeerplekken bij het complex:
+# Type-detailsoorten:
 # https://github.com/Aedes-datastandaarden/vera-referentiedata/issues/110#issuecomment-2190641829
 VERVALLEN_PARKEERGARAGE_DETAILSOORTEN: list[Referentiedata] = [
     Ruimtedetailsoort.open_parkeergarage_niet_specifieke_plek,
@@ -86,22 +86,19 @@ PUNTEN_PER_LAADPAAL = Decimal("2.0")
 def hoort_altijd_in_gemeenschappelijke_parkeerruimten(
     detail_soort: Referentiedata | None,
 ) -> bool:
-    """Of de detailsoort een parkeerplek bij het complex is.
+    """Of de detailsoort een Type I/II/III-detailsoort is (`PIP`, `PUP`, `PBD`, `PBC`).
 
-    Dit zijn Type I (`PIP`, `PUP`), Type II (`PBD`) en Type III (`PBC`). Zij
-    liggen altijd in een gemeenschappelijke parkeergelegenheid en worden daarom
-    altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
+    Zij worden altijd in rubriek 10 gewaardeerd, privé of gemeenschappelijk.
     """
-    return detail_soort in PARKEERTYPE_BIJ_COMPLEX
+    return detail_soort in PARKEERTYPE_ALTIJD_GPA
 
 
 def hoort_prive_in_buitenruimten(detail_soort: Referentiedata | None) -> bool:
-    """Of de detailsoort een parkeerruimte bij de woning is.
+    """Of de detailsoort een VERA-buitenruimte is (`carport` of `parkeerplaats`).
 
-    Dit zijn `carport` en `parkeerplaats`. Zij gaan privé naar rubriek 8 en
-    gemeenschappelijk naar rubriek 10.
+    Zij gaan privé naar rubriek 8 en gemeenschappelijk naar rubriek 10.
     """
-    return detail_soort in PARKEERTYPE_BIJ_DE_WONING
+    return detail_soort in PARKEERTYPE_BUI_OF_GPA
 
 
 def is_parkeerruimte(detail_soort: Referentiedata | None) -> bool:
@@ -135,7 +132,7 @@ def parkeertype(ruimte: EenhedenRuimte) -> str | None:
         or not wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(ruimte)
     ):
         return None
-    return PARKEERTYPE_BIJ_COMPLEX.get(detail_soort) or PARKEERTYPE_BIJ_DE_WONING.get(
+    return PARKEERTYPE_ALTIJD_GPA.get(detail_soort) or PARKEERTYPE_BUI_OF_GPA.get(
         detail_soort
     )
 
@@ -145,9 +142,9 @@ def wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
 ) -> bool:
     """Of de ruimte in rubriek 10 hoort (los van de 12 m²-eis).
 
-    Parkeerplekken bij het complex horen er altijd in; parkeerruimten bij de
-    woning alleen wanneer ze gemeenschappelijk zijn. Overige ruimtedetailsoorten
-    vallen buiten de parkeerregels.
+    Type-detailsoorten (`PIP`, `PUP`, `PBD`, `PBC`) horen er altijd in;
+    `carport` en `parkeerplaats` alleen wanneer ze gemeenschappelijk zijn.
+    Overige ruimtedetailsoorten vallen buiten de parkeerregels.
     """
     if hoort_altijd_in_gemeenschappelijke_parkeerruimten(ruimte.detail_soort):
         return True
@@ -173,14 +170,12 @@ def krijgt_punten_in_gemeenschappelijke_parkeerruimten(ruimte: EenhedenRuimte) -
     Dit bepaalt tevens waar de laadpaal wordt gewaardeerd: in rubriek 10 als de
     ruimte daar punten krijgt, anders in rubriek 12.
 
-    Zonder ``gedeeld_met_aantal_adressen`` is de deler onbekend en kent rubriek
-    10 geen punten toe; de laadpaal valt dan terug op rubriek 12.
+    Ontbreekt ``gedeeld_met_aantal_adressen``, dan wordt de deler als 1 gelezen
+    (niet gedeeld), gelijk aan ``utils.deler``.
     """
-    return (
-        wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(ruimte)
-        and ruimte.gedeeld_met_aantal_adressen is not None
-        and voldoet_aan_oppervlakte_eis(ruimte)
-    )
+    return wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
+        ruimte
+    ) and voldoet_aan_oppervlakte_eis(ruimte)
 
 
 def aantal_laadpalen(ruimte: EenhedenRuimte) -> int:

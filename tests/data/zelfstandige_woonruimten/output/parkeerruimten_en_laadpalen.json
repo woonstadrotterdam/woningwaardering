@@ -396,8 +396,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__prive__pip_prive",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__prive__parkeerplek_in_inpandige_afgesloten_parkeergarage_1_type_i",
+            "naam": "Parkeerplek in inpandige afgesloten parkeergarage 1 (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__prive"
             },
@@ -411,7 +411,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__prive__pip_prive_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__prive__parkeerplek_in_inpandige_afgesloten_parkeergarage_1_type_i_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__prive"
@@ -426,8 +426,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__prive__pup_prive",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__prive__parkeerplek_in_uitpandige_afgesloten_parkeergarage_type_i",
+            "naam": "Parkeerplek in uitpandige afgesloten parkeergarage (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__prive"
             },
@@ -447,8 +447,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__pip_3_adressen",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplek_in_inpandige_afgesloten_parkeergarage_2_type_i",
+            "naam": "Parkeerplek in inpandige afgesloten parkeergarage 2 (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
             },
@@ -462,7 +462,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__pip_3_adressen_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplek_in_inpandige_afgesloten_parkeergarage_2_type_i_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
@@ -477,8 +477,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__pbc_3_adressen",
-            "naam": "Type III",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplek_buiten_behorend_bij_complex_type_iii",
+            "naam": "Parkeerplek buiten behorend bij complex (Type III)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
             },
@@ -492,7 +492,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__pbc_3_adressen_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplek_buiten_behorend_bij_complex_type_iii_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
@@ -507,8 +507,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__pbd_3_adressen",
-            "naam": "Type II",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen__parkeerplek_buiten_met_dak_behorend_bij_complex_type_ii",
+            "naam": "Parkeerplek buiten met dak behorend bij complex (Type II)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_adressen"
             },
