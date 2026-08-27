@@ -119,7 +119,7 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
 
     Wettekst Bijlage I A rubriek 5 stelt eisen aan de keuken zelf, niet aan de
     ruimte waarin die ligt. Élke ruimte is daarom een keuken zodra er een
-    aanrecht vanaf 1 meter in staat, ook een buitenruimte of een parkeerplek.
+    aanrecht vanaf 1 meter in staat.
 
     Args:
         ruimte (EenhedenRuimte): De ruimte om te controleren.
