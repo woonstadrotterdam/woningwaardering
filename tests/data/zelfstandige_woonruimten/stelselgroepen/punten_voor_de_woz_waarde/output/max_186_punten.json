@@ -11,7 +11,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 66.0,
+      "punten": 66.25,
       "woningwaarderingen": [
         {
           "aantal": 713900.0,
@@ -85,7 +85,7 @@
             "id": "punten_voor_de_woz_waarde__maximering_woz_punten",
             "naam": "Maximering WOZ-punten tot 186 punten totaal"
           },
-          "punten": -29.75
+          "punten": -29.5
         },
         {
           "criterium": {

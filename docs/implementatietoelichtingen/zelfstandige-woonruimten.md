@@ -1529,6 +1529,9 @@ Daarnaast wordt in nog twee andere gevallen de 'cap op de WOZ' niet toegepast, n
 
 Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
 
+> [!NOTE]
+> De 187-drempel toetsen we op het totaal na kwartafronding, zonder tussentijdse afronding: de som van de rubriektotalen (per paragraaf 2.1.4 al exact op kwartpunten) gebruiken we onafgerond als grondslag voor zowel de drempel als de 33%-berekening. De hele-puntafronding van paragraaf 2.1.5 geldt alleen voor het eindtotaal.
+
 **Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 
 |                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |

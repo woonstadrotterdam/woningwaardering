@@ -286,14 +286,19 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return
 
-        # Bereken de overige punten door de punten van alle groepen op te tellen, afgerond op 0 decimalen
-        overige_punten = utils.rond_af(
-            sum(
-                Decimal(str(groep.punten)) or Decimal("0")
+        # De rubriektotalen zijn per §2.1.4 al op kwartpunten afgerond; hun som is
+        # dus exact. De hele-puntafronding geldt per §2.1.5 alleen voor het
+        # eindtotaal: "Het puntentotaal per woning wordt na eindsaldering (met
+        # inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele
+        # punten." Tussentijds afronden zou de 187-drempel en de 33%-grondslag
+        # kunnen doen omslaan.
+        overige_punten = sum(
+            (
+                Decimal(str(groep.punten))
                 for groep in woningwaardering_resultaat.groepen or []
                 if groep.punten
             ),
-            0,
+            Decimal("0"),
         )
 
         # §2.11.7 / §2.1.4 [ZEL]: 187-drempel op totaal na kwartafronding, niet op afgeronde WOZ.
