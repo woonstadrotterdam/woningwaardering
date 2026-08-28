@@ -811,11 +811,15 @@ def som_punten_waarderingen(
 def voeg_stelselgroep_afronding_toe(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
     *,
-    onafgerond: Decimal,
     afgerond: Decimal,
     stelselgroep: Referentiedata,
 ) -> None:
     """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
+
+    De waarderingen staan in de output op twee decimalen, terwijl het
+    stelselgroeptotaal uit de onafgeronde punten volgt. Het verschil komt op de
+    Afronding op kwartpunten, zodat de puntenkolom altijd optelt tot het
+    stelselgroeptotaal.
 
     Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
     """
@@ -823,7 +827,7 @@ def voeg_stelselgroep_afronding_toe(
     if not any(w.punten is not None for w in waarderingen):
         return
 
-    delta = afgerond - onafgerond
+    delta = afgerond - som_punten_waarderingen(waarderingen)
     if delta == Decimal("0"):
         return
 

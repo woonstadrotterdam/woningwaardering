@@ -63,3 +63,5 @@ Meestal draagt een subgroep zelf geen punten; die staan op de onderliggende waar
 In de praktijk begin je met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang je daar waarderingen en eventuele groeperende lagen onder, en sluit je af met `build()`.
 
 `build()` telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Ontstaat door die afronding een verschil tussen de som van de waarderingen en het stelselgroeptotaal, dan voegen we dat verschil toe als waardering **Afronding op kwartpunten**. Het eindresultaat is een `WoningwaarderingResultatenWoningwaarderingGroep`.
+
+Punten worden in de output op twee decimalen vastgelegd. Het stelselgroeptotaal wordt daarentegen berekend uit de onafgeronde punten: tussentijds afronden zou het kwartpunt kunnen verschuiven, en het beleidsboek schrijft die afronding niet voor. **Afronding op kwartpunten** sluit het verschil tussen de som van de vastgelegde waarderingen en het stelselgroeptotaal, zodat de puntenkolom van een stelselgroep in zowel de output als het rapport optelt tot het totaal. `tests/utils.py` bewaakt beide invarianten.
