@@ -96,39 +96,3 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
     assert "nieuwbouw_minimum_punten" not in segmenten
-
-
-def test_stel_woz_totaal_in_gebruikt_onafgeronde_onderdelen():
-    """#328: rubriektotaal volgt onafgeronde I+II, zonder tussentijdse afronding.
-
-    Met afronding op twee decimalen zou 2,95 + 7,18 = 10,13 zijn en het
-    rubriektotaal op 10,25 punten uitkomen in plaats van op 10,00.
-    """
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    builder = WaarderingsgroepBuilder(
-        Woningwaarderingstelsel.zelfstandige_woonruimten,
-        Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
-    )
-    punten_onderdeel_I = Decimal("2.94915654")
-    punten_onderdeel_II = Decimal("7.17566015")
-    builder.met_onderliggend(
-        id="onderdeel_I",
-        naam="Onderdeel I",
-        punten=float(punten_onderdeel_I),
-    )
-    builder.met_onderliggend(
-        id="onderdeel_II",
-        naam="Onderdeel II",
-        punten=float(punten_onderdeel_II),
-    )
-
-    groep = builder.build()
-    svc._stel_woz_totaal_in(groep, punten_onderdeel_I, punten_onderdeel_II)
-
-    assert groep.punten == 10.0
-    onderdeel_i = next(
-        w
-        for w in groep.woningwaarderingen or []
-        if w.criterium and w.criterium.id.endswith("__onderdeel_I")
-    )
-    assert onderdeel_i.punten == float(punten_onderdeel_I)

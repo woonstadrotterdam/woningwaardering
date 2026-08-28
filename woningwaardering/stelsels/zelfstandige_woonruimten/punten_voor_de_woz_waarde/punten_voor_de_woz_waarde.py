@@ -10,7 +10,6 @@ from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import voeg_stelselgroep_afronding_toe
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
@@ -241,9 +240,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        self._stel_woz_totaal_in(
-            woningwaardering_groep, punten_onderdeel_I, punten_onderdeel_II
-        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -339,49 +335,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     naam="Maximering WOZ-punten tot 33% van totaal",
                     punten=float(correctie_punten),
                 )
-
-    def _stel_woz_totaal_in(
-        self,
-        groep: WoningwaarderingResultatenWoningwaarderingGroep,
-        punten_onderdeel_I: Decimal,
-        punten_onderdeel_II: Decimal,
-    ) -> None:
-        """Zet groepspunten en afronding op basis van de onafgeronde onderdelen I en II.
-
-        Onderdeel I en II worden onafgerond in de output gezet (§2.11.2); het
-        rubriektotaal is de som daarvan, afgerond op een kwart punt (§2.1.4).
-        """
-        correctie_ids = {
-            f"{self.stelselgroep.name}__nieuwbouw_minimum_punten",
-            f"{self.stelselgroep.name}__maximering_woz_punten",
-        }
-        afronding_id = f"{self.stelselgroep.name}__afronding_op_kwartpunten"
-
-        correcties = Decimal("0")
-        display_onafgerond = Decimal("0")
-        waarderingen_zonder_afronding = []
-
-        for waardering in groep.woningwaarderingen or []:
-            if waardering.criterium and waardering.criterium.id == afronding_id:
-                continue
-            waarderingen_zonder_afronding.append(waardering)
-            if waardering.punten is None:
-                continue
-            punten = Decimal(str(waardering.punten))
-            display_onafgerond += punten
-            if waardering.criterium and waardering.criterium.id in correctie_ids:
-                correcties += punten
-
-        onafgerond = punten_onderdeel_I + punten_onderdeel_II + correcties
-        afgerond = utils.rond_af_op_kwart(onafgerond)
-        groep.punten = float(afgerond)
-        groep.woningwaarderingen = waarderingen_zonder_afronding
-        voeg_stelselgroep_afronding_toe(
-            groep,
-            onafgerond=display_onafgerond,
-            afgerond=afgerond,
-            stelselgroep=self.stelselgroep,
-        )
 
     def _cap_punten(
         self,
