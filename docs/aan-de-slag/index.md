@@ -577,7 +577,7 @@ with open(
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 45.27
+          "punten": 45.2736643
         },
         {
           "aantal": 15329.0,
@@ -598,7 +598,7 @@ with open(
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 19.38
+          "punten": 19.3768148
         },
         {
           "aantal": 148.0,
@@ -633,7 +633,7 @@ with open(
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.1
+          "punten": 0.0995209
         }
       ]
     },
@@ -1149,7 +1149,7 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 45.27
+          "punten": 45.2736643
         },
         {
           "aantal": 15329.0,
@@ -1170,7 +1170,7 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 69.95
+          "punten": 69.9455756
         },
         {
           "aantal": 41.0,
@@ -1205,7 +1205,7 @@ De output daarvan is een VERA woningwaarderingstelsel object.
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.03
+          "punten": 0.03076
         }
       ]
     },

@@ -185,7 +185,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         onderdeel_i = waarderingsgroep_builder.met_onderliggend(
             id="onderdeel_I",
             naam="Onderdeel I",
-            punten=float(utils.rond_af(punten_onderdeel_I, 2)),
+            # 2.11.2 Punten voor de WOZ-waarde: "Rond dit puntenaantal niet af."
+            punten=float(punten_onderdeel_I),
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -206,7 +207,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         onderdeel_ii = waarderingsgroep_builder.met_onderliggend(
             id="onderdeel_II",
             naam="Onderdeel II",
-            punten=float(utils.rond_af(punten_onderdeel_II, 2)),
+            # 2.11.2 Punten voor de WOZ-waarde: "Rond dit puntenaantal niet af."
+            punten=float(punten_onderdeel_II),
         )
 
         # indien de minimumwaarde wordt gebruikt, toon dit in de resultaten
@@ -326,7 +328,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 waarderingsgroep_builder.met_onderliggend(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 186 punten totaal",
-                    punten=utils.rond_af(correctie_punten, 2),
+                    punten=float(correctie_punten),
                 )
             else:
                 logger.info(
@@ -335,7 +337,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 waarderingsgroep_builder.met_onderliggend(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 33% van totaal",
-                    punten=utils.rond_af(correctie_punten, 2),
+                    punten=float(correctie_punten),
                 )
 
     def _stel_woz_totaal_in(
@@ -344,10 +346,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         punten_onderdeel_I: Decimal,
         punten_onderdeel_II: Decimal,
     ) -> None:
-        """Zet groepspunten en afronding op basis van onafgeronde I/II en weergavecriteria.
+        """Zet groepspunten en afronding op basis van de onafgeronde onderdelen I en II.
 
-        Onderdeel I en II worden in de output op 2 decimalen getoond (§2.11.2),
-        maar het rubriektotaal volgt de onafgeronde som vóór kwartafronding.
+        Onderdeel I en II worden onafgerond in de output gezet (§2.11.2); het
+        rubriektotaal is de som daarvan, afgerond op een kwart punt (§2.1.4).
         """
         correctie_ids = {
             f"{self.stelselgroep.name}__nieuwbouw_minimum_punten",
