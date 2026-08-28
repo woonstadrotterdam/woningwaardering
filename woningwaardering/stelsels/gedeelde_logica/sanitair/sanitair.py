@@ -129,12 +129,6 @@ def _bad_en_douche_punten(
     return _BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG
 
 
-def _aantal_douches(installaties: Counter[Referentiedata]) -> int:
-    return sum(
-        installaties[installatiesoort] for installatiesoort in _DOUCHE_INSTALLATIES
-    )
-
-
 def _heeft_bad_of_douche(installaties: Counter[Referentiedata]) -> bool:
     return any(
         installaties[installatiesoort]
@@ -463,9 +457,8 @@ def _waardeer_baden_en_douches(
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = Counter(ruimte.installaties or [])
     punten_bad_en_douche = _bad_en_douche_punten(stelsel)
-    aantal_baden = installaties[Installatiesoort.bad]
 
     # Bijlage I, onder A, toelichting rubriek 6.1 (Besluit huurprijzen woonruimte)
     # "Indien in de badruimte behalve het bad tevens een afzonderlijke douche is
@@ -473,58 +466,39 @@ def _waardeer_baden_en_douches(
     # douche in dezelfde ruimte waarderen we daarom samen als bad/douche. Voor
     # onzelfstandige woonruimten geldt dezelfde regel met een eigen puntenaantal
     # (bijlage I, onder B, rubriek 6).
-    aantal_gekoppeld = min(_aantal_douches(installaties), aantal_baden)
-
     # Welk douchetype aan een bad wordt gekoppeld maakt voor de punten niet uit, maar
     # wel voor de naam van de resterende waardering. De volgorde van
     # _DOUCHE_INSTALLATIES is daarin een implementatiekeuze, geen beleidsregel.
-    resterende_installaties = {Installatiesoort.bad: aantal_baden - aantal_gekoppeld}
-    nog_te_koppelen = aantal_gekoppeld
     for douchesoort in _DOUCHE_INSTALLATIES:
-        gekoppeld = min(installaties[douchesoort], nog_te_koppelen)
-        nog_te_koppelen -= gekoppeld
-        resterende_installaties[douchesoort] = installaties[douchesoort] - gekoppeld
+        gekoppeld = min(installaties[Installatiesoort.bad], installaties[douchesoort])
+        installaties[Installatiesoort.bad] -= gekoppeld
+        installaties[douchesoort] -= gekoppeld
+        # Een bad_en_douche is zelf al de combinatie van een bad met een afzonderlijke
+        # douche en wordt daarom niet gekoppeld.
+        installaties[Installatiesoort.bad_en_douche] += gekoppeld
 
-    # Een bad_en_douche is zelf al de combinatie van een bad met een afzonderlijke
-    # douche en wordt daarom niet van de losse installaties afgetrokken.
-    aantal_bad_en_douches = (
-        aantal_gekoppeld + installaties[Installatiesoort.bad_en_douche]
-    )
-
-    if aantal_bad_en_douches > 0:
+    for installatiesoort in (
+        Installatiesoort.bad_en_douche,
+        Installatiesoort.bad,
+        *_DOUCHE_INSTALLATIES,
+    ):
+        aantal = installaties[installatiesoort]
+        if aantal == 0:
+            continue
         punten = rond_af(
-            Decimal(str(aantal_bad_en_douches))
-            * Decimal(str(punten_bad_en_douche[Installatiesoort.bad_en_douche])),
+            Decimal(aantal) * Decimal(str(punten_bad_en_douche[installatiesoort])),
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Installatiesoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
         yield waarderingsgroep_builder.met_onderliggend(
-            id=Installatiesoort.bad_en_douche.name,
-            naam=Installatiesoort.bad_en_douche.naam,
+            id=installatiesoort.name,
+            naam=installatiesoort.naam,
             meeteenheid=Meeteenheid.stuks,
             punten=punten,
-            aantal=aantal_bad_en_douches,
+            aantal=aantal,
         )
-
-    for installatiesoort, aantal in resterende_installaties.items():
-        if aantal > 0:
-            punten = rond_af(
-                Decimal(str(aantal))
-                * Decimal(str(punten_bad_en_douche[installatiesoort])),
-                2,
-            )
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
-            )
-            yield waarderingsgroep_builder.met_onderliggend(
-                id=installatiesoort.name,
-                naam=installatiesoort.naam,
-                meeteenheid=Meeteenheid.stuks,
-                punten=punten,
-                aantal=aantal,
-            )
 
 
 def _waardeer_installaties(
