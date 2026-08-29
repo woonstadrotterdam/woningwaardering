@@ -256,7 +256,14 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 for ruimte in groep_ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
-                    zolder_oppervlakte = utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    # 2.2.4 Kasten: de netto oppervlakte van een kast die in een
+                    # overige ruimte uitkomt, telt mee bij de oppervlakte van die
+                    # ruimte; de zoldercorrectie rekent daarom op dezelfde grondslag
+                    # als het groepstotaal.
+                    zolder_oppervlakte = utils.rond_af(
+                        utils.oppervlakte_inclusief_verbonden_kasten(ruimte),
+                        decimalen=2,
+                    )
                     correctie_punten = (
                         bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
                         / deler
