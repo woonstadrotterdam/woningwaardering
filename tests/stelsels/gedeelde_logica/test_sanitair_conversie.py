@@ -178,7 +178,8 @@ def test_bouwkundige_elementen_blijven_behouden():
     converteer_bouwkundige_elementen_naar_installaties(eenheid)
 
     assert [
-        element.detail_soort for element in eenheid.ruimten[0].bouwkundige_elementen or []
+        element.detail_soort
+        for element in eenheid.ruimten[0].bouwkundige_elementen or []
     ] == [Bouwkundigelementdetailsoort.wastafel]
 
 
