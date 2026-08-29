@@ -156,17 +156,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 )
             )
 
+        # ``build()`` zet het stelselgroeptotaal op basis van de onafgeronde
+        # builder-punten; een hersom over de vastgelegde rijen is niet nodig.
         woningwaardering_groep = waarderingsgroep_builder.build()
-        woningwaardering_groep.punten = float(
-            utils.rond_af_op_kwart(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                )
-            )
-        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

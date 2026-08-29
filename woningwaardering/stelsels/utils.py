@@ -849,19 +849,6 @@ def voeg_stelselgroep_afronding_toe(
     ]
 
 
-def som_punten_waarderingen_afgerond(
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
-) -> float:
-    """Som van punten op alle waarderingen in een groep (afgerond op kwart).
-
-    Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
-    inclusief een eventuele waardering Afronding op kwartpunten.
-    """
-    if not waarderingen:
-        return 0.0
-    return float(rond_af_op_kwart(som_punten_waarderingen(waarderingen)))
-
-
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     """
     Voegt monumentale statussen toe aan een eenheid d.m.v. aanroepen API's.

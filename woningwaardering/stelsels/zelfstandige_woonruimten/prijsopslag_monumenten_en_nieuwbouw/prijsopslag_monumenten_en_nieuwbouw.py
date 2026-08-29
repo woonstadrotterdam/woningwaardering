@@ -70,14 +70,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
 
         woningwaardering_groep.opslagpercentage = opslagpercentage
 
-        punten = float(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            )
-        )
-
         if opslagpercentage > 0:
             logger.info(
                 f"Eenheid ({eenheid.id}) krijgt een opslagpercentage van {opslagpercentage}% voor {self.stelselgroep.naam}."
@@ -87,7 +79,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 f"Eenheid ({eenheid.id}) krijgt geen opslagpercentage voor {self.stelselgroep.naam}."
             )
 
-        woningwaardering_groep.punten = punten
+        # ``build()`` zet het stelselgroeptotaal op basis van de onafgeronde
+        # builder-punten; een hersom over de vastgelegde rijen is niet nodig.
         return woningwaardering_groep
 
     def _genereer_woningwaarderingen(
