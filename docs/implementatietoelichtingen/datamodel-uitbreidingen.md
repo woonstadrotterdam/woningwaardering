@@ -42,6 +42,26 @@ Voor een correcte waardering van rijksmonumenten dient de afsluitings datum van 
 
 Installaties zouden toegevoegd moeten worden aan het VERA model `EenhedenRuimte`. Het attribuut `installaties` bestaat al in de wiki, maar nog niet in de `vera-openapi` repository versie 4.1.5: [https://github.com/Aedes-datastandaarden/vera-openapi/issues/70](https://github.com/Aedes-datastandaarden/vera-openapi/issues/70). Op dit moment gebruiken wij `installaties` als attribuut op ruimte met als type `Optional[list[Installatiesoort]]`.
 
+## Bouwkundige elementen naast installaties
+
+Dezelfde voorziening mag zowel als bouwkundig element als als installatie op een ruimte worden meegegeven; beide attributen zijn geldige modelleringen. `installaties` bevat echter alleen een soortcode en geen id, terwijl een bouwkundig element wel een eigen id draagt. Er is dus geen identiteitskoppeling tussen beide representaties: we kunnen niet vaststellen of een meegegeven installatie hetzelfde object beschrijft als een bouwkundig element in dezelfde ruimte.
+
+Voor de stelselgroep Sanitair houden we daarom per installatiesoort het hoogste van beide aantallen aan: het aantal meegegeven installaties, of het aantal bouwkundige elementen dat op die installatiesoort mapt. Een voorziening die dubbel is gemodelleerd telt zo niet twee keer mee, terwijl extra bouwkundige elementen wel meetellen.
+
+| Bouwkundig element | Installatiesoort |
+| --- | --- |
+| `Wastafel` | `Wastafel` |
+| `Fontein` | `Wastafel` |
+| `Douche` | `Douche` |
+| `Bad` | `Bad` |
+| `Kast` | `Kastruimte` |
+| `Closetcombinatie` | `Staand toilet` |
+
+Omdat het resultaat een maximum is, verandert een tweede aanroep niets meer. Dat is nodig omdat meerdere stelselgroepen deze aanvulling op dezelfde eenheid uitvoeren. De bouwkundige elementen blijven behouden: zij dragen gegevens (id, afmetingen) die een installatiesoort niet kan bevatten.
+
+> [!NOTE]
+> De regel is een keuze bij ontbrekende informatie, geen beleidsregel. Bij één bouwkundig element naast twee installaties van dezelfde soort tellen we er twee, ook als het in werkelijkheid om drie voorzieningen gaat. Die restambiguïteit is niet op te lossen zolang `installaties` geen identiteit draagt. Geef bij voorkeur één representatie per voorziening mee.
+
 ## Aantal
 
 Het attribuut `Eenhedenruimte.aantal` is als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven hoeveel van deze specifieke ruimte er zijn. Dit attribuut wordt uitsluitend gebruikt in het berekenen van de punten voor Gemeenschappelijke Parkeerruimten. Hier door is het niet nodig om elk parkeervak van een parkeergarage of parkeerterrein mee te geven aan een eenheid.

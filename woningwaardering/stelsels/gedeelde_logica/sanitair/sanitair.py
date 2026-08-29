@@ -36,7 +36,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 # Bij een adres met 8 of meer onzelfstandige woonruimten geldt voor maximaal één
 # niet-badkamer-ruimte een uitzondering op de wastafelmaximering.
@@ -93,6 +92,26 @@ _EXTRA_VOORZIENINGEN_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.stopcontact_bij_wastafel: 0.25,
     Installatiesoort.eenhandsmengkraan: 0.25,
     Installatiesoort.thermostatische_mengkraan: 0.5,
+}
+# VERA staat toe dat dezelfde voorziening zowel als bouwkundig element als als
+# installatie wordt meegegeven; beide attributen zijn geldige modelleringen op
+# `EenhedenRuimte` (zie docs/implementatietoelichtingen/datamodel-uitbreidingen.md).
+# Deze tabel legt vast welk bouwkundig element dezelfde voorziening beschrijft als
+# welke installatiesoort.
+# 2.6.1 Punten voor sanitaire basisvoorzieningen - Wastafel
+# Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een
+# aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter
+# is dan een meter, als wastafel.
+# Daarom mappen zowel een `Wastafel` als een `Fontein` op een wastafel-installatie.
+_INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT: dict[
+    Referentiedata, InstallatiesoortReferentiedata
+] = {
+    Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
+    Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
+    Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
+    Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
+    Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
+    Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
 }
 
 
@@ -205,30 +224,54 @@ def waardeer_sanitair(
 def converteer_bouwkundige_elementen_naar_installaties(
     eenheid: EenhedenEenheid,
 ) -> None:
-    # Backwards compatibiliteit voor bouwkundige elementen
+    """Vult de installaties van elke ruimte aan met de bouwkundige elementen die
+    dezelfde voorziening beschrijven.
+
+    VERA staat toe dat dezelfde voorziening zowel als bouwkundig element als als
+    installatie wordt meegegeven. Omdat `installaties` alleen een soortcode bevat
+    en geen id, bestaat er geen identiteitskoppeling tussen beide representaties:
+    we kunnen niet zien of een meegegeven installatie hetzelfde object beschrijft
+    als een bouwkundig element. Daarom houden we per installatiesoort het hoogste
+    van beide aantallen aan. Eenzelfde voorziening die dubbel is gemodelleerd telt
+    zo niet twee keer mee, terwijl extra bouwkundige elementen wel meetellen.
+
+    Omdat het resultaat een maximum is, verandert een tweede aanroep niets meer:
+    na de eerste aanroep is het aantal installaties immers minstens gelijk aan het
+    aantal bouwkundige elementen. Dat is nodig omdat meerdere stelselgroepen deze
+    functie op dezelfde eenheid aanroepen.
+
+    Args:
+        eenheid (EenhedenEenheid): De eenheid waarvan de ruimten worden aangevuld.
+    """
     for ruimte in eenheid.ruimten or []:
         ruimte.installaties = ruimte.installaties or []
-        for bouwkundigelementdetailsoort, installatiesoort in {
-            Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
-            Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
-            Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
-            Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
-            Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
-            Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
-        }.items():
-            bouwkundige_elementen = list(
-                get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
-            )
-            if not bouwkundige_elementen:
+        # Het aantal meegegeven installaties wordt vastgelegd vóórdat we aanvullen,
+        # zodat installaties die we zelf afleiden geen volgend bouwkundig element
+        # van dezelfde installatiesoort blokkeren.
+        meegegeven_installaties = Counter(ruimte.installaties)
+
+        installaties_uit_elementen: Counter[InstallatiesoortReferentiedata] = Counter()
+        for element in ruimte.bouwkundige_elementen or []:
+            if element.detail_soort is None:
                 continue
-            if installatiesoort in ruimte.installaties:
+            installatiesoort = _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT.get(
+                element.detail_soort
+            )
+            if installatiesoort is not None:
+                installaties_uit_elementen[installatiesoort] += 1
+
+        for (
+            installatiesoort,
+            aantal_uit_elementen,
+        ) in installaties_uit_elementen.items():
+            aantal_meegegeven = meegegeven_installaties[installatiesoort]
+            aantal_aanvullen = aantal_uit_elementen - aantal_meegegeven
+            if aantal_aanvullen <= 0:
                 continue
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_aanvullen}x een {installatiesoort.naam} toegevoegd aan installaties op basis van bouwkundige elementen"
             )
-            ruimte.installaties.extend(
-                [installatiesoort for _ in bouwkundige_elementen]
-            )
+            ruimte.installaties.extend([installatiesoort] * aantal_aanvullen)
 
 
 def _waardeer_toiletten(
