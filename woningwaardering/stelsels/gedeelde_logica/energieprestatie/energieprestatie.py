@@ -136,14 +136,17 @@ def energieprestatie_met_geldig_label(
     peildatum: date, eenheid: EenhedenEenheid
 ) -> EenhedenEnergieprestatie | None:
     """
-    Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
+    Returnt de eerste geldige energieprestatie van een eenheid.
+
+    Buiten de periode 2015-2021 is dat een energieprestatie met een energielabel;
+    binnen die periode telt alleen een energie-index, ook zonder label (2.4.2/2.4.3).
 
     Args:
         peildatum (date): De peildatum waarop de energieprestatie geldig moet zijn.
         eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
 
     Returns:
-        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
+        EenhedenEnergieprestatie | None: De eerste geldige energieprestatie en None wanneer er geen geldige energieprestatie is gevonden.
     """
     aantal_energieprestaties = len(eenheid.energieprestaties or [])
     if aantal_energieprestaties == 0:

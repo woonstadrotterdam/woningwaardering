@@ -565,8 +565,8 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 > [!NOTE]
 >
-> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2). Deze vlag wordt daarom niet gecontroleerd; een energie-index in de periode 2015-2021 wordt als geldig behandeld zodra `soort`, `status`, `begindatum` en `einddatum` aan de overige voorwaarden voldoen.
-> - Een energie-index in die periode zonder bruikbare `waarde`, of een energieprestatie van een ander soort dan energie-index in die periode, telt niet mee voor de energieprestatie (2.4.3, punt 4); de woonruimte valt dan terug op het bouwjaar (2.4.5).
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
+> - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
