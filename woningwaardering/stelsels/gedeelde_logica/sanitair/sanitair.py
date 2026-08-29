@@ -49,10 +49,14 @@ _BADKAMERACHTIGE_RUIMTES: tuple[RuimtedetailsoortReferentiedata, ...] = (
     Ruimtedetailsoort.badkamer_met_toilet,
     Ruimtedetailsoort.doucheruimte,
 )
-_BAD_OF_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
-    Installatiesoort.bad,
+# Een drempelloze inrijdouche telt als een gewone douche.
+_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
     Installatiesoort.douche,
     Installatiesoort.drempelloze_inrijdouche,
+)
+_BAD_OF_DOUCHE_INSTALLATIES: tuple[InstallatiesoortReferentiedata, ...] = (
+    Installatiesoort.bad,
+    *_DOUCHE_INSTALLATIES,
     Installatiesoort.bad_en_douche,
 )
 # 2.6.1 Punten voor sanitaire basisvoorzieningen — Toilet
@@ -72,14 +76,12 @@ _WASTAFEL_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
 # 2.6.1 Punten voor sanitaire basisvoorzieningen — Bad en douche
 _BAD_EN_DOUCHE_PUNTEN_ZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.douche: 4.0,
-    # VERA-drempelloze inrijdouche telt als Douche.
     Installatiesoort.drempelloze_inrijdouche: 4.0,
     Installatiesoort.bad: 6.0,
     Installatiesoort.bad_en_douche: 7.0,
 }
 _BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.douche: 3.0,
-    # VERA-drempelloze inrijdouche telt als Douche.
     Installatiesoort.drempelloze_inrijdouche: 3.0,
     Installatiesoort.bad: 5.0,
     Installatiesoort.bad_en_douche: 6.0,
@@ -125,16 +127,6 @@ def _bad_en_douche_punten(
     if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
         return _BAD_EN_DOUCHE_PUNTEN_ZELFSTANDIG
     return _BAD_EN_DOUCHE_PUNTEN_ONZELFSTANDIG
-
-
-def _aantal_douches(installaties: Counter[Referentiedata]) -> int:
-    return sum(
-        installaties[installatiesoort]
-        for installatiesoort in (
-            Installatiesoort.douche,
-            Installatiesoort.drempelloze_inrijdouche,
-        )
-    )
 
 
 def _heeft_bad_of_douche(installaties: Counter[Referentiedata]) -> bool:
@@ -465,58 +457,48 @@ def _waardeer_baden_en_douches(
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = Counter(ruimte.installaties or [])
     punten_bad_en_douche = _bad_en_douche_punten(stelsel)
-    aantal_douches = _aantal_douches(installaties)
-    aantal_baden = installaties[Installatiesoort.bad]
 
-    # Gekoppelde bad+douche: losse BAD met DOU/DRD op dezelfde ruimte
-    aantal_bad_en_douches_gekoppeld = min(aantal_douches, aantal_baden)
-    # Expliciete referentie BDO (bad en douche als één installatie)
-    aantal_bad_en_douche_expliciet = installaties[Installatiesoort.bad_en_douche]
-    aantal_bad_en_douches = (
-        aantal_bad_en_douches_gekoppeld + aantal_bad_en_douche_expliciet
-    )
+    # Bijlage I, onder A, toelichting rubriek 6.1 (Besluit huurprijzen woonruimte)
+    # "Indien in de badruimte behalve het bad tevens een afzonderlijke douche is
+    # aangebracht, geldt een waardering van zeven punten." Een los bad met een losse
+    # douche in dezelfde ruimte waarderen we daarom samen als bad/douche. Voor
+    # onzelfstandige woonruimten geldt dezelfde regel met een eigen puntenaantal
+    # (bijlage I, onder B, rubriek 6).
+    # Welk douchetype aan een bad wordt gekoppeld maakt voor de punten niet uit, maar
+    # wel voor de naam van de resterende waardering. De volgorde van
+    # _DOUCHE_INSTALLATIES is daarin een implementatiekeuze, geen beleidsregel.
+    for douchesoort in _DOUCHE_INSTALLATIES:
+        gekoppeld = min(installaties[Installatiesoort.bad], installaties[douchesoort])
+        installaties[Installatiesoort.bad] -= gekoppeld
+        installaties[douchesoort] -= gekoppeld
+        # Een bad_en_douche is zelf al de combinatie van een bad met een afzonderlijke
+        # douche en wordt daarom niet gekoppeld.
+        installaties[Installatiesoort.bad_en_douche] += gekoppeld
 
-    if aantal_bad_en_douches > 0:
+    for installatiesoort in (
+        Installatiesoort.bad_en_douche,
+        Installatiesoort.bad,
+        *_DOUCHE_INSTALLATIES,
+    ):
+        aantal = installaties[installatiesoort]
+        if aantal == 0:
+            continue
         punten = rond_af(
-            Decimal(str(aantal_bad_en_douches))
-            * Decimal(str(punten_bad_en_douche[Installatiesoort.bad_en_douche])),
+            Decimal(aantal) * Decimal(str(punten_bad_en_douche[installatiesoort])),
             decimalen=2,
         )
         logger.info(
-            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_bad_en_douches}x een {Installatiesoort.bad_en_douche.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
         yield waarderingsgroep_builder.met_onderliggend(
-            id=Installatiesoort.bad_en_douche.name,
-            naam=Installatiesoort.bad_en_douche.naam,
+            id=installatiesoort.name,
+            naam=installatiesoort.naam,
             meeteenheid=Meeteenheid.stuks,
             punten=punten,
-            aantal=aantal_bad_en_douches,
+            aantal=aantal,
         )
-
-    for installatiesoort in [
-        Installatiesoort.bad,
-        Installatiesoort.douche,
-        Installatiesoort.drempelloze_inrijdouche,
-    ]:
-        aantal = installaties[installatiesoort] - aantal_bad_en_douches
-        if aantal > 0:
-            punten = rond_af(
-                Decimal(str(aantal))
-                * Decimal(str(punten_bad_en_douche[installatiesoort])),
-                2,
-            )
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
-            )
-            yield waarderingsgroep_builder.met_onderliggend(
-                id=installatiesoort.name,
-                naam=installatiesoort.naam,
-                meeteenheid=Meeteenheid.stuks,
-                punten=punten,
-                aantal=aantal,
-            )
 
 
 def _waardeer_installaties(
