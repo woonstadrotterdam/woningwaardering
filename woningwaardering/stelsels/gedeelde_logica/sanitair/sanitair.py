@@ -13,9 +13,6 @@ from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
     is_valide_aanrechtlengte,
 )
-from woningwaardering.stelsels.gedeelde_logica.keuken import (
-    RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN,
-)
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
@@ -269,9 +266,6 @@ def _waardeer_toiletten(
 def _korte_aanrechten(
     ruimte: EenhedenRuimte,
 ) -> list[BouwkundigElementenBouwkundigElement]:
-    if ruimte.detail_soort not in RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN:
-        return []
-
     return [
         element
         for element in ruimte.bouwkundige_elementen or []

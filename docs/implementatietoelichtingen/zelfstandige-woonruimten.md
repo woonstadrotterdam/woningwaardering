@@ -543,7 +543,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -753,6 +753,9 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
+> [!NOTE]
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
 
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 

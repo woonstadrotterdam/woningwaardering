@@ -1,0 +1,11 @@
+SAMENVATTING aanrecht_in_overige_ruimten
+  Keuken                                                                         11.00 pt
+                                                                                ---------
+
+KEUKEN
+  Bijkeuken
+    - Lengte aanrecht                                              2200.00 mm     7.00 pt
+  Garage
+    - Lengte aanrecht                                              1500.00 mm     4.00 pt
+                                                                                ---------
+  Totaal                                                                         11.00 pt

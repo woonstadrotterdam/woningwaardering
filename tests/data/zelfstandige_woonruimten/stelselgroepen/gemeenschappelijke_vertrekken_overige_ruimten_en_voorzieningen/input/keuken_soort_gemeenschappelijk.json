@@ -1,0 +1,28 @@
+{
+  "id": "keuken_soort_gemeenschappelijk",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "GEM",
+        "naam": "Gemeenschappelijke ruimten en voorzieningen"
+      },
+      "detailSoort": { "code": "KEU", "naam": "Keuken" },
+      "naam": "Keuken",
+      "oppervlakte": 10.0,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "gedeeldMetAantalAdressen": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
+          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
+          "lengte": 2000
+        }
+      ]
+    }
+  ]
+}

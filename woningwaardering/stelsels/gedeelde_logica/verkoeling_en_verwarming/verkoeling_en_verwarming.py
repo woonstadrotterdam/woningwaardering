@@ -9,7 +9,6 @@ from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import heeft_valide_aanrecht
 from woningwaardering.stelsels.gedeelde_logica.keuken import (
     OPEN_KEUKEN_DETAIL_SOORTEN,
-    VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
@@ -20,8 +19,24 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
 )
 from woningwaardering.vera.referentiedata import (
+    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelselgroep,
+)
+
+# Vertrekken waarin per definitie geen open keuken ligt. §2.3.2 maakt van een
+# aanrecht alleen in een "woon- of slaapvertrek" een open keuken: in een keuken,
+# bijkeuken, badkamer of doucheruimte wordt niet gewoond of geslapen, en een
+# `keuken` ís bovendien de keuken zelf en telt al als afzonderlijk verwarmd
+# vertrek. Elke andere ruimte die als vertrek wordt gewaardeerd, telt wél mee.
+GEEN_OPEN_KEUKEN_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.keuken,
+        Ruimtedetailsoort.bijkeuken,
+        Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
+        Ruimtedetailsoort.doucheruimte,
+    }
 )
 
 SUBGROEPEN: dict[str, str] = {
@@ -71,13 +86,31 @@ class _OpenKeukenSoort(Enum):
 
 
 def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None:
+    """Bepaalt of in dit vertrek een open keuken ligt, en op welke grond.
+
+    §2.3.2 spreekt over "een aanrecht dat is geplaatst in een woon- of
+    slaapvertrek". Wij lezen dat als de eis dat de ruimte als vertrek wordt
+    gewaardeerd — de aanroeper controleert dat — en niet als een eis aan de
+    detailsoort. Elk vertrek waarin een aanrecht vanaf 1 meter staat, heeft
+    daarom een open keuken, behalve de vertrekken uit
+    :data:`GEEN_OPEN_KEUKEN_DETAIL_SOORTEN`.
+
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte om te classificeren.
+
+    Returns:
+        _OpenKeukenSoort | None: De grond voor de open keuken, of None wanneer de
+        ruimte geen open keuken heeft.
+    """
+    if ruimte.detail_soort in GEEN_OPEN_KEUKEN_DETAIL_SOORTEN:
+        return None
     if ruimte.detail_soort in OPEN_KEUKEN_DETAIL_SOORTEN:
         return _OpenKeukenSoort.inherente_keuken
-    if ruimte.detail_soort in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
-        # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
-        # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
-        if heeft_valide_aanrecht(ruimte):
-            return _OpenKeukenSoort.impliciete_open_keuken
+    # §2.3.2: aanname open keuken bij aanrecht vanaf 1 meter,
+    # gelijk aan de keuken-basisvoorziening (wettekst Bijlage I A rubriek 5).
+    if heeft_valide_aanrecht(ruimte):
+        return _OpenKeukenSoort.impliciete_open_keuken
     return None
 
 
