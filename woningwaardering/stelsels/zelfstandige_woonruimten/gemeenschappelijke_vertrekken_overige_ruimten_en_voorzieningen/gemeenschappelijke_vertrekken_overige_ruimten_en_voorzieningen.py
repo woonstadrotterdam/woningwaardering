@@ -100,8 +100,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             # waarderingen voor sanitair van gedeelde ruimten
             self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
 
-        # ``build()`` zet het stelselgroeptotaal op basis van de onafgeronde
-        # builder-punten; een hersom over de vastgelegde rijen is niet nodig.
         woningwaardering_groep = waarderingsgroep_builder.build()
 
         logger.info(

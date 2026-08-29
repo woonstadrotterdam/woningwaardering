@@ -67,8 +67,6 @@ class PrijsopslagMonumenten(Stelselgroep):
         )
 
         woningwaardering_groep.opslagpercentage = opslagpercentage
-        # ``build()`` zet het stelselgroeptotaal op basis van de onafgeronde
-        # builder-punten; een hersom over de vastgelegde rijen is niet nodig.
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"

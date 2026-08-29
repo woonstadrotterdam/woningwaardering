@@ -79,8 +79,6 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 f"Eenheid ({eenheid.id}) krijgt geen opslagpercentage voor {self.stelselgroep.naam}."
             )
 
-        # ``build()`` zet het stelselgroeptotaal op basis van de onafgeronde
-        # builder-punten; een hersom over de vastgelegde rijen is niet nodig.
         return woningwaardering_groep
 
     def _genereer_woningwaarderingen(
