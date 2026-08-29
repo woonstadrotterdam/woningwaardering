@@ -379,15 +379,22 @@ class WaarderingsgroepBuilder:
                 stelselgroep=self.stelselgroep,
             )
         )
+        waarderingen = list(self.alle_waarderingen())
         groep.woningwaarderingen = [
-            waardering._naar_waardering()
-            for onderliggende in self._actieve_onderliggende
-            for waardering in onderliggende._zelf_en_onderliggende()
+            waardering._naar_waardering() for waardering in waarderingen
         ]
         # Het stelselgroeptotaal volgt uit de onafgeronde punten op de builder,
         # niet uit de op twee decimalen vastgelegde rijen: tussentijds afronden
         # zou het kwartpunt kunnen verschuiven.
-        afgerond = rond_af_op_kwart(self._som_punten())
+        onafgerond = sum(
+            (
+                Decimal(str(waardering.punten))
+                for waardering in waarderingen
+                if waardering.punten is not None
+            ),
+            Decimal("0"),
+        )
+        afgerond = rond_af_op_kwart(onafgerond)
         groep.punten = float(afgerond)
         voeg_stelselgroep_afronding_toe(
             groep,
@@ -395,17 +402,6 @@ class WaarderingsgroepBuilder:
             stelselgroep=self.stelselgroep,
         )
         return groep
-
-    def _som_punten(self) -> Decimal:
-        """Som van de onafgeronde punten van alle actieve waarderingen."""
-        return sum(
-            (
-                Decimal(str(waardering.punten))
-                for waardering in self.alle_waarderingen()
-                if waardering.punten is not None
-            ),
-            Decimal("0"),
-        )
 
     @property
     def _id_prefix(self) -> str:
