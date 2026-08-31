@@ -11,13 +11,13 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 20.25,
+      "punten": 10.0,
       "woningwaarderingen": [
         {
-          "aantal": 100000.0,
+          "aantal": 50000.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__woz_waarde",
-            "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
+            "naam": "WOZ-waarde op waardepeildatum 01-01-2025",
             "meeteenheid": {
               "code": "EUR",
               "naam": "Euro"
@@ -29,10 +29,10 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 6.52358275
+          "punten": 2.94915654
         },
         {
-          "aantal": 15329.0,
+          "aantal": 16954.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_I__factor_I",
             "naam": "Factor I",
@@ -50,10 +50,10 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 13.7741047
+          "punten": 7.17566015
         },
         {
-          "aantal": 30.0,
+          "aantal": 26.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -67,7 +67,7 @@
           }
         },
         {
-          "aantal": 242.0,
+          "aantal": 268.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_II__factor_II",
             "naam": "Factor II",
@@ -85,7 +85,7 @@
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.0476875
+          "punten": -0.1248167
         }
       ]
     }

@@ -1540,6 +1540,9 @@ Daarnaast wordt in nog twee andere gevallen de 'cap op de WOZ' niet toegepast, n
 
 Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
 
+> [!NOTE]
+> Rubriek 11.3 toetst de **woningwaardering** zonder cap aan 187 punten: dat is dezelfde waardering als in artikel 2 (huurprijsgrens bij 186 punten) en de slotopmerking van bijlage I. Eerst de rubrieken (2.1.4), inclusief de WOZ-rubriek ná kwartafronding van I+II (2.11.2), daarna het woningtotaal op hele punten (2.1.5). De 33%-grondslag blijft die som van kwartpunten. We ronden de WOZ-rubriek niet apart op hele punten af voordat we optellen.
+
 **Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 
 |                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |

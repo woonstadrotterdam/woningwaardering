@@ -98,6 +98,11 @@ W_OPSLAG = 7
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
+
+# Criterium-id-segment en naam van de sluitpost die het verschil tussen de som van
+# de waarderingen en het stelselgroeptotaal opvangt.
+AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT = "afronding_op_kwartpunten"
+AFRONDING_OP_KWARTPUNTEN_NAAM = "Afronding op kwartpunten"
 # Inschuif aan het begin van elke tabelregel (naamkolom).
 _TABEL_RIJ_INSCHUIF = "  "
 # Spatie tussen getal- en eenheidskolom.
@@ -446,6 +451,34 @@ def _groep_subtotaal_aantal_delen(
     return _format_aantal_delen(float(totaal), meeteenheid)
 
 
+def _is_verwaarloosbare_afronding(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> bool:
+    """Of dit de sluitpost Afronding op kwartpunten is die op twee decimalen 0 is.
+
+    Het rapport toont punten op twee decimalen. Een sluitpost die kleiner is dan
+    een halve cent verschijnt dan als ``0.00 pt`` of ``-0.00 pt``, wat een lezer
+    niets vertelt; die regel laten we weg.
+
+    De sluitpost herkennen we aan het laatste segment van de pad-id: bij een uit
+    JSON ingelezen resultaat is ``stelselgroep.name`` leeg, waardoor de volledige
+    pad-id niet betrouwbaar te reconstrueren is.
+
+    Args:
+        waardering (WoningwaarderingResultatenWoningwaardering): De waardering.
+
+    Returns:
+        bool: True als het rapport deze regel weglaat.
+    """
+    return (
+        waardering.criterium is not None
+        and waardering.criterium.id is not None
+        and waardering.criterium.id.endswith(f"__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}")
+        and waardering.punten is not None
+        and rond_af(waardering.punten, 2) == Decimal("0")
+    )
+
+
 def _render_detail_groep(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[str]:
@@ -466,7 +499,9 @@ def _render_detail_groep(
     tops = [
         w
         for w in waarderingen
-        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
+        if w.criterium is not None
+        and w.criterium.bovenliggende_criterium is None
+        and not _is_verwaarloosbare_afronding(w)
     ]
     for waardering in tops:
         _render_waardering_pre_order(
@@ -741,12 +776,12 @@ def voeg_stelselgroep_afronding_toe(
             "Stelselgroep heeft geen naam voor de Afronding-op-kwartpunten-criterium-id."
         )
 
-    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
+    afronding_id = f"{stelselgroep.name}__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}"
     groep.woningwaarderingen = [
         *waarderingen,
         WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Afronding op kwartpunten",
+                naam=AFRONDING_OP_KWARTPUNTEN_NAAM,
                 id=afronding_id,
             ),
             punten=float(delta),

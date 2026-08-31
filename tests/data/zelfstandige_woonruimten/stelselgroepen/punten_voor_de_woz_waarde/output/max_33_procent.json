@@ -29,7 +29,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 40.05
+          "punten": 40.0482745
         },
         {
           "aantal": 15329.0,
@@ -50,7 +50,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 42.28
+          "punten": 42.2796145
         },
         {
           "aantal": 60.0,
@@ -85,7 +85,7 @@
             "id": "punten_voor_de_woz_waarde__maximering_woz_punten",
             "naam": "Maximering WOZ-punten tot 33% van totaal"
           },
-          "punten": -16.33
+          "punten": -16.327889
         }
       ]
     }
