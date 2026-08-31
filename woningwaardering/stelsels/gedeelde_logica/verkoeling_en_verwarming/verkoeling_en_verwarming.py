@@ -64,7 +64,7 @@ def _ruimte_gedeeld(ruimte: EenhedenRuimte) -> bool:
 def _sorteer_voor_maximering(ruimten: list[EenhedenRuimte]) -> list[EenhedenRuimte]:
     """Sorteer ruimten zodat de maximering het hoogste eenheidstotaal oplevert.
 
-    Eén teller per maximering deelt privé en gemeenschappelijk. De cap telt
+    Eén teller per maximering deelt privé en gemeenschappelijk. Het maximum telt
     ruimten vóór deling; de aanroeper deelt daarna. Om het eenheidstotaal te
     maximaliseren gaan eerst de kleinste deler (privé = 1), daarna verkoelde
     ruimten, daarna ``ruimte.id``. De invoerlijst wordt niet gemuteerd.
@@ -79,14 +79,14 @@ def _sorteer_voor_maximering(ruimten: list[EenhedenRuimte]) -> list[EenhedenRuim
     )
 
 
-def _overflow_ruimten(
+def _ruimten_met_maximering(
     ruimten: list[EenhedenRuimte],
     komt_in_aanmerking: Callable[[EenhedenRuimte], bool],
     maximum: int,
 ) -> set[int]:
-    """Ruimten die buiten de cap vallen, als ``id(ruimte)``.
+    """Ruimten die een maximering van −1 krijgen, als ``id(ruimte)``.
 
-    De cap telt ruimten vóór deling. Welke ruimten binnen de cap vallen, volgt
+    Het maximum telt ruimten vóór deling. Welke ruimten daarbuiten vallen, volgt
     de sorteersleutel; de outputvolgorde blijft de invoervolgorde.
     """
     in_aanmerking = [
@@ -124,9 +124,9 @@ def waardeer_verkoeling_en_verwarming(
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
     verkoelde vertrekken) telt over álle meegegeven ruimten samen. Privé en
     gemeenschappelijk delen die teller tot #293 is beslist. Elke ruimte krijgt
-    1 punt; overflow (bepaald op kleinste deler, dan verkoeld, dan id) krijgt
-    −1. Deling gebeurt daarna in de aanroeper. De outputvolgorde volgt de
-    invoer.
+    1 punt; ruimten met maximering (bepaald op kleinste deler, dan verkoeld,
+    dan id) krijgen −1. Deling gebeurt daarna in de aanroeper. De
+    outputvolgorde volgt de invoer.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
@@ -186,7 +186,9 @@ def _waardeer_verwarmde_overige_ruimte(
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
-    overflow = _overflow_ruimten(ruimten, _is_verwarmde_overige_of_verkeersruimte, 4)
+    ruimten_met_maximering = _ruimten_met_maximering(
+        ruimten, _is_verwarmde_overige_of_verkeersruimte, 4
+    )
     for ruimte in ruimten:
         if not _is_verwarmde_overige_of_verkeersruimte(ruimte):
             continue
@@ -201,7 +203,7 @@ def _waardeer_verwarmde_overige_ruimte(
                 punten=1.0,
             ),
         )
-        if id(ruimte) in overflow:
+        if id(ruimte) in ruimten_met_maximering:
             yield (
                 ruimte,
                 _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
@@ -233,7 +235,9 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    overflow_verkoeld = _overflow_ruimten(ruimten, _is_verkoeld_vertrek, 2)
+    ruimten_met_maximering_verkoeld = _ruimten_met_maximering(
+        ruimten, _is_verkoeld_vertrek, 2
+    )
     for ruimte in ruimten:
         if not ruimte.verwarmd:
             continue
@@ -275,7 +279,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         punten=1,
                     ),
                 )
-                if id(ruimte) in overflow_verkoeld:
+                if id(ruimte) in ruimten_met_maximering_verkoeld:
                     logger.info(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
                     )
