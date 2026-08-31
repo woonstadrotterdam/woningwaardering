@@ -386,8 +386,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # Bereken het maximum aantal WOZ-punten dat toegestaan is
         max_woz_percentage = Decimal("33")
         overige_percentage = Decimal("100") - max_woz_percentage
-        percentage_verhouding = overige_percentage / max_woz_percentage
-        max_woz_punten = overige_punten / percentage_verhouding
+        max_woz_punten = overige_punten * max_woz_percentage / overige_percentage
 
         # Pas de cap toe op de WOZ-punten
         capped_woz_punten = min(
