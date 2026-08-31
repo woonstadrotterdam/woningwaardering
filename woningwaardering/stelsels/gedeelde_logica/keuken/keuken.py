@@ -28,26 +28,14 @@ from woningwaardering.vera.referentiedata import (
     WoningwaarderingstelselReferentiedata,
 )
 
-# Woon-/slaapvertrek-detailsoorten die de keuken al in de naam hebben.
+# Vertrek-detailsoorten die de keuken al in de naam hebben en daardoor voor
+# rubriek 3 altijd een open keuken zijn, ook zonder aanrecht in de input.
 # `keuken` zelf hoort hier niet bij: dat is een apart vertrek, geen open keuken.
-OPEN_KEUKEN_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer_en_of_keuken,
-    Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-)
-
-# Woon- of slaapvertrekken die een impliciete keuken / open keuken kunnen zijn.
-VERTREK_MET_AANRECHT_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.woonkamer,
-    Ruimtedetailsoort.woon_en_of_slaapkamer,
-    Ruimtedetailsoort.slaapkamer,
-)
-
-# Ruimtedetailsoorten waarin een aanrecht meetelt voor de waardering:
-# vanaf 1 meter als basisvoorziening keuken, korter als wastafel.
-RUIMTEN_MET_AANRECHT_DETAIL_SOORTEN = (
-    Ruimtedetailsoort.keuken,
-    *OPEN_KEUKEN_DETAIL_SOORTEN,
-    *VERTREK_MET_AANRECHT_DETAIL_SOORTEN,
+OPEN_KEUKEN_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+    }
 )
 
 
@@ -129,6 +117,10 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
     """
     Controleert of de ruimte een keuken is op basis van het aanrecht.
 
+    Wettekst Bijlage I A rubriek 5 stelt eisen aan de keuken zelf, niet aan de
+    ruimte waarin die ligt. Élke ruimte is daarom een keuken zodra er een
+    aanrecht vanaf 1 meter in staat.
+
     Args:
         ruimte (EenhedenRuimte): De ruimte om te controleren.
 
@@ -144,10 +136,10 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
         )
         return False
 
-    if ruimte.detail_soort in (
+    if ruimte.detail_soort in {
         Ruimtedetailsoort.keuken,
         *OPEN_KEUKEN_DETAIL_SOORTEN,
-    ):
+    }:
         if not valide_aanrecht:
             warnings.warn(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een keuken, maar heeft geen aanrecht (of geen aanrecht met een lengte >={AANRECHT_MINIMALE_LENGTE_MM}mm) en mag daardoor niet gewaardeerd worden voor {Woningwaarderingstelselgroep.keuken.naam}.",
@@ -155,13 +147,9 @@ def _is_keuken(ruimte: EenhedenRuimte) -> bool:
             )
             return False  # ruimte is een keuken maar heeft geen valide aanrecht en mag dus niet als keuken gewaardeerd worden
         return True  # ruimte is een keuken met een valide aanrecht
-    if ruimte.detail_soort not in VERTREK_MET_AANRECHT_DETAIL_SOORTEN:
-        return False  # ruimte is geen ruimte dat een keuken zou kunnen zijn met een aanrecht erin
 
-    if not valide_aanrecht:  # ruimte is geen keuken want heeft geen valide aanrecht
-        return False
-
-    return True  # ruimte is een impliciete keuken vanwege een valide aanrecht
+    # elke andere ruimte is een keuken zodra er een valide aanrecht in staat
+    return valide_aanrecht
 
 
 def _waardeer_aanrecht(

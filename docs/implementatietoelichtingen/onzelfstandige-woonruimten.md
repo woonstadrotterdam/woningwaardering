@@ -484,7 +484,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -697,6 +697,9 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
+> [!NOTE]
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
+
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
 > [!TIP]
@@ -865,13 +868,16 @@ Niet als wastafel worden gewaardeerd:
 _Bad en douche_  
 ~~Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die in een ander vertrek of overige ruimte staat dan de bad- of doucheruimte.~~
 
-Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld~~.
+Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen~~. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld.
 
 | Voorziening    | Punten |
 |----------------|--------|
 | Douche         | 3      |
 | Bad            | 5      |
 | Bad/douche     | 6      |
+
+> [!NOTE]
+> Dat de douchegarnituur van een bad met (hand)douche niet afzonderlijk wordt geteld, volgt uit de input: geef zo'n bad mee als `bad` en niet als `bad` plus `douche`. Een badruimte met een bad én een afzonderlijke douche kan als `bad_en_douche` worden meegegeven of als losse `bad` en `douche`.
 
 #### 2.6.2 Punten voor extra sanitaire voorzieningen
 
