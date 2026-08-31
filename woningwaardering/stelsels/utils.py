@@ -451,34 +451,6 @@ def _groep_subtotaal_aantal_delen(
     return _format_aantal_delen(float(totaal), meeteenheid)
 
 
-def _is_verwaarloosbare_afronding(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-) -> bool:
-    """Of dit de sluitpost Afronding op kwartpunten is die op twee decimalen 0 is.
-
-    Het rapport toont punten op twee decimalen. Een sluitpost die kleiner is dan
-    een halve cent verschijnt dan als ``0.00 pt`` of ``-0.00 pt``, wat een lezer
-    niets vertelt; die regel laten we weg.
-
-    De sluitpost herkennen we aan het laatste segment van de pad-id: bij een uit
-    JSON ingelezen resultaat is ``stelselgroep.name`` leeg, waardoor de volledige
-    pad-id niet betrouwbaar te reconstrueren is.
-
-    Args:
-        waardering (WoningwaarderingResultatenWoningwaardering): De waardering.
-
-    Returns:
-        bool: True als het rapport deze regel weglaat.
-    """
-    return (
-        waardering.criterium is not None
-        and waardering.criterium.id is not None
-        and waardering.criterium.id.endswith(f"__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}")
-        and waardering.punten is not None
-        and rond_af(waardering.punten, 2) == Decimal("0")
-    )
-
-
 def _render_detail_groep(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[str]:
@@ -499,9 +471,7 @@ def _render_detail_groep(
     tops = [
         w
         for w in waarderingen
-        if w.criterium is not None
-        and w.criterium.bovenliggende_criterium is None
-        and not _is_verwaarloosbare_afronding(w)
+        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
     ]
     for waardering in tops:
         _render_waardering_pre_order(
