@@ -543,7 +543,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -621,6 +621,11 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
     Het kan voorkomen dat een wooncomplex of ander gebouw bestaat uit meerdere (zelfstandige) woonruimten. Om voor waardering in aanmerking te kunnen komen, moet voor een individuele zelfstandige woonruimte geldige energieprestatie zijn afgegeven. Een energielabel voor het hele complex/gebouw wordt niet in de waardering meegenomen.
 
 > Voor het bepalen van de geldigheid van energielabels (2.4.3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
+
+> [!NOTE]
+>
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
+> - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -753,6 +758,9 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
+> [!NOTE]
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
 
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
@@ -931,13 +939,16 @@ _Niet_ als wastafel worden gewaardeerd:
 _Bad en douche_  
 Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die voldoet aan de gestelde voorwaarden, maar geplaatst is in een ander vertrek of overige ruimte dan de bad- of doucheruimte.
 
-Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld~~.
+Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen~~. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld.
 
 | Voorziening   |   Punten |
 |---------------|----------|
 | Douche        |        4 |
 | Bad           |        6 |
 | Bad/douche    |        7 |
+
+> [!NOTE]
+> Dat de douchegarnituur van een bad met (hand)douche niet afzonderlijk wordt geteld, volgt uit de input: geef zo'n bad mee als `bad` en niet als `bad` plus `douche`. Een badruimte met een bad én een afzonderlijke douche kan als `bad_en_douche` worden meegegeven of als losse `bad` en `douche`.
 
 #### 2.6.2 Punten voor extra sanitaire voorzieningen
 
@@ -1528,6 +1539,9 @@ Daarnaast wordt in nog twee andere gevallen de 'cap op de WOZ' niet toegepast, n
 - als het gaat om een nieuwbouwwoning gebouwd in de jaren 2015-2019 waarvoor minimaal 110 punten zijn behaald voor de onderdelen 1 t/m 10 en 12 van het woningwaarderingsstelsel.[^12] In deze situatie wordt minimaal 40 punten voor het onderdeel WOZ-waarde toegekend. Dit komt overeen met 26,6%, waardoor geen aftopping plaatsvindt.
 
 Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
+
+> [!NOTE]
+> Rubriek 11.3 toetst de **woningwaardering** zonder cap aan 187 punten: dat is dezelfde waardering als in artikel 2 (huurprijsgrens bij 186 punten) en de slotopmerking van bijlage I. Eerst de rubrieken (2.1.4), inclusief de WOZ-rubriek ná kwartafronding van I+II (2.11.2), daarna het woningtotaal op hele punten (2.1.5). De 33%-grondslag blijft die som van kwartpunten. We ronden de WOZ-rubriek niet apart op hele punten af voordat we optellen.
 
 **Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 

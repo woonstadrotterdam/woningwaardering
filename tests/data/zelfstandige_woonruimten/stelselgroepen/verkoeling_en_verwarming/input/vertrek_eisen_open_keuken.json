@@ -1,0 +1,185 @@
+{
+  "id": "vertrek_eisen_open_keuken",
+  "ruimten": [
+    {
+      "id": "overig_vertrek",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "OVT",
+        "naam": "Overig vertrek"
+      },
+      "naam": "Overig vertrek van 6 m2",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_overig_vertrek",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Overig vertrek van 6 m2",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_keuken",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "bijkeuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BIJ",
+        "naam": "Bijkeuken"
+      },
+      "naam": "Bijkeuken",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_bijkeuken",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Bijkeuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "berging",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging als vertrek",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_berging",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Berging als vertrek",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "doucheruimte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "naam": "Doucheruimte van 2 m2",
+      "oppervlakte": 2.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_doucheruimte",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Doucheruimte van 2 m2",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "overig_vertrek_te_klein",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "OVT",
+        "naam": "Overig vertrek"
+      },
+      "naam": "Overig vertrek van 3 m2",
+      "oppervlakte": 3.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_overig_vertrek_te_klein",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Overig vertrek van 3 m2",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    }
+  ]
+}

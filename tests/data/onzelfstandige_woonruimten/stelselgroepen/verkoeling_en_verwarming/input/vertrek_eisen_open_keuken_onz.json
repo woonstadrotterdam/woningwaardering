@@ -1,0 +1,67 @@
+{
+  "id": "vertrek_eisen_open_keuken_onz",
+  "ruimten": [
+    {
+      "id": "overig_vertrek",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "OVT",
+        "naam": "Overig vertrek"
+      },
+      "naam": "Overig vertrek van 6 m2",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_overig_vertrek",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Overig vertrek van 6 m2",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    },
+    {
+      "id": "bijkeuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BIJ",
+        "naam": "Bijkeuken"
+      },
+      "naam": "Bijkeuken",
+      "oppervlakte": 6.0,
+      "verwarmd": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_bijkeuken",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Bijkeuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        }
+      ]
+    }
+  ]
+}

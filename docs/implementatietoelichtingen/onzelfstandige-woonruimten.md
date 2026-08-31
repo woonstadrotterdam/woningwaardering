@@ -484,7 +484,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht vanaf 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -563,6 +563,11 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 > Voor het bepalen van de geldigheid van energielabels (2.4.3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
 
+> [!NOTE]
+>
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
+> - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
+
 #### 2.4.4 Punten voor geldige energieprestaties
 
 Het puntenaantal voor de energieprestatie voor de onzelfstandige woning wordt gerekend op basis van het totaal aantal m² oppervlakte die de huurder heeft als privé vertrekken en de aan huurder toe te rekenen gemeenschappelijke vertrekken.
@@ -578,6 +583,9 @@ Het puntenaantal voor de energieprestatie wordt dan als volgt berekend:
 (20 + 10) x 0,65 = 19,50 punten.
 
 ==}
+
+> [!NOTE]
+> Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld (`gedeeldMetAantalAdressen` ≥ 2) tellen **niet** mee voor de oppervlakte in §2.4.4. Het Bhw (Bijlage I, onder B, rubriek 4) bepaalt dat energieprestatie wordt berekend over de m² die **volgens rubriek 1** aan de huurder zijn toe te rekenen. Rubriek 1 dekt alleen privévertrekken en gemeenschappelijke vertrekken op hetzelfde adres; ruimten gedeeld met meerdere adressen vallen onder rubriek 9 ([§2.9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)), waar energieprestatie niet wordt genoemd. Dit komt overeen met het gedrag van de Huurcommissie-huurprijscheck.
 
 De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie. Bij een energie-index wordt het puntenaantal bepaald door het relevante cijfer. In de onderstaande tabellen is dit nader ingevuld.
 
@@ -693,6 +701,9 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
+
+> [!NOTE]
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
@@ -862,13 +873,16 @@ Niet als wastafel worden gewaardeerd:
 _Bad en douche_  
 ~~Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die in een ander vertrek of overige ruimte staat dan de bad- of doucheruimte.~~
 
-Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld~~.
+Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen~~. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld.
 
 | Voorziening    | Punten |
 |----------------|--------|
 | Douche         | 3      |
 | Bad            | 5      |
 | Bad/douche     | 6      |
+
+> [!NOTE]
+> Dat de douchegarnituur van een bad met (hand)douche niet afzonderlijk wordt geteld, volgt uit de input: geef zo'n bad mee als `bad` en niet als `bad` plus `douche`. Een badruimte met een bad én een afzonderlijke douche kan als `bad_en_douche` worden meegegeven of als losse `bad` en `douche`.
 
 #### 2.6.2 Punten voor extra sanitaire voorzieningen
 
