@@ -13,8 +13,11 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
 - Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
 - [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte). Een lokale XML-kopie van deze versie staat in `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml`.
+- De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/) van de Huurcommissie ([zelfstandig](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte), [onzelfstandig](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte)).
 
-Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_ en _Implementatietoelichting_ hieronder voor hun relatie.
+Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > huurprijscheck > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_, _Huurprijscheck_ en _Implementatietoelichting_ hieronder voor hun relatie.
+
+Agents kunnen de huurprijscheck niet raadplegen. Als wettekst en beleidsboek niet sluitend zijn, verzinnen ze geen tooluitkomst: vraag een mens de huurprijscheck te controleren en leg die uitkomst vast in de implementatietoelichting.
 
 ## Projectgrenzen
 
@@ -58,9 +61,13 @@ De datum waarop de waardering wordt bepaald. De peildatum bepaalt onder meer of 
 
 De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). De tekst van het beleidsboek vormt de inhoudelijke basis voor de implementatie, maar kan ruimte laten voor interpretatie of botsen met technische beperkingen.
 
+### Huurprijscheck
+
+De rekentool van de Huurcommissie voor de maximale huurprijs. Als wettekst en beleidsboek niet sluitend zijn, is de huurprijscheck de volgende bron van autoriteit; is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt. Agents kunnen deze tool niet bedienen: een mens controleert de huurprijscheck en legt het resultaat vast in de implementatietoelichting.
+
 ### Implementatietoelichting
 
-Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep leggen we vast hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes en interpretaties lichten we toe in aparte blokken. Deze toelichtingen staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen altijd ook het actuele online beleidsboek en de wettekst. Wijkt het online beleidsboek af, dan is dat leidend en is de afwijking een signaal dat onze toelichting moet worden bijgewerkt.
+Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep leggen we vast hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes en interpretaties lichten we toe in aparte blokken. Deze toelichtingen staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen altijd ook het actuele online beleidsboek, de wettekst en — waar die zijn vastgelegd — de uitkomsten van de huurprijscheck. Wijkt een hoger geplaatste bron af, dan is die leidend en is de afwijking een signaal dat onze toelichting moet worden bijgewerkt.
 
 ### VERA
 

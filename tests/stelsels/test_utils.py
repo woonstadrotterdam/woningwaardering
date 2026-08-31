@@ -135,3 +135,17 @@ def test_is_prive(
         gedeeldMetAantalOnzelfstandigeWoonruimten=aantal_onzelfstandige_woonruimten,
     )
     assert utils.is_prive(ruimte) is verwacht_prive
+
+
+def test_toegerekende_oppervlakte_prive() -> None:
+    ruimte = EenhedenRuimte(oppervlakte=10.4, detail_soort=Ruimtedetailsoort.slaapkamer)
+    assert utils.toegerekende_oppervlakte(ruimte) == Decimal("10.40")
+
+
+def test_toegerekende_oppervlakte_gedeeld() -> None:
+    ruimte = EenhedenRuimte(
+        oppervlakte=40.4,
+        detail_soort=Ruimtedetailsoort.woonkamer,
+        gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+    )
+    assert utils.toegerekende_oppervlakte(ruimte) == Decimal("10.10")

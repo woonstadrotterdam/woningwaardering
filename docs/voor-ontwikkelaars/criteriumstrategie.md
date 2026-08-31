@@ -58,7 +58,9 @@ Bij gedeelde ruimten kan deling op twee niveaus voorkomen: eerst, waar van toepa
 
 Een subgroep of gedeeld-met-laag verschijnt alleen in de output als er inhoud onder hangt, of als er punten, een aantal of een opslagpercentage aan wordt toegekend. Lege groeperende lagen blijven dus weg; in de builders is dit `lazy` activatie.
 
-Meestal draagt een subgroep zelf geen punten; die staan op de onderliggende waarderingen. Bij de oppervlakte-stelselgroepen (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) is dat anders: daar staan de punten op de subgroep, berekend over het afgeronde groepstotaal, en dragen de onderliggende ruimteregels alleen het aantal vierkante meters.
+Meestal draagt een subgroep zelf geen punten; die staan op de onderliggende waarderingen. Bij de oppervlakte-stelselgroepen (`oppervlakte_van_vertrekken` en `oppervlakte_van_overige_ruimten`) is dat anders: daar staan de punten op de subgroep of de stelselgroep, berekend over het afgeronde groepstotaal, en dragen de onderliggende ruimteregels alleen het aantal vierkante meters.
+
+Voor onzelfstandig rubriek 1 en 2 staan de punten op de stelselgroep, niet op de gedeeld-met-laag ([#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393)): eerst worden alle toegerekende m² gesaldeerd en daarna éénmaal afgerond ([#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391)). Bij een zoldercorrectie (vlizotrap) komt er één subtotaal direct onder de stelselgroep, met de correctie als sibling; de ruimteregels blijven onder de gedeeld-met-laag.
 
 In de praktijk begin je met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang je daar waarderingen en eventuele groeperende lagen onder, en sluit je af met `build()`.
 

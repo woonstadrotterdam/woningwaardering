@@ -1020,6 +1020,22 @@ def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
     return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
 
 
+def toegerekende_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
+    """Toegerekende oppervlakte voor onzelfstandig rubriek 1, 2 en 4.
+
+    Per ruimte: ``rond_af(m² inclusief kasten, 2) / deler``, waarbij ``deler`` het
+    aantal onzelfstandige woonruimten is (of 1). Rubriek 9 gebruikt een andere
+    delingsregel en deelt deze helper niet.
+
+    De som van deze waarden is S: rubriek 1 rondt S af op hele m², rubriek 2
+    vermenigvuldigt die afgeronde S met 0,75, rubriek 4 gebruikt de onafgeronde S.
+    """
+    deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+    return rond_af(
+        oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
+    ) / Decimal(str(deler))
+
+
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
     """
     Classificeert de ruimte volgens het Woningwaarderingstelsel

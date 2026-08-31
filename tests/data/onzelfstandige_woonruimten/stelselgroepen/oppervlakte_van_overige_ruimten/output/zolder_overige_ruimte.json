@@ -11,14 +11,13 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 15.75,
+      "punten": 15.5,
       "woningwaarderingen": [
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__prive",
             "naam": "Privé"
-          },
-          "punten": 15.0
+          }
         },
         {
           "aantal": 10.0,
@@ -57,25 +56,10 @@
         {
           "aantal": 10.0,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal",
-            "naam": "Subtotaal",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
-          },
-          "punten": 2.5
-        },
-        {
-          "aantal": 10.0,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal__Space_3",
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_3",
             "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__subtotaal"
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -84,21 +68,30 @@
           }
         },
         {
+          "aantal": 23.33,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten__Space_3__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten"
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
             }
           },
-          "punten": -1.67
+          "punten": 17.25
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap"
+          },
+          "punten": -1.66666667
         },
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.08
+          "punten": -0.0833333
         }
       ]
     }

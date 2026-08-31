@@ -11,7 +11,7 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 0.0,
+      "punten": 14.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -20,10 +20,10 @@
           }
         },
         {
-          "aantal": 2.6,
+          "aantal": 10.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__zolder",
-            "naam": "Zolder (+1 kast)",
+            "id": "oppervlakte_van_overige_ruimten__prive__berging",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__prive"
             },
@@ -34,7 +34,27 @@
           }
         },
         {
-          "aantal": 2.6,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "aantal": 40.4,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
+            "naam": "Zolderberging",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 20.5,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal",
             "naam": "Subtotaal",
@@ -43,14 +63,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.25
+          "punten": 15.75
         },
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__zolder__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
-          "punten": -2.25
+          "punten": -1.25
         }
       ]
     }
