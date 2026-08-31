@@ -150,19 +150,20 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             eenheid, factoren, woningwaardering_resultaat
         )
 
-        # §2.11.2 [ZEL]: onderdeel I en II niet tussentijds afronden; alleen totaal op kwart.
+        # 2.11.2 Punten voor de WOZ-waarde: "Rond dit puntenaantal niet af." (onderdeel I en II).
+        # Het rubriektotaal volgt paragraaf 2.1.4: kwartafronding op de som van I en II.
         punten_onderdeel_I = woz_waarde / factor_onderdeel_I
         punten_onderdeel_II = woz_waarde / oppervlakte / factor_onderdeel_II
         woz_punten_onafgerond = punten_onderdeel_I + punten_onderdeel_II
 
         logger.info(
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel I is "
-            f"{woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {utils.rond_af(punten_onderdeel_I, 2)}"
+            f"{woz_waarde:.0f} / {factor_onderdeel_I:.0f} = {punten_onderdeel_I}"
         )
         logger.info(
             f"Eenheid ({eenheid.id}): Punten voor de WOZ-waarde onderdeel II is "
             f"{woz_waarde:.0f} / {oppervlakte:.2f} / {factor_onderdeel_II:.0f} = "
-            f"{utils.rond_af(punten_onderdeel_II, 2)}"
+            f"{punten_onderdeel_II}"
         )
 
         # Toon de WOZ-waarde of minimumwaarde in de resultaten
@@ -261,8 +262,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             1. Onafgeronde onderdelen I + II.
             2. Nieuwbouwminimum (2015-2019, ≥110 punten op rubrieken 1-10/12) wanneer
                WOZ < 40 punten; daarna geen cap (26,6% → geen aftopping).
-            3. Anders: 33%-cap wanneer totaal na kwartafronding ≥ 187 punten, tenzij COROP
-               of minimum WOZ-waarde van toepassing is.
+            3. Anders: 33%-cap wanneer overige rubriektotalen plus WOZ-rubriek na
+               kwartafronding ≥ 187 punten, tenzij COROP of minimum WOZ-waarde van
+               toepassing is.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep.
@@ -286,12 +288,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return
 
-        # De rubriektotalen zijn per §2.1.4 al op kwartpunten afgerond; hun som is
-        # dus exact. De hele-puntafronding geldt per §2.1.5 alleen voor het
-        # eindtotaal: "Het puntentotaal per woning wordt na eindsaldering (met
-        # inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele
-        # punten." Tussentijds afronden zou de 187-drempel en de 33%-grondslag
-        # kunnen doen omslaan.
+        # 2.1.4 Algemene rekenregel afronding per rubriek: rubriektotalen zijn exact op
+        # kwartpunten. 2.1.5: "Het puntentotaal per woning wordt na eindsaldering (met
+        # inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele punten."
+        # Tussentijds afronden van deze som zou de 187-drempel en de 33%-grondslag kunnen
+        # doen omslaan.
         overige_punten = sum(
             (
                 Decimal(str(groep.punten))
@@ -301,8 +302,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             Decimal("0"),
         )
 
-        # §2.11.7 / §2.1.4 [ZEL]: 187-drempel op totaal na kwartafronding, niet op afgeronde WOZ.
-        totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
+        # 2.11.7 De uitzonderingen op de WOZ-cap: drempel op som van rubriektotalen plus
+        # WOZ-rubriek na kwartafronding van I + II (2.11.2 / 2.1.4), niet op afgeronde
+        # WOZ alleen en niet met tussentijdse hele-puntafronding (2.1.5).
+        woz_punten_rubriek = utils.rond_af_op_kwart(woz_punten)
+        totaal_punten_zonder_cap = overige_punten + woz_punten_rubriek
         correctie_punten = self._cap_punten(
             eenheid,
             woz_punten,
@@ -363,7 +367,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
             overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
-            totaal_punten_zonder_cap (Decimal): Totaal na kwartafronding vóór cap.
+            totaal_punten_zonder_cap (Decimal): Som van rubriektotalen plus WOZ-rubriek
+                na kwartafronding, vóór cap.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.

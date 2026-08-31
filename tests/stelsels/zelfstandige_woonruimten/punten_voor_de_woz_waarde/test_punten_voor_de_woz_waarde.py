@@ -41,7 +41,7 @@ def test_cap_punten_geen_cap_bij_totaal_onder_187_kwartafronding():
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     overige_punten = Decimal("100")
     woz_punten = Decimal("86.5")
-    totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
+    totaal_punten_zonder_cap = overige_punten + utils.rond_af_op_kwart(woz_punten)
 
     assert totaal_punten_zonder_cap == Decimal("186.5")
     assert (
@@ -61,7 +61,7 @@ def test_cap_punten_wel_cap_boven_187_drempel():
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     overige_punten = Decimal("134")
     woz_punten = Decimal("134")
-    totaal_punten_zonder_cap = utils.rond_af_op_kwart(overige_punten + woz_punten)
+    totaal_punten_zonder_cap = overige_punten + utils.rond_af_op_kwart(woz_punten)
 
     assert totaal_punten_zonder_cap >= Decimal("187")
     assert (
