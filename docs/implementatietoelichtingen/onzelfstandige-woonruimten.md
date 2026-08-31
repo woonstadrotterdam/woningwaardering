@@ -216,7 +216,11 @@ De oppervlakten voor privé- en gemeenschappelijke vertrekken worden afzonderlij
 - Bepaal het puntenaantal voor de vertrekken op basis van de m².
 
 > [!NOTE]
-> Wettekst en beleidsboek zijn hier niet sluitend. De wettekst deelt de punten van de gemeenschappelijke ruimte, terwijl het rekenvoorbeeld in dezelfde bijlage m² deelt; het beleidsboek rondt privé en gemeenschappelijk eerst afzonderlijk af. Wij delen eerst per ruimte (`rond_af(m² inclusief kasten, 2) / deler`), salderen, en ronden daarna éénmaal af op hele m² ([#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391)). Punten staan op de stelselgroep, niet op de gedeeld-met-laag ([#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393)). De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) volgt deze volgorde. Zie `CONTEXT.md` voor de volgorde van autoriteit.
+> Wettekst en beleidsboek zijn hier niet sluitend. De wettekst deelt de punten van de gemeenschappelijke ruimte, terwijl het rekenvoorbeeld in dezelfde bijlage m² deelt; het beleidsboek rondt privé en gemeenschappelijk eerst afzonderlijk af. Omdat wettekst en beleidsboek niet sluitend zijn volgen wij de [Huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte): 
+>
+> Eerst delen per ruimte (`rond_af(m² inclusief kasten, 2) / deler`), salderen, en daarna éénmaal afronden op hele m². 
+>
+> Voor meer info zie: Zie [#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391) en [#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393
 
 ##### 2.2.1.2 De voorwaarden van een vertrek
 
@@ -338,7 +342,7 @@ De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzond
 - Bepaal het puntenaantal voor de overige ruimtes op basis van de m².
 
 > [!NOTE]
-> Dezelfde volgorde als bij [§2.2.1.1](#2111-rekenregels-vertrekken): eerst delen en salderen, daarna éénmaal afronden op hele m², daarna × 0,75 ([#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391)). Punten staan op de stelselgroep, niet op de gedeeld-met-laag ([#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393)). Wettekst en beleidsboek zijn niet sluitend; de huurprijscheck volgt deze volgorde.
+> Dezelfde volgorde als bij [§2.2.1.1](#2111-rekenregels-vertrekken): eerst delen en salderen, daarna éénmaal afronden op hele m², daarna × 0,75, conform de huurprijscheck tool. Wettekst en beleidsboek zijn niet sluitend. Zie [#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391) en [#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393
 
 ##### 2.2.2.2 De voorwaarden van een overige ruimte
 
@@ -1140,7 +1144,7 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behoren 
 Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moeten worden berekend door het puntenaantal voor de oppervlakte eerst te delen door de meerdere adressen en daarna nog gedeeld door het aantal onzelfstandige woonruimten op het adres waar het gehuurde onderdeel van uitmaakt.
 
 > [!NOTE]
-> Rubriek 9 heeft een andere delingsregel dan rubriek 1 en 2 (punten eerst, daarna / adressen / onzelfstandige woonruimten) en blijft bewust ongewijzigd.
+> Rubriek 9 heeft een andere delingsregel dan rubriek 1 en 2: punten eerst berekenen, daarna / adressen / onzelfstandige woonruimten. Dit is geverifieerd met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 #### 2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten
 
