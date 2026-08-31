@@ -1,9 +1,8 @@
 import asyncio
 import warnings
-from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
-from typing import Any, Callable, Counter, List, Tuple
+from typing import Any, Counter
 
 import pandas as pd
 import requests
@@ -13,7 +12,6 @@ from pydantic import BaseModel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
-    EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
     Referentiedata,
@@ -24,8 +22,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Energieprestatiesoort,
-    Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
     RuimtesoortReferentiedata,
@@ -102,6 +98,11 @@ W_OPSLAG = 7
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
+
+# Criterium-id-segment en naam van de sluitpost die het verschil tussen de som van
+# de waarderingen en het stelselgroeptotaal opvangt.
+AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT = "afronding_op_kwartpunten"
+AFRONDING_OP_KWARTPUNTEN_NAAM = "Afronding op kwartpunten"
 # Inschuif aan het begin van elke tabelregel (naamkolom).
 _TABEL_RIJ_INSCHUIF = "  "
 # Spatie tussen getal- en eenheidskolom.
@@ -450,6 +451,34 @@ def _groep_subtotaal_aantal_delen(
     return _format_aantal_delen(float(totaal), meeteenheid)
 
 
+def _is_verwaarloosbare_afronding(
+    waardering: WoningwaarderingResultatenWoningwaardering,
+) -> bool:
+    """Of dit de sluitpost Afronding op kwartpunten is die op twee decimalen 0 is.
+
+    Het rapport toont punten op twee decimalen. Een sluitpost die kleiner is dan
+    een halve cent verschijnt dan als ``0.00 pt`` of ``-0.00 pt``, wat een lezer
+    niets vertelt; die regel laten we weg.
+
+    De sluitpost herkennen we aan het laatste segment van de pad-id: bij een uit
+    JSON ingelezen resultaat is ``stelselgroep.name`` leeg, waardoor de volledige
+    pad-id niet betrouwbaar te reconstrueren is.
+
+    Args:
+        waardering (WoningwaarderingResultatenWoningwaardering): De waardering.
+
+    Returns:
+        bool: True als het rapport deze regel weglaat.
+    """
+    return (
+        waardering.criterium is not None
+        and waardering.criterium.id is not None
+        and waardering.criterium.id.endswith(f"__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}")
+        and waardering.punten is not None
+        and rond_af(waardering.punten, 2) == Decimal("0")
+    )
+
+
 def _render_detail_groep(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[str]:
@@ -470,7 +499,9 @@ def _render_detail_groep(
     tops = [
         w
         for w in waarderingen
-        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
+        if w.criterium is not None
+        and w.criterium.bovenliggende_criterium is None
+        and not _is_verwaarloosbare_afronding(w)
     ]
     for waardering in tops:
         _render_waardering_pre_order(
@@ -631,93 +662,6 @@ def naar_rapport(
     return WoningwaarderingRapport(lines)
 
 
-def energieprestatie_met_geldig_label(
-    peildatum: date, eenheid: EenhedenEenheid
-) -> EenhedenEnergieprestatie | None:
-    """
-    Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
-
-    Args:
-        peildatum (date): De peildatum waarop de energieprestatie geldig moet zijn.
-        eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
-
-    Returns:
-        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
-    """
-    aantal_energieprestaties = len(eenheid.energieprestaties or [])
-    if aantal_energieprestaties == 0:
-        warnings.warn(
-            f"Eenheid ({eenheid.id}): 'energieprestaties' is None", UserWarning
-        )
-        return None
-
-    vereiste_attributen: List[
-        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
-    ] = [
-        ("soort", lambda ep: ep.soort is not None),
-        ("status", lambda ep: ep.status is not None),
-        ("begindatum", lambda ep: ep.begindatum is not None),
-        ("einddatum", lambda ep: ep.einddatum is not None),
-        ("label", lambda ep: ep.label is not None),
-    ]
-
-    for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
-        logger.debug(
-            f"Eenheid ({eenheid.id}): energieprestatie {idx + 1} van {aantal_energieprestaties} wordt gevalideerd."
-        )
-        ontbrekende_attributen = [
-            naam for naam, check in vereiste_attributen if not check(energieprestatie)
-        ]
-        if ontbrekende_attributen:
-            logger.debug(
-                f"Eenheid ({eenheid.id}) mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
-            )
-            continue
-
-        if energieprestatie.soort not in (
-            Energieprestatiesoort.energie_index,
-            Energieprestatiesoort.energielabel_conform_nta8800,
-            Energieprestatiesoort.primair_energieverbruik_woningbouw,
-            Energieprestatiesoort.voorlopig_energielabel,
-        ):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): ongeldige energieprestatiesoort '{energieprestatie.soort}'."
-            )
-            continue
-
-        # 2.4.3 Geldigheid energieprestatie op peildatum (beleidsboek).
-        # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
-        # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
-        begindatum = energieprestatie.begindatum
-        einddatum = energieprestatie.einddatum
-        if begindatum is None or einddatum is None:
-            continue
-        if not (begindatum <= peildatum < einddatum):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
-            )
-            continue
-
-        if energieprestatie.status != Energieprestatiestatus.definitief:
-            logger.debug(
-                f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
-            )
-            continue
-
-        logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
-        logger.debug(
-            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
-            f" status={energieprestatie.status.naam if energieprestatie.status else None}"
-            f" label={energieprestatie.label.naam if energieprestatie.label else None}"
-            f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
-            f" einddatum={energieprestatie.einddatum}"
-        )
-        return energieprestatie
-
-    logger.info(f"Eenheid ({eenheid.id}): geen geldige energieprestatie gevonden.")
-    return None
-
-
 def rond_af(
     getal: float | None | Decimal, decimalen: int, rounding: str | None = ROUND_HALF_UP
 ) -> Decimal:
@@ -832,12 +776,12 @@ def voeg_stelselgroep_afronding_toe(
             "Stelselgroep heeft geen naam voor de Afronding-op-kwartpunten-criterium-id."
         )
 
-    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
+    afronding_id = f"{stelselgroep.name}__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}"
     groep.woningwaarderingen = [
         *waarderingen,
         WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Afronding op kwartpunten",
+                naam=AFRONDING_OP_KWARTPUNTEN_NAAM,
                 id=afronding_id,
             ),
             punten=float(delta),

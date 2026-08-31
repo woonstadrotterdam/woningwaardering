@@ -1,0 +1,61 @@
+{
+  "id": "zoldercorrectie_kast_op_zolder",
+  "ruimten": [
+    {
+      "id": "Space_berging",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 6.0,
+      "gedeeldMetAantalAdressen": 2
+    },
+    {
+      "id": "Space_zolder",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimte"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder met vlizotrap",
+      "oppervlakte": 2.6,
+      "gedeeldMetAantalAdressen": 2,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ],
+      "verbondenRuimten": [
+        {
+          "id": "Space_kast",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimte"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "oppervlakte": 0.9
+        }
+      ]
+    }
+  ]
+}

@@ -13,7 +13,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
+    energieprestatie_met_geldig_label,
     get_energieprestatievergoeding,
+    in_vereenvoudigd_label_periode,
     monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -97,9 +99,7 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
-        energieprestatie = utils.energieprestatie_met_geldig_label(
-            self.peildatum, eenheid
-        )
+        energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
@@ -126,6 +126,10 @@ class Energieprestatie(Stelselgroep):
                 oppervlakte_van_vertrekken,
                 energieprestatie,
             )
+            if woningwaardering is None and eenheid.bouwjaar:
+                woningwaardering = self._bereken_punten_met_bouwjaar(
+                    waarderingsgroep_builder, eenheid, oppervlakte_van_vertrekken
+                )
 
         elif eenheid.bouwjaar:
             woningwaardering = self._bereken_punten_met_bouwjaar(
@@ -175,59 +179,74 @@ class Energieprestatie(Stelselgroep):
         Raises:
             ValueError: Als de lookup-tabel geen unieke match oplevert voor label of energie-index.
         """
-        if (
-            not energieprestatie.soort
-            or not energieprestatie.label
-            or not energieprestatie.label.code
-            or not energieprestatie.begindatum
-        ):
+        if not energieprestatie.soort or not energieprestatie.begindatum:
             warnings.warn(
                 f"Eenheid ({eenheid.id}): energieprestatie mist vereiste gegevens "
-                f"(soort, label, label.code of begindatum) en kan daarom niet "
+                f"(soort of begindatum) en kan daarom niet "
                 f"worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
                 UserWarning,
             )
             return None
 
-        label = getattr(
-            Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
-        ).naam
-        woningwaardering = waarderingsgroep_builder.met_onderliggend(
-            id="label",
-            naam=label,
-            meeteenheid=Meeteenheid.vierkante_meter_m2,
-        )
         df = Energieprestatie.lookup_mapping["label_ei"]
-
+        label = (
+            getattr(
+                Energielabel,
+                energieprestatie.label.code.lower(),
+                energieprestatie.label,
+            ).naam
+            if energieprestatie.label and energieprestatie.label.code
+            else None
+        )
         waarderings_label = label
 
         if (
-            energieprestatie.begindatum >= date(2015, 1, 1)
-            and energieprestatie.begindatum < date(2021, 1, 1)
+            in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
-            if energieprestatie.waarde is not None:
-                energie_index = float(energieprestatie.waarde)
+            if energieprestatie.waarde is None:
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): energie-index mist waarde en kan daarom niet worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                    UserWarning,
+                )
+                return None
 
-                filtered_df = df[
-                    (df["Ondergrens (exclusief)"] < energie_index)
-                    & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ]
-                if len(filtered_df) != 1:
-                    raise ValueError(
-                        f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index} voor {self.stelselgroep.naam}."
-                    )
+            energie_index = float(energieprestatie.waarde)
 
-                waarderings_label_index = filtered_df["Label"].values[0]
+            filtered_df = df[
+                (df["Ondergrens (exclusief)"] < energie_index)
+                & (energie_index <= (df["Bovengrens (inclusief)"]))
+            ]
+            if len(filtered_df) != 1:
+                raise ValueError(
+                    f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index} voor {self.stelselgroep.naam}."
+                )
 
-                # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
-                if label != waarderings_label_index:
-                    woningwaardering.naam += (
-                        f" -> {waarderings_label_index} (Energie-index)"
-                    )
-                    waarderings_label = waarderings_label_index
-                else:
-                    woningwaardering.naam += " (Energie-index)"
+            waarderings_label_index = filtered_df["Label"].values[0]
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
+                id="label",
+                naam="Energie-index"
+                if label is None
+                else (
+                    f"{label} -> {waarderings_label_index} (Energie-index)"
+                    if label != waarderings_label_index
+                    else f"{label} (Energie-index)"
+                ),
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            )
+            waarderings_label = waarderings_label_index
+        else:
+            if label is None:
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): energieprestatie mist label en kan daarom niet worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                    UserWarning,
+                )
+                return None
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
+                id="label",
+                naam=label,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            )
 
         filtered_df = df[(df["Label"] == waarderings_label)]
         if len(filtered_df) != 1:

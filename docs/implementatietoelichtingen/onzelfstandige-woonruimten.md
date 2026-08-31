@@ -580,6 +580,11 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 
 > Voor het bepalen van de geldigheid van energielabels (2.4.3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
 
+> [!NOTE]
+>
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
+> - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
+
 #### 2.4.4 Punten voor geldige energieprestaties
 
 Het puntenaantal voor de energieprestatie voor de onzelfstandige woning wordt gerekend op basis van het totaal aantal m² oppervlakte die de huurder heeft als privé vertrekken en de aan huurder toe te rekenen gemeenschappelijke vertrekken.
