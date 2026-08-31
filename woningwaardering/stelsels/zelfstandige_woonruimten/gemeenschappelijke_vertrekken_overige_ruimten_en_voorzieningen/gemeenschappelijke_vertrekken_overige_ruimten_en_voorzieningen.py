@@ -14,8 +14,8 @@ from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
     bereken_oppervlakte_punten,
-    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
+    maak_zolder_correctie_waardering,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -252,22 +252,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 for ruimte in ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
-                    # 2.2.4 Kasten: de netto oppervlakte van een kast die in een
-                    # overige ruimte uitkomt, telt mee bij de oppervlakte van die
-                    # ruimte; de zoldercorrectie rekent daarom op dezelfde grondslag
-                    # als het groepstotaal.
-                    zolder_oppervlakte = rond_af(
-                        oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
+                    # 2.2.4 Kasten: de helper rekent op oppervlakte inclusief
+                    # verbonden kasten; delen door deler gebeurt hierna, zoals bij
+                    # verkoeling/verwarming in deze stelselgroep.
+                    waardering = maak_zolder_correctie_waardering(
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_builder=subgroep,
                     )
-                    correctie_punten = (
-                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
-                        / deler
-                    )
-                    subgroep.met_onderliggend(
-                        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
-                        naam="Correctie: zolder zonder vaste trap",
-                        punten=correctie_punten,
-                    )
+                    waardering.punten = Decimal(str(waardering.punten)) / deler
 
             # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
             # krijgt de subgroep-waardering zelf de punten.
