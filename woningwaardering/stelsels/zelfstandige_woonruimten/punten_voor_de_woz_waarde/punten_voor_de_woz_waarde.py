@@ -262,9 +262,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             1. Onafgeronde onderdelen I + II.
             2. Nieuwbouwminimum (2015-2019, ≥110 punten op rubrieken 1-10/12) wanneer
                WOZ < 40 punten; daarna geen cap (26,6% → geen aftopping).
-            3. Anders: 33%-cap wanneer overige rubriektotalen plus WOZ-rubriek na
-               kwartafronding ≥ 187 punten, tenzij COROP of minimum WOZ-waarde van
-               toepassing is.
+            3. Anders: 33%-cap wanneer de woningwaardering zonder cap (rubrieksom
+               ná 2.1.4, daarna 2.1.5) ≥ 187 punten, tenzij COROP of minimum
+               WOZ-waarde van toepassing is.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep.
@@ -289,10 +289,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return
 
         # 2.1.4 Algemene rekenregel afronding per rubriek: rubriektotalen zijn exact op
-        # kwartpunten. 2.1.5: "Het puntentotaal per woning wordt na eindsaldering (met
-        # inbegrip van de bij zorgwoningen geldende toeslag) afgerond op hele punten."
-        # Tussentijds afronden van deze som zou de 187-drempel en de 33%-grondslag kunnen
-        # doen omslaan.
+        # kwartpunten. De 33%-grondslag gebruikt die som; niet tussentijds op hele punten
+        # afronden. De WOZ-rubriek volgt 2.11.2: I+II niet tussentijds afronden, de som
+        # op een kwart punt.
         overige_punten = sum(
             (
                 Decimal(str(groep.punten))
@@ -302,34 +301,41 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             Decimal("0"),
         )
 
-        # 2.11.7 De uitzonderingen op de WOZ-cap: drempel op som van rubriektotalen plus
-        # WOZ-rubriek na kwartafronding van I + II (2.11.2 / 2.1.4), niet op afgeronde
-        # WOZ alleen en niet met tussentijdse hele-puntafronding (2.1.5).
         woz_punten_rubriek = utils.rond_af_op_kwart(woz_punten)
-        totaal_punten_zonder_cap = overige_punten + woz_punten_rubriek
+        totaal_kwartpunten_zonder_cap = overige_punten + woz_punten_rubriek
+        # 11.3 CAP op de WOZ: "Deze beperking geldt niet voor ... woningen waarvan de
+        # waardering zonder die beperking lager is dan 187 punten." Die waardering is
+        # het puntentotaal van de woning, per 2.1.5 / slotopmerking bijlage I na
+        # eindsaldering op hele punten. Niet: alleen de WOZ-rubriek op hele punten.
+        waardering_zonder_cap = utils.rond_af(totaal_kwartpunten_zonder_cap, 0)
         correctie_punten = self._cap_punten(
             eenheid,
             woz_punten,
             overige_punten,
             woningwaardering_resultaat,
-            totaal_punten_zonder_cap,
+            waardering_zonder_cap,
         )
 
         if correctie_punten is not None:
-            totaal_punten_met_cap = totaal_punten_zonder_cap + correctie_punten
+            totaal_kwartpunten_met_cap = (
+                totaal_kwartpunten_zonder_cap + correctie_punten
+            )
+            waardering_met_cap = utils.rond_af(totaal_kwartpunten_met_cap, 0)
 
             logger.debug(
-                f"Eenheid ({eenheid.id}): Waardering zonder cap: {totaal_punten_zonder_cap} punten. Na toepassing van cap: {totaal_punten_met_cap} punten."
+                f"Eenheid ({eenheid.id}): Waardering zonder cap: {waardering_zonder_cap} "
+                f"punten. Na toepassing van cap: {waardering_met_cap} punten."
             )
 
-            # Wanneer een woning zonder die beperking een waardering heeft van meer dan
-            # 186 punten en door deze beperking een waardering krijgt die lager is dan
-            # 187 punten, geldt een waardering van 186 punten voor de woning.
-            if totaal_punten_zonder_cap > 186 and totaal_punten_met_cap < 187:
+            # 11.3: "Wanneer een woning zonder die beperking een waardering heeft van
+            # meer dan 186 punten en door deze beperking een waardering krijgt die
+            # lager is dan 187 punten, geldt een waardering van 186 punten voor de
+            # woning."
+            if waardering_zonder_cap > 186 and waardering_met_cap < 187:
                 logger.info(
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met 186 punten totaal door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
-                correctie_punten = 186 - totaal_punten_zonder_cap
+                correctie_punten = Decimal("186") - totaal_kwartpunten_zonder_cap
                 waarderingsgroep_builder.met_onderliggend(
                     id="maximering_woz_punten",
                     naam="Maximering WOZ-punten tot 186 punten totaal",
@@ -351,7 +357,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_punten: Decimal,
         overige_punten: Decimal,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-        totaal_punten_zonder_cap: Decimal,
+        waardering_zonder_cap: Decimal,
     ) -> Decimal | None:
         """
         Berekent de cap op de WOZ. Maximaal 33% van het
@@ -367,15 +373,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
             overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
-            totaal_punten_zonder_cap (Decimal): Som van rubriektotalen plus WOZ-rubriek
-                na kwartafronding, vóór cap.
+            waardering_zonder_cap (Decimal): Woningwaardering zonder cap, afgerond op
+                hele punten (2.1.5), voor de 187-drempel uit 11.3.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
         """
         drempel_cap_woz = Decimal("187")
 
-        if totaal_punten_zonder_cap < drempel_cap_woz:
+        if waardering_zonder_cap < drempel_cap_woz:
             logger.info(
                 f"Cap op op de WOZ wordt niet toegepast omdat het totaal aantal punten minder is dan {drempel_cap_woz}."
             )
