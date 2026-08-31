@@ -2,7 +2,10 @@ from datetime import date
 from decimal import Decimal
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
+    WaarderingsgroepBuilder,
+)
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
     PuntenVoorDeWozWaarde,
 )
@@ -35,142 +38,90 @@ def _maak_resultaat_met_overige_punten(
     )
 
 
-def _waardering_zonder_cap(overige_punten: Decimal, woz_punten: Decimal) -> Decimal:
-    """Woningwaardering zonder 11.3: rubrieken op kwartpunten, daarna 2.1.5."""
-    return utils.rond_af(overige_punten + utils.rond_af_op_kwart(woz_punten), 0)
-
-
-def test_cap_punten_geen_cap_bij_woningwaardering_onder_187():
-    """11.3: 100 + 86,25 → 186,25 → woningwaardering 186 → geen cap."""
+def _corrigeer(
+    overige_punten: float,
+    woz_punten: Decimal,
+    *,
+    bouwjaar: int = 1980,
+) -> WaarderingsgroepBuilder:
     svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    overige_punten = Decimal("100")
-    woz_punten = Decimal("86.25")
-    waardering_zonder_cap = _waardering_zonder_cap(overige_punten, woz_punten)
-
-    assert waardering_zonder_cap == Decimal("186")
-    assert (
-        svc._cap_punten(
-            eenheid,
-            woz_punten,
-            overige_punten,
-            WoningwaarderingResultatenWoningwaarderingResultaat(),
-            waardering_zonder_cap,
-        )
-        is None
-    )
-
-
-def test_cap_punten_wel_cap_bij_186_5_naar_187():
-    """#327: WOZ-rubriek op kwartpunten, 187-toets op de woningwaardering.
-
-    100 + 86,5 = 186,50 → 2.1.5 maakt 187 → cap wél. Niet: 186,50 < 187 dus geen cap.
-    """
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    overige_punten = Decimal("100")
-    woz_punten = Decimal("86.5")
-    waardering_zonder_cap = _waardering_zonder_cap(overige_punten, woz_punten)
-
-    assert utils.rond_af_op_kwart(woz_punten) == Decimal("86.5")
-    assert waardering_zonder_cap == Decimal("187")
-    assert (
-        svc._cap_punten(
-            eenheid,
-            woz_punten,
-            overige_punten,
-            WoningwaarderingResultatenWoningwaarderingResultaat(),
-            waardering_zonder_cap,
-        )
-        is not None
-    )
-
-
-def test_cap_punten_rond_woz_niet_apart_op_hele_punten_af():
-    """#327 blijft gelden voor de WOZ-rubriek: niet `rond_af(woz, 0)` vóór de som.
-
-    100 + 86,4: op hele punten alleen de WOZ → 186 (geen cap); rubriek op kwart
-    plus woningwaardering → 186,50 → 187 (wel cap).
-    """
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    overige_punten = Decimal("100")
-    woz_punten = Decimal("86.4")
-    waardering_zonder_cap = _waardering_zonder_cap(overige_punten, woz_punten)
-
-    assert utils.rond_af(woz_punten, 0) == Decimal("86")
-    assert utils.rond_af_op_kwart(woz_punten) == Decimal("86.5")
-    assert waardering_zonder_cap == Decimal("187")
-    assert (
-        svc._cap_punten(
-            eenheid,
-            woz_punten,
-            overige_punten,
-            WoningwaarderingResultatenWoningwaarderingResultaat(),
-            waardering_zonder_cap,
-        )
-        is not None
-    )
-
-
-def test_cap_punten_wel_cap_boven_187_drempel():
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    overige_punten = Decimal("134")
-    woz_punten = Decimal("134")
-    waardering_zonder_cap = _waardering_zonder_cap(overige_punten, woz_punten)
-
-    assert waardering_zonder_cap >= Decimal("187")
-    assert (
-        svc._cap_punten(
-            eenheid,
-            woz_punten,
-            overige_punten,
-            WoningwaarderingResultatenWoningwaarderingResultaat(),
-            waardering_zonder_cap,
-        )
-        is not None
-    )
-
-
-def test_corrigeer_woz_punten_186_vloer_bij_186_5():
-    """11.3: 186,50 zonder cap wordt 187, cap trekt onder 187, vloer is 186."""
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
+    eenheid = EenhedenEenheid(id="test", bouwjaar=bouwjaar)
     resultaat = _maak_resultaat_met_overige_punten(
-        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 100.0),
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, overige_punten),
     )
     builder = WaarderingsgroepBuilder(
         Woningwaarderingstelsel.zelfstandige_woonruimten,
         Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
     )
+    svc._corrigeer_woz_punten(builder, eenheid, resultaat, woz_punten)
+    return builder
 
-    svc._corrigeer_woz_punten(builder, eenheid, resultaat, Decimal("86.5"))
 
-    maximering = next(
-        w for w in builder.alle_waarderingen() if w.segment == "maximering_woz_punten"
+def _maximering(builder: WaarderingsgroepBuilder) -> WaarderingBuilder | None:
+    return next(
+        (
+            w
+            for w in builder.alle_waarderingen()
+            if w.segment == "maximering_woz_punten"
+        ),
+        None,
     )
+
+
+def test_corrigeer_woz_punten_geen_cap_bij_woningwaardering_onder_187():
+    """11.3: 100 + 86,25 → 186,25 → woningwaardering 186 → geen cap."""
+    overige = Decimal("100")
+    woz = Decimal("86.25")
+    assert utils.rond_af(overige + utils.rond_af_op_kwart(woz), 0) == Decimal("186")
+    assert _maximering(_corrigeer(100.0, woz)) is None
+
+
+def test_corrigeer_woz_punten_186_vloer_bij_186_5():
+    """#327: WOZ-rubriek op kwartpunten, 187-toets op de woningwaardering.
+
+    100 + 86,5 = 186,50 → 2.1.5 maakt 187 → cap wél, vloer 186.
+    """
+    woz = Decimal("86.5")
+    assert utils.rond_af_op_kwart(woz) == Decimal("86.5")
+    assert utils.rond_af(Decimal("100") + woz, 0) == Decimal("187")
+
+    maximering = _maximering(_corrigeer(100.0, woz))
+    assert maximering is not None
     assert maximering.naam == "Maximering WOZ-punten tot 186 punten totaal"
     assert Decimal(str(maximering.punten)) == Decimal("-0.5")
 
 
+def test_corrigeer_woz_punten_rond_woz_niet_apart_op_hele_punten_af():
+    """#327 blijft gelden voor de WOZ-rubriek: niet `rond_af(woz, 0)` vóór de som.
+
+    100 + 86,4: op hele punten alleen de WOZ → 186 (geen cap); rubriek op kwart
+    plus woningwaardering → 186,50 → 187 (wel cap, vloer 186).
+    """
+    woz = Decimal("86.4")
+    assert utils.rond_af(woz, 0) == Decimal("86")
+    assert utils.rond_af_op_kwart(woz) == Decimal("86.5")
+    assert utils.rond_af(Decimal("100") + Decimal("86.5"), 0) == Decimal("187")
+
+    maximering = _maximering(_corrigeer(100.0, woz))
+    assert maximering is not None
+    assert maximering.naam == "Maximering WOZ-punten tot 186 punten totaal"
+
+
+def test_corrigeer_woz_punten_33_procent_boven_187():
+    maximering = _maximering(_corrigeer(134.0, Decimal("134")))
+    assert maximering is not None
+    assert maximering.naam == "Maximering WOZ-punten tot 33% van totaal"
+
+
+def test_cap_punten_alleen_33_procent():
+    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    assert svc._cap_punten(Decimal("134"), Decimal("134")) is not None
+    assert svc._cap_punten(Decimal("10"), Decimal("100")) is None
+
+
 def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     """#326: nieuwbouw 2015-2019 met ≥110 punten maar WOZ > 40 → cap wél toepassen."""
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
-    eenheid = EenhedenEenheid(id="test", bouwjaar=2016)
-    resultaat = _maak_resultaat_met_overige_punten(
-        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
-        (Woningwaarderingstelselgroep.keuken, 55.0),
-        (Woningwaarderingstelselgroep.sanitair, 20.75),
-    )
-    builder = WaarderingsgroepBuilder(
-        Woningwaarderingstelsel.zelfstandige_woonruimten,
-        Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
-    )
-    woz_punten_onafgerond = Decimal("82.33")
-
-    svc._corrigeer_woz_punten(builder, eenheid, resultaat, woz_punten_onafgerond)
-
+    builder = _corrigeer(135.75, Decimal("82.33"), bouwjaar=2016)
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
     assert "nieuwbouw_minimum_punten" not in segmenten

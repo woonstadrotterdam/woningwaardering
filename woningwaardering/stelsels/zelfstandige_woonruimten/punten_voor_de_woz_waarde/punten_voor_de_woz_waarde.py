@@ -308,13 +308,21 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # het puntentotaal van de woning, per 2.1.5 / slotopmerking bijlage I na
         # eindsaldering op hele punten. Niet: alleen de WOZ-rubriek op hele punten.
         waardering_zonder_cap = utils.rond_af(totaal_kwartpunten_zonder_cap, 0)
-        correctie_punten = self._cap_punten(
-            eenheid,
-            woz_punten,
-            overige_punten,
-            woningwaardering_resultaat,
-            waardering_zonder_cap,
-        )
+        drempel_cap_woz = Decimal("187")
+
+        if waardering_zonder_cap < drempel_cap_woz:
+            logger.info(
+                f"Cap op op de WOZ wordt niet toegepast omdat het totaal aantal punten minder is dan {drempel_cap_woz}."
+            )
+            return
+
+        if self._is_corop_regel_van_toepassing(eenheid, woningwaardering_resultaat):
+            logger.info(
+                f"Eenheid ({eenheid.id}): Cap op de WOZ wordt niet toegepast vanwege COROP-uitzondering voor kleine nieuwbouwwoningen in Amsterdam/Utrecht (2018-2022)"
+            )
+            return
+
+        correctie_punten = self._cap_punten(woz_punten, overige_punten)
 
         if correctie_punten is not None:
             totaal_kwartpunten_met_cap = (
@@ -353,47 +361,23 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
     def _cap_punten(
         self,
-        eenheid: EenhedenEenheid,
         woz_punten: Decimal,
         overige_punten: Decimal,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
-        waardering_zonder_cap: Decimal,
     ) -> Decimal | None:
         """
-        Berekent de cap op de WOZ. Maximaal 33% van het
-        totale puntenaantal van een woning mag bepaald worden door de WOZ-waarde
-        van de woning.
+        Berekent de 33%-cap op de WOZ-punten.
 
-        Uitzonderingen:
-        - Woningen met minder dan 187 punten totaal
-        - Kleine nieuwbouwwoningen (<40m²) in COROP-regio's Amsterdam en Utrecht (2018-2022)
+        De 187-drempel en de COROP-uitzondering toetst de aanroeper. Deze methode
+        beperkt alleen het WOZ-aandeel tot 33% van het totaal en rondt bij toepassing
+        naar beneden af op hele punten.
 
         Args:
-            eenheid (EenhedenEenheid): De eenheid.
-            woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
-            overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
-            waardering_zonder_cap (Decimal): Woningwaardering zonder cap, afgerond op
-                hele punten (2.1.5), voor de 187-drempel uit 11.3.
+            woz_punten (Decimal): Punten voor de stelselgroep WOZ-waarde (I+II).
+            overige_punten (Decimal): Som van de overige rubriektotalen (al op kwartpunten).
 
         Returns:
-            Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
+            Decimal | None: Correctiepunten, of None als de cap het aantal niet verlaagt.
         """
-        drempel_cap_woz = Decimal("187")
-
-        if waardering_zonder_cap < drempel_cap_woz:
-            logger.info(
-                f"Cap op op de WOZ wordt niet toegepast omdat het totaal aantal punten minder is dan {drempel_cap_woz}."
-            )
-            return None
-
-        # Check voor COROP-uitzondering: kleine nieuwbouwwoningen (<40m²) in Amsterdam/Utrecht (2018-2022)
-        if self._is_corop_regel_van_toepassing(eenheid, woningwaardering_resultaat):
-            logger.info(
-                f"Eenheid ({eenheid.id}): Cap op de WOZ wordt niet toegepast vanwege COROP-uitzondering voor kleine nieuwbouwwoningen in Amsterdam/Utrecht (2018-2022)"
-            )
-            return None
-
         # Bereken het maximum aantal WOZ-punten dat toegestaan is
         max_woz_percentage = Decimal("33")
         overige_percentage = Decimal("100") - max_woz_percentage
@@ -410,24 +394,22 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # WOZ-punten, pas dan geen cap toe
         if capped_woz_punten >= Decimal(str(woz_punten)):
             return None
-        else:
-            # Indien het puntenaandeel voor de WOZ-waarde wordt beperkt op
-            # ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
-            # beneden op hele punten.
-            correctiepunten = capped_woz_punten - Decimal(str(woz_punten))
-            logger.debug(f"Cap punten: {correctiepunten}")
-            afrondingscorrectie = min(
-                (
-                    utils.rond_af(capped_woz_punten, 0, rounding=ROUND_DOWN)
-                    - capped_woz_punten
-                ),
-                Decimal(0.0),
-            )
-            logger.debug(f"Afronding punten: {afrondingscorrectie}")
 
-            totaal_correctiepunten = correctiepunten + afrondingscorrectie
+        # Indien het puntenaandeel voor de WOZ-waarde wordt beperkt op
+        # ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
+        # beneden op hele punten.
+        correctiepunten = capped_woz_punten - Decimal(str(woz_punten))
+        logger.debug(f"Cap punten: {correctiepunten}")
+        afrondingscorrectie = min(
+            (
+                utils.rond_af(capped_woz_punten, 0, rounding=ROUND_DOWN)
+                - capped_woz_punten
+            ),
+            Decimal(0.0),
+        )
+        logger.debug(f"Afronding punten: {afrondingscorrectie}")
 
-            return totaal_correctiepunten
+        return correctiepunten + afrondingscorrectie
 
     def _haal_minimum_woz_waarde_op(self) -> EenhedenWozEenheid:
         """
