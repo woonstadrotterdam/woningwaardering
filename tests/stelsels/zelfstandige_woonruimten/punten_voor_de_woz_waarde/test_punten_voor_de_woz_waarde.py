@@ -38,12 +38,7 @@ def _maak_resultaat_met_overige_punten(
 def _cap_punten(woz_punten: Decimal, overige_punten: Decimal) -> Decimal | None:
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    return stelselgroep._cap_punten(
-        eenheid,
-        woz_punten,
-        overige_punten,
-        WoningwaarderingResultatenWoningwaarderingResultaat(),
-    )
+    return stelselgroep._cap_punten(eenheid, woz_punten, overige_punten)
 
 
 def test_cap_punten_geen_cap_bij_woningwaardering_onder_187():

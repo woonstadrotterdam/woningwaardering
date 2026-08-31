@@ -146,9 +146,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             return _niet_waardeerbaar()
 
         # Bepaal de juiste factor voor onderdeel II (kan speciale COROP factor zijn)
-        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(
-            eenheid, factoren, woningwaardering_resultaat
-        )
+        factor_onderdeel_II = self._bepaal_factor_onderdeel_II(eenheid, factoren)
 
         # 2.11.2 Punten voor de WOZ-waarde: "Rond dit puntenaantal niet af." (onderdeel I en II).
         # Het rubriektotaal volgt paragraaf 2.1.4: kwartafronding op de som van I en II.
@@ -308,9 +306,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # het puntentotaal van de woning, per 2.1.5 / slotopmerking bijlage I na
         # eindsaldering op hele punten. Niet: alleen de WOZ-rubriek op hele punten.
         waardering_zonder_cap = utils.rond_af(totaal_kwartpunten_zonder_cap, 0)
-        correctie_punten = self._cap_punten(
-            eenheid, woz_punten, overige_punten, woningwaardering_resultaat
-        )
+        correctie_punten = self._cap_punten(eenheid, woz_punten, overige_punten)
 
         if correctie_punten is not None:
             totaal_kwartpunten_met_cap = (
@@ -352,7 +348,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         eenheid: EenhedenEenheid,
         woz_punten: Decimal,
         overige_punten: Decimal,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal | None:
         """
         Berekent de cap op de WOZ. Maximaal 33% van het
@@ -367,7 +362,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             eenheid (EenhedenEenheid): De eenheid.
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
             overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
@@ -383,7 +377,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
             return None
 
-        if self._is_corop_regel_van_toepassing(eenheid, woningwaardering_resultaat):
+        if self._is_corop_regel_van_toepassing(eenheid):
             logger.info(
                 f"Eenheid ({eenheid.id}): Cap op de WOZ wordt niet toegepast vanwege COROP-uitzondering voor kleine nieuwbouwwoningen in Amsterdam/Utrecht (2018-2022)"
             )
@@ -627,7 +621,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         factoren: pd.DataFrame,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> Decimal:
         """
         Bepaalt de juiste factor voor onderdeel II, rekening houdend met speciale regels
@@ -636,7 +629,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         Args:
             eenheid (EenhedenEenheid): De eenheid.
             factoren (pd.DataFrame): De factoren uit de lookup tabel.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             Decimal: De factor voor onderdeel II.
@@ -645,7 +637,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         factor_onderdeel_II = Decimal(str(factoren["Onderdeel II"].values[0]))
 
         # Check of speciale COROP-regels van toepassing zijn
-        if self._is_corop_regel_van_toepassing(eenheid, woningwaardering_resultaat):
+        if self._is_corop_regel_van_toepassing(eenheid):
             factor_onderdeel_II_corop = Decimal(
                 str(factoren["Onderdeel II Nieuwbouw/COROP"].values[0])
             )
@@ -659,7 +651,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
     def _is_corop_regel_van_toepassing(
         self,
         eenheid: EenhedenEenheid,
-        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
     ) -> bool:
         """
         Controleert of de speciale COROP-regels van toepassing zijn voor kleine nieuwbouwwoningen
@@ -667,7 +658,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         Args:
             eenheid (EenhedenEenheid): De eenheid.
-            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
 
         Returns:
             bool: True als de COROP-regels van toepassing zijn, anders False.
