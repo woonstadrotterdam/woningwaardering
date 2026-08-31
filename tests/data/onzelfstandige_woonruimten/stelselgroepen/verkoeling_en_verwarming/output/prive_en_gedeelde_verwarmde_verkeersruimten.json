@@ -1,0 +1,129 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ONZ",
+          "naam": "Onzelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 3.5,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__GangGedeeld1",
+            "naam": "GangGedeeld1",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__GangGedeeld2",
+            "naam": "GangGedeeld2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
+            "naam": "Maximering",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": -0.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__GangGedeeld3",
+            "naam": "GangGedeeld3",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
+            "naam": "Maximering",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": -0.5
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive",
+            "naam": "Privé"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__GangPrive1",
+            "naam": "GangPrive1",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__GangPrive2",
+            "naam": "GangPrive2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__GangPrive3",
+            "naam": "GangPrive3",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
+        }
+      ]
+    }
+  ]
+}
