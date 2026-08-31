@@ -36,9 +36,9 @@ def _maak_resultaat_met_overige_punten(
 
 
 def _cap_punten(woz_punten: Decimal, overige_punten: Decimal) -> Decimal | None:
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
-    return svc._cap_punten(
+    return stelselgroep._cap_punten(
         eenheid,
         woz_punten,
         overige_punten,
@@ -86,7 +86,7 @@ def test_cap_punten_wel_cap_boven_187_drempel():
 
 def test_corrigeer_woz_punten_186_vloer_bij_186_5():
     """11.3: 186,50 zonder cap wordt 187, cap trekt onder 187, vloer is 186."""
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     resultaat = _maak_resultaat_met_overige_punten(
         (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 100.0),
@@ -96,7 +96,7 @@ def test_corrigeer_woz_punten_186_vloer_bij_186_5():
         Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
     )
 
-    svc._corrigeer_woz_punten(builder, eenheid, resultaat, Decimal("86.5"))
+    stelselgroep._corrigeer_woz_punten(builder, eenheid, resultaat, Decimal("86.5"))
 
     maximering = next(
         w for w in builder.alle_waarderingen() if w.segment == "maximering_woz_punten"
@@ -107,7 +107,7 @@ def test_corrigeer_woz_punten_186_vloer_bij_186_5():
 
 def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     """#326: nieuwbouw 2015-2019 met ≥110 punten maar WOZ > 40 → cap wél toepassen."""
-    svc = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
     eenheid = EenhedenEenheid(id="test", bouwjaar=2016)
     resultaat = _maak_resultaat_met_overige_punten(
         (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
@@ -119,7 +119,7 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
         Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
     )
 
-    svc._corrigeer_woz_punten(builder, eenheid, resultaat, Decimal("82.33"))
+    stelselgroep._corrigeer_woz_punten(builder, eenheid, resultaat, Decimal("82.33"))
 
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
