@@ -446,7 +446,7 @@ _~~Oppervlakte onder een open of gesloten vaste trap~~_
 ==}
 
 > [!NOTE]
-> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen. Eerst krijgt elke ruimte 1 punt, daarna capen we op dat aantal ruimten, daarna deelt de aanroeper. Binnen de teller vullen we op kleinste deler (privé = 1), dan verkoeld, dan `ruimte.id`, zodat dezelfde ruimten in andere invoervolgorde hetzelfde totaal geven. Voorbeeld: 3 privé + 3 gemeenschappelijke verwarmde verkeersruimten gedeeld door 2 → 3,5.
+> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen. Eerst krijgt elke ruimte 1 punt, daarna capen we op dat aantal ruimten, daarna deelt de aanroeper. Binnen de teller vullen we op kleinste deler (privé = 1), dan `ruimte.id`, zodat dezelfde ruimten in andere invoervolgorde hetzelfde totaal geven. Voorbeeld: 3 privé + 3 gemeenschappelijke verwarmde verkeersruimten gedeeld door 2 → 3,5.
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.

@@ -279,7 +279,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         # De maximering op verwarmde overige ruimten (max. 4 punten) en op verkoelde
         # vertrekken (max. 2 punten) telt over álle gedeelde ruimten samen, ongeacht
         # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. De helper
-        # vult die ene teller met de kleinste deler eerst (daarna verkoeld, daarna id)
+        # vult die ene teller met de kleinste deler eerst (daarna id)
         # en wordt eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
         # adressengroep gehangen, waar de punten door het aantal adressen en
         # onzelfstandige woonruimten worden gedeeld.

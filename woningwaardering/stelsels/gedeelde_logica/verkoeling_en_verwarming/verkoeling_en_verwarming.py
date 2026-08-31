@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from decimal import Decimal
 from enum import Enum
 from typing import Iterator
 
@@ -61,40 +62,26 @@ def _ruimte_gedeeld(ruimte: EenhedenRuimte) -> bool:
     )
 
 
-def _sorteer_voor_maximering(ruimten: list[EenhedenRuimte]) -> list[EenhedenRuimte]:
-    """Sorteer ruimten zodat de maximering het hoogste eenheidstotaal oplevert.
-
-    Eén teller per maximering deelt privé en gemeenschappelijk. Het maximum telt
-    ruimten vóór deling; de aanroeper deelt daarna. Om het eenheidstotaal te
-    maximaliseren gaan eerst de kleinste deler (privé = 1), daarna verkoelde
-    ruimten, daarna ``ruimte.id``. De invoerlijst wordt niet gemuteerd.
-    """
-    return sorted(
-        ruimten,
-        key=lambda ruimte: (
-            deler(ruimte),
-            not bool(ruimte.verkoeld),
-            ruimte.id or ruimte.naam or "",
-        ),
-    )
+def _maximering_sleutel(ruimte: EenhedenRuimte) -> tuple[Decimal, str]:
+    """Kleinste deler eerst, daarna ``ruimte.id``, zodat het eenheidstotaal maximaal is."""
+    return (deler(ruimte), ruimte.id or ruimte.naam or "")
 
 
-def _ruimten_met_maximering(
+def _indexen_met_maximering(
     ruimten: list[EenhedenRuimte],
-    komt_in_aanmerking: Callable[[EenhedenRuimte], bool],
+    kandidaat_indexen: list[int],
     maximum: int,
 ) -> set[int]:
-    """Ruimten die een maximering van −1 krijgen, als ``id(ruimte)``.
+    """Indexen van ruimten die een maximering van −1 krijgen.
 
-    Het maximum telt ruimten vóór deling. Welke ruimten daarbuiten vallen, volgt
-    de sorteersleutel; de outputvolgorde blijft de invoervolgorde.
+    Het maximum telt ruimten vóór deling. ``kandidaat_indexen`` blijft in
+    invoervolgorde; deze helper rangschikt een kopie.
     """
-    in_aanmerking = [
-        ruimte
-        for ruimte in _sorteer_voor_maximering(ruimten)
-        if komt_in_aanmerking(ruimte)
-    ]
-    return {id(ruimte) for ruimte in in_aanmerking[maximum:]}
+    gerangschikt = sorted(
+        kandidaat_indexen,
+        key=lambda i: _maximering_sleutel(ruimten[i]),
+    )
+    return set(gerangschikt[maximum:])
 
 
 def _is_verwarmde_overige_of_verkeersruimte(ruimte: EenhedenRuimte) -> bool:
@@ -124,9 +111,9 @@ def waardeer_verkoeling_en_verwarming(
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
     verkoelde vertrekken) telt over álle meegegeven ruimten samen. Privé en
     gemeenschappelijk delen die teller tot #293 is beslist. Elke ruimte krijgt
-    1 punt; ruimten met maximering (bepaald op kleinste deler, dan verkoeld,
-    dan id) krijgen −1. Deling gebeurt daarna in de aanroeper. De
-    outputvolgorde volgt de invoer.
+    1 punt; ruimten met maximering (bepaald op kleinste deler, dan id) krijgen
+    −1. Deling gebeurt daarna in de aanroeper. De outputvolgorde volgt de
+    invoer.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
@@ -186,12 +173,14 @@ def _waardeer_verwarmde_overige_ruimte(
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verwarmde overige ruimten
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
-    ruimten_met_maximering = _ruimten_met_maximering(
-        ruimten, _is_verwarmde_overige_of_verkeersruimte, 4
-    )
-    for ruimte in ruimten:
-        if not _is_verwarmde_overige_of_verkeersruimte(ruimte):
-            continue
+    idx = [
+        i
+        for i, ruimte in enumerate(ruimten)
+        if _is_verwarmde_overige_of_verkeersruimte(ruimte)
+    ]
+    met_maximering = _indexen_met_maximering(ruimten, idx, 4)
+    for i in idx:
+        ruimte = ruimten[i]
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
         )
@@ -203,7 +192,7 @@ def _waardeer_verwarmde_overige_ruimte(
                 punten=1.0,
             ),
         )
-        if id(ruimte) in ruimten_met_maximering:
+        if i in met_maximering:
             yield (
                 ruimte,
                 _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
@@ -235,10 +224,11 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    ruimten_met_maximering_verkoeld = _ruimten_met_maximering(
-        ruimten, _is_verkoeld_vertrek, 2
-    )
-    for ruimte in ruimten:
+    kandidaat_indexen = [
+        i for i, ruimte in enumerate(ruimten) if _is_verkoeld_vertrek(ruimte)
+    ]
+    indexen_met_maximering = _indexen_met_maximering(ruimten, kandidaat_indexen, 2)
+    for i, ruimte in enumerate(ruimten):
         if not ruimte.verwarmd:
             continue
 
@@ -279,7 +269,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                         punten=1,
                     ),
                 )
-                if id(ruimte) in ruimten_met_maximering_verkoeld:
+                if i in indexen_met_maximering:
                     logger.info(
                         f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
                     )

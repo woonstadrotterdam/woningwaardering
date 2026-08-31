@@ -1,7 +1,7 @@
 """Maximering van verkoeling en verwarming is onafhankelijk van invoervolgorde.
 
 Privé en gemeenschappelijk delen tot #293 één teller. De helper vult die teller
-op kleinste deler (daarna verkoeld, daarna id) vóór de aanroeper deelt.
+op kleinste deler (daarna id) vóór de aanroeper deelt.
 """
 
 from tests.peildatum import REFERENTIE_PEILDATUM
@@ -22,7 +22,6 @@ def _verkeersruimte(
     ruimte_id: str,
     *,
     aantal_onzelfstandige: int | None = None,
-    verkoeld: bool = False,
 ) -> EenhedenRuimte:
     return EenhedenRuimte(
         id=ruimte_id,
@@ -31,7 +30,6 @@ def _verkeersruimte(
         detail_soort=Ruimtedetailsoort.gang,
         oppervlakte=5,
         verwarmd=True,
-        verkoeld=verkoeld,
         gedeeld_met_aantal_onzelfstandige_woonruimten=aantal_onzelfstandige,
     )
 
