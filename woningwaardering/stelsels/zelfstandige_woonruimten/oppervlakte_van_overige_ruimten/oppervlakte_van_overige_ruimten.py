@@ -102,9 +102,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
-        # In de punt-loze m²-variant dragen de waarderingen alleen vierkante
-        # meters; het stelselgroeptotaal wordt dan hier uit de m² berekend in
-        # plaats van door ``build()``.
+        # Ruimteregels hebben alleen m², geen punten, dus ``build()`` kan het
+        # stelselgroeptotaal niet sommen. (Uitzondering: zoldercorrectie.)
         if not any(w.punten is not None for w in groep_waarderingen):
             punten = rond_af_op_kwart(
                 rond_af(
