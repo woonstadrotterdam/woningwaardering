@@ -216,11 +216,7 @@ De oppervlakten voor privé- en gemeenschappelijke vertrekken worden afzonderlij
 - Bepaal het puntenaantal voor de vertrekken op basis van de m².
 
 > [!NOTE]
-> Wettekst en beleidsboek zijn hier niet sluitend. De wettekst deelt de punten van de gemeenschappelijke ruimte, terwijl het rekenvoorbeeld in dezelfde bijlage m² deelt; het beleidsboek rondt privé en gemeenschappelijk eerst afzonderlijk af. Omdat wettekst en beleidsboek niet sluitend zijn volgen wij de [Huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte):
->
-> Eerst delen per ruimte (`rond_af(m² inclusief kasten, 2) / deler`), salderen, en daarna éénmaal afronden op hele m².
->
-> Zie [#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391) en [#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393).
+> Wettekst en beleidsboek zijn hier niet sluitend. De wettekst deelt de *punten* van gemeenschappelijke ruimte; het rekenvoorbeeld in dezelfde bijlage deelt *m²-aandelen*; het beleidsboek rondt privé en gemeenschappelijk afzonderlijk af. Bij privé 10,40 m² plus gemeenschappelijk 40,40 m² gedeeld met 4 geeft de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) rubriek 1 = **21** — dat past bij delen vóór afronden (20,50 → 21 m²), niet bij apart afronden per categorie (20 m²). Daarom volgen wij: per ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m².
 
 ##### 2.2.1.2 De voorwaarden van een vertrek
 
@@ -342,7 +338,9 @@ De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzond
 - Bepaal het puntenaantal voor de overige ruimtes op basis van de m².
 
 > [!NOTE]
-> Dezelfde volgorde als bij [§2.2.1.1](#2111-rekenregels-vertrekken): eerst delen en salderen, daarna éénmaal afronden op hele m², daarna × 0,75, conform de huurprijschecktool. Wettekst en beleidsboek zijn niet sluitend. Zie [#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391) en [#393](https://github.com/woonstadrotterdam/woningwaardering/issues/393).
+> Dezelfde volgorde als bij [§2.2.1.1](#2111-rekenregels-vertrekken): per ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m², daarna × 0,75.
+>
+> Wettekst en beleidsboek zijn niet sluitend. Het beleidsboek beschrijft privé en gemeenschappelijk **afzonderlijk** afronden en daarna optellen; het rekenvoorbeeld in de wettekst deelt m²-aandelen en telt die op. Bij privé berging 10,40 m² plus gedeelde berging 40,40 m² / 4 (zonder vlizotrap) geeft de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) rubriek 2 = **15,75** — dat past bij delen vóór afronden (20,50 → 21 m²), niet bij apart afronden per categorie (20 m² → 15,00). Daarom volgen wij die volgorde ook voor rubriek 2.
 
 ##### 2.2.2.2 De voorwaarden van een overige ruimte
 
@@ -362,9 +360,11 @@ Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle v
 Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘vertrek’, maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u> van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
 
 > [!NOTE]
-> De −5 punten zijn een vermindering van de waarde van de zolder en worden gedeeld (`5 / aantal onzelfstandige woonruimten`). De zolder blijft in de saldering van rubriek 2. De aftrek is nooit groter dan het puntenaantal dat de zolder zelf toevoegt aan het totaal.
+> De maximumaftrek van 5 punten geldt per zolder en wordt gedeeld door het aantal onzelfstandige woonruimten (`5 / deler`). De zolderm² blijven in de saldering van rubriek 2; de aftrek mag nooit hoger zijn dan het puntenaantal dat de zolder zelf toevoegt.
 >
-> Voorbeeld: privé 10,40 m² plus zolder 40,40 m² gedeeld door 4 geeft 20,50 m² toegerekende oppervlakte → 21 × 0,75 minus 1,25 = **14,50**. Dit is nagerekend met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte); die toont hier 10,00 (cap ongedeeld). De wettekst is leidend. Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de correctie als sibling.
+> Voorbeeld: privé berging 10,40 m² plus gedeelde vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toegerekend → 21 × 0,75 = 15,75, minus 1,25 = **14,50**.
+>
+> In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de correctie op hetzelfde niveau; zie `criteriumstrategie.md`.
 
 ##### 2.2.2.4 Toegang ruimte via zolderruimte
 
@@ -600,7 +600,7 @@ Het puntenaantal voor de energieprestatie wordt dan als volgt berekend:
 ==}
 
 > [!NOTE]
-> “Volgens rubriek 1 toe te rekenen” is de onafgeronde toerekening (eerst delen, dan salderen; [#391](https://github.com/woonstadrotterdam/woningwaardering/issues/391)), niet het afgeronde puntenresultaat van rubriek 1. Voorbeeld: privé 10,40 m² plus gemeenschappelijk 40,40 m² gedeeld door 4 geeft 20,50 m² → 20,50 × 0,65 = **13,25** (niet 21 × 0,65). Dit is nagerekend met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
+> “Volgens rubriek 1 toe te rekenen” is de onafgeronde toerekening (eerst delen, dan salderen), niet het afgeronde puntenresultaat van rubriek 1. Voorbeeld: privé 10,40 m² plus gemeenschappelijk 40,40 m² gedeeld door 4 geeft 20,50 m² → 20,50 × 0,65 = **13,25** (niet 21 × 0,65). Dit is nagerekend met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 > [!NOTE]
 > Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld (`gedeeldMetAantalAdressen` ≥ 2) tellen **niet** mee voor de oppervlakte in §2.4.4. Het Bhw (Bijlage I, onder B, rubriek 4) bepaalt dat energieprestatie wordt berekend over de m² die **volgens rubriek 1** aan de huurder zijn toe te rekenen. Rubriek 1 dekt alleen privévertrekken en gemeenschappelijke vertrekken op hetzelfde adres; ruimten gedeeld met meerdere adressen vallen onder rubriek 9 ([§2.9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)), waar energieprestatie niet wordt genoemd. Dit komt overeen met het gedrag van de Huurcommissie-huurprijscheck.
