@@ -350,9 +350,9 @@ class Energieprestatie(Stelselgroep):
             if utils.gedeeld_met_adressen(ruimte):
                 continue
 
-            # Onze S is de onafgeronde toerekening van rubriek 1 (eerst delen, dan
-            # salderen; #391), niet het afgeronde puntenresultaat. Beleidsboek:
-            # afronden op 2 decimalen per ruimte vóór delen.
+            # De onafgeronde toerekening van rubriek 1 (eerst delen, dan salderen;
+            # #391), niet het afgeronde puntenresultaat. Beleidsboek: afronden op 2
+            # decimalen per ruimte vóór delen.
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
                 oppervlakte += toegerekende_oppervlakte(ruimte)
 
