@@ -360,9 +360,15 @@ Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle v
 Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘vertrek’, maar wel als overige ruimte kan worden aangemerkt en er is <u>geen vaste trap</u> naar de zolder, dan worden er <u>5 punten afgetrokken</u> van de waarde die aan het vloeroppervlak wordt toegekend. Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is. Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
 
 > [!NOTE]
-> De maximumaftrek van 5 punten geldt per zolder en wordt gedeeld door het aantal onzelfstandige woonruimten (`5 / deler`). De zolderm² blijven in de saldering van rubriek 2; de aftrek mag nooit hoger zijn dan het puntenaantal dat de zolder zelf toevoegt.
+> De maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige woonruimten.
 >
-> Voorbeeld: privé berging 10,40 m² plus gedeelde vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toegerekend → 21 × 0,75 = 15,75, minus 1,25 = **14,50**.
+> Voorbeeld (4 onzelfstandige woonruimten):
+>
+> 1. privé berging 10,40 m² plus vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toegerekend
+> 2. afronden op hele m²: 20,50 → 21 m²
+> 3. 21 × 0,75 = 15,75
+> 4. maximumaftrek: 5 / 4 = 1,25
+> 5. 15,75 − 1,25 = **14,50**
 >
 > In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de correctie op hetzelfde niveau; zie `criteriumstrategie.md`.
 
