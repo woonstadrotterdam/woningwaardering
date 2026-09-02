@@ -971,8 +971,9 @@ def toegerekende_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
     aantal onzelfstandige woonruimten is (of 1). Rubriek 9 gebruikt een andere
     delingsregel en deelt deze helper niet.
 
-    De som van deze waarden is S: rubriek 1 rondt S af op hele m², rubriek 2
-    vermenigvuldigt die afgeronde S met 0,75, rubriek 4 gebruikt de onafgeronde S.
+    De som is het toegerekend totaal: rubriek 1 rondt dat af op hele m², rubriek 2
+    vermenigvuldigt die afgeronde waarde met 0,75, rubriek 4 gebruikt de
+    onafgeronde som.
     """
     deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
     return rond_af(

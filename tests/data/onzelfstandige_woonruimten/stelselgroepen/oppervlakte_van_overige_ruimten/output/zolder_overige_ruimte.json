@@ -68,14 +68,9 @@
           }
         },
         {
-          "aantal": 23.33,
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal",
-            "naam": "Subtotaal",
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "naam": "Subtotaal"
           },
           "punten": 17.25
         },

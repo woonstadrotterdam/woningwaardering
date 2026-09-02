@@ -71,6 +71,39 @@ def test_som_effectieve_aantal_waarderingen_twee_gedeeld_met_lagen() -> None:
     assert utils.som_effectieve_aantal_waarderingen(waarderingen) == Decimal("1.00")
 
 
+def test_som_effectieve_aantal_waarderingen_subtotaal_zonder_aantal() -> None:
+    """Ruimteregels onder gedeeld-met plus een sibling-subtotaal zonder aantal.
+
+    Het subtotaal draagt alleen punten. De helper telt werkelijke m² na delen.
+    Zie #403.
+    """
+    prive = "oppervlakte_van_overige_ruimten__prive"
+    gedeeld = (
+        "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten"
+    )
+    waarderingen = [
+        _waardering(criterium_id=prive),
+        _waardering(
+            criterium_id=f"{prive}__berging",
+            aantal=10.4,
+            bovenliggende_id=prive,
+        ),
+        _waardering(criterium_id=gedeeld),
+        _waardering(
+            criterium_id=f"{gedeeld}__zolder",
+            aantal=40.4,
+            bovenliggende_id=gedeeld,
+        ),
+        WoningwaarderingResultatenWoningwaardering(
+            punten=15.75,
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                id="oppervlakte_van_overige_ruimten__subtotaal",
+            ),
+        ),
+    ]
+    assert utils.som_effectieve_aantal_waarderingen(waarderingen) == Decimal("20.50")
+
+
 def test_oppervlakte_inclusief_verbonden_kasten():
     ruimte = EenhedenRuimte(
         oppervlakte=3.5,

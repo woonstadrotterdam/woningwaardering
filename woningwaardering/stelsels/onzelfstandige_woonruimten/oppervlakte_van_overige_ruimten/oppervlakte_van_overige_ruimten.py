@@ -9,8 +9,8 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
-    maak_zolder_correctie_waardering,
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -25,7 +25,6 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
-    Meeteenheid,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -89,23 +88,26 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         if zolders:
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # Eén subtotaal direct onder de stelselgroep; correcties als sibling.
-            # De cap van 5 punten is van de zolder en wordt gedeeld. De zolder blijft
-            # in de saldering: correctie = −min(5/deler, (rond_af(S, 0) − rond_af(S − z, 0)) × 0,75).
+            # De maximumaftrek van 5 punten is van de zolder en wordt gedeeld. De zolder
+            # blijft in de saldering. Het subtotaal draagt geen aantal: ruimteregels
+            # tonen werkelijke m², punten komen uit toegerekende m². Zie #403.
             waarderingsgroep_builder.met_onderliggend(
                 id="subtotaal",
                 naam="Subtotaal",
-                meeteenheid=Meeteenheid.vierkante_meter_m2,
-                aantal=float(utils.rond_af(oppervlakte_totaal_na_delen, decimalen=2)),
                 punten=float(punten_uit_m2),
             )
             for ruimte in zolders:
                 deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                maak_zolder_correctie_waardering(
-                    ruimte,
-                    oppervlakte_totaal_na_delen,
-                    waarderingsgroep_builder=waarderingsgroep_builder,
-                    deler=deler,
-                    zolder_oppervlakte=toegerekende_oppervlakte(ruimte),
+                waarderingsgroep_builder.met_onderliggend(
+                    id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
+                    naam="Correctie: zolder zonder vaste trap",
+                    punten=float(
+                        bereken_zolder_correctie(
+                            oppervlakte_totaal_na_delen,
+                            toegerekende_oppervlakte(ruimte),
+                            max_aftrek=Decimal("5") / Decimal(str(deler)),
+                        )
+                    ),
                 )
             woningwaardering_groep = waarderingsgroep_builder.build()
         else:
