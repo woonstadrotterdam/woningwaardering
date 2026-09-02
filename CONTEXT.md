@@ -103,7 +103,7 @@ Een waardering waarop een maximum van toepassing is. Als die waardering zelf ged
 
 ### Toe te rekenen aantal
 
-Het aandeel van een hoeveelheid dat aan de huurder is toe te rekenen: `aantal / deler`. De `deler` is het aantal onzelfstandige woonruimten met toegang en gebruiksrecht, of 1 bij privé. Gebruik deze formulering, niet “toegerekend”.
+Het aandeel van een hoeveelheid dat aan de huurder is toe te rekenen: `aantal / deler`. De `deler` is het aantal onzelfstandige woonruimten en het aantal adressen met toegang en gebruiksrecht, of 1 bij privé. Gebruik deze formulering, niet “toegerekend”.
 
 ### Structuurterminologie
 
