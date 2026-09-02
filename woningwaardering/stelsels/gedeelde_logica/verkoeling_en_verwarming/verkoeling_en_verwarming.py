@@ -93,12 +93,10 @@ def _is_verwarmde_overige_of_verkeersruimte(ruimte: EenhedenRuimte) -> bool:
     )
 
 
-def _is_verkoeld_vertrek(ruimte: EenhedenRuimte) -> bool:
-    return bool(
-        ruimte.verwarmd
-        and ruimte.verkoeld
-        and classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
-    )
+def _is_verwarmd_vertrek(ruimte: EenhedenRuimte) -> bool:
+    if not ruimte.verwarmd:
+        return False
+    return classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
 
 
 def waardeer_verkoeling_en_verwarming(
@@ -224,65 +222,58 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
-    kandidaat_indexen = [
-        i for i, ruimte in enumerate(ruimten) if _is_verkoeld_vertrek(ruimte)
-    ]
-    indexen_met_maximering = _indexen_met_maximering(ruimten, kandidaat_indexen, 2)
-    for i, ruimte in enumerate(ruimten):
-        if not ruimte.verwarmd:
-            continue
+    idx = [i for i, ruimte in enumerate(ruimten) if _is_verwarmd_vertrek(ruimte)]
+    verkoeld_idx = [i for i in idx if ruimten[i].verkoeld]
+    met_maximering = _indexen_met_maximering(ruimten, verkoeld_idx, 2)
+    for i in idx:
+        ruimte = ruimten[i]
+        open_keuken = _classificeer_open_keuken(ruimte)
+        naam = ruimte.naam or ruimte.id or ""
+        if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
+            naam = f"{naam} met open keuken"
 
-        ruimtesoort = classificeer_ruimte(ruimte)
-        if ruimtesoort == Ruimtesoort.vertrek:
-            open_keuken = _classificeer_open_keuken(ruimte)
-            naam = ruimte.naam or ruimte.id or ""
-            if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
-                naam = f"{naam} met open keuken"
-
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+        )
+        if open_keuken is not None:
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
-            if open_keuken is not None:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
-                )
+        yield (
+            ruimte,
+            _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
+                id=ruimte.id,
+                naam=naam,
+                punten=4 if open_keuken is not None else 2,
+            ),
+        )
+
+        if ruimte.verkoeld:
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+            )
             yield (
                 ruimte,
-                _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
+                _subgroep(subgroep, ruimte, "verkoelde_vertrekken").met_onderliggend(
                     id=ruimte.id,
-                    naam=naam,
-                    punten=4 if open_keuken is not None else 2,
+                    naam=ruimte.naam or ruimte.id or "",
+                    punten=1,
                 ),
             )
-
-            if ruimte.verkoeld:
+            if i in met_maximering:
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
                 )
                 yield (
                     ruimte,
                     _subgroep(
                         subgroep, ruimte, "verkoelde_vertrekken"
                     ).met_onderliggend(
-                        id=ruimte.id,
-                        naam=ruimte.naam or ruimte.id or "",
-                        punten=1,
+                        id="max_aantal_punten",
+                        naam=maximering_naam(
+                            gedeeld=_ruimte_gedeeld(ruimte),
+                            met_puntental="Maximaal 2 punten",
+                        ),
+                        punten=-1,
                     ),
                 )
-                if i in indexen_met_maximering:
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
-                    )
-                    yield (
-                        ruimte,
-                        _subgroep(
-                            subgroep, ruimte, "verkoelde_vertrekken"
-                        ).met_onderliggend(
-                            id="max_aantal_punten",
-                            naam=maximering_naam(
-                                gedeeld=_ruimte_gedeeld(ruimte),
-                                met_puntental="Maximaal 2 punten",
-                            ),
-                            punten=-1,
-                        ),
-                    )
