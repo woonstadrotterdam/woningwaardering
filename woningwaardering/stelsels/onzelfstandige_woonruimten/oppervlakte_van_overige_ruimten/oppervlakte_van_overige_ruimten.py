@@ -120,10 +120,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ruimte
                 ):
                     waardering.punten = float(
-                        utils.rond_af(
-                            Decimal(str(waardering.punten)) / Decimal(str(deler)),
-                            decimalen=2,
-                        )
+                        Decimal(str(waardering.punten)) / Decimal(str(deler))
                     )
 
                 if waardering.aantal is not None:

@@ -341,10 +341,11 @@ def assert_punten_op_twee_decimalen(
 ) -> None:
     """De punten van elke waardering staan in de output op ten hoogste twee decimalen.
 
-    Het stelselgroeptotaal wordt uit de onafgeronde punten berekend; de
-    waardering Afronding op kwartpunten vangt het verschil met de vastgelegde
-    waarden op. Samen met assert_groep_punten_is_som_van_waarderingen betekent
-    dit dat de puntenkolom van een stelselgroep exact optelt tot het totaal.
+    Het stelselgroeptotaal is het kwartpunt van de onafgeronde builder-punten;
+    de waardering Afronding op kwartpunten vangt het verschil met de
+    vastgelegde rijen op. Samen met assert_groep_punten_is_som_van_waarderingen
+    betekent dit dat de puntenkolom van een stelselgroep exact optelt tot het
+    totaal.
     """
     for groep in resultaat.groepen or []:
         for waardering in groep.woningwaarderingen or []:

@@ -13,7 +13,6 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
-    rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -79,10 +78,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             ):
                 deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                 waardering.punten = float(
-                    rond_af(
-                        rond_af(Decimal(str(waardering.punten)), decimalen=2) / deler,
-                        decimalen=2,
-                    )
+                    Decimal(str(waardering.punten)) / Decimal(str(deler))
                 )
 
         woningwaardering_groep = waarderingsgroep_builder.build()

@@ -287,10 +287,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
-                rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
-                    decimalen=2,
-                )
+                Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen))
             )
 
     def _keuken_waarderingen(
