@@ -37,16 +37,14 @@ def bereken_zolder_correctie(
     totaal_oppervlakte: Decimal,
     zolder_oppervlakte: Decimal,
     *,
-    deler: int = 1,
+    max_aftrek: Decimal = Decimal("5"),
 ) -> Decimal:
     # 2.2.2.3 Zolderruimte zonder vaste trap
     # Maximaal 5 punten aftrek, maar niet meer dan de oppervlaktepunten die de zolder
     # zelf aan het totaal toevoegt. De correctie is negatief en wordt niet op een kwart
     # afgerond; die afronding gebeurt pas op het rubriektotaal.
-    # Bij gedeelde zolders (onzelfstandig) is de cap 5/deler en zijn totaal en zolder
-    # de toegerekende m² (S en z). De wettekst deelt punten; de cap is van de zolder.
     correctie = min(
-        Decimal("5") / Decimal(str(deler)),
+        max_aftrek,
         (
             rond_af(totaal_oppervlakte, decimalen=0)
             - rond_af(totaal_oppervlakte - zolder_oppervlakte, decimalen=0)
@@ -70,21 +68,14 @@ def maak_zolder_correctie_waardering(
     totaal_oppervlakte: Decimal,
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
-    deler: int = 1,
-    zolder_oppervlakte: Decimal | None = None,
 ) -> WaarderingBuilder:
-    if zolder_oppervlakte is None:
-        zolder_oppervlakte = rond_af(
-            oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
-        )
+    zolder_oppervlakte = rond_af(
+        oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
+    )
     return waarderingsgroep_builder.met_onderliggend(
         id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
         naam="Correctie: zolder zonder vaste trap",
-        punten=float(
-            bereken_zolder_correctie(
-                totaal_oppervlakte, zolder_oppervlakte, deler=deler
-            )
-        ),
+        punten=float(bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)),
     )
 
 
@@ -132,7 +123,6 @@ def structureer_subtotaal_bij_correcties(
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     factor: Decimal,
-    deler: int = 1,
 ) -> list[WaarderingBuilder]:
     """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
 
@@ -162,8 +152,6 @@ def structureer_subtotaal_bij_correcties(
         start=Decimal("0"),
     )
     punten_uit_m2 = bereken_oppervlakte_punten(totaal_oppervlakte, factor)
-    if deler > 1:
-        punten_uit_m2 /= Decimal(str(deler))
     subtotaal = waarderingsgroep_builder.met_onderliggend(
         id="subtotaal",
         naam="Subtotaal",
