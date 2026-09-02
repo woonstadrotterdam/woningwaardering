@@ -16,7 +16,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
-    toegerekende_oppervlakte,
+    toe_te_rekenen_oppervlakte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -77,7 +77,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             if not waarderingen:
                 continue
 
-            oppervlakte_totaal_na_delen += toegerekende_oppervlakte(ruimte)
+            oppervlakte_totaal_na_delen += toe_te_rekenen_oppervlakte(ruimte)
             if is_zolder_zonder_vaste_trap(ruimte):
                 zolders.append(ruimte)
 
@@ -90,7 +90,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # Eén subtotaal direct onder de stelselgroep; correcties als sibling.
             # De maximumaftrek van 5 punten is van de zolder en wordt gedeeld. De zolder
             # blijft in de saldering. Het subtotaal draagt geen aantal: ruimteregels
-            # tonen werkelijke m², punten komen uit toegerekende m². Zie #403.
+            # tonen werkelijke m², punten komen uit toe te rekenen m². Zie #403.
             waarderingsgroep_builder.met_onderliggend(
                 id="subtotaal",
                 naam="Subtotaal",
@@ -104,7 +104,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     punten=float(
                         bereken_zolder_correctie(
                             oppervlakte_totaal_na_delen,
-                            toegerekende_oppervlakte(ruimte),
+                            toe_te_rekenen_oppervlakte(ruimte),
                             max_aftrek=Decimal("5") / Decimal(str(deler)),
                         )
                     ),

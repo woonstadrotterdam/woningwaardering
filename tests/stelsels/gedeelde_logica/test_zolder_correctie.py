@@ -107,7 +107,7 @@ def test_bereken_zolder_correctie_prive_volledige_cap() -> None:
 
 
 def test_bereken_zolder_correctie_gedeelde_grote_zolder() -> None:
-    """Privé 10,40 + zolder 40,40 / 4 → toegerekend 20,50 en 10,10 → −1,25."""
+    """Privé 10,40 + zolder 40,40 / 4 → toe te rekenen 20,50 en 10,10 → −1,25."""
     assert bereken_zolder_correctie(
         Decimal("20.50"),
         Decimal("10.10"),
@@ -116,7 +116,7 @@ def test_bereken_zolder_correctie_gedeelde_grote_zolder() -> None:
 
 
 def test_bereken_zolder_correctie_gedeelde_kleine_zolder() -> None:
-    """Privé 10,40 + zolder 4 / 4 → toegerekend 11,40 en 1,00 → −0,75."""
+    """Privé 10,40 + zolder 4 / 4 → toe te rekenen 11,40 en 1,00 → −0,75."""
     assert bereken_zolder_correctie(
         Decimal("11.40"),
         Decimal("1.00"),

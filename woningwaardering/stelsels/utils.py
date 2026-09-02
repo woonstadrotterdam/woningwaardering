@@ -964,16 +964,16 @@ def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
     return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
 
 
-def toegerekende_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
-    """Toegerekende oppervlakte voor onzelfstandig rubriek 1, 2 en 4.
+def toe_te_rekenen_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
+    """Oppervlakte die volgens rubriek 1, 2 of 4 aan de huurder is toe te rekenen.
 
-    Per ruimte: ``rond_af(m² inclusief kasten, 2) / deler``, waarbij ``deler`` het
-    aantal onzelfstandige woonruimten is (of 1). Rubriek 9 gebruikt een andere
-    delingsregel en deelt deze helper niet.
+    Per ruimte het toe te rekenen aantal: ``rond_af(m² inclusief kasten, 2) / deler``,
+    waarbij ``deler`` het aantal onzelfstandige woonruimten is (of 1). Rubriek 9
+    gebruikt een andere delingsregel en deelt deze helper niet.
 
-    De som is het toegerekend totaal: rubriek 1 rondt dat af op hele m², rubriek 2
-    vermenigvuldigt die afgeronde waarde met 0,75, rubriek 4 gebruikt de
-    onafgeronde som.
+    De som is het toe te rekenen totaal: rubriek 1 rondt dat af op hele m², rubriek 2
+    vermenigvuldigt die afgeronde waarde met 0,75, rubriek 4 gebruikt de onafgeronde
+    som.
     """
     deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
     return rond_af(

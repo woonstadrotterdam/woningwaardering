@@ -1,1 +1,1 @@
-Privé berging 10,40 m² + vlizotrap-zolder 40,40 m² / 4. Eerst delen, dan salderen, dan éénmaal afronden (#391): 20,50 toegerekend → 21 × 0,75 = 15,75, correctie −1,25 → 14,50. Het subtotaal toont geen aantal (#403).
+Privé berging 10,40 m² + vlizotrap-zolder 40,40 m² / 4. Eerst delen, dan salderen, dan éénmaal afronden (#391): 20,50 m² toe te rekenen → 21 × 0,75 = 15,75, correctie −1,25 → 14,50. Het subtotaal toont geen aantal (#403).

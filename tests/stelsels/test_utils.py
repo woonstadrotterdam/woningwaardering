@@ -74,7 +74,7 @@ def test_som_effectieve_aantal_waarderingen_twee_gedeeld_met_lagen() -> None:
 def test_som_effectieve_aantal_waarderingen_subtotaal_zonder_aantal() -> None:
     """Ruimteregels onder gedeeld-met plus een sibling-subtotaal zonder aantal.
 
-    Het subtotaal draagt alleen punten. De helper telt werkelijke m² na delen.
+    Het subtotaal draagt alleen punten. De helper telt het toe te rekenen aantal.
     Zie #403.
     """
     prive = "oppervlakte_van_overige_ruimten__prive"
@@ -170,15 +170,15 @@ def test_is_prive(
     assert utils.is_prive(ruimte) is verwacht_prive
 
 
-def test_toegerekende_oppervlakte_prive() -> None:
+def test_toe_te_rekenen_oppervlakte_prive() -> None:
     ruimte = EenhedenRuimte(oppervlakte=10.4, detail_soort=Ruimtedetailsoort.slaapkamer)
-    assert utils.toegerekende_oppervlakte(ruimte) == Decimal("10.40")
+    assert utils.toe_te_rekenen_oppervlakte(ruimte) == Decimal("10.40")
 
 
-def test_toegerekende_oppervlakte_gedeeld() -> None:
+def test_toe_te_rekenen_oppervlakte_gedeeld() -> None:
     ruimte = EenhedenRuimte(
         oppervlakte=40.4,
         detail_soort=Ruimtedetailsoort.woonkamer,
         gedeeld_met_aantal_onzelfstandige_woonruimten=4,
     )
-    assert utils.toegerekende_oppervlakte(ruimte) == Decimal("10.10")
+    assert utils.toe_te_rekenen_oppervlakte(ruimte) == Decimal("10.10")

@@ -12,7 +12,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
-    toegerekende_oppervlakte,
+    toe_te_rekenen_oppervlakte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -66,7 +66,7 @@ class OppervlakteVanVertrekken(Stelselgroep):
                 ruimte, waarderingsgroep_builder=gedeeld_met
             )
             if waarderingen:
-                oppervlakte_totaal_na_delen += toegerekende_oppervlakte(ruimte)
+                oppervlakte_totaal_na_delen += toe_te_rekenen_oppervlakte(ruimte)
 
         woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(

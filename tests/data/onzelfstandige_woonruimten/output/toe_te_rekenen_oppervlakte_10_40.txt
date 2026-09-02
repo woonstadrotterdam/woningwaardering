@@ -1,4 +1,4 @@
-SAMENVATTING toegerekende_oppervlakte_10_40
+SAMENVATTING toe_te_rekenen_oppervlakte_10_40
   Oppervlakte van vertrekken                                                     21.00 pt
   Oppervlakte van overige ruimten                                                15.75 pt
   Verkoeling en verwarming

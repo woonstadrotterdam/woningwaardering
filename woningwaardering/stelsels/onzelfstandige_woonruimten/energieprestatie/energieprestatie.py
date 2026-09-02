@@ -21,7 +21,7 @@ from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
-    toegerekende_oppervlakte,
+    toe_te_rekenen_oppervlakte,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -350,11 +350,11 @@ class Energieprestatie(Stelselgroep):
             if utils.gedeeld_met_adressen(ruimte):
                 continue
 
-            # De onafgeronde toerekening van rubriek 1 (eerst delen, dan salderen;
-            # #391), niet het afgeronde puntenresultaat. Beleidsboek: afronden op 2
-            # decimalen per ruimte vóór delen.
+            # Het onafgeronde toe te rekenen aantal van rubriek 1 (eerst delen, dan
+            # salderen; #391), niet het afgeronde puntenresultaat. Beleidsboek:
+            # afronden op 2 decimalen per ruimte vóór delen.
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                oppervlakte += toegerekende_oppervlakte(ruimte)
+                oppervlakte += toe_te_rekenen_oppervlakte(ruimte)
 
         return float(oppervlakte)
 

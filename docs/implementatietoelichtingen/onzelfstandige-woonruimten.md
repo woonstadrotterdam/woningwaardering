@@ -364,7 +364,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 >
 > Voorbeeld (4 onzelfstandige woonruimten):
 >
-> 1. privé berging 10,40 m² plus vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toegerekend
+> 1. privé berging 10,40 m² plus vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toe te rekenen
 > 2. afronden op hele m²: 20,50 → 21 m²
 > 3. 21 × 0,75 = 15,75
 > 4. maximumaftrek: 5 / 4 = 1,25
@@ -606,7 +606,7 @@ Het puntenaantal voor de energieprestatie wordt dan als volgt berekend:
 ==}
 
 > [!NOTE]
-> “Volgens rubriek 1 toe te rekenen” is de onafgeronde toerekening (eerst delen, dan salderen), niet het afgeronde puntenresultaat van rubriek 1. Voorbeeld: privé 10,40 m² plus gemeenschappelijk 40,40 m² gedeeld door 4 geeft 20,50 m² → 20,50 × 0,65 = **13,25** (niet 21 × 0,65). Dit is nagerekend met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
+> “Volgens rubriek 1 toe te rekenen” is het onafgeronde toe te rekenen aantal (eerst delen, dan salderen), niet het afgeronde puntenresultaat van rubriek 1. Voorbeeld: privé 10,40 m² plus gemeenschappelijk 40,40 m² gedeeld door 4 geeft 20,50 m² → 20,50 × 0,65 = **13,25** (niet 21 × 0,65). Dit is nagerekend met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 > [!NOTE]
 > Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld (`gedeeldMetAantalAdressen` ≥ 2) tellen **niet** mee voor de oppervlakte in §2.4.4. Het Bhw (Bijlage I, onder B, rubriek 4) bepaalt dat energieprestatie wordt berekend over de m² die **volgens rubriek 1** aan de huurder zijn toe te rekenen. Rubriek 1 dekt alleen privévertrekken en gemeenschappelijke vertrekken op hetzelfde adres; ruimten gedeeld met meerdere adressen vallen onder rubriek 9 ([§2.9](#29-rubriek-9-gemeenschappelijke-vertrekken-overige-ruimten-en-voorzieningen)), waar energieprestatie niet wordt genoemd. Dit komt overeen met het gedrag van de Huurcommissie-huurprijscheck.
