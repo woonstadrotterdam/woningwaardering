@@ -8,7 +8,7 @@ from woningwaardering.vera.referentiedata import (
 
 
 def test_stelselgroeptotaal_volgt_uit_onafgeronde_punten():
-    """Het stelselgroeptotaal is de som van de onafgeronde punten, afgerond op een kwart punt, niet die van de vastgelegde rijen.
+    """Het stelselgroeptotaal is de som van de onafgeronde punten, afgerond op een kwart punt, niet die van de op twee decimaal afgeronde vastgelegde waarderingen.
 
     Bewust rekenkundig randgeval (geen realistische woonruimte): zeven
     waarderingen van 0,0178 punt. Onafgerond is de som 0,1246, wat afrondt op
