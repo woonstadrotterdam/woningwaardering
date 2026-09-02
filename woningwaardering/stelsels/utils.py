@@ -730,10 +730,11 @@ def voeg_stelselgroep_afronding_toe(
 ) -> None:
     """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
 
-    Het stelselgroeptotaal is het kwartpunt van de onafgeronde builder-punten
-    (§2.1.4 / §2.1.6). De waarderingen staan in de output op twee decimalen;
-    Afronding op kwartpunten sluit het verschil tussen dat kwartpunt en de
-    som van die getoonde rijen, zodat de puntenkolom optelt tot het totaal.
+    Het stelselgroeptotaal is de som van de builder-punten, afgerond op een
+    kwart punt (§2.1.4 / §2.1.6). De waarderingen staan in de output op twee
+    decimalen; Afronding op kwartpunten sluit het verschil tussen dat totaal
+    en de som van die getoonde rijen, zodat de puntenkolom optelt tot het
+    totaal.
 
     Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
     """

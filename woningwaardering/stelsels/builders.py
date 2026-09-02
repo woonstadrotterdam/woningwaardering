@@ -257,8 +257,8 @@ class WaarderingBuilder:
             )
         # Punten leggen we in de output vast op twee decimalen. De berekening
         # gebruikt de builder-punten zonder tussentijdse afronding op twee
-        # decimalen: het stelselgroeptotaal is het kwartpunt van die som
-        # (zie ``WaarderingsgroepBuilder.build``).
+        # decimalen: het stelselgroeptotaal is die som, afgerond op een kwart
+        # punt (zie ``WaarderingsgroepBuilder.build``).
         waardering = WoningwaarderingResultatenWoningwaardering(
             criterium=criterium,
             punten=(
@@ -383,9 +383,10 @@ class WaarderingsgroepBuilder:
         groep.woningwaarderingen = [
             waardering._naar_waardering() for waardering in waarderingen
         ]
-        # 2.1.4 / 2.1.6: het rubriektotaal is het kwartpunt van de som van de
-        # builder-punten. Die som gebruiken we zonder tussentijdse afronding op
-        # twee decimalen; die afronding is alleen voor de vastgelegde rijen.
+        # 2.1.4 / 2.1.6: het rubriektotaal is de som van de builder-punten,
+        # afgerond op een kwart punt. Die som gebruiken we zonder tussentijdse
+        # afronding op twee decimalen; die afronding is alleen voor de
+        # vastgelegde rijen.
         onafgerond = sum(
             (
                 Decimal(str(waardering.punten))
