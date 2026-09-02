@@ -63,3 +63,5 @@ Meestal draagt een subgroep zelf geen punten; die staan op de onderliggende waar
 In de praktijk begin je met `WaarderingsgroepBuilder(stelsel, stelselgroep)`, hang je daar waarderingen en eventuele groeperende lagen onder, en sluit je af met `build()`.
 
 `build()` telt de punten op en rondt de totaalpunten van de stelselgroep af op kwartpunten. Ontstaat door die afronding een verschil tussen de som van de waarderingen en het stelselgroeptotaal, dan voegen we dat verschil toe als waardering **Afronding op kwartpunten**. Het eindresultaat is een `WoningwaarderingResultatenWoningwaarderingGroep`.
+
+In de output staat op die waardering het exacte verschil. Het rapport toont punten op twee decimalen en laat de regel weg wanneer het verschil daar als `0.00 pt` of `-0.00 pt` zou verschijnen.
