@@ -386,7 +386,7 @@ class WaarderingsgroepBuilder:
         # 2.1.4 / 2.1.6: het rubriektotaal is de som van de builder-punten,
         # afgerond op een kwart punt. Die som gebruiken we zonder tussentijdse
         # afronding op twee decimalen; die afronding is alleen voor de
-        # vastgelegde rijen.
+        # vastgelegde waarderingen.
         onafgerond = sum(
             (
                 Decimal(str(waardering.punten))
