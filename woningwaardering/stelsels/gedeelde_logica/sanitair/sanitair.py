@@ -16,7 +16,6 @@ from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
-    rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -193,10 +192,7 @@ def waardeer_sanitair(
         for woningwaardering in detail_waarderingen:
             if woningwaardering.punten is not None:
                 woningwaardering.punten = float(
-                    rond_af(
-                        Decimal(str(woningwaardering.punten)) / Decimal(deler),
-                        decimalen=2,
-                    )
+                    Decimal(str(woningwaardering.punten)) / Decimal(deler)
                 )
 
     return [ruimte_criterium, *detail_waarderingen]
@@ -254,11 +250,8 @@ def _waardeer_toiletten(
                     id=toiletsoort.name,
                     naam=toiletsoort.naam,
                     meeteenheid=Meeteenheid.stuks,
-                    punten=rond_af(
-                        Decimal(str(toilet_punten[toiletsoort]))
-                        * Decimal(str(aantal_toiletten)),
-                        decimalen=2,
-                    ),
+                    punten=Decimal(str(toilet_punten[toiletsoort]))
+                    * Decimal(str(aantal_toiletten)),
                     aantal=aantal_toiletten,
                 )
 
@@ -374,9 +367,8 @@ def _waardeer_wastafels(
 
         punten_per_wastafel = Decimal(str(_WASTAFEL_PUNTEN[wastafelsoort]))
 
-        punten_voor_wastafels = rond_af(
-            Decimal(str(aantal_wastafels + aantal_spoelbakken)) * punten_per_wastafel,
-            decimalen=2,
+        punten_voor_wastafels = (
+            Decimal(str(aantal_wastafels + aantal_spoelbakken)) * punten_per_wastafel
         )
 
         if aantal_spoelbakken > 0:
@@ -387,10 +379,7 @@ def _waardeer_wastafels(
                 id=wastafelsoort.name,
                 naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                 meeteenheid=Meeteenheid.stuks,
-                punten=rond_af(
-                    aantal_spoelbakken * punten_per_wastafel,
-                    decimalen=2,
-                ),
+                punten=aantal_spoelbakken * punten_per_wastafel,
                 aantal=aantal_spoelbakken,
             )
 
@@ -402,10 +391,7 @@ def _waardeer_wastafels(
                 id=wastafelsoort.name,
                 naam=wastafelsoort.naam,
                 meeteenheid=Meeteenheid.stuks,
-                punten=rond_af(
-                    aantal_wastafels * punten_per_wastafel,
-                    decimalen=2,
-                ),
+                punten=aantal_wastafels * punten_per_wastafel,
                 aantal=aantal_wastafels,
             )
 
@@ -429,10 +415,7 @@ def _waardeer_wastafels(
                     ),
                     gedeelde_naam=f"Maximering voor {wastafelsoort.naam}",
                 ),
-                punten=rond_af(
-                    punten_per_wastafel - punten_voor_wastafels,
-                    decimalen=2,
-                ),
+                punten=punten_per_wastafel - punten_voor_wastafels,
             )
     # Waarschuw indien er minder wastafels zijn dan ingebouwde kasten met wastafel
     # want een wastafel moet apart worden meegegeven
@@ -479,10 +462,7 @@ def _waardeer_baden_en_douches(
         aantal = installaties[installatiesoort]
         if aantal == 0:
             continue
-        punten = rond_af(
-            Decimal(aantal) * Decimal(str(punten_bad_en_douche[installatiesoort])),
-            decimalen=2,
-        )
+        punten = Decimal(aantal) * Decimal(str(punten_bad_en_douche[installatiesoort]))
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal}x een {installatiesoort.naam} voor {Woningwaarderingstelselgroep.sanitair.naam}"
         )
@@ -548,10 +528,8 @@ def _waardeer_installaties(
                         )
                         yield voorzieningen_criterium
 
-                    punten = rond_af(
-                        Decimal(str(aantal))
-                        * Decimal(str(_EXTRA_VOORZIENINGEN_PUNTEN[installatiesoort])),
-                        decimalen=2,
+                    punten = Decimal(str(aantal)) * Decimal(
+                        str(_EXTRA_VOORZIENINGEN_PUNTEN[installatiesoort])
                     )
 
                     totaal_punten_voorzieningen += punten
@@ -612,10 +590,7 @@ def _waardeer_installaties(
                 # aantal punten voor bad en douche in dezelfde ruimte.
                 if voorzieningen_criterium is not None:
                     maximering = min(
-                        rond_af(
-                            totaal_punten_bad_en_douche - totaal_punten_voorzieningen,
-                            2,
-                        ),
+                        totaal_punten_bad_en_douche - totaal_punten_voorzieningen,
                         Decimal("0"),
                     )
                     if maximering < 0:

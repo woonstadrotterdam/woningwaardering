@@ -111,10 +111,7 @@ class Energieprestatie(Stelselgroep):
                 utils.rond_af(oppervlakte_van_vertrekken, decimalen=2)
             )
             woningwaardering.punten = float(
-                utils.rond_af(
-                    Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken)),
-                    decimalen=2,
-                )
+                Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken))
             )
 
         elif energieprestatie:
@@ -256,9 +253,7 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(
@@ -308,9 +303,7 @@ class Energieprestatie(Stelselgroep):
         )
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(

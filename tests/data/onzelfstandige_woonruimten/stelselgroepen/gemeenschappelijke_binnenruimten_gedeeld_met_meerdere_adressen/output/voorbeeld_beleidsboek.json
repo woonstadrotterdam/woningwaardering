@@ -60,7 +60,7 @@
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             }
           },
-          "punten": 0.09375
+          "punten": 0.09
         },
         {
           "aantal": 2.0,
@@ -102,7 +102,7 @@
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_4_onzelfstandige_woonruimten__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
             }
           },
-          "punten": 0.125
+          "punten": 0.13
         },
         {
           "criterium": {
@@ -135,7 +135,7 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 0.4375
+          "punten": 0.44
         },
         {
           "criterium": {
@@ -159,7 +159,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.0625
+          "punten": 0.06
         },
         {
           "aantal": 1.0,
@@ -174,7 +174,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.0625
+          "punten": 0.06
         },
         {
           "aantal": 1.0,
@@ -189,7 +189,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.0625
+          "punten": 0.06
         },
         {
           "criterium": {
@@ -222,7 +222,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.234375
+          "punten": 0.23
         },
         {
           "aantal": 1.0,
@@ -237,14 +237,14 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.0625
+          "punten": 0.06
         },
         {
           "criterium": {
             "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.109375
+          "punten": 0.12
         }
       ]
     }

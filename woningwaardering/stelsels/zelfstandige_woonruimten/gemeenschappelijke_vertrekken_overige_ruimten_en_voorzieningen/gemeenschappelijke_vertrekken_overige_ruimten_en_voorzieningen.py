@@ -102,16 +102,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
-
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
@@ -297,10 +287,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
-                rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
-                    decimalen=2,
-                )
+                Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen))
             )
 
     def _keuken_waarderingen(

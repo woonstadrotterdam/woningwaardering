@@ -21,7 +21,6 @@ from woningwaardering.stelsels.utils import (
     oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     rond_af_op_kwart,
-    som_punten_waarderingen_afgerond,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -103,12 +102,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
-        if any(w.punten is not None for w in groep_waarderingen):
-            # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen
-            woningwaardering_groep.punten = som_punten_waarderingen_afgerond(
-                groep_waarderingen
-            )
-        else:
+        # Ruimteregels hebben alleen m², geen punten, dus ``build()`` kan het
+        # stelselgroeptotaal niet sommen. (Uitzondering: zoldercorrectie.)
+        if not any(w.punten is not None for w in groep_waarderingen):
             punten = rond_af_op_kwart(
                 rond_af(
                     sum(

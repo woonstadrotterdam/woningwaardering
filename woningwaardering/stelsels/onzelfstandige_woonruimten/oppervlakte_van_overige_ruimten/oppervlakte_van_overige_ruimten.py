@@ -120,10 +120,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     ruimte
                 ):
                     waardering.punten = float(
-                        utils.rond_af(
-                            Decimal(str(waardering.punten)) / Decimal(str(deler)),
-                            decimalen=2,
-                        )
+                        Decimal(str(waardering.punten)) / Decimal(str(deler))
                     )
 
                 if waardering.aantal is not None:
@@ -157,16 +154,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        woningwaardering_groep.punten = float(
-            utils.rond_af_op_kwart(
-                sum(
-                    Decimal(str(woningwaardering.punten))
-                    for woningwaardering in woningwaardering_groep.woningwaarderingen
-                    or []
-                    if woningwaardering.punten is not None
-                )
-            )
-        )
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
