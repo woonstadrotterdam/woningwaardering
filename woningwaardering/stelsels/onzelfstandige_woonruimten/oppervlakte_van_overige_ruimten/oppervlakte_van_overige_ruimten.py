@@ -22,7 +22,6 @@ from woningwaardering.stelsels.utils import (
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenRuimte,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -57,44 +56,38 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
 
         # Ruimten gedeeld met meerdere adressen worden gewaardeerd volgens Rubriek
         # "gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
-        ruimten = [
+        overige_ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
             if not gedeeld_met_adressen(ruimte)
+            and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
         ]
 
-        # Eerst per ruimte delen, daarna salderen, daarna éénmaal afronden op hele m²
-        # (#391). Punten staan op de stelselgroep, niet op de gedeeld-met-laag (#393).
-        oppervlakte_totaal_na_delen = Decimal("0")
-        zolders: list[EenhedenRuimte] = []
-
-        for ruimte in ruimten:
-            if classificeer_ruimte(ruimte) != Ruimtesoort.overige_ruimten:
-                continue
-            oppervlakte_totaal_na_delen += toe_te_rekenen_oppervlakte(ruimte)
-            if is_zolder_zonder_vaste_trap(ruimte):
-                zolders.append(ruimte)
-
-        punten_uit_m2 = utils.rond_af(
-            oppervlakte_totaal_na_delen, decimalen=0
-        ) * Decimal("0.75")
+        zolders = [
+            ruimte for ruimte in overige_ruimten if is_zolder_zonder_vaste_trap(ruimte)
+        ]
 
         # Bij een vlizotrap hangen de gedeeld-met-lagen onder het Subtotaal, zodat de
         # ruimteregels bij het subtotaal horen. Correcties staan op hetzelfde
-        # niveau als het subtotaal.
+        # niveau als het subtotaal. Punten op het subtotaal volgen ná de saldering.
         parent: WaarderingsgroepBuilder | WaarderingBuilder = waarderingsgroep_builder
+        subtotaal: WaarderingBuilder | None = None
         if zolders:
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # De maximumaftrek van 5 punten is van de zolder en wordt gedeeld. De zolder
             # blijft in de saldering. Het subtotaal draagt geen aantal: ruimteregels
             # tonen werkelijke m², punten komen uit toe te rekenen m². Zie #403.
-            parent = waarderingsgroep_builder.met_onderliggend(
+            subtotaal = waarderingsgroep_builder.met_onderliggend(
                 id="subtotaal",
                 naam="Subtotaal",
-                punten=float(punten_uit_m2),
             )
+            parent = subtotaal
 
-        for ruimte in ruimten:
+        # Eerst per ruimte delen, daarna salderen, daarna éénmaal afronden op hele m²
+        # (#391). Punten staan op de stelselgroep, niet op de gedeeld-met-laag (#393).
+        oppervlakte_totaal_na_delen = Decimal("0")
+        for ruimte in overige_ruimten:
+            oppervlakte_totaal_na_delen += toe_te_rekenen_oppervlakte(ruimte)
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             waardeer_oppervlakte_van_overige_ruimte(
                 ruimte,
@@ -102,6 +95,12 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                     aantal_onzelfstandige_woonruimten=deler,
                 ),
             )
+
+        punten_uit_m2 = utils.rond_af(
+            oppervlakte_totaal_na_delen, decimalen=0
+        ) * Decimal("0.75")
+        if subtotaal is not None:
+            subtotaal.punten = float(punten_uit_m2)
 
         # maak_zolder_correctie_waardering is hier niet bruikbaar: die helper gaat
         # uit van ongedeelde zolder-m² tegen een ongedeeld totaal en een vaste
@@ -122,7 +121,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-        if not zolders:
+        if subtotaal is None:
             woningwaardering_groep.punten = float(utils.rond_af_op_kwart(punten_uit_m2))
 
         logger.info(
