@@ -969,7 +969,8 @@ def toe_te_rekenen_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
 
     Per ruimte het toe te rekenen aantal: ``rond_af(m² inclusief kasten, 2) / deler``,
     waarbij ``deler`` het aantal onzelfstandige woonruimten is (of 1). Rubriek 9
-    deelt niet de oppervlakten, maar het aantal punten / onzelfstandige woonruimten en adressen en kan daarom deze helper niet gebruiken.
+    deelt niet de oppervlakten, maar het aantal punten / onzelfstandige woonruimten
+    en adressen en kan daarom deze helper niet gebruiken.
 
     De som is het toe te rekenen totaal: rubriek 1 rondt dat af op hele m², rubriek 2
     vermenigvuldigt die afgeronde waarde met 0,75, rubriek 4 gebruikt de onafgeronde
