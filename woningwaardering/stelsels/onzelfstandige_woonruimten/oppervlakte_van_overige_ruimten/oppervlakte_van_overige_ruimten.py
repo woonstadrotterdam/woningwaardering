@@ -103,6 +103,10 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 ),
             )
 
+        # maak_zolder_correctie_waardering is hier niet bruikbaar: die helper gaat
+        # uit van ongedeelde zolder-m² tegen een ongedeeld totaal en een vaste
+        # maximumaftrek van 5 punten. Daarom wordt bereken_zolder_correctie hier
+        # met toe te rekenen m² en een gedeelde maximumaftrek aangeroepen.
         for ruimte in zolders:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             waarderingsgroep_builder.met_onderliggend(
