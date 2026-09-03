@@ -6,7 +6,6 @@ from loguru import logger
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import (
-    WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
@@ -73,9 +72,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             start=Decimal("0"),
         )
 
-        alle_waarderingen: list[WaarderingBuilder] = []
         for ruimte in ruimten:
-            waarderingen = waardeer_oppervlakte_van_overige_ruimte(
+            waardeer_oppervlakte_van_overige_ruimte(
                 ruimte, waarderingsgroep_builder=waarderingsgroep_builder
             )
 
@@ -85,18 +83,13 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is.
             # Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
             if is_zolder_zonder_vaste_trap(ruimte):
-                waarderingen.append(
-                    maak_zolder_correctie_waardering(
-                        ruimte,
-                        totaal_oppervlakte,
-                        waarderingsgroep_builder=waarderingsgroep_builder,
-                    )
+                maak_zolder_correctie_waardering(
+                    ruimte,
+                    totaal_oppervlakte,
+                    waarderingsgroep_builder=waarderingsgroep_builder,
                 )
 
-            alle_waarderingen.extend(waarderingen)
-
         structureer_subtotaal_bij_correcties(
-            alle_waarderingen,
             waarderingsgroep_builder=waarderingsgroep_builder,
             factor=Decimal("0.75"),
         )

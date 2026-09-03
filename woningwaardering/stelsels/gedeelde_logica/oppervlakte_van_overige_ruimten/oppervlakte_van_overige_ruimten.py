@@ -119,9 +119,8 @@ def _is_ruimteregel_met_aantal(
 
 
 def structureer_subtotaal_bij_correcties(
-    waarderingen: list[WaarderingBuilder],
     *,
-    waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
+    waarderingsgroep_builder: WaarderingsgroepBuilder,
     factor: Decimal,
 ) -> None:
     """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
@@ -132,6 +131,7 @@ def structureer_subtotaal_bij_correcties(
     De ruimteregels worden onder het Subtotaal opgebouwd, zodat ``subtotaal`` net als
     elke andere tussenlaag in het id-pad van de onderliggende waarderingen voorkomt.
     """
+    waarderingen = list(waarderingsgroep_builder.alle_waarderingen())
     heeft_ruimte_aantal = any(
         _is_ruimteregel_met_aantal(w, onder_builder=waarderingsgroep_builder)
         for w in waarderingen
