@@ -11,7 +11,7 @@
           "naam": "Sanitair"
         }
       },
-      "punten": 3.0,
+      "punten": 3.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -88,7 +88,7 @@
             "id": "sanitair__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.12
+          "punten": 0.13
         }
       ]
     }

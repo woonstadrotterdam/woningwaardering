@@ -38,6 +38,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Gebruik `warnings.warn(..., UserWarning)` voor gebruikersgerichte waarschuwingen over incomplete of onjuiste input, volgens de bestaande warning-semantiek.
 - Gebruik `loguru` voor logging volgens `docs/voor-ontwikkelaars/logging.md`.
 - Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
+- Schrijf comments voor de lezer van de huidige code, niet voor de reviewer van de wijziging: verwijs niet naar verwijderde of oude code ("dit is niet meer nodig", "voorheen gebeurde hier X"). Zulke uitleg hoort in het commitbericht of de PR-beschrijving.
 
 ```python
 # 2.2.2.3 Zolderruimte zonder vaste trap

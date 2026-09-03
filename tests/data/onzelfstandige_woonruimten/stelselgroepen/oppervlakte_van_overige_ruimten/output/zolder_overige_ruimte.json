@@ -85,14 +85,14 @@
             "id": "oppervlakte_van_overige_ruimten__Space_3__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
-          "punten": -1.66666667
+          "punten": -1.67
         },
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.0833333
+          "punten": -0.08
         }
       ]
     }

@@ -451,34 +451,6 @@ def _groep_subtotaal_aantal_delen(
     return _format_aantal_delen(float(totaal), meeteenheid)
 
 
-def _is_verwaarloosbare_afronding(
-    waardering: WoningwaarderingResultatenWoningwaardering,
-) -> bool:
-    """Of dit de sluitpost Afronding op kwartpunten is die op twee decimalen 0 is.
-
-    Het rapport toont punten op twee decimalen. Een sluitpost die kleiner is dan
-    een halve cent verschijnt dan als ``0.00 pt`` of ``-0.00 pt``, wat een lezer
-    niets vertelt; die regel laten we weg.
-
-    De sluitpost herkennen we aan het laatste segment van de pad-id: bij een uit
-    JSON ingelezen resultaat is ``stelselgroep.name`` leeg, waardoor de volledige
-    pad-id niet betrouwbaar te reconstrueren is.
-
-    Args:
-        waardering (WoningwaarderingResultatenWoningwaardering): De waardering.
-
-    Returns:
-        bool: True als het rapport deze regel weglaat.
-    """
-    return (
-        waardering.criterium is not None
-        and waardering.criterium.id is not None
-        and waardering.criterium.id.endswith(f"__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}")
-        and waardering.punten is not None
-        and rond_af(waardering.punten, 2) == Decimal("0")
-    )
-
-
 def _render_detail_groep(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[str]:
@@ -499,9 +471,7 @@ def _render_detail_groep(
     tops = [
         w
         for w in waarderingen
-        if w.criterium is not None
-        and w.criterium.bovenliggende_criterium is None
-        and not _is_verwaarloosbare_afronding(w)
+        if w.criterium is not None and w.criterium.bovenliggende_criterium is None
     ]
     for waardering in tops:
         _render_waardering_pre_order(
@@ -755,11 +725,16 @@ def som_punten_waarderingen(
 def voeg_stelselgroep_afronding_toe(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
     *,
-    onafgerond: Decimal,
     afgerond: Decimal,
     stelselgroep: Referentiedata,
 ) -> None:
     """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
+
+    Het stelselgroeptotaal is de som van de builder-punten, afgerond op een
+    kwart punt (§2.1.4 / §2.1.6). De waarderingen staan in de output op twee
+    decimalen; Afronding op kwartpunten sluit het verschil tussen dat totaal
+    en de som van die getoonde waarderingen, zodat de puntenkolom optelt tot het
+    totaal.
 
     Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
     """
@@ -767,7 +742,7 @@ def voeg_stelselgroep_afronding_toe(
     if not any(w.punten is not None for w in waarderingen):
         return
 
-    delta = afgerond - onafgerond
+    delta = afgerond - som_punten_waarderingen(waarderingen)
     if delta == Decimal("0"):
         return
 
@@ -787,19 +762,6 @@ def voeg_stelselgroep_afronding_toe(
             punten=float(delta),
         ),
     ]
-
-
-def som_punten_waarderingen_afgerond(
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
-) -> float:
-    """Som van punten op alle waarderingen in een groep (afgerond op kwart).
-
-    Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
-    inclusief een eventuele waardering Afronding op kwartpunten.
-    """
-    if not waarderingen:
-        return 0.0
-    return float(rond_af_op_kwart(som_punten_waarderingen(waarderingen)))
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
