@@ -10,6 +10,7 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    bereken_oppervlakte_punten,
     bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
     waardeer_oppervlakte_van_overige_ruimte,
@@ -96,9 +97,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 ),
             )
 
-        punten_uit_m2 = utils.rond_af(
-            oppervlakte_totaal_na_delen, decimalen=0
-        ) * Decimal("0.75")
+        punten_uit_m2 = bereken_oppervlakte_punten(
+            oppervlakte_totaal_na_delen, Decimal("0.75")
+        )
         if subtotaal is not None:
             subtotaal.punten = float(punten_uit_m2)
 
