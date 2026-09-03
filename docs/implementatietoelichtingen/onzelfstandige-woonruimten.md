@@ -870,6 +870,9 @@ Niet als wastafel worden gewaardeerd:
 > [!NOTE]
 > Indien een aanrecht met een lengte korter dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak.
 
+> [!NOTE]
+> Een `Wastafel` of `Fontein` die als bouwkundig element wordt meegegeven, telt mee als wastafel-installatie: de Huurcommissie waardeert een fonteintje als wastafel. Geef dezelfde voorziening bij voorkeur op één manier mee; zie [Bouwkundige elementen naast installaties](datamodel-uitbreidingen.md#bouwkundige-elementen-naast-installaties) voor hoe wij beide representaties samenvoegen.
+
 _Bad en douche_  
 ~~Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die in een ander vertrek of overige ruimte staat dan de bad- of doucheruimte.~~
 
