@@ -7,9 +7,10 @@ from typing import Iterator
 import pytest
 from pytest import fail
 
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_rapport, normaliseer_ruimte_namen
+from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,

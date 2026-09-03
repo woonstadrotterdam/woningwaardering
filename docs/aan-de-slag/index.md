@@ -23,7 +23,7 @@ from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
-from woningwaardering.stelsels.utils import naar_rapport
+from woningwaardering.rapport import naar_rapport
 
 warnings.simplefilter("default", UserWarning)
 
@@ -784,7 +784,7 @@ import warnings
 from datetime import date
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_rapport
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
     EenhedenAdresseerbaarObjectBasisregistratie,
