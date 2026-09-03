@@ -6,6 +6,7 @@ from loguru import logger
 from woningwaardering.stelsels import Stelselgroep
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import (
+    WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
@@ -76,6 +77,9 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         heeft_zolder_zonder_trap = any(
             is_zolder_zonder_vaste_trap(ruimte) for ruimte in ruimten
         )
+        ruimten_parent: WaarderingsgroepBuilder | WaarderingBuilder = (
+            waarderingsgroep_builder
+        )
         if heeft_zolder_zonder_trap:
             punten_uit_m2 = bereken_oppervlakte_punten(
                 totaal_oppervlakte, Decimal("0.75")
@@ -87,8 +91,6 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 aantal=float(rond_af(totaal_oppervlakte, decimalen=2)),
                 punten=float(rond_af_op_kwart(punten_uit_m2)),
             )
-        else:
-            ruimten_parent = waarderingsgroep_builder
 
         for ruimte in ruimten:
             waardeer_oppervlakte_van_overige_ruimte(
