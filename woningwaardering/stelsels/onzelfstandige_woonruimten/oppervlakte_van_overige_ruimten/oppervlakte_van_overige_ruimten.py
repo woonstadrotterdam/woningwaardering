@@ -80,7 +80,8 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         ) * Decimal("0.75")
 
         # Bij een vlizotrap hangen de gedeeld-met-lagen onder het Subtotaal, zodat de
-        # ruimteregels bij het subtotaal horen. Correcties blijven sibling.
+        # ruimteregels bij het subtotaal horen. Correcties blijven op hetzelfde
+        # niveau als het subtotaal.
         parent: WaarderingsgroepBuilder | WaarderingBuilder = waarderingsgroep_builder
         if zolders:
             # 2.2.2.3 Zolderruimte zonder vaste trap
