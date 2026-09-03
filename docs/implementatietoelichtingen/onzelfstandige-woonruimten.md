@@ -446,7 +446,7 @@ _~~Oppervlakte onder een open of gesloten vaste trap~~_
 ==}
 
 > [!NOTE]
-> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen. Eerst krijgt elke ruimte 1 punt, daarna capen we op dat aantal ruimten, daarna deelt de aanroeper. Binnen de teller vullen we op kleinste deler (privé = 1), dan `ruimte.id`, zodat dezelfde ruimten in andere invoervolgorde hetzelfde totaal geven. Voorbeeld: 3 privé + 3 gemeenschappelijke verwarmde verkeersruimten gedeeld door 2 → 3,5.
+> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen. We lopen de teller in rangorde (kleinste deler eerst, daarna invoervolgorde): elke ruimte krijgt 1 punt, boven het maximum −1, daarna deelt de aanroeper. Zo geven dezelfde ruimten hetzelfde totaal. Voorbeeld: 3 privé + 3 gemeenschappelijke verwarmde verkeersruimten gedeeld door 2 → 3,5.
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.
@@ -1136,7 +1136,7 @@ Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moe
 Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel, gedeeld door het aantal adressen met toegang en gebruiksrecht en vervolgens gedeeld door het aantal onzelfstandige wooneenheden met toegang tot de voorzieningen.
 
 > [!NOTE]
-> Verkoeling en verwarming in deze rubriek gebruikt dezelfde helper als [rubriek 3](#23-rubriek-3-verwarming-en-verkoeling): één maximeringsteller, cap vóór deling, vulling op kleinste deler.
+> Verkoeling en verwarming in deze rubriek gebruikt dezelfde helper als [rubriek 3](#23-rubriek-3-verwarming-en-verkoeling): één maximeringsteller in rangorde (kleinste deler eerst, daarna invoervolgorde), cap vóór deling.
 
 #### 2.9.3 Gemeenschappelijke (spoel)keuken
 

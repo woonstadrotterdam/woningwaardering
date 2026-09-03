@@ -1,7 +1,7 @@
 """Maximering van verkoeling en verwarming is onafhankelijk van invoervolgorde.
 
-Privé en gemeenschappelijk delen tot #293 één teller. De helper vult die teller
-op kleinste deler (daarna id) vóór de aanroeper deelt.
+Privé en gemeenschappelijk delen tot #293 één teller. De helper loopt die teller
+in rangorde (kleinste deler, daarna invoervolgorde) vóór de aanroeper deelt.
 """
 
 from tests.peildatum import REFERENTIE_PEILDATUM
