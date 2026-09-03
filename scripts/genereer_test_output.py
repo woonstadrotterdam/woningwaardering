@@ -9,8 +9,8 @@ from loguru import logger
 from pydantic import ValidationError
 
 from woningwaardering import Woningwaardering
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,

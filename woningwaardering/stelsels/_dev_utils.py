@@ -8,7 +8,7 @@ import loguru
 from loguru import logger
 
 from woningwaardering._logging import verkort_path
-from woningwaardering.stelsels import utils
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.stelsels.stelsel import Stelsel
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -131,5 +131,5 @@ class DevelopmentContext:
         eenheid_id: str | None = None,
     ) -> None:
         print(resultaat.model_dump_json(by_alias=True, indent=2, exclude_none=True))
-        rapport = utils.naar_rapport(resultaat, eenheid_id=eenheid_id)
+        rapport = naar_rapport(resultaat, eenheid_id=eenheid_id)
         print(rapport)
