@@ -12,6 +12,7 @@ from woningwaardering.stelsels.gedeelde_logica.keuken import (
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    deler,
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
 )
@@ -60,6 +61,31 @@ def _ruimte_gedeeld(ruimte: EenhedenRuimte) -> bool:
     )
 
 
+def _is_verwarmde_overige_of_verkeersruimte(ruimte: EenhedenRuimte) -> bool:
+    if not ruimte.verwarmd:
+        return False
+    return classificeer_ruimte(ruimte) in (
+        Ruimtesoort.overige_ruimten,
+        Ruimtesoort.verkeersruimte,
+    )
+
+
+def _is_verwarmd_vertrek(ruimte: EenhedenRuimte) -> bool:
+    if not ruimte.verwarmd:
+        return False
+    return classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
+
+
+def _rangschik_voor_maximering(
+    ruimten: list[EenhedenRuimte],
+) -> list[EenhedenRuimte]:
+    """Kleinste deler eerst; bij gelijke deler blijft de invoervolgorde staan."""
+    return sorted(
+        ruimten,
+        key=lambda ruimte: deler(ruimte),
+    )
+
+
 def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
     *,
@@ -68,8 +94,12 @@ def waardeer_verkoeling_en_verwarming(
     """Classificeer ruimten, pas maximering toe en bouw waarderingen op hun plek.
 
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
-    verkoelde vertrekken) telt over álle meegegeven ruimten samen en wordt hier in
-    één doorloop met lokale tellers toegepast.
+    verkoelde vertrekken) telt over álle meegegeven ruimten samen. Privé en
+    gemeenschappelijk delen die teller tot #293 is beslist. Elke ruimte krijgt
+    1 punt; ruimten boven het maximum krijgen −1. De teller loopt in rangorde
+    (kleinste deler, daarna invoervolgorde), zodat dezelfde ruimten hetzelfde
+    totaal geven.
+    Deling gebeurt daarna in de aanroeper. De outputvolgorde volgt die rangorde.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
@@ -130,39 +160,33 @@ def _waardeer_verwarmde_overige_ruimte(
     """
     subgroep_id = "verwarmde_overige_en_verkeersruimten"
     totaal_punten = 0
-    for ruimte in ruimten:
-        if not ruimte.verwarmd:
-            continue
-
-        ruimtesoort = classificeer_ruimte(ruimte)
-        if ruimtesoort in (
-            Ruimtesoort.overige_ruimten,
-            Ruimtesoort.verkeersruimte,
-        ):
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
-            )
+    for ruimte in _rangschik_voor_maximering(
+        [r for r in ruimten if _is_verwarmde_overige_of_verkeersruimte(r)]
+    ):
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmde overige- of verkeersruimte mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+        )
+        yield (
+            ruimte,
+            _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
+                id=ruimte.id,
+                naam=ruimte.naam or ruimte.id or "",
+                punten=1.0,
+            ),
+        )
+        totaal_punten += 1
+        if totaal_punten > 4:
             yield (
                 ruimte,
                 _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
-                    id=ruimte.id,
-                    naam=ruimte.naam or ruimte.id or "",
-                    punten=1.0,
+                    id="max_aantal_punten",
+                    naam=maximering_naam(
+                        gedeeld=_ruimte_gedeeld(ruimte),
+                        met_puntental="Maximaal 4 punten",
+                    ),
+                    punten=-1,
                 ),
             )
-            totaal_punten += 1
-            if totaal_punten > 4:
-                yield (
-                    ruimte,
-                    _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
-                        id="max_aantal_punten",
-                        naam=maximering_naam(
-                            gedeeld=_ruimte_gedeeld(ruimte),
-                            met_puntental="Maximaal 4 punten",
-                        ),
-                        punten=-1,
-                    ),
-                )
 
 
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
@@ -184,62 +208,57 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
     """
     totaal_punten_verkoeld = 0
-    for ruimte in ruimten:
-        if not ruimte.verwarmd:
-            continue
+    for ruimte in _rangschik_voor_maximering(
+        [r for r in ruimten if _is_verwarmd_vertrek(r)]
+    ):
+        open_keuken = _classificeer_open_keuken(ruimte)
+        naam = ruimte.naam or ruimte.id or ""
+        if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
+            naam = f"{naam} met open keuken"
 
-        ruimtesoort = classificeer_ruimte(ruimte)
-        if ruimtesoort == Ruimtesoort.vertrek:
-            open_keuken = _classificeer_open_keuken(ruimte)
-            naam = ruimte.naam or ruimte.id or ""
-            if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
-                naam = f"{naam} met open keuken"
-
+        logger.info(
+            f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+        )
+        if open_keuken is not None:
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verwarmd vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
             )
-            if open_keuken is not None:
-                logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt ook als open keuken mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
-                )
+        yield (
+            ruimte,
+            _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
+                id=ruimte.id,
+                naam=naam,
+                punten=4 if open_keuken is not None else 2,
+            ),
+        )
+
+        if ruimte.verkoeld:
+            totaal_punten_verkoeld += 1
+            logger.info(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+            )
             yield (
                 ruimte,
-                _subgroep(subgroep, ruimte, "verwarmde_vertrekken").met_onderliggend(
+                _subgroep(subgroep, ruimte, "verkoelde_vertrekken").met_onderliggend(
                     id=ruimte.id,
-                    naam=naam,
-                    punten=4 if open_keuken is not None else 2,
+                    naam=ruimte.naam or ruimte.id or "",
+                    punten=1,
                 ),
             )
-
-            if ruimte.verkoeld:
-                totaal_punten_verkoeld += 1
+            if totaal_punten_verkoeld > 2:
                 logger.info(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) telt als verkoeld vertrek mee voor {Woningwaarderingstelselgroep.verkoeling_en_verwarming.naam}"
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
                 )
                 yield (
                     ruimte,
                     _subgroep(
                         subgroep, ruimte, "verkoelde_vertrekken"
                     ).met_onderliggend(
-                        id=ruimte.id,
-                        naam=ruimte.naam or ruimte.id or "",
-                        punten=1,
+                        id="max_aantal_punten",
+                        naam=maximering_naam(
+                            gedeeld=_ruimte_gedeeld(ruimte),
+                            met_puntental="Maximaal 2 punten",
+                        ),
+                        punten=-1,
                     ),
                 )
-                if totaal_punten_verkoeld > 2:
-                    logger.info(
-                        f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden ({totaal_punten_verkoeld} > 2). Een aftrek van 1 punt wordt toegepast."
-                    )
-                    yield (
-                        ruimte,
-                        _subgroep(
-                            subgroep, ruimte, "verkoelde_vertrekken"
-                        ).met_onderliggend(
-                            id="max_aantal_punten",
-                            naam=maximering_naam(
-                                gedeeld=_ruimte_gedeeld(ruimte),
-                                met_puntental="Maximaal 2 punten",
-                            ),
-                            punten=-1,
-                        ),
-                    )

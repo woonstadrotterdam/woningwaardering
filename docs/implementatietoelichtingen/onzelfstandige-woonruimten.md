@@ -466,6 +466,9 @@ _~~Oppervlakte onder een open of gesloten vaste trap~~_
 
 ==}
 
+> [!NOTE]
+> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen.
+
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.
 > /// tab | JSON

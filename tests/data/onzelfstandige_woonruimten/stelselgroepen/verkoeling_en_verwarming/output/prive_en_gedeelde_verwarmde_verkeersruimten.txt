@@ -1,0 +1,19 @@
+SAMENVATTING prive_en_gedeelde_verwarmde_verkeersruimten
+  Verkoeling en verwarming                                                        3.50 pt
+                                                                                ---------
+
+VERKOELING EN VERWARMING
+  Privé
+    - Verwarmde overige en verkeersruimten
+      - GangPrive1                                                                1.00 pt
+      - GangPrive2                                                                1.00 pt
+      - GangPrive3                                                                1.00 pt
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Verwarmde overige en verkeersruimten
+      - GangGedeeld1                                                              0.50 pt
+      - GangGedeeld2                                                              0.50 pt
+      - Maximering                                                               -0.50 pt
+      - GangGedeeld3                                                              0.50 pt
+      - Maximering                                                               -0.50 pt
+                                                                                ---------
+  Totaal                                                                          3.50 pt

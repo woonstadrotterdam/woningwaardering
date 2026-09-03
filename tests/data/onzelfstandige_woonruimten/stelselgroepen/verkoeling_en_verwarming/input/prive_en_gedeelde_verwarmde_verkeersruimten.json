@@ -1,0 +1,92 @@
+{
+  "id": "prive_en_gedeelde_verwarmde_verkeersruimten",
+  "ruimten": [
+    {
+      "id": "GangGedeeld1",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangGedeeld1",
+      "oppervlakte": 5,
+      "verwarmd": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "GangGedeeld2",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangGedeeld2",
+      "oppervlakte": 5,
+      "verwarmd": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "GangGedeeld3",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangGedeeld3",
+      "oppervlakte": 5,
+      "verwarmd": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "GangPrive1",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangPrive1",
+      "oppervlakte": 5,
+      "verwarmd": true
+    },
+    {
+      "id": "GangPrive2",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangPrive2",
+      "oppervlakte": 5,
+      "verwarmd": true
+    },
+    {
+      "id": "GangPrive3",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "GangPrive3",
+      "oppervlakte": 5,
+      "verwarmd": true
+    }
+  ]
+}
