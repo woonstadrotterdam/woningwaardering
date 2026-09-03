@@ -123,7 +123,7 @@ def structureer_subtotaal_bij_correcties(
     *,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
     factor: Decimal,
-) -> list[WaarderingBuilder]:
+) -> None:
     """Voeg een Subtotaal-waardering toe wanneer er een punten-correctie voor een zolderruimte plaatsvindt.
 
     Oppervlakte van overige ruimten berekent punten op basis van de afgeronde som van de oppervlakte van de ruimten.
@@ -138,7 +138,7 @@ def structureer_subtotaal_bij_correcties(
     )
     heeft_puntenregel = any(w.punten is not None for w in waarderingen)
     if not (heeft_ruimte_aantal and heeft_puntenregel):
-        return waarderingen
+        return
 
     ruimteregels = [
         w
@@ -171,5 +171,3 @@ def structureer_subtotaal_bij_correcties(
     for waardering in overige:
         if waardering.bovenliggende is waarderingsgroep_builder:
             waardering.verplaats_naar(waarderingsgroep_builder)
-
-    return [subtotaal, *ruimteregels, *overige]
