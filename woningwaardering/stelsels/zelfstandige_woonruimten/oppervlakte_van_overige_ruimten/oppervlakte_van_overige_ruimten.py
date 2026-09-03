@@ -88,7 +88,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
                 naam="Subtotaal",
                 meeteenheid=Meeteenheid.vierkante_meter_m2,
                 aantal=float(rond_af(totaal_oppervlakte, decimalen=2)),
-                punten=float(rond_af_op_kwart(punten_uit_m2)),
+                punten=float(punten_uit_m2),
             )
 
         for ruimte in ruimten:
