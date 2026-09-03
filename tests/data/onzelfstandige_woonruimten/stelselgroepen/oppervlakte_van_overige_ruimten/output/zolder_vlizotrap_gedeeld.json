@@ -11,14 +11,14 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 2.5,
+      "punten": 14.5,
       "woningwaarderingen": [
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__subtotaal",
             "naam": "Subtotaal"
           },
-          "punten": 7.5
+          "punten": 15.75
         },
         {
           "criterium": {
@@ -30,12 +30,35 @@
           }
         },
         {
-          "aantal": 10.0,
+          "aantal": 10.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__zolder",
-            "naam": "Zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__berging",
+            "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
+          }
+        },
+        {
+          "aantal": 40.4,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
+            "naam": "Zolderberging",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
@@ -48,7 +71,7 @@
             "id": "oppervlakte_van_overige_ruimten__zolder__correctie_zolder_zonder_vaste_trap",
             "naam": "Correctie: zolder zonder vaste trap"
           },
-          "punten": -5.0
+          "punten": -1.25
         }
       ]
     }

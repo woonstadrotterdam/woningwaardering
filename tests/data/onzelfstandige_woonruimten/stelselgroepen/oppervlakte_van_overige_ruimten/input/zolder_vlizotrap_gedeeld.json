@@ -1,0 +1,45 @@
+{
+  "id": "zolder_vlizotrap_gedeeld",
+  "ruimten": [
+    {
+      "id": "berging",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 10.4
+    },
+    {
+      "id": "zolder",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolderberging",
+      "oppervlakte": 40.4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
+    }
+  ]
+}

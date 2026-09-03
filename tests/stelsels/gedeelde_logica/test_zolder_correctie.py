@@ -1,6 +1,9 @@
+from decimal import Decimal
+
 import pytest
 
 from woningwaardering.stelsels.gedeelde_logica.oppervlakte_van_overige_ruimten import (
+    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -97,3 +100,25 @@ def test_is_zolder_zonder_vaste_trap_niet_bij_andere_detailsoort():
     )
 
     assert not is_zolder_zonder_vaste_trap(ruimte)
+
+
+def test_bereken_zolder_correctie_prive_volledige_cap() -> None:
+    assert bereken_zolder_correctie(Decimal("10"), Decimal("10")) == Decimal("-5")
+
+
+def test_bereken_zolder_correctie_gedeelde_grote_zolder() -> None:
+    """Privé 10,40 + zolder 40,40 / 4 → toe te rekenen totaal 20,50 waarvan 10,10 voor de zolder → −1,25."""
+    assert bereken_zolder_correctie(
+        Decimal("20.50"),
+        Decimal("10.10"),
+        max_aftrek=Decimal("5") / Decimal("4"),
+    ) == Decimal("-1.25")
+
+
+def test_bereken_zolder_correctie_gedeelde_kleine_zolder() -> None:
+    """Privé 10,40 + zolder 4 / 4 → toe te rekenen totaal 11,40 waarvan 1,00 voor de zolder → −0,75."""
+    assert bereken_zolder_correctie(
+        Decimal("11.40"),
+        Decimal("1.00"),
+        max_aftrek=Decimal("5") / Decimal("4"),
+    ) == Decimal("-0.75")
