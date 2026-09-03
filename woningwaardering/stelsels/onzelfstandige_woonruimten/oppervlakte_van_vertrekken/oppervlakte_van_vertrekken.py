@@ -1,4 +1,3 @@
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 
@@ -11,7 +10,10 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_oppervlakte_van_vertrek,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import gedeeld_met_adressen
+from woningwaardering.stelsels.utils import (
+    gedeeld_met_adressen,
+    toe_te_rekenen_oppervlakte,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -45,7 +47,11 @@ class OppervlakteVanVertrekken(Stelselgroep):
             self.stelsel, self.stelselgroep
         )
 
-        gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(Decimal)
+        # Eerst per ruimte delen, daarna salderen, daarna éénmaal afronden op hele m²
+        # (#391). Wettekst en beleidsboek zijn niet sluitend; de huurprijscheck volgt
+        # deze volgorde. Punten staan op de stelselgroep, niet op de gedeeld-met-laag
+        # (#393).
+        oppervlakte_totaal_na_delen = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
             if gedeeld_met_adressen(ruimte):
@@ -59,21 +65,8 @@ class OppervlakteVanVertrekken(Stelselgroep):
             waarderingen = waardeer_oppervlakte_van_vertrek(
                 ruimte, waarderingsgroep_builder=gedeeld_met
             )
-            for waardering in waarderingen:
-                if waardering.aantal is None:
-                    continue
-                # houd bij of de ruimte gedeeld is met andere onzelfstandige woonruimten zodat later de punten kunnen worden gedeeld
-                gedeeld_met_counter[deler] += utils.rond_af(
-                    waardering.aantal, decimalen=2
-                )
-
-        # bereken de som van de woningwaarderingen per het aantal gedeelde onzelfstandige woonruimten
-        oppervlakte_totaal_na_delen = Decimal("0")
-        for aantal_onz, oppervlakte in gedeeld_met_counter.items():
-            oppervlakte_na_delen = utils.rond_af(oppervlakte, decimalen=2) / Decimal(
-                str(aantal_onz)
-            )
-            oppervlakte_totaal_na_delen += oppervlakte_na_delen
+            if waarderingen:
+                oppervlakte_totaal_na_delen += toe_te_rekenen_oppervlakte(ruimte)
 
         woningwaardering_groep = waarderingsgroep_builder.build()
         woningwaardering_groep.punten = float(

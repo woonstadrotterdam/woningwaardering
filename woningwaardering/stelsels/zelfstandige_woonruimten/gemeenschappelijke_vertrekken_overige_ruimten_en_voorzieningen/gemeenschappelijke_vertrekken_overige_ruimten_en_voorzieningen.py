@@ -14,8 +14,8 @@ from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
     bereken_oppervlakte_punten,
-    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
+    maak_zolder_correctie_waardering,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -101,16 +101,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
 
         woningwaardering_groep = waarderingsgroep_builder.build()
-
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
 
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
@@ -252,16 +242,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 for ruimte in ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
-                    zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
-                    correctie_punten = (
-                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
-                        / deler
+                    # 2.2.4 Kasten: de helper rekent op oppervlakte inclusief
+                    # verbonden kasten; delen door deler gebeurt hierna, zoals bij
+                    # verkoeling/verwarming in deze stelselgroep.
+                    waardering = maak_zolder_correctie_waardering(
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_builder=subgroep,
                     )
-                    subgroep.met_onderliggend(
-                        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
-                        naam="Correctie: zolder zonder vaste trap",
-                        punten=correctie_punten,
-                    )
+                    waardering.punten = Decimal(str(waardering.punten)) / deler
 
             # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
             # krijgt de subgroep-waardering zelf de punten.
@@ -298,10 +287,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
-                rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
-                    decimalen=2,
-                )
+                Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen))
             )
 
     def _keuken_waarderingen(

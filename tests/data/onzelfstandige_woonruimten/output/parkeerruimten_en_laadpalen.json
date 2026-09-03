@@ -137,7 +137,7 @@
       "punten": 8.5,
       "woningwaarderingen": [
         {
-          "aantal": 24.5,
+          "aantal": 24.64,
           "criterium": {
             "id": "energieprestatie__bouwjaar",
             "naam": "Bouwjaar 1998",
@@ -146,14 +146,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 8.58
+          "punten": 8.62
         },
         {
           "criterium": {
             "id": "energieprestatie__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.08
+          "punten": -0.12
         }
       ]
     },
@@ -466,7 +466,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.666666667
+          "punten": 0.67
         },
         {
           "aantal": 1.0,
@@ -481,7 +481,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 1.33333333
+          "punten": 1.33
         },
         {
           "aantal": 1.0,
@@ -496,7 +496,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.666666667
+          "punten": 0.67
         },
         {
           "aantal": 1.0,
@@ -584,7 +584,7 @@
             "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.0833333
+          "punten": 0.08
         }
       ]
     },

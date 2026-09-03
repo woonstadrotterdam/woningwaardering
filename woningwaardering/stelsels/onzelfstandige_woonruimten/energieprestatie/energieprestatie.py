@@ -1,5 +1,4 @@
 import warnings
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
@@ -14,11 +13,16 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
+    energieprestatie_met_geldig_label,
     get_energieprestatievergoeding,
+    in_vereenvoudigd_label_periode,
     monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import classificeer_ruimte
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+    toe_te_rekenen_oppervlakte,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -95,9 +99,7 @@ class Energieprestatie(Stelselgroep):
             self.peildatum, eenheid
         )
 
-        energieprestatie = utils.energieprestatie_met_geldig_label(
-            self.peildatum, eenheid
-        )
+        energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
         woningwaardering: WaarderingBuilder | None
         if energieprestatievergoeding:
@@ -111,10 +113,7 @@ class Energieprestatie(Stelselgroep):
                 utils.rond_af(oppervlakte_van_vertrekken, decimalen=2)
             )
             woningwaardering.punten = float(
-                utils.rond_af(
-                    Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken)),
-                    decimalen=2,
-                )
+                Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken))
             )
 
         elif energieprestatie:
@@ -124,6 +123,10 @@ class Energieprestatie(Stelselgroep):
                 oppervlakte_van_vertrekken,
                 energieprestatie,
             )
+            if woningwaardering is None and eenheid.bouwjaar:
+                woningwaardering = self._bereken_punten_met_bouwjaar(
+                    waarderingsgroep_builder, eenheid, oppervlakte_van_vertrekken
+                )
 
         elif eenheid.bouwjaar:
             woningwaardering = self._bereken_punten_met_bouwjaar(
@@ -173,59 +176,74 @@ class Energieprestatie(Stelselgroep):
         Raises:
             ValueError: Als de lookup-tabel geen unieke match oplevert voor label of energie-index.
         """
-        if (
-            not energieprestatie.soort
-            or not energieprestatie.label
-            or not energieprestatie.label.code
-            or not energieprestatie.begindatum
-        ):
+        if not energieprestatie.soort or not energieprestatie.begindatum:
             warnings.warn(
                 f"Eenheid ({eenheid.id}): energieprestatie mist vereiste gegevens "
-                f"(soort, label, label.code of begindatum) en kan daarom niet "
+                f"(soort of begindatum) en kan daarom niet "
                 f"worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
                 UserWarning,
             )
             return None
 
-        label = getattr(
-            Energielabel, energieprestatie.label.code.lower(), energieprestatie.label
-        ).naam
-        woningwaardering = waarderingsgroep_builder.met_onderliggend(
-            id="label",
-            naam=label,
-            meeteenheid=Meeteenheid.vierkante_meter_m2,
-        )
         df = Energieprestatie.lookup_mapping["label_ei"]
-
+        label = (
+            getattr(
+                Energielabel,
+                energieprestatie.label.code.lower(),
+                energieprestatie.label,
+            ).naam
+            if energieprestatie.label and energieprestatie.label.code
+            else None
+        )
         waarderings_label = label
 
         if (
-            energieprestatie.begindatum >= date(2015, 1, 1)
-            and energieprestatie.begindatum < date(2021, 1, 1)
+            in_vereenvoudigd_label_periode(energieprestatie.begindatum)
             and energieprestatie.soort == Energieprestatiesoort.energie_index
         ):
-            if energieprestatie.waarde is not None:
-                energie_index = float(energieprestatie.waarde)
+            if energieprestatie.waarde is None:
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): energie-index mist waarde en kan daarom niet worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                    UserWarning,
+                )
+                return None
 
-                filtered_df = df[
-                    (df["Ondergrens (exclusief)"] < energie_index)
-                    & (energie_index <= (df["Bovengrens (inclusief)"]))
-                ]
-                if len(filtered_df) != 1:
-                    raise ValueError(
-                        f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index} voor {self.stelselgroep.naam}."
-                    )
+            energie_index = float(energieprestatie.waarde)
 
-                waarderings_label_index = filtered_df["Label"].values[0]
+            filtered_df = df[
+                (df["Ondergrens (exclusief)"] < energie_index)
+                & (energie_index <= (df["Bovengrens (inclusief)"]))
+            ]
+            if len(filtered_df) != 1:
+                raise ValueError(
+                    f"Eenheid ({eenheid.id}): lookup-table gefaald voor energie-index {energie_index} voor {self.stelselgroep.naam}."
+                )
 
-                # wanneer de energie-index afwijkt van het label, geef voorkeur aan energie-index want de index is in deze tijd afgegeven
-                if label != waarderings_label_index:
-                    woningwaardering.naam += (
-                        f" -> {waarderings_label_index} (Energie-index)"
-                    )
-                    waarderings_label = waarderings_label_index
-                else:
-                    woningwaardering.naam += " (Energie-index)"
+            waarderings_label_index = filtered_df["Label"].values[0]
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
+                id="label",
+                naam="Energie-index"
+                if label is None
+                else (
+                    f"{label} -> {waarderings_label_index} (Energie-index)"
+                    if label != waarderings_label_index
+                    else f"{label} (Energie-index)"
+                ),
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            )
+            waarderings_label = waarderings_label_index
+        else:
+            if label is None:
+                warnings.warn(
+                    f"Eenheid ({eenheid.id}): energieprestatie mist label en kan daarom niet worden gewaardeerd onder stelselgroep {self.stelselgroep.naam}.",
+                    UserWarning,
+                )
+                return None
+            woningwaardering = waarderingsgroep_builder.met_onderliggend(
+                id="label",
+                naam=label,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            )
 
         filtered_df = df[(df["Label"] == waarderings_label)]
         if len(filtered_df) != 1:
@@ -237,9 +255,7 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(
@@ -289,9 +305,7 @@ class Energieprestatie(Stelselgroep):
         )
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(
@@ -310,9 +324,7 @@ class Energieprestatie(Stelselgroep):
         Returns:
             float: Oppervlakte van de vertrekken.
         """
-        oppervlakte_gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(
-            Decimal
-        )
+        oppervlakte = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
@@ -331,23 +343,13 @@ class Energieprestatie(Stelselgroep):
             if utils.gedeeld_met_adressen(ruimte):
                 continue
 
+            # Het onafgeronde toe te rekenen aantal van rubriek 1 (eerst delen, dan
+            # salderen; #391), niet het afgeronde puntenresultaat. Beleidsboek:
+            # afronden op 2 decimalen per ruimte vóór delen.
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                oppervlakte_gedeeld_met_counter[
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += utils.rond_af(
-                    utils.oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
-                )  # beleidsboek geeft expliciet aan dat moet worden afgerond op 2 decimalen
+                oppervlakte += toe_te_rekenen_oppervlakte(ruimte)
 
-        return float(
-            sum(
-                utils.rond_af(
-                    # op hele m2 afronden per categorie (aantal gedeeld met)
-                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str(aantal))),
-                    decimalen=2,
-                )
-                for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
-            )
-        )
+        return float(oppervlakte)
 
 
 if __name__ == "__main__":  # pragma: no cover

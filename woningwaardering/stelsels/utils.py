@@ -1,9 +1,8 @@
 import asyncio
 import warnings
-from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
-from typing import Any, Callable, Counter, List, Tuple
+from typing import Any, Counter
 
 import pandas as pd
 import requests
@@ -13,7 +12,6 @@ from pydantic import BaseModel
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
-    EenhedenEnergieprestatie,
     EenhedenRuimte,
     EenhedenWoonplaats,
     Referentiedata,
@@ -23,8 +21,6 @@ from woningwaardering.vera.bvg.generated import (
 )
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
-    Energieprestatiesoort,
-    Energieprestatiestatus,
     Ruimtedetailsoort,
     Ruimtesoort,
     RuimtesoortReferentiedata,
@@ -78,6 +74,11 @@ def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
 
 
 KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
+
+# Criterium-id-segment en naam van de sluitpost die het verschil tussen de som van
+# de waarderingen en het stelselgroeptotaal opvangt.
+AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT = "afronding_op_kwartpunten"
+AFRONDING_OP_KWARTPUNTEN_NAAM = "Afronding op kwartpunten"
 
 
 def _gedeeld_met_deler(criterium_id: str | None) -> Decimal:
@@ -155,93 +156,6 @@ def som_effectieve_aantal_waarderingen(
     if not bijdragen:
         return Decimal("0")
     return rond_af(sum(bijdragen), decimalen=2)
-
-
-def energieprestatie_met_geldig_label(
-    peildatum: date, eenheid: EenhedenEenheid
-) -> EenhedenEnergieprestatie | None:
-    """
-    Returnt de eerste geldige energieprestatie met een energielabel van een eenheid.
-
-    Args:
-        peildatum (date): De peildatum waarop de energieprestatie geldig moet zijn.
-        eenheid (EenhedenEenheid): De eenheid met mogelijke energieprestaties.
-
-    Returns:
-        EenhedenEnergieprestatie | None: De eerst geldige energieprestatie en None wanneer er geen geldige energieprestatie met label is gevonden.
-    """
-    aantal_energieprestaties = len(eenheid.energieprestaties or [])
-    if aantal_energieprestaties == 0:
-        warnings.warn(
-            f"Eenheid ({eenheid.id}): 'energieprestaties' is None", UserWarning
-        )
-        return None
-
-    vereiste_attributen: List[
-        Tuple[str, Callable[[EenhedenEnergieprestatie], bool]]
-    ] = [
-        ("soort", lambda ep: ep.soort is not None),
-        ("status", lambda ep: ep.status is not None),
-        ("begindatum", lambda ep: ep.begindatum is not None),
-        ("einddatum", lambda ep: ep.einddatum is not None),
-        ("label", lambda ep: ep.label is not None),
-    ]
-
-    for idx, energieprestatie in enumerate(eenheid.energieprestaties or []):
-        logger.debug(
-            f"Eenheid ({eenheid.id}): energieprestatie {idx + 1} van {aantal_energieprestaties} wordt gevalideerd."
-        )
-        ontbrekende_attributen = [
-            naam for naam, check in vereiste_attributen if not check(energieprestatie)
-        ]
-        if ontbrekende_attributen:
-            logger.debug(
-                f"Eenheid ({eenheid.id}) mist energieprestatie attributen: {', '.join(ontbrekende_attributen)}."
-            )
-            continue
-
-        if energieprestatie.soort not in (
-            Energieprestatiesoort.energie_index,
-            Energieprestatiesoort.energielabel_conform_nta8800,
-            Energieprestatiesoort.primair_energieverbruik_woningbouw,
-            Energieprestatiesoort.voorlopig_energielabel,
-        ):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): ongeldige energieprestatiesoort '{energieprestatie.soort}'."
-            )
-            continue
-
-        # 2.4.3 Geldigheid energieprestatie op peildatum (beleidsboek).
-        # Wij berekenen de 10-jaarsgeldigheid niet zelf; wij gaan uit van de geldigheid van het energielabel.
-        # In EP-online is dat de 'Geldig tot'-datum; in VERA is dat einddatum. Peildatum moet vóór einddatum liggen.
-        begindatum = energieprestatie.begindatum
-        einddatum = energieprestatie.einddatum
-        if begindatum is None or einddatum is None:
-            continue
-        if not (begindatum <= peildatum < einddatum):
-            logger.debug(
-                f"Eenheid ({eenheid.id}): peildatum {peildatum} valt buiten geldigheidsperiode van de energieprestatie."
-            )
-            continue
-
-        if energieprestatie.status != Energieprestatiestatus.definitief:
-            logger.debug(
-                f"Eenheid ({eenheid.id}): energieprestatie status is niet definitief."
-            )
-            continue
-
-        logger.info(f"Eenheid ({eenheid.id}): geldige energieprestatie gevonden.")
-        logger.debug(
-            f"Energieprestatie: id={energieprestatie.id} soort={energieprestatie.soort.naam if energieprestatie.soort else None}"
-            f" status={energieprestatie.status.naam if energieprestatie.status else None}"
-            f" label={energieprestatie.label.naam if energieprestatie.label else None}"
-            f" waarde={energieprestatie.waarde} begindatum={energieprestatie.begindatum}"
-            f" einddatum={energieprestatie.einddatum}"
-        )
-        return energieprestatie
-
-    logger.info(f"Eenheid ({eenheid.id}): geen geldige energieprestatie gevonden.")
-    return None
 
 
 def rond_af(
@@ -337,11 +251,16 @@ def som_punten_waarderingen(
 def voeg_stelselgroep_afronding_toe(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
     *,
-    onafgerond: Decimal,
     afgerond: Decimal,
     stelselgroep: Referentiedata,
 ) -> None:
     """Voeg een waardering Afronding op kwartpunten toe wanneer de som van de waarderingen afwijkt van de totaalpunten van de stelselgroep.
+
+    Het stelselgroeptotaal is de som van de builder-punten, afgerond op een
+    kwart punt (§2.1.4 / §2.1.6). De waarderingen staan in de output op twee
+    decimalen; Afronding op kwartpunten sluit het verschil tussen dat totaal
+    en de som van die getoonde waarderingen, zodat de puntenkolom optelt tot het
+    totaal.
 
     Alleen voor groepen met minstens één puntdragende waardering (geen punt-loze m²-stelselgroepen).
     """
@@ -349,7 +268,7 @@ def voeg_stelselgroep_afronding_toe(
     if not any(w.punten is not None for w in waarderingen):
         return
 
-    delta = afgerond - onafgerond
+    delta = afgerond - som_punten_waarderingen(waarderingen)
     if delta == Decimal("0"):
         return
 
@@ -358,30 +277,17 @@ def voeg_stelselgroep_afronding_toe(
             "Stelselgroep heeft geen naam voor de Afronding-op-kwartpunten-criterium-id."
         )
 
-    afronding_id = f"{stelselgroep.name}__afronding_op_kwartpunten"
+    afronding_id = f"{stelselgroep.name}__{AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT}"
     groep.woningwaarderingen = [
         *waarderingen,
         WoningwaarderingResultatenWoningwaardering(
             criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
-                naam="Afronding op kwartpunten",
+                naam=AFRONDING_OP_KWARTPUNTEN_NAAM,
                 id=afronding_id,
             ),
             punten=float(delta),
         ),
     ]
-
-
-def som_punten_waarderingen_afgerond(
-    waarderingen: list[WoningwaarderingResultatenWoningwaardering] | None,
-) -> float:
-    """Som van punten op alle waarderingen in een groep (afgerond op kwart).
-
-    Returnwaarde is bedoeld voor VERA-velden (``punten``). Telt alle punten mee,
-    inclusief een eventuele waardering Afronding op kwartpunten.
-    """
-    if not waarderingen:
-        return 0.0
-    return float(rond_af_op_kwart(som_punten_waarderingen(waarderingen)))
 
 
 def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
@@ -544,6 +450,24 @@ def oppervlakte_inclusief_verbonden_kasten(ruimte: EenhedenRuimte) -> Decimal:
         return Decimal("0")
 
     return Decimal(str(ruimte.oppervlakte)) + oppervlakte_verbonden_kasten(ruimte)
+
+
+def toe_te_rekenen_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
+    """Oppervlakte die volgens rubriek 1, 2 of 4 aan de huurder is toe te rekenen.
+
+    Per ruimte het toe te rekenen aantal: ``rond_af(m² inclusief kasten, 2) / deler``,
+    waarbij ``deler`` het aantal onzelfstandige woonruimten is (of 1). Rubriek 9
+    deelt niet de oppervlakten, maar het aantal punten / onzelfstandige woonruimten
+    en adressen en kan daarom deze helper niet gebruiken.
+
+    De som is het toe te rekenen totaal: rubriek 1 rondt dat af op hele m², rubriek 2
+    vermenigvuldigt die afgeronde waarde met 0,75, rubriek 4 gebruikt de onafgeronde
+    som.
+    """
+    deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
+    return rond_af(
+        oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
+    ) / Decimal(str(deler))
 
 
 def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:

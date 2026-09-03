@@ -15,32 +15,27 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
-          }
-        },
-        {
-          "aantal": 9.52,
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal",
-            "naam": "Subtotaal",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
-            },
-            "meeteenheid": {
-              "code": "M2",
-              "naam": "Vierkante meter, m2"
-            }
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal"
           },
           "punten": 7.5
         },
         {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
+            "naam": "Privé",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
+          }
+        },
+        {
           "aantal": 6.85,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal__Space_berging",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive__subtotaal"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -51,10 +46,10 @@
         {
           "aantal": 2.67,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__subtotaal__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__Space_zolder",
             "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive__subtotaal"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -64,11 +59,8 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__Space_zolder__correctie_zolder_zonder_vaste_trap",
-            "naam": "Correctie: zolder zonder vaste trap",
-            "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
-            }
+            "id": "oppervlakte_van_overige_ruimten__Space_zolder__correctie_zolder_zonder_vaste_trap",
+            "naam": "Correctie: zolder zonder vaste trap"
           },
           "punten": -2.25
         }

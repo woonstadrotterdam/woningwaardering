@@ -286,7 +286,7 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 18.375
+          "punten": 18.38
         },
         {
           "aantal": 49.11,
@@ -314,7 +314,7 @@
             "id": "buitenruimten__maximering",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -13.075
+          "punten": -13.08
         }
       ]
     },

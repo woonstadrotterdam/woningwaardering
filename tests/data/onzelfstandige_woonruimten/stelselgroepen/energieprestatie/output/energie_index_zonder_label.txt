@@ -1,0 +1,9 @@
+SAMENVATTING energie_index_zonder_label
+  Energieprestatie                                                                2.50 pt
+                                                                                ---------
+
+ENERGIEPRESTATIE
+  Energie-index                                                       3.67 m²     2.38 pt
+  Afronding op kwartpunten                                                        0.12 pt
+                                                                                ---------
+  Totaal                                                                          2.50 pt

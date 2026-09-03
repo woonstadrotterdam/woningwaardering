@@ -1,6 +1,7 @@
 import difflib
 from dataclasses import dataclass
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
@@ -120,6 +121,7 @@ def assert_output_model(
 
     assert_som_bovenliggend_criterium(resultaat)
     assert_punten_afgerond_op_kwarten(resultaat)
+    assert_punten_op_twee_decimalen(resultaat)
 
 
 def laad_specifiek_input_en_output_model(
@@ -333,6 +335,30 @@ def assert_groep_punten_is_som_van_waarderingen(
             f"groep.punten ({groep.punten}) != som van de waarderingen ({verwacht}) "
             f"in {groep_naam}"
         )
+
+
+def assert_punten_op_twee_decimalen(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """De punten van elke waardering staan in de output op ten hoogste twee decimalen.
+
+    Het stelselgroeptotaal wordt apart berekend: de som van de onafgeronde
+    builder-punten, afgerond op een kwart punt. De waardering Afronding op
+    kwartpunten vangt het verschil tussen dat totaal en de som van de
+    afgeronde vastgelegde waarderingen op. Samen met
+    assert_groep_punten_is_som_van_waarderingen betekent dit dat de
+    puntenkolom van een stelselgroep exact optelt tot het totaal.
+    """
+    for groep in resultaat.groepen or []:
+        for waardering in groep.woningwaarderingen or []:
+            if waardering.punten is None:
+                continue
+            punten = Decimal(str(waardering.punten))
+            criterium_naam = waardering.criterium and waardering.criterium.naam
+            assert punten == punten.quantize(Decimal("0.01")), (
+                f"Waardering '{criterium_naam}' heeft punten {waardering.punten} "
+                "met meer dan twee decimalen"
+            )
 
 
 def assert_som_bovenliggend_criterium(
