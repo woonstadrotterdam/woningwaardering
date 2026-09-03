@@ -3,11 +3,11 @@ SAMENVATTING zolder_vlizotrap_gedeeld
                                                                                 ---------
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Privé
-    - Berging                                                        10.40 m²
-  Gedeeld met 4 onzelfstandige woonruimten
-    - Zolderberging                                                  40.40 m²
   Subtotaal                                                                      15.75 pt
+    - Privé
+      - Berging                                                      10.40 m²
+    - Gedeeld met 4 onzelfstandige woonruimten
+      - Zolderberging                                                40.40 m²
   Correctie: zolder zonder vaste trap                                            -1.25 pt
                                                                                 ---------
   Totaal                                                                         14.50 pt

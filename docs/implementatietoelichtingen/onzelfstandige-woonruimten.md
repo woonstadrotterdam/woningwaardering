@@ -370,7 +370,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > 4. maximumaftrek: 5 / 4 = 1,25
 > 5. 15,75 − 1,25 = **14,50**
 >
-> In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de correctie op hetzelfde niveau; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
+> In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de ruimteregels eronder (via de gedeeld-met-laag) en de correctie op hetzelfde niveau als het subtotaal; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
 
 ##### 2.2.2.4 Toegang ruimte via zolderruimte
 

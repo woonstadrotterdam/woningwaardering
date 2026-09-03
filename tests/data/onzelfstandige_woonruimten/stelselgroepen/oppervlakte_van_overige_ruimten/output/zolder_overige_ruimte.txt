@@ -3,12 +3,12 @@ SAMENVATTING
                                                                                 ---------
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Privé
-    - Zolder                                                         10.00 m²
-    - Zolder aangeleverd als vertrek                                 10.00 m²
-  Gedeeld met 3 onzelfstandige woonruimten
-    - Zolder met vlizotrap                                           10.00 m²
   Subtotaal                                                                      17.25 pt
+    - Privé
+      - Zolder                                                       10.00 m²
+      - Zolder aangeleverd als vertrek                               10.00 m²
+    - Gedeeld met 3 onzelfstandige woonruimten
+      - Zolder met vlizotrap                                         10.00 m²
   Correctie: zolder zonder vaste trap                                            -1.67 pt
   Afronding op kwartpunten                                                       -0.08 pt
                                                                                 ---------

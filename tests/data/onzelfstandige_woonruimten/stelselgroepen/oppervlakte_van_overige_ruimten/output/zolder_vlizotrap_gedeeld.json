@@ -15,17 +15,27 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal"
+          },
+          "punten": 15.75
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
+            "naam": "Privé",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
           }
         },
         {
           "aantal": 10.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__berging",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -35,30 +45,26 @@
         },
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten",
-            "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten",
+            "naam": "Gedeeld met 4 onzelfstandige woonruimten",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
           }
         },
         {
           "aantal": 40.4,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
             "naam": "Zolderberging",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__subtotaal",
-            "naam": "Subtotaal"
-          },
-          "punten": 15.75
         },
         {
           "criterium": {

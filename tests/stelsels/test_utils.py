@@ -104,6 +104,38 @@ def test_som_effectieve_aantal_waarderingen_subtotaal_zonder_aantal() -> None:
     assert utils.som_effectieve_aantal_waarderingen(waarderingen) == Decimal("20.50")
 
 
+def test_som_effectieve_aantal_waarderingen_subtotaal_met_gedeeld_met_eronder() -> None:
+    """Ruimteregels onder het subtotaal via de gedeeld-met-laag; subtotaal zonder aantal.
+
+    Direct parent van de ruimteregel is Privé of Gedeeld-met, niet Subtotaal.
+    De helper telt de ruimtes. Zie #403.
+    """
+    subtotaal = "oppervlakte_van_overige_ruimten__subtotaal"
+    prive = f"{subtotaal}__prive"
+    gedeeld = f"{subtotaal}__gedeeld_met_4_onzelfstandige_woonruimten"
+    waarderingen = [
+        WoningwaarderingResultatenWoningwaardering(
+            punten=15.75,
+            criterium=WoningwaarderingResultatenWoningwaarderingCriterium(
+                id=subtotaal,
+            ),
+        ),
+        _waardering(criterium_id=prive, bovenliggende_id=subtotaal),
+        _waardering(
+            criterium_id=f"{prive}__berging",
+            aantal=10.4,
+            bovenliggende_id=prive,
+        ),
+        _waardering(criterium_id=gedeeld, bovenliggende_id=subtotaal),
+        _waardering(
+            criterium_id=f"{gedeeld}__zolder",
+            aantal=40.4,
+            bovenliggende_id=gedeeld,
+        ),
+    ]
+    assert utils.som_effectieve_aantal_waarderingen(waarderingen) == Decimal("20.50")
+
+
 def test_oppervlakte_inclusief_verbonden_kasten():
     ruimte = EenhedenRuimte(
         oppervlakte=3.5,

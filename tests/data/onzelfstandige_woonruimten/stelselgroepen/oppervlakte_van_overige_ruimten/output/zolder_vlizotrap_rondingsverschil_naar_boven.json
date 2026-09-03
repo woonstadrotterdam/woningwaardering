@@ -15,17 +15,27 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal"
+          },
+          "punten": 7.5
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
+            "naam": "Privé",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
           }
         },
         {
           "aantal": 6.85,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__Space_berging",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__Space_berging",
             "naam": "Berging",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
@@ -36,23 +46,16 @@
         {
           "aantal": 2.67,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__Space_zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__Space_zolder",
             "naam": "Zolder met vlizotrap",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__subtotaal",
-            "naam": "Subtotaal"
-          },
-          "punten": 7.5
         },
         {
           "criterium": {

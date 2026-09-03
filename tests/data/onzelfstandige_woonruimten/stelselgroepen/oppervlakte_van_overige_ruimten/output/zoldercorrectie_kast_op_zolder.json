@@ -15,30 +15,33 @@
       "woningwaarderingen": [
         {
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive",
-            "naam": "Privé"
+            "id": "oppervlakte_van_overige_ruimten__subtotaal",
+            "naam": "Subtotaal"
+          },
+          "punten": 2.25
+        },
+        {
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
+            "naam": "Privé",
+            "bovenliggendeCriterium": {
+              "id": "oppervlakte_van_overige_ruimten__subtotaal"
+            }
           }
         },
         {
           "aantal": 2.6,
           "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__prive__zolder",
+            "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__zolder",
             "naam": "Zolder (+1 kast)",
             "bovenliggendeCriterium": {
-              "id": "oppervlakte_van_overige_ruimten__prive"
+              "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
             },
             "meeteenheid": {
               "code": "M2",
               "naam": "Vierkante meter, m2"
             }
           }
-        },
-        {
-          "criterium": {
-            "id": "oppervlakte_van_overige_ruimten__subtotaal",
-            "naam": "Subtotaal"
-          },
-          "punten": 2.25
         },
         {
           "criterium": {
