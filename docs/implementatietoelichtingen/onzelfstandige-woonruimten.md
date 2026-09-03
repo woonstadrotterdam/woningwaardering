@@ -1153,7 +1153,7 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behoren 
 Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moeten worden berekend door het puntenaantal voor de oppervlakte eerst te delen door de meerdere adressen en daarna nog gedeeld door het aantal onzelfstandige woonruimten op het adres waar het gehuurde onderdeel van uitmaakt.
 
 > [!NOTE]
-> Anders dan rubriek 1 en 2 deelt rubriek 9 niet de oppervlakte, maar de punten. Dat is geverifieerd met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte). De volgorde (eerst punten, daarna / adressen / onzelfstandige woonruimten) staat in de alinea hierboven.
+> Anders dan rubriek 1 en 2 deelt rubriek 9 niet de oppervlakte, maar de punten. Dat is geverifieerd met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 #### 2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten
 
