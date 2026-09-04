@@ -1,3 +1,15 @@
 SAMENVATTING 1
-  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen
+  Gemeenschappelijke binnenruimten gedeeld met meerdere adressen                  0.75 pt
                                                                                 ---------
+
+GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Gedeeld met 10 adressen
+      - Oppervlakte van overige ruimten                                           0.71 pt
+        - Berging                                                    19.00 m²
+      - Verkoeling en verwarming
+        - Verwarmde overige en verkeersruimten
+          - Berging                                                               0.05 pt
+  Afronding op kwartpunten                                                       -0.01 pt
+                                                                                ---------
+  Totaal                                                                          0.75 pt
