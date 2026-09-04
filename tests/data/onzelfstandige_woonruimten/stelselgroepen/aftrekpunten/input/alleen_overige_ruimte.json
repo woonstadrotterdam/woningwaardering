@@ -1,0 +1,16 @@
+{
+  "ruimten": [
+    {
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BRG",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 10
+    }
+  ]
+}

@@ -10,24 +10,10 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder vertrek met trap",
+      "naam": "Zolder",
       "inhoud": 20,
       "oppervlakte": 10,
-      "verwarmd": true,
-      "bouwkundigeElementen": [
-        {
-          "naam": "Trap",
-          "omschrijving": "(vaste) trap naar de zolder",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "TRA",
-            "naam": "Trap"
-          }
-        }
-      ]
+      "verwarmd": true
     },
     {
       "id": "Space_2",
@@ -39,7 +25,7 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder vertrek zonder trap",
+      "naam": "Zolder aangeleverd als vertrek",
       "inhoud": 20,
       "oppervlakte": 10,
       "verwarmd": true
@@ -54,7 +40,7 @@
         "code": "ZOL",
         "naam": "Zolder"
       },
-      "naam": "Zolder vertrek met vlizo trap",
+      "naam": "Zolder met vlizotrap",
       "inhoud": 20,
       "oppervlakte": 10,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 3,

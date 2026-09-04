@@ -1,0 +1,26 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "ENE",
+          "naam": "Energieprestatie"
+        }
+      },
+      "punten": 14.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "energieprestatie__bouwjaar",
+            "naam": "Bouwjaar 1990"
+          },
+          "punten": 14.0
+        }
+      ]
+    }
+  ]
+}

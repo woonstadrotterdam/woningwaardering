@@ -1,0 +1,91 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "VKV",
+          "naam": "Verkoeling en verwarming"
+        }
+      },
+      "punten": 15.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__overig_vertrek",
+            "naam": "Overig vertrek van 6 m2 met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__bijkeuken",
+            "naam": "Bijkeuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__berging",
+            "naam": "Berging als vertrek met open keuken",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 4.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_vertrekken__doucheruimte",
+            "naam": "Doucheruimte van 2 m2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 2.0
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
+            "naam": "Verwarmde overige en verkeersruimten"
+          }
+        },
+        {
+          "criterium": {
+            "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__overig_vertrek_te_klein",
+            "naam": "Overig vertrek van 3 m2",
+            "bovenliggendeCriterium": {
+              "id": "verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
+            }
+          },
+          "punten": 1.0
+        }
+      ]
+    }
+  ]
+}

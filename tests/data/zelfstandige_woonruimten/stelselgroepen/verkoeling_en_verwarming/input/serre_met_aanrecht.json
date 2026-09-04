@@ -1,0 +1,41 @@
+{
+  "id": "serre_met_aanrecht",
+  "ruimten": [
+    {
+      "id": "serre",
+      "soort": { "code": "VTK", "naam": "Vertrek" },
+      "detailSoort": { "code": "SER", "naam": "Serre" },
+      "naam": "Serre",
+      "oppervlakte": 9.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_serre",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Serre",
+          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
+          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
+          "lengte": 2000
+        }
+      ]
+    },
+    {
+      "id": "woonkamer",
+      "soort": { "code": "VTK", "naam": "Vertrek" },
+      "detailSoort": { "code": "WOO", "naam": "Woonkamer" },
+      "naam": "Woonkamer",
+      "oppervlakte": 24.0,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_woonkamer",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Woonkamer",
+          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
+          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
+          "lengte": 2000
+        }
+      ]
+    }
+  ]
+}

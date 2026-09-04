@@ -71,4 +71,12 @@ def test_OppervlakteVanVertrekken() -> None:
 
 Om de woningwaardering-package zo nauwkeurig mogelijk te testen, zijn er eenheidmodellen (in .json format) toegevoegd in `tests/data/...`. De modellen volgen de VERA standaard en dienen als een testinput voor de geschreven tests. De resulterende outputs zijn met de hand nagerekend om de kwaliteit van de tests te waarborgen.
 
-Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen. 
+Om heel specifieke regelgeving uit het beleidsboek te testen, kunnen er handmatig test modellen gemaakt worden. Deze test modellen worden opgeslagen in de test folder van een stelselgroep waarvoor de specifieke regelgeving die getest wordt. Zie bijvoorbeeld `tests/data/zelfstandige_woonruimten/stelselgroepen/oppervlakte_van_vertrekken/input/gedeelde_berging.json`: hier is een gedeelde berging gedefinieerd om een specifieke set van regels in oppervlakte_van_vertrekken te testen.
+
+### Stelselniveau of stelselgroepniveau
+
+Een model onder `tests/data/<stelsel>/input/` wordt door het hele stelsel gewaardeerd én per stelselgroep gecontroleerd: elke `test_<Stelselgroep>_output` draait erop. Eén model dekt daarmee alle stelselgroepen tegelijk.
+
+Kies stelselniveau wanneer een regel over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/zelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`. Hetzelfde model in drie stelselgroepmappen zetten geeft die zekerheid niet, en levert drie keer dezelfde input op.
+
+Kies stelselgroepniveau voor een regel die binnen één stelselgroep blijft, en voor elk model dat een `UserWarning` oproept: een model op stelselniveau moet zonder waarschuwing te waarderen zijn, dus warning-scenario's horen altijd in de stelselgroepmap.

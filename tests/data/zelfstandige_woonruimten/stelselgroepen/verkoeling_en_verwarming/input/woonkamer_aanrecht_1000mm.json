@@ -1,0 +1,35 @@
+{
+  "id": "woonkamer_aanrecht_1000mm",
+  "ruimten": [
+    {
+      "id": "woonkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "Woonkamer",
+      "oppervlakte": 20.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000.0
+        }
+      ],
+      "verwarmd": true,
+      "aantal": 1
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "2400mm",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "inhoud": 24.8469,
+      "oppervlakte": 9.5565,
+      "verwarmd": true,
+      "afsluitbaar": true,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_1",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        },
+        {
+          "id": "aanrecht_2",
+          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Keuken",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 900
+        }
+      ],
+      "installaties": [
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" },
+        { "code": "IKO", "naam": "Inbouw koelkast" }
+      ]
+    }
+  ]
+}

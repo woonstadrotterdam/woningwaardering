@@ -137,7 +137,7 @@
       "punten": 8.5,
       "woningwaarderingen": [
         {
-          "aantal": 24.5,
+          "aantal": 24.64,
           "criterium": {
             "id": "energieprestatie__bouwjaar",
             "naam": "Bouwjaar 1998",
@@ -146,14 +146,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 8.58
+          "punten": 8.62
         },
         {
           "criterium": {
             "id": "energieprestatie__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.08
+          "punten": -0.12
         }
       ]
     },

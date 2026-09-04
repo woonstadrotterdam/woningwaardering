@@ -1,0 +1,41 @@
+{
+  "id": "aanrecht_in_overige_ruimten",
+  "ruimten": [
+    {
+      "id": "bijkeuken",
+      "soort": { "code": "OVR", "naam": "Overige ruimten" },
+      "detailSoort": { "code": "BIJ", "naam": "Bijkeuken" },
+      "naam": "Bijkeuken",
+      "oppervlakte": 4.5,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_bijkeuken",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Bijkeuken",
+          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
+          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
+          "lengte": 2200
+        }
+      ]
+    },
+    {
+      "id": "garage",
+      "soort": { "code": "OVR", "naam": "Overige ruimten" },
+      "detailSoort": { "code": "GAR", "naam": "Garage" },
+      "naam": "Garage",
+      "oppervlakte": 14.0,
+      "verwarmd": false,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_garage",
+          "naam": "Aanrecht",
+          "omschrijving": "Aanrecht in Garage",
+          "soort": { "code": "KEU", "naam": "Keuken voorziening" },
+          "detailSoort": { "code": "AAN", "naam": "Aanrecht" },
+          "lengte": 1500
+        }
+      ]
+    }
+  ]
+}

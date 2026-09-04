@@ -1,0 +1,14 @@
+SAMENVATTING 2400mm
+  Keuken                                                                         14.00 pt
+                                                                                ---------
+
+KEUKEN
+  Keuken
+    - Totale aanrechtlengte                                        2400.00 mm     7.00 pt
+      - Lengte aanrecht                                            1500.00 mm
+      - Lengte aanrecht                                             900.00 mm
+    - Extra voorzieningen
+      - Inbouw koelkast                                               8.00 st     8.00 pt
+      - Maximaal evenveel punten als aanrecht                                    -1.00 pt
+                                                                                ---------
+  Totaal                                                                         14.00 pt

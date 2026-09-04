@@ -1,0 +1,80 @@
+{
+  "id": "keuken_maximering_kort_aanrecht",
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "oppervlakte": 10.0,
+      "installaties": [
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        }
+      ],
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_1",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500
+        },
+        {
+          "id": "aanrecht_2",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 600
+        }
+      ]
+    }
+  ]
+}

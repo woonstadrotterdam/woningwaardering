@@ -1,0 +1,9 @@
+SAMENVATTING energieprestatie_verbonden_kast
+  Energieprestatie                                                               -3.25 pt
+                                                                                ---------
+
+ENERGIEPRESTATIE
+  Bouwjaar 1970                                                      22.00 m²    -3.30 pt
+  Afronding op kwartpunten                                                        0.05 pt
+                                                                                ---------
+  Totaal                                                                         -3.25 pt

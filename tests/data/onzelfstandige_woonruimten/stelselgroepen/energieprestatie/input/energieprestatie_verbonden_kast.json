@@ -1,0 +1,35 @@
+{
+  "id": "energieprestatie_verbonden_kast",
+  "bouwjaar": 1970,
+  "monumenten": [],
+  "ruimten": [
+    {
+      "id": "slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "oppervlakte": 20.0,
+      "verbondenRuimten": [
+        {
+          "id": "kast",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimtes"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "oppervlakte": 2.0
+        }
+      ]
+    }
+  ]
+}

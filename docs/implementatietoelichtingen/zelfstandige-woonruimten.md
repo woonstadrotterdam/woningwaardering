@@ -336,7 +336,10 @@ Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de vo
 Een zolderruimte kan worden gewaardeerd als een vertrek of een overige ruimte. Om een zolderruimte als vertrek te kunnen aanmerken moet deze aan 2 extra eisen voldoen:
 
 1. de zolderruimte moet bereikbaar zijn via een vaste trap en
-2. ~~het dak van de zolderruimte moet beschoten zijn. Dat betekent dat het dak aan de binnenkant is afgewerkt, waardoor de dakconstructie is afgesloten en de binnenzijde niet open ligt (en er bijvoorbeeld geen dakpannen zichtbaar zijn)~~.
+2. het dak van de zolderruimte moet beschoten zijn. Dat betekent dat het dak aan de binnenkant is afgewerkt, waardoor de dakconstructie is afgesloten en de binnenzijde niet open ligt (en er bijvoorbeeld geen dakpannen zichtbaar zijn).
+
+> [!NOTE]
+> Beide eisen worden afgeleid uit de `Ruimtedetailsoort`. Zie de toelichting bij 2.2.2.3.
 
 ##### 2.2.1.4 Aangrenzende ruimten met een open doorgang
 
@@ -427,9 +430,12 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 
 > [!NOTE]
 >
-> - Een zolderruimte groter dan 2m2 met het `Bouwkundigelement` `vlizotrap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
-> - Een zolderruimte groter dan 2m2 maar kleiner dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van overige ruimten`, mits deze wordt ingeschoten met `ruimtesoort` `overige ruimte`.
-> - Zolderruimte groter dan 4m2 met het `Bouwkundigelement` `trap` wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - De `Ruimtedetailsoort` bepaalt of een zolderruimte een vertrek kan zijn. Alleen een `zoldervertrek` voldoet aan eis 2: VERA omschrijft die als een ruimte "die zowel qua oppervlakte en stahoogte als afwerking geschikt is om als vertrek te worden gekwalificeerd". Een `zolder` is "qua oppervlakte en stahoogte geschikt (...), maar (...) voldoet niet aan de afwerkingseisen" en wordt daarom nooit als vertrek gewaardeerd.
+> - Beide detailsoorten beschrijven volgens VERA een ruimte onder het dak **met** vaste trap. De detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement` `vlizotrap` weerspreekt dat. Staan er zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap leidend.
+> - Een `zoldervertrek` van minimaal 4m2 wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
+> - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2).
+> - Andersom geldt dit niet: een zolderruimte die is ingeschoten met `ruimtesoort` `overige ruimte` wordt nooit als vertrek gewaardeerd.
+> - Een zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
@@ -476,6 +482,9 @@ _Kasten_
 De wetgever spreekt in de toelichting van het Bhw dat alle tot de woning behorende losse en vaste kasten moeten worden meegenomen in de berekening van de oppervlakte. Voor de praktijk van de Huurcommissie betekent dit dat alle tot de vertrekken behorende kasten moeten worden meegerekend.
 
 Met andere woorden: de netto oppervlakte van een kast die <u>in een vertrek</u> uitkomt, telt mee bij de oppervlakte van dat vertrek. Hoe groot of klein de kast is heeft hier geen invloed op. De plek van de deur van de kast bepaalt bij welke ruimte een kast hoort. Dat geldt ook voor het waarderen van een kastenwand tussen twee vertrekken.
+
+> [!NOTE]
+> De kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte` (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor onder meer energieprestatie, gemeenschappelijke ruimten en zoldercorrecties. Kasten op verkeersruimten tellen niet mee.
 
 ~~_Vloeroppervlakte onder aanrecht, keukentoestel, wasbak en installaties_~~  
 ~~Vloeroppervlakte onder aanrechten, toestellen in de keuken, badkuip, lavet of douchebak, moederhaard, cv-ketel, boilerinstallatie en radiatoren telt mee bij het bepalen van de totale oppervlakte van de ruimte. De oppervlakte van het vertrek of overige ruimte wordt dus bijvoorbeeld niet verminderd door de oppervlakte van een douchecabine.~~
@@ -534,7 +543,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat elke ruimte, die van zichzelf geen keuken is, met een aanrecht langer dan 1 meter als open keuken wordt gewaardeerd voor verkoeling en verwarming
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -612,6 +621,11 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
     Het kan voorkomen dat een wooncomplex of ander gebouw bestaat uit meerdere (zelfstandige) woonruimten. Om voor waardering in aanmerking te kunnen komen, moet voor een individuele zelfstandige woonruimte geldige energieprestatie zijn afgegeven. Een energielabel voor het hele complex/gebouw wordt niet in de waardering meegenomen.
 
 > Voor het bepalen van de geldigheid van energielabels (2.4.3) is `EenhedenEnergieprestatie.begindatum` en `EenhedenEnergieprestatie.einddatum` noodzakelijk (EP-online ‘Opnamedatum’ en ‘Geldig tot’). De peildatum moet vallen tussen begindatum en einddatum.
+
+> [!NOTE]
+>
+> - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
+> - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -745,6 +759,9 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
 
+> [!NOTE]
+> Rubriek 5 stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een aanrecht telt daarom in elke ruimte mee.
+
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
@@ -794,6 +811,8 @@ Voor het meten van een aanrecht gelden de volgende regels:
 
 > [!NOTE]
 > De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
+> [!NOTE]
+> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is.
 
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
@@ -819,6 +838,9 @@ Voor het meten van een aanrecht gelden de volgende regels:
 > ///
 
 Een ruimte die beschikt over de basisvoorzieningen voor een keuken kan ook extra punten voor voorzieningen in de keuken krijgen. Het aantal punten voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra voorzieningen hoger uitvalt, dan wordt dit afgetopt.
+
+> [!NOTE]
+> Bij meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering gebaseerd op de basispunten uit de gesommeerde aanrechtlengte.
 
 {==
 
@@ -886,6 +908,9 @@ Het woningwaarderingsstelsel geeft punten aan de hieronder beschreven sanitaire 
 _Toilet_  
 Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe bestemde ruimte én binnen de woonruimte ligt. Een toilet dat buiten de woonruimte, maar binnen het woongebouw ligt wordt alleen gewaardeerd als het gebruik door derden is uit te sluiten. Toiletten die buiten toiletruimten en badkamers zijn aangebracht worden niet gewaardeerd.
 
+> [!NOTE]
+> Een VERA-`doucheruimte` telt voor toiletwaardering mee als badkamer. Toiletten in een doucheruimte krijgen daarom de punten voor toilet in een badkamer.
+
 | Voorziening                             | Punten   |
 |-----------------------------------------|----------|
 | Toilet (staand) in een toiletruimte     | 3        |
@@ -914,13 +939,16 @@ _Niet_ als wastafel worden gewaardeerd:
 _Bad en douche_  
 Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die voldoet aan de gestelde voorwaarden, maar geplaatst is in een ander vertrek of overige ruimte dan de bad- of doucheruimte.
 
-Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld~~.
+Een bad wordt gewaardeerd ~~indien een volwassen persoon er in een normale zithouding in kan plaatsnemen~~. Als een bad is voorzien van een (hand)douche, dan wordt de douchegarnituur niet afzonderlijk geteld.
 
 | Voorziening   |   Punten |
 |---------------|----------|
 | Douche        |        4 |
 | Bad           |        6 |
 | Bad/douche    |        7 |
+
+> [!NOTE]
+> Dat de douchegarnituur van een bad met (hand)douche niet afzonderlijk wordt geteld, volgt uit de input: geef zo'n bad mee als `bad` en niet als `bad` plus `douche`. Een badruimte met een bad én een afzonderlijke douche kan als `bad_en_douche` worden meegegeven of als losse `bad` en `douche`.
 
 #### 2.6.2 Punten voor extra sanitaire voorzieningen
 
@@ -1093,6 +1121,11 @@ Er is een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
 
 Gedeelde buitenruimten die als parkeerplek voor auto's bedoeld zijn, worden gewaardeerd volgens [rubriek 10](#210-gemeenschappelijke-parkeerruimten). Een (gemeenschappelijke) buitenruimte die bestemd is als parkeerplek voor fietsen (fietsenstalling) wordt wél gewaardeerd als buitenruimte.
 
+> [!NOTE]
+> Type-detailsoorten (`PIP`, `PUP`, `PBD`, `PBC`) worden **altijd in rubriek 10** gewaardeerd, privé of gemeenschappelijk, en dus nooit hier. Dat zijn `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III).
+>
+> Een `carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier gewaardeerd, gemeenschappelijk in rubriek 10 — een carport als Type II, een parkeerplaats als Type III. Zie [rubriek 10](#210-gemeenschappelijke-parkeerruimten) voor de typering.
+
 #### 2.8.4 Eisen aan balkons, dakterrassen en loggia's
 
 Balkons, dakterrassen en loggia's moeten aan de volgende eisen voldoen om voor punten in aanmerking te komen. Ze moeten:
@@ -1114,6 +1147,9 @@ Zeembalkons worden, ~~zolang zij voldoen aan de hiervoor aangegeven eisen van ee
 #### 2.8.5 Minpunten bij geen enkele buitenruimte
 
 Als een woning helemaal geen privé-buitenruimte, gemeenschappelijk buitenruimte of loggia heeft, dan geldt een aftrek van 5 punten.
+
+> [!NOTE]
+> De [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Bijlage I onder A, rubriek 8) formuleert dit als aftrek «indien in het geheel géén punten in deze rubriek (geen buitenruimte)». Daarom passen we −5 alleen toe als er geen enkele **gewaardeerde** buitenruimte is (bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen punten en tellen dus niet mee tegen de aftrek).
 
 #### 2.8.6 Meetinstructies buitenruimten
 
@@ -1252,6 +1288,11 @@ Een gemeenschappelijke parkeerruimte is een ruimte die toegankelijk is voor bewo
 
 De parkeerplek mag niet openbaar te gebruiken zijn, maar moet bij een wooncomplex of adres horen en in de huurovereenkomst moet exclusief gebruiksrecht zijn toegekend.
 
+> [!NOTE]
+> Type-detailsoorten — `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (Type I), `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (Type II) en `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (Type III) — waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is toegewezen. Dit sluit aan bij de huurprijscheck van de Huurcommissie.
+>
+> "Ten minste twee adressen" lezen we als `Eenhedenruimte.gedeeld_met_aantal_adressen` groter dan 1. Zie ook de note bij [2.8.3](#283-gemeenschappelijke-buitenruimte-als-parkeerplek) voor de rubriek waarin een `carport` of `parkeerplaats` valt.
+
 #### 2.10.3 Punten per soort parkeerplek
 
 Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waarin een gangbare personenauto in zijn geheel past. Een afgebakend vak betekent dat het kenbaar moet zijn waar zich een parkeerplek bevindt. Dit kan bijvoorbeeld door een bord, al dan niet in combinatie met lijnmarkeringen op de grond of een bepaald type of kleur tegel om het vak af te kaderen. Het woningwaarderingsstelsel maakt onderscheid tussen drie soorten gemeenschappelijke parkeerplekken. Deze staan in de tabel hieronder beschreven.
@@ -1265,16 +1306,18 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 > [!NOTE]
 > Onderstaande `Ruimtedetailsoorten` corresponderen met bovenstaande parkeerplek types:
 >
-> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` met code `PIP`
-> - Type II: `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` met code `PUP` en `Ruimtedetailsoort.carport` met code `CAR`
-> - Type III: `Ruimtedetailsoort.Parkeerplek_buiten_behorend_bij_complex` met code `PBC`
+> - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
+> - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
+>
+> `PIP`, `PUP`, `PBD` en `PBC` zijn uitbreidingen op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
 #### 2.10.4 Rekenmethode
 
 Het puntenaantal moet worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te delen door aantal adressen dat toegang en gebruiksrecht heeft.
 
 > [!NOTE]
-> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_adressen` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden.
+> Omdat de woningwaardering package op eenheidniveau de punten voor het woningwaarderingsstelsel berekent, is het niet mogelijk om `Ruimtedetailsoort.parkeergarage` en `Ruimtedetailsoort.parkeerterrein` te waarderen. Deze twee ruimtedetailsoorten maken een berekening met het huidige VERA-model te complex. Om punten te krijgen voor deze rubriek moeten de parkeervakken los worden ingeschoten. Daartoe is het attribuut `Eenhedenruimte.aantal` als uitbreiding op het VERA-model toegevoegd. Hierdoor is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor de berekening van de punten, waarbij het aantal wordt bepaald door `Eenhedenruimte.aantal`. Daarnaast is ook `Eenhedenruimte.gedeeld_met_aantal_adressen` als uitbreiding toegevoegd. Dit attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere adressen.
 
 #### 2.10.5 Laadpalen
 
@@ -1497,6 +1540,9 @@ Daarnaast wordt in nog twee andere gevallen de 'cap op de WOZ' niet toegepast, n
 
 Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het puntenaantal voor de WOZ-waarde in deze gevallen rekenkundig nooit meer dan 33% kan bedragen.
 
+> [!NOTE]
+> Rubriek 11.3 toetst de **woningwaardering** zonder cap aan 187 punten: dat is dezelfde waardering als in artikel 2 (huurprijsgrens bij 186 punten) en de slotopmerking van bijlage I. Eerst de rubrieken (2.1.4), inclusief de WOZ-rubriek ná kwartafronding van I+II (2.11.2), daarna het woningtotaal op hele punten (2.1.5). De 33%-grondslag blijft die som van kwartpunten. We ronden de WOZ-rubriek niet apart op hele punten af voordat we optellen.
+
 **Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 
 |                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |
@@ -1643,6 +1689,9 @@ Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommun
 Een laadpaal voor elektrisch rijden die exclusief bestemd is voor gebruik door de bewoners, wordt gewaardeerd met 2 punten. Dit geldt alleen als de laadpaal bestemd is voor het elektrisch opladen van een gemotoriseerd voertuig, dat niet een bromfiets, fiets met trapondersteuning of gehandicaptenvoertuig is.
 
 Als een gemeenschappelijke parkeerruimte een laadpaal heeft, wordt voor de berekeningsmethode aangesloten bij [rubriek 10](#210-gemeenschappelijke-parkeerruimten).
+
+> [!NOTE]
+> "Aangesloten bij rubriek 10" lezen we als: de laadpaal deelt de rubriek én de deler van de parkeerruimte waar hij bij hoort. Krijgt die ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle andere gevallen hier, met dezelfde deler (aantal adressen). Zo krijgt een laadpaal nooit in twee rubrieken punten.
 
 ### 2.13 Opslagen
 

@@ -1,0 +1,54 @@
+{
+  "ruimten": [
+    {
+      "id": "slaapkamer_hoge_deler",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "SlaapkamerHogeDeler",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 20
+    },
+    {
+      "id": "bergruimte_lage_deler",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Bergruimte"
+      },
+      "naam": "BergruimteLageDeler",
+      "installaties": [
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    }
+  ]
+}

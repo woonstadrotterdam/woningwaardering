@@ -1,0 +1,33 @@
+from .parkeerruimten import (
+    MINIMALE_OPPERVLAKTE_PARKEERVAK,
+    PARKEERTYPE_ALTIJD_GPA,
+    PARKEERTYPE_BUI_OF_GPA,
+    PARKEERTYPE_PUNTEN,
+    PUNTEN_PER_LAADPAAL,
+    VERVALLEN_PARKEERGARAGE_DETAILSOORTEN,
+    aantal_laadpalen,
+    hoort_altijd_in_gemeenschappelijke_parkeerruimten,
+    hoort_prive_in_buitenruimten,
+    is_parkeerruimte,
+    krijgt_punten_in_gemeenschappelijke_parkeerruimten,
+    parkeertype,
+    voldoet_aan_oppervlakte_eis,
+    wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten,
+)
+
+__all__ = [
+    "MINIMALE_OPPERVLAKTE_PARKEERVAK",
+    "PARKEERTYPE_ALTIJD_GPA",
+    "PARKEERTYPE_BUI_OF_GPA",
+    "PARKEERTYPE_PUNTEN",
+    "PUNTEN_PER_LAADPAAL",
+    "VERVALLEN_PARKEERGARAGE_DETAILSOORTEN",
+    "aantal_laadpalen",
+    "hoort_altijd_in_gemeenschappelijke_parkeerruimten",
+    "hoort_prive_in_buitenruimten",
+    "is_parkeerruimte",
+    "krijgt_punten_in_gemeenschappelijke_parkeerruimten",
+    "parkeertype",
+    "voldoet_aan_oppervlakte_eis",
+    "wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten",
+]

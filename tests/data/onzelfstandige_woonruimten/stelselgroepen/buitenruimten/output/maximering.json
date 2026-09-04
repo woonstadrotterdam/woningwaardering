@@ -47,14 +47,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 5.625
+          "punten": 5.63
         },
         {
           "criterium": {
             "id": "buitenruimten__maximaal_15_punten",
             "naam": "Maximaal 15 punten"
           },
-          "punten": -1.875
+          "punten": -1.88
         }
       ]
     }

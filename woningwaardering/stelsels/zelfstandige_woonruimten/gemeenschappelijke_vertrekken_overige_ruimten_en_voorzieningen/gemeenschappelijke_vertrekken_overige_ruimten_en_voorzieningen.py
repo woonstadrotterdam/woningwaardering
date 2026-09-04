@@ -14,8 +14,8 @@ from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
     bereken_oppervlakte_punten,
-    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
+    maak_zolder_correctie_waardering,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
@@ -25,6 +25,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    oppervlakte_inclusief_verbonden_kasten,
     rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -101,16 +102,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
-
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
@@ -149,9 +140,10 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 # […]
                 # * de oppervlakte, na deling door het aantal adressen, per woning minstens
                 #   2m2 bedraagt.
-                if ruimte.oppervlakte and ruimte.gedeeld_met_aantal_adressen:
+                oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
+                if oppervlakte_met_kasten and ruimte.gedeeld_met_aantal_adressen:
                     gedeelde_oppervlakte = (
-                        ruimte.oppervlakte / ruimte.gedeeld_met_aantal_adressen
+                        oppervlakte_met_kasten / ruimte.gedeeld_met_aantal_adressen
                     )
                     if gedeelde_oppervlakte < Decimal("2.0"):
                         logger.info(
@@ -181,7 +173,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         ):
             totaal_oppervlakte = sum(
                 (
-                    rond_af(ruimte.oppervlakte, decimalen=2)
+                    rond_af(oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2)
                     for ruimte in ruimten
                     if ruimte.oppervlakte is not None
                 ),
@@ -250,16 +242,15 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 for ruimte in ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
-                    zolder_oppervlakte = rond_af(ruimte.oppervlakte, decimalen=2)
-                    correctie_punten = (
-                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
-                        / deler
+                    # 2.2.4 Kasten: de helper rekent op oppervlakte inclusief
+                    # verbonden kasten; delen door deler gebeurt hierna, zoals bij
+                    # verkoeling/verwarming in deze stelselgroep.
+                    waardering = maak_zolder_correctie_waardering(
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_builder=subgroep,
                     )
-                    subgroep.met_onderliggend(
-                        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
-                        naam="Correctie: zolder zonder vaste trap",
-                        punten=correctie_punten,
-                    )
+                    waardering.punten = Decimal(str(waardering.punten)) / deler
 
             # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
             # krijgt de subgroep-waardering zelf de punten.
@@ -296,10 +287,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
-                rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
-                    decimalen=2,
-                )
+                Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen))
             )
 
     def _keuken_waarderingen(

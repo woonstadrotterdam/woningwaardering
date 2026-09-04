@@ -11,8 +11,8 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.gedeelde_logica import waardeer_verkoeling_en_verwarming
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
+    gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
-    rond_af,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -51,8 +51,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
         ruimten = [
             ruimte
             for ruimte in eenheid.ruimten or []
-            if ruimte.gedeeld_met_aantal_adressen is None
-            or ruimte.gedeeld_met_aantal_adressen == 1
+            if not gedeeld_met_adressen(ruimte)
         ]
 
         def subgroep(
@@ -79,10 +78,7 @@ class VerkoelingEnVerwarming(Stelselgroep):
             ):
                 deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten
                 waardering.punten = float(
-                    rond_af(
-                        rond_af(Decimal(str(waardering.punten)), decimalen=2) / deler,
-                        decimalen=2,
-                    )
+                    Decimal(str(waardering.punten)) / Decimal(str(deler))
                 )
 
         woningwaardering_groep = waarderingsgroep_builder.build()

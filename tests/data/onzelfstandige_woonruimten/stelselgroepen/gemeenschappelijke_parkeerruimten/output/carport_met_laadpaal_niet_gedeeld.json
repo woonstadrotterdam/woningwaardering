@@ -22,8 +22,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__1",
-            "naam": "Type II",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__carport_type_ii",
+            "naam": "Carport (Type II)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten"
             },
@@ -37,7 +37,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__1_laadpaal",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__carport_type_ii_laadpaal",
             "naam": "Laadpaal",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten"

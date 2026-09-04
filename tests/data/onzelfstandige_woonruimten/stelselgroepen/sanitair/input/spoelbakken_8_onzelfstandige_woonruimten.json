@@ -1,0 +1,72 @@
+{
+  "ruimten": [
+    {
+      "id": "keuken",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken",
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht_1",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 800
+        },
+        {
+          "id": "aanrecht_2",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "KEU",
+            "naam": "Keuken voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 900
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    },
+    {
+      "id": "bergruimte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Bergruimte"
+      },
+      "naam": "Bergruimte",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    }
+  ]
+}

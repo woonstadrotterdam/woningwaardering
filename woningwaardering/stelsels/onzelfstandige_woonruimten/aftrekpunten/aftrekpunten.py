@@ -99,31 +99,28 @@ class Aftrekpunten(Stelselgroep):
                 peildatum=self.peildatum
             ).waardeer(eenheid)
 
-        if oppervlakte_resultaat.woningwaarderingen:
-            totale_oppervlakte_vertrekken = utils.som_effectieve_aantal_waarderingen(
-                oppervlakte_resultaat.woningwaarderingen
-            )
+        totale_oppervlakte_vertrekken = utils.som_effectieve_aantal_waarderingen(
+            oppervlakte_resultaat.woningwaarderingen or []
+        )
 
-            # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
-            if totale_oppervlakte_vertrekken < Decimal("8"):
-                aftrekpunten = -4.0
-                logger.info(
-                    f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
-                )
-                waardering = waarderingsgroep_builder.met_onderliggend(
-                    id=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
-                    naam=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} is minder dan 8 m²",
-                    punten=aftrekpunten,
-                    meeteenheid=Meeteenheid.vierkante_meter_m2,
-                )
-                waardering.aantal = float(
-                    utils.rond_af(totale_oppervlakte_vertrekken, 2)
-                )
-                return waardering
-            else:
-                logger.debug(
-                    f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken >= 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), geen aftrek hiervoor voor {self.stelselgroep.naam}"
-                )
+        # 4 punten aftrek als de totale oppervlakte van de vertrekken minder is dan 8 m2
+        if totale_oppervlakte_vertrekken < Decimal("8"):
+            aftrekpunten = -4.0
+            logger.info(
+                f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken < 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), {aftrekpunten} punten voor {self.stelselgroep.naam}"
+            )
+            waardering = waarderingsgroep_builder.met_onderliggend(
+                id=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.name}_minder_dan_8m2",
+                naam=f"{Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} is minder dan 8 m²",
+                punten=aftrekpunten,
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+            )
+            waardering.aantal = float(utils.rond_af(totale_oppervlakte_vertrekken, 2))
+            return waardering
+
+        logger.debug(
+            f"Eenheid ({eenheid.id}): oppervlakte van de vertrekken >= 8m2 ({totale_oppervlakte_vertrekken:.2f}m2), geen aftrek hiervoor voor {self.stelselgroep.naam}"
+        )
         return None
 
 

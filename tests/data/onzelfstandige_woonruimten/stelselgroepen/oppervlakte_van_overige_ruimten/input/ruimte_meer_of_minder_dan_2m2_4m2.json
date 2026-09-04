@@ -14,8 +14,7 @@
       "naam": "Slaapkamer",
       "inhoud": 10,
       "oppervlakte": 3,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "Space_862208",
@@ -30,8 +29,7 @@
       "naam": "Bijkeuken",
       "inhoud": 10,
       "oppervlakte": 2,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "Space_585655",
@@ -46,8 +44,7 @@
       "naam": "Toilet",
       "inhoud": 10,
       "oppervlakte": 1,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     }
   ]
 }

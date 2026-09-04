@@ -14,8 +14,7 @@
       "naam": "Keuken",
       "inhoud": 10,
       "oppervlakte": 2,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "Space_724604",
@@ -30,8 +29,7 @@
       "naam": "Slaapkamer",
       "inhoud": 10,
       "oppervlakte": 3,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "Space_539495",
@@ -46,8 +44,7 @@
       "naam": "Slaapkamer",
       "inhoud": 10,
       "oppervlakte": 4,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     },
     {
       "id": "Space_185859",
@@ -62,8 +59,7 @@
       "naam": "Badkamer/toilet",
       "inhoud": 10,
       "oppervlakte": 2,
-      "verwarmd": true,
-      "gemeenschappelijk": false
+      "verwarmd": true
     }
   ]
 }

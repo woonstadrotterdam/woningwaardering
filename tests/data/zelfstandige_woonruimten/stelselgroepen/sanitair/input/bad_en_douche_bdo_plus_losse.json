@@ -1,0 +1,35 @@
+{
+  "id": "bad_en_douche_bdo_plus_losse",
+  "ruimten": [
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "inhoud": 21.0,
+      "oppervlakte": 8.0,
+      "verwarmd": true,
+      "installaties": [
+        {
+          "code": "BDO",
+          "naam": "Bad en douche"
+        },
+        {
+          "code": "BAD",
+          "naam": "Bad"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ],
+      "aantal": 1
+    }
+  ]
+}

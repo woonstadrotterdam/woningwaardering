@@ -1,0 +1,55 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "SAN",
+          "naam": "Sanitair"
+        }
+      },
+      "punten": 11.0,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "sanitair__badkamer",
+            "naam": "Badkamer"
+          }
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__bad_en_douche",
+            "naam": "Bad en douche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 7.0
+        },
+        {
+          "aantal": 1.0,
+          "criterium": {
+            "id": "sanitair__badkamer__drempelloze_inrijdouche",
+            "naam": "Drempelloze inrijdouche",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__badkamer"
+            },
+            "meeteenheid": {
+              "code": "STU",
+              "naam": "Stuks"
+            }
+          },
+          "punten": 4.0
+        }
+      ]
+    }
+  ]
+}

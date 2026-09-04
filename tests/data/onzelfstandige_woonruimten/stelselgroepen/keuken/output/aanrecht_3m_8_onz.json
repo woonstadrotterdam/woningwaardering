@@ -11,7 +11,7 @@
           "naam": "Keuken"
         }
       },
-      "punten": 1.75,
+      "punten": 1.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -41,14 +41,7 @@
               "naam": "Millimeter"
             }
           },
-          "punten": 1.63
-        },
-        {
-          "criterium": {
-            "id": "keuken__afronding_op_kwartpunten",
-            "naam": "Afronding op kwartpunten"
-          },
-          "punten": 0.12
+          "punten": 1.25
         }
       ]
     }

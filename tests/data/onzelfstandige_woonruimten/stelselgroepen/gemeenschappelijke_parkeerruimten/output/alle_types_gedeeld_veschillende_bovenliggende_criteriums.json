@@ -31,8 +31,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__1",
-            "naam": "Type I",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__parkeerplek_in_inpandige_afgesloten_parkeergarage_type_i",
+            "naam": "Parkeerplek in inpandige afgesloten parkeergarage (Type I)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen"
             },
@@ -61,8 +61,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_4_adressen__2",
-            "naam": "Type II",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_4_adressen__carport_type_ii",
+            "naam": "Carport (Type II)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_4_adressen"
             },
@@ -85,8 +85,8 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_5_adressen__3",
-            "naam": "Type III",
+            "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_5_adressen__parkeerplek_buiten_type_iii",
+            "naam": "Parkeerplek buiten (Type III)",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_3_onzelfstandige_woonruimten__gedeeld_met_5_adressen"
             },

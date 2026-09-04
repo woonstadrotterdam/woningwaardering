@@ -1,0 +1,41 @@
+{
+  "id": "energie_index_zonder_waarde_naar_bouwjaar",
+  "bouwjaar": 1990,
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ],
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "72.0"
+    }
+  ],
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "EI",
+        "naam": "Energie-index"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-06-01",
+      "einddatum": "2028-06-01",
+      "registratiedatum": "2020-08-01T09:55:37+01:00",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      }
+    }
+  ]
+}

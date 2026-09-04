@@ -14,15 +14,18 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.gedeelde_logica import (
     GedeeldeRuimtegroepsleutel,
     GedeeldMet,
+    bepaal_wastafel_uitzonderingsruimte,
     bereken_oppervlakte_punten,
-    bereken_zolder_correctie,
     is_zolder_zonder_vaste_trap,
-    maximeer_wastafels,
+    maak_zolder_correctie_waardering,
     waardeer_keuken,
     waardeer_oppervlakte_van_overige_ruimte,
     waardeer_oppervlakte_van_vertrek,
     waardeer_sanitair,
     waardeer_verkoeling_en_verwarming,
+)
+from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
+    converteer_bouwkundige_elementen_naar_installaties,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -58,6 +61,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
+        converteer_bouwkundige_elementen_naar_installaties(eenheid)
+
         waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )
@@ -78,7 +83,13 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             # waarderingen voor de keuken van gedeelde ruimten
             self._keuken_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
             # waarderingen voor sanitair van gedeelde ruimten
-            self._sanitair_waarderingen(waarderingsgroep_builder, gedeelde_ruimten)
+            self._sanitair_waarderingen(
+                waarderingsgroep_builder,
+                gedeelde_ruimten,
+                wastafel_uitzonderingsruimte=bepaal_wastafel_uitzonderingsruimte(
+                    eenheid
+                ),
+            )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
@@ -162,7 +173,10 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         ):
             totaal_oppervlakte = sum(
                 (
-                    utils.rond_af(ruimte.oppervlakte, decimalen=2)
+                    utils.rond_af(
+                        utils.oppervlakte_inclusief_verbonden_kasten(ruimte),
+                        decimalen=2,
+                    )
                     for ruimte in groep_ruimten
                     if ruimte.oppervlakte is not None
                 ),
@@ -242,16 +256,15 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 for ruimte in groep_ruimten:
                     if not is_zolder_zonder_vaste_trap(ruimte):
                         continue
-                    zolder_oppervlakte = utils.rond_af(ruimte.oppervlakte, decimalen=2)
-                    correctie_punten = (
-                        bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)
-                        / deler
+                    # 2.2.4 Kasten: de helper rekent op oppervlakte inclusief
+                    # verbonden kasten; delen door deler gebeurt hierna, zoals bij
+                    # verkoeling/verwarming in deze stelselgroep.
+                    waardering = maak_zolder_correctie_waardering(
+                        ruimte,
+                        totaal_oppervlakte,
+                        waarderingsgroep_builder=subgroep,
                     )
-                    subgroep.met_onderliggend(
-                        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
-                        naam="Correctie: zolder zonder vaste trap",
-                        punten=correctie_punten,
-                    )
+                    waardering.punten = Decimal(str(waardering.punten)) / deler
 
             # In het zoldergeval draagt de Subtotaal-waardering de oppervlaktepunten; anders
             # krijgt de subgroep-waardering zelf de punten.
@@ -266,7 +279,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         # De maximering op verwarmde overige ruimten (max. 4 punten) en op verkoelde
         # vertrekken (max. 2 punten) telt over álle gedeelde ruimten samen, ongeacht
         # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. De helper
-        # wordt daarom eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
+        # loopt die ene teller in rangorde (kleinste deler eerst, daarna
+        # invoervolgorde) en wordt
+        # eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
         # adressengroep gehangen, waar de punten door het aantal adressen en
         # onzelfstandige woonruimten worden gedeeld.
         def subgroep(
@@ -302,6 +317,8 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         self,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimten: list[EenhedenRuimte],
+        *,
+        wastafel_uitzonderingsruimte: EenhedenRuimte | None,
     ) -> None:
         ruimte_waarderingen: list[
             tuple[EenhedenRuimte, WaarderingBuilder, list[WaarderingBuilder]]
@@ -330,6 +347,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
                 self.stelsel,
                 waarderingsgroep_builder=sanitair_subgroep,
                 deler=1,
+                wastafel_uitzonderingsruimte=wastafel_uitzonderingsruimte,
             )
             if not waarderingen:
                 continue
@@ -337,9 +355,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             ruimte_criterium = waarderingen[0]
             ruimte_waarderingen.append((ruimte, ruimte_criterium, waarderingen))
 
-        maximeer_wastafels(ruimte_waarderingen)
-
-        for ruimte, ruimte_criterium, waarderingen in ruimte_waarderingen:
+        for ruimte, _, waarderingen in ruimte_waarderingen:
             deler = Decimal(
                 (ruimte.gedeeld_met_aantal_adressen or 1)
                 * (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1)

@@ -1,0 +1,22 @@
+{
+  "id": "carport_gedeeld_met_onzelfstandige_woonruimten",
+  "ruimten": [
+    {
+      "id": "carport",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport",
+      "oppervlakte": 12,
+      "lengte": 4,
+      "breedte": 3,
+      "aantal": 1,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3
+    }
+  ]
+}

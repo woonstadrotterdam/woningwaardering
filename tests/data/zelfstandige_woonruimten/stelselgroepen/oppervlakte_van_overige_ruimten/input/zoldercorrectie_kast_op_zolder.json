@@ -1,0 +1,45 @@
+{
+  "id": "zoldercorrectie_kast_op_zolder",
+  "ruimten": [
+    {
+      "id": "zolder",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "ZOL",
+        "naam": "Zolder"
+      },
+      "naam": "Zolder",
+      "inhoud": 6.0,
+      "oppervlakte": 2.6,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ],
+      "verbondenRuimten": [
+        {
+          "id": "kast",
+          "soort": {
+            "code": "OVR",
+            "naam": "Overige ruimten"
+          },
+          "detailSoort": {
+            "code": "KAS",
+            "naam": "Kast"
+          },
+          "naam": "Kast",
+          "oppervlakte": 0.2,
+          "aantal": 1
+        }
+      ],
+      "aantal": 1
+    }
+  ]
+}

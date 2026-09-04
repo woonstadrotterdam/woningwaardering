@@ -1,0 +1,442 @@
+"""Tests voor de gedeelde parkeerregels (rubriek 8, 10 en 12).
+
+De regelset staat beschreven in https://github.com/woonstadrotterdam/woningwaardering/issues/381:
+één stroom voor zelfstandige en onzelfstandige woonruimten, waarbij alleen de
+deler verschilt.
+"""
+
+import warnings
+from decimal import Decimal
+from itertools import product
+
+import pytest
+
+from tests.peildatum import REFERENTIE_PEILDATUM
+from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    PARKEERTYPE_ALTIJD_GPA,
+    PARKEERTYPE_BUI_OF_GPA,
+    hoort_altijd_in_gemeenschappelijke_parkeerruimten,
+    hoort_prive_in_buitenruimten,
+    wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten,
+)
+from woningwaardering.stelsels.onzelfstandige_woonruimten.bijzondere_voorzieningen import (
+    BijzondereVoorzieningen as BijzondereVoorzieningenOnz,
+)
+from woningwaardering.stelsels.onzelfstandige_woonruimten.buitenruimten import (
+    Buitenruimten as BuitenruimtenOnz,
+)
+from woningwaardering.stelsels.onzelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
+    GemeenschappelijkeParkeerruimten as GemeenschappelijkeParkeerruimtenOnz,
+)
+from woningwaardering.stelsels.utils import deler
+from woningwaardering.stelsels.zelfstandige_woonruimten.bijzondere_voorzieningen import (
+    BijzondereVoorzieningen as BijzondereVoorzieningenZel,
+)
+from woningwaardering.stelsels.zelfstandige_woonruimten.buitenruimten import (
+    Buitenruimten as BuitenruimtenZel,
+)
+from woningwaardering.stelsels.zelfstandige_woonruimten.gemeenschappelijke_parkeerruimten import (
+    GemeenschappelijkeParkeerruimten as GemeenschappelijkeParkeerruimtenZel,
+)
+from woningwaardering.vera.bvg.generated import (
+    BouwkundigElementenBouwkundigElement,
+    EenhedenEenheid,
+    EenhedenRuimte,
+)
+from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Ruimtedetailsoort,
+    Ruimtesoort,
+)
+
+RUBRIEK_8 = "buitenruimten"
+RUBRIEK_10 = "gemeenschappelijke_parkeerruimten"
+RUBRIEK_12 = "bijzondere_voorzieningen"
+
+STELSELGROEP_CLASSES = {
+    "zelfstandige_woonruimten": {
+        RUBRIEK_8: BuitenruimtenZel,
+        RUBRIEK_10: GemeenschappelijkeParkeerruimtenZel,
+        RUBRIEK_12: BijzondereVoorzieningenZel,
+    },
+    "onzelfstandige_woonruimten": {
+        RUBRIEK_8: BuitenruimtenOnz,
+        RUBRIEK_10: GemeenschappelijkeParkeerruimtenOnz,
+        RUBRIEK_12: BijzondereVoorzieningenOnz,
+    },
+}
+
+
+def maak_parkeerruimte(
+    detailsoort,
+    *,
+    oppervlakte: float = 15.0,
+    aantal_adressen: int = 1,
+    aantal_onzelfstandige_woonruimten: int = 1,
+    met_laadpaal: bool = False,
+    aantal_laadpalen: int = 1,
+    aantal: int | None = 1,
+) -> EenhedenRuimte:
+    """Maak een parkeerruimte volgens de VERA-standaard."""
+    ruimte = EenhedenRuimte(
+        id="parkeerruimte",
+        naam=detailsoort.naam,
+        soort=(
+            Ruimtesoort.buitenruimte
+            if detailsoort in PARKEERTYPE_BUI_OF_GPA
+            else Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen
+        ),
+        detailSoort=detailsoort,
+        oppervlakte=oppervlakte,
+        lengte=5.0,
+        breedte=oppervlakte / 5.0,
+        aantal=aantal,
+        gedeeldMetAantalAdressen=aantal_adressen,
+        gedeeldMetAantalOnzelfstandigeWoonruimten=aantal_onzelfstandige_woonruimten,
+    )
+    if met_laadpaal:
+        ruimte.bouwkundige_elementen = [
+            BouwkundigElementenBouwkundigElement(
+                id=f"laadpaal_{nummer}",
+                naam="Laadpaal",
+                detailSoort=Bouwkundigelementdetailsoort.laadpaal,
+            )
+            for nummer in range(1, aantal_laadpalen + 1)
+        ]
+    return ruimte
+
+
+def maak_referentie_tuin() -> EenhedenRuimte:
+    """Een privé-tuin die in elke variant gelijk blijft.
+
+    Hiermee blijven de aanwezigheidspunten en de aftrek voor 'geen buitenruimten'
+    in rubriek 8 constant, zodat het verschil tussen twee varianten precies de
+    bijdrage van de parkeerruimte of de laadpaal is.
+    """
+    return EenhedenRuimte(
+        id="referentie_tuin",
+        naam="Tuin",
+        soort=Ruimtesoort.buitenruimte,
+        detailSoort=Ruimtedetailsoort.tuin,
+        oppervlakte=20.0,
+        lengte=5.0,
+        breedte=4.0,
+        gedeeldMetAantalAdressen=1,
+        gedeeldMetAantalOnzelfstandigeWoonruimten=1,
+    )
+
+
+def maak_eenheid(*ruimten: EenhedenRuimte) -> EenhedenEenheid:
+    return EenhedenEenheid(id="parkeer_eenheid", ruimten=list(ruimten))
+
+
+def som_punten(stelsel: str, rubriek: str, eenheid: EenhedenEenheid) -> Decimal:
+    """Som de punten van alle waarderingen in een stelselgroep, vóór kwartafronding.
+
+    De waardering 'Afronding op kwartpunten' telt niet mee: die zou het verschil
+    tussen twee varianten vertroebelen.
+    """
+    stelselgroep = STELSELGROEP_CLASSES[stelsel][rubriek](
+        peildatum=REFERENTIE_PEILDATUM
+    )
+    groep = stelselgroep.waardeer(eenheid)
+    return sum(
+        (
+            Decimal(str(waardering.punten))
+            for waardering in groep.woningwaarderingen or []
+            if waardering.punten is not None
+            and waardering.criterium is not None
+            and not (waardering.criterium.id or "").endswith(
+                "__afronding_op_kwartpunten"
+            )
+        ),
+        start=Decimal("0"),
+    )
+
+
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_ALTIJD_GPA)
+def test_hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) -> None:
+    assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is True
+    assert hoort_prive_in_buitenruimten(detailsoort) is False
+
+
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_BUI_OF_GPA)
+def test_hoort_prive_in_buitenruimten(detailsoort) -> None:
+    assert hoort_prive_in_buitenruimten(detailsoort) is True
+    assert hoort_altijd_in_gemeenschappelijke_parkeerruimten(detailsoort) is False
+
+
+def test_deler() -> None:
+    ruimte = maak_parkeerruimte(
+        Ruimtedetailsoort.carport,
+        aantal_adressen=3,
+        aantal_onzelfstandige_woonruimten=4,
+    )
+    assert deler(ruimte) == Decimal("12")
+
+
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_ALTIJD_GPA)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_altijd_gpa(
+    detailsoort,
+) -> None:
+    """``PARKEERTYPE_ALTIJD_GPA`` horen altijd in rubriek 10 (regel 1)."""
+    prive = maak_parkeerruimte(detailsoort)
+    gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
+    assert wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(prive) is True
+    assert (
+        wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(gemeenschappelijk)
+        is True
+    )
+
+
+@pytest.mark.parametrize("detailsoort", PARKEERTYPE_BUI_OF_GPA)
+def test_wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten_bui_of_gpa(
+    detailsoort,
+) -> None:
+    """``PARKEERTYPE_BUI_OF_GPA`` gaan privé naar rubriek 8, gemeenschappelijk naar 10 (regel 2)."""
+    prive = maak_parkeerruimte(detailsoort)
+    gemeenschappelijk = maak_parkeerruimte(detailsoort, aantal_adressen=3)
+    gedeeld_met_onzelfstandig = maak_parkeerruimte(
+        detailsoort, aantal_onzelfstandige_woonruimten=4
+    )
+    assert wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(prive) is False
+    assert (
+        wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(gemeenschappelijk)
+        is True
+    )
+    assert (
+        wordt_gewaardeerd_in_gemeenschappelijke_parkeerruimten(
+            gedeeld_met_onzelfstandig
+        )
+        is True
+    )
+
+
+# Cartesisch product van detailsoort × oppervlakte × adressen × onzelfstandige
+# woonruimten: geen combinatie mag in meer dan één rubriek punten krijgen, en
+# een laadpaal valt altijd in precies één rubriek.
+DETAILSOORTEN = list(PARKEERTYPE_ALTIJD_GPA) + list(PARKEERTYPE_BUI_OF_GPA)
+OPPERVLAKTEN = [10.0, 12.0, 15.0]
+AANTALLEN_ADRESSEN = [1, 3]
+AANTALLEN_ONZELFSTANDIGE_WOONRUIMTEN = [1, 4]
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+@pytest.mark.parametrize(
+    "detailsoort, oppervlakte, aantal_adressen, aantal_onzelfstandige_woonruimten",
+    list(
+        product(
+            DETAILSOORTEN,
+            OPPERVLAKTEN,
+            AANTALLEN_ADRESSEN,
+            AANTALLEN_ONZELFSTANDIGE_WOONRUIMTEN,
+        )
+    ),
+)
+def test_parkeerruimte_en_laadpaal_krijgen_in_hoogstens_een_rubriek_punten(
+    stelsel,
+    detailsoort,
+    oppervlakte,
+    aantal_adressen,
+    aantal_onzelfstandige_woonruimten,
+) -> None:
+    """Regel 5: een parkeerruimte en een laadpaal worden nooit dubbel gewaardeerd.
+
+    De bijdrage van de parkeerruimte is het verschil tussen een eenheid mét en
+    zónder die parkeerruimte; de bijdrage van de laadpaal het verschil tussen
+    dezelfde parkeerruimte mét en zónder laadpaal.
+    """
+    zonder_parkeerruimte = maak_eenheid(maak_referentie_tuin())
+    parkeerruimte = maak_parkeerruimte(
+        detailsoort,
+        oppervlakte=oppervlakte,
+        aantal_adressen=aantal_adressen,
+        aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+    )
+    met_parkeerruimte = maak_eenheid(maak_referentie_tuin(), parkeerruimte)
+    met_laadpaal = maak_eenheid(
+        maak_referentie_tuin(),
+        maak_parkeerruimte(
+            detailsoort,
+            oppervlakte=oppervlakte,
+            aantal_adressen=aantal_adressen,
+            aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            met_laadpaal=True,
+        ),
+    )
+
+    punten_ruimte = {}
+    punten_laadpaal = {}
+    for rubriek in (RUBRIEK_8, RUBRIEK_10, RUBRIEK_12):
+        basis = som_punten(stelsel, rubriek, zonder_parkeerruimte)
+        met_ruimte = som_punten(stelsel, rubriek, met_parkeerruimte)
+        met_paal = som_punten(stelsel, rubriek, met_laadpaal)
+        punten_ruimte[rubriek] = met_ruimte - basis
+        punten_laadpaal[rubriek] = met_paal - met_ruimte
+
+    rubrieken_met_ruimtepunten = [
+        rubriek for rubriek, punten in punten_ruimte.items() if punten != 0
+    ]
+    rubrieken_met_laadpaalpunten = [
+        rubriek for rubriek, punten in punten_laadpaal.items() if punten != 0
+    ]
+
+    assert len(rubrieken_met_ruimtepunten) <= 1, (
+        f"{detailsoort.naam} ({oppervlakte}m2, {aantal_adressen} adressen, "
+        f"{aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten) krijgt punten "
+        f"in meerdere rubrieken: {punten_ruimte}"
+    )
+    assert len(rubrieken_met_laadpaalpunten) <= 1, (
+        f"De laadpaal bij {detailsoort.naam} ({oppervlakte}m2, {aantal_adressen} adressen, "
+        f"{aantal_onzelfstandige_woonruimten} onzelfstandige woonruimten) krijgt punten "
+        f"in meerdere rubrieken: {punten_laadpaal}"
+    )
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+@pytest.mark.parametrize(
+    "detailsoort, oppervlakte, aantal_adressen, aantal_onzelfstandige_woonruimten",
+    list(
+        product(
+            DETAILSOORTEN,
+            OPPERVLAKTEN,
+            AANTALLEN_ADRESSEN,
+            AANTALLEN_ONZELFSTANDIGE_WOONRUIMTEN,
+        )
+    ),
+)
+def test_laadpaal_krijgt_altijd_punten(
+    stelsel,
+    detailsoort,
+    oppervlakte,
+    aantal_adressen,
+    aantal_onzelfstandige_woonruimten,
+) -> None:
+    """Regel 4: de laadpaal wordt in rubriek 10 óf in rubriek 12 gewaardeerd.
+
+    Er is dus altijd precies één rubriek waarin de laadpaal punten oplevert.
+    """
+    zonder_laadpaal = maak_eenheid(
+        maak_referentie_tuin(),
+        maak_parkeerruimte(
+            detailsoort,
+            oppervlakte=oppervlakte,
+            aantal_adressen=aantal_adressen,
+            aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+        ),
+    )
+    met_laadpaal = maak_eenheid(
+        maak_referentie_tuin(),
+        maak_parkeerruimte(
+            detailsoort,
+            oppervlakte=oppervlakte,
+            aantal_adressen=aantal_adressen,
+            aantal_onzelfstandige_woonruimten=aantal_onzelfstandige_woonruimten,
+            met_laadpaal=True,
+        ),
+    )
+
+    verwachte_punten = Decimal("2") / Decimal(
+        aantal_adressen * aantal_onzelfstandige_woonruimten
+    )
+    winst = {
+        rubriek: som_punten(stelsel, rubriek, met_laadpaal)
+        - som_punten(stelsel, rubriek, zonder_laadpaal)
+        for rubriek in (RUBRIEK_8, RUBRIEK_10, RUBRIEK_12)
+    }
+
+    # De waardering wordt op twee decimalen afgerond (2 / 3 wordt 0,67).
+    assert float(sum(winst.values())) == pytest.approx(
+        float(verwachte_punten), abs=0.005
+    ), f"Laadpaal levert {winst} op, verwacht {verwachte_punten} in precies één rubriek"
+
+
+# --- Laadpalen tellen in rubriek 10 en 12 gelijk --------------------------------
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+@pytest.mark.parametrize("aantal_laadpalen", [1, 2])
+@pytest.mark.parametrize("aantal", [1, 3])
+def test_laadpaalpunten_zijn_gelijk_aan_weerszijden_van_de_12m2_grens(
+    stelsel, aantal_laadpalen, aantal
+) -> None:
+    """De laadpaal mag niet meer of minder waard worden door de rubriek waarin hij valt.
+
+    Rubriek 10 en rubriek 12 tellen de laadpalen daarom op dezelfde manier:
+    het aantal laadpaal-elementen maal het aantal parkeerplekken van de ruimte.
+    """
+
+    def winst(oppervlakte: float) -> Decimal:
+        gemeenschappelijk = {
+            "aantal_adressen": 2,
+            "aantal": aantal,
+            "oppervlakte": oppervlakte,
+        }
+        zonder = maak_eenheid(
+            maak_referentie_tuin(),
+            maak_parkeerruimte(Ruimtedetailsoort.carport, **gemeenschappelijk),
+        )
+        met = maak_eenheid(
+            maak_referentie_tuin(),
+            maak_parkeerruimte(
+                Ruimtedetailsoort.carport,
+                met_laadpaal=True,
+                aantal_laadpalen=aantal_laadpalen,
+                **gemeenschappelijk,
+            ),
+        )
+        return sum(
+            (
+                som_punten(stelsel, rubriek, met) - som_punten(stelsel, rubriek, zonder)
+                for rubriek in (RUBRIEK_8, RUBRIEK_10, RUBRIEK_12)
+            ),
+            start=Decimal("0"),
+        )
+
+    boven_de_grens = winst(15.0)  # rubriek 10
+    onder_de_grens = winst(10.0)  # rubriek 12
+    verwacht = Decimal("2") * aantal_laadpalen * aantal / Decimal("2")
+
+    assert boven_de_grens == verwacht
+    assert onder_de_grens == verwacht
+
+
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+def test_zonder_aantal_adressen_waardeert_als_niet_gedeeld(stelsel) -> None:
+    """Zonder ``gedeeld_met_aantal_adressen`` waarschuwen we en waarderen we met deler 1.
+
+    De laadpaal blijft bij de plek in rubriek 10.
+    """
+    ruimte = maak_parkeerruimte(
+        Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
+        aantal=2,
+        met_laadpaal=True,
+    )
+    ruimte.gedeeld_met_aantal_adressen = None
+    eenheid = maak_eenheid(maak_referentie_tuin(), ruimte)
+
+    with pytest.warns(UserWarning, match="gedeeld_met_aantal_adressen"):
+        rubriek_10 = som_punten(stelsel, RUBRIEK_10, eenheid)
+
+    assert rubriek_10 == Decimal("12")  # 2 plekken × 4 pt + 2 laadpalen × 2 pt
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        basis = som_punten(stelsel, RUBRIEK_12, maak_eenheid(maak_referentie_tuin()))
+        rubriek_12 = som_punten(stelsel, RUBRIEK_12, eenheid)
+    assert rubriek_12 - basis == Decimal("0")
+
+
+@pytest.mark.filterwarnings("ignore::UserWarning")
+@pytest.mark.parametrize("stelsel", sorted(STELSELGROEP_CLASSES))
+def test_ontbrekend_aantal_laat_de_waardering_niet_crashen(stelsel) -> None:
+    """Een ruimte zonder ``aantal`` telt als één parkeerplek."""
+    ruimte = maak_parkeerruimte(
+        Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+        aantal_adressen=2,
+        aantal=None,
+    )
+    eenheid = maak_eenheid(maak_referentie_tuin(), ruimte)
+    assert som_punten(stelsel, RUBRIEK_10, eenheid) == Decimal("4.5")

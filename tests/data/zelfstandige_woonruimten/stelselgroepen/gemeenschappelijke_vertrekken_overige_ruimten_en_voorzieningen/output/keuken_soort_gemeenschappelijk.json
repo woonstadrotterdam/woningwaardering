@@ -1,0 +1,110 @@
+{
+  "groepen": [
+    {
+      "criteriumGroep": {
+        "stelsel": {
+          "code": "ZEL",
+          "naam": "Zelfstandige woonruimten"
+        },
+        "stelselgroep": {
+          "code": "GVR",
+          "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
+        }
+      },
+      "punten": 4.75,
+      "woningwaarderingen": [
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen",
+            "naam": "Gedeeld met 4 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__oppervlakte_van_vertrekken",
+            "naam": "Oppervlakte van vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen"
+            }
+          },
+          "punten": 2.5
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__oppervlakte_van_vertrekken__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__oppervlakte_van_vertrekken"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__verkoeling_en_verwarming",
+            "naam": "Verkoeling en verwarming",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken",
+            "naam": "Verwarmde vertrekken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__verkoeling_en_verwarming"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
+            }
+          },
+          "punten": 0.5
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__keuken__keuken",
+            "naam": "Keuken",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__keuken"
+            }
+          }
+        },
+        {
+          "aantal": 2000.0,
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__keuken__keuken__lengte_aanrecht_aanrecht",
+            "naam": "Lengte aanrecht",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_4_adressen__keuken__keuken"
+            },
+            "meeteenheid": {
+              "code": "MIL",
+              "naam": "Millimeter"
+            }
+          },
+          "punten": 1.75
+        }
+      ]
+    }
+  ]
+}

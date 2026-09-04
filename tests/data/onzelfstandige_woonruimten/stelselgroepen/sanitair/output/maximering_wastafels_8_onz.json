@@ -128,6 +128,16 @@
           "punten": 0.25
         },
         {
+          "criterium": {
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_wastafel",
+            "naam": "Maximering voor Wastafel",
+            "bovenliggendeCriterium": {
+              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
+            }
+          },
+          "punten": -0.13
+        },
+        {
           "aantal": 2.0,
           "criterium": {
             "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__meerpersoonswastafel",
@@ -141,16 +151,6 @@
             }
           },
           "punten": 0.38
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444__max_punten_wastafel",
-            "naam": "Maximering voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__Space_340444"
-            }
-          },
-          "punten": -0.13
         },
         {
           "criterium": {

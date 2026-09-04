@@ -211,7 +211,7 @@
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": 0.166666667
+          "punten": 0.17
         },
         {
           "criterium": {
@@ -221,7 +221,7 @@
               "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
             }
           },
-          "punten": -0.166666667
+          "punten": -0.17
         }
       ]
     }

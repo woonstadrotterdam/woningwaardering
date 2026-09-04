@@ -1,0 +1,10 @@
+SAMENVATTING zoldercorrectie_kast_op_zolder
+  Oppervlakte van overige ruimten
+                                                                                ---------
+
+OPPERVLAKTE VAN OVERIGE RUIMTEN
+  Subtotaal                                                           2.80 m²     2.25 pt
+    - Zolder (+1 kast)                                                2.80 m²
+  Correctie: zolder zonder vaste trap                                            -2.25 pt
+                                                                ----------      ---------
+  Totaal                                                              2.80 m²     0.00 pt

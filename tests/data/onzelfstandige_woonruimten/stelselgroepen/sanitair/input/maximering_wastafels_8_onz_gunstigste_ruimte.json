@@ -1,0 +1,58 @@
+{
+  "ruimten": [
+    {
+      "id": "woonkamer_wastafels",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "WOO",
+        "naam": "Woonkamer"
+      },
+      "naam": "WoonkamerMetWastafels",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    },
+    {
+      "id": "bergruimte_meerpersoons",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Bergruimte"
+      },
+      "naam": "BergruimteMetMeerpersoonswastafels",
+      "installaties": [
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        },
+        {
+          "code": "MPW",
+          "naam": "Meerpersoonswastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    }
+  ]
+}

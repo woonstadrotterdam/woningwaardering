@@ -1,0 +1,16 @@
+SAMENVATTING keuken_soort_gemeenschappelijk
+  Gemeenschappelijke vertrekken, overige ruimten en voorzieningen                 4.75 pt
+                                                                                ---------
+
+GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
+  Gedeeld met 4 adressen
+    - Oppervlakte van vertrekken                                                  2.50 pt
+      - Keuken                                                       10.00 m²
+    - Verkoeling en verwarming
+      - Verwarmde vertrekken
+        - Keuken                                                                  0.50 pt
+    - Keuken
+      - Keuken
+        - Lengte aanrecht                                          2000.00 mm     1.75 pt
+                                                                                ---------
+  Totaal                                                                          4.75 pt

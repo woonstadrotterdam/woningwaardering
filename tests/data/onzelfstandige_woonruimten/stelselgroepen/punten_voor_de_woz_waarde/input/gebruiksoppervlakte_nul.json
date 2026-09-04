@@ -1,0 +1,18 @@
+{
+  "id": "gebruiksoppervlakte_nul",
+  "adres": {
+    "woonplaats": {
+      "code": "3086",
+      "naam": "ROTTERDAM"
+    }
+  },
+  "adresseerbaarObjectBasisregistratie": {
+    "bagGebruikersOppervlakte": 0
+  },
+  "wozEenheden": [
+    {
+      "waardepeildatum": "2024-01-01",
+      "vastgesteldeWaarde": 205000
+    }
+  ]
+}

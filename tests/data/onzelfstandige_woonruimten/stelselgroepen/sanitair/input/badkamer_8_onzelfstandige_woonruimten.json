@@ -1,0 +1,58 @@
+{
+  "ruimten": [
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    },
+    {
+      "id": "slaapkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer",
+      "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+    }
+  ]
+}

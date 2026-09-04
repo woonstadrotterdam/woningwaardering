@@ -1,0 +1,30 @@
+{
+  "ruimten": [
+    {
+      "id": "doucheruimte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "naam": "Doucheruimte",
+      "installaties": [
+        {
+          "code": "STO",
+          "naam": "Staand toilet"
+        },
+        {
+          "code": "DOU",
+          "naam": "Douche"
+        },
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        }
+      ]
+    }
+  ]
+}

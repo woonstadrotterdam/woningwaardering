@@ -1,0 +1,33 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "ZVT",
+        "naam": "Zoldervertrek"
+      },
+      "naam": "Zoldervertrek met vlizotrap",
+      "inhoud": 20,
+      "oppervlakte": 10,
+      "verwarmd": true,
+      "bouwkundigeElementen": [
+        {
+          "naam": "Vlizotrap",
+          "omschrijving": "Vlizotrap naar de zolder",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
+    }
+  ]
+}

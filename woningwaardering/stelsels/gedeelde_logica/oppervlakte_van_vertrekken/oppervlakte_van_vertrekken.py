@@ -8,6 +8,7 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     voeg_oppervlakte_kasten_toe_aan_ruimte,
 )
@@ -40,9 +41,11 @@ def waardeer_oppervlakte_van_vertrek(
         return []
 
     criterium_naam = voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte)
+    oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
 
     logger.info(
-        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {ruimte.oppervlakte:.2f}m2 telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) van {oppervlakte_met_kasten:.2f}m2 "
+        f"telt mee voor {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam}"
     )
 
     return [
@@ -50,6 +53,6 @@ def waardeer_oppervlakte_van_vertrek(
             id=ruimte.id,
             naam=criterium_naam,
             meeteenheid=Meeteenheid.vierkante_meter_m2,
-            aantal=float(rond_af(ruimte.oppervlakte, decimalen=2)),
+            aantal=float(rond_af(oppervlakte_met_kasten, decimalen=2)),
         )
     ]
