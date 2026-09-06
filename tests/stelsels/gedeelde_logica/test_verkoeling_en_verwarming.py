@@ -1,12 +1,14 @@
-"""Maximering van verkoeling en verwarming is onafhankelijk van invoervolgorde.
+"""Maximering van verkoeling en verwarming in rubriek 3 is onafhankelijk van invoervolgorde.
 
-Privé en gemeenschappelijk hebben elk hun eigen teller. De helper loopt elke
-teller in rangorde (kleinste deler, daarna invoervolgorde) vóór de aanroeper
-deelt.
+Privé en gemeenschappelijk op hetzelfde adres hebben elk hun eigen teller. De
+helper loopt elke teller in rangorde (kleinste deler, daarna invoervolgorde)
+vóór de aanroeper deelt. Rubriek 9 gebruikt dezelfde puntwaarden zonder die
+plafonds.
 """
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
+    GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -140,3 +142,47 @@ def test_sorteer_muteert_invoerlijst_niet():
     ids_voor = [ruimte.id for ruimte in ruimten]
     _punten(ruimten)
     assert [ruimte.id for ruimte in ruimten] == ids_voor
+
+
+def test_adressen_gedeelde_verwarmde_overige_ruimten_worden_niet_gemaximeerd():
+    """Rubriek 9: 5 verwarmde verkeersruimten /2 adressen, zonder cap → 2,50."""
+    ruimten = [
+        EenhedenRuimte(
+            id=f"Gang{i}",
+            naam=f"Gang{i}",
+            soort=Ruimtesoort.verkeersruimte,
+            detail_soort=Ruimtedetailsoort.gang,
+            oppervlakte=5,
+            verwarmd=True,
+            gedeeld_met_aantal_adressen=2,
+        )
+        for i in range(1, 6)
+    ]
+    eenheid = EenhedenEenheid(id="test", ruimten=ruimten)
+    groep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
+        peildatum=REFERENTIE_PEILDATUM
+    ).waardeer(eenheid)
+    assert groep.punten == 2.5
+
+
+def test_adressen_gedeelde_verkoelde_vertrekken_worden_niet_gemaximeerd():
+    """Rubriek 9: 3 verwarmde én verkoelde vertrekken /2 adressen → 3 × 1,50."""
+    ruimten = [
+        EenhedenRuimte(
+            id=f"Woonkamer{i}",
+            naam=f"Woonkamer{i}",
+            soort=Ruimtesoort.vertrek,
+            detail_soort=Ruimtedetailsoort.woonkamer,
+            oppervlakte=20,
+            verwarmd=True,
+            verkoeld=True,
+            gedeeld_met_aantal_adressen=2,
+        )
+        for i in range(1, 4)
+    ]
+    eenheid = EenhedenEenheid(id="test", ruimten=ruimten)
+    groep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
+        peildatum=REFERENTIE_PEILDATUM
+    ).waardeer(eenheid)
+    # 3 × (20 m² / 2) + 3 × (2+1)/2 = 30 + 4,5. Afronding op kwart: 34,50.
+    assert groep.punten == 34.5

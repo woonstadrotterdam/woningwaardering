@@ -1209,6 +1209,9 @@ Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, d
 > [!NOTE]
 > Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_adressen`, waarbij ook het adres van de betreffende eenheid meegeteld dient te worden in het totaal. Een waarde van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte.
 
+> [!NOTE]
+> De wettekst (Bijlage I A, rubriek 9, stap 2) zegt de punten voor verkoeling en verwarming te bepalen “conform rubriek 3”. Wij nemen daarvan de puntwaarden over (2 per verwarmd vertrek, 1 extra per verwarmd én verkoeld vertrek, 1 per verwarmde overige ruimte of verkeersruimte), niet de plafonds van rubriek 3 (max. 4 verwarmde overige/verkeersruimten, max. 2 extra verkoelingspunten). Dit is conform de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) die in deze rubriek geen maximum toepast.
+
 #### 2.9.3 Gemeenschappelijke (spoel)keuken
 
 ~~Als het verstrekken van warme maaltijden onderdeel vormt van de huurovereenkomst dan~~ worden ook de aanwezige gemeenschappelijke (spoel)keuken en bijbehorende opslagruimte in de waardering meegenomen. Het gaat hier om de puntenwaardering van de oppervlakte van die ruimten, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.

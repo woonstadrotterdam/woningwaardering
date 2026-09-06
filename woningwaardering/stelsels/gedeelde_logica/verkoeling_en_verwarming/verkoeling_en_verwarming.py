@@ -90,24 +90,31 @@ def waardeer_verkoeling_en_verwarming(
     ruimten: list[EenhedenRuimte],
     *,
     subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+    maximeren: bool = True,
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
-    """Classificeer ruimten, pas maximering toe en bouw waarderingen op hun plek.
+    """Classificeer ruimten, pas eventueel maximering toe en bouw waarderingen.
 
     De maximering (max. 4 punten verwarmde overige ruimten, max. 2 punten
-    verkoelde vertrekken) telt privé en gemeenschappelijk apart: elk gebruik
-    heeft zijn eigen teller. Elke ruimte krijgt 1 punt; ruimten boven het
-    maximum van hun eigen teller krijgen −1. Elke teller loopt in rangorde
-    (kleinste deler, daarna invoervolgorde), zodat dezelfde ruimten hetzelfde
-    totaal geven.
-    Deling gebeurt daarna in de aanroeper. De outputvolgorde volgt die rangorde.
+    verkoelde vertrekken) geldt in rubriek 3. Privé en gemeenschappelijk op
+    hetzelfde adres hebben elk hun eigen teller. Elke ruimte krijgt 1 punt;
+    ruimten boven het maximum van hun eigen teller krijgen −1. Elke teller
+    loopt in rangorde (kleinste deler, daarna invoervolgorde), zodat dezelfde
+    ruimten hetzelfde totaal geven.
+    In rubriek 9 blijven de puntwaarden van rubriek 3, zonder die plafonds:
+    de huurprijscheck tópt daar niet af. Deling gebeurt daarna in de
+    aanroeper. De outputvolgorde volgt die rangorde.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met
     (ruimte, subgroep_id, subgroep_naam) op het moment dat een waardering wordt
     aangemaakt, zodat de laag lazy en op de juiste plek ontstaat.
     """
-    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(ruimten, subgroep)
-    yield from _waardeer_verwarmde_overige_ruimte(ruimten, subgroep)
+    yield from _waardeer_verkoeld_en_of_verwarmd_vertrek(
+        ruimten, subgroep, maximeren=maximeren
+    )
+    yield from _waardeer_verwarmde_overige_ruimte(
+        ruimten, subgroep, maximeren=maximeren
+    )
 
 
 class _OpenKeukenSoort(Enum):
@@ -147,6 +154,8 @@ def _classificeer_open_keuken(ruimte: EenhedenRuimte) -> _OpenKeukenSoort | None
 def _waardeer_verwarmde_overige_ruimte(
     ruimten: list[EenhedenRuimte],
     subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+    *,
+    maximeren: bool,
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Verwarmde overige ruimten tellen als 1 punt voor verwarmde overige ruimten tot een maximum van 4 punten.
@@ -154,6 +163,7 @@ def _waardeer_verwarmde_overige_ruimte(
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
         subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
+        maximeren (bool): Of het maximum van 4 punten wordt toegepast
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verwarmde overige ruimten
@@ -176,7 +186,7 @@ def _waardeer_verwarmde_overige_ruimte(
         )
         gedeeld = _ruimte_gedeeld(ruimte)
         totaal_punten[gedeeld] += 1
-        if totaal_punten[gedeeld] > 4:
+        if maximeren and totaal_punten[gedeeld] > 4:
             yield (
                 ruimte,
                 _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
@@ -193,6 +203,8 @@ def _waardeer_verwarmde_overige_ruimte(
 def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     ruimten: list[EenhedenRuimte],
     subgroep: Callable[[EenhedenRuimte, str, str], WaarderingBuilder],
+    *,
+    maximeren: bool,
 ) -> Iterator[tuple[EenhedenRuimte, WaarderingBuilder]]:
     """
     Verkoelde en verwarmde vertrekken tellen voor 2 punten per verwarmd vertrek.
@@ -204,6 +216,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
     Args:
         ruimten (list[EenhedenRuimte]): Lijst van ruimten om te waarderen
         subgroep (Callable[[EenhedenRuimte, str, str], WaarderingBuilder]): Bepaalt per ruimte onder welke builder de subgroep hangt
+        maximeren (bool): Of het maximum van 2 extra verkoelingspunten wordt toegepast
 
     Yields:
         tuple[EenhedenRuimte, WaarderingBuilder]: Tuple van ruimte en waardering voor verkoelde en verwarmde vertrekken
@@ -247,7 +260,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                     punten=1,
                 ),
             )
-            if totaal_punten_verkoeld[gedeeld] > 2:
+            if maximeren and totaal_punten_verkoeld[gedeeld] > 2:
                 logger.info(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}): Maximaal aantal punten voor verkoelde vertrekken overschreden. Een aftrek van 1 punt wordt toegepast."
                 )
