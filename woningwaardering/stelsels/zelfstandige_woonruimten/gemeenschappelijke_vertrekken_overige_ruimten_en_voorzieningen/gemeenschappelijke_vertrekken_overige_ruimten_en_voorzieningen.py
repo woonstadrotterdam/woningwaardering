@@ -241,6 +241,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
+        # Rubriek 9 neemt de puntwaarden van rubriek 3 over, zonder de maximering
+        # (max. 4 verwarmde overige ruimten, max. 2 verkoelde vertrekken). Dat
+        # volgt de huurprijschecktool
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBuilder:
@@ -260,7 +263,7 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             )
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
-            gedeelde_ruimten, subgroep=subgroep
+            gedeelde_ruimten, subgroep=subgroep, maximeren=False
         ):
             if waardering.punten is None:
                 continue

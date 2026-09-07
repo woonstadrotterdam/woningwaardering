@@ -467,7 +467,7 @@ _~~Oppervlakte onder een open of gesloten vaste trap~~_
 ==}
 
 > [!NOTE]
-> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. Tot [#293](https://github.com/woonstadrotterdam/woningwaardering/issues/293) is beslist, houden wij één teller per maximering: max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken, over privé en gemeenschappelijk samen.
+> Wettekst en beleidsboek-kaders suggereren gescheiden maxima voor privé en gemeenschappelijk. De kaders hierboven geven max. 4 verwarmde overige/verkeersruimten en max. 2 verkoelde vertrekken afzonderlijk voor privé en voor gemeenschappelijk. Dit komt ook overeen met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 > [!TIP]
 > Dit voorbeeld toont de minimale gegevens voor waardering van de verkoeling en verwarming van ruimten.
@@ -1161,6 +1161,9 @@ Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moe
 #### 2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten
 
 Punten voor voorzieningen, zoals verkoeling en verwarming, keuken en sanitair, die zich bevinden in gemeenschappelijke vertrekken en overige ruimten worden gewaardeerd volgens het woningwaarderingsstelsel, gedeeld door het aantal adressen met toegang en gebruiksrecht en vervolgens gedeeld door het aantal onzelfstandige wooneenheden met toegang tot de voorzieningen.
+
+> [!NOTE]
+> De wettekst (Bijlage I A, rubriek 9, stap 2) zegt de punten voor verkoeling en verwarming te bepalen “conform rubriek 3”. Wij nemen daarvan de puntwaarden over (2 per verwarmd vertrek, 1 extra per verwarmd én verkoeld vertrek, 1 per verwarmde overige ruimte of verkeersruimte), niet de maxima van rubriek 3 (max. 4 verwarmde overige/verkeersruimten, max. 2 extra verkoelingspunten). Dit is conform de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) die in deze rubriek geen maximering toepast.
 
 #### 2.9.3 Gemeenschappelijke (spoel)keuken
 

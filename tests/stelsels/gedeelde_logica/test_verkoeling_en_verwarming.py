@@ -1,11 +1,14 @@
-"""Maximering van verkoeling en verwarming is onafhankelijk van invoervolgorde.
+"""Maximering van verkoeling en verwarming in rubriek 3 is onafhankelijk van invoervolgorde.
 
-Privé en gemeenschappelijk delen tot #293 één teller. De helper loopt die teller
-in rangorde (kleinste deler, daarna invoervolgorde) vóór de aanroeper deelt.
+Privé en gemeenschappelijk op hetzelfde adres hebben elk hun eigen teller. De
+helper loopt elke teller in rangorde (kleinste deler, daarna invoervolgorde)
+vóór de aanroeper deelt. Rubriek 9 gebruikt dezelfde puntwaarden zonder die
+maximering.
 """
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
+    GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen,
     VerkoelingEnVerwarming,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -59,8 +62,9 @@ def _punten(ruimten: list[EenhedenRuimte]) -> float:
     return float(groep.punten)
 
 
-def test_verwarmde_verkeersruimten_prive_en_gedeeld_levert_3_5():
-    """3 privé + 3 gemeenschappelijk /2: cap 4 ruimten, privé eerst → 3,5."""
+def test_verwarmde_verkeersruimten_prive_en_gedeeld_levert_4_5():
+    """3 privé + 3 gemeenschappelijk /2: beide tellers blijven onder de cap van
+    4 ruimten, dus 3 + 3/2 → 4,5."""
     ruimten = [
         _verkeersruimte("GangGedeeld1", aantal_onzelfstandige=2),
         _verkeersruimte("GangGedeeld2", aantal_onzelfstandige=2),
@@ -69,7 +73,7 @@ def test_verwarmde_verkeersruimten_prive_en_gedeeld_levert_3_5():
         _verkeersruimte("GangPrive2"),
         _verkeersruimte("GangPrive3"),
     ]
-    assert _punten(ruimten) == 3.5
+    assert _punten(ruimten) == 4.5
 
 
 def test_verwarmde_verkeersruimten_punten_onafhankelijk_van_invoervolgorde():
@@ -81,11 +85,15 @@ def test_verwarmde_verkeersruimten_punten_onafhankelijk_van_invoervolgorde():
         _verkeersruimte("GangGedeeld2", aantal_onzelfstandige=2),
         _verkeersruimte("GangGedeeld3", aantal_onzelfstandige=2),
     ]
-    assert _punten(ruimten) == _punten(list(reversed(ruimten))) == 3.5
+    assert _punten(ruimten) == _punten(list(reversed(ruimten))) == 4.5
 
 
 def test_verkoelde_vertrekken_punten_onafhankelijk_van_invoervolgorde():
-    """3 privé + 3 /2 verwarmd én verkoeld: verwarming 9 + verkoeling 2 = 11."""
+    """3 privé + 3 /2 verwarmd én verkoeld: verwarming 9 + verkoeling 3 = 12.
+
+    Verkoeling maximeert per teller: privé 3 − 1 = 2 en gemeenschappelijk
+    (3 − 1)/2 = 1.
+    """
     ruimten = [
         _vertrek("SlaapkamerGedeeld1", aantal_onzelfstandige=2),
         _vertrek("SlaapkamerGedeeld2", aantal_onzelfstandige=2),
@@ -94,19 +102,20 @@ def test_verkoelde_vertrekken_punten_onafhankelijk_van_invoervolgorde():
         _vertrek("SlaapkamerPrive2"),
         _vertrek("SlaapkamerPrive3"),
     ]
-    assert _punten(ruimten) == _punten(list(reversed(ruimten))) == 11.0
+    assert _punten(ruimten) == _punten(list(reversed(ruimten))) == 12.0
 
 
 def test_restant_slot_gaat_naar_kleinste_deler():
-    """3 privé vullen 3 van 4 slots; het restant gaat naar /2, niet naar /4."""
+    """Binnen de gemeenschappelijke teller vullen de /2-ruimten de 4 slots; de
+    aftrek valt op /4, niet op /2."""
     ruimten = [
         _verkeersruimte("GangDeler4", aantal_onzelfstandige=4),
-        _verkeersruimte("GangDeler2", aantal_onzelfstandige=2),
-        _verkeersruimte("GangPrive1"),
-        _verkeersruimte("GangPrive2"),
-        _verkeersruimte("GangPrive3"),
+        _verkeersruimte("GangDeler2a", aantal_onzelfstandige=2),
+        _verkeersruimte("GangDeler2b", aantal_onzelfstandige=2),
+        _verkeersruimte("GangDeler2c", aantal_onzelfstandige=2),
+        _verkeersruimte("GangDeler2d", aantal_onzelfstandige=2),
     ]
-    assert _punten(ruimten) == 3.5
+    assert _punten(ruimten) == 2.0
 
 
 def test_homogene_gedeelde_overige_ruimten_blijven_2_0():
@@ -133,3 +142,47 @@ def test_sorteer_muteert_invoerlijst_niet():
     ids_voor = [ruimte.id for ruimte in ruimten]
     _punten(ruimten)
     assert [ruimte.id for ruimte in ruimten] == ids_voor
+
+
+def test_adressen_gedeelde_verwarmde_overige_ruimten_worden_niet_gemaximeerd():
+    """Rubriek 9: 5 verwarmde verkeersruimten /2 adressen, zonder cap → 2,50."""
+    ruimten = [
+        EenhedenRuimte(
+            id=f"Gang{i}",
+            naam=f"Gang{i}",
+            soort=Ruimtesoort.verkeersruimte,
+            detail_soort=Ruimtedetailsoort.gang,
+            oppervlakte=5,
+            verwarmd=True,
+            gedeeld_met_aantal_adressen=2,
+        )
+        for i in range(1, 6)
+    ]
+    eenheid = EenhedenEenheid(id="test", ruimten=ruimten)
+    groep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
+        peildatum=REFERENTIE_PEILDATUM
+    ).waardeer(eenheid)
+    assert groep.punten == 2.5
+
+
+def test_adressen_gedeelde_verkoelde_vertrekken_worden_niet_gemaximeerd():
+    """Rubriek 9: 3 verwarmde én verkoelde vertrekken /2 adressen → 3 × 1,50."""
+    ruimten = [
+        EenhedenRuimte(
+            id=f"Woonkamer{i}",
+            naam=f"Woonkamer{i}",
+            soort=Ruimtesoort.vertrek,
+            detail_soort=Ruimtedetailsoort.woonkamer,
+            oppervlakte=20,
+            verwarmd=True,
+            verkoeld=True,
+            gedeeld_met_aantal_adressen=2,
+        )
+        for i in range(1, 4)
+    ]
+    eenheid = EenhedenEenheid(id="test", ruimten=ruimten)
+    groep = GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
+        peildatum=REFERENTIE_PEILDATUM
+    ).waardeer(eenheid)
+    # 3 × (20 m² / 2) + 3 × (2+1)/2 = 30 + 4,5. Afronding op kwart: 34,50.
+    assert groep.punten == 34.5
