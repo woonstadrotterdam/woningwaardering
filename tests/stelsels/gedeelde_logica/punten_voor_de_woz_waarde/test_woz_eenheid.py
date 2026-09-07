@@ -2,6 +2,7 @@ from datetime import date
 
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
+    woz_waardepeildatums,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -9,6 +10,13 @@ from woningwaardering.vera.bvg.generated import (
 )
 
 PEILDATUM = date(2026, 7, 1)
+
+
+def test_woz_waardepeildatums_is_eerste_januari_t_min_1_en_t_min_2():
+    assert woz_waardepeildatums(PEILDATUM) == (
+        date(2025, 1, 1),
+        date(2024, 1, 1),
+    )
 
 
 def _woz_eenheid(

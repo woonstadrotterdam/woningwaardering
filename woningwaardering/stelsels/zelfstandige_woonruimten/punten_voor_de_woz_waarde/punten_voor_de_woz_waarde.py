@@ -11,6 +11,7 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
+    woz_waardepeildatums,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -106,8 +107,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         if woz_eenheid is None:
             if eenheid.woz_eenheden:
                 datums = " of ".join(
-                    date(self.peildatum.year - jaar, 1, 1).strftime(DATUM_FORMAT)
-                    for jaar in (1, 2)
+                    waardepeildatum.strftime(DATUM_FORMAT)
+                    for waardepeildatum in woz_waardepeildatums(self.peildatum)
                 )
                 waarschuwing = f"geen WOZ-waarde gevonden met waardepeildatum {datums}"
             else:
