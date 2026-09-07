@@ -2,7 +2,6 @@ import warnings
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
-from typing import cast
 
 import pandas as pd
 from loguru import logger
@@ -12,7 +11,8 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
-    woz_waardepeildatums,
+    ontbrekende_relevante_woz_toelichting,
+    waardepeildatum_van_woz_eenheid,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -73,16 +73,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_eenheid = meest_recente_relevante_woz_eenheid(eenheid, self.peildatum)
 
         if woz_eenheid is None:
-            if eenheid.woz_eenheden:
-                datums = " of ".join(
-                    waardepeildatum.strftime(DATUM_FORMAT)
-                    for waardepeildatum in woz_waardepeildatums(self.peildatum)
-                )
-                waarschuwing = f"geen WOZ-waarde gevonden met waardepeildatum {datums}"
-            else:
-                waarschuwing = "geen WOZ-waarde aangeleverd"
             warnings.warn(
-                f"Eenheid {eenheid.id}: {waarschuwing}",
+                f"Eenheid {eenheid.id}: {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}",
                 UserWarning,
             )
             logger.info(
@@ -95,7 +87,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 punten=punten,
             )
         else:
-            waardepeildatum = cast(date, woz_eenheid.waardepeildatum)
+            waardepeildatum = waardepeildatum_van_woz_eenheid(woz_eenheid)
             woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
             adres = eenheid.adres
 

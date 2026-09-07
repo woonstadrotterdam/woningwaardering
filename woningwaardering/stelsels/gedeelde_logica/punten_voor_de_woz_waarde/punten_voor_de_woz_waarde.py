@@ -5,12 +5,34 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenWozEenheid,
 )
 
+DATUM_FORMAT = "%d-%m-%Y"
+
 
 def woz_waardepeildatums(peildatum: date) -> tuple[date, date]:
     return (
         date(peildatum.year - 1, 1, 1),
         date(peildatum.year - 2, 1, 1),
     )
+
+
+def ontbrekende_relevante_woz_toelichting(
+    eenheid: EenhedenEenheid,
+    peildatum: date,
+) -> str:
+    if eenheid.woz_eenheden:
+        datums = " of ".join(
+            waardepeildatum.strftime(DATUM_FORMAT)
+            for waardepeildatum in woz_waardepeildatums(peildatum)
+        )
+        return f"geen WOZ-waarde gevonden met waardepeildatum {datums}"
+    return "geen WOZ-waarde aangeleverd"
+
+
+def waardepeildatum_van_woz_eenheid(woz_eenheid: EenhedenWozEenheid) -> date:
+    waardepeildatum = woz_eenheid.waardepeildatum
+    if waardepeildatum is None:
+        raise ValueError("WOZ-beschikking zonder waardepeildatum")
+    return waardepeildatum
 
 
 def meest_recente_relevante_woz_eenheid(
@@ -28,7 +50,4 @@ def meest_recente_relevante_woz_eenheid(
     ]
     if not woz_eenheden:
         return None
-    return max(
-        woz_eenheden,
-        key=lambda woz_eenheid: woz_eenheid.waardepeildatum or date.min,
-    )
+    return max(woz_eenheden, key=waardepeildatum_van_woz_eenheid)

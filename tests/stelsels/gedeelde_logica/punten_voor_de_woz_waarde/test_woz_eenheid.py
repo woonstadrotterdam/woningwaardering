@@ -2,6 +2,7 @@ from datetime import date
 
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
+    ontbrekende_relevante_woz_toelichting,
     woz_waardepeildatums,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -79,3 +80,23 @@ def test_meest_recente_relevante_woz_eenheid_negeert_waarde_nul():
     )
 
     assert meest_recente_relevante_woz_eenheid(eenheid, PEILDATUM) == voorgaande
+
+
+def test_ontbrekende_relevante_woz_toelichting_zonder_aangeleverde_woz():
+    eenheid = EenhedenEenheid(id="test")
+
+    assert (
+        ontbrekende_relevante_woz_toelichting(eenheid, PEILDATUM)
+        == "geen WOZ-waarde aangeleverd"
+    )
+
+
+def test_ontbrekende_relevante_woz_toelichting_met_onbruikbare_woz():
+    eenheid = EenhedenEenheid(
+        id="test",
+        woz_eenheden=[_woz_eenheid(date(2023, 1, 1), 300_000)],
+    )
+
+    assert ontbrekende_relevante_woz_toelichting(eenheid, PEILDATUM) == (
+        "geen WOZ-waarde gevonden met waardepeildatum 01-01-2025 of 01-01-2024"
+    )

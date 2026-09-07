@@ -1,8 +1,6 @@
 from datetime import date
 from decimal import Decimal
 
-import pytest
-
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
@@ -10,7 +8,6 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waard
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    EenhedenWozEenheid,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -42,36 +39,6 @@ def _cap_punten(woz_punten: Decimal, overige_punten: Decimal) -> Decimal | None:
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     return stelselgroep._cap_punten(eenheid, woz_punten, overige_punten)
-
-
-def test_waardeer_waarschuwt_over_verwachte_waardepeildatums(
-    monkeypatch: pytest.MonkeyPatch,
-):
-    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
-    eenheid = EenhedenEenheid(
-        id="test",
-        bouwjaar=1980,
-        woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1),
-                vastgestelde_waarde=300_000,
-            )
-        ],
-    )
-    resultaat = _maak_resultaat_met_overige_punten(
-        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 50.0),
-    )
-    monkeypatch.setattr(
-        stelselgroep,
-        "bepaal_oppervlakte",
-        lambda *_: Decimal("50"),
-    )
-
-    with pytest.warns(
-        UserWarning,
-        match="01-01-2025 of 01-01-2024",
-    ):
-        stelselgroep.waardeer(eenheid, resultaat)
 
 
 def test_cap_punten_geen_cap_bij_woningwaardering_onder_187():
