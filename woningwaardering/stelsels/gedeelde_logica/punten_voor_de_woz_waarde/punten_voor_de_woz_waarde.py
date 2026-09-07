@@ -1,4 +1,5 @@
 from datetime import date
+from typing import cast
 
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -29,10 +30,9 @@ def ontbrekende_relevante_woz_toelichting(
 
 
 def waardepeildatum_van_woz_eenheid(woz_eenheid: EenhedenWozEenheid) -> date:
-    waardepeildatum = woz_eenheid.waardepeildatum
-    if waardepeildatum is None:
-        raise ValueError("WOZ-beschikking zonder waardepeildatum")
-    return waardepeildatum
+    # Na het filter in meest_recente_relevante_woz_eenheid, of bij de
+    # geconstrueerde minimum WOZ-waarde, is waardepeildatum altijd gezet.
+    return cast(date, woz_eenheid.waardepeildatum)
 
 
 def meest_recente_relevante_woz_eenheid(
