@@ -3,7 +3,7 @@
 Privé en gemeenschappelijk op hetzelfde adres hebben elk hun eigen teller. De
 helper loopt elke teller in rangorde (kleinste deler, daarna invoervolgorde)
 vóór de aanroeper deelt. Rubriek 9 gebruikt dezelfde puntwaarden zonder die
-plafonds.
+maximering.
 """
 
 from tests.peildatum import REFERENTIE_PEILDATUM
