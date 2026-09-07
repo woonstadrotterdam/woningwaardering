@@ -100,9 +100,9 @@ def waardeer_verkoeling_en_verwarming(
     ruimten boven het maximum van hun eigen teller krijgen −1. Elke teller
     loopt in rangorde (kleinste deler, daarna invoervolgorde), zodat dezelfde
     ruimten hetzelfde totaal geven.
-    In rubriek 9 blijven de puntwaarden van rubriek 3, zonder die plafonds:
-    de huurprijscheck tópt daar niet af. Deling gebeurt daarna in de
-    aanroeper. De outputvolgorde volgt die rangorde.
+    In rubriek 9 blijven de puntwaarden van rubriek 3, zonder maximering:
+    de huurprijschecktool maximeert daar namelijk ook niet. Deling gebeurt daarna in de
+    aanroeper.
 
     ``subgroep`` bepaalt per ruimte onder welke builder een subgroep (bijv.
     "verwarmde vertrekken") in de hiërarchie hangt. De helper roept het aan met

@@ -278,7 +278,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
     ) -> None:
         # Rubriek 9 neemt de puntwaarden van rubriek 3 over, zonder de plafonds
         # (max. 4 verwarmde overige ruimten, max. 2 verkoelde vertrekken). Dat
-        # volgt de huurprijscheck.
+        # volgt de huurprijschecktool.
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBuilder:
