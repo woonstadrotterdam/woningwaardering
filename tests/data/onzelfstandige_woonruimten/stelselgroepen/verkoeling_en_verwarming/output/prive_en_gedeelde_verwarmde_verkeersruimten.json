@@ -11,7 +11,7 @@
           "naam": "Verkoeling en verwarming"
         }
       },
-      "punten": 3.5,
+      "punten": 4.5,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -95,16 +95,6 @@
         },
         {
           "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
-            "naam": "Maximering",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": -0.5
-        },
-        {
-          "criterium": {
             "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__GangGedeeld3",
             "naam": "GangGedeeld3",
             "bovenliggendeCriterium": {
@@ -112,16 +102,6 @@
             }
           },
           "punten": 0.5
-        },
-        {
-          "criterium": {
-            "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
-            "naam": "Maximering",
-            "bovenliggendeCriterium": {
-              "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_overige_en_verkeersruimten"
-            }
-          },
-          "punten": -0.5
         }
       ]
     }

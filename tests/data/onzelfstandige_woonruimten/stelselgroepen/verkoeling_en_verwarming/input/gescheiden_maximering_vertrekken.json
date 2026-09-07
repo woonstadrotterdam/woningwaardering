@@ -1,0 +1,103 @@
+{
+  "ruimten": [
+    {
+      "id": "prive-1",
+      "naam": "prive-1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true
+    },
+    {
+      "id": "prive-2",
+      "naam": "prive-2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true
+    },
+    {
+      "id": "prive-3",
+      "naam": "prive-3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true
+    },
+    {
+      "id": "gedeeld-1",
+      "naam": "gedeeld-1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "gedeeld-2",
+      "naam": "gedeeld-2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    },
+    {
+      "id": "gedeeld-3",
+      "naam": "gedeeld-3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLK",
+        "naam": "Slaapkamer"
+      },
+      "oppervlakte": 15,
+      "inhoud": 40,
+      "verwarmd": true,
+      "verkoeld": true,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+    }
+  ]
+}

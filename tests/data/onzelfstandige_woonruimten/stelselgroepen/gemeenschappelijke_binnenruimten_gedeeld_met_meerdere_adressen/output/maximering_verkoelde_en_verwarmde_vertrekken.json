@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
         }
       },
-      "punten": 22.0,
+      "punten": 22.25,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -166,16 +166,6 @@
             }
           },
           "punten": 0.25
-        },
-        {
-          "criterium": {
-            "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken__max_aantal_punten",
-            "naam": "Maximering",
-            "bovenliggendeCriterium": {
-              "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken"
-            }
-          },
-          "punten": -0.25
         },
         {
           "criterium": {
