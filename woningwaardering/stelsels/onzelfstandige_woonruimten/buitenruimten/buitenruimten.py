@@ -174,7 +174,7 @@ class Buitenruimten(Stelselgroep):
         # Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan
         # voorwaarden voldoen, namelijk:
         # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
-        #    meter, 1,50 meter (hoogte, breedte, diepte). VERA: mm.
+        #    meter, 1,50 meter (hoogte, breedte, diepte). Let op: VERA definieert deze in millimeters.
         te_klein = not voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte(
             ruimte
         )

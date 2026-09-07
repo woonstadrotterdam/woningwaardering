@@ -1070,7 +1070,7 @@ Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaa
 > - Een privé achtertuin van 50 m².
 > - Een dakterras van 25 m² dat wordt gedeeld met één ander adres en daarom voor 50% meetelt.
 >
-> Voor de waardering van gedeelde buitenruimten kunnen `lengte`, `breedte` en `hoogte` (naast oppervlakte) van belang zijn. Alleen gezette velden worden getoetst tegen de minimumafmeting (2000 × 1500 × 1500 mm). Zijn afmetingen wél meegegeven en te klein, dan telt de ruimte niet mee.
+> Voor de waardering van gedeelde buitenruimten kunnen `lengte`, `breedte` en `hoogte` (naast oppervlakte) van belang zijn. Alleen als een waarde is ingevuld wordt deze getoetst tegen de minimumafmeting (2000 × 1500 × 1500 mm). Zijn afmetingen meegegeven en te klein, dan telt de ruimte niet mee.
 > /// tab | JSON
 >
 ```json
@@ -1111,7 +1111,7 @@ Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal
 3. ~~de huurder(s) moet(en) toegang hebben tot de gemeenschappelijke buitenruimte zonder vertrekken, overige ruimten of verkeersruimten te gebruiken die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).~~
 
 > [!NOTE]
-> `lengte`, `breedte` en `hoogte` zijn in VERA millimeter. Alleen gezette velden worden getoetst tegen 2000 × 1500 × 1500 mm. Te kleine meegegeven afmetingen leiden ertoe dat de ruimte niet wordt gewaardeerd.
+> `lengte`, `breedte` en `hoogte` zijn in VERA millimeter. Alleen als een waarde is ingevuld wordt deze getoetst tegen 2000 × 1500 × 1500 mm. Indien een van deze afmetingen kleiner is dan noodzakelijk voor waardering leidt dat ertoe dat de ruimte niet wordt gewaardeerd.
 
 {==
 

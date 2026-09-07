@@ -176,7 +176,7 @@ class Buitenruimten(Stelselgroep):
         if aantal_adressen >= 2:  # gedeelde buitenruimte
             # 2.8.2 Punten voor een gemeenschappelijke buitenruimte
             # er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
-            # meter, 1,50 meter (hoogte, breedte, diepte). VERA: mm.
+            # meter, 1,50 meter (hoogte, breedte, diepte). Let op: VERA definieert deze in millimeters.
             if not voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte(ruimte):
                 logger.debug(
                     f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2000, 1500, 1500) mm en wordt daarom niet gewaardeerd."
