@@ -9,6 +9,9 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
+    meest_recente_relevante_woz_eenheid,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -100,9 +103,17 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         gebruikt_minimum_waarde = False
 
         # Gebruik de minimum WOZ-waarde als er geen relevante WOZ-waarde is
-        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
+        if woz_eenheid is None:
+            if eenheid.woz_eenheden:
+                datums = " of ".join(
+                    date(self.peildatum.year - jaar, 1, 1).strftime(DATUM_FORMAT)
+                    for jaar in (1, 2)
+                )
+                waarschuwing = f"geen WOZ-waarde gevonden met waardepeildatum {datums}"
+            else:
+                waarschuwing = "geen WOZ-waarde aangeleverd"
             warnings.warn(
-                f"Eenheid ({eenheid.id}): geen WOZ-waarde gevonden, gebruik minimum WOZ-waarde",
+                f"Eenheid ({eenheid.id}): {waarschuwing}, gebruik minimum WOZ-waarde",
                 UserWarning,
             )
             woz_eenheid = self._haal_minimum_woz_waarde_op()
@@ -590,31 +601,11 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         return minimum_punten
 
     def bepaal_woz_eenheid(self, eenheid: EenhedenEenheid) -> EenhedenWozEenheid | None:
-        """
-        bepaalt de WOZ-waarde voor de eenheid.
-
-        Args:
-            eenheid (EenhedenEenheid): de eenheid waarvoor de WOZ-waarde wordt bepaald.
-
-        Returns:
-            EenhedenWozEenheid | None: de WOZ-waarde.
-        """
-        woz_eenheden = sorted(
-            (
-                woz_eenheid
-                for woz_eenheid in (eenheid.woz_eenheden or [])
-                if woz_eenheid.waardepeildatum is not None
-                and woz_eenheid.waardepeildatum.year
-                in [self.peildatum.year - 1, self.peildatum.year - 2]
-            ),
-            key=lambda x: x.waardepeildatum or date.min,
-            reverse=True,
+        """Bepaal de relevante WOZ-waarde voor de eenheid."""
+        return meest_recente_relevante_woz_eenheid(
+            eenheid,
+            self.peildatum,
         )
-
-        # Kies de eerste waarde uit de gesorteerde lijst
-        woz_waarde = next(iter(woz_eenheden), None)
-
-        return woz_waarde
 
     def _bepaal_factor_onderdeel_II(
         self,

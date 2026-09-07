@@ -1383,6 +1383,15 @@ Er zijn drie manieren waarop een woonruimte punten kan krijgen. Deze manieren zi
 _Laatst vastgestelde WOZ-waarde_  
 Met de laatst vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de peildatum van de procedure bedoeld. Sluiten partijen bijvoorbeeld een huurovereenkomst op 1 augustus 2026, dan wordt in de woningwaardering rekening gehouden met de WOZ-waarde welke per 1 januari 2026 is vastgesteld. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. De WOZ-waarde in de WOZ-beschikking van 1 januari 2026 heeft dus een waardepeildatum van 1 januari 2025.
 
+> [!NOTE]
+> Wij gebruiken de WOZ-waarde uit de meest recente WOZ-beschikking: die van het lopende kalenderjaar, met waardepeildatum 1 januari van het voorafgaande kalenderjaar. Is die beschikking op de peildatum van de procedure nog niet beschikbaar, dan gebruiken we de beschikking van het voorafgaande kalenderjaar. De waardepeildatum daarvan is 1 januari van twee kalenderjaren vóór het jaar van de procedure.
+>
+> Alleen deze twee waardepeildata gelden als relevant, omdat het Bhw voor deze twee cohorten rekencijfers publiceert. Een andere waardepeildatum, een ontbrekende vastgestelde waarde en een vastgestelde waarde van € 0 gelden niet als relevante WOZ-waarde. Een onbruikbaar record voor de nieuwste beschikking verhindert niet dat de voorgaande beschikking wordt gebruikt. Is geen relevante WOZ-waarde beschikbaar, dan volgt de taxatiewaarde en anders de minimum WOZ-waarde.
+>
+> Voor een procedure in 2026 biedt de [Huurprijscheck](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte) eveneens uitsluitend 1 januari 2025 en 1 januari 2024 als waardepeildata aan. De vier kalenderjaren in de tabel met kengetallen hieronder zijn historie voor procedures met een eerdere peildatum, net als de tabel met minimum WOZ-waarden.
+>
+> De PDF-versie van januari 2026 gebruikt in de opsomming hierboven het woord “relevante”; de actuele HTML-versie niet. De overgenomen opsomming volgt de actuele HTML. In deze toelichting gebruiken we “relevante WOZ-waarde” voor de hierboven beschreven selectie.
+
 _Taxatiewaarde door erkend Register-Taxateur_  
 De taxatiewaarde van de woonruimte moet blijken uit een (hybride)taxatierapport dat door een Register-Taxateur is opgesteld. De verhuurder is verantwoordelijk voor het (laten) opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld. Als er een WOZ-waarde is vastgesteld dan vervalt de taxatiewaarde voor de toepassing van deze rubriek.
 
