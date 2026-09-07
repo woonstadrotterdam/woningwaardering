@@ -11,7 +11,7 @@ De primaire context is de publieke `woningwaardering`-package. Lokale of organis
 - `docs/aan-de-slag/index.md` beschrijft gebruik, warnings-gedrag en outputstructuur voor gebruikers.
 - `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, repository-structuur, naamgeving, tests, data, logging, releases en de criteriumstrategie (builders).
 - `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
-- Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Vanaf deze pagina's klik je door naar de algemene toelichting en de stelselgroepen.
+- Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Hiermee worden de HTML-pagina's bedoeld waarnaar deze pagina's doorlinken. De PDF-versie is een momentopname die gedurende het jaar kan achterlopen op de HTML-versie.
 - [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte). Een lokale XML-kopie van deze versie staat in `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml`.
 - De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/) van de Huurcommissie ([zelfstandig](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte), [onzelfstandig](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte)).
 
@@ -59,7 +59,7 @@ De datum waarop de waardering wordt bepaald. De peildatum bepaalt onder meer of 
 
 ### Beleidsboek
 
-De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). De tekst van het beleidsboek vormt de inhoudelijke basis voor de implementatie, maar kan ruimte laten voor interpretatie of botsen met technische beperkingen.
+De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek bestaat uit de actuele HTML-pagina's voor [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). De PDF-versie is een momentopname en kan gedurende het jaar achterlopen op de HTML-versie. De tekst van het beleidsboek vormt de inhoudelijke basis voor de implementatie, maar kan ruimte laten voor interpretatie of botsen met technische beperkingen.
 
 ### Huurprijscheck
 
