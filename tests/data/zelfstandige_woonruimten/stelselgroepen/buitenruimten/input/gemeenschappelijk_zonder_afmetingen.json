@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_zonder_afmetingen",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "DAK",
+        "naam": "Dakterras"
+      },
+      "naam": "Dakterras zonder afmetingen",
+      "oppervlakte": 20,
+      "verwarmd": false,
+      "gedeeldMetAantalAdressen": 2
+    }
+  ]
+}
