@@ -13,8 +13,8 @@
       "naam": "Klein balkon",
       "inhoud": 14.4272,
       "oppervlakte": 1,
-      "lengte": 2,
-      "breedte": 0.5,
+      "lengte": 2000,
+      "breedte": 500,
       "verwarmd": false
     },
     {
@@ -31,8 +31,8 @@
       "inhoud": 14.4272,
       "oppervlakte": 4.5,
       "verwarmd": false,
-      "lengte": 3,
-      "breedte": 1.5,
+      "lengte": 3000,
+      "breedte": 1500,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     },
     {
@@ -49,8 +49,8 @@
       "inhoud": 14.4272,
       "oppervlakte": 52,
       "verwarmd": false,
-      "lengte": 8,
-      "breedte": 6.5,
+      "lengte": 8000,
+      "breedte": 6500,
       "gedeeldMetAantalAdressen": 5,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }

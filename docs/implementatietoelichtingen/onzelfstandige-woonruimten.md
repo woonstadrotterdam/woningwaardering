@@ -1058,7 +1058,7 @@ Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan een drietal
 3. ~~de huurder(s) moet(en) toegang hebben tot de gemeenschappelijke buitenruimte zonder vertrekken, overige ruimten of verkeersruimten te gebruiken die uitsluitend ter beschikking staan aan de verhuurder of aan (een) andere huurder(s).~~  
 
 > [!NOTE]
-> Er wordt vanuitgegaan dat gemeenschappelijke buitenruimten die worden meegegeven als zodanig aan de hierboven beschreven eisen voldoen.
+> `lengte`, `breedte` en `hoogte` zijn in VERA millimeter. Alleen gezette velden worden getoetst tegen 2000 × 1500 × 1500 mm. Te kleine meegegeven afmetingen leiden ertoe dat de ruimte niet wordt gewaardeerd.
 
 {==
 

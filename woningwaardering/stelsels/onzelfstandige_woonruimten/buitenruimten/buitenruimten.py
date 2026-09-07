@@ -11,6 +11,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.buitenruimten import (
+    voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte,
+)
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     hoort_altijd_in_gemeenschappelijke_parkeerruimten,
     hoort_prive_in_buitenruimten,
@@ -168,29 +171,18 @@ class Buitenruimten(Stelselgroep):
             return
 
         # 2.8.2 Punten voor een gemeenschappelijke buitenruimte
-        # Gemeenschappelijke buitenruimten zijn ruimtes die worden gebruikt door:
-        # - meerdere bewoners die wonen op hetzelfde adres
-        # - bewoners van meerdere adressen, maar waarbij die adressen onderdeel
-        #   zijn van hetzelfde woongebouw.
         # Gemeenschappelijke buitenruimten moeten voor de woningwaardering aan
         # voorwaarden voldoen, namelijk:
         # 1. er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
-        #    meter, 1,50 meter (hoogte, breedte, diepte)
-        if not is_prive(ruimte):
-            if not (ruimte.lengte and ruimte.breedte):
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
-                    UserWarning,
-                )
-            if (
-                (ruimte.hoogte and ruimte.hoogte < 2)
-                or (ruimte.lengte and ruimte.lengte < 1.5)
-                or (ruimte.breedte and ruimte.breedte < 1.5)
-            ):
-                logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
-                )
-                return
+        #    meter, 1,50 meter (hoogte, breedte, diepte). VERA: mm.
+        te_klein = not voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte(
+            ruimte
+        )
+        if not is_prive(ruimte) and te_klein:
+            logger.debug(
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gemeenschappelijke buitenruimte met een (h, l, b) kleiner dan (2000, 1500, 1500) mm en wordt daarom niet gewaardeerd."
+            )
+            return
 
         # Een carport of parkeerplaats wordt hier alleen als privé-buitenruimte
         # gewaardeerd; gemeenschappelijk hoort zij in rubriek 10.

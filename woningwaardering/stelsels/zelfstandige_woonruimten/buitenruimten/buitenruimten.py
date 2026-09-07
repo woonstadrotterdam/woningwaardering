@@ -12,6 +12,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
+from woningwaardering.stelsels.gedeelde_logica.buitenruimten import (
+    voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte,
+)
 from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
     hoort_altijd_in_gemeenschappelijke_parkeerruimten,
     hoort_prive_in_buitenruimten,
@@ -171,19 +174,12 @@ class Buitenruimten(Stelselgroep):
 
         aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
         if aantal_adressen >= 2:  # gedeelde buitenruimte
-            # Gemeenschappelijke buitenruimten hebben een minimumafmeting van 2 m x 1,5 m, 1,5 m (hoogte, lengte, breedte)
-            if not (ruimte.lengte and ruimte.breedte):
-                warnings.warn(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een gedeelde buitenruimte, maar heeft geen lengte en/of breedte, terwijl daar wel eisen voor zijn: (h, l, b) >= (2, 1.5, 1.5).",
-                    UserWarning,
-                )
-            if (
-                (ruimte.hoogte and ruimte.hoogte < 2)
-                or (ruimte.lengte and ruimte.lengte < 1.5)
-                or (ruimte.breedte and ruimte.breedte < 1.5)
-            ):
+            # 2.8.2 Punten voor een gemeenschappelijke buitenruimte
+            # er moet sprake zijn van een minimumafmeting van 2,00 meter x 1,50
+            # meter, 1,50 meter (hoogte, breedte, diepte). VERA: mm.
+            if not voldoet_aan_minimumafmeting_gemeenschappelijke_buitenruimte(ruimte):
                 logger.debug(
-                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2, 1.5, 1.5) en wordt daarom niet gewaardeerd."
+                    f"Ruimte '{ruimte.naam}' ({ruimte.id}) is een met {aantal_adressen} gedeelde buitenruimte met een (h, l, b) kleiner dan (2000, 1500, 1500) mm en wordt daarom niet gewaardeerd."
                 )
                 return
             logger.debug(

@@ -13,9 +13,9 @@
       "naam": "Te korte buitenruimte",
       "inhoud": 9.01742,
       "oppervlakte": 3.14196,
-      "lengte": 1.15,
-      "breedte": 2.8,
-      "hoogte": 3.17,
+      "lengte": 1150,
+      "breedte": 2800,
+      "hoogte": 3170,
       "verwarmd": false,
       "gedeeldMetAantalAdressen": 2
     },
@@ -32,9 +32,9 @@
       "naam": "Te smalle buitenruimte",
       "inhoud": 9.01742,
       "oppervlakte": 3.14196,
-      "breedte": 1.15,
-      "lengte": 2.8,
-      "hoogte": 3.17,
+      "breedte": 1150,
+      "lengte": 2800,
+      "hoogte": 3170,
       "verwarmd": false,
       "gedeeldMetAantalAdressen": 2
     },
@@ -51,9 +51,9 @@
       "naam": "Te lage buitenruimte",
       "inhoud": 9.01742,
       "oppervlakte": 3.14196,
-      "lengte": 3.17,
-      "breedte": 2.8,
-      "hoogte": 1.15,
+      "lengte": 3170,
+      "breedte": 2800,
+      "hoogte": 1150,
       "verwarmd": false,
       "gedeeldMetAantalAdressen": 2
     }

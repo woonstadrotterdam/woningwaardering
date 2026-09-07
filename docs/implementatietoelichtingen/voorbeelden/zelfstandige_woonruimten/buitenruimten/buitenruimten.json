@@ -20,8 +20,8 @@
         "code": "DAK",
         "naam": "Dakterras"
       },
-      "breedte": 5.0,
-      "lengte": 5.0,
+      "breedte": 5000.0,
+      "lengte": 5000.0,
       "oppervlakte": 25.0,
       "gedeeldMetAantalAdressen": 2
     }
