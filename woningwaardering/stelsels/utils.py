@@ -561,16 +561,6 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
         Ruimtedetailsoort.recreatieruimte,
         Ruimtedetailsoort.overige_ruimte,
     ]:
-        if (
-            ruimte.detail_soort == Ruimtedetailsoort.berging
-            and ruimte.soort == Ruimtesoort.overige_ruimten
-        ):
-            aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
-            if (opp_met_kasten / Decimal(str(aantal_adressen))) >= Decimal("2"):
-                return Ruimtesoort.overige_ruimten
-            else:
-                return None
-
         if ruimte.soort == Ruimtesoort.vertrek:
             if opp_met_kasten >= Decimal("4"):
                 return Ruimtesoort.vertrek

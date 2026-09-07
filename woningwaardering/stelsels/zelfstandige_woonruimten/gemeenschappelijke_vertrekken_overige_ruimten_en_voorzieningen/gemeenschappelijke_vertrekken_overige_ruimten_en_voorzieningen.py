@@ -37,7 +37,6 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Doelgroep,
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -130,26 +129,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ruimtesoort = classificeer_ruimte(ruimte)
             if ruimtesoort not in (Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten):
                 continue
-
-            if ruimte.detail_soort in [
-                Ruimtedetailsoort.berging,
-                Ruimtedetailsoort.bergruimte,
-            ]:
-                # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
-                #
-                # […]
-                # * de oppervlakte, na deling door het aantal adressen, per woning minstens
-                #   2m2 bedraagt.
-                oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
-                if oppervlakte_met_kasten and ruimte.gedeeld_met_aantal_adressen:
-                    gedeelde_oppervlakte = (
-                        oppervlakte_met_kasten / ruimte.gedeeld_met_aantal_adressen
-                    )
-                    if gedeelde_oppervlakte < Decimal("2.0"):
-                        logger.info(
-                            f"Ruimte ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {self.stelselgroep.naam}"
-                        )
-                        continue
 
             oppervlaktegroepen[
                 (

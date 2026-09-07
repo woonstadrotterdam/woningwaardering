@@ -11,7 +11,7 @@
           "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
         }
       },
-      "punten": 1.5,
+      "punten": 2.75,
       "woningwaarderingen": [
         {
           "criterium": {
@@ -36,6 +36,36 @@
             "naam": "Berging",
             "bovenliggendeCriterium": {
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__oppervlakte_van_overige_ruimten"
+            },
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen",
+            "naam": "Gedeeld met 6 adressen"
+          }
+        },
+        {
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_overige_ruimten",
+            "naam": "Oppervlakte van overige ruimten",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen"
+            }
+          },
+          "punten": 1.25
+        },
+        {
+          "aantal": 10.0,
+          "criterium": {
+            "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_overige_ruimten__Space_2",
+            "naam": "Berging",
+            "bovenliggendeCriterium": {
+              "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_6_adressen__oppervlakte_van_overige_ruimten"
             },
             "meeteenheid": {
               "code": "M2",
