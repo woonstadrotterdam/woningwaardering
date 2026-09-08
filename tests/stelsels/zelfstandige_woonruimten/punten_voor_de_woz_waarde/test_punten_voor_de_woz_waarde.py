@@ -11,6 +11,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waard
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    EenhedenWozEenheid,
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -132,22 +133,89 @@ def _resultaat_voor_woz_warning() -> (
     )
 
 
+def _eenheid_zonder_woz() -> EenhedenEenheid:
+    return EenhedenEenheid(id="test")
+
+
+def _eenheid_onbruikbare_woz() -> EenhedenEenheid:
+    return EenhedenEenheid(
+        id="test",
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1),
+                vastgestelde_waarde=300_000,
+            )
+        ],
+    )
+
+
 def test_geen_woz_error_geeft_instructie_met_woz_eenheden():
+    """Zonder WOZ-waarde en simplefilter("error") stopt de run.
+
+    De UserWarning vraagt om wozEenheden met de waardepeildatums T-1/T-2
+    en noemt het minimumbedrag dat anders wordt toegepast.
+    """
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
-    eenheid = EenhedenEenheid(id="test")
     with warnings.catch_warnings():
         warnings.simplefilter("error", UserWarning)
         with pytest.raises(UserWarning, match="wozEenheden") as excinfo:
-            stelselgroep.waardeer(eenheid, _resultaat_voor_woz_warning())
+            stelselgroep.waardeer(_eenheid_zonder_woz(), _resultaat_voor_woz_warning())
     assert "€85806" in str(excinfo.value)
     assert "01-01-2025" in str(excinfo.value)
 
 
 def test_geen_woz_default_geeft_minimum_wordt_toegepast():
+    """Zonder WOZ-waarde en simplefilter("default") gaat de berekening door.
+
+    De WOZ-UserWarning noemt het toegepaste minimumbedrag, niet de
+    instructie om wozEenheden mee te geven. Andere warnings (zoals 0 m²)
+    tellen niet mee.
+    """
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
-    eenheid = EenhedenEenheid(id="test")
     with warnings.catch_warnings():
         warnings.simplefilter("default", UserWarning)
-        with pytest.warns(UserWarning, match="wordt toegepast") as recorded:
-            stelselgroep.waardeer(eenheid, _resultaat_voor_woz_warning())
-    assert not any("wozEenheden" in str(w.message) for w in recorded)
+        with pytest.warns(UserWarning) as recorded:
+            stelselgroep.waardeer(_eenheid_zonder_woz(), _resultaat_voor_woz_warning())
+    teksten = [str(w.message) for w in recorded]
+    woz_teksten = [tekst for tekst in teksten if "minimum WOZ-waarde" in tekst]
+    assert len(woz_teksten) == 1
+    assert "€85806" in woz_teksten[0]
+    assert "wozEenheden" not in woz_teksten[0]
+
+
+def test_onbruikbare_woz_error_geeft_waardepeildatums_en_woz_eenheden():
+    """Een WOZ-beschikking buiten T-1/T-2 telt niet; error vraagt om invoer.
+
+    De UserWarning noemt wozEenheden, de waardepeildatums
+    01-01-2025 of 01-01-2024, en het minimumbedrag.
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UserWarning)
+        with pytest.raises(UserWarning, match="wozEenheden") as excinfo:
+            stelselgroep.waardeer(
+                _eenheid_onbruikbare_woz(), _resultaat_voor_woz_warning()
+            )
+    tekst = str(excinfo.value)
+    assert "€85806" in tekst
+    assert "01-01-2025 of 01-01-2024" in tekst
+
+
+def test_onbruikbare_woz_default_geeft_minimum_zonder_woz_eenheden():
+    """Een WOZ-beschikking buiten T-1/T-2; default past het minimum toe.
+
+    De WOZ-UserWarning noemt het minimumbedrag, niet de instructie om
+    wozEenheden mee te geven.
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
+    with warnings.catch_warnings():
+        warnings.simplefilter("default", UserWarning)
+        with pytest.warns(UserWarning) as recorded:
+            stelselgroep.waardeer(
+                _eenheid_onbruikbare_woz(), _resultaat_voor_woz_warning()
+            )
+    teksten = [str(w.message) for w in recorded]
+    woz_teksten = [tekst for tekst in teksten if "minimum WOZ-waarde" in tekst]
+    assert len(woz_teksten) == 1
+    assert "€85806" in woz_teksten[0]
+    assert "wozEenheden" not in woz_teksten[0]
