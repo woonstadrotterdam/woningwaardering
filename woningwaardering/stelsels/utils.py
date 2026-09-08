@@ -81,6 +81,32 @@ AFRONDING_OP_KWARTPUNTEN_ID_SEGMENT = "afronding_op_kwartpunten"
 AFRONDING_OP_KWARTPUNTEN_NAAM = "Afronding op kwartpunten"
 
 
+def _userwarning_setting() -> str:
+    """Effectieve ``simplefilter``-setting voor ``UserWarning``.
+
+    Loopt ``warnings.filters`` af zoals CPython: eerste match wint. Alleen
+    category-wide regels (geen message-, module- of regelrestrictie), omdat de
+    package-docs alleen ``simplefilter("error"|"default"|"ignore", UserWarning)``
+    beschrijven. Geen match → ``"default"``.
+    """
+    for action, message, category, module, lineno in warnings.filters:
+        if message is not None or module is not None or lineno != 0:
+            continue
+        if issubclass(UserWarning, category):
+            return action
+    return "default"
+
+
+def waarschuw_gebruiker(*, error: str, log: str) -> None:
+    """UserWarning waarvan de tekst afhangt van de UserWarning-setting.
+
+    ``error`` is de tekst bij ``simplefilter("error")`` (package-standaard): de
+    run stopt. ``log`` is de tekst als de berekening doorgaat.
+    """
+    tekst = error if _userwarning_setting() == "error" else log
+    warnings.warn(tekst, UserWarning, stacklevel=2)
+
+
 def _gedeeld_met_deler(criterium_id: str | None) -> Decimal:
     """Bepaal waarmee een bruto ``aantal`` gedeeld moet worden (gedeeld-met-deler).
 

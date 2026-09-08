@@ -13,6 +13,7 @@ from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import 
     meest_recente_relevante_woz_eenheid,
     ontbrekende_relevante_woz_toelichting,
     waardepeildatum_van_woz_eenheid,
+    woz_waardepeildatums,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -106,12 +107,29 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
 
         # Gebruik de minimum WOZ-waarde als er geen relevante WOZ-waarde is
         if woz_eenheid is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}, gebruik minimum WOZ-waarde",
-                UserWarning,
-            )
             woz_eenheid = self._haal_minimum_woz_waarde_op()
             gebruikt_minimum_waarde = True
+            toelichting = ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)
+            datums = " of ".join(
+                waardepeildatum.strftime(DATUM_FORMAT)
+                for waardepeildatum in woz_waardepeildatums(self.peildatum)
+            )
+            minimum_waardepeildatum = waardepeildatum_van_woz_eenheid(woz_eenheid)
+            utils.waarschuw_gebruiker(
+                error=(
+                    f"Eenheid ({eenheid.id}): {toelichting}, "
+                    f"geef eenheid.wozEenheden mee met de WOZ-waarde van {datums}, "
+                    f"anders wordt de minimum WOZ-waarde van "
+                    f"€{woz_eenheid.vastgestelde_waarde:.0f} op "
+                    f"{minimum_waardepeildatum.strftime(DATUM_FORMAT)} toegepast"
+                ),
+                log=(
+                    f"Eenheid ({eenheid.id}): {toelichting}, "
+                    f"de minimum WOZ-waarde van "
+                    f"€{woz_eenheid.vastgestelde_waarde:.0f} op "
+                    f"{minimum_waardepeildatum.strftime(DATUM_FORMAT)} wordt toegepast"
+                ),
+            )
         else:
             # Als er een relevante WOZ-waarde is, gebruik die
             logger.info(

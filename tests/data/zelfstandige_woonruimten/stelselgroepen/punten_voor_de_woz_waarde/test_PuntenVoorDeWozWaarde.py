@@ -43,7 +43,7 @@ warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_woz.json",
         warnings={
-            UserWarning: "geen WOZ-waarde aangeleverd",
+            UserWarning: "minimum WOZ-waarde",
         },
     ),
 ]

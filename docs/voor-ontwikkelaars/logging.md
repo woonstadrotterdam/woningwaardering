@@ -28,6 +28,8 @@ Het gebruikersgedrag (`UserWarning` → standaard error, `simplefilter`, `Deprec
 Alle waarschuwingen die met `warnings.warn()` worden gegenereerd, loggen we via `logger.warning()` (als logging aanstaat) en tonen we via de standaardfoutuitvoer (_stderr_).
 Ook als logging uitstaat, blijven deze waarschuwingen zichtbaar via _stderr_.
 
+Voor incomplete of onjuiste invoer waarvan de berekening tóch door kan gebruik je `waarschuw_gebruiker` in [`utils.py`](../../woningwaardering/stelsels/utils.py). `error` is de tekst bij `simplefilter("error")` (package-standaard): de run stopt. `log` is de tekst als de berekening doorgaat.
+
 ### Warning vs Exception
 
 In de stelselgroepen gebruiken we doorgaans `warnings.warn()` in plaats van het raisen van een exceptie.
