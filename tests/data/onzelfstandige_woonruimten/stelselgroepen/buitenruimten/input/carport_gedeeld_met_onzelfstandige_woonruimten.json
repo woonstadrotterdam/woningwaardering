@@ -13,8 +13,8 @@
       },
       "naam": "Carport",
       "oppervlakte": 12,
-      "lengte": 4,
-      "breedte": 3,
+      "lengte": 4000,
+      "breedte": 3000,
       "aantal": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 3
     }

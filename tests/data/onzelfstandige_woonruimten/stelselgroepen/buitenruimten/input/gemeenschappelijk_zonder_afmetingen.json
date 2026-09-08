@@ -1,7 +1,7 @@
 {
   "ruimten": [
     {
-      "id": "Space_108017429",
+      "id": "Space_zonder_afmetingen",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -10,11 +10,8 @@
         "code": "TUI",
         "naam": "Tuin"
       },
-      "naam": "Tuin",
-      "oppervlakte": 6,
-      "hoogte": 2500,
-      "lengte": 1000,
-      "breedte": 1000,
+      "naam": "Tuin zonder afmetingen",
+      "oppervlakte": 30,
       "verwarmd": false,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
