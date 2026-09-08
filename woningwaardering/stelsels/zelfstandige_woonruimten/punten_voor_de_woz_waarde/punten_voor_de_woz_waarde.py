@@ -118,7 +118,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             utils.waarschuw_gebruiker(
                 error=(
                     f"Eenheid ({eenheid.id}): {toelichting}, "
-                    f"geef eenheid.wozEenheden mee met een WOZ-waarde uit {datums}, "
+                    f"geef eenheid.wozEenheden mee met de WOZ-waarde van {datums}, "
                     f"anders wordt de minimum WOZ-waarde van "
                     f"€{woz_eenheid.vastgestelde_waarde:.0f} op "
                     f"{minimum_waardepeildatum.strftime(DATUM_FORMAT)} toegepast"
