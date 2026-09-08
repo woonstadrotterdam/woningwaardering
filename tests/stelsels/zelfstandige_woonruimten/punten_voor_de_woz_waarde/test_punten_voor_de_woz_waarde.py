@@ -1,5 +1,8 @@
+import warnings
 from datetime import date
 from decimal import Decimal
+
+import pytest
 
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
@@ -119,3 +122,32 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
     assert "nieuwbouw_minimum_punten" not in segmenten
+
+
+def _resultaat_voor_woz_warning() -> (
+    WoningwaarderingResultatenWoningwaarderingResultaat
+):
+    return _maak_resultaat_met_overige_punten(
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
+    )
+
+
+def test_geen_woz_error_geeft_instructie_met_woz_eenheden():
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
+    eenheid = EenhedenEenheid(id="test")
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UserWarning)
+        with pytest.raises(UserWarning, match="wozEenheden") as excinfo:
+            stelselgroep.waardeer(eenheid, _resultaat_voor_woz_warning())
+    assert "€85806" in str(excinfo.value)
+    assert "01-01-2025" in str(excinfo.value)
+
+
+def test_geen_woz_default_geeft_minimum_wordt_toegepast():
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1))
+    eenheid = EenhedenEenheid(id="test")
+    with warnings.catch_warnings():
+        warnings.simplefilter("default", UserWarning)
+        with pytest.warns(UserWarning, match="wordt toegepast") as recorded:
+            stelselgroep.waardeer(eenheid, _resultaat_voor_woz_warning())
+    assert not any("wozEenheden" in str(w.message) for w in recorded)

@@ -13,6 +13,7 @@ from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import 
     meest_recente_relevante_woz_eenheid,
     ontbrekende_relevante_woz_toelichting,
     waardepeildatum_van_woz_eenheid,
+    woz_waardepeildatums,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
@@ -73,9 +74,21 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_eenheid = meest_recente_relevante_woz_eenheid(eenheid, self.peildatum)
 
         if woz_eenheid is None:
-            warnings.warn(
-                f"Eenheid {eenheid.id}: {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}",
-                UserWarning,
+            toelichting = ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)
+            datums = " of ".join(
+                waardepeildatum.strftime(DATUM_FORMAT)
+                for waardepeildatum in woz_waardepeildatums(self.peildatum)
+            )
+            utils.waarschuw_gebruiker(
+                error=(
+                    f"Eenheid ({eenheid.id}): {toelichting}, "
+                    f"geef eenheid.wozEenheden mee met een WOZ-waarde uit {datums}, "
+                    f"anders wordt het minimum van 10 punten toegepast"
+                ),
+                log=(
+                    f"Eenheid ({eenheid.id}): {toelichting}, "
+                    f"het minimum van 10 punten wordt toegepast"
+                ),
             )
             logger.info(
                 f"Eenheid {eenheid.id}: geen WOZ-waarde bekend. Laagste puntenaantal voor de WOZ-waarde wordt toegepast (10 punten)."
