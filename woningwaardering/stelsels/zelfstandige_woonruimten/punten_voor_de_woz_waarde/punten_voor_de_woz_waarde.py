@@ -9,6 +9,11 @@ from loguru import logger
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
+    meest_recente_relevante_woz_eenheid,
+    ontbrekende_relevante_woz_toelichting,
+    waardepeildatum_van_woz_eenheid,
+)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -96,13 +101,13 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 negeer_stelselgroep=Woningwaarderingstelselgroep.punten_voor_de_woz_waarde,
             )
 
-        woz_eenheid = self.bepaal_woz_eenheid(eenheid)
+        woz_eenheid = meest_recente_relevante_woz_eenheid(eenheid, self.peildatum)
         gebruikt_minimum_waarde = False
 
         # Gebruik de minimum WOZ-waarde als er geen relevante WOZ-waarde is
-        if woz_eenheid is None or woz_eenheid.vastgestelde_waarde is None:
+        if woz_eenheid is None:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): geen WOZ-waarde gevonden, gebruik minimum WOZ-waarde",
+                f"Eenheid ({eenheid.id}): {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}",
                 UserWarning,
             )
             woz_eenheid = self._haal_minimum_woz_waarde_op()
@@ -113,15 +118,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): WOZ-waarde op waardepeildatum {woz_eenheid.waardepeildatum} is €{woz_eenheid.vastgestelde_waarde:.0f}"
             )
 
-        if woz_eenheid.waardepeildatum is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): WOZ-eenheid heeft geen waardepeildatum",
-                UserWarning,
-            )
-            return _niet_waardeerbaar()
-
+        waardepeildatum = pd.to_datetime(waardepeildatum_van_woz_eenheid(woz_eenheid))
         woz_waarde = Decimal(str(woz_eenheid.vastgestelde_waarde))
-        waardepeildatum = pd.to_datetime(woz_eenheid.waardepeildatum)
 
         # De WOZ-factor wordt bepaald op basis van de waardepeildatum van de WOZ-waarde.
         filtered = self.pd_woz_factor[
@@ -588,33 +586,6 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
 
         return minimum_punten
-
-    def bepaal_woz_eenheid(self, eenheid: EenhedenEenheid) -> EenhedenWozEenheid | None:
-        """
-        bepaalt de WOZ-waarde voor de eenheid.
-
-        Args:
-            eenheid (EenhedenEenheid): de eenheid waarvoor de WOZ-waarde wordt bepaald.
-
-        Returns:
-            EenhedenWozEenheid | None: de WOZ-waarde.
-        """
-        woz_eenheden = sorted(
-            (
-                woz_eenheid
-                for woz_eenheid in (eenheid.woz_eenheden or [])
-                if woz_eenheid.waardepeildatum is not None
-                and woz_eenheid.waardepeildatum.year
-                in [self.peildatum.year - 1, self.peildatum.year - 2]
-            ),
-            key=lambda x: x.waardepeildatum or date.min,
-            reverse=True,
-        )
-
-        # Kies de eerste waarde uit de gesorteerde lijst
-        woz_waarde = next(iter(woz_eenheden), None)
-
-        return woz_waarde
 
     def _bepaal_factor_onderdeel_II(
         self,
