@@ -107,7 +107,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # Gebruik de minimum WOZ-waarde als er geen relevante WOZ-waarde is
         if woz_eenheid is None:
             warnings.warn(
-                f"Eenheid ({eenheid.id}): {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}, gebruik minimum WOZ-waarde",
+                f"Eenheid ({eenheid.id}): {ontbrekende_relevante_woz_toelichting(eenheid, self.peildatum)}",
                 UserWarning,
             )
             woz_eenheid = self._haal_minimum_woz_waarde_op()
