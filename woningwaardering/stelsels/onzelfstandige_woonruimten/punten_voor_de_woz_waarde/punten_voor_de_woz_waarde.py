@@ -268,6 +268,12 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             dtype={"COROP-gebiedcode": str, str(jaar): str},
         )
 
+        if str(jaar) not in df_woz.columns:
+            raise ValueError(
+                f"Geen gemiddelde WOZ-waarden per COROP-gebied beschikbaar "
+                f"voor waardepeildatum {jaar}."
+            )
+
         woz_mask = df_woz["COROP-gebiedcode"] == corop_gebied["code"]
 
         if not woz_mask.any():

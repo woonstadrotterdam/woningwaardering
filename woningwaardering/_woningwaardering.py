@@ -4,6 +4,7 @@ from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
 )
+from woningwaardering.stelsels.utils import controleer_peildatum
 from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
     ZelfstandigeWoonruimten,
 )
@@ -27,6 +28,15 @@ class Woningwaardering:
         peildatum (date): De peildatum voor de waardering.
         stelsels (dict): Dictionary met alle beschikbare stelsels.
     """
+
+    @property
+    def peildatum(self) -> date:
+        return self._peildatum
+
+    @peildatum.setter
+    def peildatum(self, value: date) -> None:
+        controleer_peildatum(value)
+        self._peildatum = value
 
     def __init__(self, peildatum: date = date.today()) -> None:
         self.peildatum = peildatum

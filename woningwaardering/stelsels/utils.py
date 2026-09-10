@@ -1,5 +1,6 @@
 import asyncio
 import warnings
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
 from typing import Any, Counter
@@ -51,6 +52,25 @@ ZOLDER_DETAIL_SOORTEN = frozenset(
         Ruimtedetailsoort.zoldervertrek,
     }
 )
+
+ONDERSTEUNDE_PEILDATUM_VANAF = date(2026, 1, 1)
+ONDERSTEUNDE_PEILDATUM_TOT = date(2027, 1, 1)
+
+
+def controleer_peildatum(peildatum: date) -> None:
+    """Controleer of de peildatum door deze packageversie wordt ondersteund."""
+    if peildatum < ONDERSTEUNDE_PEILDATUM_VANAF:
+        raise ValueError(
+            f"Peildatum {peildatum} wordt niet ondersteund. "
+            "De ondersteunde periode loopt van 01-01-2026 tot en met 31-12-2026."
+        )
+
+    if peildatum >= ONDERSTEUNDE_PEILDATUM_TOT:
+        warnings.warn(
+            f"Peildatum {peildatum} valt buiten de ondersteunde periode. "
+            "De package gebruikt regels en bedragen voor 2026.",
+            DeprecationWarning,
+        )
 
 
 def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:

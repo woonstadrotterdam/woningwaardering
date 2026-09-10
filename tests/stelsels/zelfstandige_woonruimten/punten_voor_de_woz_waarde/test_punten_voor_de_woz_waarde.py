@@ -1,6 +1,6 @@
-from datetime import date
 from decimal import Decimal
 
+from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
@@ -36,7 +36,7 @@ def _maak_resultaat_met_overige_punten(
 
 
 def _cap_punten(woz_punten: Decimal, overige_punten: Decimal) -> Decimal | None:
-    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     return stelselgroep._cap_punten(eenheid, woz_punten, overige_punten)
 
@@ -81,7 +81,7 @@ def test_cap_punten_wel_cap_boven_187_drempel():
 
 def test_corrigeer_woz_punten_186_vloer_bij_186_5():
     """11.3: 186,50 zonder cap wordt 187, cap trekt onder 187, vloer is 186."""
-    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
     eenheid = EenhedenEenheid(id="test", bouwjaar=1980)
     resultaat = _maak_resultaat_met_overige_punten(
         (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 100.0),
@@ -102,7 +102,7 @@ def test_corrigeer_woz_punten_186_vloer_bij_186_5():
 
 def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     """#326: nieuwbouw 2015-2019 met ≥110 punten maar WOZ > 40 → cap wél toepassen."""
-    stelselgroep = PuntenVoorDeWozWaarde(peildatum=date(2025, 1, 1))
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
     eenheid = EenhedenEenheid(id="test", bouwjaar=2016)
     resultaat = _maak_resultaat_met_overige_punten(
         (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
