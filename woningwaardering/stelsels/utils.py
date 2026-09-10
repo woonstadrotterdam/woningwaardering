@@ -68,7 +68,7 @@ def controleer_peildatum(peildatum: date) -> None:
     if peildatum >= ONDERSTEUNDE_PEILDATUM_TOT:
         warnings.warn(
             f"Peildatum {peildatum} valt buiten de ondersteunde periode. "
-            "De package gebruikt regels en bedragen voor 2026.",
+            "De package gebruikt regels en bedragen van 2026.",
             DeprecationWarning,
         )
 
