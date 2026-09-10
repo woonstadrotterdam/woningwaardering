@@ -55,7 +55,10 @@ warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_geldige_woz_waarde.json",
         warnings={
-            UserWarning: "geen WOZ-waarde",
+            UserWarning: (
+                "geen WOZ-waarde gevonden met waardepeildatum "
+                "01-01-2025 of 01-01-2024"
+            ),
         },
     ),
     WarningConfig(

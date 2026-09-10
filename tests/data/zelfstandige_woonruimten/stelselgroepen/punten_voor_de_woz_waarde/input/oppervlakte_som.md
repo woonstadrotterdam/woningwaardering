@@ -1,1 +1,1 @@
-Deze testcase is bedoeld om te kijken of de som van de parkeervakken correct wordt toegepast en opgeteld voor punten voor de woz waarde.
+Deze testcase is bedoeld om te kijken of de som van de parkeervakken correct wordt toegepast en opgeteld voor punten voor de woz waarde. Het WOZ-record met waardepeildatum 1 januari 2025 heeft geen vastgestelde waarde; de waardering valt daardoor terug op de beschikking van 1 januari 2024.
