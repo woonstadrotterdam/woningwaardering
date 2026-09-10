@@ -27,7 +27,7 @@
               "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen"
             }
           },
-          "punten": 1.875
+          "punten": 1.88
         },
         {
           "aantal": 5.0,
@@ -48,7 +48,7 @@
             "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.125
+          "punten": 0.12
         }
       ]
     }

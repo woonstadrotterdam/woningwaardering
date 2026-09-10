@@ -13,8 +13,8 @@
       "naam": "Tuin",
       "inhoud": 14.4272,
       "oppervlakte": 30,
-      "lengte": 6,
-      "breedte": 5,
+      "lengte": 6000,
+      "breedte": 5000,
       "verwarmd": false
     },
     {
@@ -31,8 +31,8 @@
       "inhoud": 14.4272,
       "oppervlakte": 15,
       "verwarmd": false,
-      "lengte": 5,
-      "breedte": 3
+      "lengte": 5000,
+      "breedte": 3000
     }
   ]
 }

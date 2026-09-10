@@ -94,10 +94,7 @@ class Sanitair(Stelselgroep):
             for waardering in waarderingen[1:]:
                 if waardering.punten is not None:
                     waardering.punten = float(
-                        utils.rond_af(
-                            Decimal(str(waardering.punten)) / Decimal(deler),
-                            decimalen=2,
-                        )
+                        Decimal(str(waardering.punten)) / Decimal(deler)
                     )
 
         woningwaardering_groep = waarderingsgroep_builder.build()

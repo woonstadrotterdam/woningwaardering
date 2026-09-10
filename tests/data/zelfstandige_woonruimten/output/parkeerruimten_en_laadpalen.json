@@ -472,7 +472,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.666666667
+          "punten": 0.67
         },
         {
           "aantal": 1.0,
@@ -487,7 +487,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 1.33333333
+          "punten": 1.33
         },
         {
           "aantal": 1.0,
@@ -502,7 +502,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.666666667
+          "punten": 0.67
         },
         {
           "aantal": 1.0,
@@ -524,7 +524,7 @@
             "id": "gemeenschappelijke_parkeerruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.0833333
+          "punten": 0.08
         }
       ]
     },
@@ -571,7 +571,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 17.2222585
+          "punten": 17.22
         },
         {
           "aantal": 15329.0,
@@ -592,7 +592,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 13.3037694
+          "punten": 13.3
         },
         {
           "aantal": 82.0,
@@ -627,7 +627,7 @@
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.0260279
+          "punten": -0.02
         }
       ]
     },

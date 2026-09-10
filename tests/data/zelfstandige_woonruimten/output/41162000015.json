@@ -470,7 +470,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_I",
             "naam": "Onderdeel I"
           },
-          "punten": 19.2445691
+          "punten": 19.24
         },
         {
           "aantal": 15329.0,
@@ -491,7 +491,7 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 18.7539733
+          "punten": 18.75
         },
         {
           "aantal": 65.0,
@@ -526,7 +526,7 @@
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.0014576
+          "punten": 0.01
         }
       ]
     },

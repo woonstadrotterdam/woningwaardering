@@ -276,12 +276,9 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         ruimten: list[EenhedenRuimte],
     ) -> None:
-        # De maximering op verwarmde overige ruimten (max. 4 punten) en op verkoelde
-        # vertrekken (max. 2 punten) telt over álle gedeelde ruimten samen, ongeacht
-        # met hoeveel adressen/onzelfstandige woonruimten ze gedeeld worden. De helper
-        # wordt daarom eenmalig aangeroepen; elk resultaat wordt daarna onder de juiste
-        # adressengroep gehangen, waar de punten door het aantal adressen en
-        # onzelfstandige woonruimten worden gedeeld.
+        # Rubriek 9 neemt de puntwaarden van rubriek 3 over, zonder de maximering
+        # (max. 4 verwarmde overige ruimten, max. 2 verkoelde vertrekken). Dat
+        # volgt de huurprijschecktool.
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBuilder:
@@ -301,7 +298,7 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             )
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
-            ruimten, subgroep=subgroep
+            ruimten, subgroep=subgroep, maximeren=False
         ):
             if waardering.punten is None:
                 continue

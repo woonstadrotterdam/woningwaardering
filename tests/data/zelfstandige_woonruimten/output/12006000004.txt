@@ -72,6 +72,6 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                                   21.90 pt
     - Oppervlakte van vertrekken en overige ruimten                  60.00 m²
     - Factor II                                                     242.00 EUR
-  Afronding op kwartpunten                                                        0.10 pt
+  Afronding op kwartpunten                                                        0.11 pt
                                                                                 ---------
   Totaal                                                                         42.75 pt

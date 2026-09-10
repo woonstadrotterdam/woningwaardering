@@ -32,14 +32,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 5.625
+          "punten": 5.63
         },
         {
           "criterium": {
             "id": "buitenruimten__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.125
+          "punten": 0.12
         }
       ]
     }

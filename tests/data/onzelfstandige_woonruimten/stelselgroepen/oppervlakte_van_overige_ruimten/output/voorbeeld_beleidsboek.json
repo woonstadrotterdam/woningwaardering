@@ -11,14 +11,13 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 9.25,
+      "punten": 9.0,
       "woningwaarderingen": [
         {
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__prive",
             "naam": "Privé"
-          },
-          "punten": 3.0
+          }
         },
         {
           "aantal": 4.0,
@@ -38,8 +37,7 @@
           "criterium": {
             "id": "oppervlakte_van_overige_ruimten__gedeeld_met_3_onzelfstandige_woonruimten",
             "naam": "Gedeeld met 3 onzelfstandige woonruimten"
-          },
-          "punten": 6.25
+          }
         },
         {
           "aantal": 19.34,

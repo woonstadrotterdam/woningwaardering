@@ -13,7 +13,6 @@ from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
     AANRECHT_MINIMALE_LENGTE_MM,
     heeft_valide_aanrecht,
 )
-from woningwaardering.stelsels.utils import rond_af
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -85,16 +84,13 @@ def waardeer_keuken(
         for waardering in detail_waarderingen:
             if waardering.punten is not None:
                 waardering.punten = float(
-                    rond_af(
-                        Decimal(str(waardering.punten)) / Decimal(deler),
-                        decimalen=2,
-                    )
+                    Decimal(str(waardering.punten)) / Decimal(deler)
                 )
 
     if punten_voor_extra_voorzieningen > max_punten_voorzieningen:
         # Maximum tot het aantal punten dat voor de aanrechtlengte is bepaald.
         aftrek_ongedeeld = max_punten_voorzieningen - punten_voor_extra_voorzieningen
-        aftrek = rond_af(aftrek_ongedeeld / Decimal(deler), decimalen=2)
+        aftrek = aftrek_ongedeeld / Decimal(deler)
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aftrek_ongedeeld} punt(en) i.v.m. te veel punten ({punten_voor_extra_voorzieningen} > {max_punten_voorzieningen}) voor extra keuken voorzieningen"
         )
@@ -307,11 +303,10 @@ def _waardeer_extra_voorzieningen(
         if count == 0:
             continue
 
-        punten = rond_af(
-            Decimal(str(punten_per_installatie[installatiesoort]))
-            * Decimal(str(count)),
-            decimalen=2,
+        punten = Decimal(str(punten_per_installatie[installatiesoort])) * Decimal(
+            str(count)
         )
+
         logger.info(
             f"Ruimte '{ruimte.naam}' ({ruimte.id}): {count}x een '{installatiesoort.naam}' voor {Woningwaarderingstelselgroep.keuken.naam}."
         )

@@ -37,7 +37,6 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Doelgroep,
     Meeteenheid,
-    Ruimtedetailsoort,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -102,16 +101,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
 
         woningwaardering_groep = waarderingsgroep_builder.build()
 
-        punten = utils.rond_af_op_kwart(
-            sum(
-                Decimal(str(woningwaardering.punten))
-                for woningwaardering in woningwaardering_groep.woningwaarderingen or []
-                if woningwaardering.punten is not None
-            ),
-        )
-
-        woningwaardering_groep.punten = float(punten)
-
         logger.info(
             f"Eenheid ({eenheid.id}) krijgt in totaal {woningwaardering_groep.punten} punten voor {self.stelselgroep.naam}"
         )
@@ -140,26 +129,6 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             ruimtesoort = classificeer_ruimte(ruimte)
             if ruimtesoort not in (Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten):
                 continue
-
-            if ruimte.detail_soort in [
-                Ruimtedetailsoort.berging,
-                Ruimtedetailsoort.bergruimte,
-            ]:
-                # Gemeenschappelijke bergingen worden gewaardeerd als overige ruimte als:
-                #
-                # […]
-                # * de oppervlakte, na deling door het aantal adressen, per woning minstens
-                #   2m2 bedraagt.
-                oppervlakte_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
-                if oppervlakte_met_kasten and ruimte.gedeeld_met_aantal_adressen:
-                    gedeelde_oppervlakte = (
-                        oppervlakte_met_kasten / ruimte.gedeeld_met_aantal_adressen
-                    )
-                    if gedeelde_oppervlakte < Decimal("2.0"):
-                        logger.info(
-                            f"Ruimte ({ruimte.id}) heeft, na deling door het aantal adressen, een oppervlakte van minder dan 2 m2 en wordt daarom niet gewaardeerd onder {self.stelselgroep.naam}"
-                        )
-                        continue
 
             oppervlaktegroepen[
                 (
@@ -272,6 +241,9 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
         waarderingsgroep_builder: WaarderingsgroepBuilder,
         gedeelde_ruimten: list[EenhedenRuimte],
     ) -> None:
+        # Rubriek 9 neemt de puntwaarden van rubriek 3 over, zonder de maximering
+        # (max. 4 verwarmde overige ruimten, max. 2 verkoelde vertrekken). Dat
+        # volgt de huurprijschecktool
         def subgroep(
             ruimte: EenhedenRuimte, subgroep_id: str, subgroep_naam: str
         ) -> WaarderingBuilder:
@@ -291,16 +263,13 @@ class GemeenschappelijkeVertrekkenOverigeRuimtenEnVoorzieningen(Stelselgroep):
             )
 
         for ruimte, waardering in waardeer_verkoeling_en_verwarming(
-            gedeelde_ruimten, subgroep=subgroep
+            gedeelde_ruimten, subgroep=subgroep, maximeren=False
         ):
             if waardering.punten is None:
                 continue
             aantal_adressen = ruimte.gedeeld_met_aantal_adressen or 1
             waardering.punten = float(
-                rond_af(
-                    Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen)),
-                    decimalen=2,
-                )
+                Decimal(str(waardering.punten)) / Decimal(str(aantal_adressen))
             )
 
     def _keuken_waarderingen(

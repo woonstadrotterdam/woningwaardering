@@ -1,5 +1,4 @@
 import warnings
-from collections import defaultdict
 from datetime import date
 from decimal import Decimal
 from importlib.resources import files
@@ -20,7 +19,10 @@ from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     monument_correctie,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import classificeer_ruimte
+from woningwaardering.stelsels.utils import (
+    classificeer_ruimte,
+    toe_te_rekenen_oppervlakte,
+)
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
@@ -111,10 +113,7 @@ class Energieprestatie(Stelselgroep):
                 utils.rond_af(oppervlakte_van_vertrekken, decimalen=2)
             )
             woningwaardering.punten = float(
-                utils.rond_af(
-                    Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken)),
-                    decimalen=2,
-                )
+                Decimal("0.5") * Decimal(str(oppervlakte_van_vertrekken))
             )
 
         elif energieprestatie:
@@ -256,9 +255,7 @@ class Energieprestatie(Stelselgroep):
 
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(
@@ -308,9 +305,7 @@ class Energieprestatie(Stelselgroep):
         )
         woningwaardering.aantal = float(utils.rond_af(oppervlakte, decimalen=2))
         woningwaardering.punten = float(
-            utils.rond_af(
-                Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte)), decimalen=2
-            )
+            Decimal(str(punten_per_m2)) * Decimal(str(oppervlakte))
         )
 
         logger.info(
@@ -329,9 +324,7 @@ class Energieprestatie(Stelselgroep):
         Returns:
             float: Oppervlakte van de vertrekken.
         """
-        oppervlakte_gedeeld_met_counter: defaultdict[int, Decimal] = defaultdict(
-            Decimal
-        )
+        oppervlakte = Decimal("0")
 
         for ruimte in eenheid.ruimten or []:
             if ruimte.oppervlakte is None:
@@ -350,23 +343,13 @@ class Energieprestatie(Stelselgroep):
             if utils.gedeeld_met_adressen(ruimte):
                 continue
 
+            # Het onafgeronde toe te rekenen aantal van rubriek 1 (eerst delen, dan
+            # salderen; #391), niet het afgeronde puntenresultaat. Beleidsboek:
+            # afronden op 2 decimalen per ruimte vóór delen.
             if classificeer_ruimte(ruimte) == Ruimtesoort.vertrek:
-                oppervlakte_gedeeld_met_counter[
-                    ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
-                ] += utils.rond_af(
-                    utils.oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
-                )  # beleidsboek geeft expliciet aan dat moet worden afgerond op 2 decimalen
+                oppervlakte += toe_te_rekenen_oppervlakte(ruimte)
 
-        return float(
-            sum(
-                utils.rond_af(
-                    # op hele m2 afronden per categorie (aantal gedeeld met)
-                    (utils.rond_af(oppervlakte, decimalen=0) / Decimal(str(aantal))),
-                    decimalen=2,
-                )
-                for aantal, oppervlakte in oppervlakte_gedeeld_met_counter.items()
-            )
-        )
+        return float(oppervlakte)
 
 
 if __name__ == "__main__":  # pragma: no cover

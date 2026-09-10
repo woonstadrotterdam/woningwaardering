@@ -1,0 +1,19 @@
+{
+  "ruimten": [
+    {
+      "id": "Space_zonder_afmetingen",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin zonder afmetingen",
+      "oppervlakte": 30,
+      "verwarmd": false,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    }
+  ]
+}

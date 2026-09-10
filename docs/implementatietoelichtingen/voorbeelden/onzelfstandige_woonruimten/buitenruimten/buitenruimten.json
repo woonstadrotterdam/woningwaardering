@@ -9,8 +9,8 @@
         "code": "ATU",
         "naam": "Achtertuin"
       },
-      "breedte": 0.5,
-      "lengte": 2.0,
+      "breedte": 500.0,
+      "lengte": 2000.0,
       "oppervlakte": 1.0
     },
     {
@@ -22,8 +22,8 @@
         "code": "BAL",
         "naam": "Balkon"
       },
-      "breedte": 1.5,
-      "lengte": 3.0,
+      "breedte": 1500.0,
+      "lengte": 3000.0,
       "oppervlakte": 4.5,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     },
@@ -36,8 +36,8 @@
         "code": "DAK",
         "naam": "Dakterras"
       },
-      "breedte": 6.5,
-      "lengte": 8.0,
+      "breedte": 6500.0,
+      "lengte": 8000.0,
       "oppervlakte": 52.0,
       "gedeeldMetAantalAdressen": 5,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4

@@ -25,6 +25,11 @@ from woningwaardering.stelsels.criterium import (
     GedeeldMetSoort,
     naam_gedeeld_met_groep,
 )
+from woningwaardering.stelsels.utils import (
+    rond_af,
+    rond_af_op_kwart,
+    voeg_stelselgroep_afronding_toe,
+)
 from woningwaardering.vera.bvg.generated import (
     Referentiedata,
     WoningwaarderingCriteriumSleutels,
@@ -33,6 +38,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
 )
+
+#: Aantal decimalen waarop punten in de output worden vastgelegd.
+PUNTEN_DECIMALEN = 2
 
 
 class WaarderingBuilder:
@@ -247,9 +255,17 @@ class WaarderingBuilder:
             criterium.bovenliggende_criterium = WoningwaarderingCriteriumSleutels(
                 id=bovenliggende_id
             )
+        # Punten leggen we in de output vast op twee decimalen. De berekening
+        # gebruikt de builder-punten zonder tussentijdse afronding op twee
+        # decimalen: het stelselgroeptotaal is die som, afgerond op een kwart
+        # punt (zie ``WaarderingsgroepBuilder.build``).
         waardering = WoningwaarderingResultatenWoningwaardering(
             criterium=criterium,
-            punten=float(self.punten) if self.punten is not None else None,
+            punten=(
+                float(rond_af(self.punten, PUNTEN_DECIMALEN))
+                if self.punten is not None
+                else None
+            ),
             aantal=float(self.aantal) if self.aantal is not None else None,
         )
         if self.opslagpercentage is not None:
@@ -357,29 +373,32 @@ class WaarderingsgroepBuilder:
         De boom wordt doorlopen (elke bovenliggende vóór zijn onderliggende) en
         de groepspunten worden gesommeerd.
         """
-        from woningwaardering.stelsels.utils import (
-            rond_af_op_kwart,
-            som_punten_waarderingen,
-            voeg_stelselgroep_afronding_toe,
-        )
-
         groep = WoningwaarderingResultatenWoningwaarderingGroep(
             criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
                 stelsel=self.stelsel,
                 stelselgroep=self.stelselgroep,
             )
         )
+        waarderingen = list(self.alle_waarderingen())
         groep.woningwaarderingen = [
-            waardering._naar_waardering()
-            for onderliggende in self._actieve_onderliggende
-            for waardering in onderliggende._zelf_en_onderliggende()
+            waardering._naar_waardering() for waardering in waarderingen
         ]
-        onafgerond = som_punten_waarderingen(groep.woningwaarderingen)
+        # 2.1.4 / 2.1.6: het rubriektotaal is de som van de builder-punten,
+        # afgerond op een kwart punt. Die som gebruiken we zonder tussentijdse
+        # afronding op twee decimalen; die afronding is alleen voor de
+        # vastgelegde waarderingen.
+        onafgerond = sum(
+            (
+                Decimal(str(waardering.punten))
+                for waardering in waarderingen
+                if waardering.punten is not None
+            ),
+            Decimal("0"),
+        )
         afgerond = rond_af_op_kwart(onafgerond)
         groep.punten = float(afgerond)
         voeg_stelselgroep_afronding_toe(
             groep,
-            onafgerond=onafgerond,
             afgerond=afgerond,
             stelselgroep=self.stelselgroep,
         )

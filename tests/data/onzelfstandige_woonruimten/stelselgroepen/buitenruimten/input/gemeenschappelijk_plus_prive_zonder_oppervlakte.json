@@ -13,8 +13,8 @@
       },
       "naam": "Gemeenschappelijke tuin",
       "oppervlakte": 30,
-      "lengte": 10,
-      "breedte": 3,
+      "lengte": 10000,
+      "breedte": 3000,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     },
     {

@@ -10,9 +10,9 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica import (
+    bereken_oppervlakte_punten,
     is_zolder_zonder_vaste_trap,
     maak_zolder_correctie_waardering,
-    structureer_subtotaal_bij_correcties,
     waardeer_oppervlakte_van_overige_ruimte,
 )
 from woningwaardering.stelsels.utils import (
@@ -21,7 +21,6 @@ from woningwaardering.stelsels.utils import (
     oppervlakte_inclusief_verbonden_kasten,
     rond_af,
     rond_af_op_kwart,
-    som_punten_waarderingen_afgerond,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -29,6 +28,7 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Meeteenheid,
     Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
@@ -73,10 +73,27 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             start=Decimal("0"),
         )
 
-        alle_waarderingen: list[WaarderingBuilder] = []
+        heeft_zolder_zonder_trap = any(
+            is_zolder_zonder_vaste_trap(ruimte) for ruimte in ruimten
+        )
+        ruimten_parent: WaarderingsgroepBuilder | WaarderingBuilder = (
+            waarderingsgroep_builder
+        )
+        if heeft_zolder_zonder_trap:
+            punten_uit_m2 = bereken_oppervlakte_punten(
+                totaal_oppervlakte, Decimal("0.75")
+            )
+            ruimten_parent = waarderingsgroep_builder.met_onderliggend(
+                id="subtotaal",
+                naam="Subtotaal",
+                meeteenheid=Meeteenheid.vierkante_meter_m2,
+                aantal=float(rond_af(totaal_oppervlakte, decimalen=2)),
+                punten=float(punten_uit_m2),
+            )
+
         for ruimte in ruimten:
-            waarderingen = waardeer_oppervlakte_van_overige_ruimte(
-                ruimte, waarderingsgroep_builder=waarderingsgroep_builder
+            waardeer_oppervlakte_van_overige_ruimte(
+                ruimte, waarderingsgroep_builder=ruimten_parent
             )
 
             # 2.2.2.3 Zolderruimte zonder vaste trap
@@ -85,30 +102,17 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
             # Maar: er kunnen nooit meer punten afgetrokken worden dan het totaal aantal punten dat de zolderruimte zelf waard is.
             # Met andere woorden: de waarde van de zolder kan door deze aftrek niet negatief worden.
             if is_zolder_zonder_vaste_trap(ruimte):
-                waarderingen.append(
-                    maak_zolder_correctie_waardering(
-                        ruimte,
-                        totaal_oppervlakte,
-                        waarderingsgroep_builder=waarderingsgroep_builder,
-                    )
+                maak_zolder_correctie_waardering(
+                    ruimte,
+                    totaal_oppervlakte,
+                    waarderingsgroep_builder=waarderingsgroep_builder,
                 )
-
-            alle_waarderingen.extend(waarderingen)
-
-        structureer_subtotaal_bij_correcties(
-            alle_waarderingen,
-            waarderingsgroep_builder=waarderingsgroep_builder,
-            factor=Decimal("0.75"),
-        )
 
         woningwaardering_groep = waarderingsgroep_builder.build()
         groep_waarderingen = woningwaardering_groep.woningwaarderingen or []
-        if any(w.punten is not None for w in groep_waarderingen):
-            # de maximering is altijd in punten en daarom wordt de som van de punten hier gebruikt om de maximering toe te passsen
-            woningwaardering_groep.punten = som_punten_waarderingen_afgerond(
-                groep_waarderingen
-            )
-        else:
+        # Ruimteregels hebben alleen m², geen punten, dus ``build()`` kan het
+        # stelselgroeptotaal niet sommen. (Uitzondering: zoldercorrectie.)
+        if not any(w.punten is not None for w in groep_waarderingen):
             punten = rond_af_op_kwart(
                 rond_af(
                     sum(

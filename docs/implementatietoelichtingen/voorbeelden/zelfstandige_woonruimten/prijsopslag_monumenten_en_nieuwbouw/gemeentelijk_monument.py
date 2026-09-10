@@ -3,7 +3,7 @@ import warnings
 from loguru import logger
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_rapport
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )

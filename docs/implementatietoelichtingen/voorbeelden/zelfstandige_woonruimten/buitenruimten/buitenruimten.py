@@ -3,7 +3,7 @@ import warnings
 from loguru import logger
 
 from woningwaardering import Woningwaardering
-from woningwaardering.stelsels.utils import naar_rapport
+from woningwaardering.rapport import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenRuimte,
@@ -29,8 +29,8 @@ def get_eenheid():
             soort=Ruimtesoort.buitenruimte,
             detail_soort=Ruimtedetailsoort.dakterras,
             oppervlakte=25,
-            breedte=5,
-            lengte=5,
+            breedte=5000,
+            lengte=5000,
             gedeeld_met_aantal_adressen=2,
         ),
     ]

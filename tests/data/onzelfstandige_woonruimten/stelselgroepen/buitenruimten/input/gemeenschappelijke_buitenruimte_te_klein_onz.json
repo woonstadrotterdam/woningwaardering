@@ -12,9 +12,9 @@
       },
       "naam": "Tuin",
       "oppervlakte": 6,
-      "hoogte": 2.5,
-      "lengte": 1.0,
-      "breedte": 1.0,
+      "hoogte": 2500,
+      "lengte": 1000,
+      "breedte": 1000,
       "verwarmd": false,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }

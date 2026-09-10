@@ -23,14 +23,14 @@
               "naam": "Vierkante meter, m2"
             }
           },
-          "punten": 2.39
+          "punten": 2.38
         },
         {
           "criterium": {
             "id": "energieprestatie__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": 0.11
+          "punten": 0.12
         }
       ]
     }
