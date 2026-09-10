@@ -97,11 +97,12 @@ _EXTRA_VOORZIENINGEN_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
 # `EenhedenRuimte` (zie docs/implementatietoelichtingen/datamodel-uitbreidingen.md).
 # Deze tabel legt vast welk bouwkundig element dezelfde voorziening beschrijft als
 # welke installatiesoort.
-# 2.6.1 Punten voor sanitaire basisvoorzieningen - Wastafel
-# Zoals genoemd in paragraaf 5.2 waardeert de Huurcommissie een fonteintje en een
-# aanrecht dat niet voor punten in aanmerking komt, waarvan de aanrechtlengte korter
-# is dan een meter, als wastafel.
+# 2.6.1 Punten voor sanitaire basisvoorzieningen — Wastafel
+# Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool
+# zijn aangesloten, worden geteld als wastafel.
 # Daarom mappen zowel een `Wastafel` als een `Fontein` op een wastafel-installatie.
+# Een aanrecht korter dan een meter telt ook als wastafel, maar loopt via
+# `_korte_aanrechten` en niet via deze mapping.
 _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT: dict[
     Referentiedata, InstallatiesoortReferentiedata
 ] = {
