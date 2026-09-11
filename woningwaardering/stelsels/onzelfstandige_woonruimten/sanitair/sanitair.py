@@ -11,7 +11,6 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     bepaal_wastafel_uitzonderingsruimte,
-    converteer_bouwkundige_elementen_naar_installaties,
     waardeer_sanitair,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
@@ -45,8 +44,6 @@ class Sanitair(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        converteer_bouwkundige_elementen_naar_installaties(eenheid)
-
         waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )

@@ -24,9 +24,6 @@ from woningwaardering.stelsels.gedeelde_logica import (
     waardeer_sanitair,
     waardeer_verkoeling_en_verwarming,
 )
-from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
-    converteer_bouwkundige_elementen_naar_installaties,
-)
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -61,8 +58,6 @@ class GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(Stelselgroep):
             WoningwaarderingResultatenWoningwaarderingResultaat | None
         ) = None,
     ) -> WoningwaarderingResultatenWoningwaarderingGroep:
-        converteer_bouwkundige_elementen_naar_installaties(eenheid)
-
         waarderingsgroep_builder = WaarderingsgroepBuilder(
             self.stelsel, self.stelselgroep
         )

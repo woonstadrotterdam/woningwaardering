@@ -35,7 +35,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
     WoningwaarderingstelselReferentiedata,
 )
-from woningwaardering.vera.utils import get_bouwkundige_elementen
 
 # Bij een adres met 8 of meer onzelfstandige woonruimten geldt voor maximaal één
 # niet-badkamer-ruimte een uitzondering op de wastafelmaximering.
@@ -92,6 +91,27 @@ _EXTRA_VOORZIENINGEN_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
     Installatiesoort.stopcontact_bij_wastafel: 0.25,
     Installatiesoort.eenhandsmengkraan: 0.25,
     Installatiesoort.thermostatische_mengkraan: 0.5,
+}
+# VERA staat toe dat dezelfde voorziening zowel als bouwkundig element als als
+# installatie wordt meegegeven; beide attributen zijn geldige modelleringen op
+# `EenhedenRuimte` (zie docs/implementatietoelichtingen/datamodel-uitbreidingen.md).
+# Deze tabel legt vast welk bouwkundig element dezelfde voorziening beschrijft als
+# welke installatiesoort.
+# 2.6.1 Punten voor sanitaire basisvoorzieningen — Wastafel
+# Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool
+# zijn aangesloten, worden geteld als wastafel.
+# Daarom mappen zowel een `Wastafel` als een `Fontein` op een wastafel-installatie.
+# Een aanrecht korter dan een meter telt ook als wastafel, maar loopt via
+# `_korte_aanrechten` en niet via deze mapping.
+_INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT: dict[
+    Referentiedata, InstallatiesoortReferentiedata
+] = {
+    Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
+    Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
+    Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
+    Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
+    Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
+    Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
 }
 
 
@@ -198,40 +218,37 @@ def waardeer_sanitair(
     return [ruimte_criterium, *detail_waarderingen]
 
 
-def converteer_bouwkundige_elementen_naar_installaties(
-    eenheid: EenhedenEenheid,
-) -> None:
-    # Backwards compatibiliteit voor bouwkundige elementen
-    for ruimte in eenheid.ruimten or []:
-        ruimte.installaties = ruimte.installaties or []
-        for bouwkundigelementdetailsoort, installatiesoort in {
-            Bouwkundigelementdetailsoort.wastafel: Installatiesoort.wastafel,
-            Bouwkundigelementdetailsoort.douche: Installatiesoort.douche,
-            Bouwkundigelementdetailsoort.bad: Installatiesoort.bad,
-            Bouwkundigelementdetailsoort.kast: Installatiesoort.kastruimte,
-            Bouwkundigelementdetailsoort.closetcombinatie: Installatiesoort.staand_toilet,
-            Bouwkundigelementdetailsoort.fontein: Installatiesoort.wastafel,
-        }.items():
-            bouwkundige_elementen = list(
-                get_bouwkundige_elementen(ruimte, bouwkundigelementdetailsoort)
-            )
-            if not bouwkundige_elementen:
-                continue
-            if installatiesoort in ruimte.installaties:
-                continue
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {bouwkundigelementdetailsoort.naam} wordt als {installatiesoort.naam} toegevoegd aan installaties"
-            )
-            ruimte.installaties.extend(
-                [installatiesoort for _ in bouwkundige_elementen]
-            )
+def _installatieaantallen(
+    ruimte: EenhedenRuimte,
+) -> Counter[Referentiedata]:
+    """Geeft per installatiesoort het hoogste van meegegeven installaties en
+    gemapte bouwkundige elementen.
+
+    VERA staat toe dat dezelfde voorziening zowel als bouwkundig element als als
+    installatie wordt meegegeven. Omdat `installaties` alleen een soortcode bevat
+    en geen id, bestaat er geen identiteitskoppeling tussen beide representaties:
+    we kunnen niet zien of een meegegeven installatie hetzelfde object beschrijft
+    als een bouwkundig element. Daarom houden we per installatiesoort het hoogste
+    van beide aantallen aan. Eenzelfde voorziening die dubbel is gemodelleerd telt
+    zo niet twee keer mee, terwijl extra bouwkundige elementen wel meetellen.
+    """
+    uit_elementen: Counter[Referentiedata] = Counter()
+    for element in ruimte.bouwkundige_elementen or []:
+        if element.detail_soort is None:
+            continue
+        installatiesoort = _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT.get(
+            element.detail_soort
+        )
+        if installatiesoort is not None:
+            uit_elementen[installatiesoort] += 1
+    return Counter(ruimte.installaties or []) | uit_elementen
 
 
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
     toilet_punten = _toilet_punten(ruimte)
     # Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor
     # waardering. Doucheruimte telt hierbij mee als badkamer.
@@ -273,7 +290,7 @@ def _aantal_wastafels_in_ruimte(
     ruimte: EenhedenRuimte,
     soort: InstallatiesoortReferentiedata,
 ) -> int:
-    aantal = Counter(ruimte.installaties or [])[soort]
+    aantal = _installatieaantallen(ruimte)[soort]
     if soort == Installatiesoort.wastafel:
         aantal += len(_korte_aanrechten(ruimte))
     return aantal
@@ -344,7 +361,7 @@ def _waardeer_wastafels(
     *,
     uitzonderingsruimte: EenhedenRuimte | None,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
 
     totaal_aantal_wastafels = 0
 
@@ -434,7 +451,7 @@ def _waardeer_baden_en_douches(
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter(ruimte.installaties or [])
+    installaties = _installatieaantallen(ruimte)
     punten_bad_en_douche = _bad_en_douche_punten(stelsel)
 
     # Bijlage I, onder A, toelichting rubriek 6.1 (Besluit huurprijzen woonruimte)
@@ -481,7 +498,7 @@ def _waardeer_installaties(
     *,
     totaal_punten_bad_en_douche: Decimal,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
 
     totaal_punten_voorzieningen = Decimal("0")
 
