@@ -218,11 +218,11 @@ def waardeer_sanitair(
     return [ruimte_criterium, *detail_waarderingen]
 
 
-def converteer_bouwkundige_elementen_naar_installaties(
-    eenheid: EenhedenEenheid,
-) -> None:
-    """Vult de installaties van elke ruimte aan met de bouwkundige elementen die
-    dezelfde voorziening beschrijven.
+def _installatieaantallen(
+    ruimte: EenhedenRuimte,
+) -> Counter[Referentiedata]:
+    """Geeft per installatiesoort het hoogste van meegegeven installaties en
+    gemapte bouwkundige elementen.
 
     VERA staat toe dat dezelfde voorziening zowel als bouwkundig element als als
     installatie wordt meegegeven. Omdat `installaties` alleen een soortcode bevat
@@ -231,51 +231,24 @@ def converteer_bouwkundige_elementen_naar_installaties(
     als een bouwkundig element. Daarom houden we per installatiesoort het hoogste
     van beide aantallen aan. Eenzelfde voorziening die dubbel is gemodelleerd telt
     zo niet twee keer mee, terwijl extra bouwkundige elementen wel meetellen.
-
-    Omdat het resultaat een maximum is, verandert een tweede aanroep niets meer:
-    na de eerste aanroep is het aantal installaties immers minstens gelijk aan het
-    aantal bouwkundige elementen. Dat is nodig omdat meerdere stelselgroepen deze
-    functie op dezelfde eenheid aanroepen.
-
-    Args:
-        eenheid (EenhedenEenheid): De eenheid waarvan de ruimten worden aangevuld.
     """
-    for ruimte in eenheid.ruimten or []:
-        ruimte.installaties = ruimte.installaties or []
-        # Het aantal meegegeven installaties wordt vastgelegd vóórdat we aanvullen,
-        # zodat installaties die we zelf afleiden geen volgend bouwkundig element
-        # van dezelfde installatiesoort blokkeren.
-        meegegeven_installaties = Counter(ruimte.installaties)
-
-        installaties_uit_elementen: Counter[InstallatiesoortReferentiedata] = Counter()
-        for element in ruimte.bouwkundige_elementen or []:
-            if element.detail_soort is None:
-                continue
-            installatiesoort = _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT.get(
-                element.detail_soort
-            )
-            if installatiesoort is not None:
-                installaties_uit_elementen[installatiesoort] += 1
-
-        for (
-            installatiesoort,
-            aantal_uit_elementen,
-        ) in installaties_uit_elementen.items():
-            aantal_meegegeven = meegegeven_installaties[installatiesoort]
-            aantal_aanvullen = aantal_uit_elementen - aantal_meegegeven
-            if aantal_aanvullen <= 0:
-                continue
-            logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_aanvullen}x een {installatiesoort.naam} toegevoegd aan installaties op basis van bouwkundige elementen"
-            )
-            ruimte.installaties.extend([installatiesoort] * aantal_aanvullen)
+    uit_elementen: Counter[Referentiedata] = Counter()
+    for element in ruimte.bouwkundige_elementen or []:
+        if element.detail_soort is None:
+            continue
+        installatiesoort = _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT.get(
+            element.detail_soort
+        )
+        if installatiesoort is not None:
+            uit_elementen[installatiesoort] += 1
+    return Counter(ruimte.installaties or []) | uit_elementen
 
 
 def _waardeer_toiletten(
     ruimte: EenhedenRuimte,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
     toilet_punten = _toilet_punten(ruimte)
     # Toiletten buiten toiletruimten en badkamers komen niet in aanmerking voor
     # waardering. Doucheruimte telt hierbij mee als badkamer.
@@ -317,7 +290,7 @@ def _aantal_wastafels_in_ruimte(
     ruimte: EenhedenRuimte,
     soort: InstallatiesoortReferentiedata,
 ) -> int:
-    aantal = Counter(ruimte.installaties or [])[soort]
+    aantal = _installatieaantallen(ruimte)[soort]
     if soort == Installatiesoort.wastafel:
         aantal += len(_korte_aanrechten(ruimte))
     return aantal
@@ -388,7 +361,7 @@ def _waardeer_wastafels(
     *,
     uitzonderingsruimte: EenhedenRuimte | None,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
 
     totaal_aantal_wastafels = 0
 
@@ -478,7 +451,7 @@ def _waardeer_baden_en_douches(
     stelsel: WoningwaarderingstelselReferentiedata,
     waarderingsgroep_builder: WaarderingsgroepBuilder | WaarderingBuilder,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter(ruimte.installaties or [])
+    installaties = _installatieaantallen(ruimte)
     punten_bad_en_douche = _bad_en_douche_punten(stelsel)
 
     # Bijlage I, onder A, toelichting rubriek 6.1 (Besluit huurprijzen woonruimte)
@@ -525,7 +498,7 @@ def _waardeer_installaties(
     *,
     totaal_punten_bad_en_douche: Decimal,
 ) -> Iterator[WaarderingBuilder]:
-    installaties = Counter([installatie for installatie in ruimte.installaties or []])
+    installaties = _installatieaantallen(ruimte)
 
     totaal_punten_voorzieningen = Decimal("0")
 

@@ -57,8 +57,6 @@ Voor de stelselgroep Sanitair houden we daarom per installatiesoort het hoogste 
 | `Kast` | `Kastruimte` |
 | `Closetcombinatie` | `Staand toilet` |
 
-Omdat het resultaat een maximum is, verandert een tweede aanroep niets meer. Dat is nodig omdat meerdere stelselgroepen deze aanvulling op dezelfde eenheid uitvoeren. De bouwkundige elementen blijven behouden: zij dragen gegevens (id, afmetingen) die een installatiesoort niet kan bevatten.
-
 > [!NOTE]
 > De regel is een keuze bij ontbrekende informatie, geen beleidsregel. Bij één bouwkundig element naast twee installaties van dezelfde soort tellen we er twee, ook als het in werkelijkheid om drie voorzieningen gaat. Die restambiguïteit is niet op te lossen zolang `installaties` geen identiteit draagt. Geef bij voorkeur één representatie per voorziening mee.
 
