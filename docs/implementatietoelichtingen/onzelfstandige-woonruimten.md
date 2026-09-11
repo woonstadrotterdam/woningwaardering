@@ -870,7 +870,7 @@ Een toilet met waterspoeling krijgt punten als deze geplaatst is in een daartoe 
 | Toilet buiten toiletruimte of badkamer | n.v.t. |
 
 _Wastafel_  
-Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool zijn aangesloten, worden geteld als wastafel. De kranen kunnen onder de voorwaarden van [paragraaf 2.6.2](#262-punten-voor-extra-sanitaire-voorzieningen) afzonderlijk worden gewaardeerd als extra sanitaire voorzieningen. Een meerpersoonswastafel heeft een minimale breedte van 70 centimeter en is voorzien van twee kranen. Voor dergelijke wastafels geldt een maximum van 1,50 punt per vertrek of overige ruimte, met uitzondering van de badkamer. Voor wastafels geldt een maximum van 1 punt per vertrek of overige ruimte, met uitzondering van de badkamer.
+~~Alle bakken voor wassen en spoelen die op de waterleiding én het huisriool zijn aangesloten, worden geteld als wastafel. De kranen kunnen onder de voorwaarden van [paragraaf 2.6.2](#262-punten-voor-extra-sanitaire-voorzieningen) afzonderlijk worden gewaardeerd als extra sanitaire voorzieningen. Een meerpersoonswastafel heeft een minimale breedte van 70 centimeter en is voorzien van twee kranen.~~ Voor dergelijke wastafels geldt een maximum van 1,50 punt per vertrek of overige ruimte, met uitzondering van de badkamer. Voor wastafels geldt een maximum van 1 punt per vertrek of overige ruimte, met uitzondering van de badkamer.
 
 | Voorziening                                    | Punten                                     |
 |------------------------------------------------|--------------------------------------------|
@@ -896,6 +896,9 @@ Niet als wastafel worden gewaardeerd:
 
 > [!NOTE]
 > Indien een aanrecht met een lengte korter dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak.
+
+> [!NOTE]
+> Een `Wastafel` of `Fontein` die als bouwkundig element wordt meegegeven, telt mee als wastafel-installatie: de Huurcommissie waardeert een fonteintje als wastafel. Geef dezelfde voorziening bij voorkeur op één manier mee; zie [Bouwkundige elementen naast installaties](datamodel-uitbreidingen.md#bouwkundige-elementen-naast-installaties) voor hoe wij beide representaties samenvoegen.
 
 _Bad en douche_  
 ~~Als douche wordt iedere, door de verhuurder aangebrachte, installatie voor het nemen van een stortbad geteld. Hieronder valt dus ook een douchecabine die in een ander vertrek of overige ruimte staat dan de bad- of doucheruimte.~~
