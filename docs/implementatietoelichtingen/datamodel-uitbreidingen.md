@@ -58,7 +58,7 @@ Voor de stelselgroep Sanitair houden we daarom per installatiesoort het hoogste 
 | `Closetcombinatie` | `Staand toilet` |
 
 > [!NOTE]
-> De regel is een keuze bij ontbrekende informatie, geen beleidsregel. Bij één bouwkundig element naast twee installaties van dezelfde soort tellen we er twee, ook als het in werkelijkheid om drie voorzieningen gaat. Die restambiguïteit is niet op te lossen zolang `installaties` geen identiteit draagt. Geef bij voorkeur één representatie per voorziening mee.
+> Voorbeeld: staat er één wastafel als bouwkundig element én twee als installatie, dan tellen we er twee. Dat is te weinig als het in werkelijkheid drie wastafels zijn, en precies goed als één van die installaties dezelfde wastafel beschrijft als het bouwkundige element. Omdat we dat niet kunnen zien, geef je elke voorziening bij voorkeur maar op één manier mee.
 
 ## Aantal
 
