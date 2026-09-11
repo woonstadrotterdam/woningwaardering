@@ -9,6 +9,7 @@ from woningwaardering.stelsels.stelselgroep import (
     Stelselgroep,
 )
 from woningwaardering.stelsels.utils import (
+    controleer_peildatum,
     normaliseer_ruimte_namen,
     rond_af,
     rond_af_op_kwart,
@@ -33,6 +34,15 @@ class Stelsel:
             Standaard is de huidige datum.
         stelselgroepen (list[type[Stelselgroep]] | None, optional): De stelselgroepen die worden berekend.
     """
+
+    @property
+    def peildatum(self) -> date:
+        return self._peildatum
+
+    @peildatum.setter
+    def peildatum(self, value: date) -> None:
+        controleer_peildatum(value)
+        self._peildatum = value
 
     def __init__(
         self,

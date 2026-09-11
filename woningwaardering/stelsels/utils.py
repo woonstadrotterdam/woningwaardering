@@ -1,5 +1,6 @@
 import asyncio
 import warnings
+from datetime import date
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from importlib.resources import files
 from typing import Any, Counter
@@ -51,6 +52,29 @@ ZOLDER_DETAIL_SOORTEN = frozenset(
         Ruimtedetailsoort.zoldervertrek,
     }
 )
+
+ONDERSTEUNDE_PEILDATUM_VANAF = date(2026, 1, 1)
+ONDERSTEUNDE_PEILDATUM_TOT = date(2027, 1, 1)
+
+
+def controleer_peildatum(peildatum: date) -> None:
+    """Controleer of de peildatum door deze packageversie wordt ondersteund.
+
+    Deze packageversie implementeert alleen het woningwaarderingsstelsel van 2026.
+    Omdat de toepassing van het stelsel aan kalenderjaren is gekoppeld (1.3.4), zou een
+    peildatum buiten 2026 beleidsjaren mengen. Zo'n peildatum wordt daarom geweigerd.
+
+    Args:
+        peildatum (date): De peildatum van de waardering.
+
+    Raises:
+        ValueError: Wanneer de peildatum buiten 2026 valt.
+    """
+    if not ONDERSTEUNDE_PEILDATUM_VANAF <= peildatum < ONDERSTEUNDE_PEILDATUM_TOT:
+        raise ValueError(
+            f"Peildatum {peildatum} wordt niet ondersteund. "
+            "De ondersteunde periode loopt van 01-01-2026 tot en met 31-12-2026."
+        )
 
 
 def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:

@@ -39,6 +39,18 @@ def test_PuntenVoorDeWozWaarde_specifiek_output(
     )
 
 
+def test_gemiddelde_woz_voor_corop_gebied_weigert_onbekend_jaar(
+    peildatum,
+) -> None:
+    punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde(peildatum)
+
+    with pytest.raises(ValueError, match="2026"):
+        punten_voor_de_woz_waarde._gemiddelde_woz_voor_corop_gebied(
+            {"code": "40", "naam": "Groot-Rijnmond"},
+            2026,
+        )
+
+
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_geldige_woz_waarde.json",

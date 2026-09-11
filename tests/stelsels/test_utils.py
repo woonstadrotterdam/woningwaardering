@@ -1,3 +1,4 @@
+from datetime import date
 from decimal import Decimal
 
 import pytest
@@ -10,6 +11,29 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingCriterium,
 )
 from woningwaardering.vera.referentiedata import Ruimtedetailsoort, Ruimtesoort
+
+
+@pytest.mark.parametrize(
+    "peildatum",
+    [
+        date(2026, 1, 1),
+        date(2026, 12, 31),
+    ],
+)
+def test_controleer_peildatum_accepteert_2026(peildatum: date) -> None:
+    utils.controleer_peildatum(peildatum)
+
+
+@pytest.mark.parametrize(
+    "peildatum",
+    [
+        date(2025, 12, 31),
+        date(2027, 1, 1),
+    ],
+)
+def test_controleer_peildatum_weigert_datum_buiten_2026(peildatum: date) -> None:
+    with pytest.raises(ValueError, match="2026"):
+        utils.controleer_peildatum(peildatum)
 
 
 def _waardering(

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import date
 
+from woningwaardering.stelsels.utils import controleer_peildatum
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -13,6 +14,15 @@ from woningwaardering.vera.referentiedata import (
 
 
 class Stelselgroep(ABC):
+    @property
+    def peildatum(self) -> date:
+        return self._peildatum
+
+    @peildatum.setter
+    def peildatum(self, value: date) -> None:
+        controleer_peildatum(value)
+        self._peildatum = value
+
     @property
     def stelsel(self) -> WoningwaarderingstelselReferentiedata:
         return self._stelsel
