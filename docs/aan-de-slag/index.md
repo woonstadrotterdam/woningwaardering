@@ -1325,7 +1325,7 @@ Met `warnings.simplefilter("default", UserWarning)` blijft de waarschuwing zicht
 
 Een `DeprecationWarning` (bijvoorbeeld voor tijdelijk nog ondersteunde, verouderde velden) wordt wel getoond en gelogd, maar leidt niet tot een error.
 
-Deze versie van de package ondersteunt peildatums van 1 januari 2026 tot en met 31 december 2026. Een eerdere peildatum geeft een `ValueError`. Bij een latere peildatum volgt een `DeprecationWarning` en gebruikt de berekening de regels en bedragen van 2026.
+Deze versie van de package ondersteunt peildatums van 1 januari 2026 tot en met 31 december 2026. Een peildatum buiten die periode geeft een `ValueError`, zodat de berekening geen beleidsjaren mengt.
 
 ### Criterium-id's
 

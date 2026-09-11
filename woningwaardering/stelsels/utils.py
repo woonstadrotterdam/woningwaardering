@@ -58,18 +58,22 @@ ONDERSTEUNDE_PEILDATUM_TOT = date(2027, 1, 1)
 
 
 def controleer_peildatum(peildatum: date) -> None:
-    """Controleer of de peildatum door deze packageversie wordt ondersteund."""
-    if peildatum < ONDERSTEUNDE_PEILDATUM_VANAF:
+    """Controleer of de peildatum door deze packageversie wordt ondersteund.
+
+    Deze packageversie implementeert alleen het woningwaarderingsstelsel van 2026.
+    Omdat de toepassing van het stelsel aan kalenderjaren is gekoppeld (1.3.4), zou een
+    peildatum buiten 2026 beleidsjaren mengen. Zo'n peildatum wordt daarom geweigerd.
+
+    Args:
+        peildatum (date): De peildatum van de waardering.
+
+    Raises:
+        ValueError: Wanneer de peildatum buiten 2026 valt.
+    """
+    if not ONDERSTEUNDE_PEILDATUM_VANAF <= peildatum < ONDERSTEUNDE_PEILDATUM_TOT:
         raise ValueError(
             f"Peildatum {peildatum} wordt niet ondersteund. "
             "De ondersteunde periode loopt van 01-01-2026 tot en met 31-12-2026."
-        )
-
-    if peildatum >= ONDERSTEUNDE_PEILDATUM_TOT:
-        warnings.warn(
-            f"Peildatum {peildatum} valt buiten de ondersteunde periode. "
-            "De package gebruikt regels en bedragen van 2026.",
-            DeprecationWarning,
         )
 
 

@@ -24,14 +24,16 @@ def test_controleer_peildatum_accepteert_2026(peildatum: date) -> None:
     utils.controleer_peildatum(peildatum)
 
 
-def test_controleer_peildatum_weigert_datum_voor_2026() -> None:
+@pytest.mark.parametrize(
+    "peildatum",
+    [
+        date(2025, 12, 31),
+        date(2027, 1, 1),
+    ],
+)
+def test_controleer_peildatum_weigert_datum_buiten_2026(peildatum: date) -> None:
     with pytest.raises(ValueError, match="2026"):
-        utils.controleer_peildatum(date(2025, 12, 31))
-
-
-def test_controleer_peildatum_waarschuwt_na_2026() -> None:
-    with pytest.warns(DeprecationWarning, match="2026"):
-        utils.controleer_peildatum(date(2027, 1, 1))
+        utils.controleer_peildatum(peildatum)
 
 
 def _waardering(
