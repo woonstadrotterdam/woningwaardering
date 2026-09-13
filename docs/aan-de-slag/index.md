@@ -1350,7 +1350,7 @@ BUITENRUIMTEN
 
 De bijbehorende criterium-id's:
 
-| Tabelregel | Criterium-id |
+| Tabelrij | Criterium-id |
 | --- | --- |
 | Privé | `buitenruimten__prive` |
 | Balkon 1 | `buitenruimten__prive__Space_108014713` |
@@ -1358,5 +1358,5 @@ De bijbehorende criterium-id's:
 | Privé buitenruimten aanwezig | `buitenruimten__prive_buitenruimten_aanwezig` |
 | Maximaal 15 punten | `buitenruimten__maximering` |
 
-`buitenruimten__prive` is de gedeeld-met-laag direct onder de stelselgroep. De ruimtes hangen daaronder: hun id begint met `buitenruimten__prive__`. De overige twee regels staan weer direct onder de stelselgroep.
+`buitenruimten__prive` is de gedeeld-met-laag direct onder de stelselgroep. De ruimtes hangen daaronder: hun id begint met `buitenruimten__prive__`. De overige twee rijen staan weer direct onder de stelselgroep.
 

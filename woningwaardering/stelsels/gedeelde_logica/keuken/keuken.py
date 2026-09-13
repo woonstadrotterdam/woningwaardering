@@ -164,9 +164,9 @@ def _waardeer_aanrecht(
     Returns:
         list[WaarderingBuilder]: De puntdragende aanrechtwaardering, of een lege
         lijst als er geen geldig aanrecht is. Bij één aanrecht is dat de
-        lengteregel zelf. Bij meerdere aanrechten is dat alleen de
-        subtotaalregel; de lengtedetails hangen daaronder in de boom zonder
-        punten.
+        waardering voor de lengte zelf. Bij meerdere aanrechten is dat alleen de
+        subtotaalwaardering; de lengtedetails hangen daaronder in de hiërarchie
+        zonder punten.
     """
     aanrechten_met_lengte = []
     for element in ruimte.bouwkundige_elementen or []:

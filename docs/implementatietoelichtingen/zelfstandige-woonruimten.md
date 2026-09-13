@@ -441,6 +441,9 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 
 ~~Als er op zolder een ruimte is die alleen bereikbaar is via de zolderruimte, dan wordt de loopruimte die je nodig hebt om die ruimte te bereiken niet meegeteld bij de oppervlakte van de zolder. Wat dan overblijft aan zolderruimte moet minimaal 2,00 m² zijn, anders voldoet de zolderruimte niet meer aan de eisen voor de waardering van de oppervlakte van een 'overige ruimte'.~~
 
+> [!NOTE]
+> De package trekt geen loopruimte van de zolderoppervlakte af. Geef de oppervlakte mee ná aftrek van de loopruimte die nodig is om een alleen via de zolder bereikbare ruimte te bereiken. Wat overblijft moet minimaal 2,00 m² zijn.
+
 ##### 2.2.2.5 Privé parkeerruimte
 
 Een binnenruimte die bedoeld is als parkeerruimte en waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben (privé parkeerruimte), wordt gewaardeerd als overige ruimte. Een voorbeeld is een garagebox die hoort tot de woning. Is er sprake van een privé-parkeerruimte in een buitenruimte, dan wordt de ruimte gewaardeerd in rubriek 8 ('Buitenruimte').
@@ -765,6 +768,9 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
+
+> [!NOTE]
+> Deze sanctie past de package alleen toe op de niet-doorgestreepte eis (aanrecht van minimaal 1 meter). Ontbreken alleen de doorgestreepte basisvoorzieningen, dan worden keukenpunten wél toegekend. Zie [§2.5.2](#252-punten-voor-basisvoorzieningen-keuken).
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
