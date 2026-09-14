@@ -346,7 +346,7 @@ De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzond
 
 > [!NOTE]
 >
-> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is. Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is (drempelfallback). Dat geldt ook voor een `toiletruimte`. Een overige ruimte wordt nooit tot vertrek gepromoveerd, behalve keuken, badkamer en doucheruimte — dan volgt een `UserWarning` (upgrade).
+> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is. Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
 > - Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 
 Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle van de volgende eisen:

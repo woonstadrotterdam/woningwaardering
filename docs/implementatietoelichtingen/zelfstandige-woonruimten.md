@@ -417,9 +417,8 @@ De waardering van overige ruimten wordt (net als de vertrekken) gebaseerd op hel
 > [!NOTE]
 >
 > - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is.
-> - Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is (drempelfallback). Dat geldt ook voor een `toiletruimte`. Een overige ruimte wordt nooit tot vertrek gepromoveerd, behalve keuken, badkamer en doucheruimte — dan volgt een `UserWarning` (upgrade).
+> - Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
 > - Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
-> - `UserWarning` als de aangeleverde `Ruimtesoort` niet de WWS-classificatie is, behalve wanneer die soort de VERA-parent is, bij de drempels (inclusief `None`), of bij een gedeelde `garage` met `soort=overige_ruimten`. Zie 2.2.1.2.
 
 Een overige ruimte krijgt punten voor de oppervlakte als deze voldoet aan alle van de volgende eisen:
 
@@ -436,7 +435,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 > - De `Ruimtedetailsoort` bepaalt of een zolderruimte een vertrek kan zijn. Alleen een `zoldervertrek` voldoet aan eis 2: VERA omschrijft die als een ruimte "die zowel qua oppervlakte en stahoogte als afwerking geschikt is om als vertrek te worden gekwalificeerd". Een `zolder` is "qua oppervlakte en stahoogte geschikt (...), maar (...) voldoet niet aan de afwerkingseisen" en wordt daarom nooit als vertrek gewaardeerd.
 > - Beide detailsoorten beschrijven volgens VERA een ruimte onder het dak **met** vaste trap. De detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement` `vlizotrap` weerspreekt dat. Staan er zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap leidend.
 > - Een `zoldervertrek` van minimaal 4m2 wordt gewaardeerd onder `Oppervlakte van vertrekken`, mits deze wordt ingeschoten met `ruimtesoort` `vertrek`.
-> - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2). Haalt een `zolder` (VERA-parent overige ruimte) wél 4,00 m² maar is `soort=vertrek`, dan volgt een `UserWarning`. Een `zoldervertrek` met `soort=vertrek` waarschuwt niet: dat is de VERA-parent, ook als een `vlizotrap` de waardering naar overige ruimte trekt.
+> - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2).
 > - Andersom geldt dit niet: een zolderruimte die is ingeschoten met `ruimtesoort` `overige ruimte` wordt nooit als vertrek gewaardeerd.
 > - Een zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3.
 
@@ -449,7 +448,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 Een binnenruimte die bedoeld is als parkeerruimte en waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben (privé parkeerruimte), wordt gewaardeerd als overige ruimte. Een voorbeeld is een garagebox die hoort tot de woning. Is er sprake van een privé-parkeerruimte in een buitenruimte, dan wordt de ruimte gewaardeerd in rubriek 8 ('Buitenruimte').
 
 > [!NOTE]
-> Een `garage` volgt dezelfde soort+drempel-regel als andere binnenruimten op de allowlist: `Ruimtesoort` `vertrek` en minimaal 4,00 m² maakt haar een vertrek. De zin hierboven — privé-parkeerruimte als overige ruimte — geldt wanneer de garage geen vertrek is. Een garage met `soort=overige_ruimten` die met adressen wordt gedeeld, wordt niet in rubriek 2 gewaardeerd (geen `UserWarning`: VERA zet garage onder overige ruimte).
+> Een `garage` volgt dezelfde ruimtesoort plus oppervlakte-eis als andere binnenruimten: `Ruimtesoort` `vertrek` en minimaal 4,00 m² maakt haar een vertrek. Een garage met `soort=overige_ruimten` die met adressen wordt gedeeld, wordt niet in rubriek 2 gewaardeerd.
 
 #### 2.2.3 Verkeersruimten
 
