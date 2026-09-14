@@ -103,8 +103,30 @@
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 5.25,
+      "punten": 18.0,
       "woningwaarderingen": [
+        {
+          "aantal": 10.22,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_108006242",
+            "naam": "Overige ruimte 1",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.11,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_108006238",
+            "naam": "Overige ruimte 2",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
         {
           "aantal": 6.65,
           "criterium": {
@@ -517,7 +539,7 @@
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 64.75,
+      "punten": 62.75,
       "woningwaarderingen": [
         {
           "aantal": 694000.0,
@@ -556,10 +578,10 @@
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 19.38
+          "punten": 17.38
         },
         {
-          "aantal": 148.0,
+          "aantal": 165.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -625,12 +647,12 @@
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1900.64,
-  "punten": 284.0,
+  "maximaleHuur": 1976.1,
+  "punten": 295.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1900.64
+  "maximaleHuurInclusiefOpslag": 1976.1
 }

@@ -315,9 +315,9 @@ Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
 
 > [!NOTE]
 >
-> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'.
+> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
-> - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte, wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
+> - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
 Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de volgende eisen:
 
@@ -414,7 +414,7 @@ De waardering van overige ruimten wordt (net als de vertrekken) gebaseerd op hel
 
 > [!NOTE]
 >
-> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is.
+> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte met `Ruimtesoort` `overige ruimte` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minimaal 2 m² is.
 > - Een ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m² en minimaal 2 m² is.
 > - Een ruimte dient alleen als overige ruimte gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 
@@ -449,7 +449,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 Een binnenruimte die bedoeld is als parkeerruimte en waartoe bewoners van één adres op grond van de huurovereenkomst exclusieve toegang hebben (privé parkeerruimte), wordt gewaardeerd als overige ruimte. Een voorbeeld is een garagebox die hoort tot de woning. Is er sprake van een privé-parkeerruimte in een buitenruimte, dan wordt de ruimte gewaardeerd in rubriek 8 ('Buitenruimte').
 
 > [!NOTE]
-> De `Ruimtedetailsoort` `garage` wordt tot op heden alleen gewaardeerd als overige ruimte wanneer deze voldoet aan de voorwaarden.
+> Een `garage` volgt dezelfde ruimtesoort plus oppervlakte-eis als andere binnenruimten: `Ruimtesoort` `vertrek` en minimaal 4,00 m² maakt haar een vertrek. Een garage met `soort=overige_ruimten` die met adressen wordt gedeeld, wordt niet in rubriek 2 gewaardeerd.
 
 #### 2.2.3 Verkeersruimten
 
