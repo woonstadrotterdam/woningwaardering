@@ -212,8 +212,6 @@ def test_classificeer_ruimte_zoldervertrek_als_overige_ruimte_wordt_nooit_vertre
     assert classificeer(ruimte) == Ruimtesoort.overige_ruimten
 
 
-
-
 def test_classificeer_ruimte_garage_gedeeld_als_overige_is_none_zonder_warning():
     """VERA-parent van garage is overige ruimte: gedeeld is geen foute input."""
     ruimte = maak_ruimte(
