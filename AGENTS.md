@@ -108,3 +108,24 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 - Commit of push alleen wanneer de gebruiker daar expliciet om vraagt; volg dan [`.cursor/skills/managing-commits/SKILL.md`](.cursor/skills/managing-commits/SKILL.md).
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.
+
+## Cursor Cloud specific instructions
+
+- Dit is een pure Python-**library** (geen server, database of GUI). "De applicatie draaien" betekent een woningwaardering berekenen; er is niets om op een poort te starten.
+- `uv` staat geïnstalleerd in `~/.local/bin` en op het PATH via de login-shell; het startup-script draait `uv sync --extra dev`. Draai commands met `uv run ...` (zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md)); een aparte `.venv`-activatie is niet nodig.
+- Snelle end-to-end sanity check (rapport op een echte VERA-input, komt overeen met het README-voorbeeld):
+
+  ```bash
+  uv run python -c "
+  from datetime import date
+  from woningwaardering import Woningwaardering
+  from woningwaardering.vera.bvg.generated import EenhedenEenheid
+  from woningwaardering.stelsels.utils import naar_rapport
+  wws = Woningwaardering(peildatum=date(2026, 7, 1))
+  with open('tests/data/generiek/input/37101000032.json') as f:
+      eenheid = EenhedenEenheid.model_validate_json(f.read())
+  print(naar_rapport(wws.waardeer(eenheid), eenheid_id=eenheid.id))
+  "
+  ```
+
+- Tests/lint/typecheck staan al beschreven onder "Omgeving En Commands" en "Tests" hierboven (`uv run python -m pytest`, `uv run pre-commit run --all-files [--hook-stage pre-push]`). De eerste pre-commit-run installeert hook-omgevingen en duurt langer; daarna zijn ze gecachet.
