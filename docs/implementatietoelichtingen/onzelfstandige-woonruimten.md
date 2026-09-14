@@ -730,7 +730,7 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
 
 > [!NOTE]
-> Deze sanctie past de package alleen toe op de niet-doorgestreepte eis (aanrecht van minimaal 1 meter). Ontbreken alleen de doorgestreepte basisvoorzieningen, dan worden keukenpunten wél toegekend. Zie [§2.5.2](#252-punten-voor-basisvoorzieningen-keuken).
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
