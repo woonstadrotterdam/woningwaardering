@@ -2,8 +2,8 @@
   "ruimten": [
     {
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
+        "code": "VTK",
+        "naam": "Vertrek"
       },
       "detailSoort": {
         "code": "BAT",

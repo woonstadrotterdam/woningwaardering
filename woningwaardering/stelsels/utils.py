@@ -441,6 +441,45 @@ _VERKEERSRUIMTE_DETAILSOORTEN = frozenset(
         Ruimtedetailsoort.overloop,
         Ruimtedetailsoort.entree,
         Ruimtedetailsoort.gang,
+        Ruimtedetailsoort.trappenhuis,
+        Ruimtedetailsoort.galerij,
+        Ruimtedetailsoort.liftschacht,
+    }
+)
+
+_ALTIJD_VERTREK_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.keuken,
+        Ruimtedetailsoort.badkamer,
+        Ruimtedetailsoort.badkamer_met_toilet,
+        Ruimtedetailsoort.doucheruimte,
+    }
+)
+
+# Binnenruimten die via soort+drempel rubriek 1 of 2 in mogen. VERA-parent is
+# geen WWS-classificatie: schacht, kast, meterruimte, technische_ruimte en
+# vliering hebben parent overige_ruimten maar staan hier bewust niet.
+_VERTREK_OF_OVERIGE_DETAIL_SOORTEN = frozenset(
+    {
+        Ruimtedetailsoort.woonkamer,
+        Ruimtedetailsoort.woon_en_of_slaapkamer,
+        Ruimtedetailsoort.woonkamer_en_of_keuken,
+        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
+        Ruimtedetailsoort.slaapkamer,
+        Ruimtedetailsoort.overig_vertrek,
+        Ruimtedetailsoort.bijkeuken,
+        Ruimtedetailsoort.berging,
+        Ruimtedetailsoort.bergruimte,
+        Ruimtedetailsoort.wasruimte,
+        Ruimtedetailsoort.kelder,
+        Ruimtedetailsoort.serre,
+        Ruimtedetailsoort.schuur,
+        Ruimtedetailsoort.tussenkamer,
+        Ruimtedetailsoort.containerruimte,
+        Ruimtedetailsoort.recreatieruimte,
+        Ruimtedetailsoort.overige_ruimte,
+        Ruimtedetailsoort.toiletruimte,
+        Ruimtedetailsoort.garage,
     }
 )
 
@@ -494,34 +533,75 @@ def toe_te_rekenen_oppervlakte(ruimte: EenhedenRuimte) -> Decimal:
     ) / Decimal(str(deler))
 
 
-def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
+def _vera_parent(
+    detail_soort: Referentiedata | None,
+) -> Referentiedata | None:
+    """VERA-parent van een `Ruimtedetailsoort`.
+
+    JSON vult `parent` niet (`exclude=True`); we zoeken het enumlid op code.
     """
-    Classificeert de ruimte volgens het Woningwaarderingstelsel
+    if detail_soort is None:
+        return None
+    for lid in Ruimtedetailsoort:
+        if lid == detail_soort:
+            return lid.parent
+    return None
 
-    Args:
-        ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
 
-    Returns:
-        RuimtesoortReferentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
-            Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
+def _is_vertrek_drempelfallback(
+    aangeleverd: Referentiedata,
+    resultaat: RuimtesoortReferentiedata | None,
+    opp_met_kasten: Decimal,
+) -> bool:
+    """2.2.1.2: een vertrek onder de 4,00 m² valt terug op overige ruimte vanaf 2,00 m²."""
+    return (
+        aangeleverd == Ruimtesoort.vertrek
+        and resultaat == Ruimtesoort.overige_ruimten
+        and opp_met_kasten >= Decimal("2")
+        and opp_met_kasten < Decimal("4")
+    )
+
+
+def _waarschuw_als_aangeleverde_soort_afwijkt(
+    ruimte: EenhedenRuimte,
+    resultaat: RuimtesoortReferentiedata | None,
+    opp_met_kasten: Decimal,
+) -> None:
+    """UserWarning als de aangeleverde `Ruimtesoort` niet de WWS-classificatie is.
+
+    Stil wanneer de aangeleverde soort de VERA-parent van de detailsoort is:
+    dat is juiste VERA-input, ook als WWS `None` of een andere rubriek geeft.
+    Stil bij de 4 m²-fallback (vertrek 2,00–4,00 m² → overige ruimte) en wanneer
+    het resultaat `None` is (niet op de allowlist, onder 2,00 m², gedeelde garage).
     """
+    aangeleverd = ruimte.soort
+    if aangeleverd is None or aangeleverd == resultaat:
+        return
+    parent = _vera_parent(ruimte.detail_soort)
+    if parent is not None and aangeleverd == parent:
+        return
+    if _is_vertrek_drempelfallback(aangeleverd, resultaat, opp_met_kasten):
+        return
+    if resultaat is None:
+        return
+    warnings.warn(
+        f"Ruimte '{ruimte.naam}' ({ruimte.id}) is aangeleverd als "
+        f"{aangeleverd.naam} maar wordt gewaardeerd als {resultaat.naam}.",
+        UserWarning,
+    )
 
-    if ruimte.oppervlakte is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
-        warnings.warn(warning_msg, UserWarning)
-        return None
 
-    if ruimte.soort is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort"
-        warnings.warn(warning_msg, UserWarning)
-        return None
-
-    if ruimte.detail_soort is None:
-        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
-        warnings.warn(warning_msg, UserWarning)
-        return None
-
-    if ruimte.soort == Ruimtesoort.verkeersruimte:
+def _classificeer_ruimte(
+    ruimte: EenhedenRuimte, opp_met_kasten: Decimal
+) -> RuimtesoortReferentiedata | None:
+    # 2.2.3 Verkeersruimten
+    # Verkeersruimten zijn ruimten die bedoeld zijn voor het bereiken van een andere
+    # ruimte en niet zijn bestemd om duurzaam in te verblijven. Verkeersruimten
+    # krijgen geen punten voor hun oppervlakte in rubriek 1 of 2.
+    if (
+        ruimte.soort == Ruimtesoort.verkeersruimte
+        or ruimte.detail_soort in _VERKEERSRUIMTE_DETAILSOORTEN
+    ):
         return Ruimtesoort.verkeersruimte
 
     if (
@@ -554,68 +634,13 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
     ):
         return Ruimtesoort.buitenruimte
 
-    # Keuken, badkamer en doucheruimte worden altijd gewaardeerd als vertrek
-    if ruimte.detail_soort in [
-        Ruimtedetailsoort.keuken,
-        Ruimtedetailsoort.badkamer,
-        Ruimtedetailsoort.badkamer_met_toilet,
-        Ruimtedetailsoort.doucheruimte,
-    ]:
+    # In afwijking van bovenstaande eisen is een ruimte die uitsluitend als keuken
+    # dient en een badkamer of doucheruimte altijd een vertrek.
+    if ruimte.detail_soort in _ALTIJD_VERTREK_DETAIL_SOORTEN:
         return Ruimtesoort.vertrek
 
-    # §2.2.4 Kasten: kastoppervlakte telt mee voor drempeltoets van minimale oppervlakte voor vertrek/overige ruimte.
-    opp_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
-
-    if ruimte.detail_soort in [
-        Ruimtedetailsoort.woonkamer,
-        Ruimtedetailsoort.woon_en_of_slaapkamer,
-        Ruimtedetailsoort.woonkamer_en_of_keuken,
-        Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken,
-        Ruimtedetailsoort.slaapkamer,
-        Ruimtedetailsoort.overig_vertrek,
-        Ruimtedetailsoort.bijkeuken,
-        Ruimtedetailsoort.berging,
-        Ruimtedetailsoort.bergruimte,
-        Ruimtedetailsoort.wasruimte,
-        Ruimtedetailsoort.kelder,
-        Ruimtedetailsoort.serre,
-        Ruimtedetailsoort.schuur,
-        Ruimtedetailsoort.tussenkamer,
-        Ruimtedetailsoort.containerruimte,
-        Ruimtedetailsoort.recreatieruimte,
-        Ruimtedetailsoort.overige_ruimte,
-    ]:
-        if ruimte.soort == Ruimtesoort.vertrek:
-            if opp_met_kasten >= Decimal("4"):
-                return Ruimtesoort.vertrek
-            if opp_met_kasten >= Decimal("2"):
-                return Ruimtesoort.overige_ruimten
-
-        if ruimte.soort == Ruimtesoort.overige_ruimten:
-            if opp_met_kasten >= Decimal("2"):
-                return Ruimtesoort.overige_ruimten
-
-    if ruimte.detail_soort == Ruimtedetailsoort.toiletruimte:
-        # mag alleen als overige ruimte gewaardeerd worden
-        if opp_met_kasten >= Decimal("2"):
-            return Ruimtesoort.overige_ruimten
-
-    if (
-        ruimte.detail_soort in [Ruimtedetailsoort.garage]
-        and not gedeeld_met_adressen(
-            ruimte
-        )  # garages moeten privé zijn om gecategoriseerd te worden als overige ruimte
-        or (
-            # Deze tak leidt naar rubriek 4 Oppervlakte van overige ruimten en
-            # valt buiten de parkeerregels van rubriek 8/10/12: hier telt alleen
-            # deling met adressen, niet met onzelfstandige woonruimten.
-            ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
-            and ruimte.soort == Ruimtesoort.overige_ruimten
-            and not gedeeld_met_adressen(ruimte)
-        )
-    ):
-        if opp_met_kasten >= Decimal("2"):
-            return Ruimtesoort.overige_ruimten
+    if ruimte.detail_soort == Ruimtedetailsoort.carport:
+        return None
 
     if ruimte.detail_soort in ZOLDER_DETAIL_SOORTEN:
         # 2.2.1.3 Zolderruimte als vertrek
@@ -657,8 +682,80 @@ def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | N
                 f"{Ruimtesoort.overige_ruimten.naam} (heeft een oppervlakte van minder "
                 "dan 2,00 m²): Ruimte wordt niet gewaardeerd."
             )
+        return None
+
+    # Deze tak leidt naar rubriek 2/4 Oppervlakte van overige ruimten en valt
+    # buiten de parkeerregels van rubriek 8/10/12: hier telt alleen deling met
+    # adressen, niet met onzelfstandige woonruimten.
+    if (
+        ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
+        and ruimte.soort == Ruimtesoort.overige_ruimten
+        and not gedeeld_met_adressen(ruimte)
+        and opp_met_kasten >= Decimal("2")
+    ):
+        return Ruimtesoort.overige_ruimten
+
+    if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
+        return None
+
+    # 2.2.1.2 / 2.2.2.2: op de allowlist is de aangeleverde ruimtesoort leidend,
+    # plus de oppervlaktedrempel. Een toiletruimte of garage die als vertrek is
+    # aangeleverd en de drempel van 4,00 m² haalt, is een vertrek. "Een toiletruimte
+    # wordt gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van
+    # een overige ruimte": voorwaarde 3 is dat de ruimte niet aan de vertrekeisen
+    # voldoet.
+    if ruimte.detail_soort in _VERTREK_OF_OVERIGE_DETAIL_SOORTEN:
+        if ruimte.soort == Ruimtesoort.vertrek:
+            if opp_met_kasten >= Decimal("4"):
+                return Ruimtesoort.vertrek
+            if opp_met_kasten >= Decimal("2"):
+                return Ruimtesoort.overige_ruimten
+
+        if ruimte.soort == Ruimtesoort.overige_ruimten:
+            # 2.2.2.5: een privé-garage is overige ruimte. Een garage gedeeld met
+            # adressen hoort in rubriek 10 (Type-detailsoort), niet in rubriek 2.
+            if ruimte.detail_soort == Ruimtedetailsoort.garage and gedeeld_met_adressen(
+                ruimte
+            ):
+                return None
+            if opp_met_kasten >= Decimal("2"):
+                return Ruimtesoort.overige_ruimten
 
     return None
+
+
+def classificeer_ruimte(ruimte: EenhedenRuimte) -> RuimtesoortReferentiedata | None:
+    """
+    Classificeert de ruimte volgens het Woningwaarderingstelsel
+
+    Args:
+        ruimte (EenhedenRuimte): De ruimte die geclassificeerd moet worden.
+
+    Returns:
+        RuimtesoortReferentiedata | None: De classificatie van de ruimte volgens het Woningwaarderingstelsel.
+            Geeft `None` terug als de ruimte niet kan worden gewaardeerd.
+    """
+
+    if ruimte.oppervlakte is None:
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen oppervlakte"
+        warnings.warn(warning_msg, UserWarning)
+        return None
+
+    if ruimte.soort is None:
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen soort"
+        warnings.warn(warning_msg, UserWarning)
+        return None
+
+    if ruimte.detail_soort is None:
+        warning_msg = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
+        warnings.warn(warning_msg, UserWarning)
+        return None
+
+    # §2.2.4 Kasten: kastoppervlakte telt mee voor drempeltoets van minimale oppervlakte voor vertrek/overige ruimte.
+    opp_met_kasten = oppervlakte_inclusief_verbonden_kasten(ruimte)
+    resultaat = _classificeer_ruimte(ruimte, opp_met_kasten)
+    _waarschuw_als_aangeleverde_soort_afwijkt(ruimte, resultaat, opp_met_kasten)
+    return resultaat
 
 
 def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
