@@ -157,8 +157,30 @@ with open(
           "naam": "Oppervlakte van overige ruimten"
         }
       },
-      "punten": 5.25,
+      "punten": 18.0,
       "woningwaarderingen": [
+        {
+          "aantal": 10.22,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_108006242",
+            "naam": "Overige ruimte 1",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
+        {
+          "aantal": 7.11,
+          "criterium": {
+            "id": "oppervlakte_van_overige_ruimten__Space_108006238",
+            "naam": "Overige ruimte 2",
+            "meeteenheid": {
+              "code": "M2",
+              "naam": "Vierkante meter, m2"
+            }
+          }
+        },
         {
           "aantal": 6.65,
           "criterium": {
@@ -559,7 +581,7 @@ with open(
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 64.75,
+      "punten": 62.75,
       "woningwaarderingen": [
         {
           "aantal": 694000.0,
@@ -598,10 +620,10 @@ with open(
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 19.38
+          "punten": 17.38
         },
         {
-          "aantal": 148.0,
+          "aantal": 165.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -667,14 +689,14 @@ with open(
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1900.64,
-  "punten": 284.0,
+  "maximaleHuur": 1976.1,
+  "punten": 295.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1900.64
+  "maximaleHuurInclusiefOpslag": 1976.1
 }
 ```
 
@@ -686,7 +708,7 @@ with open(
 ```text
 SAMENVATTING 37101000032
   Oppervlakte van vertrekken                                          141.00 pt
-  Oppervlakte van overige ruimten                                       5.25 pt
+  Oppervlakte van overige ruimten                                      18.00 pt
   Verkoeling en verwarming                                             14.00 pt
   Buitenruimten                                                        15.00 pt
   Energieprestatie                                                     22.00 pt
@@ -694,12 +716,12 @@ SAMENVATTING 37101000032
   Sanitair                                                             15.00 pt
   Gemeenschappelijke parkeerruimten
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-  Punten voor de WOZ-waarde                                            64.75 pt
+  Punten voor de WOZ-waarde                                            62.75 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
                                                                       ---------
-  Totaal afgerond op hele punten                                      284.00 pt
-  Maximaal redelijke huur                                1900.64 EUR
+  Totaal afgerond op hele punten                                      295.00 pt
+  Maximaal redelijke huur                                1976.10 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 1                                             21.05 m²
@@ -713,9 +735,11 @@ OPPERVLAKTE VAN VERTREKKEN
   Totaal                                                  140.87 m²   141.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
+  Overige ruimte 1                                         10.22 m²
+  Overige ruimte 2                                          7.11 m²
   Berging                                                   6.65 m²
                                                       ----------      ---------
-  Totaal                                                    6.65 m²     5.25 pt
+  Totaal                                                   23.98 m²    18.00 pt
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -766,12 +790,12 @@ PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024             694000.00 EUR
   Onderdeel I                                                          45.27 pt
     - Factor I                                          15329.00 EUR
-  Onderdeel II                                                         19.38 pt
-    - Oppervlakte van vertrekken en overige ruimten       148.00 m²
+  Onderdeel II                                                         17.38 pt
+    - Oppervlakte van vertrekken en overige ruimten       165.00 m²
     - Factor II                                           242.00 EUR
   Afronding op kwartpunten                                              0.10 pt
                                                                       ---------
-  Totaal                                                               64.75 pt
+  Totaal                                                               62.75 pt
 ```
 
 

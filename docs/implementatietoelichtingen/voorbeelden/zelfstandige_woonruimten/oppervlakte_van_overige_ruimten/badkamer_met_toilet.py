@@ -21,7 +21,7 @@ def get_eenheid():
 
     eenheid.ruimten = [
         EenhedenRuimte(
-            soort=Ruimtesoort.overige_ruimten,
+            soort=Ruimtesoort.vertrek,
             detail_soort=Ruimtedetailsoort.badkamer_met_toilet,
             oppervlakte=8,
         )

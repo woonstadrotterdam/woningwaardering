@@ -1,3 +1,27 @@
 SAMENVATTING
-  Verkoeling en verwarming
+  Verkoeling en verwarming                                                       12.00 pt
                                                                                 ---------
+
+VERKOELING EN VERWARMING
+  Privé
+    - Verwarmde vertrekken
+      - prive-1                                                                   2.00 pt
+      - prive-2                                                                   2.00 pt
+      - prive-3                                                                   2.00 pt
+    - Verkoelde vertrekken
+      - prive-1                                                                   1.00 pt
+      - prive-2                                                                   1.00 pt
+      - prive-3                                                                   1.00 pt
+      - Maximaal 2 punten                                                        -1.00 pt
+  Gedeeld met 2 onzelfstandige woonruimten
+    - Verwarmde vertrekken
+      - gedeeld-1                                                                 1.00 pt
+      - gedeeld-2                                                                 1.00 pt
+      - gedeeld-3                                                                 1.00 pt
+    - Verkoelde vertrekken
+      - gedeeld-1                                                                 0.50 pt
+      - gedeeld-2                                                                 0.50 pt
+      - gedeeld-3                                                                 0.50 pt
+      - Maximering                                                               -0.50 pt
+                                                                                ---------
+  Totaal                                                                         12.00 pt
