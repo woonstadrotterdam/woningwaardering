@@ -69,15 +69,17 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         ]
 
         # Bij een vlizotrap hangen de gedeeld-met-lagen onder het Subtotaal, zodat de
-        # ruimteregels bij het subtotaal horen. Correcties staan op hetzelfde
-        # niveau als het subtotaal. Punten op het subtotaal volgen ná de saldering.
+        # waarderingen van de ruimten bij het subtotaal horen. Correcties staan op
+        # hetzelfde niveau als het subtotaal. Punten op het subtotaal volgen ná de
+        # saldering.
         parent: WaarderingsgroepBuilder | WaarderingBuilder = waarderingsgroep_builder
         subtotaal: WaarderingBuilder | None = None
         if zolders:
             # 2.2.2.3 Zolderruimte zonder vaste trap
             # De maximumaftrek van 5 punten is van de zolder en wordt gedeeld. De zolder
-            # blijft in de saldering. Het subtotaal draagt geen aantal: ruimteregels
-            # tonen werkelijke m², punten komen uit toe te rekenen m². Zie #403.
+            # blijft in de saldering. Het subtotaal draagt geen aantal: waarderingen
+            # van de ruimten tonen werkelijke m², punten komen uit toe te rekenen m².
+            # Zie #403.
             subtotaal = waarderingsgroep_builder.met_onderliggend(
                 id="subtotaal",
                 naam="Subtotaal",

@@ -439,7 +439,10 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
-~~Als er op zolder een ruimte is die alleen bereikbaar is via de zolderruimte, dan wordt de loopruimte die je nodig hebt om die ruimte te bereiken niet meegeteld bij de oppervlakte van de zolder. Wat dan overblijft aan zolderruimte moet minimaal 2,00 m² zijn, anders voldoet de zolderruimte niet meer aan de eisen voor de waardering van de oppervlakte van een 'overige ruimte'.~~
+~~Als er op zolder een ruimte is die alleen bereikbaar is via de zolderruimte, dan wordt de loopruimte die je nodig hebt om die ruimte te bereiken niet meegeteld bij de oppervlakte van de zolder.~~ Wat dan overblijft aan zolderruimte moet minimaal 2,00 m² zijn, anders voldoet de zolderruimte niet meer aan de eisen voor de waardering van de oppervlakte van een 'overige ruimte'.
+
+> [!NOTE]
+> De package trekt geen loopruimte van de zolderoppervlakte af. Geef de oppervlakte mee ná aftrek van de loopruimte die nodig is om een alleen via de zolder bereikbare ruimte te bereiken.
 
 ##### 2.2.2.5 Privé parkeerruimte
 
@@ -765,6 +768,9 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 ~~De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
+
+> [!NOTE]
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 

@@ -96,7 +96,7 @@ def test_som_effectieve_aantal_waarderingen_twee_gedeeld_met_lagen() -> None:
 
 
 def test_som_effectieve_aantal_waarderingen_subtotaal_zonder_aantal() -> None:
-    """Ruimteregels onder gedeeld-met plus een subtotaal zonder aantal op hetzelfde niveau.
+    """Waarderingen van de ruimten onder gedeeld-met plus een subtotaal zonder aantal op hetzelfde niveau.
 
     Het subtotaal draagt alleen punten. De helper telt het toe te rekenen aantal.
     Zie #403.
@@ -129,9 +129,9 @@ def test_som_effectieve_aantal_waarderingen_subtotaal_zonder_aantal() -> None:
 
 
 def test_som_effectieve_aantal_waarderingen_subtotaal_met_gedeeld_met_eronder() -> None:
-    """Ruimteregels onder het subtotaal via de gedeeld-met-laag; subtotaal zonder aantal.
+    """Waarderingen van de ruimten onder het subtotaal via de gedeeld-met-laag; subtotaal zonder aantal.
 
-    De bovenliggende van de ruimteregel is Privé of Gedeeld-met, niet Subtotaal.
+    De bovenliggende van de waardering van de ruimte is Privé of Gedeeld-met, niet Subtotaal.
     De helper telt de ruimtes. Zie #403.
     """
     subtotaal = "oppervlakte_van_overige_ruimten__subtotaal"

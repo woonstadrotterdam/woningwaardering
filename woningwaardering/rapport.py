@@ -30,7 +30,7 @@ W_OPSLAG = 7
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
-# Inschuif aan het begin van elke tabelregel (naamkolom).
+# Inschuif aan het begin van elke tabelrij (naamkolom).
 _TABEL_RIJ_INSCHUIF = "  "
 # Spatie tussen getal- en eenheidskolom.
 _GETAL_EENHEID_GAP = " "
@@ -100,30 +100,30 @@ _PUNTEN_KOLOM_EINDE = _EENHEID_KOLOM_EINDE + len(_GAP) + W_PUNTEN
 _OPSLAG_KOLOM_EINDE = _PUNTEN_KOLOM_EINDE + len(_GAP) + W_OPSLAG
 
 
-def _plaats_rechts(regel: str, tekst: str, kolom_einde: int) -> str:
-    """Plak ``tekst`` rechts uitgelijnd achter ``regel`` zodat het op ``kolom_einde`` eindigt.
+def _plaats_rechts(rij: str, tekst: str, kolom_einde: int) -> str:
+    """Plak ``tekst`` rechts uitgelijnd achter ``rij`` zodat het op ``kolom_einde`` eindigt.
 
-    Wanneer ``regel`` al te lang is, schuift ``tekst`` naar rechts met minimaal één spatie.
+    Wanneer ``rij`` al te lang is, schuift ``tekst`` naar rechts met minimaal één spatie.
     """
     if not tekst:
-        return regel
-    padding = max(1, kolom_einde - len(regel) - len(tekst))
-    return f"{regel}{' ' * padding}{tekst}"
+        return rij
+    padding = max(1, kolom_einde - len(rij) - len(tekst))
+    return f"{rij}{' ' * padding}{tekst}"
 
 
-def _plaats_eenheid(regel: str, eenheid: str) -> str:
+def _plaats_eenheid(rij: str, eenheid: str) -> str:
     """Plak ``eenheid`` links uitgelijnd in de eenheidskolom (direct na het getal)."""
     if not eenheid:
-        return regel
-    if len(regel) < _GETAL_KOLOM_EINDE:
-        regel = f"{regel}{' ' * (_GETAL_KOLOM_EINDE - len(regel))}"
-    regel = f"{regel}{_GETAL_EENHEID_GAP}{eenheid}"
-    if len(regel) < _EENHEID_KOLOM_EINDE:
-        regel = f"{regel}{' ' * (_EENHEID_KOLOM_EINDE - len(regel))}"
-    return regel
+        return rij
+    if len(rij) < _GETAL_KOLOM_EINDE:
+        rij = f"{rij}{' ' * (_GETAL_KOLOM_EINDE - len(rij))}"
+    rij = f"{rij}{_GETAL_EENHEID_GAP}{eenheid}"
+    if len(rij) < _EENHEID_KOLOM_EINDE:
+        rij = f"{rij}{' ' * (_EENHEID_KOLOM_EINDE - len(rij))}"
+    return rij
 
 
-def _tabel_regel(
+def _tabel_rij(
     naam: str,
     *,
     aantal: str = "",
@@ -131,24 +131,24 @@ def _tabel_regel(
     punten: str = "",
     opslag: str = "",
 ) -> str:
-    """Formatteer één tabelregel met de gedeelde kolomopmaak.
+    """Formatteer één tabelrij met de gedeelde kolomopmaak.
 
-    Wordt gebruikt voor de regels in de samenvatting, de waarderingen in een
-    stelselgroep en de totaalregels: de naam staat links; getal, punten en opslag
+    Wordt gebruikt voor de rijen in de samenvatting, de waarderingen in een
+    stelselgroep en de totaalrijen: de naam staat links; getal, punten en opslag
     lijnen rechts uit op vaste kolomeinden; de eenheid staat in een vaste kolom
     direct na het getal.
     """
-    regel = _TABEL_RIJ_INSCHUIF + naam
-    regel = _plaats_rechts(regel, aantal, _GETAL_KOLOM_EINDE)
-    regel = _plaats_eenheid(regel, eenheid)
-    regel = _plaats_rechts(regel, punten, _PUNTEN_KOLOM_EINDE)
-    regel = _plaats_rechts(regel, opslag, _OPSLAG_KOLOM_EINDE)
-    return regel.rstrip()
+    rij = _TABEL_RIJ_INSCHUIF + naam
+    rij = _plaats_rechts(rij, aantal, _GETAL_KOLOM_EINDE)
+    rij = _plaats_eenheid(rij, eenheid)
+    rij = _plaats_rechts(rij, punten, _PUNTEN_KOLOM_EINDE)
+    rij = _plaats_rechts(rij, opslag, _OPSLAG_KOLOM_EINDE)
+    return rij.rstrip()
 
 
 def _tabel_scheiding(*, toon_aantal: bool) -> str:
-    """Scheidingsregel boven een totaalregel (onder de getal- en puntenkolom)."""
-    return _tabel_regel(
+    """Scheidingsrij boven een totaalrij (onder de getal- en puntenkolom)."""
+    return _tabel_rij(
         "",
         aantal="-" * W_GETAL if toon_aantal else "",
         punten="-" * W_PUNTEN,
@@ -213,7 +213,7 @@ def _onderliggende_waarderingen(
 def _render_waardering_pre_order(
     waardering: WoningwaarderingResultatenWoningwaardering,
     waarderingen: list[WoningwaarderingResultatenWoningwaardering],
-    regels: list[str],
+    rijen: list[str],
     *,
     toon_opslag_kolom: bool,
     indent: int = 0,
@@ -225,8 +225,8 @@ def _render_waardering_pre_order(
     getal, eenheid = _format_aantal_delen(
         waardering.aantal, _waardering_meeteenheid(waardering)
     )
-    regels.append(
-        _tabel_regel(
+    rijen.append(
+        _tabel_rij(
             prefix + (waardering.criterium.naam or ""),
             aantal=getal,
             eenheid=eenheid,
@@ -239,7 +239,7 @@ def _render_waardering_pre_order(
         _render_waardering_pre_order(
             kind,
             waarderingen,
-            regels,
+            rijen,
             toon_opslag_kolom=toon_opslag_kolom,
             indent=indent + 1,
         )
@@ -248,7 +248,7 @@ def _render_waardering_pre_order(
 def groep_toont_subtotaal_aantal(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> bool:
-    """Of de stelselgroep-`Totaal`-regel in tabellen een hoeveelheid mag tonen."""
+    """Of de stelselgroep-`Totaal`-rij in tabellen een hoeveelheid mag tonen."""
     criterium_groep = groep.criterium_groep
     if (
         criterium_groep is None
@@ -316,7 +316,7 @@ def _render_detail_groep(
     )
     toon_opslag_kolom = _groep_toon_opslag_kolom(groep)
 
-    regels: list[str] = [stelselgroep_naam.upper()]
+    rijen: list[str] = [stelselgroep_naam.upper()]
 
     tops = [
         w
@@ -327,7 +327,7 @@ def _render_detail_groep(
         _render_waardering_pre_order(
             waardering,
             waarderingen,
-            regels,
+            rijen,
             toon_opslag_kolom=toon_opslag_kolom,
         )
 
@@ -339,9 +339,9 @@ def _render_detail_groep(
         else ""
     )
 
-    regels.append(_tabel_scheiding(toon_aantal=bool(subtotaal_aantal)))
-    regels.append(
-        _tabel_regel(
+    rijen.append(_tabel_scheiding(toon_aantal=bool(subtotaal_aantal)))
+    rijen.append(
+        _tabel_rij(
             "Totaal",
             aantal=subtotaal_aantal,
             eenheid=subtotaal_eenheid,
@@ -349,7 +349,7 @@ def _render_detail_groep(
             opslag=groep_opslag,
         )
     )
-    return regels
+    return rijen
 
 
 def _render_samenvatting(
@@ -373,13 +373,13 @@ def _render_samenvatting(
             if toon_opslag_kolom and groep.opslagpercentage is not None
             else ""
         )
-        lines.append(_tabel_regel(stelselgroep_naam, punten=waarde, opslag=opslag))
+        lines.append(_tabel_rij(stelselgroep_naam, punten=waarde, opslag=opslag))
 
     lines.append(_tabel_scheiding(toon_aantal=False))
 
     if resultaat.punten is not None:
         lines.append(
-            _tabel_regel(
+            _tabel_rij(
                 "Totaal afgerond op hele punten",
                 punten=_format_punten_cel(_tabel_fmt_num(resultaat.punten)),
             )
@@ -393,7 +393,7 @@ def _render_samenvatting(
         opslag_bedrag = _tabel_fmt_num(resultaat.huurprijsopslag)
     if opslag_percentage or opslag_bedrag:
         lines.append(
-            _tabel_regel(
+            _tabel_rij(
                 "Opslag",
                 aantal=opslag_bedrag,
                 eenheid="EUR" if opslag_bedrag else "",
@@ -403,7 +403,7 @@ def _render_samenvatting(
 
     if resultaat.maximale_huur is not None:
         lines.append(
-            _tabel_regel(
+            _tabel_rij(
                 "Maximaal redelijke huur",
                 aantal=_tabel_fmt_num(resultaat.maximale_huur),
                 eenheid="EUR",
@@ -416,7 +416,7 @@ def _render_samenvatting(
         and resultaat.maximale_huur_inclusief_opslag is not None
     ):
         lines.append(
-            _tabel_regel(
+            _tabel_rij(
                 "Maximaal redelijke huur inclusief opslag",
                 aantal=_tabel_fmt_num(resultaat.maximale_huur_inclusief_opslag),
                 eenheid="EUR",

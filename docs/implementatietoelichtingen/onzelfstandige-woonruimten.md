@@ -370,11 +370,14 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > 4. maximumaftrek: 5 / 4 = 1,25
 > 5. 15,75 − 1,25 = **14,50**
 >
-> In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de ruimteregels eronder (via de gedeeld-met-laag) en de correctie op hetzelfde niveau als het subtotaal; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
+> In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de waarderingen van de ruimten eronder (via de gedeeld-met-laag) en de correctie op hetzelfde niveau als het subtotaal; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
 
-##### 2.2.2.4 Toegang ruimte via zolderruimte
+##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
-Als er op zolder een ruimte is die alleen bereikbaar is via de zolderruimte, dan wordt de loopruimte die je nodig hebt om die ruimte te bereiken niet meegeteld bij de oppervlakte van de zolder. Wat dan overblijft aan zolderruimte moet minimaal 2,00 m² zijn, anders voldoet de zolderruimte niet meer aan de eisen voor de waardering van de oppervlakte van een ‘overige ruimte’.
+~~Als er op zolder een ruimte is die alleen bereikbaar is via de zolderruimte, dan wordt de loopruimte die je nodig hebt om die ruimte te bereiken niet meegeteld bij de oppervlakte van de zolder. Wat dan overblijft aan zolderruimte moet minimaal 2,00 m² zijn, anders voldoet de zolderruimte niet meer aan de eisen voor de waardering van de oppervlakte van een ‘overige ruimte’.~~
+
+> [!NOTE]
+> De package trekt geen loopruimte van de zolderoppervlakte af. Geef de oppervlakte mee ná aftrek van de loopruimte die nodig is om een alleen via de zolder bereikbare ruimte te bereiken. Wat overblijft moet minimaal 2,00 m² zijn.
 
 #### 2.2.3 Verkeersruimten
 
@@ -725,6 +728,9 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 - ~~een waterdichte wandafwerking boven het waterdichte aanrechtblad en in de kookhoek van minimaal 1,50 meter (gemeten vanaf de vloer). De wandafwerking moet een onroerende aanhorigheid zijn (zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Een keuken met bijvoorbeeld een tegelwand of waterdichte verf voldoet dus aan deze eis, maar een plastic zeil als wandafwerking voldoet niet. Een hedendaagse keuken zal in de regel aan deze eis voldoen, daarom neemt de Huurcommissie als uitgangspunt dat de wandafwerking waterdicht is.~~
 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
+
+> [!NOTE]
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
 
 > [!NOTE]
 > Zorg ervoor dat alleen aanrechten mét een spoelbak worden meegegeven, en alleen indien de keuken voldoet aan de basisvoorzieningen, en dat deze spoelbak niet ook nog als aparte `wastafel` wordt meegegeven.
