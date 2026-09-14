@@ -461,9 +461,6 @@ N.v.t.
 
 Verkeersruimten zijn ruimten die bedoeld zijn voor het bereiken van een andere ruimte en niet zijn bestemd om duurzaam in te verblijven. Bekende voorbeelden zijn een hal, gang of overloop. Verkeersruimten krijgen <u>geen</u> punten voor hun oppervlakte in rubriek 1 of 2.
 
-> [!NOTE]
-> Een ruimte is een verkeersruimte als `Ruimtesoort` `verkeersruimte` is, of als de `Ruimtedetailsoort` volgens VERA onder verkeersruimte valt (`gang`, `hal`, `overloop`, `entree`, `trappenhuis`, `galerij`, `liftschacht`). Die detailsoort dwingt de categorie, ook wanneer `soort=vertrek` is aangeleverd — dan volgt een `UserWarning`.
-
 #### 2.2.4 Meetinstructies vertrekken en overige ruimtes
 
 > [!NOTE]

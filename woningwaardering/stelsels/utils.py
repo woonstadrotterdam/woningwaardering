@@ -456,8 +456,9 @@ _ALTIJD_VERTREK_DETAIL_SOORTEN = frozenset(
     }
 )
 
-# Binnenruimten die via soort+drempel rubriek 1 of 2 in mogen. VERA-parent is
-# geen WWS-classificatie: schacht, kast, meterruimte, technische_ruimte en
+# Binnenruimten die op basis van `Ruimtesoort` oppervlakte in rubriek 1 of 2 gewaardeerd mogen worden. 
+#VERA-parent van `Ruimtesoort` staat namelijk niet gelijk aan of het in rubriek 1 of 2 gewaardeerd mag worden:
+# schacht, kast, meterruimte, technische_ruimte en
 # vliering hebben parent overige_ruimten maar staan hier bewust niet.
 _VERTREK_OF_OVERIGE_DETAIL_SOORTEN = frozenset(
     {
@@ -699,11 +700,7 @@ def _classificeer_ruimte(
         return None
 
     # 2.2.1.2 / 2.2.2.2: op de allowlist is de aangeleverde ruimtesoort leidend,
-    # plus de oppervlaktedrempel. Een toiletruimte of garage die als vertrek is
-    # aangeleverd en de drempel van 4,00 m² haalt, is een vertrek. "Een toiletruimte
-    # wordt gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van
-    # een overige ruimte": voorwaarde 3 is dat de ruimte niet aan de vertrekeisen
-    # voldoet.
+    # gecombineerd met de oppervlakte-eis.
     if ruimte.detail_soort in _VERTREK_OF_OVERIGE_DETAIL_SOORTEN:
         if ruimte.soort == Ruimtesoort.vertrek:
             if opp_met_kasten >= Decimal("4"):
@@ -713,7 +710,7 @@ def _classificeer_ruimte(
 
         if ruimte.soort == Ruimtesoort.overige_ruimten:
             # 2.2.2.5: een privé-garage is overige ruimte. Een garage gedeeld met
-            # adressen hoort in rubriek 10 (Type-detailsoort), niet in rubriek 2.
+            # adressen hoort in rubriek 10, niet in rubriek 2.
             if ruimte.detail_soort == Ruimtedetailsoort.garage and gedeeld_met_adressen(
                 ruimte
             ):

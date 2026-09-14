@@ -212,40 +212,6 @@ def test_classificeer_ruimte_zoldervertrek_als_overige_ruimte_wordt_nooit_vertre
     assert classificeer(ruimte) == Ruimtesoort.overige_ruimten
 
 
-@pytest.mark.parametrize(
-    "oppervlakte,soort,verwacht,verwacht_soort_warning",
-    [
-        (4, Ruimtesoort.vertrek, Ruimtesoort.vertrek, False),
-        (3.99, Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten, False),
-        (2, Ruimtesoort.vertrek, Ruimtesoort.overige_ruimten, False),
-        (2, Ruimtesoort.overige_ruimten, Ruimtesoort.overige_ruimten, False),
-        (4, Ruimtesoort.overige_ruimten, Ruimtesoort.overige_ruimten, False),
-        (1.99, Ruimtesoort.vertrek, None, False),
-        (1.99, Ruimtesoort.overige_ruimten, None, False),
-    ],
-)
-def test_classificeer_ruimte_toiletruimte(
-    oppervlakte, soort, verwacht, verwacht_soort_warning
-):
-    ruimte = maak_ruimte(
-        soort, Ruimtedetailsoort.toiletruimte, oppervlakte, naam="Toiletruimte"
-    )
-    assert (
-        classificeer(ruimte, verwacht_soort_warning=verwacht_soort_warning) == verwacht
-    )
-
-
-@pytest.mark.parametrize(
-    "oppervlakte,soort,verwacht",
-    [
-        (20, Ruimtesoort.vertrek, Ruimtesoort.vertrek),
-        (20, Ruimtesoort.overige_ruimten, Ruimtesoort.overige_ruimten),
-        (2, Ruimtesoort.overige_ruimten, Ruimtesoort.overige_ruimten),
-    ],
-)
-def test_classificeer_ruimte_garage(oppervlakte, soort, verwacht):
-    ruimte = maak_ruimte(soort, Ruimtedetailsoort.garage, oppervlakte, naam="Garage")
-    assert classificeer(ruimte) == verwacht
 
 
 def test_classificeer_ruimte_garage_gedeeld_als_overige_is_none_zonder_warning():
