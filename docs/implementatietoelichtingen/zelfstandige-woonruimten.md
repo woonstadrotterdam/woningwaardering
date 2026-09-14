@@ -315,11 +315,9 @@ Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
 
 > [!NOTE]
 >
-> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Dat geldt ook voor een `toiletruimte` of `garage`: de wettekst waardeert een toiletruimte als overige ruimte *als* zij aan de voorwaarden van een overige ruimte voldoet, en die voorwaarden sluiten een ruimte uit die aan de vertrekeisen voldoet.
+> - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 > - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
-> - Uitzonderingen: keuken, badkamer en doucheruimte zijn altijd een vertrek; verkeersruimten (via `Ruimtesoort` of VERA-parent) en buitenruimten volgen hun categorie; een `zolder` (niet `zoldervertrek`) is nooit een vertrek. `vliering`, `schacht`, `kast`, `meterruimte`, `technische_ruimte` en de parkeer-types `PIP`/`PUP`/`PBD`/`PBC` gaan niet naar rubriek 1 of 2: de VERA-parent is geen WWS-classificatie.
-> - `UserWarning` als de aangeleverde `Ruimtesoort` niet de WWS-classificatie is, behalve: de aangeleverde soort is de VERA-parent van de detailsoort; de 4 m²-fallback (vertrek 2,00–4,00 m² → overige ruimte); of het resultaat is `None`.
 
 Een ruimte wordt als een vertrek gewaardeerd als deze voldoet aan alle van de volgende eisen:
 
