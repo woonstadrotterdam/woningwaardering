@@ -456,8 +456,8 @@ _ALTIJD_VERTREK_DETAIL_SOORTEN = frozenset(
     }
 )
 
-# Binnenruimten die op basis van `Ruimtesoort` oppervlakte in rubriek 1 of 2 gewaardeerd mogen worden. 
-#VERA-parent van `Ruimtesoort` staat namelijk niet gelijk aan of het in rubriek 1 of 2 gewaardeerd mag worden:
+# Binnenruimten die op basis van `Ruimtesoort` oppervlakte in rubriek 1 of 2 gewaardeerd mogen worden.
+# VERA-parent van `Ruimtesoort` staat namelijk niet gelijk aan of het in rubriek 1 of 2 gewaardeerd mag worden:
 # schacht, kast, meterruimte, technische_ruimte en
 # vliering hebben parent overige_ruimten maar staan hier bewust niet.
 _VERTREK_OF_OVERIGE_DETAIL_SOORTEN = frozenset(
@@ -539,13 +539,14 @@ def _vera_parent(
 ) -> Referentiedata | None:
     """VERA-parent van een `Ruimtedetailsoort`.
 
-    JSON vult `parent` niet (`exclude=True`); we zoeken het enumlid op code.
+    JSON vult `parent` niet (`exclude=True`); we zoeken de
+    `Ruimtedetailsoort` op code.
     """
     if detail_soort is None:
         return None
-    for lid in Ruimtedetailsoort:
-        if lid == detail_soort:
-            return lid.parent
+    for ruimtedetailsoort in Ruimtedetailsoort:
+        if ruimtedetailsoort == detail_soort:
+            return ruimtedetailsoort.parent
     return None
 
 
@@ -685,9 +686,9 @@ def _classificeer_ruimte(
             )
         return None
 
-    # Deze tak leidt naar rubriek 2/4 Oppervlakte van overige ruimten en valt
-    # buiten de parkeerregels van rubriek 8/10/12: hier telt alleen deling met
-    # adressen, niet met onzelfstandige woonruimten.
+    # 2.2.2.5: een privé-parkeerplaats binnen (`soort=overige_ruimten`) is
+    # overige ruimte. Gedeeld met adressen is geen privé-parkeerruimte en hoort
+    # in rubriek 10.
     if (
         ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
         and ruimte.soort == Ruimtesoort.overige_ruimten
