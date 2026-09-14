@@ -106,7 +106,7 @@ def classificeer(ruimte, *, verwacht_soort_warning: bool = False):
         (3.99, [TRAP], Ruimtesoort.overige_ruimten, False),
         (2, [TRAP], Ruimtesoort.overige_ruimten, False),
         # Onder de 2 m² voldoet de zolder aan geen van beide rubrieken. Geen warning:
-        # dat is dezelfde soort drempel als de 4 m²-fallback.
+        # de classificatie is `None`.
         (1.99, [TRAP], None, False),
         (1.99, [VLIZOTRAP], None, False),
         (1.99, [], None, False),
@@ -326,7 +326,7 @@ def test_classificeer_ruimte_parkeertype_als_gemeenschappelijk_waarschuwt_niet()
 
 
 def test_classificeer_ruimte_toiletruimte_json_zonder_parent_waarschuwt_niet():
-    """JSON vult `parent` niet; de VERA-parent-schildregel zoekt het enumlid op code."""
+    """JSON vult `parent` niet; `_vera_parent` zoekt het enumlid op code."""
     ruimte = EenhedenRuimte(
         id="Space_1",
         naam="Toiletruimte",

@@ -456,8 +456,8 @@ _ALTIJD_VERTREK_DETAIL_SOORTEN = frozenset(
     }
 )
 
-# Binnenruimten die op basis van `Ruimtesoort` oppervlakte in rubriek 1 of 2 gewaardeerd mogen worden.
-# VERA-parent van `Ruimtesoort` staat namelijk niet gelijk aan of het in rubriek 1 of 2 gewaardeerd mag worden:
+# Binnenruimten die op basis van `Ruimtesoort` en oppervlakte in rubriek 1 of 2 gewaardeerd mogen worden.
+# De VERA-parent van een `Ruimtedetailsoort` bepaalt namelijk niet of het in rubriek 1 of 2 gewaardeerd mag worden:
 # schacht, kast, meterruimte, technische_ruimte en
 # vliering hebben parent overige_ruimten maar staan hier bewust niet.
 _VERTREK_OF_OVERIGE_DETAIL_SOORTEN = frozenset(
@@ -571,10 +571,13 @@ def _waarschuw_als_aangeleverde_soort_afwijkt(
 ) -> None:
     """UserWarning als de aangeleverde `Ruimtesoort` niet de WWS-classificatie is.
 
-    Stil wanneer de aangeleverde soort de VERA-parent van de detailsoort is:
-    dat is juiste VERA-input, ook als WWS `None` of een andere rubriek geeft.
-    Stil bij de 4 m²-fallback (vertrek 2,00–4,00 m² → overige ruimte) en wanneer
-    het resultaat `None` is (niet op de allowlist, onder 2,00 m², gedeelde garage).
+    Geen warning als de aangeleverde soort de VERA-parent van de detailsoort
+    is: dat is juiste VERA-input, ook wanneer het WWS `None` of een andere
+    rubriek geeft. Ook geen warning bij de oppervlakte-eis van 2.2.1.2: een
+    vertrek van 2,00–4,00 m² wordt overige ruimte. En geen warning wanneer
+    het resultaat `None` is, bijvoorbeeld omdat de detailsoort niet in
+    `_VERTREK_OF_OVERIGE_DETAIL_SOORTEN` staat, de oppervlakte onder 2,00 m²
+    blijft, of een garage met adressen wordt gedeeld.
     """
     aangeleverd = ruimte.soort
     if aangeleverd is None or aangeleverd == resultaat:
@@ -687,8 +690,8 @@ def _classificeer_ruimte(
         return None
 
     # 2.2.2.5: een privé-parkeerplaats binnen (`soort=overige_ruimten`) is
-    # overige ruimte. Gedeeld met adressen is geen privé-parkeerruimte en hoort
-    # in rubriek 10.
+    # overige ruimte. Een parkeerplaats gedeeld met adressen is geen privé-
+    # parkeerruimte en hoort in rubriek 10.
     if (
         ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats
         and ruimte.soort == Ruimtesoort.overige_ruimten
@@ -700,7 +703,7 @@ def _classificeer_ruimte(
     if ruimte.detail_soort == Ruimtedetailsoort.parkeerplaats:
         return None
 
-    # 2.2.1.2 / 2.2.2.2: op de allowlist is de aangeleverde ruimtesoort leidend,
+    # 2.2.1.2 / 2.2.2.2: op deze lijst is de aangeleverde ruimtesoort leidend,
     # gecombineerd met de oppervlakte-eis.
     if ruimte.detail_soort in _VERTREK_OF_OVERIGE_DETAIL_SOORTEN:
         if ruimte.soort == Ruimtesoort.vertrek:
