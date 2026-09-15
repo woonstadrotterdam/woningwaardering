@@ -43,6 +43,15 @@ from woningwaardering.vera.bvg.generated import (
 PUNTEN_DECIMALEN = 2
 
 
+def _criterium_id_segment(id: str | None, naam: str | None) -> str:
+    """Id-segment: `id`, anders de naam in kleine letters met underscores, anders ``onbekend``."""
+    if id:
+        return id
+    if naam:
+        return naam.lower().replace(" ", "_")
+    return "onbekend"
+
+
 class WaarderingBuilder:
     """Een waardering-in-opbouw die een ``WoningwaarderingResultatenWoningwaardering`` representeert.
 
@@ -147,7 +156,7 @@ class WaarderingBuilder:
         """
         return _voeg_subgroep_toe(
             self,
-            segment=id or "onbekend",
+            segment=_criterium_id_segment(id, naam),
             naam=naam or "",
         )
 
@@ -172,7 +181,7 @@ class WaarderingBuilder:
         self._activeer()
         return _voeg_onderliggende_toe(
             self,
-            segment=id or "onbekend",
+            segment=_criterium_id_segment(id, naam),
             naam=naam or "",
             punten=punten,
             aantal=aantal,
@@ -314,7 +323,7 @@ class WaarderingsgroepBuilder:
         """
         return _voeg_subgroep_toe(
             self,
-            segment=id or "onbekend",
+            segment=_criterium_id_segment(id, naam),
             naam=naam or "",
         )
 
@@ -335,7 +344,7 @@ class WaarderingsgroepBuilder:
         """
         return _voeg_onderliggende_toe(
             self,
-            segment=id or "onbekend",
+            segment=_criterium_id_segment(id, naam),
             naam=naam or "",
             punten=punten,
             aantal=aantal,

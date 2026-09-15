@@ -15,6 +15,7 @@ from woningwaardering.stelsels.utils import (
     deler,
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
+    weergavenaam,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
@@ -180,7 +181,7 @@ def _waardeer_verwarmde_overige_ruimte(
             ruimte,
             _subgroep(subgroep, ruimte, subgroep_id).met_onderliggend(
                 id=ruimte.id,
-                naam=ruimte.naam or ruimte.id or "",
+                naam=weergavenaam(ruimte),
                 punten=1.0,
             ),
         )
@@ -226,7 +227,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
         [r for r in ruimten if _is_verwarmd_vertrek(r)]
     ):
         open_keuken = _classificeer_open_keuken(ruimte)
-        naam = ruimte.naam or ruimte.id or ""
+        naam = weergavenaam(ruimte)
         if open_keuken == _OpenKeukenSoort.impliciete_open_keuken:
             naam = f"{naam} met open keuken"
 
@@ -256,7 +257,7 @@ def _waardeer_verkoeld_en_of_verwarmd_vertrek(
                 ruimte,
                 _subgroep(subgroep, ruimte, "verkoelde_vertrekken").met_onderliggend(
                     id=ruimte.id,
-                    naam=ruimte.naam or ruimte.id or "",
+                    naam=weergavenaam(ruimte),
                     punten=1,
                 ),
             )

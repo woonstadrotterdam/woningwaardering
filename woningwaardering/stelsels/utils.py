@@ -390,10 +390,29 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
     return eenheid
 
 
+def weergavenaam(ruimte: EenhedenRuimte) -> str:
+    """Criterium-naam van een ruimte: `naam`, anders `detail_soort.naam`, anders `id`.
+
+    Ontbreken die alle drie, dan ``Naamloze ruimte``.
+    """
+    if ruimte.naam:
+        return ruimte.naam
+    if ruimte.detail_soort is not None and ruimte.detail_soort.naam:
+        return ruimte.detail_soort.naam
+    return ruimte.id or "Naamloze ruimte"
+
+
+def criterium_id_voor_ruimte(ruimte: EenhedenRuimte) -> str:
+    """Id-segment van een ruimte: `ruimte.id`, anders de weergavenaam in kleine letters met underscores."""
+    if ruimte.id:
+        return ruimte.id
+    return weergavenaam(ruimte).lower().replace(" ", "_")
+
+
 def normaliseer_ruimte_namen(eenheid: EenhedenEenheid) -> None:
     for ruimte in eenheid.ruimten or []:
         if not ruimte.naam:
-            ruimte.naam = getattr(ruimte.detail_soort, "naam", ruimte.id)
+            ruimte.naam = weergavenaam(ruimte)
 
     naam_counter = Counter(
         ruimte.naam for ruimte in eenheid.ruimten or [] if ruimte.naam
@@ -771,7 +790,7 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
         str: De naam van de ruimte inclusief het aantal meetellende kasten.
     """
 
-    criterium_naam = ruimte.naam or "Naamloze ruimte"
+    criterium_naam = weergavenaam(ruimte)
 
     if ruimte.detail_soort is None or ruimte.detail_soort is None:
         message = f"Ruimte '{ruimte.naam}' ({ruimte.id}) heeft geen detailsoort"
@@ -805,7 +824,10 @@ def voeg_oppervlakte_kasten_toe_aan_ruimte(ruimte: EenhedenRuimte) -> str:
                 "voor de oppervlaktewaardering."
             )
 
-            criterium_naam = f"{ruimte.naam} (+{aantal_ruimte_kasten} {aantal_ruimte_kasten == 1 and 'kast' or 'kasten'})"
+            criterium_naam = (
+                f"{criterium_naam} (+{aantal_ruimte_kasten} "
+                f"{'kast' if aantal_ruimte_kasten == 1 else 'kasten'})"
+            )
     return criterium_naam
 
 

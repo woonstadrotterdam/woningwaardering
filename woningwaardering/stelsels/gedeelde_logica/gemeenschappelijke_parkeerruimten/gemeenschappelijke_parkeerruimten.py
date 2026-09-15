@@ -135,7 +135,7 @@ def waardeer_gemeenschappelijke_parkeerruimte(
     aantal_plekken = int(ruimte.aantal or 1)
     punten = PARKEERTYPE_PUNTEN[type_parkeerruimte]
     totaal_punten_type_parkeeruimte = punten * Decimal(aantal_plekken) / deler
-    weergavenaam = _weergavenaam(ruimte)
+    weergavenaam = utils.weergavenaam(ruimte)
     criterium_id = _parkeer_criterium_id(weergavenaam, type_parkeerruimte)
 
     logger.info(
@@ -170,22 +170,6 @@ def waardeer_gemeenschappelijke_parkeerruimte(
             hergebruik=True,
         )
         _tel_op(laadpaal, aantal=laadpalen, punten=totaal_punten_laadpaal)
-
-
-def _weergavenaam(ruimte: EenhedenRuimte) -> str:
-    """Naam van de parkeerplek in de output: `ruimte.naam`, anders de detailsoort.
-
-    Args:
-        ruimte (EenhedenRuimte): De parkeerruimte.
-
-    Returns:
-        str: De weergavenaam.
-    """
-    if ruimte.naam:
-        return ruimte.naam
-    if ruimte.detail_soort is not None and ruimte.detail_soort.naam:
-        return ruimte.detail_soort.naam
-    return ruimte.id or "onbekend"
 
 
 def _parkeer_criterium_id(weergavenaam: str, type_parkeerruimte: str) -> str:
