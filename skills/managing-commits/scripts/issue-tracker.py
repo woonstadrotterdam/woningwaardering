@@ -22,8 +22,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Cache file location (in .cursor for project-specific storage)
-CACHE_DIR = ".cursor/github-workflows"
+# Cache file location (tool-neutral, shared by .cursor/skills and .claude/skills)
+CACHE_DIR = ".agent-cache/github-workflows"
 CACHE_FILE = "active-issues.json"
 
 
@@ -500,7 +500,6 @@ def find_related_issues(files=None):
         env.get("branch", {}).get("relatedIssues", []) if env else []
     )
     detected_scope = env.get("branch", {}).get("scopeLabel") if env else None
-
     for issue in issues:
         score = 0
         reasons = []

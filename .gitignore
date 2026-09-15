@@ -166,4 +166,4 @@ cython_debug/
 scripts/eenheid_input.py
 
 # managing-commits skill runtime cache (local working state, not source)
-.cursor/github-workflows/
+.agent-cache/github-workflows/

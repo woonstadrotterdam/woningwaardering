@@ -1,9 +1,8 @@
 ---
 name: managing-commits
-description: >-
-  Git commit quality and conventional commits for this repo, with issue-reference integration.
-  Use whenever creating, preparing, reviewing, or analyzing git commits—including when the user
-  asks to commit, when grouping staged changes, or when validating commit message format.
+description: Git commit quality and conventional commits expertise with automatic issue tracking integration. Auto-invokes when the user explicitly asks to commit or push changes, group multiple file changes into logical commits, asks about commit message format, commit quality, conventional commits, commit history analysis, issue references in commits, or requests help writing commit messages. Integrates with the issue cache for automatic issue references.
+version: 1.2.0
+allowed-tools: Bash, Read, Grep, Glob
 ---
 
 # Managing Commits Skill
@@ -12,15 +11,19 @@ You are a Git commit management expert specializing in conventional commits, com
 
 ## When to Use This Skill
 
-Use this skill whenever you create, prepare, review, or analyze git commits in this repository, including when:
+Auto-invoke this skill when the user explicitly:
 
-- The user asks to **commit** staged or unstaged changes
-- You need to **write or validate** a commit message
-- You **group** multiple file changes into logical commits
-- You **review** commit history or message quality on a branch
-- You add **issue references** (`Closes #N`, `Refs #N`) to commits
+- Asks to **commit** or **push** staged or unstaged changes
+- Asks about **commit message format** ("how should I format my commit message")
+- Requests help **writing commits** ("help me write a commit", "create a commit message")
+- Mentions **conventional commits** ("should I use conventional commits")
+- Asks about **commit quality** ("review my commit messages", "are my commits good")
+- Wants **commit history analysis** ("analyze my commit history", "check my commits")
+- Needs multiple file changes **grouped** into logical commits
+- Needs **issue references** (`Closes #N`, `Refs #N`) added to commits
+- References `/commit-smart`, `/commit-review`, or `/commit-interactive` commands
 
-**Do NOT invoke** for casual mentions of "commit" unrelated to git (e.g., "I committed to finishing this feature").
+**Do NOT auto-invoke** for casual mentions of "commit" in conversation (e.g., "I committed to finishing this feature"). Be selective and only activate when commit-related assistance is clearly needed.
 
 ## Your Capabilities
 
@@ -170,16 +173,16 @@ git log -- path/to/file
 
 ```bash
 # Check message format
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py check-format
+{baseDir}/scripts/commit-analyzer.py check-format
 
 # Find fixup opportunities
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py find-fixups
+{baseDir}/scripts/commit-analyzer.py find-fixups
 
 # Analyze commit size
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py analyze-size
+{baseDir}/scripts/commit-analyzer.py analyze-size
 
 # Full quality report
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py report
+{baseDir}/scripts/commit-analyzer.py report
 ```
 
 ### 5. **Commit Message Generation Workflow**
@@ -208,7 +211,7 @@ python .cursor/skills/managing-commits/scripts/commit-analyzer.py report
 
 **Automatic issue detection and referencing**:
 
-The skill integrates with the issue tracking cache (`.cursor/github-workflows/active-issues.json`) to automatically detect and suggest issue references.
+The skill integrates with the issue tracking cache (`.agent-cache/github-workflows/active-issues.json`) to automatically detect and suggest issue references.
 
 **Issue detection methods**:
 
@@ -236,16 +239,16 @@ The skill integrates with the issue tracking cache (`.cursor/github-workflows/ac
 
 ```bash
 # Sync issues before committing
-python .cursor/skills/managing-commits/scripts/issue-tracker.py sync assigned
+python {baseDir}/scripts/issue-tracker.py sync assigned
 
 # Find related issues for staged changes
-python .cursor/skills/managing-commits/scripts/issue-tracker.py suggest-refs
+python {baseDir}/scripts/issue-tracker.py suggest-refs
 
 # Get specific issue details
-python .cursor/skills/managing-commits/scripts/issue-tracker.py get 42
+python {baseDir}/scripts/issue-tracker.py get 42
 
 # Show all cached issues
-python .cursor/skills/managing-commits/scripts/issue-tracker.py show
+python {baseDir}/scripts/issue-tracker.py show
 ```
 
 **Issue reference types**:
@@ -537,78 +540,78 @@ Commit with this message? [y/n/edit]: y
 
 ### Commit Analyzer
 
-**.cursor/skills/managing-commits/scripts/commit-analyzer.py**:
+**{baseDir}/scripts/commit-analyzer.py**:
 
 ```bash
 # Check format compliance
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py check-format
+python {baseDir}/scripts/commit-analyzer.py check-format
 
 # Find commits to squash/fixup
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py find-fixups
+python {baseDir}/scripts/commit-analyzer.py find-fixups
 
 # Analyze commit sizes
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py analyze-size
+python {baseDir}/scripts/commit-analyzer.py analyze-size
 
 # Full quality report (includes suggestions)
-python .cursor/skills/managing-commits/scripts/commit-analyzer.py report --branch feature/auth
+python {baseDir}/scripts/commit-analyzer.py report --branch feature/auth
 ```
 
 ### Conventional Commits Helper
 
-**.cursor/skills/managing-commits/scripts/conventional-commits.py**:
+**{baseDir}/scripts/conventional-commits.py**:
 
 ```bash
 # Validate commit message
-python .cursor/skills/managing-commits/scripts/conventional-commits.py validate "feat(auth): add login"
+python {baseDir}/scripts/conventional-commits.py validate "feat(auth): add login"
 
 # Generate from changes
-python .cursor/skills/managing-commits/scripts/conventional-commits.py generate
+python {baseDir}/scripts/conventional-commits.py generate
 
 # Interactive commit
-python .cursor/skills/managing-commits/scripts/conventional-commits.py interactive
+python {baseDir}/scripts/conventional-commits.py interactive
 
 # Batch validate
-python .cursor/skills/managing-commits/scripts/conventional-commits.py validate-branch feature/auth
+python {baseDir}/scripts/conventional-commits.py validate-branch feature/auth
 ```
 
 ### Issue Tracker
 
-**.cursor/skills/managing-commits/scripts/issue-tracker.py**:
+**{baseDir}/scripts/issue-tracker.py**:
 
 ```bash
 # Sync issues from GitHub to local cache
-python .cursor/skills/managing-commits/scripts/issue-tracker.py sync assigned
-python .cursor/skills/managing-commits/scripts/issue-tracker.py sync labeled priority:high
-python .cursor/skills/managing-commits/scripts/issue-tracker.py sync milestone "Sprint 5"
+python {baseDir}/scripts/issue-tracker.py sync assigned
+python {baseDir}/scripts/issue-tracker.py sync labeled priority:high
+python {baseDir}/scripts/issue-tracker.py sync milestone "Sprint 5"
 
 # Show cached issues as task list
-python .cursor/skills/managing-commits/scripts/issue-tracker.py show
+python {baseDir}/scripts/issue-tracker.py show
 
 # Find related issues for current staged changes
-python .cursor/skills/managing-commits/scripts/issue-tracker.py suggest-refs
+python {baseDir}/scripts/issue-tracker.py suggest-refs
 
 # Get specific issue from cache
-python .cursor/skills/managing-commits/scripts/issue-tracker.py get 42
+python {baseDir}/scripts/issue-tracker.py get 42
 
 # Clear the cache
-python .cursor/skills/managing-commits/scripts/issue-tracker.py clear
+python {baseDir}/scripts/issue-tracker.py clear
 
 # Output cache as JSON
-python .cursor/skills/managing-commits/scripts/issue-tracker.py json
+python {baseDir}/scripts/issue-tracker.py json
 ```
 
 ## Assets
 
 ### Commit Templates
 
-**`.cursor/skills/managing-commits/assets/commit-templates.json`**:
+**{baseDir}/assets/commit-templates.json**:
 Template patterns for common commit types with examples.
 
 ## References
 
 ### Conventional Commits Spec
 
-**`.cursor/skills/managing-commits/references/conventional-commits.md`**:
+**{baseDir}/references/conventional-commits.md**:
 
 - Full specification
 - Type definitions
@@ -618,7 +621,7 @@ Template patterns for common commit types with examples.
 
 ### Commit Patterns
 
-**`.cursor/skills/managing-commits/references/commit-patterns.md`**:
+**{baseDir}/references/commit-patterns.md**:
 
 - Common patterns
 - Anti-patterns
@@ -727,7 +730,7 @@ git diff HEAD --stat
 
 ```python
 # Use helper script
-python .cursor/skills/managing-commits/scripts/group-files.py --analyze
+python {baseDir}/scripts/group-files.py --analyze
 ```
 
 Output:
@@ -837,17 +840,17 @@ Use when: Default mode, gives user full control
 
 **File Grouper**
 
-`.cursor/skills/managing-commits/scripts/group-files.py`:
+{baseDir}/scripts/group-files.py:
 
 ```bash
 # Analyze and group files
-python .cursor/skills/managing-commits/scripts/group-files.py
+python {baseDir}/scripts/group-files.py
 
 # Specific mode
-python .cursor/skills/managing-commits/scripts/group-files.py --mode scope
+python {baseDir}/scripts/group-files.py --mode scope
 
 # JSON output for automation
-python .cursor/skills/managing-commits/scripts/group-files.py --json
+python {baseDir}/scripts/group-files.py --json
 ```
 
 ## Common Use Cases
