@@ -24,6 +24,7 @@ from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     gedeeld_met_adressen,
     is_prive,
+    weergavenaam,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -197,8 +198,8 @@ class Buitenruimten(Stelselgroep):
         totaal_criteria[gedeeld_met] = aantal_adressen
 
         waardering = gedeeld_met.met_onderliggend(
-            id=ruimte.id or "ruimte",
-            naam=ruimte.naam or "",
+            id=ruimte.id,
+            naam=weergavenaam(ruimte),
             meeteenheid=Meeteenheid.vierkante_meter_m2,
         )
         waardering.aantal = float(utils.rond_af(ruimte.oppervlakte, decimalen=2))

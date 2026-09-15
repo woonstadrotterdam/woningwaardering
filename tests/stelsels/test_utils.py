@@ -5,6 +5,7 @@ import pytest
 
 from woningwaardering.stelsels import utils
 from woningwaardering.vera.bvg.generated import (
+    EenhedenEenheid,
     EenhedenRuimte,
     WoningwaarderingCriteriumSleutels,
     WoningwaarderingResultatenWoningwaardering,
@@ -185,7 +186,7 @@ def test_classificeer_ruimte_telt_kast_mee_bij_vertrekdrempel():
     assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
 
 
-def test_verbonden_kast_wordt_na_naamhelper_niet_dubbel_geteld():
+def test_voeg_oppervlakte_kasten_toe_aan_ruimte_wijzigt_oppervlakte_niet():
     ruimte = EenhedenRuimte(
         id="slaapkamer",
         naam="Slaapkamer",
@@ -203,6 +204,57 @@ def test_verbonden_kast_wordt_na_naamhelper_niet_dubbel_geteld():
     assert ruimte.oppervlakte == 3.5
     assert utils.oppervlakte_inclusief_verbonden_kasten(ruimte) == Decimal("4.0")
     assert utils.classificeer_ruimte(ruimte) == Ruimtesoort.vertrek
+
+
+@pytest.mark.parametrize(
+    "ruimte, verwacht",
+    [
+        (
+            EenhedenRuimte(
+                id="SLAAP-1",
+                naam="Slaapkamer voor",
+                detail_soort=Ruimtedetailsoort.slaapkamer,
+            ),
+            "Slaapkamer voor",
+        ),
+        (
+            EenhedenRuimte(id="SLAAP-1", detail_soort=Ruimtedetailsoort.slaapkamer),
+            "Slaapkamer",
+        ),
+        (
+            EenhedenRuimte(
+                id="SLAAP-1",
+                detail_soort=Ruimtedetailsoort.slaapkamer.model_copy(
+                    update={"naam": None}
+                ),
+            ),
+            "SLAAP-1",
+        ),
+        (EenhedenRuimte(id="SLAAP-1"), "SLAAP-1"),
+        (EenhedenRuimte(), "Naamloze ruimte"),
+    ],
+)
+def test_weergavenaam(ruimte: EenhedenRuimte, verwacht: str) -> None:
+    assert utils.weergavenaam(ruimte) == verwacht
+
+
+def test_normaliseer_ruimte_namen_vult_ontbrekende_namen_en_nummert_dubbelen() -> None:
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        ruimten=[
+            EenhedenRuimte(id="a", detail_soort=Ruimtedetailsoort.slaapkamer),
+            EenhedenRuimte(id="b", detail_soort=Ruimtedetailsoort.slaapkamer),
+            EenhedenRuimte(),
+            EenhedenRuimte(),
+        ],
+    )
+    utils.normaliseer_ruimte_namen(eenheid)
+    assert [ruimte.naam for ruimte in eenheid.ruimten or []] == [
+        "Slaapkamer 1",
+        "Slaapkamer 2",
+        "Naamloze ruimte 1",
+        "Naamloze ruimte 2",
+    ]
 
 
 @pytest.mark.parametrize(

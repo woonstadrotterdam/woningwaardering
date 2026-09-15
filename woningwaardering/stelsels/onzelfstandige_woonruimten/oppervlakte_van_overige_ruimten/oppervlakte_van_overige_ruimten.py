@@ -18,6 +18,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
+    criterium_id_voor_ruimte,
     gedeeld_met_adressen,
     toe_te_rekenen_oppervlakte,
 )
@@ -112,7 +113,7 @@ class OppervlakteVanOverigeRuimten(Stelselgroep):
         for ruimte in zolders:
             deler = ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 1
             waarderingsgroep_builder.met_onderliggend(
-                id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
+                id=f"{criterium_id_voor_ruimte(ruimte)}__correctie_zolder_zonder_vaste_trap",
                 naam="Correctie: zolder zonder vaste trap",
                 punten=float(
                     bereken_zolder_correctie(

@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+import pytest
+
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelsel,
@@ -53,3 +55,38 @@ def test_stelselgroeptotaal_volgt_uit_onafgeronde_punten():
         if waardering.punten is not None
     )
     assert som_rijen == Decimal(str(groep.punten))
+
+
+@pytest.mark.parametrize(
+    "ruimte_id, naam, verwacht_segment",
+    [
+        ("0e6e6d1e", "Slaapkamer 2", "0e6e6d1e"),
+        (None, "Slaapkamer 2", "slaapkamer_2"),
+        (None, "", "onbekend"),
+    ],
+)
+def test_id_segment_valt_terug_van_id_op_naam_op_onbekend(
+    ruimte_id: str | None, naam: str, verwacht_segment: str
+) -> None:
+    waarderingsgroep_builder = WaarderingsgroepBuilder(
+        Woningwaarderingstelsel.zelfstandige_woonruimten,
+        Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,
+    )
+
+    waardering = waarderingsgroep_builder.met_onderliggend(
+        id=ruimte_id, naam=naam, aantal=12.0
+    )
+
+    assert waardering.segment == verwacht_segment
+
+
+def test_subgroepen_met_dezelfde_naam_en_zonder_id_zijn_één_subgroep() -> None:
+    """Waarderingen voor dezelfde subgroep komen onder één kop, ook als die subgroep geen id heeft."""
+    waarderingsgroep_builder = WaarderingsgroepBuilder(
+        Woningwaarderingstelsel.zelfstandige_woonruimten,
+        Woningwaarderingstelselgroep.keuken,
+    )
+
+    keuken = waarderingsgroep_builder.met_subgroep(id=None, naam="Keuken")
+
+    assert keuken is waarderingsgroep_builder.met_subgroep(id=None, naam="Keuken")
