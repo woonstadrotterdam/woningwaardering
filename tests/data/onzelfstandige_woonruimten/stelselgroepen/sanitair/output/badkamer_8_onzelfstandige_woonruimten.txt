@@ -1,6 +1,6 @@
 SAMENVATTING
   Sanitair                                                                        1.00 pt
-                                                                                ---------
+                                                                                ------
 
 SANITAIR
   Gedeeld met 8 onzelfstandige woonruimten
@@ -10,5 +10,5 @@ SANITAIR
     - Slaapkamer
       - Wastafel                                                      3.00 st     0.38 pt
   Afronding op kwartpunten                                                       -0.01 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          1.00 pt

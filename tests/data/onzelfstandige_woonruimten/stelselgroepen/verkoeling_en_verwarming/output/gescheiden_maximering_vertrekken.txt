@@ -1,6 +1,6 @@
 SAMENVATTING
   Verkoeling en verwarming                                                       12.00 pt
-                                                                                ---------
+                                                                                ------
 
 VERKOELING EN VERWARMING
   Privé
@@ -23,5 +23,5 @@ VERKOELING EN VERWARMING
       - gedeeld-2                                                                 0.50 pt
       - gedeeld-3                                                                 0.50 pt
       - Maximering                                                               -0.50 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         12.00 pt

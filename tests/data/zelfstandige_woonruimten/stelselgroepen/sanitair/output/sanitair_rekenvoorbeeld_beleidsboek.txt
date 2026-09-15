@@ -1,6 +1,6 @@
 SAMENVATTING
   Sanitair                                                                       17.75 pt
-                                                                                ---------
+                                                                                ------
 
 SANITAIR
   Badruimte
@@ -15,5 +15,5 @@ SANITAIR
       - Thermostatische mengkraan                                     1.00 st     0.50 pt
   Slaapkamer
     - Douche                                                          1.00 st     4.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         17.75 pt

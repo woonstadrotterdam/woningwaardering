@@ -12,7 +12,7 @@ SAMENVATTING toe_te_rekenen_oppervlakte_10_40
   Bijzondere voorzieningen
   Aftrekpunten
   Prijsopslag monumenten
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                 62.00 pt
   Maximaal redelijke huur                                           621.84 EUR
 
@@ -21,7 +21,7 @@ OPPERVLAKTE VAN VERTREKKEN
     - Slaapkamer                                                     10.40 m²
   Gedeeld met 4 onzelfstandige woonruimten
     - Woonkamer                                                      40.40 m²
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         21.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
@@ -29,13 +29,13 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
     - Berging                                                        10.40 m²
   Gedeeld met 4 onzelfstandige woonruimten
     - Berging gedeeld                                                40.40 m²
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         15.75 pt
 
 ENERGIEPRESTATIE
   A                                                                  20.50 m²    13.33 pt
   Afronding op kwartpunten                                                       -0.08 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         13.25 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -44,5 +44,5 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Gebruiksoppervlakte                                            58.00 m²
     - WOZ-waarde per m²                                            3534.48 EUR
     - Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond             3537.00 EUR
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         12.00 pt

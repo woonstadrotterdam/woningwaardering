@@ -11,7 +11,7 @@ SAMENVATTING 85651000021
   Punten voor de WOZ-waarde                                                      38.75 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                114.00 pt
   Maximaal redelijke huur                                           733.79 EUR
 
@@ -21,7 +21,7 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                          25.54 m²
   Slaapkamer 1                                                       12.06 m²
   Slaapkamer 2                                                        8.11 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             59.54 m²    60.00 pt
 
 VERKOELING EN VERWARMING
@@ -31,25 +31,25 @@ VERKOELING EN VERWARMING
     - Woonkamer                                                                   2.00 pt
     - Slaapkamer 1                                                                2.00 pt
     - Slaapkamer 2                                                                2.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         10.00 pt
 
 BUITENRUIMTEN
   Privé                                                               5.00 m²     1.75 pt
     - Balkon                                                          4.97 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          3.75 pt
 
 ENERGIEPRESTATIE
   Bouwjaar 1897                                                                 -15.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                        -15.00 pt
 
 KEUKEN
   Keuken
     - Lengte aanrecht                                              2100.00 mm     7.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          7.00 pt
 
 SANITAIR
@@ -59,7 +59,7 @@ SANITAIR
   Toiletruimte
     - Staand Toilet                                                   1.00 st     3.00 pt
     - Wastafel                                                        1.00 st     1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          9.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -69,5 +69,5 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                                   19.90 pt
     - Oppervlakte van vertrekken en overige ruimten                  60.00 m²
     - Factor II                                                     242.00 EUR
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         38.75 pt

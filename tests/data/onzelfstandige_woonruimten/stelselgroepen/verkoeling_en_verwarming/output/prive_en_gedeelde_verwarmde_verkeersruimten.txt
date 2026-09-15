@@ -1,6 +1,6 @@
 SAMENVATTING prive_en_gedeelde_verwarmde_verkeersruimten
   Verkoeling en verwarming                                                        4.50 pt
-                                                                                ---------
+                                                                                ------
 
 VERKOELING EN VERWARMING
   Privé
@@ -13,5 +13,5 @@ VERKOELING EN VERWARMING
       - GangGedeeld1                                                              0.50 pt
       - GangGedeeld2                                                              0.50 pt
       - GangGedeeld3                                                              0.50 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          4.50 pt

@@ -1,6 +1,6 @@
 SAMENVATTING 1
   Gemeenschappelijke binnenruimten gedeeld met meerdere adressen                 22.25 pt
-                                                                                ---------
+                                                                                ------
 
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 2 onzelfstandige woonruimten
@@ -23,5 +23,5 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
           - Lengte aanrecht                                        3001.00 mm     2.50 pt
         - Keuken 2
           - Lengte aanrecht                                        3001.00 mm     2.50 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         22.25 pt

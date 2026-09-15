@@ -1,6 +1,6 @@
 SAMENVATTING vertrek_eisen_open_keuken
   Verkoeling en verwarming                                                       15.00 pt
-                                                                                ---------
+                                                                                ------
 
 VERKOELING EN VERWARMING
   Verwarmde vertrekken
@@ -11,5 +11,5 @@ VERKOELING EN VERWARMING
     - Doucheruimte van 2 m2                                                       2.00 pt
   Verwarmde overige en verkeersruimten
     - Overig vertrek van 3 m2                                                     1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         15.00 pt

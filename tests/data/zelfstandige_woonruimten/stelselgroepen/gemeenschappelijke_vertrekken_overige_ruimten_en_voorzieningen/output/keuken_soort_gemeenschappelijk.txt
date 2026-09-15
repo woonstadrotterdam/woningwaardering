@@ -1,6 +1,6 @@
 SAMENVATTING keuken_soort_gemeenschappelijk
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen                 4.75 pt
-                                                                                ---------
+                                                                                ------
 
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 4 adressen
@@ -12,5 +12,5 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
     - Keuken
       - Keuken
         - Lengte aanrecht                                          2000.00 mm     1.75 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          4.75 pt

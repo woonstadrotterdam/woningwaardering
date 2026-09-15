@@ -1,6 +1,6 @@
 SAMENVATTING 2400mm
   Keuken                                                                         14.00 pt
-                                                                                ---------
+                                                                                ------
 
 KEUKEN
   Keuken
@@ -10,5 +10,5 @@ KEUKEN
     - Extra voorzieningen
       - Inbouw koelkast                                               8.00 st     8.00 pt
       - Maximaal evenveel punten als aanrecht                                    -1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         14.00 pt

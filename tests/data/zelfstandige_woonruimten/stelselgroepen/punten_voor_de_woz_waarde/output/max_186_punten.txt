@@ -1,6 +1,6 @@
 SAMENVATTING
   Punten voor de WOZ-waarde                                                      66.25 pt
-                                                                                ---------
+                                                                                ------
 
 PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024                       713900.00 EUR
@@ -11,5 +11,5 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Factor II                                                     242.00 EUR
   Maximering WOZ-punten tot 186 punten totaal                                   -29.50 pt
   Afronding op kwartpunten                                                        0.01 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         66.25 pt
