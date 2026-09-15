@@ -52,7 +52,7 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies:
-          - "aiohttp>=3.11"
+          - "aiohttp>=3.14.3"
           - "datamodel-code-generator>=0.25.6"
           - "jinja2>=3.1"
           - "libcst==1.4" # tijdelijk, tot release libcst>1.7.0: https://github.com/Instagram/LibCST/pull/1316
