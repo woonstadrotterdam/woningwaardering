@@ -16,6 +16,7 @@ from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
 from woningwaardering.stelsels.utils import (
     gedeeld_met_adressen,
     gedeeld_met_onzelfstandige_woonruimten,
+    weergavenaam,
 )
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -166,9 +167,7 @@ def waardeer_sanitair(
 
     ruimte_criterium = waarderingsgroep_builder.met_subgroep(
         id=ruimte.id,
-        naam=ruimte.naam
-        or ruimte.id
-        or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
+        naam=weergavenaam(ruimte),
     )
 
     detail_waarderingen: list[WaarderingBuilder] = [

@@ -9,6 +9,7 @@ from woningwaardering.stelsels.builders import (
 from woningwaardering.stelsels.utils import (
     ZOLDER_DETAIL_SOORTEN,
     classificeer_ruimte,
+    criterium_id_voor_ruimte,
     heeft_vaste_trap,
     oppervlakte_inclusief_verbonden_kasten,
     rond_af,
@@ -72,7 +73,7 @@ def maak_zolder_correctie_waardering(
         oppervlakte_inclusief_verbonden_kasten(ruimte), decimalen=2
     )
     return waarderingsgroep_builder.met_onderliggend(
-        id=f"{ruimte.id}__correctie_zolder_zonder_vaste_trap",
+        id=f"{criterium_id_voor_ruimte(ruimte)}__correctie_zolder_zonder_vaste_trap",
         naam="Correctie: zolder zonder vaste trap",
         punten=float(bereken_zolder_correctie(totaal_oppervlakte, zolder_oppervlakte)),
     )

@@ -13,6 +13,7 @@ from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
     AANRECHT_MINIMALE_LENGTE_MM,
     heeft_valide_aanrecht,
 )
+from woningwaardering.stelsels.utils import weergavenaam
 from woningwaardering.vera.bvg.generated import (
     EenhedenRuimte,
     Referentiedata,
@@ -53,9 +54,7 @@ def waardeer_keuken(
 
     ruimte_criterium = waarderingsgroep_builder.met_subgroep(
         id=ruimte.id,
-        naam=ruimte.naam
-        or ruimte.id
-        or (ruimte.detail_soort.naam if ruimte.detail_soort else ""),
+        naam=weergavenaam(ruimte),
     )
 
     aanrecht_waarderingen = _waardeer_aanrecht(ruimte, stelsel, ruimte_criterium)

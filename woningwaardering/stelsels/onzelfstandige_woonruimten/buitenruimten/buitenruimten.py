@@ -22,6 +22,7 @@ from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
     classificeer_ruimte,
     is_prive,
+    weergavenaam,
 )
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
@@ -71,8 +72,8 @@ class Buitenruimten(Stelselgroep):
                     ),
                 )
                 laag.met_onderliggend(
-                    id=ruimte.id or "ruimte",
-                    naam=ruimte.naam or "",
+                    id=ruimte.id,
+                    naam=weergavenaam(ruimte),
                     punten=bron.punten,
                     aantal=bron.aantal,
                     meeteenheid=Meeteenheid.vierkante_meter_m2,
