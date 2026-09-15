@@ -11,7 +11,7 @@ SAMENVATTING 71211000027
   Punten voor de WOZ-waarde                                                      24.25 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                142.00 pt
   Maximaal redelijke huur                                           925.98 EUR
 
@@ -22,7 +22,7 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 2                                                        4.73 m²
   Slaapkamer 3                                                        8.72 m²
   Badruimte                                                           4.94 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             53.99 m²    54.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
@@ -30,7 +30,7 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
     - Zolder                                                         11.07 m²
     - Berging                                                         5.05 m²
   Correctie: zolder zonder vaste trap                                            -5.00 pt
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             16.12 m²     7.00 pt
 
 VERKOELING EN VERWARMING
@@ -41,7 +41,7 @@ VERKOELING EN VERWARMING
     - Slaapkamer 2                                                                2.00 pt
     - Slaapkamer 3                                                                2.00 pt
     - Badruimte                                                                   2.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         12.00 pt
 
 BUITENRUIMTEN
@@ -50,18 +50,18 @@ BUITENRUIMTEN
     - Tuin 2                                                         34.41 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
   Maximaal 15 punten                                                             -0.65 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         15.00 pt
 
 ENERGIEPRESTATIE
   D (Energie-index)                                                              14.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         14.00 pt
 
 KEUKEN
   Keuken
     - Lengte aanrecht                                              3000.00 mm     7.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          7.00 pt
 
 SANITAIR
@@ -71,7 +71,7 @@ SANITAIR
   Badruimte
     - Wastafel                                                        1.00 st     1.00 pt
     - Douche                                                          1.00 st     4.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          9.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -82,5 +82,5 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Oppervlakte van vertrekken en overige ruimten                  70.00 m²
     - Factor II                                                     242.00 EUR
   Afronding op kwartpunten                                                        0.02 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         24.25 pt

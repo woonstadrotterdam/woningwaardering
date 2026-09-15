@@ -1,6 +1,6 @@
 SAMENVATTING
   Sanitair                                                                        0.50 pt
-                                                                                ---------
+                                                                                ------
 
 SANITAIR
   Gedeeld met 20 onzelfstandige woonruimten
@@ -11,5 +11,5 @@ SANITAIR
     - BergruimteLageDeler
       - Meerpersoonswastafel                                          2.00 st     0.38 pt
   Afronding op kwartpunten                                                        0.07 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          0.50 pt

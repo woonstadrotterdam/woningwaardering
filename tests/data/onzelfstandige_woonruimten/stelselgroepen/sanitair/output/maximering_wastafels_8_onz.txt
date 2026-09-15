@@ -1,6 +1,6 @@
 SAMENVATTING
   Sanitair                                                                        6.25 pt
-                                                                                ---------
+                                                                                ------
 
 SANITAIR
   Privé
@@ -16,5 +16,5 @@ SANITAIR
       - Maximering voor Wastafel                                                 -0.13 pt
       - Meerpersoonswastafel                                          2.00 st     0.38 pt
       - Maximering voor Meerpersoonswastafel                                     -0.19 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          6.25 pt

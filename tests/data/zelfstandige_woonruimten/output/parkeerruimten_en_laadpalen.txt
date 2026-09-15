@@ -11,7 +11,7 @@ SAMENVATTING parkeerruimten_en_laadpalen
   Punten voor de WOZ-waarde                                                      30.50 pt
   Bijzondere voorzieningen                                                        6.00 pt
   Prijsopslag monumenten en nieuwbouw
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                165.00 pt
   Maximaal redelijke huur                                          1083.88 EUR
 
@@ -19,12 +19,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                             15.74 m²
   Slaapkamer                                                         39.82 m²
   Badruimte                                                           1.77 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             57.33 m²    57.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Berging                                                            19.67 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             19.67 m²    15.00 pt
 
 VERKOELING EN VERWARMING
@@ -32,7 +32,7 @@ VERKOELING EN VERWARMING
     - Keuken                                                                      2.00 pt
     - Slaapkamer                                                                  2.00 pt
     - Badruimte                                                                   2.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          6.00 pt
 
 BUITENRUIMTEN
@@ -42,18 +42,18 @@ BUITENRUIMTEN
     - Carport 2                                                      10.00 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
   Maximaal 15 punten                                                             -1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         15.00 pt
 
 ENERGIEPRESTATIE
   F                                                                              -9.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         -9.00 pt
 
 KEUKEN
   Keuken
     - Lengte aanrecht                                              2100.00 mm     7.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          7.00 pt
 
 SANITAIR
@@ -65,7 +65,7 @@ SANITAIR
   Toiletruimte
     - Staand Toilet                                                   1.00 st     3.00 pt
     - Wastafel                                                        1.00 st     1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         10.00 pt
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
@@ -80,7 +80,7 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
     - Laadpaal                                                        1.00 st     0.67 pt
     - Parkeerplek buiten met dak behorend bij complex (Type II)       1.00 st     2.00 pt
   Afronding op kwartpunten                                                        0.08 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         27.75 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -91,11 +91,11 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Oppervlakte van vertrekken en overige ruimten                  82.00 m²
     - Factor II                                                     242.00 EUR
   Afronding op kwartpunten                                                       -0.02 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         30.50 pt
 
 BIJZONDERE VOORZIENINGEN
   Privé
     - Laadpalen                                                       3.00 st     6.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          6.00 pt

@@ -1,6 +1,6 @@
 SAMENVATTING 12006000004
   Gemeenschappelijke parkeerruimten                                               2.75 pt
-                                                                                ---------
+                                                                                ------
 
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
   Gedeeld met 10 adressen
@@ -9,5 +9,5 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
     - Parkeerplek buiten met dak (Type II)                            1.00 st     0.60 pt
     - Parkeerplek buiten (Type III)                                   1.00 st     0.40 pt
   Afronding op kwartpunten                                                       -0.05 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          2.75 pt

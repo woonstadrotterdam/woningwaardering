@@ -1,6 +1,6 @@
 SAMENVATTING
   Oppervlakte van overige ruimten                                                 4.50 pt
-                                                                                ---------
+                                                                                ------
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Subtotaal                                                                       7.50 pt
@@ -8,5 +8,5 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
       - Berging                                                       6.00 m²
       - Zolder met vlizotrap                                          4.40 m²
   Correctie: zolder zonder vaste trap                                            -3.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          4.50 pt

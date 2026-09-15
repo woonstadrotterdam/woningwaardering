@@ -1,6 +1,6 @@
 SAMENVATTING
   Sanitair                                                                       13.00 pt
-                                                                                ---------
+                                                                                ------
 
 SANITAIR
   Badruimte
@@ -17,5 +17,5 @@ SANITAIR
       - Éénhandsmengkraan                                             1.00 st     0.25 pt
       - Thermostatische mengkraan                                     1.00 st     0.50 pt
       - Max verdubbeling punten bad en douche                                    -0.25 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         13.00 pt

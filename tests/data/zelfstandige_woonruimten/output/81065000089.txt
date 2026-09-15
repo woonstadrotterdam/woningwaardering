@@ -11,7 +11,7 @@ SAMENVATTING 81065000089
   Punten voor de WOZ-waarde                                                      30.25 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                144.00 pt
   Maximaal redelijke huur                                           939.73 EUR
 
@@ -21,7 +21,7 @@ OPPERVLAKTE VAN VERTREKKEN
   Woonkamer                                                          17.77 m²
   Keuken                                                             12.72 m²
   Slaapkamer 3                                                        8.34 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             58.08 m²    58.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
@@ -29,7 +29,7 @@ OPPERVLAKTE VAN OVERIGE RUIMTEN
     - Zolder                                                         10.23 m²
     - Wasruimte                                                       2.86 m²
   Correctie: zolder zonder vaste trap                                            -5.00 pt
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                             13.09 m²     4.75 pt
 
 VERKOELING EN VERWARMING
@@ -41,29 +41,29 @@ VERKOELING EN VERWARMING
     - Slaapkamer 3                                                                2.00 pt
   Verwarmde overige en verkeersruimten
     - Wasruimte                                                                   1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         11.00 pt
 
 BUITENRUIMTEN
   Geen buitenruimten                                                             -5.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         -5.00 pt
 
 ENERGIEPRESTATIE
   B                                                                              34.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         34.00 pt
 
 KEUKEN
   Keuken
     - Lengte aanrecht                                              2507.00 mm     7.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          7.00 pt
 
 SANITAIR
   Wasruimte
     - Douche                                                          1.00 st     4.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          4.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -74,5 +74,5 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Oppervlakte van vertrekken en overige ruimten                  71.00 m²
     - Factor II                                                     242.00 EUR
   Afronding op kwartpunten                                                        0.01 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         30.25 pt

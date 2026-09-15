@@ -11,7 +11,7 @@ SAMENVATTING 41164000002
   Punten voor de WOZ-waarde                                                      53.25 pt
   Bijzondere voorzieningen
   Prijsopslag monumenten en nieuwbouw
-                                                                                ---------
+                                                                                ------
   Totaal afgerond op hele punten                                                256.00 pt
   Maximaal redelijke huur                                          1708.56 EUR
 
@@ -23,12 +23,12 @@ OPPERVLAKTE VAN VERTREKKEN
   Slaapkamer 3                                                       17.63 m²
   Woonkamer                                                          32.95 m²
   Slaapkamer 4 (+1 kast)                                             20.45 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                            138.15 m²   138.00 pt
 
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Wasruimte                                                           4.31 m²
-                                                                ----------      ---------
+                                                                    ------      ------
   Totaal                                                              4.31 m²     3.00 pt
 
 VERKOELING EN VERWARMING
@@ -42,7 +42,7 @@ VERKOELING EN VERWARMING
     - Slaapkamer 4                                                                2.00 pt
   Verwarmde overige en verkeersruimten
     - Trappenhuis                                                                 1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         15.00 pt
 
 BUITENRUIMTEN
@@ -50,12 +50,12 @@ BUITENRUIMTEN
     - Balkon                                                          7.50 m²
   Privé buitenruimten aanwezig                                                    2.00 pt
   Afronding op kwartpunten                                                       -0.05 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          4.75 pt
 
 ENERGIEPRESTATIE
   B (Energie-index)                                                              34.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         34.00 pt
 
 SANITAIR
@@ -70,7 +70,7 @@ SANITAIR
     - Wastafel                                                        1.00 st     1.00 pt
   Wasruimte
     - Wastafel                                                        1.00 st     1.00 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                          8.00 pt
 
 PUNTEN VOOR DE WOZ-WAARDE
@@ -81,5 +81,5 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Oppervlakte van vertrekken en overige ruimten                 142.00 m²
     - Factor II                                                     242.00 EUR
   Afronding op kwartpunten                                                       -0.05 pt
-                                                                                ---------
+                                                                                ------
   Totaal                                                                         53.25 pt

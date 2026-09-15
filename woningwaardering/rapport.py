@@ -27,6 +27,7 @@ W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
 W_EENHEID = 3  # links uitgelijnd na het getal, bijv. "EUR" / "m²" / "st"
 W_PUNTEN = 9  # "XXX.00 pt" (drie cijfers voor de komma)
 W_OPSLAG = 7
+W_SCHEIDING = 6  # streepjes onder het getal, bijv. "113.00"
 _GAP = "  "
 _INDENT = "  "
 _BULLET = "- "
@@ -34,6 +35,7 @@ _BULLET = "- "
 _TABEL_RIJ_INSCHUIF = "  "
 # Spatie tussen getal- en eenheidskolom.
 _GETAL_EENHEID_GAP = " "
+_PUNTEN_SUFFIX = " pt"
 
 
 class WoningwaarderingRapport:
@@ -148,17 +150,20 @@ def _tabel_rij(
 
 def _tabel_scheiding(*, toon_aantal: bool) -> str:
     """Scheidingsrij boven een totaalrij (onder de getal- en puntenkolom)."""
+    streep = "-" * W_SCHEIDING
+    # De puntencel eindigt op het suffix; met spaties op die breedte eindigt de
+    # streep op het getal.
     return _tabel_rij(
         "",
-        aantal="-" * W_GETAL if toon_aantal else "",
-        punten="-" * W_PUNTEN,
+        aantal=streep if toon_aantal else "",
+        punten=streep + " " * len(_PUNTEN_SUFFIX),
     )
 
 
 def _format_punten_cel(waarde: str) -> str:
     if not waarde:
         return ""
-    return f"{waarde} pt"
+    return f"{waarde}{_PUNTEN_SUFFIX}"
 
 
 def _waardering_opslag(waardering: WoningwaarderingResultatenWoningwaardering) -> str:
