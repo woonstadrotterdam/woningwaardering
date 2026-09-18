@@ -45,6 +45,11 @@ class _EenhedenEenheid(BaseModel):
                 field_path = ".".join(str(loc) for loc in (info.field_name,) + locs)
                 # Haal de foutmelding op, of gebruik 'Onbekende fout' als er geen melding is
                 error_msg = error.get("msg", "Onbekende fout")
+                invoer = error.get("input")
+                if isinstance(invoer, str) and "," in invoer:
+                    error_msg = (
+                        f"{error_msg}. Gebruik een punt als decimaalscheidingsteken."
+                    )
 
                 readable_error = (
                     f"Validatiefout in attribuut '{field_path}'. {error_msg}"
@@ -56,6 +61,8 @@ class _EenhedenEenheid(BaseModel):
             # Verwijder het veld met de fout
             for error in validation_error.errors():
                 locs = tuple(error.get("loc", []))
+                if not locs:
+                    return None
                 parent_object = reduce(getitem, locs[:-1], value)
                 if isinstance(parent_object, dict):
                     del parent_object[locs[-1]]

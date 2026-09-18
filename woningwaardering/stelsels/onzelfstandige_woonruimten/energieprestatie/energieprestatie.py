@@ -17,6 +17,7 @@ from woningwaardering.stelsels.gedeelde_logica.energieprestatie import (
     get_energieprestatievergoeding,
     in_vereenvoudigd_label_periode,
     monument_correctie,
+    parse_energie_index_waarde,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.utils import (
@@ -208,7 +209,13 @@ class Energieprestatie(Stelselgroep):
                 )
                 return None
 
-            energie_index = float(energieprestatie.waarde)
+            energie_index = parse_energie_index_waarde(
+                energieprestatie.waarde,
+                eenheid_id=eenheid.id,
+                stelselgroep_naam=self.stelselgroep.naam,
+            )
+            if energie_index is None:
+                return None
 
             filtered_df = df[
                 (df["Ondergrens (exclusief)"] < energie_index)
