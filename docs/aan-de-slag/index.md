@@ -1345,6 +1345,8 @@ PUNTEN VOOR DE WOZ-WAARDE
 
 Bij incomplete of onjuiste inputdata genereert de package een `UserWarning`. Standaard leidt dat tot een error, zodat duidelijk is dat invoer ontbreekt of onjuist is.
 
+Getallen, ook in tekstvelden zoals de energie-index (`EenhedenEnergieprestatie.waarde`), gebruiken een punt als decimaalscheidingsteken.
+
 Met `warnings.simplefilter("default", UserWarning)` blijft de waarschuwing zichtbaar, maar faalt de package niet: je krijgt dan wel een woningwaarderingresultaat. Zie [Gebruik](#gebruik) voor een concreet voorbeeld.
 
 Een `DeprecationWarning` (bijvoorbeeld voor tijdelijk nog ondersteunde, verouderde velden) wordt wel getoond en gelogd, maar leidt niet tot een error.

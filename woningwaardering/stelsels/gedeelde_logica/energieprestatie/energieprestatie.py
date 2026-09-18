@@ -31,6 +31,29 @@ VEREENVOUDIGD_LABEL_PERIODE_START = date(2015, 1, 1)
 VEREENVOUDIGD_LABEL_PERIODE_EINDE = date(2021, 1, 1)
 
 
+def parse_energie_index_waarde(
+    waarde: str,
+    *,
+    eenheid_id: str | None,
+    stelselgroep_naam: str | None,
+) -> float | None:
+    """
+    Zet de energie-index-``waarde`` om naar een getal.
+
+    Strings die ``float()`` niet aankan, leveren een ``UserWarning`` en ``None`` op,
+    zodat de aanroeper hetzelfde pad volgt als bij een ontbrekende waarde.
+    """
+    try:
+        return float(waarde)
+    except ValueError:
+        hint = " Gebruik een punt als decimaalscheidingsteken." if "," in waarde else ""
+        warnings.warn(
+            f"Eenheid ({eenheid_id}): energie-index waarde '{waarde}' kan niet als getal worden gelezen en kan daarom niet worden gewaardeerd onder stelselgroep {stelselgroep_naam}.{hint}",
+            UserWarning,
+        )
+        return None
+
+
 def in_vereenvoudigd_label_periode(begindatum: date) -> bool:
     """
     Of ``begindatum`` valt in de periode van de 'vereenvoudigde energielabels' (2.4.3.4).
