@@ -26,6 +26,36 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Run commit-checks: `uv run pre-commit run --all-files`
 - Run pre-push checks: `uv run pre-commit run --all-files --hook-stage pre-push`
 
+## Cursor Cloud specific instructions
+
+Deze sectie is bedoeld voor [Cursor Cloud Agents](https://cursor.com/docs/cloud-agent). Volg daarnaast altijd de overige instructies in dit bestand.
+
+### Omgeving opzetten
+
+- Installeer dependencies met `uv sync --extra dev`.
+- Gebruik daarna `uv run ...` of activeer `.venv` voordat je Python, pytest of scripts draait.
+- Registreer pre-commit-hooks alleen als je in deze cloud-sessie zelf gaat committen of pushen: `uv run pre-commit install`.
+- Voor setup en checks, zie ook [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [docs/voor-ontwikkelaars/testing.md](docs/voor-ontwikkelaars/testing.md).
+
+### Verifiëren na codewijzigingen
+
+Draai na code- of testwijzigingen:
+
+```bash
+uv run python -m pytest
+uv run pre-commit run --all-files
+uv run pre-commit run --all-files --hook-stage pre-push
+```
+
+Of, met geactiveerde virtualenv: `task check`.
+
+### Repo-specifieke tips
+
+- Werk voorzichtig met domeinlogica onder `woningwaardering/stelsels/`; lees eerst de relevante pagina in `docs/implementatietoelichtingen/`.
+- Behandel gegenereerde code onder `woningwaardering/vera/` terughoudend; wijzig die alleen via de bestaande scripts.
+- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
+- Secrets horen in het [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), niet in de repository.
+
 ## Codeconventies
 
 - Volg de VERA-referentiedata voor naamgeving van stelsels en stelselgroepen.
