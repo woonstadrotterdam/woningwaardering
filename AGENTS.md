@@ -77,7 +77,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 ## Skills
 
-Gebruik [`.cursor/skills/grill-me-with-docs/SKILL.md`](.cursor/skills/grill-me-with-docs/SKILL.md) **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
+Gebruik [`skills/grill-me-with-docs/SKILL.md`](skills/grill-me-with-docs/SKILL.md) **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
 
 - plannen, ontwerpen, architectuur of refactor-voorstellen
 - domeinlogica, stelselgroepen, beleidsregel-interpretatie of VERA-modellering
@@ -105,6 +105,7 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 ## Git En Veiligheid
 
 - Revert geen bestaande wijzigingen die je niet zelf hebt gemaakt.
-- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt; volg dan [`.cursor/skills/managing-commits/SKILL.md`](.cursor/skills/managing-commits/SKILL.md).
+- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
+- Schrijf commitberichten als [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/) met een Nederlandse omschrijving, bijvoorbeeld `fix(onz): corrigeer maximale huurprijs bij 106 punten`. De scope is optioneel en benoemt het geraakte onderdeel (bijv. `stelsels`, `sanitair`, `rapport`, `deps`). Eén logische wijziging per commit; verwijs in de footer naar een gerelateerde issue met `Closes #N` of `Refs #N`.
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.
