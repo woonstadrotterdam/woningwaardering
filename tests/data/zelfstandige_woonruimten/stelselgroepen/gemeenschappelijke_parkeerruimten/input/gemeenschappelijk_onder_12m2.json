@@ -14,8 +14,8 @@
       },
       "aantal": 1,
       "oppervlakte": 10,
-      "lengte": 5,
-      "breedte": 2.0,
+      "lengte": 5000,
+      "breedte": 2000.0,
       "gedeeldMetAantalAdressen": 3,
       "bouwkundigeElementen": [
         {
@@ -45,8 +45,8 @@
       },
       "aantal": 1,
       "oppervlakte": 10,
-      "lengte": 5,
-      "breedte": 2.0,
+      "lengte": 5000,
+      "breedte": 2000.0,
       "gedeeldMetAantalAdressen": 3,
       "bouwkundigeElementen": [
         {

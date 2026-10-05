@@ -143,9 +143,9 @@
       "naam": "Balkon",
       "inhoud": 9.01742,
       "oppervlakte": 3.14196,
-      "lengte": 1.15,
-      "breedte": 2.8,
-      "hoogte": 3.17,
+      "lengte": 1150.0,
+      "breedte": 2800.0,
+      "hoogte": 3170.0,
       "verwarmd": false
     },
     {
@@ -161,9 +161,9 @@
       "naam": "Balkon",
       "inhoud": 8.91506,
       "oppervlakte": 3.1391,
-      "lengte": 1.15,
-      "breedte": 2.8,
-      "hoogte": 3.17,
+      "lengte": 1150.0,
+      "breedte": 2800.0,
+      "hoogte": 3170.0,
       "verwarmd": false
     },
     {
@@ -643,8 +643,8 @@
       },
       "naam": "Dakterras",
       "inhoud": 49.6957,
-      "lengte": 3.26,
-      "breedte": 5.02,
+      "lengte": 3260.0,
+      "breedte": 5020.0,
       "oppervlakte": 15.9281,
       "verwarmd": false
     },

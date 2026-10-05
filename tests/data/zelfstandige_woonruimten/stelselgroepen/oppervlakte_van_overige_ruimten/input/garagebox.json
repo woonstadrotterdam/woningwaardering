@@ -12,9 +12,9 @@
       },
       "naam": "Garagebox",
       "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
+      "lengte": 3000,
+      "breedte": 5000,
+      "hoogte": 3170.0
     },
     {
       "id": "Space_281469",
@@ -28,9 +28,9 @@
       },
       "naam": "Garagebox",
       "oppervlakte": 15,
-      "lengte": 3,
-      "breedte": 5,
-      "hoogte": 3.17
+      "lengte": 3000,
+      "breedte": 5000,
+      "hoogte": 3170.0
     }
   ]
 }

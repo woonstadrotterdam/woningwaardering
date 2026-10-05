@@ -115,9 +115,9 @@
       "naam": "Balkon",
       "inhoud": 11.2627,
       "oppervlakte": 4.61588,
-      "breedte": 3.08,
-      "lengte": 1.68,
-      "hoogte": 2.44,
+      "breedte": 3080.0,
+      "lengte": 1680.0,
+      "hoogte": 2440.0,
       "verwarmd": false,
       "bouwlaag": {
         "nummer": "02",

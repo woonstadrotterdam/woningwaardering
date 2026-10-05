@@ -317,8 +317,8 @@
       "naam": "Terras",
       "inhoud": 8.97171,
       "oppervlakte": 3.20991,
-      "lengte": 1.01,
-      "breedte": 3.67,
+      "lengte": 1010.0,
+      "breedte": 3670.0,
       "verwarmd": false,
       "bouwkundigeElementen": [],
       "bouwlaag": {
