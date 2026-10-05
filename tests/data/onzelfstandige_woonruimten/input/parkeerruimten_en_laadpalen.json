@@ -191,7 +191,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -223,7 +223,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -255,7 +255,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -287,7 +287,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
     },
@@ -305,7 +305,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3
     },
     {
@@ -322,7 +322,7 @@
       "aantal": 1,
       "oppervlakte": 10,
       "lengte": 5000,
-      "breedte": 2000.0,
+      "breedte": 2000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -354,7 +354,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -386,7 +386,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -418,7 +418,7 @@
       "aantal": 1,
       "oppervlakte": 10,
       "lengte": 5000,
-      "breedte": 2000.0,
+      "breedte": 2000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
     },
@@ -436,7 +436,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
       "bouwkundigeElementen": [
@@ -468,7 +468,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4,
       "bouwkundigeElementen": [

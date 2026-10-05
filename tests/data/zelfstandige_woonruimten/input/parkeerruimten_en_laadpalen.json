@@ -91,7 +91,7 @@
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 2100.0
+          "lengte": 2100
         }
       ],
       "verwarmd": true
@@ -256,7 +256,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "bouwkundigeElementen": [
         {
@@ -287,7 +287,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "bouwkundigeElementen": [
         {
@@ -318,7 +318,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "bouwkundigeElementen": [
         {
@@ -349,7 +349,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1
     },
     {
@@ -366,7 +366,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3
     },
     {
@@ -383,7 +383,7 @@
       "aantal": 1,
       "oppervlakte": 10,
       "lengte": 5000,
-      "breedte": 2000.0,
+      "breedte": 2000,
       "gedeeldMetAantalAdressen": 1,
       "bouwkundigeElementen": [
         {
@@ -414,7 +414,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "bouwkundigeElementen": [
         {
@@ -445,7 +445,7 @@
       "aantal": 1,
       "oppervlakte": 15,
       "lengte": 5000,
-      "breedte": 3000.0,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 1,
       "bouwkundigeElementen": [
         {
@@ -476,7 +476,7 @@
       "aantal": 1,
       "oppervlakte": 10,
       "lengte": 5000,
-      "breedte": 2000.0,
+      "breedte": 2000,
       "gedeeldMetAantalAdressen": 1
     }
   ],
