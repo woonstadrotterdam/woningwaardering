@@ -14,8 +14,8 @@
       },
       "aantal": 1,
       "oppervlakte": 15,
-      "lengte": 5,
-      "breedte": 3.0,
+      "lengte": 5000,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
@@ -46,8 +46,8 @@
       },
       "aantal": 1,
       "oppervlakte": 15,
-      "lengte": 5,
-      "breedte": 3.0,
+      "lengte": 5000,
+      "breedte": 3000,
       "gedeeldMetAantalAdressen": 3,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 1,
       "bouwkundigeElementen": [
