@@ -9,8 +9,8 @@
         "code": "CAR",
         "naam": "Carport"
       },
-      "breedte": 3.0,
-      "lengte": 4.0,
+      "breedte": 3000.0,
+      "lengte": 4000.0,
       "oppervlakte": 12.0,
       "gedeeldMetAantalAdressen": 10,
       "bouwkundigeElementen": [
@@ -36,8 +36,8 @@
         "code": "PBC",
         "naam": "Parkeerplek buiten behorend bij complex"
       },
-      "breedte": 3.0,
-      "lengte": 4.0,
+      "breedte": 3000.0,
+      "lengte": 4000.0,
       "oppervlakte": 12.0,
       "gedeeldMetAantalAdressen": 10,
       "aantal": 2
