@@ -113,5 +113,6 @@ Gebruik de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) om een scena
 - Revert geen bestaande wijzigingen die je niet zelf hebt gemaakt.
 - Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
 - Schrijf commitberichten als [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/) met een Nederlandse omschrijving, bijvoorbeeld `fix(onz): corrigeer maximale huurprijs bij 106 punten`. De scope is optioneel en benoemt het geraakte onderdeel (bijv. `stelsels`, `sanitair`, `rapport`, `deps`). Eén logische wijziging per commit; verwijs in de footer naar een gerelateerde issue met `Closes #N` of `Refs #N`.
+- Noem een branch `<type>/<korte-omschrijving>` in kebab-case, met hetzelfde Conventional Commits-type als de wijziging (`feat`, `fix`, `docs`, `chore`, `refactor`, ...) en waar van toepassing het issuenummer, bijvoorbeeld `fix/399-toiletruimte-classificatie`. Push geen branch met een tool-prefix zoals `claude/` of `cursor/`: hernoem die vóór de eerste push.
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.
