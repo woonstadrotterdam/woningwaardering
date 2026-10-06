@@ -19,10 +19,11 @@ Interview de gebruiker over het plan totdat jullie het eens zijn over wat er ver
 ## Kernregels
 
 1. Stel één vraag tegelijk en wacht op het antwoord. Geef bij elke vraag je aanbevolen antwoord, met de bron waarop het rust.
-2. Zoek feiten zelf op: wat de code nu doet en wat wettekst, online beleidsboek of implementatietoelichting letterlijk zeggen. Stel daar geen vraag over.
-3. Leg beslissingen voor: de interpretatie van een beleidsregel, het gewenste gedrag, wat binnen de taak valt. Neem die niet zelf, ook niet wanneer de code één kant op wijst.
-4. Werk beslissingen af in volgorde van afhankelijkheid: eerst de keuze waar andere keuzes van afhangen.
-5. Schrijf geen code voordat de gebruiker het samengevatte plan heeft bevestigd.
+2. Stel elke vraag als meerkeuzevraag met twee tot vier concrete antwoorden, je aanbevolen antwoord eerst. Gebruik daarvoor de vragentool van je omgeving als die er is (`AskUserQuestion` in Claude Code, `AskQuestion` in Cursor). Zet het citaat en de link in je bericht vóór de vraag: in de opties passen ze niet.
+3. Zoek feiten zelf op: wat de code nu doet en wat wettekst, online beleidsboek of implementatietoelichting letterlijk zeggen. Stel daar geen vraag over.
+4. Leg beslissingen voor: de interpretatie van een beleidsregel, het gewenste gedrag, wat binnen de taak valt. Neem die niet zelf, ook niet wanneer de code één kant op wijst.
+5. Werk beslissingen af in volgorde van afhankelijkheid: eerst de keuze waar andere keuzes van afhangen.
+6. Schrijf geen code voordat de gebruiker het samengevatte plan heeft bevestigd.
 
 ## Toets elk antwoord
 
