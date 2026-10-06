@@ -11,36 +11,53 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      # Labelt op het Conventional Commits-type in de PR-titel. De labels bepalen
-      # de rubriek in de release notes (.github/release.yml).
+      # Labelt op het Conventional Commits-type in de PR-titel, of op de prefix van
+      # de branchnaam als de titel geen type heeft. De labels bepalen de rubriek in
+      # de release notes (.github/release.yml).
       - uses: actions/github-script@v9
         with:
           script: |
             const LABEL_PER_TYPE = {
               feat: "enhancement",
+              feature: "enhancement",
               fix: "bug",
+              bug: "bug",
               docs: "documentation",
               chore: "chore",
               build: "chore",
               ci: "chore",
+              // Bekende types zonder eigen rubriek in de release notes.
+              refactor: null,
+              test: null,
+              style: null,
+              perf: null,
+              revert: null,
             };
             const BREAKING_CHANGE = "breaking change";
 
+            const { action, changes, pull_request: pr } = context.payload;
+
             const labelsVoor = (titel) => {
-              const match = /^([a-z]+)(\([^)]*\))?(!)?: /i.exec(titel ?? "");
+              const kandidaten = [
+                /^([a-z]+)(\([^)]*\))?(!)?: /i.exec(titel),
+                /^([a-z]+)\//i.exec(pr.head.ref),
+              ];
+              const match = kandidaten.find(
+                (kandidaat) => kandidaat && kandidaat[1].toLowerCase() in LABEL_PER_TYPE,
+              );
               if (!match) return [];
               const label = LABEL_PER_TYPE[match[1].toLowerCase()];
               return [label, match[3] && BREAKING_CHANGE].filter(Boolean);
             };
 
-            const { action, changes, pull_request: pr } = context.payload;
             // Een bewerking van alleen de beschrijving verandert niets aan de labels.
             if (action === "edited" && !changes?.title) return;
 
             const huidig = pr.labels.map((label) => label.name);
             const gewenst = labelsVoor(pr.title);
             // Verwijder alleen wat de vorige titel opleverde; handmatig gezette labels blijven staan.
-            const vervallen = labelsVoor(changes?.title?.from).filter(
+            const vorige = changes?.title ? labelsVoor(changes.title.from) : [];
+            const vervallen = vorige.filter(
               (label) => !gewenst.includes(label) && huidig.includes(label),
             );
             const nieuw = gewenst.filter((label) => !huidig.includes(label));
