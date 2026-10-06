@@ -51,14 +51,14 @@ De package wordt eerst gepubliceerd op [TestPyPi](https://test.pypi.org/project/
 
 De changelog deelt pull requests in op label; de rubrieken staan in [.github/release.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/release.yml). De workflow [.github/workflows/labeler.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/workflows/labeler.yml) zet het label op basis van het [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/)-type in de PR-titel:
 
-| Type in PR-titel                                    | Label             | Rubriek in release notes |
-| --------------------------------------------------- | ----------------- | ------------------------ |
-| `feat`                                              | `enhancement`     | Nieuwe Features          |
-| `fix`                                               | `bug`             | Bugfixes                 |
-| `docs`                                              | `documentation`   | Documentatie             |
-| `chore`, `build`, `ci`, `refactor`, `test`, `style` | `chore`           | Overige wijzigingen      |
-| `!` achter het type                                 | `breaking change` | Breaking Changes         |
+| Type in PR-titel                                            | Label             | Rubriek in release notes |
+| ----------------------------------------------------------- | ----------------- | ------------------------ |
+| `feat`                                                      | `enhancement`     | Nieuwe Features          |
+| `fix`                                                       | `bug`             | Bugfixes                 |
+| `docs`                                                      | `documentation`   | Documentatie             |
+| `chore`, `build`, `ci`, `refactor`, `test`, `style`, `perf` | `chore`           | Overige wijzigingen      |
+| `!` achter het type                                         | `breaking change` | Breaking Changes         |
 
-Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. De types `perf` en `revert` krijgen geen label en komen onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
+Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. Het type `revert` krijgt geen label en komt onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
 
 Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.

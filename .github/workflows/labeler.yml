@@ -29,8 +29,8 @@ jobs:
               refactor: "chore",
               test: "chore",
               style: "chore",
-              // Bekende types zonder label.
-              perf: null,
+              perf: "chore",
+              // Bekend type zonder label.
               revert: null,
             };
             const BREAKING_CHANGE = "breaking change";
