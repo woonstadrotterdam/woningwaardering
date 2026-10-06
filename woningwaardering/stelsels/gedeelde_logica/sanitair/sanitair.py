@@ -11,6 +11,7 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    heeft_valide_aanrecht,
     is_valide_aanrechtlengte,
 )
 from woningwaardering.stelsels.utils import (
@@ -275,6 +276,13 @@ def _waardeer_toiletten(
 def _korte_aanrechten(
     ruimte: EenhedenRuimte,
 ) -> list[BouwkundigElementenBouwkundigElement]:
+    # Bijlage I, onder A, toelichting rubriek 5 (Besluit huurprijzen woonruimte)
+    # "Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt geen
+    # waardering."
+    # Een aanrecht korter dan 1 meter telt in een ruimte met een aanrecht vanaf
+    # 1 meter mee in de aanrechtlengte van de keuken en is daarom geen wastafel.
+    if heeft_valide_aanrecht(ruimte):
+        return []
     return [
         element
         for element in ruimte.bouwkundige_elementen or []

@@ -818,7 +818,7 @@ Voor het meten van een aanrecht gelden de volgende regels:
 > [!NOTE]
 > De woningwaarderingpackage gaat ervanuit dat lengten van aanrechten worden ingestuurd die zijn gemeten volgens de meetinstructies van de huurcommissie.
 > [!NOTE]
-> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is.
+> Als een ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1 meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van minimaal 1 meter aanwezig is. Dat korte deel wordt dan niet ook als wastafel gewaardeerd in de rubriek sanitair.
 
 #### 2.5.3 Punten voor extra voorzieningen keuken
 
@@ -944,6 +944,8 @@ _Niet_ als wastafel worden gewaardeerd:
 
 > [!NOTE]
 > Indien een aanrecht met een lengte korter dan één meter wordt meegegeven wordt deze als wastafel gewaardeerd. Geef hier niet ook nog een wastafel mee voor de spoelbak.
+>
+> Dit geldt alleen in een ruimte zonder aanrecht vanaf 1 meter. Staat in dezelfde ruimte ook een aanrecht vanaf 1 meter, dan telt het korte deel mee in de aanrechtlengte van de [keuken](#252-punten-voor-basisvoorzieningen-keuken) en niet als wastafel. De wettekst (Bijlage I, onder A, toelichting rubriek 5) bepaalt: "Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt geen waardering."
 
 > [!NOTE]
 > Een `Wastafel` of `Fontein` die als bouwkundig element wordt meegegeven, telt mee als wastafel-installatie: de Huurcommissie waardeert een fonteintje als wastafel. Geef dezelfde voorziening bij voorkeur op één manier mee; zie [Bouwkundige elementen naast installaties](datamodel-uitbreidingen.md#bouwkundige-elementen-naast-installaties) voor hoe wij beide representaties samenvoegen.
