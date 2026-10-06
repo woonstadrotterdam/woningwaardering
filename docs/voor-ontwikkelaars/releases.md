@@ -56,9 +56,9 @@ De changelog deelt pull requests in op label; de rubrieken staan in [.github/rel
 | `feat`                 | `enhancement`     | Nieuwe Features          |
 | `fix`                  | `bug`             | Bugfixes                 |
 | `docs`                 | `documentation`   | Documentatie             |
-| `chore`, `build`, `ci` | `chore`           | Overige wijzigingen      |
+| `chore`, `build`, `ci`, `refactor`, `test`, `style` | `chore` | Overige wijzigingen |
 | `!` achter het type    | `breaking change` | Breaking Changes         |
 
-Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. Andere types (`refactor`, `test`, `style`) krijgen geen label en komen onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
+Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. De types `perf` en `revert` krijgen geen label en komen onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
 
 Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.

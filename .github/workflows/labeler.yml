@@ -26,10 +26,10 @@ jobs:
               chore: "chore",
               build: "chore",
               ci: "chore",
-              // Bekende types zonder eigen rubriek in de release notes.
-              refactor: null,
-              test: null,
-              style: null,
+              refactor: "chore",
+              test: "chore",
+              style: "chore",
+              // Bekende types zonder label.
               perf: null,
               revert: null,
             };
