@@ -1,4 +1,5 @@
 import difflib
+from collections import Counter
 from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
@@ -76,6 +77,9 @@ def assert_output_model(
 
         groepen = get_stelselgroep_resultaten(resultaat, stelselgroep)
         resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(groepen=groepen)
+
+    assert_unieke_criterium_ids(verwacht_resultaat)
+    assert_unieke_criterium_ids(resultaat)
 
     difflines = list(
         difflib.unified_diff(
@@ -265,6 +269,28 @@ def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fix
         )
 
     return specifieke_input_en_output_model
+
+
+def assert_unieke_criterium_ids(
+    resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+) -> None:
+    """Binnen een stelselgroep heeft elke waardering een criterium met een uniek id."""
+    for groep in resultaat.groepen or []:
+        criterium_ids = [
+            waardering.criterium.id
+            for waardering in groep.woningwaarderingen or []
+            if waardering.criterium and waardering.criterium.id
+        ]
+        dubbele_ids = sorted(
+            criterium_id
+            for criterium_id, aantal in Counter(criterium_ids).items()
+            if aantal > 1
+        )
+        assert not dubbele_ids, (
+            f"Criterium-id's komen meer dan één keer voor: {dubbele_ids} "
+            f"(groep "
+            f"{groep.criterium_groep and groep.criterium_groep.stelselgroep and groep.criterium_groep.stelselgroep.naam})"
+        )
 
 
 def assert_geen_dubbele_aantal_in_hierarchie(

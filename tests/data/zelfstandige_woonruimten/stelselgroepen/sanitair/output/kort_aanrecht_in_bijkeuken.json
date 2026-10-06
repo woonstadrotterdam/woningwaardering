@@ -22,7 +22,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__bijkeuken__wastafel",
+            "id": "sanitair__bijkeuken__spoelbak_in_aanrecht",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
             "bovenliggendeCriterium": {
               "id": "sanitair__bijkeuken"

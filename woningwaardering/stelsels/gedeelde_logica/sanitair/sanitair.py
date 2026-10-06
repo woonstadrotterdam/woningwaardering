@@ -400,7 +400,7 @@ def _waardeer_wastafels(
                 f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_spoelbakken}x aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
             )
             yield waarderingsgroep_builder.met_onderliggend(
-                id=wastafelsoort.name,
+                id="spoelbak_in_aanrecht",
                 naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                 meeteenheid=Meeteenheid.stuks,
                 punten=aantal_spoelbakken * punten_per_wastafel,
