@@ -79,6 +79,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 - Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
 - Vervang `☐` door `☑` bij invullen; gebruik geen GitHub-task-syntax (`- [ ]` / `- [x]`) — die telt mee als PR-tasks op GitHub.
+- Push je naar een branch met een open pull request, werk dan in dezelfde beurt de titel en beschrijving bij als die de wijziging nog niet dekken. Pas alleen aan wat door de push verandert en laat tekst van anderen staan.
 
 ## Skills
 
