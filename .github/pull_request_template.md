@@ -25,7 +25,7 @@
 <!-- Alleen invullen als 'Domeinlogica / puntberekening' is aangevinkt; anders overslaan.
      Domeinlogica omvat onder meer wijzigingen in woningwaardering/stelsels/, waarschuwings-
      of foutgedrag, lookup-tabellen, modeluitbreidingen en tests met gewijzigde verwachte punten.
-     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie `CONTEXT.md`).
+     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie Domeinregels in `AGENTS.md`).
      Herhaal het onderstaande blok per gewijzigde domeinregel. -->
 
 ### [Stelselgroep / onderwerp]
@@ -34,6 +34,8 @@
 
 - ☐ Beleidsboek Huurcommissie (online, actueel)
 - ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
+
+**Link:** <!-- pagina van het online beleidsboek of artikel van de wettekst waar de quote staat -->
 
 **Quote:**
 
