@@ -1,12 +1,75 @@
 name: "Pull Request Labeler"
 on:
-  - pull_request_target
+  pull_request_target:
+    types: [opened, reopened, edited]
+
+permissions: {}
 
 jobs:
   labeler:
     permissions:
-      contents: read
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v6
+      # Labelt op het Conventional Commits-type in de PR-titel, of op de prefix van
+      # de branchnaam als de titel geen type heeft. De labels bepalen de rubriek in
+      # de release notes (.github/release.yml).
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const LABEL_PER_TYPE = {
+              feat: "enhancement",
+              feature: "enhancement",
+              fix: "bug",
+              bug: "bug",
+              docs: "documentation",
+              chore: "chore",
+              build: "chore",
+              ci: "chore",
+              refactor: "chore",
+              test: "chore",
+              style: "chore",
+              perf: "chore",
+              // Bekend type zonder label.
+              revert: null,
+            };
+            const BREAKING_CHANGE = "breaking change";
+
+            const { action, changes, pull_request: pr } = context.payload;
+
+            const labelsVoor = (titel) => {
+              const kandidaten = [
+                // Matcht het type aan het begin van een titel, bv. "feat(api)!: nieuwe endpoint" → "feat"
+                /^([a-z]+)(\([^)]*\))?(!)?: /i.exec(titel),
+
+                // Matcht het eerste deel van een branchnaam vóór "/", bv. "feature/login-page" → "feature"
+                /^([a-z]+)\//i.exec(pr.head.ref),
+              ];
+              const match = kandidaten.find(
+                (kandidaat) => kandidaat && kandidaat[1].toLowerCase() in LABEL_PER_TYPE,
+              );
+              if (!match) return [];
+              const label = LABEL_PER_TYPE[match[1].toLowerCase()];
+              return [label, match[3] && BREAKING_CHANGE].filter(Boolean);
+            };
+
+            // Een bewerking van alleen de beschrijving verandert niets aan de labels.
+            if (action === "edited" && !changes?.title) return;
+
+            const huidig = pr.labels.map((label) => label.name);
+            const gewenst = labelsVoor(pr.title);
+            // Verwijder alleen wat de vorige titel opleverde; handmatig gezette labels blijven staan.
+            const vorige = changes?.title ? labelsVoor(changes.title.from) : [];
+            const vervallen = vorige.filter(
+              (label) => !gewenst.includes(label) && huidig.includes(label),
+            );
+            const nieuw = gewenst.filter((label) => !huidig.includes(label));
+
+            const issue = { ...context.repo, issue_number: pr.number };
+            for (const name of vervallen) {
+              await github.rest.issues.removeLabel({ ...issue, name });
+            }
+            if (nieuw.length > 0) {
+              await github.rest.issues.addLabels({ ...issue, labels: nieuw });
+            }
+            core.info(`Titel: ${pr.title} | toegevoegd: ${nieuw} | verwijderd: ${vervallen}`);

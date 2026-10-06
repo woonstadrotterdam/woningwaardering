@@ -72,6 +72,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 ## Pull Requests
 
+- Geef de PR-titel de vorm van een Conventional Commit, zoals bij commitberichten. Het type bepaalt het label en daarmee de rubriek in de release notes; zie [releases.md](docs/voor-ontwikkelaars/releases.md#labels-en-release-notes).
 - Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
 - Vervang `☐` door `☑` bij invullen; gebruik geen GitHub-task-syntax (`- [ ]` / `- [x]`) — die telt mee als PR-tasks op GitHub.
 
