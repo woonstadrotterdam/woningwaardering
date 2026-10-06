@@ -37,7 +37,7 @@ Interview de gebruiker over het plan totdat jullie het eens zijn over wat er ver
 ## Wanneer bronnen niet sluiten
 
 - Spreken bronnen elkaar tegen, toon dan beide citaten en zeg welke volgens de volgorde van autoriteit leidend is.
-- Geven wettekst en online beleidsboek geen uitsluitsel, vraag de gebruiker dan de huurprijscheck te controleren en wacht op de uitkomst. Vul die uitkomst niet zelf in.
+- Geven wettekst en online beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck` en leg de uitkomst voor. Lukt dat niet, vraag de gebruiker dan de tool te controleren en wacht op de uitkomst. Vul die uitkomst niet zelf in.
 - Kan VERA of het inputmodel de regel niet volledig dragen, zeg dat en leg de keuze voor: een modeluitbreiding, of een gedocumenteerde interpretatie.
 
 ## Afronden

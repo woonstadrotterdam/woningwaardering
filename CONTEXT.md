@@ -61,7 +61,7 @@ De door de Huurcommissie gepubliceerde uitleg van de wet van het WWS (zie _Bronn
 
 ### Huurprijscheck
 
-De rekentool van de Huurcommissie voor de maximale huurprijs. De tool kan alleen door een mens worden bediend; uitkomsten die bij een beleidsregel zijn gecontroleerd, staan in de implementatietoelichting.
+De rekentool van de Huurcommissie voor de maximale huurprijs. De tool heeft geen API; uitkomsten die bij een beleidsregel zijn gecontroleerd, staan in de implementatietoelichting.
 
 ### Implementatietoelichting
 

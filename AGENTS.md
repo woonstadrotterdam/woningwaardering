@@ -84,6 +84,8 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 Gebruik de skill [`grill-me-with-docs`](skills/grill-me-with-docs/SKILL.md) vóór de implementatie wanneer een taak domeinlogica, puntberekening, waarschuwings- of foutgedrag of VERA-modellering wijzigt en de interpretatie van de beleidsregel of de gewenste uitkomst nog niet vaststaat. Sla de skill over bij typefouten, formatting, dependency-updates en fixes waarvan de uitkomst al vastligt.
 
+Gebruik de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) om een scenario door te rekenen in de rekentool van de Huurcommissie; zie [Domeinregels](#domeinregels) voor wanneer dat nodig is.
+
 ## Documentatie
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
@@ -98,7 +100,7 @@ Gebruik de skill [`grill-me-with-docs`](skills/grill-me-with-docs/SKILL.md) vó�
 - Voor puntberekeningen geldt deze volgorde van autoriteit: **wettekst > online beleidsboek > huurprijscheck > implementatietoelichting**. Bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend.
 - Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
 - Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
-- Huurprijscheck: agents kunnen deze tool niet raadplegen. Als wettekst en beleidsboek niet sluitend zijn, verzin dan geen tooluitkomst: vraag een mens de huurprijscheck te controleren en leg de uitkomst vast in de implementatietoelichting. Is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt.
+- Huurprijscheck: als wettekst en beleidsboek niet sluitend zijn, reken het scenario dan door met de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) en leg de uitkomst vast in de implementatietoelichting. Verzin geen tooluitkomst: lukt het doorrekenen niet, vraag dan een mens de huurprijscheck te controleren. Is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt.
 - Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
 - Elke wijziging in domeinlogica citeert het regelnummer of artikel van de bron in het codecommentaar en in de sectie Bronverwijzing van de pull request, en vermeldt tegenstrijdigheden tussen bronnen.
 - Geef bij elk citaat uit een online bron, in de pull request en in antwoorden aan de gebruiker, ook de link naar de pagina waar de tekst staat, zo specifiek als de bron toelaat: de rubriekpagina van het online beleidsboek of het artikel in de online wettekst.
