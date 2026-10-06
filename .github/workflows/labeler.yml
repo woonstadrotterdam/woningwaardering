@@ -1,12 +1,55 @@
 name: "Pull Request Labeler"
 on:
-  - pull_request_target
+  pull_request_target:
+    types: [opened, reopened, edited]
+
+permissions: {}
 
 jobs:
   labeler:
     permissions:
-      contents: read
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v6
+      # Labelt op het Conventional Commits-type in de PR-titel. De labels bepalen
+      # de rubriek in de release notes (.github/release.yml).
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const LABEL_PER_TYPE = {
+              feat: "enhancement",
+              fix: "bug",
+              docs: "documentation",
+              chore: "chore",
+              build: "chore",
+              ci: "chore",
+            };
+            const BREAKING_CHANGE = "breaking change";
+
+            const labelsVoor = (titel) => {
+              const match = /^([a-z]+)(\([^)]*\))?(!)?: /i.exec(titel ?? "");
+              if (!match) return [];
+              const label = LABEL_PER_TYPE[match[1].toLowerCase()];
+              return [label, match[3] && BREAKING_CHANGE].filter(Boolean);
+            };
+
+            const { action, changes, pull_request: pr } = context.payload;
+            // Een bewerking van alleen de beschrijving verandert niets aan de labels.
+            if (action === "edited" && !changes?.title) return;
+
+            const huidig = pr.labels.map((label) => label.name);
+            const gewenst = labelsVoor(pr.title);
+            // Verwijder alleen wat de vorige titel opleverde; handmatig gezette labels blijven staan.
+            const vervallen = labelsVoor(changes?.title?.from).filter(
+              (label) => !gewenst.includes(label) && huidig.includes(label),
+            );
+            const nieuw = gewenst.filter((label) => !huidig.includes(label));
+
+            const issue = { ...context.repo, issue_number: pr.number };
+            for (const name of vervallen) {
+              await github.rest.issues.removeLabel({ ...issue, name });
+            }
+            if (nieuw.length > 0) {
+              await github.rest.issues.addLabels({ ...issue, labels: nieuw });
+            }
+            core.info(`Titel: ${pr.title} | toegevoegd: ${nieuw} | verwijderd: ${vervallen}`);

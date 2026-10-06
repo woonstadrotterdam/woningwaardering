@@ -46,3 +46,19 @@ Hiermee start het releaseproces, gedefinieerd in een GitHub workflow: [.github/w
 In dit proces wordt een package aangemaakt met een Python-versienummer dat is afgeleid van de tag. Een pre-releasetag zoals `v5.202701.0-alpha` wordt daarbij genormaliseerd naar `5.202701.0a0`.
 
 De package wordt eerst gepubliceerd op [TestPyPi](https://test.pypi.org/project/woningwaardering/). Na goedkeuring wordt de package naar [PyPi](https://pypi.org/project/woningwaardering/) gepubliceerd. Daarna wordt er een release aangemaakt in GitHub, met een changelog met de titel en link naar alle pull requests die deel uitmaken van deze release.
+
+## Labels en release notes
+
+De changelog deelt pull requests in op label; de rubrieken staan in [.github/release.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/release.yml). De workflow [.github/workflows/labeler.yml](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.github/workflows/labeler.yml) zet het label op basis van het [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/)-type in de PR-titel:
+
+| Type in PR-titel       | Label             | Rubriek in release notes |
+| ---------------------- | ----------------- | ------------------------ |
+| `feat`                 | `enhancement`     | Nieuwe Features          |
+| `fix`                  | `bug`             | Bugfixes                 |
+| `docs`                 | `documentation`   | Documentatie             |
+| `chore`, `build`, `ci` | `chore`           | Overige wijzigingen      |
+| `!` achter het type    | `breaking change` | Breaking Changes         |
+
+Andere types (`refactor`, `test`, `style`) en titels zonder type krijgen geen label en komen onder Overige wijzigingen. De branchnaam en de gewijzigde bestanden tellen niet mee.
+
+Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.
