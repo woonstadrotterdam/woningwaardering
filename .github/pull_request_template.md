@@ -1,16 +1,16 @@
-## Samenvatting
-
-<!-- Wat verandert en waarom? -->
-<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
-
 ## Gerelateerde issue(s)
 
+<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
 <!-- Kies één optie. Gebruik Closes/Fixes/Resolves #123 als het issue met deze PR wordt opgelost. -->
 
 - ☐ Gerelateerde issue: <!-- bijv. Closes #123 of #456 -->
 - ☐ Geen gerelateerde issue — waarom is deze PR nodig?
 
 <!-- Indien geen issue: leg hier kort uit waarom deze wijziging nodig is. -->
+
+## Samenvatting
+
+<!-- Wat verandert en waarom? -->
 
 ## Soort wijziging
 
