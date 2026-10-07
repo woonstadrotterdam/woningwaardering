@@ -85,6 +85,42 @@ def test_get_woonplaats_kiest_exact_adres_uit_meerdere_documenten():
     assert woonplaats == EenhedenWoonplaats(code="3295", naam="Utrecht")
 
 
+def test_get_woonplaats_valt_terug_op_postcode_en_huisnummer():
+    adres = EenhedenEenheidadres(
+        postcode="3511AD", huisnummer="100", huisnummer_toevoeging="hs"
+    )
+    responses = [
+        _locatieserver_response(),
+        _locatieserver_response(
+            _document(huisnummertoevoeging="H"), _document(huisnummertoevoeging="1")
+        ),
+    ]
+
+    with patch(REQUESTS_GET, side_effect=responses) as mock_get:
+        woonplaats = get_woonplaats(adres)
+
+    assert woonplaats == EenhedenWoonplaats(code="3295", naam="Utrecht")
+    assert mock_get.call_args.kwargs["params"]["fq"] == ["type:adres"]
+
+
+def test_get_woonplaats_valt_niet_terug_bij_meerdere_woonplaatsen():
+    adres = EenhedenEenheidadres(
+        postcode="3511AD", huisnummer="100", huisnummer_toevoeging="hs"
+    )
+    responses = [
+        _locatieserver_response(),
+        _locatieserver_response(
+            _document(huisnummertoevoeging="H"),
+            _document("0001", "Elders", huisnummertoevoeging="1"),
+        ),
+    ]
+
+    with patch(REQUESTS_GET, side_effect=responses):
+        woonplaats = get_woonplaats(adres)
+
+    assert woonplaats is None
+
+
 def test_get_woonplaats_geeft_geen_woonplaats_zonder_resultaat():
     adres = EenhedenEenheidadres(postcode="9999ZZ", huisnummer="1")
 
