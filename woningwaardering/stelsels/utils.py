@@ -97,7 +97,7 @@ def heeft_vaste_trap(ruimte: EenhedenRuimte) -> bool:
     return not heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
 
 
-KADASTER_SPARQL_ENDPOINT = "https://data.kkg.kadaster.nl/service/sparql"
+PDOK_LOCATIESERVER_ENDPOINT = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/free"
 
 # Criterium-id-segment en naam van de sluitpost die het verschil tussen de som van
 # de waarderingen en het stelselgroeptotaal opvangt.
@@ -875,55 +875,6 @@ def deler(ruimte: EenhedenRuimte) -> Decimal:
     )
 
 
-WOONPLAATS_QUERY_TEMPLATE = """
-prefix imxgeo: <http://modellen.geostandaarden.nl/def/imx-geo#>
-prefix sor: <https://data.kkg.kadaster.nl/sor/model/def/>
-prefix nen3610: <http://modellen.geostandaarden.nl/def/nen3610#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-
-select DISTINCT ?identificatie ?naam
-where {{
-  values ?postcode {{ "{postcode}" }}
-  values ?huisnummer {{ {huisnummer} }}
-  values ?huisnummertoevoeging {{ "{huisnummertoevoeging}" }}
-  values ?huisletter {{ "{huisletter}" }}
-
-  ?adres a imxgeo:Adres;
-         imxgeo:postcode ?postcode;
-         imxgeo:huisnummer ?adresHuisnummer;
-         imxgeo:plaatsnaam ?naam;
-         imxgeo:isAdresVanGebouw/imxgeo:bevindtZichOpPerceel/imxgeo:ligtInRegistratieveRuimte ?registratieveRuimte.
-  ?registratieveRuimte a imxgeo:Woonplaats;
-         imxgeo:status "Woonplaats aangewezen";
-         nen3610:identificatie ?identificatie
-  optional
-  {{
-    ?adres imxgeo:huisnummer ?adresHuisnummer.
-  }}
-  optional
-  {{
-    ?adres imxgeo:huisnummertoevoeging ?adresHuisnummertoevoeging.
-  }}
-  optional
-  {{
-    ?adres imxgeo:huisletter ?adresHuisletter.
-  }}
-  FILTER(
-    (!BOUND(?adresHuisnummer) && ?huisnummer = "") ||
-    (?adresHuisnummer = ?huisnummer)
-  )
-  FILTER(
-    (!BOUND(?adresHuisletter) && ?huisletter = "") ||
-    (lcase(?adresHuisletter) = lcase(?huisletter))
-  )
-  FILTER(
-    (!BOUND(?adresHuisnummertoevoeging) && ?huisnummertoevoeging = "") ||
-    (lcase(?adresHuisnummertoevoeging) = lcase(?huisnummertoevoeging))
-  )
-}}
-"""
-
-
 def _normaliseer_woonplaatsnaam(naam: str) -> str:
     return naam.strip().casefold()
 
@@ -946,14 +897,35 @@ def _woonplaatsnamen_komen_overeen(naam1: str, naam2: str) -> bool:
     return _normaliseer_woonplaatsnaam(naam1) == _normaliseer_woonplaatsnaam(naam2)
 
 
+def _locatieserver_filter(veld: str, waarde: str | None) -> str:
+    """
+    Maakt een filter voor de PDOK Locatieserver op een optioneel adresveld.
+
+    Zonder waarde worden alleen adressen geselecteerd waarbij het veld ontbreekt.
+    """
+    if not waarde:
+        return f"-{veld}:*"
+    return f"{veld}:{_locatieserver_term(waarde)}"
+
+
+def _locatieserver_term(waarde: str) -> str:
+    waarde = waarde.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{waarde}"'
+
+
+def _adresdeel_komt_overeen(opgegeven: str | None, gevonden: Any) -> bool:
+    return (opgegeven or "").casefold() == str(gevonden or "").casefold()
+
+
 def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     Haalt de woonplaats op voor een gegeven adres.
 
     Als de BAG-woonplaatscode is opgegeven, wordt die gebruikt. Anders wordt de
-    woonplaats bij het Kadaster opgehaald op basis van postcode, huisnummer,
+    woonplaats bij de PDOK Locatieserver opgehaald op basis van postcode, huisnummer,
     huisletter en huisnummertoevoeging. Is alleen een woonplaatsnaam opgegeven en
-    die wijkt af van het Kadaster, dan wordt None teruggegeven met een waarschuwing.
+    die wijkt af van de gevonden woonplaats, dan wordt None teruggegeven met een
+    waarschuwing.
 
     Args:
         adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisletter en huisnummertoevoeging.
@@ -968,51 +940,68 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     if not adres.postcode or not adres.huisnummer:
         return None
 
-    logger.info("Woonplaats wordt opgehaald via het Kadaster")
+    logger.info("Woonplaats wordt opgehaald via de PDOK Locatieserver")
 
     if not adres.huisnummer.isnumeric():
         warnings.warn(
             f'Huisnummer "{adres.huisnummer}" moet numeriek zijn. Maak gebruik van de attributen huisnummer, huisnummerToevoeging en huisletter voor de nummeraanduiding.'
         )
 
-    query = WOONPLAATS_QUERY_TEMPLATE.format(
-        postcode=adres.postcode.replace(" ", ""),
-        huisnummer=int(adres.huisnummer),
-        huisletter=adres.huisletter or "",
-        huisnummertoevoeging=adres.huisnummer_toevoeging or "",
-    )
-    request_data = {"query": query, "format": "json"}
+    postcode = adres.postcode.replace(" ", "")
+    huisnummer = int(adres.huisnummer)
+    params: dict[str, str | int | list[str]] = {
+        "q": f"postcode:{_locatieserver_term(postcode)} AND huisnummer:{huisnummer}",
+        "fq": [
+            "type:adres",
+            _locatieserver_filter("huisletter", adres.huisletter),
+            _locatieserver_filter("huisnummertoevoeging", adres.huisnummer_toevoeging),
+        ],
+        "fl": "woonplaatscode,woonplaatsnaam,postcode,huisnummer,huisletter,huisnummertoevoeging",
+        "rows": 100,
+    }
 
     try:
-        response = requests.post(KADASTER_SPARQL_ENDPOINT, data=request_data, timeout=5)
+        response = requests.get(PDOK_LOCATIESERVER_ENDPOINT, params=params, timeout=5)
         response.raise_for_status()
-        result = response.json()
-
-        if isinstance(result, list) and len(result) == 1:
-            woonplaats_kadaster = EenhedenWoonplaats(
-                code=result[0]["identificatie"], naam=result[0]["naam"]
-            )
-            if (
-                adres.woonplaats
-                and adres.woonplaats.naam
-                and woonplaats_kadaster.naam
-                and not _woonplaatsnamen_komen_overeen(
-                    adres.woonplaats.naam, woonplaats_kadaster.naam
-                )
-            ):
-                warnings.warn(
-                    f"Woonplaats {woonplaats_kadaster.naam} is gevonden voor adres "
-                    f"{_formatteer_adresomschrijving(adres)}, terwijl woonplaats "
-                    f"{adres.woonplaats.naam} is opgegeven. Kan geen woonplaats "
-                    f"bepalen voor de waardering.",
-                    UserWarning,
-                )
-                return None
-            return woonplaats_kadaster
-        return None
+        documenten = response.json().get("response", {}).get("docs", [])
     except requests.RequestException as e:
         warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}", UserWarning)
         return None
+
+    # De Locatieserver kan meerdere adressen teruggeven, bijvoorbeeld met een
+    # huisletter of huisnummertoevoeging. Alleen adressen waarvan postcode,
+    # huisnummer, huisletter en huisnummertoevoeging exact overeenkomen tellen mee.
+    woonplaatsen = {
+        (str(document["woonplaatscode"]), str(document["woonplaatsnaam"]))
+        for document in documenten
+        if document.get("woonplaatscode")
+        and document.get("woonplaatsnaam")
+        and _adresdeel_komt_overeen(postcode, document.get("postcode"))
+        and document.get("huisnummer") == huisnummer
+        and _adresdeel_komt_overeen(adres.huisletter, document.get("huisletter"))
+        and _adresdeel_komt_overeen(
+            adres.huisnummer_toevoeging, document.get("huisnummertoevoeging")
+        )
+    }
+    if len(woonplaatsen) != 1:
+        return None
+
+    code, naam = next(iter(woonplaatsen))
+    woonplaats_pdok = EenhedenWoonplaats(code=code, naam=naam)
+    if (
+        adres.woonplaats
+        and adres.woonplaats.naam
+        and not _woonplaatsnamen_komen_overeen(adres.woonplaats.naam, naam)
+    ):
+        warnings.warn(
+            f"Woonplaats {naam} is gevonden voor adres "
+            f"{_formatteer_adresomschrijving(adres)}, terwijl woonplaats "
+            f"{adres.woonplaats.naam} is opgegeven. Kan geen woonplaats "
+            f"bepalen voor de waardering.",
+            UserWarning,
+        )
+        return None
+    return woonplaats_pdok
 
 
 def get_corop_voor_woonplaats(woonplaats_code: str) -> dict[str, str] | None:
