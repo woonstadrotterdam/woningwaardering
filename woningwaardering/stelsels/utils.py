@@ -897,17 +897,6 @@ def _woonplaatsnamen_komen_overeen(naam1: str, naam2: str) -> bool:
     return _normaliseer_woonplaatsnaam(naam1) == _normaliseer_woonplaatsnaam(naam2)
 
 
-def _locatieserver_filter(veld: str, waarde: str | None) -> str:
-    """
-    Maakt een filter voor de PDOK Locatieserver op een optioneel adresveld.
-
-    Zonder waarde worden alleen adressen geselecteerd waarbij het veld ontbreekt.
-    """
-    if not waarde:
-        return f"-{veld}:*"
-    return f"{veld}:{_locatieserver_term(waarde)}"
-
-
 def _locatieserver_term(waarde: str) -> str:
     waarde = waarde.replace("\\", "\\\\").replace('"', '\\"')
     return f'"{waarde}"'
@@ -920,78 +909,52 @@ def _adresdeel_komt_overeen(opgegeven: str | None, gevonden: Any) -> bool:
 PDOK_LOCATIESERVER_MAX_ROWS = 100
 
 
-def _zoek_woonplaatsen_bij_locatieserver(
-    postcode: str,
-    huisnummer: int,
-    huisletter: str | None = None,
-    huisnummertoevoeging: str | None = None,
-    exact: bool = True,
-) -> set[tuple[str, str]] | None:
+def _zoek_adressen_bij_locatieserver(
+    postcode: str, huisnummer: int
+) -> list[dict[str, Any]]:
     """
-    Zoekt bij de PDOK Locatieserver de woonplaatsen van adressen met de gegeven
-    postcode en het gegeven huisnummer.
+    Zoekt bij de PDOK Locatieserver de adressen met de gegeven postcode en het
+    gegeven huisnummer.
 
     Args:
         postcode (str): Postcode zonder spaties.
         huisnummer (int): Huisnummer.
-        huisletter (str | None): Huisletter, alleen gebruikt als `exact` True is.
-        huisnummertoevoeging (str | None): Huisnummertoevoeging, alleen gebruikt als `exact` True is.
-        exact (bool): Als True tellen alleen adressen mee waarvan ook huisletter en
-            huisnummertoevoeging overeenkomen; als False alle adressen op het huisnummer.
 
     Returns:
-        set[tuple[str, str]] | None: De gevonden combinaties van woonplaatscode en
-            woonplaatsnaam, of None als niet alle adressen opgehaald konden worden.
+        list[dict[str, Any]]: De gevonden adressen, elk met woonplaatscode en
+            woonplaatsnaam en, indien aanwezig, huisletter en huisnummertoevoeging.
     """
-    filters = ["type:adres"]
-    if exact:
-        filters += [
-            _locatieserver_filter("huisletter", huisletter),
-            _locatieserver_filter("huisnummertoevoeging", huisnummertoevoeging),
-        ]
-    params: dict[str, str | int | list[str]] = {
+    params: dict[str, str | int] = {
         "q": f"postcode:{_locatieserver_term(postcode)} AND huisnummer:{huisnummer}",
-        "fq": filters,
+        "fq": "type:adres",
         "fl": "woonplaatscode,woonplaatsnaam,postcode,huisnummer,huisletter,huisnummertoevoeging",
+        # De Locatieserver geeft maximaal 100 adressen terug. Liggen er meer op het
+        # huisnummer, dan wordt de woonplaats bepaald op basis van deze 100.
         "rows": PDOK_LOCATIESERVER_MAX_ROWS,
     }
     response = requests.get(PDOK_LOCATIESERVER_ENDPOINT, params=params, timeout=5)
     response.raise_for_status()
-    resultaat = response.json().get("response", {})
-    documenten = resultaat.get("docs", [])
-    if resultaat.get("numFound", len(documenten)) > len(documenten):
-        return None
-
-    return {
-        (str(document["woonplaatscode"]), str(document["woonplaatsnaam"]))
-        for document in documenten
+    return [
+        document
+        for document in response.json().get("response", {}).get("docs", [])
         if document.get("woonplaatscode")
         and document.get("woonplaatsnaam")
         and _adresdeel_komt_overeen(postcode, document.get("postcode"))
         and document.get("huisnummer") == huisnummer
-        and (
-            not exact
-            or (
-                _adresdeel_komt_overeen(huisletter, document.get("huisletter"))
-                and _adresdeel_komt_overeen(
-                    huisnummertoevoeging, document.get("huisnummertoevoeging")
-                )
-            )
-        )
-    }
+    ]
 
 
 def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     """
     Haalt de woonplaats op voor een gegeven adres.
 
-    Als de BAG-woonplaatscode is opgegeven, wordt die gebruikt. Anders wordt de
-    woonplaats bij de PDOK Locatieserver opgehaald op basis van postcode, huisnummer,
-    huisletter en huisnummertoevoeging. Wordt het adres zo niet gevonden, dan wordt
-    de woonplaats bepaald op basis van postcode en huisnummer, mits die eenduidig
-    is. Is alleen een woonplaatsnaam opgegeven en
-    die wijkt af van de gevonden woonplaats, dan wordt None teruggegeven met een
-    waarschuwing.
+    Als de BAG-woonplaatscode is opgegeven, wordt die gebruikt. Anders worden bij de
+    PDOK Locatieserver de adressen op de postcode en het huisnummer opgehaald. Staat
+    het adres met huisletter en huisnummertoevoeging daartussen, dan wordt de
+    woonplaats van dat adres gebruikt. Zo niet, dan wordt de woonplaats bepaald op
+    basis van alle gevonden adressen, mits die in dezelfde woonplaats liggen. Is
+    alleen een woonplaatsnaam opgegeven en wijkt die af van de gevonden woonplaats,
+    dan wordt None teruggegeven met een waarschuwing.
 
     Args:
         adres (EenhedenEenheidadres): Adres met woonplaats met woonplaatscode of postcode, huisnummer en optioneel huisletter en huisnummertoevoeging.
@@ -1017,27 +980,35 @@ def get_woonplaats(adres: EenhedenEenheidadres) -> EenhedenWoonplaats | None:
     huisnummer = int(adres.huisnummer)
 
     try:
-        woonplaatsen = _zoek_woonplaatsen_bij_locatieserver(
-            postcode, huisnummer, adres.huisletter, adres.huisnummer_toevoeging
-        )
-        if not woonplaatsen:
-            # Het doel is de woonplaats, niet het exacte adres. Wordt het adres niet
-            # gevonden met huisletter en huisnummertoevoeging, dan volstaat het
-            # huisnummer, mits alle adressen op dat huisnummer in dezelfde
-            # woonplaats liggen.
-            logger.info(
-                f"Adres {_formatteer_adresomschrijving(adres)} niet gevonden met "
-                f"huisletter en huisnummertoevoeging; woonplaats wordt bepaald op "
-                f"basis van postcode en huisnummer"
-            )
-            woonplaatsen = _zoek_woonplaatsen_bij_locatieserver(
-                postcode, huisnummer, exact=False
-            )
+        adressen = _zoek_adressen_bij_locatieserver(postcode, huisnummer)
     except requests.RequestException as e:
         warnings.warn(f"Fout bij het ophalen van woonplaatsdata: {e}", UserWarning)
         return None
 
-    if woonplaatsen is None or len(woonplaatsen) != 1:
+    exacte_adressen = [
+        document
+        for document in adressen
+        if _adresdeel_komt_overeen(adres.huisletter, document.get("huisletter"))
+        and _adresdeel_komt_overeen(
+            adres.huisnummer_toevoeging, document.get("huisnummertoevoeging")
+        )
+    ]
+    if not exacte_adressen:
+        # Het doel is de woonplaats, niet het exacte adres. Wordt het adres niet
+        # gevonden met huisletter en huisnummertoevoeging, dan volstaat het
+        # huisnummer, mits alle gevonden adressen op dat huisnummer in dezelfde
+        # woonplaats liggen.
+        logger.info(
+            f"Adres {_formatteer_adresomschrijving(adres)} niet gevonden met "
+            f"huisletter en huisnummertoevoeging; woonplaats wordt bepaald op "
+            f"basis van postcode en huisnummer"
+        )
+
+    woonplaatsen = {
+        (str(document["woonplaatscode"]), str(document["woonplaatsnaam"]))
+        for document in exacte_adressen or adressen
+    }
+    if len(woonplaatsen) != 1:
         return None
 
     code, naam = next(iter(woonplaatsen))

@@ -14,10 +14,15 @@ from woningwaardering.vera.bvg.generated import EenhedenEenheidadres, EenhedenWo
 REQUESTS_GET = "woningwaardering.stelsels.utils.requests.get"
 
 
-def _locatieserver_response(*documenten: dict[str, Any]) -> MagicMock:
+def _locatieserver_response(
+    *documenten: dict[str, Any], num_found: int | None = None
+) -> MagicMock:
     mock_response = MagicMock()
     mock_response.json.return_value = {
-        "response": {"numFound": len(documenten), "docs": list(documenten)}
+        "response": {
+            "numFound": len(documenten) if num_found is None else num_found,
+            "docs": list(documenten),
+        }
     }
     mock_response.raise_for_status = MagicMock()
     return mock_response
@@ -66,7 +71,7 @@ def test_get_woonplaats_verrijkt_woonplaats_via_locatieserver():
     assert mock_get.call_args.args == (PDOK_LOCATIESERVER_ENDPOINT,)
     params = mock_get.call_args.kwargs["params"]
     assert params["q"] == 'postcode:"3511AD" AND huisnummer:100'
-    assert params["fq"] == ["type:adres", "-huisletter:*", "-huisnummertoevoeging:*"]
+    assert params["fq"] == "type:adres"
 
 
 def test_get_woonplaats_kiest_exact_adres_uit_meerdere_documenten():
@@ -79,46 +84,58 @@ def test_get_woonplaats_kiest_exact_adres_uit_meerdere_documenten():
         _document("0001", "Elders", huisnummer=102, huisletter="B"),
     )
 
-    with patch(REQUESTS_GET, return_value=mock_response):
+    with patch(REQUESTS_GET, return_value=mock_response) as mock_get:
         woonplaats = get_woonplaats(adres)
 
     assert woonplaats == EenhedenWoonplaats(code="3295", naam="Utrecht")
+    mock_get.assert_called_once()
 
 
 def test_get_woonplaats_valt_terug_op_postcode_en_huisnummer():
     adres = EenhedenEenheidadres(
         postcode="3511AD", huisnummer="100", huisnummer_toevoeging="hs"
     )
-    responses = [
-        _locatieserver_response(),
-        _locatieserver_response(
-            _document(huisnummertoevoeging="H"), _document(huisnummertoevoeging="1")
-        ),
-    ]
+    mock_response = _locatieserver_response(
+        _document(huisnummertoevoeging="H"), _document(huisnummertoevoeging="1")
+    )
 
-    with patch(REQUESTS_GET, side_effect=responses) as mock_get:
+    with patch(REQUESTS_GET, return_value=mock_response) as mock_get:
         woonplaats = get_woonplaats(adres)
 
     assert woonplaats == EenhedenWoonplaats(code="3295", naam="Utrecht")
-    assert mock_get.call_args.kwargs["params"]["fq"] == ["type:adres"]
+    mock_get.assert_called_once()
 
 
 def test_get_woonplaats_valt_niet_terug_bij_meerdere_woonplaatsen():
     adres = EenhedenEenheidadres(
         postcode="3511AD", huisnummer="100", huisnummer_toevoeging="hs"
     )
-    responses = [
-        _locatieserver_response(),
-        _locatieserver_response(
-            _document(huisnummertoevoeging="H"),
-            _document("0001", "Elders", huisnummertoevoeging="1"),
-        ),
-    ]
+    mock_response = _locatieserver_response(
+        _document(huisnummertoevoeging="H"),
+        _document("0001", "Elders", huisnummertoevoeging="1"),
+    )
 
-    with patch(REQUESTS_GET, side_effect=responses):
+    with patch(REQUESTS_GET, return_value=mock_response):
         woonplaats = get_woonplaats(adres)
 
     assert woonplaats is None
+
+
+def test_get_woonplaats_gebruikt_teruggegeven_adressen_bij_afgekapt_antwoord():
+    adres = EenhedenEenheidadres(
+        postcode="3511AD", huisnummer="100", huisnummer_toevoeging="99"
+    )
+    mock_response = _locatieserver_response(
+        _document(huisnummertoevoeging="1"),
+        _document(huisnummertoevoeging="2"),
+        num_found=239,
+    )
+
+    with patch(REQUESTS_GET, return_value=mock_response) as mock_get:
+        woonplaats = get_woonplaats(adres)
+
+    assert woonplaats == EenhedenWoonplaats(code="3295", naam="Utrecht")
+    mock_get.assert_called_once()
 
 
 def test_get_woonplaats_geeft_geen_woonplaats_zonder_resultaat():
