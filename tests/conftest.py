@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+import requests
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.vera.bvg.generated import (
@@ -10,6 +11,18 @@ from woningwaardering.vera.bvg.generated import (
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "tests/data"
+
+
+@pytest.fixture(autouse=True)
+def geen_externe_aanroepen(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Tests mogen niet afhangen van externe diensten: mock de aanroep in de test."""
+
+    def weiger_aanroep(self, method, url, *args, **kwargs):
+        raise AssertionError(
+            f"Test doet een externe aanroep ({method} {url}); mock deze aanroep."
+        )
+
+    monkeypatch.setattr(requests.Session, "request", weiger_aanroep)
 
 
 @pytest.fixture()

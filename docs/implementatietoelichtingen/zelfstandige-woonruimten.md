@@ -1523,7 +1523,7 @@ Voor het toepassen van deze aparte berekeningsmethode moet de woning voldoen aan
 > [!NOTE]
 > Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
 >
-> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
+> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij de [PDOK Locatieserver](https://www.pdok.nl/pdok-locatieserver) opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat postcode en huisnummer overeenkomen met de BAG-registratie.
 
 Alleen als aan de bovenstaande eisen wordt voldaan dient bij de berekening van de WOZ-waarde gerekend te worden met de volgende kengetallen:
 
