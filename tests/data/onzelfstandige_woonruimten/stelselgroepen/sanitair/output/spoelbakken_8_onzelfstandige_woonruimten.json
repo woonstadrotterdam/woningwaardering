@@ -29,9 +29,9 @@
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__wastafel",
+            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__spoelbak_in_aanrecht",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
             "bovenliggendeCriterium": {
               "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
@@ -41,17 +41,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 0.25
-        },
-        {
-          "criterium": {
-            "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__max_punten_wastafel",
-            "naam": "Maximering voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
-            }
-          },
-          "punten": -0.13
+          "punten": 0.13
         },
         {
           "criterium": {
@@ -76,6 +66,13 @@
             }
           },
           "punten": 0.38
+        },
+        {
+          "criterium": {
+            "id": "sanitair__afronding_op_kwartpunten",
+            "naam": "Afronding op kwartpunten"
+          },
+          "punten": -0.01
         }
       ]
     }

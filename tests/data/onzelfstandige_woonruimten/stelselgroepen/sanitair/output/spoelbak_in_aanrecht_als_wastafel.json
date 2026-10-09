@@ -31,7 +31,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__prive__Space_249297__wastafel",
+            "id": "sanitair__prive__Space_249297__spoelbak_in_aanrecht",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive__Space_249297"

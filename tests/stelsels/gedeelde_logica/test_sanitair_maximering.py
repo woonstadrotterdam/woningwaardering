@@ -11,9 +11,11 @@ from woningwaardering.stelsels.onzelfstandige_woonruimten import (
 )
 from woningwaardering.vera.bvg.generated import EenhedenEenheid
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
     Doelgroep,
     Installatiesoort,
     Ruimtedetailsoort,
+    Ruimtesoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -168,24 +170,82 @@ def test_zorgwoning_sluit_ruimte_gedeeld_met_adressen_uit():
     assert uitzonderingsruimte is ruimte_op_adres
 
 
-def test_korte_aanrechten_tellen_mee_bij_selectie():
+def test_spoelbak_in_kort_aanrecht_telt_mee_bij_selectie():
     eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
     assert eenheid.ruimten is not None
-    bergruimte = eenheid.ruimten[1]
+    keuken, bergruimte = eenheid.ruimten
+    keuken.installaties = [Installatiesoort.wastafel]
     bergruimte.installaties = [Installatiesoort.wastafel]
-
-    uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
-
-    assert uitzonderingsruimte is eenheid.ruimten[0]
-
-
-def test_korte_aanrechten_in_woon_slaap_keuken_tellen_mee():
-    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
-    assert eenheid.ruimten is not None
-    keuken = eenheid.ruimten[0]
-    keuken.detail_soort = Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken
-    eenheid.ruimten[1].installaties = [Installatiesoort.wastafel]
+    eenheid.ruimten = [bergruimte, keuken]
 
     uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
 
     assert uitzonderingsruimte is keuken
+
+
+def test_spoelbak_in_kort_aanrecht_in_woon_slaap_keuken_telt_mee():
+    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
+    assert eenheid.ruimten is not None
+    keuken, bergruimte = eenheid.ruimten
+    keuken.detail_soort = Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken
+    keuken.installaties = [Installatiesoort.wastafel]
+    bergruimte.installaties = [Installatiesoort.wastafel]
+    eenheid.ruimten = [bergruimte, keuken]
+
+    uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
+
+    assert uitzonderingsruimte is keuken
+
+
+def test_meerdere_korte_aanrechten_tellen_als_een_wastafel_bij_selectie():
+    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
+    assert eenheid.ruimten is not None
+    keuken, bergruimte = eenheid.ruimten
+    bergruimte.installaties = [Installatiesoort.wastafel, Installatiesoort.wastafel]
+
+    uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
+
+    assert uitzonderingsruimte is bergruimte
+
+
+def test_kort_aanrechtdeel_naast_aanrecht_vanaf_1m_telt_niet_mee_bij_selectie():
+    eenheid = EenhedenEenheid.model_validate(
+        {
+            "ruimten": [
+                {
+                    "id": "keuken_met_kort_aanrechtdeel",
+                    "soort": Ruimtesoort.vertrek,
+                    "detailSoort": Ruimtedetailsoort.keuken,
+                    "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
+                    "installaties": [Installatiesoort.wastafel],
+                    "bouwkundigeElementen": [
+                        {
+                            "id": "aanrecht_kort",
+                            "detailSoort": Bouwkundigelementdetailsoort.aanrecht,
+                            "lengte": 800,
+                        },
+                        {
+                            "id": "aanrecht_lang",
+                            "detailSoort": Bouwkundigelementdetailsoort.aanrecht,
+                            "lengte": 1200,
+                        },
+                    ],
+                },
+                {
+                    "id": "keuken_met_twee_wastafels",
+                    "soort": Ruimtesoort.vertrek,
+                    "detailSoort": Ruimtedetailsoort.keuken,
+                    "gedeeldMetAantalOnzelfstandigeWoonruimten": 8,
+                    "installaties": [
+                        Installatiesoort.wastafel,
+                        Installatiesoort.wastafel,
+                    ],
+                },
+            ]
+        }
+    )
+
+    uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
+
+    assert uitzonderingsruimte is not None
+    assert uitzonderingsruimte.id == "keuken_met_twee_wastafels"

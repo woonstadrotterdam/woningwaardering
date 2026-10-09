@@ -11,6 +11,7 @@ from woningwaardering.stelsels.builders import (
 )
 from woningwaardering.stelsels.criterium import maximering_naam
 from woningwaardering.stelsels.gedeelde_logica.aanrecht import (
+    heeft_valide_aanrecht,
     is_valide_aanrechtlengte,
 )
 from woningwaardering.stelsels.utils import (
@@ -19,7 +20,6 @@ from woningwaardering.stelsels.utils import (
     weergavenaam,
 )
 from woningwaardering.vera.bvg.generated import (
-    BouwkundigElementenBouwkundigElement,
     EenhedenEenheid,
     EenhedenRuimte,
     Referentiedata,
@@ -103,7 +103,7 @@ _EXTRA_VOORZIENINGEN_PUNTEN: dict[InstallatiesoortReferentiedata, float] = {
 # zijn aangesloten, worden geteld als wastafel.
 # Daarom mappen zowel een `Wastafel` als een `Fontein` op een wastafel-installatie.
 # Een aanrecht korter dan een meter telt ook als wastafel, maar loopt via
-# `_korte_aanrechten` en niet via deze mapping.
+# `_aantal_spoelbakken_in_kort_aanrecht` en niet via deze mapping.
 _INSTALLATIESOORT_PER_BOUWKUNDIGELEMENTDETAILSOORT: dict[
     Referentiedata, InstallatiesoortReferentiedata
 ] = {
@@ -272,17 +272,25 @@ def _waardeer_toiletten(
                 )
 
 
-def _korte_aanrechten(
-    ruimte: EenhedenRuimte,
-) -> list[BouwkundigElementenBouwkundigElement]:
-    return [
-        element
-        for element in ruimte.bouwkundige_elementen or []
-        if element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
+def _aantal_spoelbakken_in_kort_aanrecht(ruimte: EenhedenRuimte) -> int:
+    # Bijlage I, onder A, toelichting rubriek 5 (Besluit huurprijzen woonruimte)
+    # "Een spoelbak in een keuken die voldoet aan het basisniveau, krijgt geen
+    # waardering."
+    # Een aanrecht korter dan 1 meter telt in een ruimte met een aanrecht vanaf
+    # 1 meter mee in de aanrechtlengte van de keuken en is daarom geen wastafel.
+    if heeft_valide_aanrecht(ruimte):
+        return 0
+    # Alle aanrechten in een ruimte vormen samen één keuken met hooguit één
+    # spoelbak; een extra aanrecht is een los werkblad. Dit is een aanname van
+    # de package: VERA legt niet vast of een aanrecht een spoelbak heeft.
+    heeft_kort_aanrecht = any(
+        element.detail_soort == Bouwkundigelementdetailsoort.aanrecht
         # een aanrecht zonder lengte telt niet mee als kort aanrecht
         and element.lengte is not None
         and not is_valide_aanrechtlengte(element.lengte)
-    ]
+        for element in ruimte.bouwkundige_elementen or []
+    )
+    return 1 if heeft_kort_aanrecht else 0
 
 
 def _aantal_wastafels_in_ruimte(
@@ -291,7 +299,7 @@ def _aantal_wastafels_in_ruimte(
 ) -> int:
     aantal = _installatieaantallen(ruimte)[soort]
     if soort == Installatiesoort.wastafel:
-        aantal += len(_korte_aanrechten(ruimte))
+        aantal += _aantal_spoelbakken_in_kort_aanrecht(ruimte)
     return aantal
 
 
@@ -374,7 +382,7 @@ def _waardeer_wastafels(
         # voldoet dus niet aan de eis van 1 m en wordt daarom niet als aanrecht gewaardeerd,
         # maar als wastafel.
         aantal_spoelbakken = (
-            len(_korte_aanrechten(ruimte))
+            _aantal_spoelbakken_in_kort_aanrecht(ruimte)
             if wastafelsoort == Installatiesoort.wastafel
             else 0
         )
@@ -389,10 +397,10 @@ def _waardeer_wastafels(
 
         if aantal_spoelbakken > 0:
             logger.info(
-                f"Ruimte '{ruimte.naam}' ({ruimte.id}): {aantal_spoelbakken}x aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
+                f"Ruimte '{ruimte.naam}' ({ruimte.id}): spoelbak in aanrecht < 1m telt als wastafel mee voor {Woningwaarderingstelselgroep.sanitair.naam}."
             )
             yield waarderingsgroep_builder.met_onderliggend(
-                id=wastafelsoort.name,
+                id="spoelbak_in_aanrecht",
                 naam=f"{wastafelsoort.naam} (spoelbak in aanrecht < 1m)",
                 meeteenheid=Meeteenheid.stuks,
                 punten=aantal_spoelbakken * punten_per_wastafel,

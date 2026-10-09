@@ -380,7 +380,7 @@
         {
           "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__Space_72310936__wastafel",
+            "id": "sanitair__Space_72310936__spoelbak_in_aanrecht",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
             "bovenliggendeCriterium": {
               "id": "sanitair__Space_72310936"

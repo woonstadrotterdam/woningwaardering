@@ -29,9 +29,9 @@
           }
         },
         {
-          "aantal": 2.0,
+          "aantal": 1.0,
           "criterium": {
-            "id": "sanitair__prive__keuken__wastafel",
+            "id": "sanitair__prive__keuken__spoelbak_in_aanrecht",
             "naam": "Wastafel (spoelbak in aanrecht < 1m)",
             "bovenliggendeCriterium": {
               "id": "sanitair__prive__keuken"
@@ -41,17 +41,7 @@
               "naam": "Stuks"
             }
           },
-          "punten": 2.0
-        },
-        {
-          "criterium": {
-            "id": "sanitair__prive__keuken__max_punten_wastafel",
-            "naam": "Max 1.0 punt voor Wastafel",
-            "bovenliggendeCriterium": {
-              "id": "sanitair__prive__keuken"
-            }
-          },
-          "punten": -1.0
+          "punten": 1.0
         }
       ]
     }
