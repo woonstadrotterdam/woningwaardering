@@ -1,18 +1,22 @@
 # Instructies Voor Agents
 
-Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen direct invloed hebben op woningwaarderingen. Lees eerst de relevante context en wijzig alleen wat nodig is voor de taak.
+Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen direct invloed hebben op woningwaarderingen. Wijzig alleen wat nodig is voor de taak.
 
-## Eerst Lezen
+## Wat Lees Je Wanneer
 
-- Lees `CONTEXT.md` voor de gedeelde domeintaal.
-- Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
-- Lees `docs/index.md` voor de gebruikersgerichte uitleg van warnings en outputstructuur.
-- Lees `docs/voor-ontwikkelaars/` voor repository-opzet, lookup-tabellen, logging/warnings en de criteriumstrategie.
-- Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`.
-- Check en citeer de actuele HTML-pagina's van het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
-- Gebruik voor de wettekst eerst de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` om te zoeken en citeren. Verifieer deze daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
-- Pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
-- Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `testing.md`, `naamgeving.md`, `data.md` en `logging.md`.
+Lees alleen wat bij de taak hoort.
+
+| Als de taak raakt aan                                                                                    | Lees dan eerst                                                                                                                |
+| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en de bronnen onder [Domeinregels](#domeinregels)                   |
+| Outputstructuur, criterium-id's of builders                                                              | `docs/voor-ontwikkelaars/criteriumstrategie.md`, `docs/index.md` en de inline voorbeeld-output in `docs/aan-de-slag/index.md` |
+| Tests of testdata                                                                                        | `docs/voor-ontwikkelaars/testing.md` en `data.md`                                                                             |
+| Naamgeving                                                                                               | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                       |
+| Warnings of logging                                                                                      | `docs/voor-ontwikkelaars/logging.md` en `docs/index.md`                                                                       |
+| Installatie, repository-opzet of releases                                                                | `docs/voor-ontwikkelaars/index.md` en `releases.md`                                                                           |
+| Doel, disclaimer en actuele beleidsboek- en VERA-versies                                                 | `README.md` en `pyproject.toml`                                                                                               |
+| Domeintermen in code, docs of comments                                                                   | `CONTEXT.md`                                                                                                                  |
+| Typefout, formatting of eenduidige testfix zonder domeinvraag                                            | Niets extra                                                                                                                   |
 
 ## Omgeving En Commands
 
@@ -32,12 +36,12 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [tes
 - Plaats stelselgroep-logica in de map van het juiste stelsel onder `woningwaardering/stelsels/`.
 - Plaats logica die door meerdere stelsels gedeeld wordt in `woningwaardering/stelsels/gedeelde_logica/`.
 - Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py` (`met_onderliggend` / `met_subgroep` / `gedeeld_met`); zie `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de criteriumstrategie.
-- Behandel gegenereerde code onder `woningwaardering/vera/` terughoudend. Wijzig deze alleen via de bestaande scripts of wanneer de taak daar expliciet om vraagt.
+- `woningwaardering/vera/bvg/generated.py` en `woningwaardering/vera/referentiedata/` zijn gegenereerd. Bewerk ze niet met de hand, want de generator overschrijft handmatige wijzigingen; draai in plaats daarvan `task genereer-vera-bvg-modellen` of `task genereer-vera-referentiedata`. De modeluitbreidingen in `woningwaardering/vera/bvg/model_uitbreidingen/` zijn handgeschreven en mag je wel bewerken.
 - Gebruik bestaande patronen voor stelsels, stelselgroepen, criterium-id's en lookup-tabellen voordat je nieuwe abstraheringen toevoegt.
 - Houd imports bovenaan het bestand; voeg geen inline imports toe.
 - Gebruik `warnings.warn(..., UserWarning)` voor gebruikersgerichte waarschuwingen over incomplete of onjuiste input, volgens de bestaande warning-semantiek.
 - Gebruik `loguru` voor logging volgens `docs/voor-ontwikkelaars/logging.md`.
-- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
+- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de wettekst letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
 - Schrijf comments voor de lezer van de huidige code, niet voor de reviewer van de wijziging: verwijs niet naar verwijderde of oude code ("dit is niet meer nodig", "voorheen gebeurde hier X"). Zulke uitleg hoort in het commitbericht of de PR-beschrijving.
 
 ```python
@@ -69,23 +73,20 @@ uv run pre-commit run --all-files --hook-stage pre-push
 - Gebruik `tests/data/...` voor VERA-realistische inputmodellen en handmatig nagerekende verwachte output.
 - Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
+- Laat een falende test niet slagen door de verwachte output te wijzigen of te regenereren (`task genereer-test-output` overschrijft alle bestanden in `tests/data/**/output/`): die output is handmatig nagerekend. Wijzig verwachte output alleen wanneer de punten volgens de bronnen moeten veranderen of wanneer de gebruiker er expliciet om vraagt.
 
 ## Pull Requests
 
 - Geef de PR-titel de vorm van een Conventional Commit, zoals bij commitberichten. Het type bepaalt het label en daarmee de rubriek in de release notes; zie [releases.md](docs/voor-ontwikkelaars/releases.md#labels-en-release-notes).
 - Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
 - Vervang `☐` door `☑` bij invullen; gebruik geen GitHub-task-syntax (`- [ ]` / `- [x]`) — die telt mee als PR-tasks op GitHub.
+- Push je naar een branch met een open pull request, werk dan in dezelfde beurt de titel en beschrijving bij als die de wijziging nog niet dekken. Pas alleen aan wat door de push verandert en laat tekst van anderen staan.
 
 ## Skills
 
-Gebruik [`skills/grill-me-with-docs/SKILL.md`](skills/grill-me-with-docs/SKILL.md) **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
+Gebruik de skill [`grill-me-with-docs`](skills/grill-me-with-docs/SKILL.md) vóór de implementatie wanneer een taak domeinlogica, puntberekening, waarschuwings- of foutgedrag of VERA-modellering wijzigt en de interpretatie van de beleidsregel of de gewenste uitkomst nog niet vaststaat. Sla de skill over bij typefouten, formatting, dependency-updates en fixes waarvan de uitkomst al vastligt.
 
-- plannen, ontwerpen, architectuur of refactor-voorstellen
-- domeinlogica, stelselgroepen, beleidsregel-interpretatie of VERA-modellering
-- nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
-- terminologie, projectgrenzen of documentatie die moet worden aangescherpt
-
-Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+Gebruik de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) om een scenario door te rekenen in de rekentool van de Huurcommissie; zie [Domeinregels](#domeinregels) voor wanneer dat nodig is.
 
 ## Documentatie
 
@@ -98,7 +99,13 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 
 ## Domeinregels
 
-- Behandel voor puntberekeningen de volgorde van autoriteit in `CONTEXT.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Voor puntberekeningen geldt deze volgorde van autoriteit: **wettekst > online beleidsboek > huurprijscheck > implementatietoelichting**. Bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend.
+- Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
+- Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
+- Huurprijscheck: als wettekst en beleidsboek niet sluitend zijn, reken het scenario dan door met de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) en leg de uitkomst vast in de implementatietoelichting. Verzin geen tooluitkomst: lukt het doorrekenen niet, vraag dan een mens de huurprijscheck te controleren. Is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt.
+- Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
+- Elke wijziging in domeinlogica citeert het regelnummer of artikel van de bron in het codecommentaar en in de sectie Bronverwijzing van de pull request, en vermeldt tegenstrijdigheden tussen bronnen.
+- Geef bij elk citaat uit een online bron, in de pull request en in antwoorden aan de gebruiker, ook de link naar de pagina waar de tekst staat, zo specifiek als de bron toelaat: de rubriekpagina van het online beleidsboek of het artikel in de online wettekst.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
@@ -108,5 +115,6 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 - Revert geen bestaande wijzigingen die je niet zelf hebt gemaakt.
 - Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
 - Schrijf commitberichten als [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/) met een Nederlandse omschrijving, bijvoorbeeld `fix(onz): corrigeer maximale huurprijs bij 106 punten`. De scope is optioneel en benoemt het geraakte onderdeel (bijv. `stelsels`, `sanitair`, `rapport`, `deps`). Eén logische wijziging per commit; verwijs in de footer naar een gerelateerde issue met `Closes #N` of `Refs #N`.
+- Noem een branch `<type>/<korte-omschrijving>` in kebab-case, met hetzelfde Conventional Commits-type als de wijziging (`feat`, `fix`, `docs`, `chore`, `refactor`, ...) en waar van toepassing het issuenummer, bijvoorbeeld `fix/399-toiletruimte-classificatie`. Push geen branch met een tool-prefix zoals `claude/` of `cursor/`: hernoem die vóór de eerste push.
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.

@@ -1,16 +1,16 @@
-## Samenvatting
-
-<!-- Wat verandert en waarom? -->
-<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
-
 ## Gerelateerde issue(s)
 
+<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
 <!-- Kies één optie. Gebruik Closes/Fixes/Resolves #123 als het issue met deze PR wordt opgelost. -->
 
 - ☐ Gerelateerde issue: <!-- bijv. Closes #123 of #456 -->
 - ☐ Geen gerelateerde issue — waarom is deze PR nodig?
 
 <!-- Indien geen issue: leg hier kort uit waarom deze wijziging nodig is. -->
+
+## Samenvatting
+
+<!-- Wat verandert en waarom? -->
 
 ## Soort wijziging
 
@@ -25,7 +25,7 @@
 <!-- Alleen invullen als 'Domeinlogica / puntberekening' is aangevinkt; anders overslaan.
      Domeinlogica omvat onder meer wijzigingen in woningwaardering/stelsels/, waarschuwings-
      of foutgedrag, lookup-tabellen, modeluitbreidingen en tests met gewijzigde verwachte punten.
-     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie `CONTEXT.md`).
+     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie Domeinregels in `AGENTS.md`).
      Herhaal het onderstaande blok per gewijzigde domeinregel. -->
 
 ### [Stelselgroep / onderwerp]
@@ -34,6 +34,8 @@
 
 - ☐ Beleidsboek Huurcommissie (online, actueel)
 - ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
+
+**Link:** <!-- pagina van het online beleidsboek of artikel van de wettekst waar de quote staat -->
 
 **Quote:**
 

@@ -1,95 +1,54 @@
 ---
 name: grill-me-with-docs
 description: >-
-  Challenges plans and implementation choices against CONTEXT.md, implementatietoelichtingen,
-  and code; sharpens domain terminology and updates docs inline. Use proactively at the start
-  of non-trivial work—plans, design, architecture, refactors, new features, stelselgroep or
-  beleidsregel changes, VERA modeling, ambiguous requirements, warning/error behavior, or
-  when terminology or project boundaries are unclear. Also when user mentions grill, plan,
-  design, domain, interpretatie, or implementatiekeuze.
+  Scherpt een plan voor een wijziging in de woningwaardering aan door de gebruiker één vraag
+  tegelijk te interviewen en elk antwoord te toetsen aan wettekst, online beleidsboek,
+  implementatietoelichting, CONTEXT.md en code. Gebruik vóór de implementatie wanneer een taak
+  domeinlogica, puntberekening, waarschuwings- of foutgedrag of VERA-modellering wijzigt en de
+  interpretatie van de beleidsregel of de gewenste uitkomst nog niet vaststaat, of wanneer de
+  gebruiker vraagt om te grillen of een plan te toetsen. Niet voor typefouten, formatting,
+  dependency-updates, releases of fixes waarvan de uitkomst al vastligt.
 ---
 
-<what-to-do>
+<!-- Herkomst: afgeleid van grill-with-docs uit mattpocock/skills (MIT); wordt zelfstandig onderhouden. -->
 
-**Wanneer starten:** aan het begin van elke taak die domein, ontwerp of gedrag raakt—niet pas na implementatie. Bij twijfel: start met één verhelderende vraag in plaats van meteen code te schrijven.
+# Grill me with docs
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+Interview de gebruiker over het plan totdat jullie het eens zijn over wat er verandert, waarom, en op welke bron dat rust.
 
-Ask the questions one at a time, waiting for feedback on each question before continuing.
+## Kernregels
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+1. Stel één vraag tegelijk en wacht op het antwoord. Geef bij elke vraag je aanbevolen antwoord, met de bron waarop het rust.
+2. Stel elke vraag als meerkeuzevraag met twee tot vier concrete antwoorden, je aanbevolen antwoord eerst. Gebruik daarvoor de vragentool van je omgeving als die er is (`AskUserQuestion` in Claude Code, `AskQuestion` in Cursor). Zet het citaat en de link in je bericht vóór de vraag: in de opties passen ze niet.
+3. Zoek feiten zelf op: wat de code nu doet en wat wettekst, online beleidsboek of implementatietoelichting letterlijk zeggen. Stel daar geen vraag over.
+4. Leg beslissingen voor: de interpretatie van een beleidsregel, het gewenste gedrag, wat binnen de taak valt. Neem die niet zelf, ook niet wanneer de code één kant op wijst.
+5. Werk beslissingen af in volgorde van afhankelijkheid: eerst de keuze waar andere keuzes van afhangen.
+6. Schrijf geen code voordat de gebruiker het samengevatte plan heeft bevestigd.
 
-</what-to-do>
+## Toets elk antwoord
 
-<supporting-info>
+**Aan de domeintaal.** Wijkt een term af van `CONTEXT.md`, benoem dat direct. "Je noemt 'Oppervlakte van vertrekken' hier een stelselgroep, maar binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen' is het een subgroep. Welke bedoel je?" Kan een term meer dan één ding betekenen, vraag dan welke: "Je zegt 'gedeelde keuken'. Gedeeld met andere onzelfstandige woonruimten op hetzelfde adres, of met meerdere adressen? Dat bepaalt de deler."
 
-## Domain awareness
+**Aan de bronnen.** Volg de Domeinregels in `AGENTS.md` voor de volgorde van autoriteit en voor waar je elke bron vindt. Citeer de passage letterlijk met regelnummer of artikel en met de link naar de pagina waar de tekst staat, zodat de gebruiker op de tekst reageert en niet op jouw samenvatting.
 
-During codebase exploration, also look for existing documentation. In this repo, start with:
+**Aan de code.** Zegt de gebruiker hoe iets werkt, controleer of de code dat ook doet en leg een verschil voor: "Je zegt dat een zolder zonder vaste trap altijd 5 punten aftrek krijgt, maar de code past dat alleen toe wanneer de zolder een overige ruimte is (beleidsboek 2.2.2.3). Welke van de twee bedoel je?"
 
-- `CONTEXT.md` — gedeelde domeintaal en projectgrenzen
-- `README.md`, `docs/index.md`, `docs/voor-ontwikkelaars/criteriumstrategie.md` — opzet, criterium-id's, lookup-tabellen
-- `docs/implementatietoelichtingen/` — welke beleidsboekregels wel/niet geïmplementeerd zijn en waarom
-- `docs/voor-ontwikkelaars/` — ontwikkelaarsafspraken
-- `AGENTS.md` — agent-instructies en conventies
-- `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` — lokale XML-kopie om de wettekst te zoeken en citeren; verifieer daarna tegen https://wetten.overheid.nl/BWBR0003237/2026-01-01, de leidende bron
+**Aan een concreet geval.** Reken een woonruimte door die op de grens van de regel ligt, zoals een ruimte die door drie onzelfstandige woonruimten wordt gedeeld of een waarde precies op een drempel in een lookuptabel, en vraag of de uitkomst is wat de gebruiker verwacht.
 
-### File structure
+## Wanneer bronnen niet sluiten
 
-Most repos have a single context:
+- Spreken bronnen elkaar tegen, toon dan beide citaten en zeg welke volgens de volgorde van autoriteit leidend is.
+- Geven wettekst en online beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck` en leg de uitkomst voor. Lukt dat niet, vraag de gebruiker dan de tool te controleren en wacht op de uitkomst. Vul die uitkomst niet zelf in.
+- Kan VERA of het inputmodel de regel niet volledig dragen, zeg dat en leg de keuze voor: een modeluitbreiding, of een gedocumenteerde interpretatie.
 
-```
-/
-├── CONTEXT.md
-├── docs/
-│   └── adr/
-│       ├── 0001-event-sourced-orders.md
-│       └── 0002-postgres-for-write-model.md
-└── src/
-```
+## Afronden
 
-This repo uses `docs/implementatietoelichtingen/` for domain implementation decisions instead of (or alongside) ADRs. Prefer updating implementatietoelichtingen when a decision affects beleidsregel-interpretatie or implementatiestatus.
+Vat het plan samen wanneer er geen open beslissing meer is: wat er verandert, de bron met citaat, de geraakte stelselgroepen, de tests en de docs die mee moeten. Vraag om bevestiging. De sessie is klaar wanneer de gebruiker dat plan heeft bevestigd.
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives.
+## Vastleggen
 
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Stel de tekst voor en schrijf die na akkoord van de gebruiker:
 
-## During the session
-
-### Challenge against the glossary
-
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
-
-### Sharpen fuzzy language
-
-When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account' — do you mean the Customer or the User? Those are different things."
-
-### Discuss concrete scenarios
-
-When domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.
-
-### Cross-reference with code
-
-When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
-
-### Update CONTEXT.md inline
-
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
-
-Don't couple `CONTEXT.md` to implementation details. Only include terms that are meaningful to domain experts.
-
-### Update implementatietoelichtingen when relevant
-
-When a grilling session resolves how a beleidsboekregel should be interpreted or whether it is (fully) implementeerbaar, offer to update the relevant page in `docs/implementatietoelichtingen/`. Include bronverwijzing (beleidsboek/wettekst) and quote where possible.
-
-### Offer ADRs sparingly
-
-Only offer to create an ADR when all three are true:
-
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
-
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
-
-</supporting-info>
+- Een interpretatie van een beleidsregel of een wijziging in wat wel of niet is geïmplementeerd: de relevante pagina in `docs/implementatietoelichtingen/`, met bronverwijzing en citaat.
+- Een duurzaam verduidelijkte domeinterm: `CONTEXT.md`, volgens de werkafspraak onderaan dat bestand.
+- Een ontwikkelaarsafspraak: `docs/voor-ontwikkelaars/`.
