@@ -1,5 +1,4 @@
-from pathlib import Path
-
+from tests.input import badkamer
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     waardeer_sanitair,
@@ -13,17 +12,9 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
-INPUT = (
-    Path(__file__).parents[2]
-    / "data/zelfstandige_woonruimten/stelselgroepen/sanitair/input/douche.json"
-)
-
 
 def test_waardeer_sanitair_groepeert_per_ruimte():
-    with INPUT.open() as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-
-    ruimte = eenheid.ruimten[0]
+    ruimte = badkamer(Installatiesoort.douche)
     waarderingsgroep_builder = WaarderingsgroepBuilder(
         Woningwaarderingstelsel.zelfstandige_woonruimten,
         Woningwaarderingstelselgroep.sanitair,
