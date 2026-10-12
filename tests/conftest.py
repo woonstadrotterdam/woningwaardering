@@ -1,10 +1,19 @@
+from collections.abc import Callable, Iterable
 from pathlib import Path
+from warnings import WarningMessage
 
 import pytest
 
 from tests.peildatum import REFERENTIE_PEILDATUM
+from tests.testreferenties import (
+    maak_testreferentie,
+    pad_van_testreferentie,
+    vergelijk_of_werk_bij,
+)
+from tests.utils import assert_invarianten_van_groep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
+    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
@@ -12,9 +21,64 @@ BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "tests/data"
 
 
+def pytest_configure(config: pytest.Config) -> None:
+    config.addinivalue_line(
+        "markers",
+        "toelichting(tekst): waarom dit geval van een geparametriseerde waarderingstest "
+        "bestaat; de tekst komt in de testreferentie",
+    )
+
+
 @pytest.fixture()
 def peildatum():
     return REFERENTIE_PEILDATUM
+
+
+@pytest.fixture()
+def vergelijk_met_testreferentie(
+    request: pytest.FixtureRequest, recwarn: pytest.WarningsRecorder
+) -> Callable[..., None]:
+    """Vergelijk een waardering met de testreferentie van deze test.
+
+    De testreferentie bevat de docstring van de test, het rapport, de
+    waarschuwingen, de input als VERA-JSON en de output-JSON. Wijkt de
+    waardering af of ontbreekt de testreferentie, dan faalt de test. Bijwerken kan
+    alleen met `task genereer-test-output`.
+
+    Daarnaast gelden voor elke vergeleken waardering de invarianten uit
+    `assert_invarianten_van_groep`, en faalt de test bij een `UserWarning` die
+    niet met `pytest.warns` is opgevangen en meegegeven.
+    """
+    vergeleken = False
+
+    def _vergelijk(
+        eenheid: EenhedenEenheid,
+        groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        waarschuwingen: Iterable[WarningMessage] = (),
+    ) -> None:
+        nonlocal vergeleken
+        assert (
+            not vergeleken
+        ), "Roep vergelijk_met_testreferentie één keer per test aan."
+        vergeleken = True
+        waarschuwingen = list(waarschuwingen)
+        meegegeven = {str(w.message) for w in waarschuwingen}
+        onverwacht = [
+            str(w.message)
+            for w in recwarn
+            if issubclass(w.category, UserWarning) and str(w.message) not in meegegeven
+        ]
+        assert not onverwacht, (
+            "Onverwachte waarschuwing. Vang een verwachte waarschuwing op met "
+            f"pytest.warns en geef hem mee aan vergelijk_met_testreferentie: {onverwacht}"
+        )
+        assert_invarianten_van_groep(groep)
+        vergelijk_of_werk_bij(
+            pad_van_testreferentie(request.node),
+            maak_testreferentie(request.node, eenheid, groep, waarschuwingen),
+        )
+
+    return _vergelijk
 
 
 @pytest.fixture(

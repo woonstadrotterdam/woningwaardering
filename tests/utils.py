@@ -408,3 +408,58 @@ def assert_punten_afgerond_op_kwarten(
             assert (
                 remainder == 0.0
             ), f"Groep '{groep.criterium_groep.naam}' heeft punten {groep.punten} die niet zijn afgerond op kwarten"
+
+
+def assert_invarianten_van_groep(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> None:
+    """Controleer de eigenschappen die voor elke gewaardeerde stelselgroep gelden."""
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(groepen=[groep])
+    assert_unieke_criterium_ids(resultaat)
+    assert_som_bovenliggend_criterium(resultaat)
+    assert_punten_afgerond_op_kwarten(resultaat)
+    assert_punten_op_twee_decimalen(resultaat)
+
+
+def punten_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef de punten van elke waardering met punten, op naam van het criterium."""
+    punten: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in punten, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "punten_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        punten[naam] = waardering.punten
+    return punten
+
+
+def punten_per_bovenliggende(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str | None, dict[str, float]]:
+    """Geef de punten per waardering, gegroepeerd op de naam van het bovenliggende criterium.
+
+    Een waardering direct onder de stelselgroep staat onder de sleutel `None`.
+    """
+    namen = {
+        waardering.criterium.id: waardering.criterium.naam
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+    }
+    punten: dict[str | None, dict[str, float]] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        bovenliggende = waardering.criterium.bovenliggende_criterium
+        groepsnaam = namen[bovenliggende.id] if bovenliggende else None
+        naam = waardering.criterium.naam or ""
+        onderliggend = punten.setdefault(groepsnaam, {})
+        assert (
+            naam not in onderliggend
+        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        onderliggend[naam] = waardering.punten
+    return punten

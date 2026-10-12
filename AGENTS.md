@@ -64,11 +64,22 @@ uv run pre-commit run --all-files --hook-stage pre-push
 ```
 
 - Voeg passende tests toe bij nieuwe of gewijzigde code.
+- Lees [testing.md](docs/voor-ontwikkelaars/testing.md) voordat je een test schrijft of wijzigt: daar staat welke soort test je nodig hebt en hoe je hem opbouwt.
 - Spiegel de package-structuur waar praktisch: tests voor `woningwaardering/.../module.py` horen onder `tests/.../test_module.py`.
 - Laat testfuncties beginnen met `test_`.
-- Gebruik `tests/data/...` voor VERA-realistische inputmodellen en handmatig nagerekende verwachte output.
+- Gebruik `tests/data/...` voor VERA-realistische inputmodellen en handmatig nagerekende verwachte output, zolang een stelselgroep nog niet naar waarderingstests is omgezet.
 - Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
+
+### Verwachte output
+
+De verwachte output van de tests staat op drie plekken: de testreferenties van waarderingstests (`tests/**/testreferenties/*.md`), `tests/data/**/output/` en `tests/docs/output_json_*.json`. `task genereer-test-output` overschrijft ze alle drie. Daarna slaagt elke vergelijking, ook als de output fout is: een groene suite zegt dan alleen dat de verwachte output is meegeschoven, niet dat de code klopt.
+
+- Draai `task genereer-test-output` wanneer uit de taak blijkt dat de output gaat wijzigen (punten, namen, criterium-id's, rapport), zoals bij een bugfix voor verkeerde punten, of wanneer de gebruiker vooraf heeft gezegd dat de output mag wijzigen. Een nieuwe test heeft nog geen verwachte output en valt hier ook onder.
+- Bekijk daarna de diff: alleen de verwachte output die de taak hoort te raken is gewijzigd. Is er meer gewijzigd, zet die bestanden dan terug.
+- Wijkt een test af terwijl de taak geen outputwijziging voorziet: herstel de code en laat de verwachte output zoals hij was. Kom je er niet uit, laat de test dan rood en meld welke test afwijkt, wat er verschilt en wat volgens jou de oorzaak is.
+- `task genereer-test-output` is de enige schrijver van verwachte output; bewerk die bestanden niet met de hand. Een bestand verwijderen mag alleen wanneer de bijbehorende test of het bijbehorende model bewust is verwijderd of hernoemd.
+- Meld in je eindbericht en in de PR-beschrijving welke verwachte output is gewijzigd en waarom.
 
 ## Pull Requests
 
