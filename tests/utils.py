@@ -1,12 +1,9 @@
 import difflib
 from collections import Counter
-from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
-from pathlib import Path
 from typing import Iterator
 
-import pytest
 from pytest import fail
 
 from woningwaardering.rapport import naar_rapport
@@ -128,25 +125,6 @@ def assert_output_model(
     assert_punten_op_twee_decimalen(resultaat)
 
 
-def laad_specifiek_input_en_output_model(
-    module_path: Path,
-    output_json_path: Path,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    file_name = output_json_path.name
-    input_path = module_path / f"input/{file_name}"
-    with open(input_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    with open(output_json_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
-
-
 def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterator[str]:
     green = "\x1b[92m"
     red = "\x1b[91m"
@@ -160,40 +138,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
         else diff
         for diff in diffresult
     )
-
-
-@dataclass
-class WarningConfig:
-    file: str
-    warnings: dict[type[Warning], str]
-
-
-def assert_stelselgroep_warnings(
-    warning_config: WarningConfig, peildatum: date, stelselgroep_class: Stelselgroep
-):
-    """
-    Generieke functie om warnings voor stelselgroepen te testen
-
-    Args:
-        warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
-        peildatum (date): peildatum waarop de stelselgroep wordt gewaardeerd
-        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
-    """
-    with open(warning_config.file, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    with pytest.warns() as records:
-        stelselgroep = stelselgroep_class(peildatum=peildatum)
-        stelselgroep.waardeer(eenheid_input)
-
-        warning_message = [(r.category, str(r.message)) for r in records]
-        for warning_type, warning_message in warning_config.warnings.items():
-            assert any(
-                [
-                    warning_type == r.category and warning_message in str(r.message)
-                    for r in records
-                ]
-            ), f"Geen {warning_type} met message '{warning_message}' geraised"
 
 
 def assert_stelselgroep_output(
@@ -219,56 +163,6 @@ def assert_stelselgroep_output(
         eenheid_output,
         stelselgroep.stelselgroep,
     )
-
-
-def assert_stelselgroep_specifiek_output(
-    specifieke_input_en_output_model: tuple[
-        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
-    ],
-    peildatum: date,
-    stelselgroep_class: Stelselgroep,
-):
-    """
-    Generieke functie om specifieke output voor stelselgroepen te testen
-
-    Args:
-        specifieke_input_en_output_model (tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]): Tuple van input en verwachte output
-        peildatum (date): peildatum
-        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
-    """
-    eenheid_input, eenheid_output = specifieke_input_en_output_model
-    stelselgroep = stelselgroep_class(peildatum=peildatum)
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        stelselgroep.stelselgroep,
-    )
-
-
-def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
-    """
-    Factory functie die een pytest fixture maakt voor het laden van specifieke test cases.
-
-    Args:
-        base_path (Path): Pad naar de directory waarin de test file zich bevindt
-
-    Returns:
-        pytest.fixture: Een pytest fixture die een tuple van input en output model retourneert
-    """
-
-    @pytest.fixture(params=[str(p) for p in (base_path / "output").rglob("*.json")])
-    def specifieke_input_en_output_model(request):
-        current_file_path = Path(request.fspath).parent
-        output_file_path = request.param
-        return laad_specifiek_input_en_output_model(
-            current_file_path, Path(output_file_path)
-        )
-
-    return specifieke_input_en_output_model
 
 
 def assert_unieke_criterium_ids(
