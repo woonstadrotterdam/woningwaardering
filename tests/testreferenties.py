@@ -24,7 +24,7 @@ from woningwaardering.vera.bvg.generated import (
 
 # Alleen `task genereer-test-output` geeft deze optie mee aan pytest. Zonder de
 # optie vergelijkt pytest en schrijft het nooit.
-BIJWERKOPTIE = "--werk-testreferenties-bij"
+BIJWERKOPTIE = "--update-testreferenties"
 BIJWERKOPDRACHT = "task genereer-test-output"
 
 # De map met testreferenties, naast de testmodule.

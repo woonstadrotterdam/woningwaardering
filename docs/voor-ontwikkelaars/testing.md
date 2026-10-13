@@ -267,7 +267,7 @@ De verwachte output van de tests staat op drie plekken: de testreferenties, `tes
 task genereer-test-output
 ```
 
-De task draait `scripts/genereer_test_output.py` en daarna de tests met de optie `--werk-testreferenties-bij`, en overschrijft daarbij alle verwachte output. Zonder die optie vergelijkt `pytest` alleen.
+De task draait `scripts/genereer_test_output.py` en daarna de tests met de optie `--update-testreferenties`, en overschrijft daarbij alle verwachte output. Zonder die optie vergelijkt `pytest` alleen.
 
 Na het bijwerken slaagt elke vergelijking met de verwachte output, ook als de nieuwe output fout is. Een groene suite zegt dan niet dat de code klopt, alleen dat de verwachte output is meegeschoven. Werk daarom alleen bij wanneer je vooraf weet dat de output gaat wijzigen. Wanneer dat zo is, en wat je doet als een test afwijkt terwijl de taak dat niet voorzag, staat in `AGENTS.md` onder "Verwachte output". Die afspraken gelden voor agents en voor ontwikkelaars.
 

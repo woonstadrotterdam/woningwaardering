@@ -24,7 +24,7 @@ tasks:
     desc: Genereer alle verwachte output van de tests, inclusief testreferenties (overschrijven); beoordeel daarna de diff
     cmds:
       - uv run python scripts/genereer_test_output.py
-      - uv run python -m pytest --no-cov --werk-testreferenties-bij
+      - uv run python -m pytest --no-cov --update-testreferenties
 
   genereer-corop-data:
     desc: Genereer COROP data
