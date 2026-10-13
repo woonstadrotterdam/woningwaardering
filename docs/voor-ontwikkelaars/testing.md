@@ -161,7 +161,7 @@ De volledige tekst van elke meegegeven waarschuwing komt in de testreferentie. E
 
 ### Meerdere gevallen in één test
 
-Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen ruimte, zet de ruimten op volgorde van punten, van laag naar hoog, en vergelijk de hele uitkomst met `punten_per_bovenliggende`. Nummer ruimten van dezelfde detailsoort (`Badkamer1`, `Badkamer2`): de naam zegt dan in wat voor ruimte de voorziening staat, en het geval lees je af aan de voorziening zelf.
+Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen ruimte en vergelijk de hele uitkomst met `punten_per_bovenliggende`. Nummer ruimten van dezelfde detailsoort (`Badkamer1`, `Badkamer2`): de naam zegt dan in wat voor ruimte de voorziening staat, en het geval lees je af aan de voorziening zelf.
 
 ```python
 eenheid = EenhedenEenheid(
