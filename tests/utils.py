@@ -512,3 +512,21 @@ def aantal_per_bovenliggende(
         ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
         onderliggend[naam] = waardering.aantal
     return aantallen
+
+
+def zolders_met_aftrek(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> list[str]:
+    """Geef de id's van de zolderruimten met een aftrek voor een zolder zonder vaste trap.
+
+    De aftrek staat direct onder de stelselgroep en heet voor elke zolderruimte
+    hetzelfde; alleen het criterium-id noemt de zolderruimte.
+    """
+    achtervoegsel = "__correctie_zolder_zonder_vaste_trap"
+    return [
+        waardering.criterium.id.removesuffix(achtervoegsel).rsplit("__", 1)[-1]
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+        and waardering.criterium.id is not None
+        and waardering.criterium.id.endswith(achtervoegsel)
+    ]

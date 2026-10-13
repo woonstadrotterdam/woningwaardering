@@ -7,14 +7,12 @@ from tests.utils import (
     aantal_per_naam,
     assert_stelselgroep_output,
     punten_per_naam,
+    zolders_met_aftrek,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanOverigeRuimten,
 )
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingGroep,
-)
+from woningwaardering.vera.bvg.generated import EenhedenEenheid
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
@@ -25,24 +23,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def oppervlakte_van_overige_ruimten(peildatum):
     return OppervlakteVanOverigeRuimten(peildatum=peildatum)
-
-
-def zolders_met_aftrek(
-    groep: WoningwaarderingResultatenWoningwaarderingGroep,
-) -> list[str]:
-    """Geef de id's van de zolderruimten met een aftrek voor een zolder zonder vaste trap.
-
-    De aftrek staat direct onder de stelselgroep en heet voor elke zolderruimte
-    hetzelfde; alleen het criterium-id noemt de zolderruimte.
-    """
-    achtervoegsel = "__correctie_zolder_zonder_vaste_trap"
-    return [
-        waardering.criterium.id.removesuffix(achtervoegsel).rsplit("__", 1)[-1]
-        for waardering in groep.woningwaarderingen or []
-        if waardering.criterium is not None
-        and waardering.criterium.id is not None
-        and waardering.criterium.id.endswith(achtervoegsel)
-    ]
 
 
 def test_OppervlakteVanOverigeRuimten_output(
