@@ -28,7 +28,7 @@ Na wijzigingen in code of tests draai je ook de pre-commit hooks (dezelfde set a
 
 Nieuwe of gewijzigde code lever je op met passende tests. Er zijn twee soorten:
 
-| | Waarderingtest | Functietest |
+| | Waarderingtest | Unittest |
 | --- | --- | --- |
 | Vraag | Kent de stelselgroep de punten toe die de beleidsregel voorschrijft? | Doet deze functie wat hij belooft? |
 | Roept aan | een stelselgroep: `Sanitair(...).waardeer(eenheid)` | de functie zelf |
@@ -37,7 +37,7 @@ Nieuwe of gewijzigde code lever je op met passende tests. Er zijn twee soorten:
 
 Een beleidsregel test je met een waarderingstest: de test waardeert een stelselgroep en controleert de punten die de beleidsregel toekent.
 
-Een functietest is bedoeld voor een functie die op zichzelf staat: wat hij teruggeeft volgt uit zijn argumenten, zonder dat je een stelselgroep hoeft te waarderen. Voorbeelden zijn `rond_af_op_kwart` en `classificeer_ruimte`.
+Een unittest is bedoeld voor een functie die op zichzelf staat: wat hij teruggeeft volgt uit zijn argumenten, zonder dat je een stelselgroep hoeft te waarderen. Voorbeelden zijn `rond_af_op_kwart` en `classificeer_ruimte`.
 
 Een privéfunctie van een stelselgroep test je via een waarderingstest: die blijft geldig wanneer de functie wordt herschreven, en vergelijkt de output met een testreferentie. Test een privéfunctie alleen rechtstreeks wanneer het scenario via de stelselgroep onevenredig veel input vraagt. `_cap_punten` van de stelselgroep punten voor de WOZ-waarde is zo'n geval: de uitkomst hangt af van de punten van alle andere stelselgroepen.
 
@@ -50,7 +50,7 @@ Nog niet elke stelselgroep is omgezet naar waarderingstests. Een omgezette stels
 | Een beleidsregel binnen één stelselgroep die is omgezet | Een [waarderingstest](#een-waarderingstest-schrijven) |
 | Een beleidsregel binnen één stelselgroep die nog niet is omgezet | Een JSON-model in de map van de stelselgroep; zie [JSON-modellen](#model-op-stelselniveau-of-test-op-de-stelselgroep) |
 | Een beleidsregel die over meer dan één stelselgroep gaat | Een JSON-model op stelselniveau; zie [JSON-modellen](#model-op-stelselniveau-of-test-op-de-stelselgroep) |
-| Een functie die op zichzelf staat | Een [functietest](#een-functietest-schrijven) |
+| Een functie die op zichzelf staat | Een [unittest](#een-unittest-schrijven) |
 
 ## Een waarderingstest schrijven
 
@@ -226,9 +226,9 @@ def test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel(
 
 Geef elk geval een id met `pytest.param(..., id="...")`, als letterlijke tekst. De id noemt de situatie (`precies_1m`), niet de uitkomst; de verwachting staat in de kolom ernaast. De id wordt onderdeel van de bestandsnaam van de testreferentie en mag daarom alleen letters, cijfers, `_` en `-` bevatten.
 
-## Een functietest schrijven
+## Een unittest schrijven
 
-Een functietest roept de functie rechtstreeks aan en assert de uitkomst, zoals `tests/stelsels/utils/test_rond_af_op_kwart.py`. Hij heeft geen testreferentie en gebruikt `vergelijk_met_testreferentie` dus niet.
+Een unittest roept de functie rechtstreeks aan en assert de uitkomst, zoals `tests/stelsels/utils/test_rond_af_op_kwart.py`. Hij heeft geen testreferentie en gebruikt `vergelijk_met_testreferentie` dus niet.
 
 ## Testreferenties
 
