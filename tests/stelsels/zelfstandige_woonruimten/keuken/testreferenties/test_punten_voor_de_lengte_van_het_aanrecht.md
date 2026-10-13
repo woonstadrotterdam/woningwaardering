@@ -1,0 +1,152 @@
+# test_punten_voor_de_lengte_van_het_aanrecht
+
+Een aanrecht krijgt vanaf 1 meter 4 punten en vanaf 2 meter 7 punten.
+
+Het beleidsboek (2.5.2) geeft de 7 punten aan een aanrecht "Langer dan 2
+meter". De package volgt de wettekst en geeft ze ook bij precies 2 meter.
+
+Bron: wettekst, Bijlage I onder A, onderdeel 5.1: "1 tot 2 m 4 punten" en
+"2 m en meer 7 punten".
+
+## Rapport
+
+```text
+KEUKEN
+  Keuken1
+    - Lengte aanrecht                                              1000.00 mm     4.00 pt
+  Keuken2
+    - Lengte aanrecht                                              2000.00 mm     7.00 pt
+                                                                                ------
+  Totaal                                                                         11.00 pt
+```
+
+## Waarschuwingen
+
+Geen.
+
+## Input
+
+```json
+{
+  "ruimten": [
+    {
+      "id": "keuken1",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken1",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1000.0
+        }
+      ]
+    },
+    {
+      "id": "keuken2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken2",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2000.0
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Output
+
+```json
+{
+  "criteriumGroep": {
+    "stelsel": {
+      "code": "ZEL",
+      "naam": "Zelfstandige woonruimten"
+    },
+    "stelselgroep": {
+      "code": "KEU",
+      "naam": "Keuken"
+    }
+  },
+  "punten": 11.0,
+  "woningwaarderingen": [
+    {
+      "criterium": {
+        "id": "keuken__keuken1",
+        "naam": "Keuken1"
+      }
+    },
+    {
+      "aantal": 1000.0,
+      "criterium": {
+        "id": "keuken__keuken1__lengte_aanrecht_aanrecht",
+        "naam": "Lengte aanrecht",
+        "bovenliggendeCriterium": {
+          "id": "keuken__keuken1"
+        },
+        "meeteenheid": {
+          "code": "MIL",
+          "naam": "Millimeter"
+        }
+      },
+      "punten": 4.0
+    },
+    {
+      "criterium": {
+        "id": "keuken__keuken2",
+        "naam": "Keuken2"
+      }
+    },
+    {
+      "aantal": 2000.0,
+      "criterium": {
+        "id": "keuken__keuken2__lengte_aanrecht_aanrecht",
+        "naam": "Lengte aanrecht",
+        "bovenliggendeCriterium": {
+          "id": "keuken__keuken2"
+        },
+        "meeteenheid": {
+          "code": "MIL",
+          "naam": "Millimeter"
+        }
+      },
+      "punten": 7.0
+    }
+  ]
+}
+```
