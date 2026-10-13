@@ -7,7 +7,6 @@ docs/voor-ontwikkelaars/testing.md voor de afspraken.
 import ast
 import difflib
 import inspect
-import os
 import re
 from collections.abc import Iterable
 from pathlib import Path
@@ -23,9 +22,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingGroep,
 )
 
-# Alleen `task genereer-test-output` zet deze omgevingsvariabele. Zonder de
-# variabele vergelijkt pytest en schrijft het nooit.
-BIJWERKEN = "WERK_TESTREFERENTIES_BIJ"
+# Alleen `task genereer-test-output` geeft deze optie mee aan pytest. Zonder de
+# optie vergelijkt pytest en schrijft het nooit.
+BIJWERKOPTIE = "--werk-testreferenties-bij"
 BIJWERKOPDRACHT = "task genereer-test-output"
 
 # De map met testreferenties, naast de testmodule.
@@ -117,9 +116,9 @@ def maak_testreferentie(
     )
 
 
-def vergelijk_of_werk_bij(pad: Path, testreferentie: str) -> None:
+def vergelijk_of_werk_bij(pad: Path, testreferentie: str, *, bijwerken: bool) -> None:
     """Vergelijk de testreferentie met het bestand, of schrijf het bij het bijwerken."""
-    if os.environ.get(BIJWERKEN) == "1":
+    if bijwerken:
         pad.parent.mkdir(parents=True, exist_ok=True)
         pad.write_text(testreferentie)
         return

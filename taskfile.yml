@@ -22,11 +22,9 @@ tasks:
     ignore_errors: yes
   genereer-test-output:
     desc: Genereer alle verwachte output van de tests, inclusief testreferenties (overschrijven); beoordeel daarna de diff
-    env:
-      WERK_TESTREFERENTIES_BIJ: "1"
     cmds:
       - uv run python scripts/genereer_test_output.py
-      - uv run python -m pytest --no-cov
+      - uv run python -m pytest --no-cov --werk-testreferenties-bij
 
   genereer-corop-data:
     desc: Genereer COROP data

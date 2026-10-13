@@ -6,6 +6,7 @@ import pytest
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from tests.testreferenties import (
+    BIJWERKOPTIE,
     maak_testreferentie,
     pad_van_testreferentie,
     vergelijk_of_werk_bij,
@@ -19,6 +20,15 @@ from woningwaardering.vera.bvg.generated import (
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "tests/data"
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption(
+        BIJWERKOPTIE,
+        action="store_true",
+        help="Schrijf de testreferenties in plaats van ermee te vergelijken. "
+        "Gebruik hiervoor `task genereer-test-output`.",
+    )
 
 
 def pytest_configure(config: pytest.Config) -> None:
@@ -76,6 +86,7 @@ def vergelijk_met_testreferentie(
         vergelijk_of_werk_bij(
             pad_van_testreferentie(request.node),
             maak_testreferentie(request.node, eenheid, groep, waarschuwingen),
+            bijwerken=request.config.getoption(BIJWERKOPTIE),
         )
 
     return _vergelijk
