@@ -228,7 +228,7 @@ Een functietest roept de functie rechtstreeks aan en assert de uitkomst, zoals `
 
 Een testreferentie is een Markdown-bestand in de map `testreferenties/` naast de testmodule, met de naam van de test: `test_meerdere_kastruimtes_tellen_samen_als_een.md`, of `test_naam[id].md` voor een geval uit een tabel. Het bestand bevat de docstring van de test, het rapport, de waarschuwingen, de input als VERA-JSON en de output-JSON. Van de input staan alleen de velden erin die de test invult, niet de standaardwaarden van het model.
 
-De input staat erbij omdat de functies uit `tests/input.py` velden invullen die in de test niet te zien zijn. Verandert iemand zo'n functie, dan laat de testreferentie per test zien dat de input is gewijzigd.
+De input staat erbij omdat de test maar een deel van het inputmodel laat zien. De functies uit `tests/input.py` vullen ook velden van de `EenhedenEenheid` die niet in de test staan, zoals de id, de naam en de oppervlakte van een ruimte. Verandert iemand zo'n functie, dan laat de testreferentie per test zien dat de input is gewijzigd.
 
 Een testreferentie heeft één schrijver: de fixture `vergelijk_met_testreferentie`, en die schrijft alleen tijdens `task genereer-test-output`. Bewerk het bestand nooit met de hand. De map is uitgesloten van `prettier`.
 
