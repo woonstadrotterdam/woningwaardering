@@ -268,24 +268,24 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
             ruimte(
                 Ruimtedetailsoort.zoldervertrek,
                 naam="Zoldervertrek1",
-                elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
-            ),
-            ruimte(
-                Ruimtedetailsoort.zoldervertrek,
-                naam="Zoldervertrek2",
                 elementen=[element(Bouwkundigelementdetailsoort.trap)],
             ),
             # Zonder trap als bouwkundig element: de detailsoort gaat uit van
             # een vaste trap.
-            ruimte(Ruimtedetailsoort.zoldervertrek, naam="Zoldervertrek3"),
+            ruimte(Ruimtedetailsoort.zoldervertrek, naam="Zoldervertrek2"),
+            ruimte(
+                Ruimtedetailsoort.zoldervertrek,
+                naam="Zoldervertrek3",
+                elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
+            ),
         ]
     )
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
     assert oppervlakte_per_naam(groep) == {
+        "Zoldervertrek1": 10.0,
         "Zoldervertrek2": 10.0,
-        "Zoldervertrek3": 10.0,
     }
     assert groep.punten == 20.0
     vergelijk_met_testreferentie(eenheid, groep)

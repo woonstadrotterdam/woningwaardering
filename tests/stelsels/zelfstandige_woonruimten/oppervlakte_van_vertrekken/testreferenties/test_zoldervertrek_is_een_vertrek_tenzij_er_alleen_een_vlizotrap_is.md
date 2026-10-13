@@ -14,8 +14,8 @@ detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
 
 ```text
 OPPERVLAKTE VAN VERTREKKEN
+  Zoldervertrek1                                                     10.00 m²
   Zoldervertrek2                                                     10.00 m²
-  Zoldervertrek3                                                     10.00 m²
                                                                     ------      ------
   Totaal                                                             20.00 m²    20.00 pt
 ```
@@ -43,15 +43,15 @@ Geen.
       "oppervlakte": 10.0,
       "bouwkundigeElementen": [
         {
-          "id": "vlizotrap",
-          "naam": "Vlizotrap",
+          "id": "trap",
+          "naam": "Trap",
           "soort": {
             "code": "VOO",
             "naam": "Voorziening"
           },
           "detailSoort": {
-            "code": "VTR",
-            "naam": "Vlizotrap"
+            "code": "TRA",
+            "naam": "Trap"
           }
         }
       ]
@@ -67,21 +67,7 @@ Geen.
         "naam": "Zoldervertrek"
       },
       "naam": "Zoldervertrek2",
-      "oppervlakte": 10.0,
-      "bouwkundigeElementen": [
-        {
-          "id": "trap",
-          "naam": "Trap",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "TRA",
-            "naam": "Trap"
-          }
-        }
-      ]
+      "oppervlakte": 10.0
     },
     {
       "id": "zoldervertrek3",
@@ -94,7 +80,21 @@ Geen.
         "naam": "Zoldervertrek"
       },
       "naam": "Zoldervertrek3",
-      "oppervlakte": 10.0
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "vlizotrap",
+          "naam": "Vlizotrap",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "VTR",
+            "naam": "Vlizotrap"
+          }
+        }
+      ]
     }
   ]
 }
@@ -119,8 +119,8 @@ Geen.
     {
       "aantal": 10.0,
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__zoldervertrek2",
-        "naam": "Zoldervertrek2",
+        "id": "oppervlakte_van_vertrekken__zoldervertrek1",
+        "naam": "Zoldervertrek1",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
@@ -130,8 +130,8 @@ Geen.
     {
       "aantal": 10.0,
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__zoldervertrek3",
-        "naam": "Zoldervertrek3",
+        "id": "oppervlakte_van_vertrekken__zoldervertrek2",
+        "naam": "Zoldervertrek2",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
