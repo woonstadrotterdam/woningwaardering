@@ -131,6 +131,13 @@ Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten
 assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 7.0}
 ```
 
+In een stelselgroep waarin een waardering geen eigen punten heeft, zoals de oppervlakte van vertrekken, gebruik je `aantal_per_naam(groep)` en `aantal_per_bovenliggende(groep)`. Die geven het aantal (daar de oppervlakte in m²) in plaats van de punten; het totaal staat op de stelselgroep en krijgt een eigen assert:
+
+```python
+assert aantal_per_naam(groep) == {"Slaapkamer2": 4.0}
+assert groep.punten == 4.0
+```
+
 Schrijf de naam van een waardering zoals je de input schrijft. Is het de naam van een referentiedata-object, gebruik dan dat object: `Installatiesoort.kastruimte.naam`, niet `"Kastruimte"`. Een naam die de package zelf samenstelt, zoals `"Max 0.75 punten voor Kastruimte"`, schrijf je als tekst, zoals hij in het rapport staat. Dat geldt ook voor een naam die je in de test zelf als tekst meegeeft, zoals `"Badkamer1"`.
 
 Bereken de verwachte punten zelf uit de bron en neem ze niet over uit de output van de code, zodat de test de beleidsregel controleert en niet de code.

@@ -463,3 +463,52 @@ def punten_per_bovenliggende(
         ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
         onderliggend[naam] = waardering.punten
     return punten
+
+
+def aantal_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef het aantal van elke waardering met een aantal, op naam van het criterium.
+
+    Bedoeld voor stelselgroepen waarin een waardering geen eigen punten heeft,
+    zoals de oppervlakte van vertrekken: daar is het aantal de oppervlakte in m²
+    en staan de punten op de stelselgroep (`groep.punten`).
+    """
+    aantallen: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in aantallen, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "aantal_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        aantallen[naam] = waardering.aantal
+    return aantallen
+
+
+def aantal_per_bovenliggende(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str | None, dict[str, float]]:
+    """Geef het aantal per waardering, gegroepeerd op de naam van het bovenliggende criterium.
+
+    Een waardering direct onder de stelselgroep staat onder de sleutel `None`.
+    """
+    namen = {
+        waardering.criterium.id: waardering.criterium.naam
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+    }
+    aantallen: dict[str | None, dict[str, float]] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        bovenliggende = waardering.criterium.bovenliggende_criterium
+        groepsnaam = namen[bovenliggende.id] if bovenliggende else None
+        naam = waardering.criterium.naam or ""
+        onderliggend = aantallen.setdefault(groepsnaam, {})
+        assert (
+            naam not in onderliggend
+        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        onderliggend[naam] = waardering.aantal
+    return aantallen

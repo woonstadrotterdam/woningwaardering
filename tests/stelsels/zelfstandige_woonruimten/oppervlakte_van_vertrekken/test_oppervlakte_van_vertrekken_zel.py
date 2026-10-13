@@ -3,14 +3,14 @@
 import pytest
 
 from tests.input import element, ruimte
-from tests.utils import assert_stelselgroep_output
+from tests.utils import (
+    aantal_per_naam,
+    assert_stelselgroep_output,
+)
 from woningwaardering.stelsels.zelfstandige_woonruimten import (
     OppervlakteVanVertrekken,
 )
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingGroep,
-)
+from woningwaardering.vera.bvg.generated import EenhedenEenheid
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     Ruimtedetailsoort,
@@ -21,26 +21,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def oppervlakte_van_vertrekken(peildatum):
     return OppervlakteVanVertrekken(peildatum=peildatum)
-
-
-def oppervlakte_per_naam(
-    groep: WoningwaarderingResultatenWoningwaarderingGroep,
-) -> dict[str, float]:
-    """Geef de oppervlakte in m² van elk gewaardeerd vertrek, op naam van het criterium.
-
-    Een vertrek krijgt in deze stelselgroep geen eigen punten: de punten volgen
-    uit de opgetelde oppervlakte en staan op de stelselgroep (`groep.punten`).
-    """
-    oppervlakten: dict[str, float] = {}
-    for waardering in groep.woningwaarderingen or []:
-        if waardering.aantal is None or waardering.criterium is None:
-            continue
-        naam = waardering.criterium.naam or ""
-        assert (
-            naam not in oppervlakten
-        ), f"De naam '{naam}' komt meer dan één keer voor."
-        oppervlakten[naam] = waardering.aantal
-    return oppervlakten
 
 
 def test_OppervlakteVanVertrekken_output(
@@ -78,7 +58,7 @@ def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_vertrekken(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {
+    assert aantal_per_naam(groep) == {
         Ruimtedetailsoort.woonkamer.naam: 15.49,
         Ruimtedetailsoort.keuken.naam: 11.24,
     }
@@ -106,7 +86,7 @@ def test_vertrek_moet_minimaal_4m2_groot_zijn(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {"Slaapkamer2": 4.0}
+    assert aantal_per_naam(groep) == {"Slaapkamer2": 4.0}
     assert groep.punten == 4.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -129,7 +109,7 @@ def test_keuken_en_badkamer_zijn_ook_onder_4m2_een_vertrek(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {
+    assert aantal_per_naam(groep) == {
         Ruimtedetailsoort.keuken.naam: 2.0,
         Ruimtedetailsoort.badkamer_met_toilet.naam: 2.0,
     }
@@ -182,7 +162,7 @@ def test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {"Slaapkamer (+1 kast)": oppervlakte_met_kast}
+    assert aantal_per_naam(groep) == {"Slaapkamer (+1 kast)": oppervlakte_met_kast}
     assert groep.punten == 4.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -220,7 +200,7 @@ def test_keuken_aangeleverd_als_overige_ruimte_is_een_vertrek(
     with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
         groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {Ruimtedetailsoort.keuken.naam: 1.0}
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.keuken.naam: 1.0}
     assert groep.punten == 1.0
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
@@ -242,7 +222,7 @@ def test_schuur_aangeleverd_als_vertrek_is_een_vertrek(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {Ruimtedetailsoort.schuur.naam: 6.0}
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.schuur.naam: 6.0}
     assert groep.punten == 6.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -283,7 +263,7 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {
+    assert aantal_per_naam(groep) == {
         "Zoldervertrek1": 10.0,
         "Zoldervertrek2": 10.0,
     }
@@ -318,6 +298,6 @@ def test_zolder_is_nooit_een_vertrek(
     with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
         groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert oppervlakte_per_naam(groep) == {}
+    assert aantal_per_naam(groep) == {}
     assert groep.punten == 0.0
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
