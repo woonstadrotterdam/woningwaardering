@@ -1,4 +1,8 @@
 {
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
+  },
   "bouwjaar": 1981,
   "klimaatbeheersing": [
     {

@@ -1,23 +1,13 @@
 {
-  "bouwjaar": 1912,
-  "renovatie": {
-    "omschrijving": "hoogniveau renovatie",
-    "datum": "2022-01-01",
-    "bedragInvestering": 10000
+  "woningwaarderingstelsel": {
+    "code": "ZEL",
+    "naam": "Zelfstandige woonruimte"
   },
+  "bouwjaar": 1981,
   "klimaatbeheersing": [
     {
       "code": "IND",
       "naam": "Individueel"
-    }
-  ],
-  "oppervlakten": [
-    {
-      "soort": {
-        "code": "GTZ",
-        "naam": "Gebruiksoppervlakte thermische zone"
-      },
-      "waarde": "72.0"
     }
   ],
   "adres": {
@@ -28,10 +18,6 @@
     "woonplaats": {
       "naam": "ROTTERDAM"
     }
-  },
-  "adresseerbaarObjectBasisregistratie": {
-    "id": "0599010000320510",
-    "bagIdentificatie": "0599010000320510"
   },
   "panden": [
     {
@@ -44,15 +30,15 @@
   "wozEenheden": [
     {
       "waardepeildatum": "2022-01-01",
-      "vastgesteldeWaarde": 219999
+      "vastgesteldeWaarde": 597000
     },
     {
       "waardepeildatum": "2023-01-01",
-      "vastgesteldeWaarde": 239999
+      "vastgesteldeWaarde": 653900
     },
     {
       "waardepeildatum": "2024-01-01",
-      "vastgesteldeWaarde": 259999
+      "vastgesteldeWaarde": 713900
     }
   ],
   "energieprestaties": [
@@ -65,21 +51,29 @@
         "code": "DEF",
         "naam": "Definitief"
       },
-      "begindatum": "2021-02-23",
-      "einddatum": "2027-02-23",
-      "registratiedatum": "2021-02-23T09:55:37+01:00",
+      "begindatum": "2021-03-27",
+      "einddatum": "2031-03-27",
+      "registratiedatum": "2021-03-27T14:51:32.980000+01:00",
       "label": {
-        "code": "A++++",
-        "naam": "A++++"
+        "code": "A",
+        "naam": "A"
       },
-      "waarde": "1.48"
+      "waarde": "170"
     }
   ],
-  "gebruiksoppervlakte": 71,
+  "oppervlakten": [
+    {
+      "soort": {
+        "code": "GTZ",
+        "naam": "Gebruiksoppervlakte thermische zone"
+      },
+      "waarde": "82.77"
+    }
+  ],
   "monumenten": [],
   "ruimten": [
     {
-      "id": "Space_82124154",
+      "id": "Space_756353",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -101,65 +95,7 @@
       }
     },
     {
-      "id": "Space_82123527",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "TEC",
-        "naam": "Technische ruimte"
-      },
-      "naam": "Technische ruimte",
-      "inhoud": 0.89856,
-      "oppervlakte": 0.3456,
-      "verwarmd": false,
-      "afsluitbaar": false,
-      "bouwkundigeElementen": [
-        {
-          "id": "Ketel_82123536",
-          "idBimmodel": "2k22N_pdTCYeGXB4k1S$ti",
-          "naam": "Ketel",
-          "soort": {
-            "code": "VER",
-            "naam": "Verwarming"
-          },
-          "detailSoort": {
-            "code": "VTO",
-            "naam": "Verwarmingstoestellen"
-          },
-          "extraAttributen": {
-            "ifcSoort": "IfcBoiler"
-          }
-        }
-      ],
-      "bouwlaag": {
-        "nummer": "01",
-        "omschrijving": "eerste verdieping"
-      }
-    },
-    {
-      "id": "Space_82123555",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimtes"
-      },
-      "detailSoort": {
-        "code": "SCH",
-        "naam": "Schacht"
-      },
-      "naam": "Schacht",
-      "inhoud": 0.6566,
-      "oppervlakte": 0.2345,
-      "verwarmd": false,
-      "afsluitbaar": false,
-      "bouwlaag": {
-        "nummer": "01",
-        "omschrijving": "eerste verdieping"
-      }
-    },
-    {
-      "id": "Space_82123416",
+      "id": "Space_166598",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -175,8 +111,6 @@
       "afsluitbaar": false,
       "bouwkundigeElementen": [
         {
-          "id": "Douche_82123432",
-          "idBimmodel": "13pwBguB9DqgURg72nn7P4",
           "naam": "Douche",
           "soort": {
             "code": "SAN",
@@ -191,8 +125,6 @@
           }
         },
         {
-          "id": "Wastafel_82123438",
-          "idBimmodel": "13pwBguB9DqgURg72nn7Sv",
           "naam": "Wastafel",
           "soort": {
             "code": "SAN",
@@ -213,7 +145,7 @@
       }
     },
     {
-      "id": "Space_82123569",
+      "id": "Space_913364",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -227,26 +159,9 @@
       "oppervlakte": 9.5565,
       "verwarmd": true,
       "afsluitbaar": true,
-      "bouwkundigeElementen": [
-        {
-          "id": "Aanrecht_82123576",
-          "idBimmodel": "1xBRbJ4wfBAhSRsKl9Fn1h",
-          "naam": "Aanrecht",
-          "omschrijving": "Aanrecht in Keuken",
-          "soort": {
-            "code": "KEU",
-            "naam": "Keuken voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 2100
-        }
-      ],
+      "bouwkundigeElementen": [],
       "verbondenRuimten": [
         {
-          "id": "Space_82123559",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -266,7 +181,6 @@
           }
         },
         {
-          "id": "Space_82123527",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -282,8 +196,6 @@
           "afsluitbaar": false,
           "bouwkundigeElementen": [
             {
-              "id": "Ketel_82123536",
-              "idBimmodel": "2k22N_pdTCYeGXB4k1S$ti",
               "naam": "Ketel",
               "soort": {
                 "code": "VER",
@@ -304,7 +216,6 @@
           }
         },
         {
-          "id": "Space_82123518",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -330,7 +241,7 @@
       }
     },
     {
-      "id": "Space_82123563",
+      "id": "Space_407091",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -350,7 +261,6 @@
       },
       "verbondenRuimten": [
         {
-          "id": "Space_82123551",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -372,7 +282,7 @@
       ]
     },
     {
-      "id": "Space_82123455",
+      "id": "Space_779561",
       "soort": {
         "code": "VRK",
         "naam": "Verkeersruimte"
@@ -392,7 +302,6 @@
       },
       "verbondenRuimten": [
         {
-          "id": "Space_82123445",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -412,7 +321,6 @@
           }
         },
         {
-          "id": "Space_82123507",
           "soort": {
             "code": "OVR",
             "naam": "Overige ruimtes"
@@ -434,7 +342,7 @@
       ]
     },
     {
-      "id": "Space_82123469",
+      "id": "Space_914610",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -454,7 +362,7 @@
       }
     },
     {
-      "id": "Space_82123551",
+      "id": "Space_294363",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -474,7 +382,7 @@
       }
     },
     {
-      "id": "Space_82123507",
+      "id": "Space_265545",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -494,7 +402,7 @@
       }
     },
     {
-      "id": "Space_82123518",
+      "id": "Space_562593",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -514,7 +422,7 @@
       }
     },
     {
-      "id": "Space_82123484",
+      "id": "Space_427723",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -530,8 +438,6 @@
       "afsluitbaar": false,
       "bouwkundigeElementen": [
         {
-          "id": "Fontein_82123493",
-          "idBimmodel": "13pwBguB9DqgURg72nn72C",
           "soort": {
             "code": "SAN",
             "naam": "Sanitaire voorziening"
@@ -545,8 +451,6 @@
           }
         },
         {
-          "id": "Closetcombinatie_82123500",
-          "idBimmodel": "159rhSKFPCaQkhEgKCsAcx",
           "naam": "Closetcombinatie",
           "soort": {
             "code": "SAN",
@@ -567,7 +471,7 @@
       }
     },
     {
-      "id": "Space_82123559",
+      "id": "Space_792209",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
@@ -587,7 +491,7 @@
       }
     },
     {
-      "id": "Space_82123399",
+      "id": "Space_236251",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -607,7 +511,7 @@
       }
     },
     {
-      "id": "Space_82123445",
+      "id": "Space_890169",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimtes"
