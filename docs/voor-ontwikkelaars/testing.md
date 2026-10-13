@@ -230,7 +230,7 @@ Een testreferentie is een Markdown-bestand in de map `testreferenties/` naast de
 
 De input staat erbij omdat de test maar een deel van het inputmodel laat zien. De functies uit `tests/input.py` vullen ook velden van de `EenhedenEenheid` die niet in de test staan, zoals de id, de naam en de oppervlakte van een ruimte. Verandert iemand zo'n functie, dan laat de testreferentie per test zien dat de input is gewijzigd.
 
-Een testreferentie heeft één schrijver: de fixture `vergelijk_met_testreferentie`, en die schrijft alleen tijdens `task genereer-test-output`. Bewerk het bestand nooit met de hand. De map is uitgesloten van `prettier`.
+Een testreferentie heeft één schrijver: de fixture `vergelijk_met_testreferentie`, en die schrijft alleen bij [het bijwerken](#verwachte-output-bijwerken). Bewerk het bestand nooit met de hand. De map is uitgesloten van `prettier`.
 
 ### Wanneer een test faalt
 
@@ -245,9 +245,9 @@ Een aparte test, `test_geen_verweesde_testreferenties`, faalt wanneer er een tes
 
 ### Bijwerken en verwijderen
 
-Een testreferentie werk je bij met `task genereer-test-output`; zie [Verwachte output bijwerken](#verwachte-output-bijwerken).
+Hoe je een testreferentie bijwerkt, staat onder [Verwachte output bijwerken](#verwachte-output-bijwerken).
 
-Die opdracht verwijdert geen bestanden. Heb je een test bewust verwijderd of hernoemd, verwijder dan zelf zijn testreferentie. Verwijder een testreferentie niet om een andere reden.
+Bijwerken verwijdert geen bestanden. Heb je een test bewust verwijderd of hernoemd, verwijder dan zelf zijn testreferentie. Verwijder een testreferentie niet om een andere reden.
 
 ### Beoordelen in een pull request
 
@@ -273,7 +273,7 @@ Sanitair voor zelfstandige woonruimten is omgezet naar waarderingstests. De over
 
 ### Verwachte output van JSON-modellen
 
-De verwachte output staat onder `tests/data/**/output/*.json` en `tests/docs/output_json_*.json`. Je werkt hem bij met `task genereer-test-output`; zie [Verwachte output bijwerken](#verwachte-output-bijwerken).
+De verwachte output staat onder `tests/data/**/output/*.json` en `tests/docs/output_json_*.json`. Hoe je hem bijwerkt, staat onder [Verwachte output bijwerken](#verwachte-output-bijwerken).
 
 Naast elke output-JSON onder `tests/data/` schrijft het script een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om wijzigingen in de output in een pull request te beoordelen; `pytest` vergelijkt alleen de JSON-bestanden.
 
