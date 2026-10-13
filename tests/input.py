@@ -35,6 +35,7 @@ def ruimte(
     lengte_mm: int | None = None,
     breedte_mm: int | None = None,
     hoogte_mm: int | None = None,
+    aantal: int | None = None,
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
 
@@ -52,9 +53,12 @@ def ruimte(
 
     Zonder `lengte_mm`, `breedte_mm` en `hoogte_mm` heeft de ruimte geen
     afmetingen, alleen een oppervlakte.
+
+    Zonder `aantal` is de ruimte één parkeerplek. Geef `aantal` mee wanneer de
+    ruimte voor meer dan één parkeerplek van dezelfde soort staat.
     """
     naam = naam or detail_soort.naam or ""
-    return EenhedenRuimte(
+    nieuwe_ruimte = EenhedenRuimte(
         id=naam.lower().replace(" ", "_"),
         naam=naam,
         soort=soort or detail_soort.parent,
@@ -73,6 +77,11 @@ def ruimte(
         breedte=breedte_mm,
         hoogte=hoogte_mm,
     )
+    # Het model geeft `aantal` zelf de standaardwaarde 1; alleen een meegegeven
+    # aantal komt in de input van de test.
+    if aantal is not None:
+        nieuwe_ruimte.aantal = aantal
+    return nieuwe_ruimte
 
 
 def badkamer(
