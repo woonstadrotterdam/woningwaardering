@@ -2,7 +2,7 @@
 
 import pytest
 
-from tests.input import aanrecht, badkamer, elementen, keuken, ruimte
+from tests.input import aanrecht, badkamer, elementen, ruimte
 from tests.utils import (
     assert_stelselgroep_output,
     punten_per_bovenliggende,
@@ -325,7 +325,9 @@ def test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel(
     gewaardeerd "een spoelbak in het keukenaanrecht, tenzij deze onderdeel
     uitmaakt van een keukenaanrecht dat korter is dan één meter".
     """
-    eenheid = EenhedenEenheid(ruimten=[keuken(aanrechten_mm=[aanrecht_mm])])
+    eenheid = EenhedenEenheid(
+        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(aanrecht_mm)])]
+    )
 
     groep = sanitair.waardeer(eenheid)
 
@@ -402,7 +404,17 @@ def test_kort_aanrechtdeel_naast_aanrecht_vanaf_1m_is_geen_wastafel(
     dezelfde ruimte ook een aanrecht vanaf 1 meter, dan telt het korte deel mee
     in de aanrechtlengte van de keuken en niet als wastafel."
     """
-    eenheid = EenhedenEenheid(ruimten=[keuken(aanrechten_mm=[800, 1200])])
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.keuken,
+                elementen=[
+                    aanrecht(800, id="kort_aanrecht"),
+                    aanrecht(1200, id="lang_aanrecht"),
+                ],
+            )
+        ]
+    )
 
     groep = sanitair.waardeer(eenheid)
 

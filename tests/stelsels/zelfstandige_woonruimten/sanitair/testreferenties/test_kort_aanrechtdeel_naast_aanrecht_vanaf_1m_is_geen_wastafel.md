@@ -38,7 +38,7 @@ Geen.
       "oppervlakte": 10.0,
       "bouwkundigeElementen": [
         {
-          "id": "aanrecht_1",
+          "id": "kort_aanrecht",
           "naam": "Aanrecht",
           "soort": {
             "code": "VOO",
@@ -51,7 +51,7 @@ Geen.
           "lengte": 800.0
         },
         {
-          "id": "aanrecht_2",
+          "id": "lang_aanrecht",
           "naam": "Aanrecht",
           "soort": {
             "code": "VOO",

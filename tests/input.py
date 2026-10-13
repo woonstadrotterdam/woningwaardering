@@ -53,21 +53,6 @@ def badkamer(
     )
 
 
-def keuken(
-    *installaties: InstallatiesoortReferentiedata,
-    aanrechten_mm: Sequence[int] = (),
-) -> EenhedenRuimte:
-    """Maak een keuken met een aanrecht per opgegeven lengte in millimeters."""
-    return ruimte(
-        Ruimtedetailsoort.keuken,
-        *installaties,
-        elementen=[
-            aanrecht(lengte_mm, id=f"aanrecht_{nummer}")
-            for nummer, lengte_mm in enumerate(aanrechten_mm, start=1)
-        ],
-    )
-
-
 def element(
     detail_soort: BouwkundigelementdetailsoortReferentiedata,
     *,

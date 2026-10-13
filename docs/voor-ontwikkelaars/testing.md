@@ -113,7 +113,7 @@ Een berekening hoort niet in de docstring. De asserts laten zien hoe de beleidsr
 
 ### Input
 
-Bouw de input op met de functies uit `tests/input.py`, zoals `badkamer(...)`, `keuken(...)` en `ruimte(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`.
+Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `badkamer(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`.
 
 Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sanitair`), de `peildatum` en `vergelijk_met_testreferentie`. Een scenario dat in een fixture staat, is in de test niet meer te lezen.
 
@@ -208,7 +208,9 @@ def test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel(
     gewaardeerd "een spoelbak in het keukenaanrecht, tenzij deze onderdeel
     uitmaakt van een keukenaanrecht dat korter is dan één meter".
     """
-    eenheid = EenhedenEenheid(ruimten=[keuken(aanrechten_mm=[aanrecht_mm])])
+    eenheid = EenhedenEenheid(
+        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(aanrecht_mm)])]
+    )
 
     groep = sanitair.waardeer(eenheid)
 

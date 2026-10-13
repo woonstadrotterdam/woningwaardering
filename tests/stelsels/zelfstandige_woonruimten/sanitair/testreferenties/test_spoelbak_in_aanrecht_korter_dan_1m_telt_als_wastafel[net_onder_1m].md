@@ -39,7 +39,7 @@ Geen.
       "oppervlakte": 10.0,
       "bouwkundigeElementen": [
         {
-          "id": "aanrecht_1",
+          "id": "aanrecht",
           "naam": "Aanrecht",
           "soort": {
             "code": "VOO",
