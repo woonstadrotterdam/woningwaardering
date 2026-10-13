@@ -16,6 +16,7 @@ from woningwaardering.vera.referentiedata import (
     InstallatiesoortReferentiedata,
     Ruimtedetailsoort,
     RuimtedetailsoortReferentiedata,
+    RuimtesoortReferentiedata,
 )
 
 
@@ -25,21 +26,27 @@ def ruimte(
     elementen: Sequence[BouwkundigElementenBouwkundigElement] = (),
     naam: str | None = None,
     oppervlakte: float = 10.0,
+    soort: RuimtesoortReferentiedata | None = None,
+    verbonden_ruimten: Sequence[EenhedenRuimte] = (),
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
 
     Nummer de ruimten met `naam` wanneer een eenheid meer ruimten van dezelfde
     detailsoort heeft: "Badkamer1", "Badkamer2".
+
+    De soort volgt uit de detailsoort. Geef `soort` mee wanneer de ruimte met
+    een andere ruimtesoort is aangeleverd, zoals een schuur als vertrek.
     """
     naam = naam or detail_soort.naam or ""
     return EenhedenRuimte(
         id=naam.lower().replace(" ", "_"),
         naam=naam,
-        soort=detail_soort.parent,
+        soort=soort or detail_soort.parent,
         detail_soort=detail_soort,
         oppervlakte=oppervlakte,
         installaties=list(installaties) or None,
         bouwkundige_elementen=list(elementen) or None,
+        verbonden_ruimten=list(verbonden_ruimten) or None,
     )
 
 
