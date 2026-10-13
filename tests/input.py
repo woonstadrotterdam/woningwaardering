@@ -30,6 +30,8 @@ def ruimte(
     verbonden_ruimten: Sequence[EenhedenRuimte] = (),
     gedeeld_met_aantal_onzelfstandige_woonruimten: int | None = None,
     gedeeld_met_aantal_adressen: int | None = None,
+    verwarmd: bool | None = None,
+    verkoeld: bool | None = None,
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
 
@@ -41,6 +43,9 @@ def ruimte(
 
     Zonder `gedeeld_met_aantal_onzelfstandige_woonruimten` is de ruimte privé.
     Zonder `gedeeld_met_aantal_adressen` is ze niet met andere adressen gedeeld.
+
+    Zonder `verwarmd` is de ruimte niet verwarmd, zonder `verkoeld` heeft ze
+    geen verkoelingsfunctie.
     """
     naam = naam or detail_soort.naam or ""
     return EenhedenRuimte(
@@ -56,6 +61,8 @@ def ruimte(
             gedeeld_met_aantal_onzelfstandige_woonruimten
         ),
         gedeeld_met_aantal_adressen=gedeeld_met_aantal_adressen,
+        verwarmd=verwarmd,
+        verkoeld=verkoeld,
     )
 
 
