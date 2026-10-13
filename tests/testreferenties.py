@@ -151,6 +151,23 @@ def vergelijk_of_werk_bij(pad: Path, testreferentie: str, *, bijwerken: bool) ->
         )
 
 
+def assert_geen_onverwachte_waarschuwingen(
+    opgevangen: Iterable[WarningMessage], meegegeven: Iterable[WarningMessage]
+) -> None:
+    """Faal bij een `UserWarning` die de test niet aan de testreferentie meegeeft."""
+    teksten = {str(waarschuwing.message) for waarschuwing in meegegeven}
+    onverwacht = [
+        str(waarschuwing.message)
+        for waarschuwing in opgevangen
+        if issubclass(waarschuwing.category, UserWarning)
+        and str(waarschuwing.message) not in teksten
+    ]
+    assert not onverwacht, (
+        "Onverwachte waarschuwing. Vang een verwachte waarschuwing op met "
+        f"pytest.warns en geef hem mee aan vergelijk_met_testreferentie: {onverwacht}"
+    )
+
+
 def _gevallen_per_testfunctie(testmodule: Path) -> dict[str, set[str]]:
     """Geef per testfunctie de id's van de gevallen uit `pytest.param(..., id=...)`."""
     testfuncties = [

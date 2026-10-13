@@ -133,7 +133,13 @@ Bereken de verwachte punten zelf uit de bron en neem ze niet over uit de output 
 
 ### Vergelijken met de testreferentie
 
-Sluit de test af met `vergelijk_met_testreferentie(eenheid, groep)`. Roep de fixture één keer per test aan; een tweede aanroep laat de test falen. Zie [Testreferenties](#testreferenties).
+Sluit de test af met `vergelijk_met_testreferentie(eenheid, groep)`. Die aanroep doet drie dingen, in deze volgorde:
+
+1. Hij faalt bij een `UserWarning` die de test niet heeft meegegeven; zie [Waarschuwingen](#waarschuwingen).
+2. Hij controleert wat voor elke gewaardeerde stelselgroep geldt: de criterium-id's zijn uniek, punten en aantallen staan niet zowel op een bovenliggende als op een onderliggende waardering, het totaal van de stelselgroep is de som van de waarderingen en is afgerond op kwarten, en punten hebben ten hoogste twee decimalen.
+3. Hij vergelijkt de waardering met de [testreferentie](#testreferenties) van de test.
+
+Roep de fixture één keer per test aan; een tweede aanroep laat de test falen.
 
 ### Waarschuwingen
 

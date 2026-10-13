@@ -7,6 +7,7 @@ import pytest
 from tests.peildatum import REFERENTIE_PEILDATUM
 from tests.testreferenties import (
     BIJWERKOPTIE,
+    assert_geen_onverwachte_waarschuwingen,
     maak_testreferentie,
     pad_van_testreferentie,
     vergelijk_of_werk_bij,
@@ -48,40 +49,38 @@ def peildatum():
 def vergelijk_met_testreferentie(
     request: pytest.FixtureRequest, recwarn: pytest.WarningsRecorder
 ) -> Callable[..., None]:
-    """Vergelijk een waardering met de testreferentie van deze test.
+    """Geef de functie waarmee een waarderingstest afsluit.
 
-    De testreferentie bevat de docstring van de test, het rapport, de
-    waarschuwingen, de input als VERA-JSON en de output-JSON. Wijkt de
-    waardering af of ontbreekt de testreferentie, dan faalt de test. Bijwerken kan
-    alleen met `task genereer-test-output`.
+    De functie doet drie dingen, in deze volgorde:
 
-    Daarnaast gelden voor elke vergeleken waardering de invarianten uit
-    `assert_invarianten_van_groep`, en faalt de test bij een `UserWarning` die
-    niet met `pytest.warns` is opgevangen en meegegeven.
+    1. Ze faalt bij een `UserWarning` die de test niet heeft meegegeven.
+    2. Ze controleert de invarianten die voor elke gewaardeerde stelselgroep
+       gelden, zie `assert_invarianten_van_groep`.
+    3. Ze vergelijkt de waardering met de testreferentie van de test. Wijkt de
+       waardering af of ontbreekt de testreferentie, dan faalt de test.
+       Bijwerken kan alleen met `task genereer-test-output`.
+
+    Het is een fixture omdat de testreferentie de naam, de docstring en de
+    waarschuwingen van de test nodig heeft; die geeft pytest via `request` en
+    `recwarn`.
     """
-    vergeleken = False
+    aangeroepen = False
 
     def _vergelijk(
         eenheid: EenhedenEenheid,
         groep: WoningwaarderingResultatenWoningwaarderingGroep,
         waarschuwingen: Iterable[WarningMessage] = (),
     ) -> None:
-        nonlocal vergeleken
+        # Een test heeft één testreferentie; een tweede aanroep zou de eerste
+        # overschrijven.
+        nonlocal aangeroepen
         assert (
-            not vergeleken
+            not aangeroepen
         ), "Roep vergelijk_met_testreferentie één keer per test aan."
-        vergeleken = True
+        aangeroepen = True
         waarschuwingen = list(waarschuwingen)
-        meegegeven = {str(w.message) for w in waarschuwingen}
-        onverwacht = [
-            str(w.message)
-            for w in recwarn
-            if issubclass(w.category, UserWarning) and str(w.message) not in meegegeven
-        ]
-        assert not onverwacht, (
-            "Onverwachte waarschuwing. Vang een verwachte waarschuwing op met "
-            f"pytest.warns en geef hem mee aan vergelijk_met_testreferentie: {onverwacht}"
-        )
+
+        assert_geen_onverwachte_waarschuwingen(recwarn, waarschuwingen)
         assert_invarianten_van_groep(groep)
         vergelijk_of_werk_bij(
             pad_van_testreferentie(request.node),
