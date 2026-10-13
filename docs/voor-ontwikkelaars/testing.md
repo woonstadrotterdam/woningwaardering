@@ -43,13 +43,12 @@ Een privéfunctie van een stelselgroep test je via een waarderingstest: die blij
 
 ### Welke test schrijf je?
 
-Nog niet elke stelselgroep is omgezet naar waarderingstests. Een omgezette stelselgroep herken je aan de map `testreferenties/` naast de testmodule; op dit moment is dat alleen sanitair voor zelfstandige woonruimten. De overige stelselgroepen gebruiken [JSON-modellen](#json-modellen).
+Elke stelselgroep heeft waarderingstests. De testreferenties staan in de map `testreferenties/` naast de testmodule.
 
 | Wat je test | Wat je schrijft |
 | --- | --- |
-| Een beleidsregel binnen één stelselgroep die is omgezet | Een [waarderingstest](#een-waarderingstest-schrijven) |
-| Een beleidsregel binnen één stelselgroep die nog niet is omgezet | Een JSON-model in de map van de stelselgroep; zie [JSON-modellen](#model-op-stelselniveau-of-test-op-de-stelselgroep) |
-| Een beleidsregel die over meer dan één stelselgroep gaat | Een JSON-model op stelselniveau; zie [JSON-modellen](#model-op-stelselniveau-of-test-op-de-stelselgroep) |
+| Een beleidsregel binnen één stelselgroep | Een [waarderingstest](#een-waarderingstest-schrijven) |
+| Een beleidsregel die over meer dan één stelselgroep gaat | Een JSON-model op stelselniveau; zie [JSON-modellen](#model-op-stelselniveau-of-waarderingstest) |
 | Een functie die op zichzelf staat | Een [unittest](#een-unittest-schrijven) |
 
 ## Een waarderingstest schrijven
@@ -125,7 +124,7 @@ Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sa
 
 Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`). De overige waarderingen vind je terug in de testreferentie. In het voorbeeld hierboven staan het bad en de wastafel niet in de asserts: ze horen bij het scenario, maar de beleidsregel gaat over de kastruimte.
 
-`punten_per_naam(groep)` geeft de punten van elke waardering met punten, op naam van het criterium. Komt dezelfde naam in meer dan één ruimte voor, gebruik dan `punten_per_bovenliggende(groep)`: die groepeert de punten op de naam van het bovenliggende criterium. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst. Het totaal volgt dan uit die waarderingen en heeft geen eigen assert nodig:
+`punten_per_naam(groep)` geeft de punten van elke waardering met punten, op naam van het criterium. Komt dezelfde naam in meer dan één ruimte voor, gebruik dan `punten_per_bovenliggende(groep)`: die groepeert de punten op de naam van het bovenliggende criterium. Voor aantallen en opslagpercentages zijn er `aantal_per_naam`, `aantal_per_bovenliggende` en `opslagpercentage_per_naam`. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst. Het totaal volgt dan uit die waarderingen en heeft geen eigen assert nodig:
 
 ```python
 assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 7.0}
@@ -286,7 +285,7 @@ Na het bijwerken slaagt elke vergelijking met de verwachte output, ook als de ni
 
 ## JSON-modellen
 
-Sanitair voor zelfstandige woonruimten is omgezet naar waarderingstests. De overige stelselgroepen en de modellen op stelselniveau gebruiken eenheidmodellen in JSON onder `tests/data/...`, met verwachte output in `output/`.
+De modellen op stelselniveau zijn eenheidmodellen in JSON onder `tests/data/<stelsel>/input/`, met verwachte output in `output/`.
 
 ### Verwachte output van JSON-modellen
 
@@ -294,16 +293,13 @@ De verwachte output staat onder `tests/data/**/output/*.json` en `tests/docs/out
 
 Naast elke output-JSON onder `tests/data/` schrijft het script een `*.txt` met de woningwaardering in leesbaar tabelformaat. Die bestanden zijn bedoeld om wijzigingen in de output in een pull request te beoordelen; `pytest` vergelijkt alleen de JSON-bestanden.
 
-### Model op stelselniveau of test op de stelselgroep
+### Model op stelselniveau of waarderingstest
 
 Een model onder `tests/data/<stelsel>/input/` wordt door het hele stelsel gewaardeerd én per stelselgroep gecontroleerd: elke `test_<Stelselgroep>_output` draait erop. Eén model dekt daarmee alle stelselgroepen tegelijk.
 
-Kies een model op stelselniveau wanneer een beleidsregel over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/zelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`. Dezelfde input in een test per stelselgroep zetten geeft die zekerheid niet, en levert meerdere keren dezelfde input op.
+Kies een model op stelselniveau wanneer een beleidsregel over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/zelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`. Dezelfde input in een waarderingstest per stelselgroep zetten geeft die zekerheid niet, en levert meerdere keren dezelfde input op.
 
-Kies een test op de stelselgroep voor een beleidsregel die binnen één stelselgroep blijft, en voor elk scenario dat een `UserWarning` oproept: een model op stelselniveau moet zonder waarschuwing te waarderen zijn.
-
-- Is de stelselgroep omgezet, dan schrijf je een [waarderingstest](#een-waarderingstest-schrijven).
-- Is de stelselgroep nog niet omgezet, dan zet je een model in de map van de stelselgroep, zoals `tests/data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_1.json`.
+Kies een [waarderingstest](#een-waarderingstest-schrijven) voor een beleidsregel die binnen één stelselgroep blijft, en voor elk scenario dat een `UserWarning` oproept: een model op stelselniveau moet zonder waarschuwing te waarderen zijn.
 
 ## Test coverage rapport
 

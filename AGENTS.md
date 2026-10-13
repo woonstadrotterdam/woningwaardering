@@ -67,7 +67,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 - Lees [testing.md](docs/voor-ontwikkelaars/testing.md) voordat je een test schrijft of wijzigt: daar staat welke soort test je nodig hebt en hoe je hem opbouwt.
 - Spiegel de package-structuur waar praktisch: tests voor `woningwaardering/.../module.py` horen onder `tests/.../test_module.py`.
 - Laat testfuncties beginnen met `test_`.
-- Gebruik `tests/data/...` voor VERA-realistische inputmodellen en handmatig nagerekende verwachte output, zolang een stelselgroep nog niet naar waarderingstests is omgezet.
+- Gebruik `tests/data/...` voor VERA-realistische inputmodellen op stelselniveau, met handmatig nagerekende verwachte output.
 - Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
 
