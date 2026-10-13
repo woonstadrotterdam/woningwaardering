@@ -28,7 +28,7 @@ Na wijzigingen in code of tests draai je ook de pre-commit hooks (dezelfde set a
 
 Nieuwe of gewijzigde code lever je op met passende tests. Er zijn twee soorten:
 
-| | Waarderingtest | Unittest |
+| | Waarderingstest | Unittest |
 | --- | --- | --- |
 | Vraag | Kent de stelselgroep de punten toe die de beleidsregel voorschrijft? | Doet deze functie wat hij belooft? |
 | Roept aan | een stelselgroep: `Sanitair(...).waardeer(eenheid)` | de functie zelf |
