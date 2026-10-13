@@ -32,6 +32,9 @@ def ruimte(
     gedeeld_met_aantal_adressen: int | None = None,
     verwarmd: bool | None = None,
     verkoeld: bool | None = None,
+    lengte_mm: int | None = None,
+    breedte_mm: int | None = None,
+    hoogte_mm: int | None = None,
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
 
@@ -46,6 +49,9 @@ def ruimte(
 
     Zonder `verwarmd` is de ruimte niet verwarmd, zonder `verkoeld` heeft ze
     geen verkoelingsfunctie.
+
+    Zonder `lengte_mm`, `breedte_mm` en `hoogte_mm` heeft de ruimte geen
+    afmetingen, alleen een oppervlakte.
     """
     naam = naam or detail_soort.naam or ""
     return EenhedenRuimte(
@@ -63,6 +69,9 @@ def ruimte(
         gedeeld_met_aantal_adressen=gedeeld_met_aantal_adressen,
         verwarmd=verwarmd,
         verkoeld=verkoeld,
+        lengte=lengte_mm,
+        breedte=breedte_mm,
+        hoogte=hoogte_mm,
     )
 
 
