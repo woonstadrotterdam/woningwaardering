@@ -88,7 +88,7 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
     groep = sanitair.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten["Kastruimte"] == 1.5
+    assert punten[Installatiesoort.kastruimte.naam] == 1.5
     assert punten["Max 0.75 punten voor Kastruimte"] == -0.75
     assert groep.punten == 7.75
     vergelijk_met_testreferentie(eenheid, groep)
@@ -124,10 +124,10 @@ Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten
 `punten_per_naam(groep)` geeft de punten van elke waardering met punten, op naam van het criterium. Komt dezelfde naam in meer dan één ruimte voor, gebruik dan `punten_per_bovenliggende(groep)`: die groepeert de punten op de naam van het bovenliggende criterium. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst. Het totaal volgt dan uit die waarderingen en heeft geen eigen assert nodig:
 
 ```python
-assert punten_per_naam(groep) == {"Bad en douche": 7.0}
+assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 7.0}
 ```
 
-Schrijf de naam van een waardering als tekst, zoals hij in het rapport staat: `"Kastruimte"`, niet `Installatiesoort.kastruimte.naam`. Zo staan alle namen in een test op dezelfde manier, ook de namen die de package zelf samenstelt, zoals `"Max 0.75 punten voor Kastruimte"`.
+Schrijf de naam van een waardering zoals je de input schrijft. Is het de naam van een referentiedata-object, gebruik dan dat object: `Installatiesoort.kastruimte.naam`, niet `"Kastruimte"`. Een naam die de package zelf samenstelt, zoals `"Max 0.75 punten voor Kastruimte"`, schrijf je als tekst, zoals hij in het rapport staat. Dat geldt ook voor een naam die je in de test zelf als tekst meegeeft, zoals `"Badkamer1"`.
 
 Bereken de verwachte punten zelf uit de bron en neem ze niet over uit de output van de code, zodat de test de beleidsregel controleert en niet de code.
 
@@ -165,9 +165,9 @@ eenheid = EenhedenEenheid(
 groep = sanitair.waardeer(eenheid)
 
 assert punten_per_bovenliggende(groep) == {
-    "Badkamer1": {"Douche": 4.0},
-    "Badkamer2": {"Bad": 6.0},
-    "Badkamer3": {"Bad en douche": 7.0},
+    "Badkamer1": {Installatiesoort.douche.naam: 4.0},
+    "Badkamer2": {Installatiesoort.bad.naam: 6.0},
+    "Badkamer3": {Installatiesoort.bad_en_douche.naam: 7.0},
 }
 ```
 

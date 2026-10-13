@@ -50,9 +50,9 @@ def test_punten_voor_bad_en_douche(sanitair, vergelijk_met_testreferentie):
     groep = sanitair.waardeer(eenheid)
 
     assert punten_per_bovenliggende(groep) == {
-        "Badkamer1": {"Douche": 4.0},
-        "Badkamer2": {"Bad": 6.0},
-        "Badkamer3": {"Bad en douche": 7.0},
+        "Badkamer1": {Installatiesoort.douche.naam: 4.0},
+        "Badkamer2": {Installatiesoort.bad.naam: 6.0},
+        "Badkamer3": {Installatiesoort.bad_en_douche.naam: 7.0},
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -74,7 +74,7 @@ def test_bad_en_douche_in_dezelfde_ruimte_is_een_voorziening(
 
     groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep) == {"Bad en douche": 7.0}
+    assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 7.0}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -99,7 +99,7 @@ def test_bad_douche_naast_los_bad_en_losse_douche_zijn_twee_voorzieningen(
 
     groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep) == {"Bad en douche": 14.0}
+    assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 14.0}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -117,7 +117,7 @@ def test_douche_buiten_de_badkamer_telt_mee(sanitair, vergelijk_met_testreferent
 
     groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep) == {"Douche": 4.0}
+    assert punten_per_naam(groep) == {Installatiesoort.douche.naam: 4.0}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -146,21 +146,21 @@ def test_drempelloze_inrijdouche_telt_als_douche(
     groep = sanitair.waardeer(eenheid)
 
     assert punten_per_bovenliggende(groep) == {
-        "Badkamer1": {"Drempelloze inrijdouche": 4.0},
+        "Badkamer1": {inrijdouche.naam: 4.0},
         # Het bad en de inrijdouche vormen samen één bad/douche.
-        "Badkamer2": {"Bad en douche": 7.0},
+        "Badkamer2": {Installatiesoort.bad_en_douche.naam: 7.0},
         "Badkamer3": {
-            "Douche": 4.0,
-            "Drempelloze inrijdouche": 4.0,
+            douche.naam: 4.0,
+            inrijdouche.naam: 4.0,
         },
         # Het bad vormt een bad/douche met de gewone douche; de inrijdouche telt
         # daarnaast als douche.
         "Badkamer4": {
-            "Bad en douche": 7.0,
-            "Drempelloze inrijdouche": 4.0,
+            Installatiesoort.bad_en_douche.naam: 7.0,
+            inrijdouche.naam: 4.0,
         },
         # Eén bad vormt een bad/douche met de inrijdouche; het andere bad telt los.
-        "Badkamer5": {"Bad en douche": 7.0, "Bad": 6.0},
+        "Badkamer5": {Installatiesoort.bad_en_douche.naam: 7.0, bad.naam: 6.0},
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -188,8 +188,14 @@ def test_toilet_krijgt_in_toiletruimte_een_punt_meer_dan_in_badkamer(
     groep = sanitair.waardeer(eenheid)
 
     assert punten_per_bovenliggende(groep) == {
-        "Badkamer": {"Staand Toilet": 2.0, "Hangend toilet": 2.75},
-        "Toiletruimte": {"Staand Toilet": 3.0, "Hangend toilet": 3.75},
+        Ruimtedetailsoort.badkamer.naam: {
+            Installatiesoort.staand_toilet.naam: 2.0,
+            Installatiesoort.hangend_toilet.naam: 2.75,
+        },
+        Ruimtedetailsoort.toiletruimte.naam: {
+            Installatiesoort.staand_toilet.naam: 3.0,
+            Installatiesoort.hangend_toilet.naam: 3.75,
+        },
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -216,7 +222,7 @@ def test_toilet_in_doucheruimte_telt_als_toilet_in_badkamer(
 
     groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep)["Staand Toilet"] == 2.0
+    assert punten_per_naam(groep)[Installatiesoort.staand_toilet.naam] == 2.0
     assert groep.punten == 7.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -249,8 +255,8 @@ def test_wastafels_in_de_badkamer_tellen_allemaal(
     groep = sanitair.waardeer(eenheid)
 
     assert punten_per_naam(groep) == {
-        "Wastafel": 2.0,
-        "Meerpersoonswastafel": 3.0,
+        Installatiesoort.wastafel.naam: 2.0,
+        Installatiesoort.meerpersoonswastafel.naam: 3.0,
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -287,14 +293,14 @@ def test_wastafels_buiten_de_badkamer_krijgen_een_maximum_per_ruimte(
     groep = sanitair.waardeer(eenheid)
 
     met_maximum = {
-        "Wastafel": 2.0,
+        Installatiesoort.wastafel.naam: 2.0,
         "Max 1.0 punt voor Wastafel": -1.0,
-        "Meerpersoonswastafel": 3.0,
+        Installatiesoort.meerpersoonswastafel.naam: 3.0,
         "Max 1.5 punt voor Meerpersoonswastafel": -1.5,
     }
     assert punten_per_bovenliggende(groep) == {
-        "Toiletruimte": met_maximum,
-        "Woonkamer": met_maximum,
+        Ruimtedetailsoort.toiletruimte.naam: met_maximum,
+        Ruimtedetailsoort.woonkamer.naam: met_maximum,
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -384,7 +390,7 @@ def test_spoelbak_telt_mee_in_het_maximum_voor_wastafels(
 
     punten = punten_per_naam(groep)
     assert punten["Wastafel (spoelbak in aanrecht < 1m)"] == 1.0
-    assert punten["Wastafel"] == 2.0
+    assert punten[Installatiesoort.wastafel.naam] == 2.0
     assert punten["Max 1.0 punt voor Wastafel"] == -2.0
     assert groep.punten == 2.5
     vergelijk_met_testreferentie(eenheid, groep)
@@ -448,7 +454,7 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
     groep = sanitair.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten["Kastruimte"] == 1.5
+    assert punten[Installatiesoort.kastruimte.naam] == 1.5
     assert punten["Max 0.75 punten voor Kastruimte"] == -0.75
     assert groep.punten == 7.75
     vergelijk_met_testreferentie(eenheid, groep)
@@ -483,7 +489,7 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_bad(
     groep = sanitair.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten["Bad"] == 6.0
+    assert punten[Installatiesoort.bad.naam] == 6.0
     assert punten["Max verdubbeling punten bad en douche"] == -0.25
     assert groep.punten == 13.0
     vergelijk_met_testreferentie(eenheid, groep)
@@ -543,8 +549,8 @@ def test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen(
     groep = sanitair.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten["Handdoekenradiator"] == 0.75
-    assert punten["Thermostatische mengkraan"] == 0.5
+    assert punten[Installatiesoort.handdoekenradiator.naam] == 0.75
+    assert punten[Installatiesoort.thermostatische_mengkraan.naam] == 0.5
     assert groep.punten == 6.25
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -586,8 +592,8 @@ def test_rekenvoorbeeld_extra_voorzieningen_uit_het_beleidsboek(
     groep = sanitair.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten["Bad en douche"] == 7.0
-    assert punten["Douche"] == 4.0
+    assert punten[Installatiesoort.bad_en_douche.naam] == 7.0
+    assert punten[Installatiesoort.douche.naam] == 4.0
     assert "Max verdubbeling punten bad en douche" not in punten
     assert groep.punten == 17.75
     vergelijk_met_testreferentie(eenheid, groep)
@@ -653,12 +659,12 @@ def test_sanitair_als_bouwkundig_element_telt_als_installatie(
     groep = sanitair.waardeer(eenheid)
 
     assert punten_per_bovenliggende(groep) == {
-        "Badkamer1": {"Wastafel": 1.0},
-        "Badkamer2": {"Staand Toilet": 2.0},
-        "Badkamer3": {"Douche": 4.0},
-        "Badkamer4": {"Bad": 6.0},
-        "Badkamer5": {"Bad en douche": 7.0},
-        "Badkamer6": {"Bad en douche": 14.0},
+        "Badkamer1": {Installatiesoort.wastafel.naam: 1.0},
+        "Badkamer2": {Installatiesoort.staand_toilet.naam: 2.0},
+        "Badkamer3": {Installatiesoort.douche.naam: 4.0},
+        "Badkamer4": {Installatiesoort.bad.naam: 6.0},
+        "Badkamer5": {Installatiesoort.bad_en_douche.naam: 7.0},
+        "Badkamer6": {Installatiesoort.bad_en_douche.naam: 14.0},
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
