@@ -33,7 +33,7 @@ Nieuwe of gewijzigde code lever je op met passende tests. Er zijn twee soorten:
 | Vraag | Kent de stelselgroep de punten toe die de beleidsregel voorschrijft? | Doet deze functie wat hij belooft? |
 | Roept aan | een stelselgroep: `Sanitair(...).waardeer(eenheid)` | de functie zelf |
 | Testreferentie | altijd | nooit |
-| Voorbeeld | `tests/stelsels/zelfstandige_woonruimten/sanitair/test_sanitair.py` | `tests/stelsels/utils/test_rond_af_op_kwart.py` |
+| Voorbeeld | `tests/stelsels/zelfstandige_woonruimten/sanitair/test_sanitair_zel.py` | `tests/stelsels/utils/test_rond_af_op_kwart.py` |
 
 Een beleidsregel test je met een waarderingstest: de test waardeert een stelselgroep en controleert de punten die de beleidsregel toekent.
 
@@ -93,6 +93,10 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
     assert groep.punten == 7.75
     vergelijk_met_testreferentie(eenheid, groep)
 ```
+
+### Bestand
+
+De tests van een stelselgroep staan in `tests/stelsels/<stelsel>/<stelselgroep>/`, in `test_<stelselgroep>_zel.py` voor zelfstandige en `test_<stelselgroep>_onz.py` voor onzelfstandige woonruimten. Het achtervoegsel is nodig omdat `pytest` geen twee testbestanden met dezelfde naam accepteert, en een stelselgroep komt in beide stelsels voor en soms ook in `gedeelde_logica`.
 
 ### Eén beleidsregel per test
 
