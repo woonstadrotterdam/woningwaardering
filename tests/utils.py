@@ -514,6 +514,23 @@ def aantal_per_bovenliggende(
     return aantallen
 
 
+def opslagpercentage_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef het opslagpercentage van elke waardering met een opslag, op naam van het criterium."""
+    opslagpercentages: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.opslagpercentage is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in opslagpercentages, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "opslagpercentage_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        opslagpercentages[naam] = waardering.opslagpercentage
+    return opslagpercentages
+
+
 def zolders_met_aftrek(
     groep: WoningwaarderingResultatenWoningwaarderingGroep,
 ) -> list[str]:

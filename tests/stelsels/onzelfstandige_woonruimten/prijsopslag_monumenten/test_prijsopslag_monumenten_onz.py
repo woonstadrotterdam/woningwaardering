@@ -6,31 +6,21 @@ from types import SimpleNamespace
 
 import pytest
 
-from tests.utils import assert_stelselgroep_output, punten_per_naam
+from tests.utils import (
+    assert_stelselgroep_output,
+    opslagpercentage_per_naam,
+    punten_per_naam,
+)
 from woningwaardering.stelsels.onzelfstandige_woonruimten.prijsopslag_monumenten import (
     PrijsopslagMonumenten,
 )
-from woningwaardering.vera.bvg.generated import (
-    EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingGroep,
-)
+from woningwaardering.vera.bvg.generated import EenhedenEenheid
 from woningwaardering.vera.referentiedata import Eenheidmonument
 
 
 @pytest.fixture()
 def prijsopslag_monumenten(peildatum):
     return PrijsopslagMonumenten(peildatum=peildatum)
-
-
-def opslagpercentage_per_naam(
-    groep: WoningwaarderingResultatenWoningwaarderingGroep,
-) -> dict[str, float]:
-    """Geef het opslagpercentage van elke waardering met een opslag, op naam van het criterium."""
-    return {
-        waardering.criterium.naam or "": waardering.opslagpercentage
-        for waardering in groep.woningwaarderingen or []
-        if waardering.opslagpercentage is not None and waardering.criterium is not None
-    }
 
 
 def test_PrijsopslagMonumenten_output(
