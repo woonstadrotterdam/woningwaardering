@@ -28,6 +28,8 @@ def ruimte(
     oppervlakte: float = 10.0,
     soort: RuimtesoortReferentiedata | None = None,
     verbonden_ruimten: Sequence[EenhedenRuimte] = (),
+    gedeeld_met_aantal_onzelfstandige_woonruimten: int | None = None,
+    gedeeld_met_aantal_adressen: int | None = None,
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
 
@@ -36,6 +38,9 @@ def ruimte(
 
     De soort volgt uit de detailsoort. Geef `soort` mee wanneer de ruimte met
     een andere ruimtesoort is aangeleverd, zoals een schuur als vertrek.
+
+    Zonder `gedeeld_met_aantal_onzelfstandige_woonruimten` is de ruimte privé.
+    Zonder `gedeeld_met_aantal_adressen` is ze niet met andere adressen gedeeld.
     """
     naam = naam or detail_soort.naam or ""
     return EenhedenRuimte(
@@ -47,6 +52,10 @@ def ruimte(
         installaties=list(installaties) or None,
         bouwkundige_elementen=list(elementen) or None,
         verbonden_ruimten=list(verbonden_ruimten) or None,
+        gedeeld_met_aantal_onzelfstandige_woonruimten=(
+            gedeeld_met_aantal_onzelfstandige_woonruimten
+        ),
+        gedeeld_met_aantal_adressen=gedeeld_met_aantal_adressen,
     )
 
 
