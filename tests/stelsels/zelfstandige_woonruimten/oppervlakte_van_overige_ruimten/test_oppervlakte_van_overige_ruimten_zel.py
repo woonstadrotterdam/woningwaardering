@@ -54,15 +54,18 @@ def test_toiletruimte_kleiner_dan_2m2_wordt_niet_gewaardeerd(
                 Ruimtedetailsoort.toiletruimte, naam="Toiletruimte1", oppervlakte=1.9
             ),
             ruimte(
-                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte2", oppervlakte=2.1
+                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte2", oppervlakte=2.0
+            ),
+            ruimte(
+                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte3", oppervlakte=2.1
             ),
         ]
     )
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {"Toiletruimte2": 2.1}
-    assert groep.punten == 1.5
+    assert aantal_per_naam(groep) == {"Toiletruimte2": 2.0, "Toiletruimte3": 2.1}
+    assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
