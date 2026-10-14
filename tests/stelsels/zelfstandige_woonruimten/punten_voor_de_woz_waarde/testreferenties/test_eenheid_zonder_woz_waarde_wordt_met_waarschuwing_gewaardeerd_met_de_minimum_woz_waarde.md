@@ -15,8 +15,8 @@ voor WOZ-beschikkingen met waardepeildatum 1 januari 2025, taxatiewaarden
 en minimumwaarden." en "€ 268 bij WOZ-beschikkingen met waardepeildatum 1
 januari 2025, taxatiewaarden en minimumwaarden."
 
-De oppervlakte in onderdeel II is die van de vijf vertrekken van het
-appartement, afgerond op hele vierkante meters. De vaste kasten van de
+De oppervlakte in onderdeel II is die van de vijf vertrekken van de
+woning, afgerond op hele vierkante meters. De vaste kasten van de
 keuken en de woonkamer tellen daarin mee.
 
 Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Rond hierna de
@@ -27,7 +27,7 @@ kast": "Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden
 de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur
 van de kast zich bevindt."
 
-Het appartement is in 2016 gebouwd en haalt voor de rubrieken 1 tot en met
+De woning is in 2016 gebouwd en haalt voor de rubrieken 1 tot en met
 10 en 12 meer dan 110 punten. Het krijgt daarom minimaal 40 punten: de
 waardering 'Nieuwbouw: min. 40 punten' vult de punten van onderdeel I en II
 aan tot dat minimum.
@@ -65,14 +65,14 @@ PUNTEN VOOR DE WOZ-WAARDE
 
 ## Waarschuwingen
 
-- UserWarning: Eenheid (eenheid): 'energieprestaties' is None
-- UserWarning: Eenheid (eenheid): geen WOZ-waarde aangeleverd
+- UserWarning: Eenheid (meergezinswoning_van_71_m2): 'energieprestaties' is None
+- UserWarning: Eenheid (meergezinswoning_van_71_m2): geen WOZ-waarde aangeleverd
 
 ## Input
 
 ```json
 {
-  "id": "eenheid",
+  "id": "meergezinswoning_van_71_m2",
   "bouwjaar": 2016,
   "adres": {
     "huisnummer": "44",

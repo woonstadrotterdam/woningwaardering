@@ -6,7 +6,13 @@ from types import SimpleNamespace
 
 import pytest
 
-from tests.input import aanrecht, element, elementen, ruimte
+from tests.input import (
+    aanrecht,
+    element,
+    elementen,
+    meergezinswoning_van_71_m2,
+    ruimte,
+)
 from tests.utils import (
     aantal_per_bovenliggende,
     aantal_per_naam,
@@ -20,6 +26,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheidadres,
     EenhedenEnergieprestatie,
     EenhedenPand,
+    EenhedenRenovatie,
     EenhedenWoonplaats,
     EenhedenWozEenheid,
 )
@@ -374,8 +381,8 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
     en minimumwaarden." en "€ 268 bij WOZ-beschikkingen met waardepeildatum 1
     januari 2025, taxatiewaarden en minimumwaarden."
 
-    De oppervlakte in onderdeel II is die van de vijf vertrekken van het
-    appartement, afgerond op hele vierkante meters. De vaste kasten van de
+    De oppervlakte in onderdeel II is die van de vijf vertrekken van de
+    woning, afgerond op hele vierkante meters. De vaste kasten van de
     keuken en de woonkamer tellen daarin mee.
 
     Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Rond hierna de
@@ -386,7 +393,7 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
     de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur
     van de kast zich bevindt."
 
-    Het appartement is in 2016 gebouwd en haalt voor de rubrieken 1 tot en met
+    De woning is in 2016 gebouwd en haalt voor de rubrieken 1 tot en met
     10 en 12 meer dan 110 punten. Het krijgt daarom minimaal 40 punten: de
     waardering 'Nieuwbouw: min. 40 punten' vult de punten van onderdeel I en II
     aan tot dat minimum.
@@ -405,100 +412,7 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
     Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
     genereert de package een `UserWarning`."
     """
-    # De vaste kasten, de meterruimte en de technische ruimte zijn ruimten van
-    # de eenheid en ook de verbonden ruimten van de keuken, de woonkamer en de
-    # hal.
-    kast1 = ruimte(Ruimtedetailsoort.kast, naam="Kast1", oppervlakte=0.856)
-    kast2 = ruimte(Ruimtedetailsoort.kast, naam="Kast2", oppervlakte=0.312)
-    kast3 = ruimte(Ruimtedetailsoort.kast, naam="Kast3", oppervlakte=0.308)
-    kast4 = ruimte(Ruimtedetailsoort.kast, naam="Kast4", oppervlakte=0.3575)
-    meterruimte = ruimte(Ruimtedetailsoort.meterruimte, oppervlakte=0.2205)
-    technische_ruimte = ruimte(
-        Ruimtedetailsoort.technische_ruimte,
-        oppervlakte=0.3456,
-        elementen=[element(Bouwkundigelementdetailsoort.verwarmingstoestellen)],
-    )
-    eenheid = EenhedenEenheid(
-        id="eenheid",
-        bouwjaar=2016,
-        adres=EenhedenEenheidadres(
-            huisnummer="44",
-            huisnummer_toevoeging="",
-            postcode="3012CJ",
-            woonplaats=EenhedenWoonplaats(naam="ROTTERDAM"),
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_identificatie="0599010000320510"
-        ),
-        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
-        energieprestaties=[],
-        gebruiksoppervlakte=71,
-        monumenten=[],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.balkon,
-                oppervlakte=1.82259,
-                lengte_mm=1290,
-                breedte_mm=1500,
-                hoogte_mm=2600,
-            ),
-            technische_ruimte,
-            ruimte(Ruimtedetailsoort.schuur, oppervlakte=0.2345),
-            ruimte(
-                Ruimtedetailsoort.badkamer,
-                oppervlakte=3.584,
-                verwarmd=True,
-                elementen=elementen(
-                    Bouwkundigelementdetailsoort.douche,
-                    Bouwkundigelementdetailsoort.wastafel,
-                ),
-            ),
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                oppervlakte=9.5565,
-                verwarmd=True,
-                elementen=[aanrecht(2100)],
-                verbonden_ruimten=[kast3, technische_ruimte, kast2],
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=25.96,
-                verwarmd=True,
-                verbonden_ruimten=[kast1],
-            ),
-            ruimte(
-                Ruimtedetailsoort.hal,
-                oppervlakte=6.198,
-                verwarmd=True,
-                verbonden_ruimten=[kast4, meterruimte],
-            ),
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                naam="Slaapkamer1",
-                oppervlakte=6.486,
-                verwarmd=True,
-            ),
-            kast1,
-            meterruimte,
-            kast2,
-            ruimte(
-                Ruimtedetailsoort.toiletruimte,
-                oppervlakte=1.26375,
-                elementen=elementen(
-                    Bouwkundigelementdetailsoort.wastafel,
-                    Bouwkundigelementdetailsoort.closetcombinatie,
-                ),
-            ),
-            kast3,
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                naam="Slaapkamer2",
-                oppervlakte=12.978,
-                verwarmd=True,
-            ),
-            kast4,
-        ],
-    )
+    eenheid = meergezinswoning_van_71_m2(bouwjaar=2016)
 
     with pytest.warns(
         UserWarning, match="geen WOZ-waarde aangeleverd"
@@ -927,3 +841,313 @@ def test_woning_van_35_m2_uit_2023_in_corop_gebied_amsterdam_krijgt_in_onderdeel
     assert punten_per_naam(groep)["Onderdeel II"] == 36.6
     assert groep.punten == 56.75
     vergelijk_met_testreferentie(eenheid, groep)
+
+
+# Het minimum van 40 punten voor woningen uit 2015 tot en met 2019
+
+
+def test_woning_uit_2016_met_minstens_110_punten_krijgt_minimaal_40_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+):
+    """Een woning uit 2016 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.2: "Indien een woning is
+    gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal
+    aantal punten na saldering van de punten van de onderdelen 1 tot en met 10
+    en 12, 110 of meer is, worden minimaal 40 punten toegekend."
+
+    De woning haalt voor die rubrieken meer dan 110 punten. Onderdeel I
+    en II geven samen minder dan 40 punten; de waardering 'Nieuwbouw: min. 40
+    punten' vult ze aan tot dat minimum.
+
+    De eenheid heeft geen energieprestatie. Daarvoor waarschuwt de rubriek
+    energieprestatie, die de package voor het minimum van 40 punten
+    meewaardeert.
+
+    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
+    genereert de package een `UserWarning`."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=2016,
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning, match="energieprestaties") as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert punten_per_naam(groep)["Nieuwbouw: min. 40 punten"] == 5.13
+    assert groep.punten == 40.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+@pytest.mark.parametrize(
+    ("renovatiedatum", "energieprestatie"),
+    [
+        pytest.param(
+            date(2019, 1, 1),
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2027, 2, 23),
+                label=Energielabel.ap4,
+                waarde="1.48",
+            ),
+            id="renovatie_2019_label_a4plus",
+        ),
+        pytest.param(
+            date(2021, 1, 1),
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2027, 2, 23),
+                label=Energielabel.app,
+                waarde="0.3",
+            ),
+            id="renovatie_2021_waarde_0_3",
+        ),
+    ],
+)
+def test_gerenoveerde_woning_uit_2016_met_minstens_110_punten_krijgt_minimaal_40_punten(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    renovatiedatum,
+    energieprestatie,
+):
+    """Een gerenoveerde woning uit 2016 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.2: "Indien een woning is
+    gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal
+    aantal punten na saldering van de punten van de onderdelen 1 tot en met 10
+    en 12, 110 of meer is, worden minimaal 40 punten toegekend."
+
+    De woning haalt voor die rubrieken meer dan 110 punten. De package
+    past de regel toe op het bouwjaar en leest de renovatie niet.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5: "We
+    passen deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar
+    voor bouwjaar 2015-2019."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=2016,
+        renovatie=EenhedenRenovatie(
+            omschrijving="hoogniveau renovatie",
+            datum=renovatiedatum,
+            bedrag_investering=10000,
+        ),
+        energieprestaties=[energieprestatie],
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
+            ),
+        ],
+    )
+
+    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert punten_per_naam(groep)["Nieuwbouw: min. 40 punten"] == 5.13
+    assert groep.punten == 40.0
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+@pytest.mark.parametrize(
+    "renovatiedatum",
+    [
+        pytest.param(date(2014, 12, 31), id="renovatie_eind_2014"),
+        pytest.param(date(2022, 1, 1), id="renovatie_2022"),
+    ],
+)
+def test_woning_uit_1912_met_renovatie_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie, renovatiedatum
+):
+    """Een woning uit 1912 die buiten 2015 tot en met 2019 is gerenoveerd, krijgt geen minimum van 40 punten voor de WOZ-waarde.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.2: "Indien een woning is
+    gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal
+    aantal punten na saldering van de punten van de onderdelen 1 tot en met 10
+    en 12, 110 of meer is, worden minimaal 40 punten toegekend."
+
+    De woning haalt voor de rubrieken 1 tot en met 10 en 12 meer dan 110
+    punten, maar is niet in 2015 tot en met 2019 gebouwd. De package leest de
+    renovatie niet.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5: "We
+    passen deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar
+    voor bouwjaar 2015-2019."
+
+    Zonder minimum is het totaal de som van onderdeel I en II, afgerond op een
+    kwart punt.
+
+    Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Tel de punten van de
+    twee onderdelen bij elkaar op en rond volgens de instructie van paragraaf
+    2.1.4 af op een kwart punt."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=1912,
+        renovatie=EenhedenRenovatie(
+            omschrijving="hoogniveau renovatie",
+            datum=renovatiedatum,
+            bedrag_investering=10000,
+        ),
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2027, 2, 23),
+                label=Energielabel.ap4,
+                waarde="1.48",
+            )
+        ],
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
+            ),
+        ],
+    )
+
+    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert "Nieuwbouw: min. 40 punten" not in punten_per_naam(groep)
+    assert groep.punten == 34.75
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+# De cap op de WOZ
+
+
+def test_woz_punten_worden_beperkt_tot_33_procent_van_de_waardering(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+):
+    """De punten voor de WOZ-waarde zijn niet meer dan 33 procent van de waardering van een woning die zonder die beperking 187 punten of meer heeft.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.3: "Het aandeel van de
+    punten voor de WOZ-waarde in de waardering van de woning is niet groter dan
+    33 procent. Deze beperking geldt niet voor woningen als bedoeld in
+    onderdeel 11.1, onder a, en niet voor woningen waarvan de waardering zonder
+    die beperking lager is dan 187 punten."
+
+    De woning haalt in de andere rubrieken 135,75 punten. Ook met de
+    beperking komt de waardering boven 186 punten.
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 11: "Indien met
+    toepassing van 11.3 het puntenaandeel voor de WOZ-waarde wordt beperkt op
+    ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
+    beneden op hele punten."
+
+    De keuken heeft geen aanrecht. Daarvoor waarschuwt de rubriek keuken, die
+    de package voor de beperking meewaardeert.
+
+    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
+    genereert de package een `UserWarning`."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=1981,
+        aanrecht_mm=None,
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 3, 27),
+                einddatum=date(2031, 3, 27),
+                label=Energielabel.ap3,
+                waarde="170",
+            )
+        ],
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=497000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=553900
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=613900
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning, match="aanrecht") as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert punten_per_naam(groep)["Maximering WOZ-punten tot 33% van totaal"] == -16.33
+    assert groep.punten == 66.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_woning_die_door_de_cap_onder_187_punten_komt_krijgt_186_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+):
+    """Een woning die zonder de cap op de WOZ meer dan 186 punten heeft en met de cap minder dan 187, krijgt een waardering van 186 punten.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.3: "Wanneer een woning
+    zonder die beperking een waardering heeft van meer dan 186 punten en door
+    deze beperking een waardering krijgt die lager is dan 187 punten, geldt
+    een waardering van 186 punten voor de woning."
+
+    De woning haalt in de andere rubrieken 119,75 punten. De punten voor
+    de WOZ-waarde vullen de waardering aan tot 186 punten.
+
+    De keuken heeft geen aanrecht. Daarvoor waarschuwt de rubriek keuken, die
+    de package voor de beperking meewaardeert.
+
+    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
+    genereert de package een `UserWarning`."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=1981,
+        aanrecht_mm=None,
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 3, 27),
+                einddatum=date(2031, 3, 27),
+                label=Energielabel.a,
+                waarde="170",
+            )
+        ],
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=597000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=653900
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=713900
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning, match="aanrecht") as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert (
+        punten_per_naam(groep)["Maximering WOZ-punten tot 186 punten totaal"] == -29.5
+    )
+    assert groep.punten == 66.25
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
