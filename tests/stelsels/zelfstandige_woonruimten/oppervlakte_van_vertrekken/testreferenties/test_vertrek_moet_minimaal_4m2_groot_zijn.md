@@ -34,7 +34,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer1",
-      "oppervlakte": 3.0
+      "oppervlakte": 3.99
     },
     {
       "id": "slaapkamer2",

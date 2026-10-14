@@ -66,6 +66,35 @@ def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_vertrekken(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+@pytest.mark.parametrize(
+    ("oppervlakte", "verwachte_punten"),
+    [
+        pytest.param(10.49, 10.0, id="net_onder_een_halve_m2"),
+        pytest.param(10.5, 11.0, id="precies_een_halve_m2"),
+    ],
+)
+def test_oppervlakte_wordt_vanaf_een_halve_m2_naar_boven_afgerond(
+    oppervlakte_van_vertrekken,
+    vergelijk_met_testreferentie,
+    oppervlakte,
+    verwachte_punten,
+):
+    """De oppervlakte van de vertrekken wordt vanaf 0,5 m² naar boven afgerond op hele m².
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "bij 0,5 m² of
+    meer wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=oppervlakte)]
+    )
+
+    groep = oppervlakte_van_vertrekken.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.woonkamer.naam: oppervlakte}
+    assert groep.punten == verwachte_punten
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Voorwaarden van een vertrek
 
 
@@ -79,7 +108,7 @@ def test_vertrek_moet_minimaal_4m2_groot_zijn(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=3),
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=3.99),
             ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer2", oppervlakte=4),
         ]
     )
