@@ -172,6 +172,72 @@ def test_woz_waarde_per_m2_ruim_60_procent_onder_het_gemiddelde_van_het_corop_ge
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+@pytest.mark.parametrize(
+    ("woz_waarde", "verwachte_punten"),
+    [
+        pytest.param(
+            318329,
+            10.0,
+            id="net_meer_dan_10_procent_lager",
+            marks=pytest.mark.toelichting(
+                "het verschil is -10,0003%; het rapport rondt af op -10,00"
+            ),
+        ),
+        pytest.param(318330, 12.0, id="precies_10_procent_lager"),
+        pytest.param(389070, 12.0, id="precies_10_procent_hoger"),
+        pytest.param(
+            389071,
+            14.0,
+            id="net_meer_dan_10_procent_hoger",
+            marks=pytest.mark.toelichting(
+                "het verschil is 10,0003%; het rapport rondt af op 10,00"
+            ),
+        ),
+    ],
+)
+def test_punten_hangen_af_van_het_verschil_met_het_gemiddelde_van_het_corop_gebied(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    woz_waarde,
+    verwachte_punten,
+):
+    """De punten voor de WOZ-waarde hangen af van hoeveel de WOZ-waarde per m² afwijkt van het gemiddelde van het COROP-gebied.
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 11.1: "per m²
+    gebruiksoppervlakte is meer dan 10% hoger dan de gemiddelde WOZ-waarde per
+    m² gebruiksoppervlakte van woningen in het COROP-gebied waarbinnen de
+    woonruimte is gelegen." met "14 punten", "per m² gebruiksoppervlakte is
+    maximaal 10% hoger of lager dan de gemiddelde WOZ-waarde per m²
+    gebruiksoppervlakte" met "12 punten" en "per m² gebruiksoppervlakte is meer
+    dan 10% lager dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte" met
+    "10 punten".
+
+    Het gemiddelde van het COROP-gebied staat per waardepeildatum in de
+    Uitvoeringsregeling huurprijzen woonruimte (bijlage IIa): voor
+    Groot-Rijnmond bij waardepeildatum 1 januari 2024 is dat € 3.537 per m².
+    Bij 100 m² gebruiksoppervlakte ligt 10% lager op € 318.330 en 10% hoger
+    op € 389.070.
+    """
+    eenheid = EenhedenEenheid(
+        adres=EenhedenEenheidadres(
+            woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
+        ),
+        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
+            bag_gebruikers_oppervlakte=100
+        ),
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=woz_waarde
+            ),
+        ],
+    )
+
+    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {"Percentage verschil": verwachte_punten}
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Geen WOZ-waarde
 
 
