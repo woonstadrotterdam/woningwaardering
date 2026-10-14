@@ -274,6 +274,38 @@ def test_buitenruimten_krijgen_samen_hooguit_15_punten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_maximum_van_15_punten_geldt_voor_prive_en_gemeenschappelijke_buitenruimten_samen(
+    buitenruimten, vergelijk_met_testreferentie
+):
+    """Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voor de rubriek
+    buitenruimten (rubriek 8) kan in totaal maximaal vijftien punten worden
+    toegekend."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.tuin, oppervlakte=30),
+            ruimte(
+                Ruimtedetailsoort.dakterras,
+                oppervlakte=30,
+                gedeeld_met_aantal_adressen=3,
+            ),
+        ]
+    )
+
+    groep = buitenruimten.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {
+        "Privé": 10.5,
+        "Privé buitenruimten aanwezig": 2.0,
+        "Gedeeld met 3 adressen": 7.5,
+        "Maximaal 15 punten": -5.0,
+    }
+    assert groep.punten == 15.0
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Geen buitenruimte
 
 
