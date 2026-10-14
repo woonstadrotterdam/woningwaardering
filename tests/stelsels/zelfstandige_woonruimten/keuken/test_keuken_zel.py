@@ -2,7 +2,7 @@
 
 import pytest
 
-from tests.input import aanrecht, badkamer, element, ruimte
+from tests.input import aanrecht, element, ruimte
 from tests.utils import (
     aantal_per_naam,
     assert_stelselgroep_output,
@@ -424,8 +424,10 @@ def test_extra_voorzieningen_in_een_ruimte_zonder_aanrecht_krijgen_geen_punten(
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(1000)]),
-            badkamer(
-                Installatiesoort.inbouw_koelkast, Installatiesoort.inbouw_koelkast
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.inbouw_koelkast,
+                Installatiesoort.inbouw_koelkast,
             ),
         ]
     )

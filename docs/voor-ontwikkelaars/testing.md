@@ -54,7 +54,8 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 Installatiesoort.bad,
                 Installatiesoort.wastafel,
                 Installatiesoort.kastruimte,
@@ -97,7 +98,7 @@ De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berek
 
 ### Input
 
-Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `badkamer(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
+Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `element(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
 
 Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
 
@@ -143,9 +144,11 @@ Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staa
 ```python
 eenheid = EenhedenEenheid(
     ruimten=[
-        badkamer(Installatiesoort.douche, naam="Badkamer1"),
-        badkamer(Installatiesoort.bad, naam="Badkamer2"),
-        badkamer(Installatiesoort.bad_en_douche, naam="Badkamer3"),
+        ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.douche, naam="Badkamer1"),
+        ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.bad, naam="Badkamer2"),
+        ruimte(
+            Ruimtedetailsoort.badkamer, Installatiesoort.bad_en_douche, naam="Badkamer3"
+        ),
     ]
 )
 

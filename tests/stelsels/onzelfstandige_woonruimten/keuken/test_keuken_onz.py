@@ -2,7 +2,7 @@
 
 import pytest
 
-from tests.input import aanrecht, badkamer, element, ruimte
+from tests.input import aanrecht, element, ruimte
 from tests.utils import (
     assert_stelselgroep_output,
     punten_per_bovenliggende,
@@ -613,8 +613,10 @@ def test_extra_voorzieningen_in_een_ruimte_zonder_aanrecht_krijgen_geen_punten(
                 elementen=[aanrecht(1000)],
                 gedeeld_met_aantal_onzelfstandige_woonruimten=aantal_woonruimten,
             ),
-            badkamer(
-                Installatiesoort.inbouw_koelkast, Installatiesoort.inbouw_koelkast
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.inbouw_koelkast,
+                Installatiesoort.inbouw_koelkast,
             ),
         ]
     )

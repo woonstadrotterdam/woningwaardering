@@ -45,9 +45,9 @@ def ruimte(
     gedeeld_met_aantal_adressen: int | None = None,
     verwarmd: bool | None = None,
     verkoeld: bool | None = None,
-    lengte_mm: int | None = None,
-    breedte_mm: int | None = None,
-    hoogte_mm: int | None = None,
+    lengte: int | None = None,
+    breedte: int | None = None,
+    hoogte: int | None = None,
     aantal: int | None = None,
 ) -> EenhedenRuimte:
     """Maak een ruimte; de naam volgt uit de detailsoort en de id uit de naam.
@@ -64,8 +64,8 @@ def ruimte(
     Zonder `verwarmd` is de ruimte niet verwarmd, zonder `verkoeld` heeft ze
     geen verkoelingsfunctie.
 
-    Zonder `lengte_mm`, `breedte_mm` en `hoogte_mm` heeft de ruimte geen
-    afmetingen, alleen een oppervlakte.
+    Zonder `lengte`, `breedte` en `hoogte` heeft de ruimte geen
+    afmetingen, alleen een oppervlakte. Afmetingen zijn in mm, zoals in VERA.
 
     Zonder `aantal` is de ruimte één parkeerplek. Geef `aantal` mee wanneer de
     ruimte voor meer dan één parkeerplek van dezelfde soort staat.
@@ -86,9 +86,9 @@ def ruimte(
         gedeeld_met_aantal_adressen=gedeeld_met_aantal_adressen,
         verwarmd=verwarmd,
         verkoeld=verkoeld,
-        lengte=lengte_mm,
-        breedte=breedte_mm,
-        hoogte=hoogte_mm,
+        lengte=lengte,
+        breedte=breedte,
+        hoogte=hoogte,
     )
     # Het model geeft `aantal` zelf de standaardwaarde 1; alleen een meegegeven
     # aantal komt in de input van de test.
@@ -97,30 +97,23 @@ def ruimte(
     return nieuwe_ruimte
 
 
-def badkamer(
-    *installaties: InstallatiesoortReferentiedata,
-    elementen: Sequence[BouwkundigElementenBouwkundigElement] = (),
-    naam: str | None = None,
-) -> EenhedenRuimte:
-    return ruimte(
-        Ruimtedetailsoort.badkamer, *installaties, elementen=elementen, naam=naam
-    )
-
-
 def element(
     detail_soort: BouwkundigelementdetailsoortReferentiedata,
     *,
     id: str | None = None,
-    lengte_mm: int | None = None,
+    lengte: int | None = None,
 ) -> BouwkundigElementenBouwkundigElement:
-    """Maak een bouwkundig element; id en naam volgen uit de detailsoort."""
+    """Maak een bouwkundig element; id en naam volgen uit de detailsoort.
+
+    De `lengte` is in mm, zoals in VERA.
+    """
     naam = detail_soort.naam or ""
     return BouwkundigElementenBouwkundigElement(
         id=id or naam.lower().replace(" ", "_"),
         naam=naam,
         soort=detail_soort.parent,
         detail_soort=detail_soort,
-        lengte=lengte_mm,
+        lengte=lengte,
     )
 
 
@@ -135,9 +128,9 @@ def elementen(
 
 
 def aanrecht(
-    lengte_mm: int, *, id: str = "aanrecht"
+    lengte: int, *, id: str = "aanrecht"
 ) -> BouwkundigElementenBouwkundigElement:
-    return element(Bouwkundigelementdetailsoort.aanrecht, id=id, lengte_mm=lengte_mm)
+    return element(Bouwkundigelementdetailsoort.aanrecht, id=id, lengte=lengte)
 
 
 def meergezinswoning_van_71_m2(
@@ -190,9 +183,9 @@ def meergezinswoning_van_71_m2(
             ruimte(
                 Ruimtedetailsoort.balkon,
                 oppervlakte=1.82259,
-                lengte_mm=1290,
-                breedte_mm=1500,
-                hoogte_mm=2600,
+                lengte=1290,
+                breedte=1500,
+                hoogte=2600,
             ),
             technische_ruimte,
             ruimte(Ruimtedetailsoort.schuur, oppervlakte=0.2345),
@@ -289,9 +282,9 @@ def meergezinswoning_van_79_m2(
             ruimte(
                 Ruimtedetailsoort.balkon,
                 oppervlakte=4.61588,
-                lengte_mm=1680,
-                breedte_mm=3080,
-                hoogte_mm=2440,
+                lengte=1680,
+                breedte=3080,
+                hoogte=2440,
             ),
             ruimte(Ruimtedetailsoort.meterruimte, oppervlakte=0.27125),
             ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.1218, verwarmd=True),

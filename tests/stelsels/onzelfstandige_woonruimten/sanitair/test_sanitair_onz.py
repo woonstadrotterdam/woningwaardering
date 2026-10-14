@@ -2,7 +2,7 @@
 
 import pytest
 
-from tests.input import aanrecht, badkamer, elementen, ruimte
+from tests.input import aanrecht, elementen, ruimte
 from tests.utils import (
     assert_stelselgroep_output,
     punten_per_bovenliggende,
@@ -43,9 +43,15 @@ def test_punten_voor_bad_en_douche(sanitair, vergelijk_met_testreferentie):
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(Installatiesoort.douche, naam="Badkamer1"),
-            badkamer(Installatiesoort.bad, naam="Badkamer2"),
-            badkamer(Installatiesoort.bad_en_douche, naam="Badkamer3"),
+            ruimte(
+                Ruimtedetailsoort.badkamer, Installatiesoort.douche, naam="Badkamer1"
+            ),
+            ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.bad, naam="Badkamer2"),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.bad_en_douche,
+                naam="Badkamer3",
+            ),
         ]
     )
 
@@ -71,7 +77,13 @@ def test_bad_en_douche_in_dezelfde_ruimte_is_een_voorziening(
     worden meegegeven of als losse `bad` en `douche`."
     """
     eenheid = EenhedenEenheid(
-        ruimten=[badkamer(Installatiesoort.bad, Installatiesoort.douche)]
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.bad,
+                Installatiesoort.douche,
+            )
+        ]
     )
 
     groep = sanitair.waardeer(eenheid)
@@ -114,7 +126,9 @@ def test_drempelloze_inrijdouche_krijgt_de_punten_van_een_douche(
     Bron: wettekst, Bijlage I onder B, onderdeel 6.1: "Douche 3 punten".
     """
     eenheid = EenhedenEenheid(
-        ruimten=[badkamer(Installatiesoort.drempelloze_inrijdouche)]
+        ruimten=[
+            ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.drempelloze_inrijdouche)
+        ]
     )
 
     groep = sanitair.waardeer(eenheid)
@@ -142,7 +156,7 @@ def test_toilet_krijgt_in_toiletruimte_een_punt_meer_dan_in_badkamer(
     toiletten = (Installatiesoort.staand_toilet, Installatiesoort.hangend_toilet)
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(*toiletten),
+            ruimte(Ruimtedetailsoort.badkamer, *toiletten),
             ruimte(Ruimtedetailsoort.toiletruimte, *toiletten),
         ]
     )
@@ -205,7 +219,8 @@ def test_wastafels_in_de_badkamer_tellen_allemaal(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 Installatiesoort.wastafel,
                 Installatiesoort.wastafel,
                 Installatiesoort.meerpersoonswastafel,
@@ -519,7 +534,13 @@ def test_vanaf_8_onzelfstandige_woonruimten_geldt_het_wastafelmaximum_niet_voor_
     meerpersoonswastafel = Installatiesoort.meerpersoonswastafel
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(wastafel, wastafel, meerpersoonswastafel, meerpersoonswastafel),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                wastafel,
+                wastafel,
+                meerpersoonswastafel,
+                meerpersoonswastafel,
+            ),
             ruimte(
                 Ruimtedetailsoort.woonkamer,
                 wastafel,
@@ -750,7 +771,8 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 Installatiesoort.bad,
                 Installatiesoort.wastafel,
                 Installatiesoort.kastruimte,
@@ -779,7 +801,8 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_bad_en_douche(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 Installatiesoort.bad,
                 Installatiesoort.douche,
                 Installatiesoort.wastafel,
@@ -859,7 +882,8 @@ def test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 Installatiesoort.drempelloze_inrijdouche,
                 Installatiesoort.wastafel,
                 Installatiesoort.handdoekenradiator,
@@ -919,7 +943,8 @@ def test_sanitair_als_bouwkundig_element_telt_als_installatie(
     douche = Bouwkundigelementdetailsoort.douche
     eenheid = EenhedenEenheid(
         ruimten=[
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 naam="Badkamer1",
                 elementen=elementen(Bouwkundigelementdetailsoort.wastafel),
             ),
@@ -928,9 +953,16 @@ def test_sanitair_als_bouwkundig_element_telt_als_installatie(
                 elementen=elementen(Bouwkundigelementdetailsoort.closetcombinatie),
             ),
             ruimte(Ruimtedetailsoort.doucheruimte, elementen=elementen(douche)),
-            badkamer(naam="Badkamer2", elementen=elementen(bad)),
-            badkamer(naam="Badkamer3", elementen=elementen(bad, douche)),
-            badkamer(
+            ruimte(
+                Ruimtedetailsoort.badkamer, naam="Badkamer2", elementen=elementen(bad)
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                naam="Badkamer3",
+                elementen=elementen(bad, douche),
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
                 naam="Badkamer4",
                 elementen=elementen(bad, bad, douche, douche),
             ),

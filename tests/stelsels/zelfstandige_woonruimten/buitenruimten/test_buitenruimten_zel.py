@@ -163,8 +163,8 @@ def test_gemeenschappelijke_buitenruimte_boven_de_minimumafmeting_wordt_gewaarde
                 Ruimtedetailsoort.tuin,
                 oppervlakte=6,
                 gedeeld_met_aantal_adressen=2,
-                lengte_mm=10000,
-                breedte_mm=2000,
+                lengte=10000,
+                breedte=2000,
             )
         ]
     )
@@ -203,27 +203,27 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
                 naam="Balkon1",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte_mm=1150,
-                breedte_mm=2800,
-                hoogte_mm=3170,
+                lengte=1150,
+                breedte=2800,
+                hoogte=3170,
             ),
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon2",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte_mm=2800,
-                breedte_mm=1150,
-                hoogte_mm=3170,
+                lengte=2800,
+                breedte=1150,
+                hoogte=3170,
             ),
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon3",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte_mm=3170,
-                breedte_mm=2800,
-                hoogte_mm=1150,
+                lengte=3170,
+                breedte=2800,
+                hoogte=1150,
             ),
         ]
     )

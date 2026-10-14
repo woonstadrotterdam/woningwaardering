@@ -84,8 +84,8 @@ def test_prive_buitenruimte_onder_de_minimumafmeting_wordt_gewaardeerd(
             ruimte(
                 Ruimtedetailsoort.balkon,
                 oppervlakte=1,
-                lengte_mm=2000,
-                breedte_mm=500,
+                lengte=2000,
+                breedte=500,
             )
         ]
     )
@@ -369,8 +369,8 @@ def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaarde
                 detail_soort,
                 oppervlakte=oppervlakte,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=4,
-                lengte_mm=lengte_mm,
-                breedte_mm=breedte_mm,
+                lengte=lengte_mm,
+                breedte=breedte_mm,
             )
         ]
     )
@@ -408,9 +408,9 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
                 Ruimtedetailsoort.tuin,
                 oppervlakte=6,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=4,
-                lengte_mm=1000,
-                breedte_mm=1000,
-                hoogte_mm=2500,
+                lengte=1000,
+                breedte=1000,
+                hoogte=2500,
             )
         ]
     )
