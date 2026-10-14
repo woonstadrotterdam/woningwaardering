@@ -2,7 +2,6 @@ from datetime import date
 
 from loguru import logger
 
-from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
     waardeer_bijzondere_voorzieningen,
@@ -61,12 +60,3 @@ class BijzondereVoorzieningen(Stelselgroep):
         )
 
         return woningwaardering_groep
-
-
-if __name__ == "__main__":  # pragma: no cover
-    with DevelopmentContext(
-        instance=BijzondereVoorzieningen(peildatum=date(2026, 7, 1)),
-        strict=False,  # False is log warnings, True is raise warnings
-        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")

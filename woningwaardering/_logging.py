@@ -19,18 +19,3 @@ def log_userwarning(
 ) -> None:
     logger.warning(f"{category.__name__}: {message}")
     _original_showwarning(message, category, filename, lineno, file, line)
-
-
-def verkort_path(name: str, regel: int, dev: bool = False) -> str:
-    name = name.replace("zelfstandige_woonruimten", "zelfstandig")
-    parts = name.split(".")
-    if len(parts) > 4:
-        package = parts[0]
-        stelsel = parts[-3]
-        stelselgroep = parts[-1]
-        path = f"{package}.{stelsel}.{stelselgroep}"
-    else:
-        path = name
-    if dev:
-        path = path.replace("woningwaardering.", "")
-    return f"{path}:{regel}"

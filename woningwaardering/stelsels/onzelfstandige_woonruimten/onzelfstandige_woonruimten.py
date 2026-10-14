@@ -1,6 +1,5 @@
 from datetime import date
 
-from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Aftrekpunten,
     BijzondereVoorzieningen,
@@ -43,12 +42,3 @@ class OnzelfstandigeWoonruimten(Stelsel):
                 PrijsopslagMonumenten,
             ],
         )
-
-
-if __name__ == "__main__":  # pragma: no cover
-    with DevelopmentContext(
-        instance=OnzelfstandigeWoonruimten(peildatum=date(2026, 7, 1)),
-        strict=False,  # False is log warnings, True is raise warnings
-        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/onzelfstandige_woonruimten/input/15004000185.json")
