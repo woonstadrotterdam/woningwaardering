@@ -95,6 +95,36 @@ def test_aanrecht_van_5500mm_krijgt_13_punten_in_een_keuken_gedeeld_met_8_woonru
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_keuken_gedeeld_met_7_woonruimten(
+    keuken, vergelijk_met_testreferentie
+):
+    """Een aanrecht van 5,5 meter krijgt 10 punten als de keuken met 7 onzelfstandige woonruimten wordt gedeeld.
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten",
+    "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
+    gebruiksrecht hebben tot deze keuken) 13 punten" en "De hieronder
+    weergegeven punten dienen te worden gedeeld door het aantal onzelfstandige
+    woonruimten dat toegang en gebruiksrecht heeft".
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.keuken,
+                elementen=[aanrecht(5500)],
+                gedeeld_met_aantal_onzelfstandige_woonruimten=7,
+            )
+        ]
+    )
+
+    groep = keuken.waardeer(eenheid)
+
+    # 10 punten gedeeld door 7 woonruimten is 1,43 punt, afgerond op kwartpunten
+    # 1,5; 13 punten zouden 1,86 punt geven.
+    assert punten_per_naam(groep)["Lengte aanrecht"] == 1.43
+    assert groep.punten == 1.5
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_privekeuken(
     keuken, vergelijk_met_testreferentie
 ):
@@ -226,6 +256,35 @@ def test_keuken_zonder_aanrecht_geeft_een_waarschuwing(
         groep = keuken.waardeer(eenheid)
 
     assert punten_per_naam(groep) == {}
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_aanrecht_zonder_lengte_geeft_een_waarschuwing(
+    keuken, vergelijk_met_testreferentie
+):
+    """Een aanrecht zonder lengte is incomplete input.
+
+    De keuken wordt gewaardeerd op het aanrecht dat wel een lengte heeft.
+
+    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
+    genereert de package een `UserWarning`."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.keuken,
+                elementen=[
+                    aanrecht(2000, id="aanrecht_1"),
+                    element(Bouwkundigelementdetailsoort.aanrecht, id="aanrecht_2"),
+                ],
+            )
+        ]
+    )
+
+    with pytest.warns(UserWarning, match="geen lengte") as waarschuwingen:
+        groep = keuken.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {"Lengte aanrecht": 7.0}
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
