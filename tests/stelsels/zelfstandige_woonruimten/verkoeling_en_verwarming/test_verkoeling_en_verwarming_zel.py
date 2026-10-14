@@ -177,6 +177,39 @@ def test_verwarmde_overige_ruimten_krijgen_samen_hooguit_4_punten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_verwarmde_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_punten(
+    verkoeling_en_verwarming, vergelijk_met_testreferentie
+):
+    """Verwarmde overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
+
+    Bron: wettekst, Bijlage I onder A, rubriek 3: "verwarming per overige ruimte
+    en verkeersruimte 1 punt (maximaal 4 punten)".
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.berging, naam="Berging1", verwarmd=True),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging2", verwarmd=True),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging3", verwarmd=True),
+            ruimte(Ruimtedetailsoort.gang, naam="Gang1", verwarmd=True),
+            ruimte(Ruimtedetailsoort.gang, naam="Gang2", verwarmd=True),
+        ]
+    )
+
+    groep = verkoeling_en_verwarming.waardeer(eenheid)
+
+    assert punten_per_bovenliggende(groep) == {
+        "Verwarmde overige en verkeersruimten": {
+            "Berging1": 1.0,
+            "Berging2": 1.0,
+            "Berging3": 1.0,
+            "Gang1": 1.0,
+            "Gang2": 1.0,
+            "Maximaal 4 punten": -1.0,
+        }
+    }
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Open keuken
 
 
@@ -249,7 +282,7 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
             ruimte(
                 Ruimtedetailsoort.woonkamer,
                 naam="Woonkamer1",
-                elementen=[aanrecht(500)],
+                elementen=[aanrecht(999)],
                 verwarmd=True,
             ),
             ruimte(

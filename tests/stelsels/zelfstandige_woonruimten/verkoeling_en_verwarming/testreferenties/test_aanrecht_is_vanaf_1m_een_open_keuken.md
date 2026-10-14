@@ -58,7 +58,7 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 500.0
+          "lengte": 999.0
         }
       ],
       "verwarmd": true

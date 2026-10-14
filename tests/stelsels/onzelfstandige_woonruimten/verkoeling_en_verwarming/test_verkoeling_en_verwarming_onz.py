@@ -197,6 +197,49 @@ def test_verwarmde_prive_overige_ruimten_krijgen_samen_hooguit_4_punten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_verwarmde_prive_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_punten(
+    verkoeling_en_verwarming, vergelijk_met_testreferentie
+):
+    """Verwarmde privé overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
+
+    Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privé overige
+    ruimte en verkeersruimte 1 punt".
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmde
+    overige ruimte en verkeersruimte wordt, ongeacht de verwarmingswijze, een
+    waardering van één punt toegepast, voor zover de verwarming tot de
+    onroerende zaak en zijn onroerende aanhorigheden behoort. Hiervoor geldt
+    een maximum van vier punten."
+
+    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
+    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
+    overeenkomstige toepassing is."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.berging, naam="Berging1", verwarmd=True),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging2", verwarmd=True),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging3", verwarmd=True),
+            ruimte(Ruimtedetailsoort.gang, naam="Gang1", verwarmd=True),
+            ruimte(Ruimtedetailsoort.gang, naam="Gang2", verwarmd=True),
+        ]
+    )
+
+    groep = verkoeling_en_verwarming.waardeer(eenheid)
+
+    assert punten_per_bovenliggende(groep) == {
+        "Verwarmde overige en verkeersruimten": {
+            "Berging1": 1.0,
+            "Berging2": 1.0,
+            "Berging3": 1.0,
+            "Gang1": 1.0,
+            "Gang2": 1.0,
+            "Maximaal 4 punten": -1.0,
+        }
+    }
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Gemeenschappelijke ruimten
 
 
@@ -622,7 +665,7 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
             ruimte(
                 Ruimtedetailsoort.woonkamer,
                 naam="Woonkamer1",
-                elementen=[aanrecht(500)],
+                elementen=[aanrecht(999)],
                 verwarmd=True,
             ),
             ruimte(
