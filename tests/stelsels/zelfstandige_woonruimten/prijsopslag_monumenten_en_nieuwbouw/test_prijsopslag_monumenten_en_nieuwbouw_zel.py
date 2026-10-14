@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from tests.input import meergezinswoning_van_79_m2
 from tests.utils import (
     assert_stelselgroep_output,
     opslagpercentage_per_naam,
@@ -14,7 +15,7 @@ from tests.utils import (
 from woningwaardering.stelsels.zelfstandige_woonruimten.prijsopslag_monumenten_en_nieuwbouw import (
     PrijsopslagMonumentenEnNieuwbouw,
 )
-from woningwaardering.vera.bvg.generated import EenhedenEenheid
+from woningwaardering.vera.bvg.generated import EenhedenEenheid, EenhedenWozEenheid
 from woningwaardering.vera.referentiedata import Eenheidmonument
 
 
@@ -248,6 +249,81 @@ def test_rijksbeschermd_stadsgezicht_zonder_bouwjaar_krijgt_met_waarschuwing_gee
 
     assert opslagpercentage_per_naam(groep) == {}
     assert groep.opslagpercentage == 0.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+# Nieuwbouw
+
+
+def test_nieuwbouwwoning_met_149_punten_krijgt_10_procent_opslag(
+    prijsopslag_monumenten_en_nieuwbouw, vergelijk_met_testreferentie
+):
+    """Een woning met 149 punten die na 1 juli 2024 voor het eerst in gebruik is genomen en waarvan de bouw voor 1 januari 2028 is gestart, krijgt 10 procent opslag.
+
+    Bron: wettekst, artikel 8a, vierde lid: "wordt met 10% vermeerderd indien
+    die woonruimte na 1 juli 2024 voor het eerst in gebruik wordt genomen als
+    woonruimte en de bouw van deze woonruimte, of de verbouw van een ruimte met
+    een andere gebruiksfunctie dan een woonfunctie naar een woonruimte met een
+    woonfunctie, voor 1 januari 2028 is gestart."
+
+    De opslag geldt voor een woning in de middensector. De woning haalt zonder
+    opslag 149 punten en valt daarmee in de middensector.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 1.3.1: "Hoger dan
+    € 932,93 maar maximaal € 1.228,07 of 144 t/m 186 punten"
+
+    De keuken heeft geen aanrecht en de woning heeft geen bouwjaar. Daarvoor
+    waarschuwen de rubrieken keuken en punten voor de WOZ-waarde, die de
+    package voor het puntentotaal meewaardeert.
+
+    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
+    genereert de package een `UserWarning`."
+    """
+    eenheid = meergezinswoning_van_79_m2(
+        begin_bouwdatum=date(2023, 1, 1),
+        in_exploitatiedatum=date(2024, 8, 1),
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=313000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=307000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=341000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2021, 1, 1), vastgestelde_waarde=283000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2020, 1, 1), vastgestelde_waarde=273000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2019, 1, 1), vastgestelde_waarde=237000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2018, 1, 1), vastgestelde_waarde=201000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2017, 1, 1), vastgestelde_waarde=163000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2016, 1, 1), vastgestelde_waarde=142000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2015, 1, 1), vastgestelde_waarde=135000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2014, 1, 1), vastgestelde_waarde=125000
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        groep = prijsopslag_monumenten_en_nieuwbouw.waardeer(eenheid)
+
+    assert opslagpercentage_per_naam(groep) == {"Nieuwbouw": 0.1}
+    assert groep.opslagpercentage == 0.1
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 

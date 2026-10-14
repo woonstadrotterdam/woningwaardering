@@ -5,6 +5,7 @@ standaardwaarde. Zie docs/voor-ontwikkelaars/testing.md.
 """
 
 from collections.abc import Sequence
+from datetime import date
 
 from woningwaardering.vera.bvg.generated import (
     BouwkundigElementenBouwkundigElement,
@@ -21,6 +22,9 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     BouwkundigelementdetailsoortReferentiedata,
+    Energielabel,
+    Energieprestatiesoort,
+    Energieprestatiestatus,
     InstallatiesoortReferentiedata,
     Pandsoort,
     Ruimtedetailsoort,
@@ -245,5 +249,69 @@ def meergezinswoning_van_71_m2(
                 verwarmd=True,
             ),
             kast4,
+        ],
+    )
+
+
+def meergezinswoning_van_79_m2(
+    *,
+    begin_bouwdatum: date,
+    in_exploitatiedatum: date,
+    woz_eenheden: Sequence[EenhedenWozEenheid] = (),
+) -> EenhedenEenheid:
+    """Maak een meergezinswoning van 79 m² met elf ruimten, waaronder vijf vertrekken en een balkon.
+
+    Gebruik haar voor een beleidsregel die het puntentotaal van alle rubrieken
+    nodig heeft, zoals de opslag voor nieuwbouw.
+
+    De woning heeft geen bouwjaar. De keuken heeft geen aanrecht en de badkamer
+    en de toiletruimte hebben geen sanitair.
+    """
+    return EenhedenEenheid(
+        id="meergezinswoning_van_79_m2",
+        begin_bouwdatum=begin_bouwdatum,
+        in_exploitatiedatum=in_exploitatiedatum,
+        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
+        woz_eenheden=list(woz_eenheden) or None,
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energie_index,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2019, 7, 3),
+                einddatum=date(2029, 7, 3),
+                label=Energielabel.b,
+                waarde="1.24",
+            )
+        ],
+        gebruiksoppervlakte=79,
+        monumenten=[],
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.balkon,
+                oppervlakte=4.61588,
+                lengte_mm=1680,
+                breedte_mm=3080,
+                hoogte_mm=2440,
+            ),
+            ruimte(Ruimtedetailsoort.meterruimte, oppervlakte=0.27125),
+            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.1218, verwarmd=True),
+            ruimte(Ruimtedetailsoort.entree, oppervlakte=7.14345, verwarmd=True),
+            ruimte(
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer1",
+                oppervlakte=11.718,
+                verwarmd=True,
+            ),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging1", oppervlakte=5.09507),
+            ruimte(Ruimtedetailsoort.badkamer, oppervlakte=4.644, verwarmd=True),
+            ruimte(
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer2",
+                oppervlakte=9.2092,
+                verwarmd=True,
+            ),
+            ruimte(Ruimtedetailsoort.keuken, oppervlakte=5.76, verwarmd=True),
+            ruimte(Ruimtedetailsoort.berging, naam="Berging2", oppervlakte=1.8836),
+            ruimte(Ruimtedetailsoort.toiletruimte, oppervlakte=1.28113),
         ],
     )
