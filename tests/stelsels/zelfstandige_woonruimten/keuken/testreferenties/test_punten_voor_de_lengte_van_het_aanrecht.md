@@ -1,6 +1,6 @@
 # test_punten_voor_de_lengte_van_het_aanrecht
 
-Een aanrecht krijgt vanaf 1 meter 4 punten en vanaf 2 meter 7 punten.
+De punten voor een aanrecht hangen af van zijn lengte.
 
 Het beleidsboek (2.5.2) geeft de 7 punten aan een aanrecht "Langer dan 2
 meter". De package volgt de wettekst en geeft ze ook bij precies 2 meter.
@@ -15,9 +15,11 @@ KEUKEN
   Keuken1
     - Lengte aanrecht                                              1000.00 mm     4.00 pt
   Keuken2
+    - Lengte aanrecht                                              1999.00 mm     4.00 pt
+  Keuken3
     - Lengte aanrecht                                              2000.00 mm     7.00 pt
                                                                                 ------
-  Totaal                                                                         11.00 pt
+  Totaal                                                                         15.00 pt
 ```
 
 ## Waarschuwingen
@@ -81,6 +83,34 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
+          "lengte": 1999.0
+        }
+      ]
+    },
+    {
+      "id": "keuken3",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken3",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
           "lengte": 2000.0
         }
       ]
@@ -103,7 +133,7 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 11.0,
+  "punten": 15.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -133,12 +163,33 @@ Geen.
       }
     },
     {
-      "aantal": 2000.0,
+      "aantal": 1999.0,
       "criterium": {
         "id": "keuken__keuken2__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
           "id": "keuken__keuken2"
+        },
+        "meeteenheid": {
+          "code": "MIL",
+          "naam": "Millimeter"
+        }
+      },
+      "punten": 4.0
+    },
+    {
+      "criterium": {
+        "id": "keuken__keuken3",
+        "naam": "Keuken3"
+      }
+    },
+    {
+      "aantal": 2000.0,
+      "criterium": {
+        "id": "keuken__keuken3__lengte_aanrecht_aanrecht",
+        "naam": "Lengte aanrecht",
+        "bovenliggendeCriterium": {
+          "id": "keuken__keuken3"
         },
         "meeteenheid": {
           "code": "MIL",

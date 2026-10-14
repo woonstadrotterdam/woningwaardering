@@ -38,7 +38,7 @@ def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum)
 
 
 def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testreferentie):
-    """Een aanrecht krijgt vanaf 1 meter 4 punten en vanaf 2 meter 7 punten.
+    """De punten voor een aanrecht hangen af van zijn lengte.
 
     Het beleidsboek (2.5.2) geeft de 7 punten aan een aanrecht "Langer dan 2
     meter". De package volgt de wettekst en geeft ze ook bij precies 2 meter.
@@ -52,7 +52,10 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
                 Ruimtedetailsoort.keuken, naam="Keuken1", elementen=[aanrecht(1000)]
             ),
             ruimte(
-                Ruimtedetailsoort.keuken, naam="Keuken2", elementen=[aanrecht(2000)]
+                Ruimtedetailsoort.keuken, naam="Keuken2", elementen=[aanrecht(1999)]
+            ),
+            ruimte(
+                Ruimtedetailsoort.keuken, naam="Keuken3", elementen=[aanrecht(2000)]
             ),
         ]
     )
@@ -61,7 +64,8 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
 
     assert punten_per_bovenliggende(groep) == {
         "Keuken1": {"Lengte aanrecht": 4.0},
-        "Keuken2": {"Lengte aanrecht": 7.0},
+        "Keuken2": {"Lengte aanrecht": 4.0},
+        "Keuken3": {"Lengte aanrecht": 7.0},
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -81,7 +85,7 @@ def test_aanrecht_korter_dan_1m_krijgt_geen_punten(
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
-        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(900)])],
+        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(999)])],
     )
 
     with pytest.warns(UserWarning, match="geen aanrecht") as waarschuwingen:

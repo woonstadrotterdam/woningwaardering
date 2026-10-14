@@ -1,6 +1,6 @@
 # test_punten_voor_de_lengte_van_het_aanrecht
 
-Een aanrecht van 1 meter krijgt 4 punten, een van 2 meter 7 punten en een van 3,5 meter 10 punten.
+De punten voor een aanrecht hangen af van zijn lengte.
 
 Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "1 tot 2 m 4 punten",
 "2 tot 3 m 7 punten" en "3 m en meer 10 punten".
@@ -13,11 +13,15 @@ KEUKEN
     - Keuken1
       - Lengte aanrecht                                            1000.00 mm     4.00 pt
     - Keuken2
-      - Lengte aanrecht                                            2000.00 mm     7.00 pt
+      - Lengte aanrecht                                            1999.00 mm     4.00 pt
     - Keuken3
+      - Lengte aanrecht                                            2000.00 mm     7.00 pt
+    - Keuken4
+      - Lengte aanrecht                                            2999.00 mm     7.00 pt
+    - Keuken5
       - Lengte aanrecht                                            3500.00 mm    10.00 pt
                                                                                 ------
-  Totaal                                                                         21.00 pt
+  Totaal                                                                         32.00 pt
 ```
 
 ## Waarschuwingen
@@ -81,7 +85,7 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 2000.0
+          "lengte": 1999.0
         }
       ]
     },
@@ -96,6 +100,62 @@ Geen.
         "naam": "Keuken"
       },
       "naam": "Keuken3",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2000.0
+        }
+      ]
+    },
+    {
+      "id": "keuken4",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken4",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 2999.0
+        }
+      ]
+    },
+    {
+      "id": "keuken5",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "KEU",
+        "naam": "Keuken"
+      },
+      "naam": "Keuken5",
       "oppervlakte": 10.0,
       "bouwkundigeElementen": [
         {
@@ -131,7 +191,7 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 21.0,
+  "punten": 32.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -173,7 +233,7 @@ Geen.
       }
     },
     {
-      "aantal": 2000.0,
+      "aantal": 1999.0,
       "criterium": {
         "id": "keuken__prive__keuken2__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
@@ -185,7 +245,7 @@ Geen.
           "naam": "Millimeter"
         }
       },
-      "punten": 7.0
+      "punten": 4.0
     },
     {
       "criterium": {
@@ -197,12 +257,60 @@ Geen.
       }
     },
     {
-      "aantal": 3500.0,
+      "aantal": 2000.0,
       "criterium": {
         "id": "keuken__prive__keuken3__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
           "id": "keuken__prive__keuken3"
+        },
+        "meeteenheid": {
+          "code": "MIL",
+          "naam": "Millimeter"
+        }
+      },
+      "punten": 7.0
+    },
+    {
+      "criterium": {
+        "id": "keuken__prive__keuken4",
+        "naam": "Keuken4",
+        "bovenliggendeCriterium": {
+          "id": "keuken__prive"
+        }
+      }
+    },
+    {
+      "aantal": 2999.0,
+      "criterium": {
+        "id": "keuken__prive__keuken4__lengte_aanrecht_aanrecht",
+        "naam": "Lengte aanrecht",
+        "bovenliggendeCriterium": {
+          "id": "keuken__prive__keuken4"
+        },
+        "meeteenheid": {
+          "code": "MIL",
+          "naam": "Millimeter"
+        }
+      },
+      "punten": 7.0
+    },
+    {
+      "criterium": {
+        "id": "keuken__prive__keuken5",
+        "naam": "Keuken5",
+        "bovenliggendeCriterium": {
+          "id": "keuken__prive"
+        }
+      }
+    },
+    {
+      "aantal": 3500.0,
+      "criterium": {
+        "id": "keuken__prive__keuken5__lengte_aanrecht_aanrecht",
+        "naam": "Lengte aanrecht",
+        "bovenliggendeCriterium": {
+          "id": "keuken__prive__keuken5"
         },
         "meeteenheid": {
           "code": "MIL",

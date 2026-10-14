@@ -36,7 +36,7 @@ def test_Keuken_output(onzelfstandige_woonruimten_input_en_outputmodel, peildatu
 
 
 def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testreferentie):
-    """Een aanrecht van 1 meter krijgt 4 punten, een van 2 meter 7 punten en een van 3,5 meter 10 punten.
+    """De punten voor een aanrecht hangen af van zijn lengte.
 
     Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "1 tot 2 m 4 punten",
     "2 tot 3 m 7 punten" en "3 m en meer 10 punten".
@@ -47,10 +47,16 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
                 Ruimtedetailsoort.keuken, naam="Keuken1", elementen=[aanrecht(1000)]
             ),
             ruimte(
-                Ruimtedetailsoort.keuken, naam="Keuken2", elementen=[aanrecht(2000)]
+                Ruimtedetailsoort.keuken, naam="Keuken2", elementen=[aanrecht(1999)]
             ),
             ruimte(
-                Ruimtedetailsoort.keuken, naam="Keuken3", elementen=[aanrecht(3500)]
+                Ruimtedetailsoort.keuken, naam="Keuken3", elementen=[aanrecht(2000)]
+            ),
+            ruimte(
+                Ruimtedetailsoort.keuken, naam="Keuken4", elementen=[aanrecht(2999)]
+            ),
+            ruimte(
+                Ruimtedetailsoort.keuken, naam="Keuken5", elementen=[aanrecht(3500)]
             ),
         ]
     )
@@ -59,8 +65,10 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
 
     assert punten_per_bovenliggende(groep) == {
         "Keuken1": {"Lengte aanrecht": 4.0},
-        "Keuken2": {"Lengte aanrecht": 7.0},
-        "Keuken3": {"Lengte aanrecht": 10.0},
+        "Keuken2": {"Lengte aanrecht": 4.0},
+        "Keuken3": {"Lengte aanrecht": 7.0},
+        "Keuken4": {"Lengte aanrecht": 7.0},
+        "Keuken5": {"Lengte aanrecht": 10.0},
     }
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -186,7 +194,7 @@ def test_aanrecht_korter_dan_1m_krijgt_geen_punten(
     genereert de package een `UserWarning`."
     """
     eenheid = EenhedenEenheid(
-        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(900)])]
+        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(999)])]
     )
 
     with pytest.warns(UserWarning, match="geen aanrecht") as waarschuwingen:
@@ -705,6 +713,44 @@ def test_punten_voor_het_aanrecht_worden_gedeeld_door_het_aantal_woonruimten(
         "Keuken3": {"Lengte aanrecht": 5.0},
         "Keuken4": {"Lengte aanrecht": 1.25},
     }
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_punten_voor_een_keuken_gedeeld_met_4_woonruimten_worden_door_4_gedeeld(
+    keuken, vergelijk_met_testreferentie
+):
+    """De punten voor een keuken die 4 onzelfstandige woonruimten delen, worden door 4 gedeeld.
+
+    Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst: 7
+    punten voor het aanrecht en 3 voor de voorzieningen.
+
+    Bron: wettekst, Bijlage I onder B, toelichting rubriek 5: "Er is één
+    keuken, waarvoor 10 punten worden toegekend (7 voor het aanrecht, en 3 voor
+    de voorzieningen). Omdat de keuken wordt gedeeld door vier onzelfstandige
+    woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.keuken,
+                Installatiesoort.inbouw_koelkast,
+                Installatiesoort.inbouw_kookplaat_keramisch,
+                Installatiesoort.inbouw_oven_elektrisch,
+                elementen=[aanrecht(2500)],
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+            )
+        ]
+    )
+
+    groep = keuken.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {
+        "Lengte aanrecht": 1.75,
+        Installatiesoort.inbouw_koelkast.naam: 0.25,
+        Installatiesoort.inbouw_kookplaat_keramisch.naam: 0.25,
+        Installatiesoort.inbouw_oven_elektrisch.naam: 0.25,
+    }
+    assert groep.punten == 2.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 

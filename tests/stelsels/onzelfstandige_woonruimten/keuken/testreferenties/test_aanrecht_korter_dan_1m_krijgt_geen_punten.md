@@ -47,7 +47,7 @@ Geen waarderingen voor Keuken.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 900.0
+          "lengte": 999.0
         }
       ]
     }
