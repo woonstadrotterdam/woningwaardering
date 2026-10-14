@@ -327,6 +327,29 @@ def test_nieuwbouwwoning_met_149_punten_krijgt_10_procent_opslag(
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
+def test_woning_die_op_1_juli_2024_voor_het_eerst_in_gebruik_is_genomen_krijgt_geen_opslag_voor_nieuwbouw(
+    prijsopslag_monumenten_en_nieuwbouw, vergelijk_met_testreferentie
+):
+    """Een woning die op 1 juli 2024 voor het eerst in gebruik is genomen, krijgt geen opslag voor nieuwbouw.
+
+    Bron: wettekst, artikel 8a, vierde lid: "wordt met 10% vermeerderd indien
+    die woonruimte na 1 juli 2024 voor het eerst in gebruik wordt genomen als
+    woonruimte".
+
+    De package leest de datum van ingebruikname uit `in_exploitatiedatum`.
+    """
+    eenheid = meergezinswoning_van_79_m2(
+        begin_bouwdatum=date(2023, 1, 1),
+        in_exploitatiedatum=date(2024, 7, 1),
+    )
+
+    groep = prijsopslag_monumenten_en_nieuwbouw.waardeer(eenheid)
+
+    assert opslagpercentage_per_naam(groep) == {}
+    assert groep.opslagpercentage == 0.0
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Samenloop van opslagen
 
 
