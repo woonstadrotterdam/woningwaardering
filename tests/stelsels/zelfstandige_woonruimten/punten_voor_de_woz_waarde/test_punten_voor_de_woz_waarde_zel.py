@@ -890,6 +890,55 @@ def test_woning_uit_2016_met_minstens_110_punten_krijgt_minimaal_40_punten(
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
+def test_woning_uit_2016_met_minder_dan_110_punten_krijgt_geen_minimum_van_40_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+):
+    """Een woning uit 2016 die voor de rubrieken 1 tot en met 10 en 12 minder dan 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 11.2: "Indien een woning is
+    gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal
+    aantal punten na saldering van de punten van de onderdelen 1 tot en met 10
+    en 12, 110 of meer is, worden minimaal 40 punten toegekend."
+
+    Met energielabel C haalt de woning voor die rubrieken minder dan 110
+    punten. Zonder minimum is het totaal de som van onderdeel I en II, afgerond
+    op een kwart punt.
+
+    Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Tel de punten van de
+    twee onderdelen bij elkaar op en rond volgens de instructie van paragraaf
+    2.1.4 af op een kwart punt."
+    """
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=2016,
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2031, 2, 23),
+                label=Energielabel.c,
+            )
+        ],
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
+            ),
+        ],
+    )
+
+    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert "Nieuwbouw: min. 40 punten" not in punten_per_naam(groep)
+    assert groep.punten == 34.75
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 @pytest.mark.parametrize(
     ("renovatiedatum", "energieprestatie"),
     [
