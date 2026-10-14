@@ -47,7 +47,7 @@ Elke stelselgroep heeft waarderingstests. De testreferenties staan in de map `te
 
 | Wat je test | Wat je schrijft |
 | --- | --- |
-| Een beleidsregel binnen één stelselgroep | Een [waarderingstest](#een-waarderingstest-schrijven) |
+| Een beleidsregel binnen één stelselgroep, ook als ze het puntentotaal van andere rubrieken nodig heeft | Een [waarderingstest](#een-waarderingstest-schrijven) |
 | Een beleidsregel die over meer dan één stelselgroep gaat | Een JSON-model op stelselniveau; zie [JSON-modellen](#model-op-stelselniveau-of-waarderingstest) |
 | Een functie die op zichzelf staat | Een [unittest](#een-unittest-schrijven) |
 
@@ -116,7 +116,7 @@ Een berekening hoort niet in de docstring. De asserts laten zien hoe de beleidsr
 
 ### Input
 
-Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `badkamer(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
+Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `badkamer(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`. Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
 
 Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sanitair`), de `peildatum` en `vergelijk_met_testreferentie`. Een scenario dat in een fixture staat, is in de test niet meer te lezen.
 
@@ -299,7 +299,7 @@ Een model onder `tests/data/<stelsel>/input/` wordt door het hele stelsel gewaar
 
 Kies een model op stelselniveau wanneer een beleidsregel over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/zelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`. Dezelfde input in een waarderingstest per stelselgroep zetten geeft die zekerheid niet, en levert meerdere keren dezelfde input op.
 
-Kies een [waarderingstest](#een-waarderingstest-schrijven) voor een beleidsregel die binnen één stelselgroep blijft, en voor elk scenario dat een `UserWarning` oproept: een model op stelselniveau moet zonder waarschuwing te waarderen zijn.
+Kies een [waarderingstest](#een-waarderingstest-schrijven) voor een beleidsregel die binnen één stelselgroep blijft, ook als ze het puntentotaal van andere rubrieken nodig heeft, zoals het minimum voor de WOZ-waarde of de nieuwbouwopslag, en voor elk scenario dat een `UserWarning` oproept: een model op stelselniveau moet zonder waarschuwing te waarderen zijn.
 
 ## Test coverage rapport
 
