@@ -15,9 +15,9 @@ en minimaal 2 m² is."
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Slaapkamer                                                          3.00 m²
+  Slaapkamer1                                                         3.99 m²
                                                                     ------      ------
-  Totaal                                                              3.00 m²     2.25 pt
+  Totaal                                                              3.99 m²     3.00 pt
 ```
 
 ## Waarschuwingen
@@ -30,7 +30,7 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "slaapkamer",
+      "id": "slaapkamer1",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -39,8 +39,21 @@ Geen.
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Slaapkamer",
-      "oppervlakte": 3.0
+      "naam": "Slaapkamer1",
+      "oppervlakte": 3.99
+    },
+    {
+      "id": "slaapkamer2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer2",
+      "oppervlakte": 4.0
     }
   ]
 }
@@ -60,13 +73,13 @@ Geen.
       "naam": "Oppervlakte van overige ruimten"
     }
   },
-  "punten": 2.25,
+  "punten": 3.0,
   "woningwaarderingen": [
     {
-      "aantal": 3.0,
+      "aantal": 3.99,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__slaapkamer",
-        "naam": "Slaapkamer",
+        "id": "oppervlakte_van_overige_ruimten__slaapkamer1",
+        "naam": "Slaapkamer1",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"

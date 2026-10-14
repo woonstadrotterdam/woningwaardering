@@ -330,15 +330,24 @@ def test_vertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
-                Ruimtedetailsoort.slaapkamer, soort=Ruimtesoort.vertrek, oppervlakte=3
-            )
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer1",
+                soort=Ruimtesoort.vertrek,
+                oppervlakte=3.99,
+            ),
+            ruimte(
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer2",
+                soort=Ruimtesoort.vertrek,
+                oppervlakte=4.0,
+            ),
         ]
     )
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {Ruimtedetailsoort.slaapkamer.naam: 3.0}
-    assert groep.punten == 2.25
+    assert aantal_per_naam(groep) == {"Slaapkamer1": 3.99}
+    assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 

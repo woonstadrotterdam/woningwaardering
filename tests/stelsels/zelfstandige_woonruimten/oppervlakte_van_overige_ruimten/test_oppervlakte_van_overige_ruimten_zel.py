@@ -35,6 +35,40 @@ def test_OppervlakteVanOverigeRuimten_output(
     )
 
 
+# Afronding
+
+
+def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_overige_ruimten(
+    oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
+):
+    """De oppervlakten van alle overige ruimten worden eerst opgeteld en dan afgerond op hele m².
+
+    Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst.
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De oppervlakte
+    per overige ruimte wordt afgerond op 2 decimalen. De afronding van de
+    oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante
+    meters na saldering van de oppervlakte van de afzonderlijke overige
+    ruimten" en "Dit vertaalt zich dan naar 25 x 0,75 punt (per m²) = 18,75
+    punten."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.garage, oppervlakte=19.3392),
+            ruimte(Ruimtedetailsoort.bijkeuken, oppervlakte=6.0557),
+        ]
+    )
+
+    groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {
+        Ruimtedetailsoort.garage.naam: 19.34,
+        Ruimtedetailsoort.bijkeuken.naam: 6.06,
+    }
+    assert groep.punten == 18.75
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Voorwaarden van een overige ruimte
 
 
@@ -86,15 +120,24 @@ def test_vertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
-                Ruimtedetailsoort.slaapkamer, soort=Ruimtesoort.vertrek, oppervlakte=3
-            )
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer1",
+                soort=Ruimtesoort.vertrek,
+                oppervlakte=3.99,
+            ),
+            ruimte(
+                Ruimtedetailsoort.slaapkamer,
+                naam="Slaapkamer2",
+                soort=Ruimtesoort.vertrek,
+                oppervlakte=4.0,
+            ),
         ]
     )
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {Ruimtedetailsoort.slaapkamer.naam: 3.0}
-    assert groep.punten == 2.25
+    assert aantal_per_naam(groep) == {"Slaapkamer1": 3.99}
+    assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
