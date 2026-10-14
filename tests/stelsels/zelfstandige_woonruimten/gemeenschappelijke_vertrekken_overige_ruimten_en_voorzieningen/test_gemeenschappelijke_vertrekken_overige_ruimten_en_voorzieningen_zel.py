@@ -763,6 +763,95 @@ def test_punten_voor_sanitair_in_gemeenschappelijke_ruimte_worden_gedeeld_door_h
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+# Rekenvoorbeeld
+
+
+def test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst(
+    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,
+    vergelijk_met_testreferentie,
+):
+    """Het rekenvoorbeeld uit de wettekst: een keuken van 20 m² en een toilet van 2 m² die vier adressen delen, geven elk adres 9,50 punten.
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "(A) een
+    gemeenschappelijke binnenruimte met keuken van 20 m², en daarnaast (B) een
+    gedeelde toiletruimte van 2 m². Tot beiden hebben 4 adressen toegang.",
+    "4. Saldering levert op: 20 + 1,5 + 2 + 10 + 4,75 = 38,25. 5. Delen door
+    het aantal adressen levert op: 38,25 punten / 4 = 9.5625 per adres. 6.
+    Afronden geschiedt op een kwart punt per adres op 9,50."
+
+    De 7 punten voor het aanrecht zijn in de input een aanrecht van 2.999 mm,
+    de 3 punten voor de voorzieningen een inbouwkoelkast, een elektrische
+    inbouwoven en een inbouwmagnetron.
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 5.1: "2 m en meer 7 punten".
+
+    Bron: wettekst, Bijlage I onder A, onderdeel 5.2: "Inbouw koelkast 1 punt",
+    "Inbouw oven elektrisch 1 punt" en "Inbouw magnetron 1 punt".
+
+    De radiator is in de input een bouwkundig element van de keuken. De package
+    leest de verwarming af aan `verwarmd`.
+
+    Bron: implementatietoelichting datamodel-uitbreidingen, Verkoeld en
+    verwarmd: "Hierom hebben wij twee boolean kenmerken toegevoegd aan
+    `EenhedenRuimte`: `verwarmd` en `verkoeld`."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.keuken,
+                Installatiesoort.inbouw_magnetron,
+                Installatiesoort.inbouw_koelkast,
+                Installatiesoort.inbouw_oven_elektrisch,
+                elementen=[
+                    aanrecht(2999),
+                    element(Bouwkundigelementdetailsoort.radiator),
+                ],
+                oppervlakte=20,
+                verwarmd=True,
+                gedeeld_met_aantal_adressen=4,
+            ),
+            ruimte(
+                Ruimtedetailsoort.toiletruimte,
+                Installatiesoort.wastafel,
+                Installatiesoort.hangend_toilet,
+                oppervlakte=2,
+                gedeeld_met_aantal_adressen=4,
+            ),
+        ]
+    )
+
+    groep = gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.waardeer(
+        eenheid
+    )
+
+    # Elke waardering is een kwart van de punten uit het rekenvoorbeeld. Het
+    # rapport toont twee decimalen.
+    assert punten_per_bovenliggende(groep) == {
+        "Gedeeld met 4 adressen": {
+            "Oppervlakte van vertrekken": 5.0,
+            # 1,5 punt gedeeld door 4 is 0,375 punt.
+            "Oppervlakte van overige ruimten": 0.38,
+        },
+        "Verwarmde vertrekken": {Ruimtedetailsoort.keuken.naam: 0.5},
+        Ruimtedetailsoort.keuken.naam: {"Lengte aanrecht": 1.75},
+        "Extra voorzieningen": {
+            Installatiesoort.inbouw_koelkast.naam: 0.25,
+            Installatiesoort.inbouw_oven_elektrisch.naam: 0.25,
+            Installatiesoort.inbouw_magnetron.naam: 0.25,
+        },
+        Ruimtedetailsoort.toiletruimte.naam: {
+            # 3,75 punten gedeeld door 4 is 0,9375 punt.
+            Installatiesoort.hangend_toilet.naam: 0.94,
+            Installatiesoort.wastafel.naam: 0.25,
+        },
+        # De waarderingen in het rapport zijn samen 9,57 punten; het totaal van
+        # 9,5625 punten wordt afgerond op kwartpunten 9,50.
+        None: {"Afronding op kwartpunten": -0.07},
+    }
+    assert groep.punten == 9.5
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Zorgwoning
 
 
