@@ -83,11 +83,7 @@ def test_een_vertrek_van_precies_8m2_geeft_geen_aftrek(
 def test_gemeenschappelijk_vertrek_telt_voor_de_aftrek_met_de_toe_te_rekenen_oppervlakte(
     aftrekpunten, vergelijk_met_testreferentie
 ):
-    """Een gemeenschappelijk vertrek van 6 m² dat met 2 onzelfstandige woonruimten wordt gedeeld, telt voor de aftrek als 3 m².
-
-    Het scenario onderscheidt niet of de grens van 8 m² aan de toe te rekenen
-    of aan de hele oppervlakte wordt getoetst: 3 m² en 6 m² zijn beide minder
-    dan 8 m².
+    """Een gemeenschappelijk vertrek van 12 m² dat met 2 onzelfstandige woonruimten wordt gedeeld, telt voor de aftrek als 6 m².
 
     Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
     oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
@@ -101,7 +97,7 @@ def test_gemeenschappelijk_vertrek_telt_voor_de_aftrek_met_de_toe_te_rekenen_opp
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.woonkamer,
-                oppervlakte=6,
+                oppervlakte=12,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=2,
             )
         ]
@@ -110,7 +106,93 @@ def test_gemeenschappelijk_vertrek_telt_voor_de_aftrek_met_de_toe_te_rekenen_opp
     groep = aftrekpunten.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {
-        "Oppervlakte van vertrekken is minder dan 8 m²": 3.0
+        "Oppervlakte van vertrekken is minder dan 8 m²": 6.0
+    }
+    assert punten_per_naam(groep) == {
+        "Oppervlakte van vertrekken is minder dan 8 m²": -4.0
+    }
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_oppervlakte_van_alle_vertrekken_samen_telt_voor_de_aftrek(
+    aftrekpunten, vergelijk_met_testreferentie
+):
+    """Voor de aftrek telt de oppervlakte van alle vertrekken samen, zodat twee vertrekken van 4 m² geen aftrek geven.
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
+    oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
+    punten".
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=4),
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer2", oppervlakte=4),
+        ]
+    )
+
+    groep = aftrekpunten.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {}
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_ruimte_kleiner_dan_4m2_telt_niet_mee_voor_de_aftrek(
+    aftrekpunten, vergelijk_met_testreferentie
+):
+    """Een slaapkamer van 3,5 m² is geen vertrek en telt niet mee voor de aftrek.
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
+    oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
+    punten".
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De ruimte dient
+    een oppervlakte te hebben van minimaal 4 m²."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=5),
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer2", oppervlakte=3.5),
+        ]
+    )
+
+    groep = aftrekpunten.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {
+        "Oppervlakte van vertrekken is minder dan 8 m²": 5.0
+    }
+    assert punten_per_naam(groep) == {
+        "Oppervlakte van vertrekken is minder dan 8 m²": -4.0
+    }
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_vertrek_gedeeld_met_een_ander_adres_telt_niet_mee_voor_de_aftrek(
+    aftrekpunten, vergelijk_met_testreferentie
+):
+    """Een vertrek dat met een ander adres wordt gedeeld, telt niet mee voor de aftrek.
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
+    oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
+    punten".
+
+    Bron: wettekst, Bijlage I onder B, onderdeel 1: "Oppervlakte
+    gemeenschappelijk(e) vertrek(ken) op hetzelfde adres".
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(Ruimtedetailsoort.slaapkamer, oppervlakte=6),
+            ruimte(
+                Ruimtedetailsoort.woonkamer,
+                oppervlakte=10,
+                gedeeld_met_aantal_adressen=2,
+            ),
+        ]
+    )
+
+    groep = aftrekpunten.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {
+        "Oppervlakte van vertrekken is minder dan 8 m²": 6.0
     }
     assert punten_per_naam(groep) == {
         "Oppervlakte van vertrekken is minder dan 8 m²": -4.0
