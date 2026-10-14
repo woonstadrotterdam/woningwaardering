@@ -1,0 +1,186 @@
+# test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal
+
+Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
+
+De carports worden met 4 adressen gedeeld; op het eigen adres heeft één
+onzelfstandige woonruimte toegang.
+
+Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
+is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
+punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
+puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
+parkeerplek(ken)."
+
+Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
+dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
+overeenkomstige toepassing is."
+
+## Rapport
+
+```text
+GEMEENSCHAPPELIJKE PARKEERRUIMTEN
+  Gedeeld met 4 adressen
+    - Carport1 (Type II)                                              1.00 st     1.50 pt
+    - Laadpaal                                                        1.00 st     0.50 pt
+    - Carport2 (Type II)                                              1.00 st     1.50 pt
+    - Laadpaal                                                        1.00 st     0.50 pt
+                                                                                ------
+  Totaal                                                                          4.00 pt
+```
+
+## Waarschuwingen
+
+Geen.
+
+## Input
+
+```json
+{
+  "ruimten": [
+    {
+      "id": "carport1",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport1",
+      "oppervlakte": 15.0,
+      "gedeeldMetAantalAdressen": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
+    },
+    {
+      "id": "carport2",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "CAR",
+        "naam": "Carport"
+      },
+      "naam": "Carport2",
+      "oppervlakte": 15.0,
+      "gedeeldMetAantalAdressen": 4,
+      "bouwkundigeElementen": [
+        {
+          "id": "laadpaal",
+          "naam": "Laadpaal",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "LAA",
+            "naam": "Laadpaal"
+          }
+        }
+      ],
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
+    }
+  ]
+}
+```
+
+## Output
+
+```json
+{
+  "criteriumGroep": {
+    "stelsel": {
+      "code": "ONZ",
+      "naam": "Onzelfstandige woonruimten"
+    },
+    "stelselgroep": {
+      "code": "GPA",
+      "naam": "Gemeenschappelijke parkeerruimten"
+    }
+  },
+  "punten": 4.0,
+  "woningwaarderingen": [
+    {
+      "criterium": {
+        "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen",
+        "naam": "Gedeeld met 4 adressen"
+      }
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen__carport1_type_ii",
+        "naam": "Carport1 (Type II)",
+        "bovenliggendeCriterium": {
+          "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 1.5
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen__carport1_type_ii_laadpaal",
+        "naam": "Laadpaal",
+        "bovenliggendeCriterium": {
+          "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 0.5
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen__carport2_type_ii",
+        "naam": "Carport2 (Type II)",
+        "bovenliggendeCriterium": {
+          "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 1.5
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen__carport2_type_ii_laadpaal",
+        "naam": "Laadpaal",
+        "bovenliggendeCriterium": {
+          "id": "gemeenschappelijke_parkeerruimten__gedeeld_met_4_adressen"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 0.5
+    }
+  ]
+}
+```

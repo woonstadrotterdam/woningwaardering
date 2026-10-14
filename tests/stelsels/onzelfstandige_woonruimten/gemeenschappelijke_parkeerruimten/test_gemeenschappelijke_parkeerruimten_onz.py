@@ -381,6 +381,62 @@ def test_laadpaal_bij_parkeerplek_krijgt_2_punten_gedeeld_door_het_aantal_adress
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal(
+    gemeenschappelijke_parkeerruimten, vergelijk_met_testreferentie
+):
+    """Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
+
+    De carports worden met 4 adressen gedeeld; op het eigen adres heeft één
+    onzelfstandige woonruimte toegang.
+
+    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
+    is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
+    punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
+    puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
+    parkeerplek(ken)."
+
+    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
+    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
+    overeenkomstige toepassing is."
+    """
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.carport,
+                naam="Carport1",
+                elementen=[element(Bouwkundigelementdetailsoort.laadpaal)],
+                oppervlakte=15,
+                gedeeld_met_aantal_adressen=4,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=1,
+            ),
+            ruimte(
+                Ruimtedetailsoort.carport,
+                naam="Carport2",
+                elementen=[element(Bouwkundigelementdetailsoort.laadpaal)],
+                oppervlakte=15,
+                gedeeld_met_aantal_adressen=4,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=1,
+            ),
+        ]
+    )
+
+    groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
+
+    # Beide laadpalen staan onder "Gedeeld met 4 adressen" en heten "Laadpaal";
+    # vergelijk_met_testreferentie controleert dat hun criterium-id's
+    # verschillen. 2 punten gedeeld door 4 adressen is 0,5 punt per laadpaal.
+    laadpalen = [
+        waardering.punten
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium and waardering.criterium.naam == "Laadpaal"
+    ]
+    assert laadpalen == [0.5, 0.5]
+    # Twee carports van 6 punten en twee laadpalen van 2 punten, gedeeld door 4
+    # adressen.
+    assert groep.punten == 4.0
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Parkeerruimte gedeeld binnen het eigen adres
 
 
