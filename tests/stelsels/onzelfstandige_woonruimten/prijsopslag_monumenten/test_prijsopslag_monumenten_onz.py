@@ -67,10 +67,10 @@ def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_op
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_rijksmonument_met_huurovereenkomst_van_1_januari_2024_krijgt_10_punten(
+def test_rijksmonument_met_huurovereenkomst_van_30_juni_2024_krijgt_10_punten(
     prijsopslag_monumenten, vergelijk_met_testreferentie
 ):
-    """Een rijksmonument waarvan de huurovereenkomst op 1 januari 2024 is afgesloten, krijgt 10 punten.
+    """Een rijksmonument waarvan de huurovereenkomst op 30 juni 2024 is afgesloten, krijgt 10 punten.
 
     Bron: wettekst, artikel 8a, tweede lid: "Indien de woonruimte bestaat uit
     of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de
@@ -85,7 +85,7 @@ def test_rijksmonument_met_huurovereenkomst_van_1_januari_2024_krijgt_10_punten(
     toegekend."
     """
     eenheid = EenhedenEenheid(
-        datum_afsluiten_huurovereenkomst=date(2024, 1, 1),
+        datum_afsluiten_huurovereenkomst=date(2024, 6, 30),
         monumenten=[Eenheidmonument.rijksmonument],
     )
 
@@ -164,6 +164,27 @@ def test_gemeentelijk_monument_krijgt_15_procent_opslag(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_provinciaal_monument_krijgt_15_procent_opslag(
+    prijsopslag_monumenten, vergelijk_met_testreferentie
+):
+    """Een provinciaal monument krijgt 15% opslag op de maximale huurprijs.
+
+    Bron: wettekst, artikel 8a, derde lid: "De maximale huurprijsgrens wordt
+    met 15% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
+    een door het college van burgemeester en wethouders aangewezen gemeentelijk
+    monument of een door gedeputeerde staten aangewezen provinciaal monument."
+    """
+    eenheid = EenhedenEenheid(monumenten=[Eenheidmonument.provinciaal_monument])
+
+    groep = prijsopslag_monumenten.waardeer(eenheid)
+
+    assert opslagpercentage_per_naam(groep) == {
+        "Gemeentelijk of provinciaal monument": 0.15
+    }
+    assert groep.opslagpercentage == 0.15
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Beschermd stads- en dorpsgezicht
 
 
@@ -212,6 +233,59 @@ def test_rijksbeschermd_stadsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag
 
     assert opslagpercentage_per_naam(groep) == verwachte_opslag
     assert groep.opslagpercentage == verwacht_opslagpercentage
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_rijksbeschermd_dorpsgezicht_krijgt_bij_bouwjaar_voor_1965_5_procent_opslag(
+    prijsopslag_monumenten, vergelijk_met_testreferentie
+):
+    """Een woonruimte in een rijksbeschermd dorpsgezicht die vóór 1965 is gebouwd, krijgt 5% opslag op de maximale huurprijs.
+
+    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
+    met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
+    rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
+    lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
+    is gebouwd voor 1965; en".
+    """
+    eenheid = EenhedenEenheid(
+        bouwjaar=1964,
+        monumenten=[Eenheidmonument.rijksbeschermd_dorpsgezicht],
+    )
+
+    groep = prijsopslag_monumenten.waardeer(eenheid)
+
+    assert opslagpercentage_per_naam(groep) == {
+        "Rijksbeschermd stads- of dorpsgezicht": 0.05
+    }
+    assert groep.opslagpercentage == 0.05
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_gemeentelijk_beschermd_stads_of_dorpsgezicht_krijgt_geen_opslag(
+    prijsopslag_monumenten, vergelijk_met_testreferentie
+):
+    """Een woonruimte in een gemeentelijk beschermd stads- of dorpsgezicht krijgt geen opslag.
+
+    De opslag geldt alleen voor een rijksbeschermd stads- of dorpsgezicht.
+
+    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
+    met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
+    rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
+    lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
+    is gebouwd voor 1965; en".
+    """
+    eenheid = EenhedenEenheid(
+        bouwjaar=1964,
+        monumenten=[
+            Eenheidmonument.gemeentelijk_beschermd_stadsgezicht,
+            Eenheidmonument.gemeentelijk_beschermd_dorpsgezicht,
+        ],
+    )
+
+    groep = prijsopslag_monumenten.waardeer(eenheid)
+
+    assert opslagpercentage_per_naam(groep) == {}
+    assert groep.opslagpercentage == 0.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 

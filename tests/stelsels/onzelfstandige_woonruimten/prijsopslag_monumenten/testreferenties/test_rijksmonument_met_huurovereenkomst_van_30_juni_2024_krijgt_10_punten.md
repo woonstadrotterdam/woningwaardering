@@ -1,6 +1,6 @@
-# test_rijksmonument_met_huurovereenkomst_van_1_januari_2024_krijgt_50_punten
+# test_rijksmonument_met_huurovereenkomst_van_30_juni_2024_krijgt_10_punten
 
-Een rijksmonument waarvan de huurovereenkomst op 1 januari 2024 is afgesloten, krijgt 50 punten.
+Een rijksmonument waarvan de huurovereenkomst op 30 juni 2024 is afgesloten, krijgt 10 punten.
 
 Bron: wettekst, artikel 8a, tweede lid: "Indien de woonruimte bestaat uit
 of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de
@@ -10,17 +10,17 @@ waardering voor een zelfstandige woonruimte in bijlage I, onder A, met 50
 punten vermeerderd en de waardering voor een onzelfstandige woonruimte in
 bijlage I, onder B, met 10 punten vermeerderd."
 
-Bron: beleidsboek zelfstandige woonruimten, 2.13.4: "als de
-huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 50 punten extra
+Bron: beleidsboek onzelfstandige woonruimten, 2.14.4: "als de
+huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 10 punten extra
 toegekend."
 
 ## Rapport
 
 ```text
-PRIJSOPSLAG MONUMENTEN EN NIEUWBOUW
-  Rijksmonument                                                                  50.00 pt
+PRIJSOPSLAG MONUMENTEN
+  Rijksmonument                                                                  10.00 pt
                                                                                 ------
-  Totaal                                                                         50.00 pt
+  Totaal                                                                         10.00 pt
 ```
 
 ## Waarschuwingen
@@ -37,7 +37,7 @@ Geen.
       "naam": "Rijksmonument"
     }
   ],
-  "datumAfsluitenHuurovereenkomst": "2024-01-01"
+  "datumAfsluitenHuurovereenkomst": "2024-06-30"
 }
 ```
 
@@ -47,22 +47,22 @@ Geen.
 {
   "criteriumGroep": {
     "stelsel": {
-      "code": "ZEL",
-      "naam": "Zelfstandige woonruimten"
+      "code": "ONZ",
+      "naam": "Onzelfstandige woonruimten"
     },
     "stelselgroep": {
-      "code": "PMN",
-      "naam": "Prijsopslag monumenten en nieuwbouw"
+      "code": "PMO",
+      "naam": "Prijsopslag monumenten"
     }
   },
-  "punten": 50.0,
+  "punten": 10.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "prijsopslag_monumenten_en_nieuwbouw__rijksmonument",
+        "id": "prijsopslag_monumenten__rijksmonument",
         "naam": "Rijksmonument"
       },
-      "punten": 50.0
+      "punten": 10.0
     }
   ],
   "opslagpercentage": 0.0
