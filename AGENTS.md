@@ -12,11 +12,11 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 - Check en citeer de actuele HTML-pagina's van het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Gebruik voor de wettekst eerst de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` om te zoeken en citeren. Verifieer deze daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
 - Pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
-- Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `testing.md`, `naamgeving.md`, `data.md` en `logging.md`.
+- Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `naamgeving.md`, `data.md` en `logging.md`.
 
 ## Omgeving En Commands
 
-Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) en [testing.md](docs/voor-ontwikkelaars/testing.md) voor installatie, tests en pre-commit. Kort:
+Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) voor installatie, tests en pre-commit. Kort:
 
 - Gebruik een Python-versie die voldoet aan `requires-python` in `pyproject.toml`.
 - Gebruik [uv](https://docs.astral.sh/uv/) voor dependency management; installeer ontwikkelaarsdependencies met `uv sync --extra dev`.
@@ -67,8 +67,6 @@ uv run pre-commit run --all-files --hook-stage pre-push
 - Lees [testing.md](docs/voor-ontwikkelaars/testing.md) voordat je een test schrijft of wijzigt: daar staat welke soort test je nodig hebt en hoe je hem opbouwt.
 - Spiegel de package-structuur waar praktisch: tests voor `woningwaardering/.../module.py` horen onder `tests/.../test_module.py`.
 - Laat testfuncties beginnen met `test_`.
-- Gebruik `tests/data/...` voor VERA-realistische inputmodellen op stelselniveau, met handmatig nagerekende verwachte output.
-- Denk bij stelselgroepwijzigingen aan zowel detailtests voor specifieke regels als ketentests voor de hele stelselgroep wanneer dat waarde toevoegt.
 - Test geen gegenereerde VERA-code alleen om coverage te verhogen.
 
 ### Verwachte output
