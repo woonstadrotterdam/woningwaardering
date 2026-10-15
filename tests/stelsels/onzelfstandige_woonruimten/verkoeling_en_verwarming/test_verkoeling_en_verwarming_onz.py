@@ -793,7 +793,7 @@ def test_gemeenschappelijk_vertrek_met_open_keuken_krijgt_de_punten_gedeeld_door
 def test_aanrecht_in_een_overig_vertrek_is_een_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een aanrecht in een verwarmd privé overig vertrek is een open keuken.
+    """Een aanrecht in een verwarmd overig vertrek is een open keuken.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
