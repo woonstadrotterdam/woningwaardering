@@ -81,13 +81,14 @@ def test_rijksmonument_met_huurovereenkomst_voor_1_juli_2024_krijgt_10_punten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_krijgt_met_waarschuwing_35_procent_opslag(
+def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_wordt_met_waarschuwing_naar_de_peildatum_gewaardeerd(
     prijsopslag_monumenten, vergelijk_met_testreferentie
 ):
-    """Een rijksmonument zonder datum van afsluiten van de huurovereenkomst krijgt met een waarschuwing 35% opslag op de maximale huurprijs.
+    """Zonder datum van afsluiten van de huurovereenkomst waardeert de package een rijksmonument met een waarschuwing alsof de huurovereenkomst op de peildatum is afgesloten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-    artikel 8a, eerste lid.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4;
+    implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten
+    huurovereenkomst"; wettekst, artikel 8a, eerste lid.
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
