@@ -2,10 +2,8 @@
 
 Een garage die bij de woning hoort, wordt als overige ruimte gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Parkeerruimte die
-exclusief tot één adres behoort (privé-garage), wordt gewaardeerd als
-overige ruimte." en "Overige ruimten worden gewaardeerd met driekwart punt
-per vierkante meter."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.5; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

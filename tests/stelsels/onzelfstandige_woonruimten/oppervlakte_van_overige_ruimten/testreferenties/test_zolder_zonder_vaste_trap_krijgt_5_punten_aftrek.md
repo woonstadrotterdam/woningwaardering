@@ -2,17 +2,9 @@
 
 Een zolder zonder vaste trap krijgt 5 punten aftrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "Is er
-een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van
-2.2.2.3."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

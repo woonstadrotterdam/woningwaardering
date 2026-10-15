@@ -2,15 +2,9 @@
 
 Een drempelloze inrijdouche krijgt de punten van een douche.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 6.1: "Als douche
-moet worden meegeteld iedere door de verhuurder aangebrachte installatie
-voor het nemen van een stortbad."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: wettekst, Bijlage I onder B, onderdeel 6.1: "Douche 3 punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

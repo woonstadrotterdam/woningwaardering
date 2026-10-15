@@ -2,13 +2,13 @@
 
 Meerdere aanrechten korter dan 1 meter tellen ook in een gemeenschappelijke keuken samen als één wastafel.
 
-De berging met drie wastafels krijgt de uitzondering op het maximum voor
-wastafels. Twee spoelbakken in de keuken zouden daardoor een maximering
-krijgen; één spoelbak krijgt die niet.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1: "Meerdere
-aanrechten korter dan één meter in dezelfde ruimte tellen samen als één
-wastafel."
+De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door
+het aantal onzelfstandige woonruimten.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
+Bijlage I onder B, onderdeel 6.1.
 
 ## Rapport
 

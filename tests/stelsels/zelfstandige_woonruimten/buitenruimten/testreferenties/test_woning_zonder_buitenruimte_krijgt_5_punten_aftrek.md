@@ -2,9 +2,8 @@
 
 Een woning zonder buitenruimte krijgt 5 punten aftrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Indien de woning
-in het geheel geen privé-buitenruimte, geen gemeenschappelijke buitenruimte
-of loggia heeft, wordt een aftrek toegepast van vijf punten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

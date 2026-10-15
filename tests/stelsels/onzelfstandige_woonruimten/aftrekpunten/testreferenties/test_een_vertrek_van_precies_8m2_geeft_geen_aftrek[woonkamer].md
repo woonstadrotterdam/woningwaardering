@@ -1,10 +1,9 @@
 # test_een_vertrek_van_precies_8m2_geeft_geen_aftrek[woonkamer]
 
-Een woonruimte met één privévertrek van precies 8 m² krijgt geen aftrek.
+Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
+Bijlage I onder B, onderdeel 13.
 
 ## Rapport
 

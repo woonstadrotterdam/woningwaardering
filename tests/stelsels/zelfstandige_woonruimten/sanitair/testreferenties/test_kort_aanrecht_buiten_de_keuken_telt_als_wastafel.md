@@ -1,11 +1,8 @@
 # test_kort_aanrecht_buiten_de_keuken_telt_als_wastafel
 
-Een aanrecht korter dan 1 meter telt ook in een bijkeuken als wastafel.
+Een aanrecht korter dan 1 meter buiten de keuken telt als wastafel.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.5.2: "Een aanrecht met
-spoelbak dat korter is dan 1 meter voldoet niet aan de basisvoorzieningen en
-krijgt daarom géén punten in de rubriek keuken. Wel kan de spoelbak als
-wastafel nog één punt krijgen in de rubriek sanitair."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2.
 
 ## Rapport
 

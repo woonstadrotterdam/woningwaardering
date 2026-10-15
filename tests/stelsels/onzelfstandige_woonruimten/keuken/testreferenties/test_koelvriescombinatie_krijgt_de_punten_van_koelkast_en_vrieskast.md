@@ -2,19 +2,9 @@
 
 Een inbouw koelvriescombinatie krijgt de punten van een koelkast en een vrieskast samen.
 
-De keuken wordt met 2 onzelfstandige woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 5.2: "Wanneer een
-object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi
-magnetron/oven of een gecombineerde koel- en vrieskast, worden beide
-voorzieningen in dit object gewaardeerd conform de rubriek."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "Inbouw koelkast 1 punt"
-en "Inbouw vrieskast 0,75 punt".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.4; wettekst,
+Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 5.2.
 
 ## Rapport
 

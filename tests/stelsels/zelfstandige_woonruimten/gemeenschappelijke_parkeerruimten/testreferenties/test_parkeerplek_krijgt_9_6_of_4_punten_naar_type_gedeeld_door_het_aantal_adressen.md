@@ -2,27 +2,8 @@
 
 Een parkeerplek krijgt 9 punten als Type I, 6 punten als Type II en 4 punten als Type III, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: wettekst, Bijlage I onder A, rubriek 10: "Type I Parkeerplek in
-afgesloten parkeergarage behorende tot het complex 9 punten gedeeld door het
-aantal adressen dat toegang en gebruiksrecht heeft.", "Type II Parkeerplek
-buiten behorende tot het complex met dak 6 punten gedeeld door het aantal
-adressen dat toegang en gebruiksrecht heeft." en "Type III Parkeerplek
-buiten behorende tot het complex zonder dak 4 punten gedeeld door het aantal
-adressen dat toegang en gebruiksrecht heeft."
-
-Welke ruimtedetailsoort bij welk type hoort, staat in de
-implementatietoelichting. Een parkeerplek in een uitpandige afgesloten
-parkeergarage is net als een inpandige Type I.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Type I:
-`Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage`
-(`PIP`) en
-`Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage`
-(`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of
-uitpandig is: de wettekst maakt dat onderscheid niet.", "Type II:
-`Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex`
-(`PBD`)" en "Type III:
-`Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder A, onderdeel 10.
 
 ## Rapport
 

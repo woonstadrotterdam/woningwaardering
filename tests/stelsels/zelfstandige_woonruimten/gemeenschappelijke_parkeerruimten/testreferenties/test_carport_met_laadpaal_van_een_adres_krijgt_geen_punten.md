@@ -2,24 +2,8 @@
 
 Een carport met laadpaal van één adres krijgt in deze rubriek geen punten.
 
-De carport is een privé-buitenruimte en hoort in rubriek 8.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een
-parkeerruimte waartoe bewoners van één adres krachtens de huurovereenkomst
-exclusieve toegang tot en gebruiksrecht op hebben, wordt gewaardeerd volgens
-rubriek 2 (binnen, bijvoorbeeld een garagebox behorende tot de woning) of
-rubriek 8 (buiten, bijvoorbeeld een oprit exclusief behorende tot de
-woning)."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.3: "Een
-`carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-gewaardeerd, gemeenschappelijk in rubriek 10".
-
-De laadpaal volgt de carport en hoort dan in rubriek 12.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3: "Krijgt die
-ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle
-andere gevallen hier, met dezelfde deler (aantal adressen)."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2; wettekst,
+Bijlage I onder A, toelichting rubriek 10.
 
 ## Rapport
 

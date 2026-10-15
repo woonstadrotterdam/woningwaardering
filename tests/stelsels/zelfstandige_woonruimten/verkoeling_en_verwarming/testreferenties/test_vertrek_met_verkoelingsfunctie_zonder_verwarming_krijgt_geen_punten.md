@@ -2,8 +2,8 @@
 
 Een vertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Een
-verkoelingsvoorziening moet tevens kunnen verwarmen."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
+wettekst, Bijlage I onder A, onderdeel 3.
 
 ## Rapport
 

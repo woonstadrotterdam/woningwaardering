@@ -2,34 +2,7 @@
 
 Een energie-index zonder waarde wordt met een waarschuwing op het bouwjaar gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3: "Een
-energieprestatie van een ander soort dan energie-index in de periode
-2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee
-(2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij
-een energie-index zonder `waarde` gebeurt dit met een `UserWarning`
-(standaard een error)."
-
-Bouwjaar 1970 geeft -0,15 punt per m².
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1, tabel met de kolommen
-energieprestatie, energie-index, bouwjaar en punten per m²: "G EI > 2,7
-1976 of ouder – 0,15 punt".
-
-De m² zijn die van de vertrekken die aan de huurder zijn toe te rekenen:
-elk gemeenschappelijk vertrek gedeeld door het aantal onzelfstandige
-woonruimten, onafgerond opgeteld.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1: "Punten per m² die
-volgens rubriek 1 zijn toe te rekenen aan de huurder".
-
-Bron: wettekst, Bijlage I onder B, onderdeel 1: "Oppervlakte
-gemeenschappelijk(e) vertrek(ken) op hetzelfde adres", "1 punt per m², te
-delen door het aantal onzelfstandige woonruimten dat toegang en
-gebruiksrecht heeft".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4: volgens
-rubriek 1 toe te rekenen "is de onafgeronde toerekening (eerst delen, dan
-salderen), niet het afgeronde puntenresultaat van rubriek 1."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
 
 ## Rapport
 

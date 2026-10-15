@@ -2,13 +2,8 @@
 
 De oppervlakten van alle vertrekken worden eerst opgeteld en dan afgerond op hele m².
 
-Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De afronding van
-de oppervlakte van alle vertrekken samen vindt plaats op hele vierkante
-meters na saldering van de oppervlakte van alle vertrekken; bij 0,5 m² of
-meer wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden." en
-"Dit vertaalt zich dan naar 27 x 1 punt (per m²) = 27 punten".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.1;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

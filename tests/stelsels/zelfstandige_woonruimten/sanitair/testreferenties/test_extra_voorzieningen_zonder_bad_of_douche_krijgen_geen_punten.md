@@ -2,9 +2,8 @@
 
 Extra voorzieningen tellen alleen in een ruimte met een bad of een douche.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 6.2: "Voorzieningen in de bad-
-of doucheruimte (tot maximaal het aantal punten extra dat reeds voor douche,
-bad en bad/douche is verkregen)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
+Bijlage I onder A, toelichting rubriek 6.2.
 
 ## Rapport
 

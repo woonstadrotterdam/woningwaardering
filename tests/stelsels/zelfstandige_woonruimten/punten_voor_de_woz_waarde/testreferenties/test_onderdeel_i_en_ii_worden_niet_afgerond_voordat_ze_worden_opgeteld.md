@@ -2,36 +2,7 @@
 
 De punten van onderdeel I en onderdeel II worden niet afgerond voordat ze bij elkaar worden opgeteld.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "1 punt voor iedere
-€ 16.954 van de laatstelijk vastgestelde WOZ-waarde met waardepeildatum 1
-januari 2025 , 85% van de taxatiewaarde of de minimum WOZ-waarde. Rond dit
-puntenaantal niet af.", "Deel de WOZ-waarde door het aantal berekende m² en
-vervolgens door € 268 (bij een WOZ-waarde met waardepeildatum 1 januari
-2025 , 85% van de taxatiewaarde of minimum WOZ-waarde). Dit geeft het
-puntenaantal voor onderdeel II. Rond dit puntenaantal niet af." en "Tel de
-punten van de twee onderdelen bij elkaar op en rond volgens de instructie
-van paragraaf 2.1.4 af op een kwart punt."
-
-In de output staan de punten van onderdeel I en II wel op twee decimalen.
-De waardering 'Afronding op kwartpunten' is het verschil tussen de som van
-die twee rijen en het totaal.
-
-Bron: docs/voor-ontwikkelaars/criteriumstrategie, Structuur van de output:
-"Punten van een waardering worden in de berekening niet tussentijds op twee
-decimalen afgerond; alleen het rubriektotaal wordt op een kwart punt
-afgerond. Bij het vastleggen in de output krijgen de rijen wel twee
-decimalen. Afronding op kwartpunten sluit het verschil tussen de som van
-die getoonde rijen en het stelselgroeptotaal".
-
-De eenheid heeft alleen een bouwjaar, een WOZ-waarde en een slaapkamer.
-Deze rubriek rekent met de uitkomst van de andere rubrieken: de oppervlakte
-uit rubriek 1 en 2, en de punten waaraan het minimum van 40 punten en de
-cap op de WOZ worden getoetst. De package waardeert die rubrieken daarom
-mee en waarschuwt voor de energieprestatie, de monumenten, de pandsoort en
-de keuken die ontbreken.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
 
 ## Rapport
 

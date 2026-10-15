@@ -2,20 +2,9 @@
 
 Een gemeenschappelijke buitenruimte met een lengte en breedte van ten minste de minimumafmeting wordt gewaardeerd.
 
-De buitenruimte wordt met 4 onzelfstandige woonruimten op hetzelfde adres
-gedeeld.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-diepte)."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimte(n) op hetzelfde adres", "0,75 punt per m², gedeeld door het
-aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

@@ -2,21 +2,8 @@
 
 Een carport zonder aantal adressen krijgt in deze rubriek geen punten.
 
-De package leest het ontbrekende aantal als niet gedeeld met andere
-adressen. De carport is dan een privé-buitenruimte en hoort in rubriek 8.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.3: "Een
-`carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-gewaardeerd, gemeenschappelijk in rubriek 10".
-
-De implementatietoelichting zegt dat bij een ontbrekend aantal adressen een
-waarschuwing volgt. Bij een carport geeft de package die in deze rubriek
-niet; de test legt het huidige gedrag vast.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4: "Dit
-attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt
-het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere
-adressen."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4;
+implementatietoelichting zelfstandige woonruimten, 2.8.3.
 
 ## Rapport
 

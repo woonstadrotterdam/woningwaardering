@@ -2,16 +2,9 @@
 
 Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-Slaapkamer1 en Woonkamer/keuken1 zijn privé; Slaapkamer2 en
-Woonkamer/keuken2 worden met 2 onzelfstandige woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-er verwarming aanwezig is".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

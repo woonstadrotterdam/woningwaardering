@@ -1,10 +1,9 @@
 # test_oppervlakte_van_alle_vertrekken_samen_telt_voor_de_aftrek
 
-Voor de aftrek telt de oppervlakte van alle vertrekken samen, zodat twee vertrekken van 4 m² geen aftrek geven.
+Voor de aftrek telt de totale oppervlakte van alle vertrekken samen.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
+Bijlage I onder B, onderdeel 13.
 
 ## Rapport
 

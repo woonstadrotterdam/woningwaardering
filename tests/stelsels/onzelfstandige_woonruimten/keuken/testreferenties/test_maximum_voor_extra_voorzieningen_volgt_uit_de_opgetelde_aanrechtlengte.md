@@ -2,11 +2,7 @@
 
 Bij meer dan één aanrecht volgt het maximum voor extra voorzieningen uit de opgetelde aanrechtlengte.
 
-De keuken wordt met 2 onzelfstandige woonruimten gedeeld.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3: "Bij
-meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering
-gebaseerd op de basispunten uit de gesommeerde aanrechtlengte."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3.
 
 ## Rapport
 

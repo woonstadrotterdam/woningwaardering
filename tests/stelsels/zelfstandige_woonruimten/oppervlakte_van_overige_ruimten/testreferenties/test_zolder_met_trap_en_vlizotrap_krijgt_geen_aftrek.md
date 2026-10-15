@@ -2,9 +2,7 @@
 
 Een zolder met zowel een trap als een vlizotrap krijgt geen aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Staan er
-zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap
-leidend."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3.
 
 ## Rapport
 

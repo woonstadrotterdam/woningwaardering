@@ -2,19 +2,8 @@
 
 Een ruimte met de detailsoort open parkeergarage, niet specifieke plek, geeft een waarschuwing dat een andere detailsoort nodig is.
 
-De package waardeert de ruimte niet, ook niet nu ze 100 m² groot is en met
-10 adressen en 2 onzelfstandige woonruimten wordt gedeeld. De waarschuwing
-noemt de detailsoorten die in deze rubriek wel worden gewaardeerd. Dat de
-package deze detailsoort met een waarschuwing afwijst, staat in geen bron.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: implementatietoelichting, datamodel-uitbreidingen,
-"Parkeergelegenheden": "Als uitbreiding op de referentiedata zijn er
-verschillende parkeerruimten (`Ruimtedetailsoort`) toegevoegd, die
-overeenkomen met Type I, II en III parkeergelegenheden vanuit het
-WWS-beleidsboek".
+Bron: implementatietoelichting datamodel-uitbreidingen,
+"Parkeergelegenheden".
 
 ## Rapport
 

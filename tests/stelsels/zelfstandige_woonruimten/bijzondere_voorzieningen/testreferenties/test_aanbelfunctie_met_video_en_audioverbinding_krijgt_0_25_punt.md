@@ -2,17 +2,8 @@
 
 Een aanbelfunctie met video- en audioverbinding krijgt 0,25 punt.
 
-Bron: wettekst, Bijlage I onder A, rubriek 12: "Aanbelfunctie met video- en
-audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit
-de woning." en "0,25 punt".
-
-De aanbelfunctie is een installatie van een ruimte, hier de woonkamer. Of
-de voordeur vanuit de woning kan worden geopend, controleert de package
-niet: de implementatietoelichting haalt die voorwaarde door en houdt de
-waardering over. De test legt het huidige gedrag vast.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12.2: "wordt de
-aanbelfunctie gewaardeerd met 0,25 punt."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.12.2; wettekst,
+Bijlage I onder A, onderdeel 12.
 
 ## Rapport
 

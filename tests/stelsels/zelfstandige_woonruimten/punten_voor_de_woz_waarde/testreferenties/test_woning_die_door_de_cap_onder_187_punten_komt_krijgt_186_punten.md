@@ -2,19 +2,8 @@
 
 Een woning die zonder de cap op de WOZ meer dan 186 punten heeft en met de cap minder dan 187, krijgt een waardering van 186 punten.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.3: "Wanneer een woning
-zonder die beperking een waardering heeft van meer dan 186 punten en door
-deze beperking een waardering krijgt die lager is dan 187 punten, geldt
-een waardering van 186 punten voor de woning."
-
-De woning haalt in de andere rubrieken 119,75 punten. De punten voor
-de WOZ-waarde vullen de waardering aan tot 186 punten.
-
-De keuken heeft geen aanrecht. Daarvoor waarschuwt de rubriek keuken, die
-de package voor de beperking meewaardeert.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst,
+Bijlage I onder A, onderdeel 11.3.
 
 ## Rapport
 

@@ -41,17 +41,10 @@ def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_op
 ):
     """Een rijksmonument waarvan de huurovereenkomst op 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
-    Bron: wettekst, artikel 8a, eerste lid: "De maximale huurprijsgrens wordt
-    met 35% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-    een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet en de
-    huurovereenkomst betreffende die woonruimte is afgesloten na het tijdstip
-    van inwerkingtreding van de Wet betaalbare huur."
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.14.4: "als de
-    huurovereenkomst is afgesloten op of na het tijdstip van inwerkingtreding
-    van de Wet betaalbare huur (vanaf 1 juli 2024) dan wordt de maximale
-    huurprijs vermeerderd met 35%."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+    artikel 8a, eerste lid.
     """
+    # Precies op de dag van inwerkingtreding van de Wet betaalbare huur.
     eenheid = EenhedenEenheid(
         datum_afsluiten_huurovereenkomst=date(2024, 7, 1),
         monumenten=[Eenheidmonument.rijksmonument],
@@ -67,23 +60,15 @@ def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_op
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_rijksmonument_met_huurovereenkomst_van_30_juni_2024_krijgt_10_punten(
+def test_rijksmonument_met_huurovereenkomst_voor_1_juli_2024_krijgt_10_punten(
     prijsopslag_monumenten, vergelijk_met_testreferentie
 ):
-    """Een rijksmonument waarvan de huurovereenkomst op 30 juni 2024 is afgesloten, krijgt 10 punten.
+    """Een rijksmonument waarvan de huurovereenkomst vóór 1 juli 2024 is afgesloten, krijgt 10 punten.
 
-    Bron: wettekst, artikel 8a, tweede lid: "Indien de woonruimte bestaat uit
-    of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de
-    Erfgoedwet en de huurovereenkomst betreffende die woonruimte is afgesloten
-    voor het tijdstip van inwerkingtreding van de Wet betaalbare huur, wordt de
-    waardering voor een zelfstandige woonruimte in bijlage I, onder A, met 50
-    punten vermeerderd en de waardering voor een onzelfstandige woonruimte in
-    bijlage I, onder B, met 10 punten vermeerderd."
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.14.4: "als de
-    huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 10 punten extra
-    toegekend."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+    artikel 8a, tweede lid.
     """
+    # Eén dag vóór de inwerkingtreding van de Wet betaalbare huur.
     eenheid = EenhedenEenheid(
         datum_afsluiten_huurovereenkomst=date(2024, 6, 30),
         monumenten=[Eenheidmonument.rijksmonument],
@@ -101,26 +86,8 @@ def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_krijgt_met_waarschuw
 ):
     """Een rijksmonument zonder datum van afsluiten van de huurovereenkomst krijgt met een waarschuwing 35% opslag op de maximale huurprijs.
 
-    De waardering van een rijksmonument hangt af van de datum waarop de
-    huurovereenkomst is afgesloten; de package vraagt die datum daarom op.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4: "De datum
-    van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor
-    Rijksmonumenten."
-
-    Bron: implementatietoelichting, datamodel-uitbreidingen, "Datum afsluiten
-    huurovereenkomst": "Voor een correcte waardering van rijksmonumenten dient
-    de afsluitings datum van de huurovereenkomst opgegeven te worden."
-
-    Ontbreekt de datum, dan rekent de package met de peildatum van de
-    waardering, hier 1 juli 2026. De implementatietoelichting noemt die keuze
-    niet; de test legt het huidige gedrag vast.
-
-    Bron: wettekst, artikel 8a, eerste lid: "De maximale huurprijsgrens wordt
-    met 35% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-    een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet en de
-    huurovereenkomst betreffende die woonruimte is afgesloten na het tijdstip
-    van inwerkingtreding van de Wet betaalbare huur."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+    artikel 8a, eerste lid.
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -132,6 +99,8 @@ def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_krijgt_met_waarschuw
     ) as waarschuwingen:
         groep = prijsopslag_monumenten.waardeer(eenheid)
 
+    # De peildatum (1 juli 2026) valt na de inwerkingtreding van de Wet
+    # betaalbare huur, dus het rijksmonument krijgt 35% opslag.
     assert opslagpercentage_per_naam(groep) == {
         Eenheidmonument.rijksmonument.naam: 0.35
     }
@@ -148,10 +117,8 @@ def test_gemeentelijk_monument_krijgt_15_procent_opslag(
 ):
     """Een gemeentelijk monument krijgt 15% opslag op de maximale huurprijs.
 
-    Bron: wettekst, artikel 8a, derde lid: "De maximale huurprijsgrens wordt
-    met 15% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-    een door het college van burgemeester en wethouders aangewezen gemeentelijk
-    monument of een door gedeputeerde staten aangewezen provinciaal monument."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
+    artikel 8a, derde lid.
     """
     eenheid = EenhedenEenheid(monumenten=[Eenheidmonument.gemeentelijk_monument])
 
@@ -169,10 +136,8 @@ def test_provinciaal_monument_krijgt_15_procent_opslag(
 ):
     """Een provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
-    Bron: wettekst, artikel 8a, derde lid: "De maximale huurprijsgrens wordt
-    met 15% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-    een door het college van burgemeester en wethouders aangewezen gemeentelijk
-    monument of een door gedeputeerde staten aangewezen provinciaal monument."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
+    artikel 8a, derde lid.
     """
     eenheid = EenhedenEenheid(monumenten=[Eenheidmonument.provinciaal_monument])
 
@@ -218,11 +183,8 @@ def test_rijksbeschermd_stadsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag
 ):
     """Een woonruimte in een rijksbeschermd stadsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
-    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-    met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
-    rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
-    lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
-    is gebouwd voor 1965; en".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+    artikel 8a, vijfde lid.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=bouwjaar,
@@ -241,11 +203,8 @@ def test_rijksbeschermd_dorpsgezicht_krijgt_bij_bouwjaar_voor_1965_5_procent_ops
 ):
     """Een woonruimte in een rijksbeschermd dorpsgezicht die vóór 1965 is gebouwd, krijgt 5% opslag op de maximale huurprijs.
 
-    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-    met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
-    rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
-    lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
-    is gebouwd voor 1965; en".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+    artikel 8a, vijfde lid.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1964,
@@ -266,14 +225,10 @@ def test_gemeentelijk_beschermd_stads_of_dorpsgezicht_krijgt_geen_opslag(
 ):
     """Een woonruimte in een gemeentelijk beschermd stads- of dorpsgezicht krijgt geen opslag.
 
-    De opslag geldt alleen voor een rijksbeschermd stads- of dorpsgezicht.
-
-    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-    met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
-    rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
-    lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
-    is gebouwd voor 1965; en".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+    artikel 8a, vijfde lid.
     """
+    # Het bouwjaar voldoet aan de eis; alleen de soort gezicht sluit de opslag uit.
     eenheid = EenhedenEenheid(
         bouwjaar=1964,
         monumenten=[
@@ -292,26 +247,7 @@ def test_gemeentelijk_beschermd_stads_of_dorpsgezicht_krijgt_geen_opslag(
 def test_rijksbeschermd_stadsgezicht_zonder_bouwjaar_krijgt_met_waarschuwing_geen_opslag(
     prijsopslag_monumenten, vergelijk_met_testreferentie
 ):
-    """Een woonruimte in een rijksbeschermd stadsgezicht zonder bouwjaar krijgt met een waarschuwing geen opslag.
-
-    De opslag geldt alleen voor een woning die vóór 1965 is gebouwd. Zonder
-    bouwjaar kan de package die voorwaarde niet toetsen.
-
-    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-    met 5% vermeerderd indien:" en "b. de woonruimte behoort tot een woning die
-    is gebouwd voor 1965; en".
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6: "Het
-    bouwjaar is van belang omdat alleen woningen gebouwd vóór 1965 in
-    aanmerking komen voor de opslag van 5%."
-
-    De implementatietoelichting noemt niet dat de package bij een ontbrekend
-    bouwjaar waarschuwt en geen opslag toekent; de test legt het huidige gedrag
-    vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een woonruimte in een rijksbeschermd stadsgezicht zonder bouwjaar krijgt met een waarschuwing geen opslag."""
     eenheid = EenhedenEenheid(
         id="eenheid",
         monumenten=[Eenheidmonument.rijksbeschermd_stadsgezicht],
@@ -333,41 +269,16 @@ def test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_he
 ):
     """Een rijksmonument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-    Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-    met 5% vermeerderd indien:" en "c. de woonruimte niet bestaat of deel
-    uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet
-    of van een door het college van burgemeester en wethouders aangewezen
-    gemeentelijk monument of een door gedeputeerde staten aangewezen
-    provinciaal monument."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.1;
+    implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+    artikel 8a, vijfde lid.
 
-    Bron: beleidsboek onzelfstandige woonruimten, 2.14.1: "Zo kunnen de
-    monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke
-    monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet
-    tegelijkertijd voor dezelfde woonruimte worden toegekend".
+    Een rijksmonument krijgt 35% opslag op de maximale huurprijs.
 
-    De woning is uit 1964 en voldoet daarmee aan de voorwaarde voor het
-    bouwjaar; alleen de status van rijksmonument sluit de opslag voor het
-    stadsgezicht uit.
-
-    Bron: wettekst, artikel 8a, vijfde lid: "b. de woonruimte behoort tot een
-    woning die is gebouwd voor 1965; en".
-
-    De eenheid heeft geen datum van afsluiten van de huurovereenkomst. De
-    package waarschuwt daarvoor en rekent met de peildatum van de waardering,
-    hier 1 juli 2026; het rijksmonument krijgt daarmee 35% opslag. De
-    implementatietoelichting noemt de keuze voor de peildatum niet; de test
-    legt het huidige gedrag vast.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4: "De datum
-    van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor
-    Rijksmonumenten."
-
-    Bron: wettekst, artikel 8a, eerste lid: "De maximale huurprijsgrens wordt
-    met 35% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-    een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet en de
-    huurovereenkomst betreffende die woonruimte is afgesloten na het tijdstip
-    van inwerkingtreding van de Wet betaalbare huur."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+    artikel 8a, eerste lid.
     """
+    # Het bouwjaar voldoet aan de eis; alleen het rijksmonument sluit de opslag uit.
     eenheid = EenhedenEenheid(
         bouwjaar=1964,
         monumenten=[
@@ -381,6 +292,8 @@ def test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_he
     ) as waarschuwingen:
         groep = prijsopslag_monumenten.waardeer(eenheid)
 
+    # Zonder datum van afsluiten rekent de package met de peildatum (1 juli 2026),
+    # dus het rijksmonument krijgt 35% opslag.
     assert opslagpercentage_per_naam(groep) == {
         Eenheidmonument.rijksmonument.naam: 0.35
     }
@@ -394,19 +307,7 @@ def test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_he
 def test_eenheid_zonder_opgegeven_monumenten_geeft_een_waarschuwing(
     prijsopslag_monumenten, vergelijk_met_testreferentie, monkeypatch
 ):
-    """Een eenheid waarvan `monumenten` niet is opgegeven, geeft een waarschuwing.
-
-    De package vraagt om een lege lijst wanneer de eenheid geen monumentstatus
-    heeft. De implementatietoelichting noemt die keuze niet; de test legt het
-    huidige gedrag vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    Na de waarschuwing zoekt de package de monumentstatus zelf op met de
-    BAG-identificatie van de eenheid (README.md, Installatie). Deze eenheid
-    heeft geen BAG-identificatie en krijgt geen waardering.
-    """
+    """Een eenheid waarvan `monumenten` niet is opgegeven, geeft een waarschuwing."""
     # De package `monumenten` is optioneel; zonder haar geeft de waardering een
     # tweede waarschuwing. Met deze vervanger verloopt de waardering in elke
     # omgeving hetzelfde: zonder BAG-identificatie wordt `MonumentenClient`
@@ -414,6 +315,7 @@ def test_eenheid_zonder_opgegeven_monumenten_geeft_een_waarschuwing(
     monkeypatch.setitem(
         sys.modules, "monumenten", SimpleNamespace(MonumentenClient=None)
     )
+    # Zonder BAG-identificatie zoekt de package de monumentstatus niet zelf op.
     eenheid = EenhedenEenheid(id="eenheid")
 
     with pytest.warns(

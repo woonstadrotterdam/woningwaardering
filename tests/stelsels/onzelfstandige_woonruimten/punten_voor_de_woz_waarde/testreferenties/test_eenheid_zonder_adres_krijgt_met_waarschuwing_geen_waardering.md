@@ -2,23 +2,6 @@
 
 Een eenheid zonder adres krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-De package bepaalt het COROP-gebied met de woonplaatscode, of zoekt de
-woonplaats op met postcode en huisnummer. Zonder adres heeft zij geen van
-beide.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Het
-COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats
-waarin de eenheid zich bevindt." en "Indien dit attribuut niet
-gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en
-huisnummertoevoeging bepaald in welke woonplaats een eenheid zich bevindt."
-
-De implementatietoelichting noemt niet dat de package bij een ontbrekend
-adres waarschuwt en geen waardering geeft; de test legt het huidige gedrag
-vast.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 Geen waarderingen voor Punten voor de WOZ-waarde.

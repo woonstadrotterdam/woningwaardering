@@ -2,13 +2,6 @@
 
 Een buitenruimte zonder oppervlakte geeft een waarschuwing over incomplete input.
 
-De package waardeert het balkon niet. Het balkon is privé: de woonruimte
-krijgt daardoor ook de 2 punten voor de aanwezigheid van een
-privé-buitenruimte niet. Die keuze van de package staat in geen bron.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 Geen waarderingen voor Buitenruimten.

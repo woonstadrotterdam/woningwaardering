@@ -2,9 +2,7 @@
 
 Een overige ruimte met een aanrecht telt voor de keuken mee.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1: "Rubriek 5
-stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een
-aanrecht telt daarom in elke ruimte mee."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1.
 
 ## Rapport
 

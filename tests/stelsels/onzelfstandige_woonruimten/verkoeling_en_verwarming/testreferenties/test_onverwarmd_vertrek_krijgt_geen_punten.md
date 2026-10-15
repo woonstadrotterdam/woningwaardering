@@ -2,11 +2,8 @@
 
 Een vertrek zonder verwarming krijgt geen punten.
 
-Keuken1 is privé; Keuken2 wordt met 2 onzelfstandige woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privévertrek
-2 punten" en "Verwarming per gemeenschappelijk vertrek op hetzelfde adres 2
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder B, onderdeel 3.
 
 ## Rapport
 

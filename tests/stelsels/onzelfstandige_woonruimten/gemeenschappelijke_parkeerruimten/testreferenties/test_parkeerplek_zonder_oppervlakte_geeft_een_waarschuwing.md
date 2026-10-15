@@ -2,20 +2,6 @@
 
 Een parkeerplek zonder oppervlakte geeft een waarschuwing over incomplete input.
 
-De package waardeert de parkeerplek niet: zonder oppervlakte is niet vast te
-stellen of ze de minimale oppervlakte heeft.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-gangbare personenauto in zijn geheel op past."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
 ## Rapport
 
 Geen waarderingen voor Gemeenschappelijke parkeerruimten.

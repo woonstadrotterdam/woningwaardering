@@ -2,13 +2,8 @@
 
 Staat het aanrecht in gedeelde vertrekken, dan worden de punten per vertrek gedeeld door het aantal onzelfstandige woonruimten waarmee dat vertrek wordt gedeeld.
 
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-voorziening(en)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.5; wettekst,
+Bijlage I onder B, toelichting, inleiding.
 
 ## Rapport
 

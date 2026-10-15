@@ -1,0 +1,82 @@
+# test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee
+
+Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021 telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
+
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3;
+implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst, Bijlage
+I onder A, toelichting rubriek 4.1.
+
+## Rapport
+
+```text
+ENERGIEPRESTATIE
+  Bouwjaar 1990                                                                  14.00 pt
+                                                                                ------
+  Totaal                                                                         14.00 pt
+```
+
+## Waarschuwingen
+
+Geen.
+
+## Input
+
+```json
+{
+  "bouwjaar": 1990,
+  "energieprestaties": [
+    {
+      "soort": {
+        "code": "VEL",
+        "naam": "Voorlopig energielabel"
+      },
+      "status": {
+        "code": "DEF",
+        "naam": "Definitief"
+      },
+      "begindatum": "2018-06-01",
+      "einddatum": "2028-06-01",
+      "label": {
+        "code": "A",
+        "naam": "A"
+      }
+    }
+  ],
+  "monumenten": [],
+  "panden": [
+    {
+      "soort": {
+        "code": "EGW",
+        "naam": "Eengezinswoning"
+      }
+    }
+  ]
+}
+```
+
+## Output
+
+```json
+{
+  "criteriumGroep": {
+    "stelsel": {
+      "code": "ZEL",
+      "naam": "Zelfstandige woonruimten"
+    },
+    "stelselgroep": {
+      "code": "ENE",
+      "naam": "Energieprestatie"
+    }
+  },
+  "punten": 14.0,
+  "woningwaarderingen": [
+    {
+      "criterium": {
+        "id": "energieprestatie__bouwjaar",
+        "naam": "Bouwjaar 1990"
+      },
+      "punten": 14.0
+    }
+  ]
+}
+```

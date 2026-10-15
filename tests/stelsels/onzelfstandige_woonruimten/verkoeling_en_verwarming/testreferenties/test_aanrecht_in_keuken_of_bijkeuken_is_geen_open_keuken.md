@@ -2,18 +2,7 @@
 
 Een aanrecht in een verwarmde keuken, of in een verwarmde bijkeuken die als vertrek is aangeleverd, is geen open keuken.
 
-Keuken1 is privé. Keuken2 en de bijkeuken worden met 2 onzelfstandige
-woonruimten gedeeld en krijgen daarom de helft van de 2 punten.
-
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privévertrek
-2 punten" en "Verwarming per gemeenschappelijk vertrek op hetzelfde adres 2
-punten, te delen door het aantal onzelfstandige woonruimten dat toegang en
-gebruiksrecht heeft".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2: "Elke
-ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`,
-`badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd
-en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
 ## Rapport
 

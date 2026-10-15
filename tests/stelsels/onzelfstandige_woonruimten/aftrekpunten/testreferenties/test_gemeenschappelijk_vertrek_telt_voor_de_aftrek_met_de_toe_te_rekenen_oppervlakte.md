@@ -1,14 +1,14 @@
 # test_gemeenschappelijk_vertrek_telt_voor_de_aftrek_met_de_toe_te_rekenen_oppervlakte
 
-Een gemeenschappelijk vertrek van 12 m² dat met 2 onzelfstandige woonruimten wordt gedeeld, telt voor de aftrek als 6 m².
+Een gemeenschappelijk vertrek telt voor de aftrek mee met de oppervlakte die aan de huurder is toe te rekenen.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1; wettekst,
+Bijlage I onder B, toelichting rubriek 1.
 
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 1: "Het aantal m² dat
-volgens rubriek 1 aan de huurder is toe te rekenen is 10 m² + (40 m²/4) =
-20 m²."
+Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
+Bijlage I onder B, onderdeel 13.
 
 ## Rapport
 

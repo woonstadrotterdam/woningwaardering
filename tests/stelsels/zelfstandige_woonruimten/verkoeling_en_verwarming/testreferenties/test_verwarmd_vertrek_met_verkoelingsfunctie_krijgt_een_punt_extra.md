@@ -2,14 +2,8 @@
 
 Een verwarmd vertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-punten" en "Verkoelingsfunctie per vertrek (mits deze voorziening tevens een
-verwarmingsfunctie heeft) 1 punt (maximaal 2 punten bij meerdere vertrekken
-met verkoelingsfunctie)".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Dit betekent dat
-een vertrek met verkoelingsvoorziening (die ook kan verwarmen) ook als
-verwarmd vertrek geldt en aanspraak kan maken op bijbehorende waardering."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+Bijlage I onder A, onderdeel 3.
 
 ## Rapport
 

@@ -43,17 +43,12 @@ def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_overige_ruimten(
 ):
     """De oppervlakten van alle overige ruimten worden eerst opgeteld en dan afgerond op hele m².
 
-    Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De oppervlakte
-    per overige ruimte wordt afgerond op 2 decimalen. De afronding van de
-    oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante
-    meters na saldering van de oppervlakte van de afzonderlijke overige
-    ruimten" en "Dit vertaalt zich dan naar 25 x 0,75 punt (per m²) = 18,75
-    punten."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Het rekenvoorbeeld uit de toelichting bij de wettekst.
             ruimte(Ruimtedetailsoort.garage, oppervlakte=19.3392),
             ruimte(Ruimtedetailsoort.bijkeuken, oppervlakte=6.0557),
         ]
@@ -77,10 +72,8 @@ def test_toiletruimte_kleiner_dan_2m2_wordt_niet_gewaardeerd(
 ):
     """Een toiletruimte kleiner dan 2 m² wordt niet als overige ruimte gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De ruimte dient
-    een oppervlakte te hebben van minimaal 2 m²." en "Een toiletruimte wordt
-    gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van een
-    overige ruimte."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -108,14 +101,8 @@ def test_vertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
 ):
     """Een ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², wordt als overige ruimte gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: een overige ruimte
-    is een ruimte waarvoor geldt "De ruimte voldoet niet aan de eisen voor een
-    vertrek (zie vaste toelichting onder 1) of een verkeersruimte".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.2: "Een
-    ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de
-    rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m²
-    en minimaal 2 m² is."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -149,10 +136,8 @@ def test_garage_wordt_als_overige_ruimte_gewaardeerd(
 ):
     """Een garage die bij de woning hoort, wordt als overige ruimte gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Parkeerruimte die
-    exclusief tot één adres behoort (privé-garage), wordt gewaardeerd als
-    overige ruimte." en "Overige ruimten worden gewaardeerd met driekwart punt
-    per vierkante meter."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -176,15 +161,12 @@ def test_zolder_zonder_vaste_trap_krijgt_5_punten_aftrek(
 ):
     """Een zolder zonder vaste trap krijgt 5 punten aftrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Is er een
-    `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Een vlizotrap is geen vaste trap (implementatietoelichting 2.2.2.3).
             ruimte(
                 Ruimtedetailsoort.zolder,
                 elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
@@ -207,13 +189,8 @@ def test_alleen_zolder_met_vlizotrap_krijgt_de_aftrek(
 ):
     """Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "De
-    detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-    `vlizotrap` weerspreekt dat."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -255,9 +232,7 @@ def test_zolder_met_trap_en_vlizotrap_krijgt_geen_aftrek(
 ):
     """Een zolder met zowel een trap als een vlizotrap krijgt geen aftrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Staan er
-    zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap
-    leidend."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -321,11 +296,8 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_zolder(
 ):
     """De aftrek voor een zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd, doch niet met meer punten dan voor de
-    oppervlakte van de zolderruimten wordt gegeven." en "Waardering in punten
-    vindt na saldering en afronding plaats."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -356,14 +328,8 @@ def test_zoldervertrek_met_alleen_een_vlizotrap_krijgt_de_aftrek(
 ):
     """Een zoldervertrek dat alleen via een vlizotrap bereikbaar is, krijgt als overige ruimte 5 punten aftrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Een
-    zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder
-    `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan
-    geldt daarbij de puntenaftrek van 2.2.2.3."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -394,18 +360,8 @@ def test_zolderruimte_die_geen_vertrek_kan_zijn_wordt_als_overige_ruimte_gewaard
 ):
     """Een zolderruimte die als vertrek is aangeleverd maar niet aan de eisen van een vertrek voldoet, wordt als overige ruimte gewaardeerd.
 
-    De package waarschuwt bij de ruimte met de detailsoort `zolder`.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Onder overige
-    ruimten, voor zover zij niet voldoen aan de eisen voor een vertrek, worden
-    onder andere verstaan: bijkeukens, bergingen, wasruimten, schuren, zolders
-    en kelders."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Voldoet
-    een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige
-    ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is
-    ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die
-    de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -429,6 +385,7 @@ def test_zolderruimte_die_geen_vertrek_kan_zijn_wordt_als_overige_ruimte_gewaard
         ]
     )
 
+    # De package waarschuwt alleen bij de ruimte met de detailsoort zolder.
     with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
         groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
@@ -455,19 +412,8 @@ def test_kast_telt_mee_in_het_subtotaal_van_de_overige_ruimten(
 ):
     """De oppervlakte van een kast telt mee in het subtotaal van de overige ruimten.
 
-    Het subtotaal staat in de uitkomst wanneer er een zolder zonder vaste trap
-    is; de aftrek voor die zolder komt daarop in mindering.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Meting van de
-    oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50 meter
-    boven de vloer, inclusief de oppervlakte van alle losse en vaste tot de
-    woning behorende kasten".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-    kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-    (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-    onder meer energieprestatie, gemeenschappelijke ruimten en
-    zoldercorrecties."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
     eenheid = EenhedenEenheid(
@@ -475,6 +421,7 @@ def test_kast_telt_mee_in_het_subtotaal_van_de_overige_ruimten(
             ruimte(
                 Ruimtedetailsoort.berging, oppervlakte=2.6, verbonden_ruimten=[kast]
             ),
+            # De zolder zonder vaste trap zorgt dat het subtotaal in de uitkomst staat.
             ruimte(
                 Ruimtedetailsoort.zolder,
                 oppervlakte=2.4,
@@ -505,16 +452,8 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_zolder_zonder_vaste_trap(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een zolder zonder vaste trap.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Meting van de
-    oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50 meter
-    boven de vloer, inclusief de oppervlakte van alle losse en vaste tot de
-    woning behorende kasten".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-    kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-    (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-    onder meer energieprestatie, gemeenschappelijke ruimten en
-    zoldercorrecties."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
     """
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
     eenheid = EenhedenEenheid(

@@ -2,18 +2,8 @@
 
 Een zolderruimte die als vertrek is aangeleverd maar niet aan de eisen van een vertrek voldoet, wordt als overige ruimte gewaardeerd.
 
-De package waarschuwt bij de ruimte met de detailsoort `zolder`.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Onder overige
-ruimten, voor zover zij niet voldoen aan de eisen voor een vertrek, worden
-onder andere verstaan: bijkeukens, bergingen, wasruimten, schuren, zolders
-en kelders."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Voldoet
-een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige
-ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is
-ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die
-de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2)."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

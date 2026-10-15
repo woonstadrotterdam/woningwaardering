@@ -2,15 +2,7 @@
 
 Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-De package toetst de minimumafmeting alleen op de afmetingen die zijn
-ingevuld.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2: "Alleen als
-een waarde is ingevuld wordt deze getoetst tegen 2000 × 1500 × 1500 mm."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-het aantal adressen dat toegang heeft tot de buitenruimte."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2.
 
 ## Rapport
 

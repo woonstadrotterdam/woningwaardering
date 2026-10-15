@@ -2,30 +2,8 @@
 
 Een vertrek dat met meerdere adressen wordt gedeeld, telt niet mee in de m² voor de energieprestatie.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1: "Punten per m² die
-volgens rubriek 1 zijn toe te rekenen aan de huurder".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4:
-"Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld
-(`gedeeldMetAantalAdressen` ≥ 2) tellen niet mee voor de oppervlakte in
-§2.4.4." en "Rubriek 1 dekt alleen privévertrekken en gemeenschappelijke
-vertrekken op hetzelfde adres; ruimten gedeeld met meerdere adressen
-vallen onder rubriek 9".
-
-De privéslaapkamer heeft in de input
-`gedeeld_met_aantal_onzelfstandige_woonruimten` 1 en is daarmee niet
-gedeeld.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4: "Indien
-deze property leeg is of kleiner is dan 2, tellen we de ruimte mee als
-zijnde niet gedeeld."
-
-Alleen de privéslaapkamer van 20 m² telt mee. Label A geeft 0,65 punt per
-m².
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1, tabel met de kolommen
-energieprestatie, energie-index, bouwjaar en punten per m²: "A 0,8 < EI ≤
-1,2 2002 en later 0,65 punt".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
+Bijlage I onder B, onderdeel 4.1.
 
 ## Rapport
 

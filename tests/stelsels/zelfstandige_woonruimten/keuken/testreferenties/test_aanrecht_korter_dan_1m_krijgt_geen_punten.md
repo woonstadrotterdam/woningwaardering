@@ -2,13 +2,8 @@
 
 Een aanrecht korter dan 1 meter krijgt geen punten.
 
-De package geeft daarbij twee waarschuwingen: de keuken heeft geen aanrecht
-van minimaal 1 meter, en de eenheid heeft daardoor geen keuken.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 5.1: "Minder dan 1 m 0 punten".
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2; wettekst,
+Bijlage I onder A, onderdeel 5.1.
 
 ## Rapport
 

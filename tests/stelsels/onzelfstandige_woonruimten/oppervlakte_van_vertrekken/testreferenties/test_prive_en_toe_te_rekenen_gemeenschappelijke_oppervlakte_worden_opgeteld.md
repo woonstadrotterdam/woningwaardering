@@ -2,24 +2,15 @@
 
 De oppervlakte van privévertrekken en de toe te rekenen oppervlakte van gemeenschappelijke vertrekken worden opgeteld.
 
-Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst, met
-de keuken als gemeenschappelijk vertrek van drie onzelfstandige
-woonruimten. Het onderscheidt niet of er één keer of per soort vertrek
-wordt afgerond: beide geven 19 punten.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
+wettekst, Bijlage I onder B, toelichting rubriek 1.
 
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 1: "Het aantal m² dat
-volgens rubriek 1 aan de huurder is toe te rekenen is 10 m² + (40 m²/4) =
-20 m²."
+De oppervlakte per vertrek wordt afgerond op twee decimalen, en die van
+alle vertrekken samen na saldering op hele vierkante meters.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De oppervlakte
-per vertrek wordt afgerond op twee decimalen. De afronding van de
-oppervlakte van alle vertrekken samen vindt plaats op hele vierkante meters
-na saldering van de oppervlakte van alle vertrekken; bij 0,5 m² of meer
-wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
+wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

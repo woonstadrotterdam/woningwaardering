@@ -2,20 +2,10 @@
 
 Een privé-carport of privé-parkeerplaats wordt als privé-buitenruimte gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Wanneer zich
-binnen de privé-buitenruimte een parkeerplek bevindt, geldt de parkeerplek
-en de weg daar naartoe als privé-buitenruimte."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3: "Een
-`carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-gewaardeerd, gemeenschappelijk in rubriek 10".
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Privé buitenruimte(n)", "2
-punten + 0,35 punt per m²".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1;
+implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
+Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

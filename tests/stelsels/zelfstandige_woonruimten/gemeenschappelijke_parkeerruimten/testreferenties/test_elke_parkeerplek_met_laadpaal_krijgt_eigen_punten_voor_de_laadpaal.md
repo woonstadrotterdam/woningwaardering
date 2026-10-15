@@ -2,11 +2,8 @@
 
 Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
-puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
-parkeerplek(ken)."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
+Bijlage I onder A, toelichting rubriek 10.
 
 ## Rapport
 

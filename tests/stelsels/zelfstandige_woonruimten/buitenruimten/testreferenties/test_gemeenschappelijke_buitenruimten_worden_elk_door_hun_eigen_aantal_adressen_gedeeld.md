@@ -2,9 +2,8 @@
 
 Van gemeenschappelijke buitenruimten met een verschillend aantal adressen worden de punten per buitenruimte door haar eigen aantal adressen gedeeld.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-het aantal adressen dat toegang heeft tot de buitenruimte."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

@@ -2,23 +2,8 @@
 
 Een gemeenschappelijke parkeerplaats wordt als Type III gewaardeerd.
 
-De parkeerplaats wordt met 3 adressen gedeeld; op het eigen adres heeft één
-onzelfstandige woonruimte toegang. De package waarschuwt dat bij een
-gemeenschappelijke parkeerplek een Type-detailsoort hoort.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3: "Type
-III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en,
-wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`).
-Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op
-zijn plaats is: `PAR` legt het type niet vast."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: wettekst, Bijlage I onder B, rubriek 10: "Type III Parkeerplek buiten
-behorende tot het complex zonder dak 4 punten gedeeld door het aantal
-adressen dat toegang en gebruiksrecht heeft, en daarna gedeeld door het
-aantal onzelfstandige woonruimten op dat adres".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder B, onderdeel 10.
 
 ## Rapport
 

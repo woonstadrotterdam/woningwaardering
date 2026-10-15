@@ -2,9 +2,8 @@
 
 Een drempelloze inrijdouche telt als een gewone douche.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.6.1: "Als douche wordt iedere,
-door de verhuurder aangebrachte, installatie voor het nemen van een stortbad
-geteld."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, toelichting rubriek 6.1.
 
 ## Rapport
 

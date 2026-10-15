@@ -2,21 +2,13 @@
 
 Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-Geen van de drie balkons wordt gewaardeerd. De woning heeft daardoor geen
-gewaardeerde buitenruimte en krijgt de aftrek van 5 punten.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-diepte)."
+Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2: "Indien een
-van deze afmetingen kleiner is dan noodzakelijk voor waardering leidt dat
-ertoe dat de ruimte niet wordt gewaardeerd."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5: "Daarom
-passen we −5 alleen toe als er geen enkele gewaardeerde buitenruimte is
-(bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen
-punten en tellen dus niet mee tegen de aftrek)."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

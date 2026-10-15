@@ -2,18 +2,7 @@
 
 Een energie-index zonder waarde wordt met een waarschuwing op het bouwjaar gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3: "Een
-energieprestatie van een ander soort dan energie-index in de periode
-2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee
-(2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij
-een energie-index zonder `waarde` gebeurt dit met een `UserWarning`
-(standaard een error)."
-
-Een eengezinswoning met bouwjaar 1990 krijgt 14 punten.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 4.1, tabel met de kolommen
-energielabel, energie-index, bouwjaar, eengezinswoning en meergezinswoning:
-"D 1,8 < EI ≤ 2,1 1984 t/m 1991 14 11".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
 
 ## Rapport
 

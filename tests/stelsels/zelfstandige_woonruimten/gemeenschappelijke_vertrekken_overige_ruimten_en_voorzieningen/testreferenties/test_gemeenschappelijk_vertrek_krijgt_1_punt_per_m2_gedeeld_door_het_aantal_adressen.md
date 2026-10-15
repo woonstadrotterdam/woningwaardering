@@ -2,15 +2,8 @@
 
 Een gemeenschappelijk vertrek krijgt 1 punt per m², gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke vertrek 1
-punt per m² gedeeld door het aantal adressen dat toegang en gebruiksrecht
-heeft."
-
-Het totaal van de rubriek wordt afgerond op een kwart punt.
-
-Bron: wettekst, Bijlage I onder A, toelichting, inleiding: "De waardering in
-punten per rubriek wordt na saldering afgerond op 0,25 punt waarbij een
-achtste (1/8) punt naar boven wordt afgerond."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9; wettekst,
+Bijlage I onder A, onderdeel 9.
 
 ## Rapport
 

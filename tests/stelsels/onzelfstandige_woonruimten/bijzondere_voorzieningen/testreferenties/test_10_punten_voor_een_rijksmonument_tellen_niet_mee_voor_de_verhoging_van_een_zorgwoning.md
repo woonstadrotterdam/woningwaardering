@@ -1,45 +1,15 @@
 # test_10_punten_voor_een_rijksmonument_tellen_niet_mee_voor_de_verhoging_van_een_zorgwoning
 
-De 10 punten voor een rijksmonument met een huurovereenkomst van 1 januari 2024 tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
+De 10 punten voor een rijksmonument met een huurovereenkomst van vóór de inwerkingtreding van de Wet betaalbare huur tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-De 10 punten komen op grond van artikel 8a bij de waardering. De verhoging
-voor een zorgwoning is een percentage van de punten van de onderdelen 1 tot
-en met 11.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.12;
+implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+artikel 8a, tweede lid; wettekst, Bijlage I onder B, onderdeel 12.
 
-Bron: wettekst, artikel 8a, tweede lid: "Indien de woonruimte bestaat uit
-of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de
-Erfgoedwet en de huurovereenkomst betreffende die woonruimte is afgesloten
-voor het tijdstip van inwerkingtreding van de Wet betaalbare huur, wordt de
-waardering voor een zelfstandige woonruimte in bijlage I, onder A, met 50
-punten vermeerderd en de waardering voor een onzelfstandige woonruimte in
-bijlage I, onder B, met 10 punten vermeerderd."
+Een rijksmonument krijgt in rubriek 4 geen minpunten.
 
-Bron: wettekst, Bijlage I onder B, rubriek 12: "bij: 35% van de ingevolge
-de onderdelen 1 tot en met 11 toegekende punten."
-
-De eenheid heeft bouwjaar 1960 en geen energielabel. Bij dat bouwjaar geeft
-rubriek 4 minpunten, maar niet aan een rijksmonument: de rubriek draagt 0
-punten bij aan de punten waarover de verhoging wordt berekend.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.2: "Indien de woonruimte
-bestaat uit of deel uitmaakt van een rijksmonument, een provinciaal
-monument of een gemeentelijke monument als bedoeld in artikel 8a worden
-voor deze rubriek geen minpunten toegekend."
-
-De eenheid heeft verder de doelgroep zorg, de datum van de
-huurovereenkomst en een verwarmde woonkamer. De test geeft geen eerder
-resultaat mee; de package waardeert de andere rubrieken daarom zelf en
-waarschuwt voor de energieprestatie en de WOZ-waarde die ontbreken. Dat de
-verhoging van de gegevens voor de andere rubrieken afhangt, staat alleen in
-de implementatietoelichting voor zelfstandige woonruimten.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12: "De extra
-attributen in het model (zoals de WOZ-waarde, energielabel,
-ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen
-wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
+wettekst, Bijlage I onder B, onderdeel 4.2.
 
 ## Rapport
 

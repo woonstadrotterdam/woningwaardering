@@ -2,18 +2,9 @@
 
 Een ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², wordt als overige ruimte gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: een overige ruimte
-is een ruimte waarvoor geldt "De ruimte voldoet niet aan de eisen voor een
-vertrek (zie vaste toelichting onder 1) of een verkeersruimte".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2: "Een
-ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de
-rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m²
-en minimaal 2 m² is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
+wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

@@ -2,10 +2,8 @@
 
 Een vertrek zonder verwarming krijgt geen punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmd
-vertrek wordt, ongeacht de verwarmingswijze, een waardering van twee punten
-toegepast, voor zover de verwarming tot de onroerende zaak en zijn
-onroerende aanhorigheden behoort."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+Bijlage I onder A, onderdeel 3.
 
 ## Rapport
 

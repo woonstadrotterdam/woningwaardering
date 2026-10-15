@@ -2,19 +2,8 @@
 
 De maximale aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal onzelfstandige woonruimten.
 
-Het scenario is het voorbeeld uit de implementatietoelichting. Volgens die
-toelichting trekt de huurprijscheck hier de volle 5 punten af; de package
-volgt de wettekst.
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 2: "De punten voor
-de oppervlakte van overige ruimten worden gedeeld door het aantal
-onzelfstandige woonruimten op één adres dat toegang en gebruiksrecht
-heeft."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3: "De
-maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige
-woonruimten.", "maximumaftrek: 5 / 4 = 1,25" en "Omdat wettekst en tool
-botsen, volgen wij de wettekst (gedeelde cap)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+wettekst, Bijlage I onder B, toelichting rubriek 2.
 
 ## Rapport
 

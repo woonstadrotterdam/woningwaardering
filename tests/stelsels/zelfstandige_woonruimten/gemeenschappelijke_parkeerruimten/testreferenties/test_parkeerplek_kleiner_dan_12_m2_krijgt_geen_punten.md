@@ -2,9 +2,8 @@
 
 Een parkeerplek met een oppervlakte onder 12 m² krijgt geen punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-gangbare personenauto in zijn geheel op past."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder A, toelichting rubriek 10.
 
 ## Rapport
 

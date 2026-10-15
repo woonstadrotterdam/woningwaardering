@@ -2,24 +2,8 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijk vertrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Met vertrekken en
-overige ruimten wordt onder deze rubriek aangesloten bij definities en de
-meetmethoden als gegeven onder rubriek 1 en 2."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Meting van de
-oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van
-1,50 meter boven de vloer, inclusief de oppervlakte van alle tot de woning
-behorende losse en vaste kasten."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-(4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-onder meer energieprestatie, gemeenschappelijke ruimten en
-zoldercorrecties."
-
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke vertrek 1
-punt per m² gedeeld door het aantal adressen dat toegang en gebruiksrecht
-heeft."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
+Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

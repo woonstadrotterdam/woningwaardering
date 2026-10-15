@@ -2,9 +2,7 @@
 
 Bij meer dan één aanrecht volgt het maximum voor extra voorzieningen uit de opgetelde aanrechtlengte.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3: "Bij
-meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering
-gebaseerd op de basispunten uit de gesommeerde aanrechtlengte."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3.
 
 ## Rapport
 

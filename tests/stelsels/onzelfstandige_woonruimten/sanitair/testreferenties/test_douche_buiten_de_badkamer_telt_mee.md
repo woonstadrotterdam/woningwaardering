@@ -1,11 +1,8 @@
 # test_douche_buiten_de_badkamer_telt_mee
 
-Een douche in een slaapkamer krijgt dezelfde punten als in een badkamer.
+Een douche telt ook mee buiten de badkamer.
 
-Bron: beleidsboek onzelfstandige woonruimten, 2.6: "De waardering van
-sanitair is niet beperkt tot de badkamer en toiletruimte, maar kan ook gaan
-over sanitaire voorzieningen in andere ruimten. Bijvoorbeeld een douche in
-een woon- of slaapkamer."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.
 
 ## Rapport
 

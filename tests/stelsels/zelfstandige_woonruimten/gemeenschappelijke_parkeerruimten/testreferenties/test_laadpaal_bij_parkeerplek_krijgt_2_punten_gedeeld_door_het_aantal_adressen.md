@@ -2,16 +2,8 @@
 
 Een laadpaal bij een parkeerplek krijgt 2 punten extra, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
-puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
-parkeerplek(ken)."
-
-Bron: beleidsboek zelfstandige woonruimten, 2.10.5: "Als de parkeerplek
-beschikt over een laadpaal voor elektrisch rijden, die exclusief is voor
-gebruik door bewoners, dan worden 2 extra punten toegekend, gedeeld door het
-aantal adressen dat toegang en gebruiksrecht heeft."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
+Bijlage I onder A, toelichting rubriek 10.
 
 ## Rapport
 

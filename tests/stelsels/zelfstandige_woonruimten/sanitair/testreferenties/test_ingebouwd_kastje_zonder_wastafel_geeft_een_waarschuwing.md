@@ -2,10 +2,6 @@
 
 Een ingebouwd kastje met wastafel zonder wastafel in de ruimte is onjuiste input.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2: "Voor een
-ingebouwde kast met wastafel moet de wastafel als aparte voorziening worden
-meegegeven."
-
 ## Rapport
 
 Geen waarderingen voor Sanitair.

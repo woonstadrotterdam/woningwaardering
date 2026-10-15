@@ -1,59 +1,17 @@
 # test_vijfde_verwarmde_overige_ruimte_krijgt_ook_een_punt
 
-Ook de vijfde verwarmde gemeenschappelijke overige ruimte krijgt 1 punt: het maximum van 4 punten uit rubriek 3 geldt niet over de ruimten van deze rubriek samen.
+Voor verwarmde gemeenschappelijke overige ruimten geldt in deze rubriek geen maximum van 4 punten.
 
-De wettekst verwijst voor verkoeling en verwarming naar rubriek 3, die voor
-verwarmde overige ruimten een maximum van 4 punten kent. De package neemt
-de puntwaarden van rubriek 3 over en de maxima niet; de test legt dat
-gedrag vast.
-
-Vier bergingen worden met 2 adressen gedeeld en de vijfde met 3. Een
-maximum per groep ruimten met dezelfde deling zou hier dezelfde punten
-geven; dat onderscheidt het scenario niet.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal de punten
-voor verkoeling en verwarming conform rubriek 3;"
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmde
-overige ruimte en verkeersruimte wordt, ongeacht de verwarmingswijze, een
-waardering van één punt toegepast, voor zover de verwarming tot de
-onroerende zaak en zijn onroerende aanhorigheden behoort. Hiervoor geldt
-een maximum van vier punten."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2: "Wij
-nemen daarvan de puntwaarden over (2 per verwarmd vertrek, 1 extra per
-verwarmd én verkoeld vertrek, 1 per verwarmde overige ruimte of
-verkeersruimte), niet de maxima van rubriek 3 (max. 4 verwarmde
-overige/verkeersruimten, max. 2 extra verkoelingspunten). Dit is conform de
-huurprijscheck die in deze rubriek geen maximering toepast."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek 3
+(via Bijlage I onder B, toelichting, inleiding).
 
 Elk punt wordt gedeeld door het aantal adressen en daarna door het aantal
 onzelfstandige woonruimten op het adres.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Deel dit aantal
-punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke
-binnenruimten."
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 9: "De punten voor
-een gemeenschappelijke binnenruimte worden na verdeling over de meerdere
-adressen nog gedeeld door het aantal onzelfstandige woonruimten op dat
-adres."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-In het totaal zitten ook de punten voor de oppervlakte van de bergingen;
-het wordt afgerond op een kwart punt.
-
-Bron: wettekst, Bijlage I onder B, rubriek 9: "Gemeenschappelijke overige
-ruimte 0,75 punt per m² gedeeld door het aantal adressen dat toegang en
-gebruiksrecht heeft, en daarna gedeeld door het aantal onzelfstandige
-woonruimten op dat adres".
-
-Bron: wettekst, Bijlage I onder A, toelichting, inleiding: "De waardering in
-punten per rubriek wordt na saldering afgerond op 0,25 punt waarbij een
-achtste (1/8) punt naar boven wordt afgerond."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder B, toelichting rubriek 9.
 
 ## Rapport
 

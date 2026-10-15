@@ -2,36 +2,8 @@
 
 Parkeerplekken met een verschillend aantal adressen en onzelfstandige woonruimten worden elk door hun eigen aantallen gedeeld.
 
-De parkeerplek in de parkeergarage wordt met 3 adressen en 2 onzelfstandige
-woonruimten gedeeld, de carport met 4 adressen en 3 onzelfstandige
-woonruimten en de parkeerplek buiten met 5 adressen en 3 onzelfstandige
-woonruimten.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.10.4: "Het puntenaantal moet
-worden berekend door het puntenaantal per gemeenschappelijke parkeerplek te
-delen door aantal adressen dat toegang heeft tot de parkeerplek. Dit getal
-moet daarna worden gedeeld door het aantal onzelfstandige woonruimten op het
-eigen woonadres, om tot het puntenaantal voor de onzelfstandige woonruimte
-te komen."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-voorziening(en)."
-
-Bron: wettekst, Bijlage I onder B, rubriek 10: "Type I Parkeerplek in
-afgesloten parkeergarage behorende tot het complex 9 punten", "Type II
-Parkeerplek buiten behorende tot het complex met dak 6 punten" en "Type III
-Parkeerplek buiten behorende tot het complex zonder dak 4 punten".
-
-De gemeenschappelijke carport is een parkeerplek van Type II.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3: "Type II:
-`Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`)
-en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
+Bijlage I onder B, toelichting, inleiding.
 
 ## Rapport
 

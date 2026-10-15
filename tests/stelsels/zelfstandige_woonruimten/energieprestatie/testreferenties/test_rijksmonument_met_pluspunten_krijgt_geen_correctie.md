@@ -2,19 +2,8 @@
 
 Een rijksmonument met een positief aantal punten voor de energieprestatie houdt die punten.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 4.2: "Indien de woonruimte
-bestaat uit of deel uitmaakt van een rijksmonument, een provinciaal monument
-of een gemeentelijke monument als bedoeld in artikel 8a worden voor deze
-rubriek geen minpunten toegekend."
-
-De punten komen hier uit de energieprestatievergoeding van een
-eengezinswoning.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 4.3: "In de gevallen waarin een
-energieprestatievergoeding als bedoeld in artikel 237 van boek 7 van het
-Burgerlijk Wetboek is overeengekomen, wordt in afwijking van bovenstaande
-tabel het volgende aantal punten toegekend: Eengezinswoning
-Meergezinswoning/duplexwoning 32 28".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
+Bijlage I onder A, onderdeel 4.2.
 
 ## Rapport
 

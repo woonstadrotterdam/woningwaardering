@@ -2,13 +2,7 @@
 
 Een spoelbak in een aanrecht van 1 meter telt niet als wastafel.
 
-Naast het aanrecht heeft de woonkamer wastafels. Een spoelbak die als
-wastafel telt, zou een eigen waardering krijgen en het maximum voor
-wastafels verder overschrijden.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.6.1: niet als wastafel wordt
-gewaardeerd "een spoelbak in het keukenaanrecht, tenzij deze onderdeel
-uitmaakt van een keukenaanrecht dat korter is dan één meter".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

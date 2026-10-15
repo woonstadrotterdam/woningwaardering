@@ -2,14 +2,8 @@
 
 Een zoldervertrek dat alleen via een vlizotrap bereikbaar is, krijgt als overige ruimte 5 punten aftrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Een
-zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder
-`Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan
-geldt daarbij de puntenaftrek van 2.2.2.3."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

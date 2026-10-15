@@ -1,14 +1,9 @@
 # test_doucheruimte_kleiner_dan_4m2_krijgt_de_punten_van_een_verwarmd_vertrek
 
-Een verwarmde doucheruimte kleiner dan 4 m² krijgt de 2 punten van een verwarmd vertrek.
+Een verwarmde doucheruimte is ook kleiner dan 4 m² een vertrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "In afwijking van
-bovenstaande eisen is een ruimte die uitsluitend als keuken dient en een
-badkamer of doucheruimte altijd een vertrek."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmd
-vertrek wordt, ongeacht de verwarmingswijze, een waardering van twee punten
-toegepast".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

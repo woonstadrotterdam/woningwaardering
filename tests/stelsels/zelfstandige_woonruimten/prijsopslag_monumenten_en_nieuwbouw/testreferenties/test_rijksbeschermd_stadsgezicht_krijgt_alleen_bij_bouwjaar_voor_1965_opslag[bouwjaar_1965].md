@@ -2,11 +2,8 @@
 
 Een woonruimte in een rijksbeschermd stadsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
-Bron: wettekst, artikel 8a, vijfde lid: "De maximale huurprijsgrens wordt
-met 5% vermeerderd indien:", "a. die woonruimte behoort tot een
-rijksbeschermd stads- of dorpsgezicht als bedoeld in artikel 2.34, vierde
-lid, van de Omgevingswet," en "b. de woonruimte behoort tot een woning die
-is gebouwd voor 1965; en".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
+artikel 8a, vijfde lid.
 
 Dit geval: een woning uit 1965 is niet vóór 1965 gebouwd, dus de woonruimte krijgt geen opslag
 

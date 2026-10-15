@@ -2,49 +2,13 @@
 
 In onderdeel II telt de oppervlakte mee van de vertrekken en overige ruimten uit rubriek 1 en 2 en van de parkeerplekken type I uit rubriek 10.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "die waarde, gedeeld
-door het aantal m² van de vertrekken, de overige ruimten en parkeerplekken,
-bedoeld in de rubrieken 1,2 en 10 voor zover het parkeerplek type I
-betreft".
-
-De woonkamer van 10 m² is een vertrek en de eerste toiletruimte van 10 m²
-een overige ruimte. De tweede toiletruimte telt niet mee: met 1,9 m² is zij
-geen overige ruimte in rubriek 2.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De ruimte dient
-een oppervlakte te hebben van minimaal 2 m²."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
+Bijlage I onder A, onderdeel 11.1.
 
 Van een parkeerplek type I telt de oppervlakte gedeeld door het aantal
-adressen. De eerste ruimte staat voor twee parkeerplekken van elk 20 m²,
-gedeeld met 4 adressen, en telt voor 10 m². De tweede ruimte telt niet mee:
-een parkeerplek van 10 m² valt niet onder rubriek 10.
+adressen dat toegang heeft tot de parkeerplek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2: "Wij gaan
-er vanuit dat de oppervlakte van de parkeerplekken ook nog gedeeld moet
-worden door het aantal adressen dat toegang heeft tot de parkeerplek, omdat
-er anders onredelijk veel punten kunnen worden toegewezen voor
-parkeerplekken. Wij hanteren geen standaardmaat van 12m2, omdat een
-parkeerplek Type I kleiner dan12m2 niet onder rubriek 10 valt."
-
-Bron: implementatietoelichting, datamodel-uitbreidingen, "Aantal":
-"Hierdoor is het mogelijk om aan te geven hoeveel van deze specifieke
-ruimte er zijn."
-
-De WOZ-waarde heeft waardepeildatum 1 januari 2024.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "1 punt per € 15.329
-voor WOZ-beschikkingen met waardepeildatum 1 januari 2024." en "€ 242 bij
-WOZ-beschikkingen met waardepeildatum 1 januari 2024."
-
-De eenheid heeft alleen een WOZ-waarde en deze ruimten. Deze rubriek rekent
-met de uitkomst van de andere rubrieken: de oppervlakte uit rubriek 1 en 2,
-en de punten waaraan het minimum van 40 punten en de cap op de WOZ worden
-getoetst. De package waardeert die rubrieken daarom mee en waarschuwt voor
-de energieprestatie, de monumenten, de pandsoort, de keuken en het bouwjaar
-die ontbreken.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
 
 ## Rapport
 

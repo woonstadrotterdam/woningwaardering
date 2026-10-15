@@ -2,14 +2,8 @@
 
 De oppervlakten van alle overige ruimten worden eerst opgeteld en dan afgerond op hele m².
 
-Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De oppervlakte
-per overige ruimte wordt afgerond op 2 decimalen. De afronding van de
-oppervlakte van alle overige ruimte samen vindt plaats op hele vierkante
-meters na saldering van de oppervlakte van de afzonderlijke overige
-ruimten" en "Dit vertaalt zich dan naar 25 x 0,75 punt (per m²) = 18,75
-punten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.1; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

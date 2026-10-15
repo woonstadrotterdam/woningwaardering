@@ -2,13 +2,8 @@
 
 Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "De
-detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-`vlizotrap` weerspreekt dat."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

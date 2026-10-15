@@ -2,29 +2,8 @@
 
 Een parkeerplek zonder aantal adressen wordt gewaardeerd als een parkeerplek van één adres.
 
-De package waarschuwt dat `gedeeld_met_aantal_adressen` ontbreekt.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4: "Dit
-attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt
-het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere
-adressen."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-De twee parkeerplekken van Type III worden ook voor één adres in deze
-rubriek gewaardeerd: hun punten worden opgeteld en door 1 gedeeld.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2:
-"waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is
-toegewezen."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Bij meerdere
-parkeerplekken worden de punten bij elkaar opgeteld." en "Indien sprake is
-van een privé parkeerplek voor één adres, wordt gedeeld door 1."
-
-Bron: wettekst, Bijlage I onder A, rubriek 10: "Type III Parkeerplek buiten
-behorende tot het complex zonder dak 4 punten".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
+Bijlage I onder A, toelichting rubriek 10.
 
 ## Rapport
 

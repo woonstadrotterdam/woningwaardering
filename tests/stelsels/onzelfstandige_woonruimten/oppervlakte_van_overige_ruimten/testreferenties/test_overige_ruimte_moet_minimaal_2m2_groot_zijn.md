@@ -2,14 +2,9 @@
 
 Een ruimte kleiner dan 2 m² wordt niet als overige ruimte gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De ruimte dient
-een oppervlakte te hebben van minimaal 2 m²." en "Een toiletruimte wordt
-gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van een
-overige ruimte."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
+wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

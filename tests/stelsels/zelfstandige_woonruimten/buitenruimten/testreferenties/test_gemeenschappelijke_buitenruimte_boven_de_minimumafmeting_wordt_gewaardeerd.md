@@ -2,13 +2,8 @@
 
 Een gemeenschappelijke buitenruimte met een lengte en breedte boven de minimumafmeting wordt gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-diepte)."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-het aantal adressen dat toegang heeft tot de buitenruimte."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

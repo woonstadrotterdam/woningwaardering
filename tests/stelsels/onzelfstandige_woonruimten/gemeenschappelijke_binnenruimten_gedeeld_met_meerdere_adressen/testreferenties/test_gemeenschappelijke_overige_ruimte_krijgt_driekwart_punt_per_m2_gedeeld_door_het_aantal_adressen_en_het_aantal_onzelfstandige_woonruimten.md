@@ -2,48 +2,9 @@
 
 Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: wettekst, Bijlage I onder B, rubriek 9: "Gemeenschappelijke overige
-ruimte 0,75 punt per m² gedeeld door het aantal adressen dat toegang en
-gebruiksrecht heeft, en daarna gedeeld door het aantal onzelfstandige
-woonruimten op dat adres".
-
-De package deelt de punten en niet de oppervlakte. De berging telt daardoor
-mee, ook al is haar oppervlakte per adres kleiner dan de 2 m² die een
-overige ruimte minimaal groot is.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1: "Anders
-dan rubriek 1 en 2 deelt rubriek 9 niet de oppervlakte, maar de punten."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal of het
-een vertrek of een overige ruimte is en bereken de oppervlaktepunten:" en
-"Deel dit aantal punten door het aantal adressen dat toegang heeft tot de
-gemeenschappelijke binnenruimten."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De ruimte dient
-een oppervlakte te hebben van minimaal 2 m²."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-In het totaal zit ook het punt voor de verwarming van de berging, op
-dezelfde manier gedeeld; het wordt afgerond op een kwart punt.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal de punten
-voor verkoeling en verwarming conform rubriek 3;"
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmde
-overige ruimte en verkeersruimte wordt, ongeacht de verwarmingswijze, een
-waardering van één punt toegepast".
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 9: "De punten voor
-een gemeenschappelijke binnenruimte worden na verdeling over de meerdere
-adressen nog gedeeld door het aantal onzelfstandige woonruimten op dat
-adres."
-
-Bron: wettekst, Bijlage I onder A, toelichting, inleiding: "De waardering in
-punten per rubriek wordt na saldering afgerond op 0,25 punt waarbij een
-achtste (1/8) punt naar boven wordt afgerond."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9;
+implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
+Bijlage I onder B, onderdeel 9.
 
 ## Rapport
 

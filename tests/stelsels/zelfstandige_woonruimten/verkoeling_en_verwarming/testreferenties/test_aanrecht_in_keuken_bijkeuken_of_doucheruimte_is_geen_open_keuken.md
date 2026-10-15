@@ -2,13 +2,7 @@
 
 Een aanrecht in een verwarmde keuken, doucheruimte of bijkeuken die als vertrek is aangeleverd, is geen open keuken.
 
-Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-punten".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Elke ruimte
-(uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en
-`doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht
-vanaf 1 meter staat, heeft dus een open keuken".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
 ## Rapport
 

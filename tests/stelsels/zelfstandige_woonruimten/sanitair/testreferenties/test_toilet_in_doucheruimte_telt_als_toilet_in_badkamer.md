@@ -2,9 +2,7 @@
 
 Een toilet in een doucheruimte krijgt de punten van een toilet in een badkamer.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1: "Een
-VERA-`doucheruimte` telt voor toiletwaardering mee als badkamer. Toiletten
-in een doucheruimte krijgen daarom de punten voor toilet in een badkamer."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

@@ -2,8 +2,8 @@
 
 Vertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Er kan één punt
-worden behaald per vertrek, met een totaal maximum van twee punten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
+wettekst, Bijlage I onder A, onderdeel 3.
 
 ## Rapport
 

@@ -2,19 +2,8 @@
 
 Buitenruimten krijgen samen hooguit 15 punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voor de rubriek
-buitenruimten (rubriek 8) kan in totaal maximaal vijftien punten worden
-toegekend."
-
-De punten vóór het maximum volgen uit de opgetelde oppervlakte van de tuin
-en het balkon.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Indien sprake is
-van meerdere buitenruimten die allen tot dezelfde categorie behoren, zijnde
-allen gemeenschappelijk of privé, dan worden de oppervlaktes van die
-buitenruimtes bij elkaar opgeteld." en "Voor privébuitenruimten worden in
-ieder geval twee punten toegekend, en daarna per vierkante meter 0,35
-punt."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

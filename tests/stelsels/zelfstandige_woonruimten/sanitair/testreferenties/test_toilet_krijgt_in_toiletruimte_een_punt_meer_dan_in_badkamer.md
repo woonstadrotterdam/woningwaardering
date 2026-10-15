@@ -1,10 +1,9 @@
 # test_toilet_krijgt_in_toiletruimte_een_punt_meer_dan_in_badkamer
 
-Een toilet krijgt in een toiletruimte een punt meer dan in een badkamer.
+Een toilet krijgt in een toiletruimte meer punten dan in een badkamer.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 6.1: een toilet krijgt in een
-"Aparte toiletruimte" "3 punten" en "In badkamer" "2 punten"; een hangend
-toilet "3,75 punten" en "2,75 punten".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, onderdeel 6.1.
 
 ## Rapport
 

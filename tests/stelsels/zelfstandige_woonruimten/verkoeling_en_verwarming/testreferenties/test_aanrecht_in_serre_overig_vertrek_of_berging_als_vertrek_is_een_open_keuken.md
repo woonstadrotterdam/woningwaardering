@@ -2,16 +2,12 @@
 
 Een aanrecht in een verwarmde serre, een overig vertrek of een berging die als vertrek is aangeleverd, is een open keuken.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-er verwarming aanwezig is".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Elke ruimte
-(uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en
-`doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht
-vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een
-`serre`, `overig vertrek` of een `berging` die als vertrek wordt
-aangeleverd."
+Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3.
 
 ## Rapport
 

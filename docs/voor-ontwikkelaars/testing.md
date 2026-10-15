@@ -1,14 +1,10 @@
 # Testing
 
-De tests draaien met [pytest](https://docs.pytest.org/). Installatie en de pre-commit-checks staan onder [Project opzetten](index.md#project-opzetten) en [Tests en checks](index.md#tests-en-checks).
-
-```bash
-uv run python -m pytest
-```
+De tests draaien met [pytest](https://docs.pytest.org/). Installatie, de commando's en de pre-commit-checks staan onder [Project opzetten](index.md#project-opzetten) en [Tests en checks](index.md#tests-en-checks).
 
 ## Uitgangspunt
 
-Een wijziging in het rapport of de output-JSON van een woningwaardering gebeurt altijd bewust én intentioneel. Daarom vergelijkt `pytest` de output met de verwachte output, maar schrijft hij die nooit. Alleen `task genereer-test-output` werkt de verwachte output bij, en een reviewer beoordeelt de wijziging in de diff van de pull request. Wanneer je die opdracht gebruikt, staat in `AGENTS.md` onder "Verwachte output"; die afspraken gelden voor agents en voor ontwikkelaars.
+Een wijziging in het rapport of de output-JSON van een woningwaardering gebeurt altijd bewust. Daarom vergelijkt `pytest` de output met de verwachte output, maar schrijft hij die nooit. Hoe en wanneer je de verwachte output bijwerkt, staat in `AGENTS.md` onder "Verwachte output"; die afspraken gelden voor agents en voor ontwikkelaars.
 
 ## Welke test schrijf je?
 
@@ -35,73 +31,38 @@ De stappen:
 1. Zoek de beleidsregel op in de bron en bereken zelf hoeveel punten het scenario oplevert, zonder de bestaande code te gebruiken. Zo controleert de test de beleidsregel en niet de code.
 2. Schrijf de test. De onderdelen hieronder beschrijven hoe.
 3. Draai `pytest`. De nieuwe test faalt met de melding `Geen testreferentie`; alle andere tests slagen. Faalt er meer, los dat dan eerst op: de volgende stap overschrijft alle verwachte output.
-4. Draai `task genereer-test-output`. Die schrijft de testreferentie van de test: een Markdown-bestand in `testreferenties/` naast de testmodule, met de docstring, het rapport, de waarschuwingen, de input en de output-JSON. Controleer in de diff dat alleen die testreferentie erbij is gekomen, en lees het rapport erin na: het moet overeenkomen met wat je in stap 1 hebt berekend.
-5. Draai `pytest` en de pre-commit hooks.
+4. Draai `task genereer-test-output`. Die schrijft de testreferentie van de test in `testreferenties/` naast de testmodule. Controleer in de diff dat alleen die testreferentie erbij is gekomen, en dat het rapport erin overeenkomt met wat je in stap 1 hebt berekend.
+5. Draai de [tests en checks](index.md#tests-en-checks).
 
 Hernoem of verwijder je een test, verwijder dan zelf zijn oude testreferentie: het bijwerken verwijdert geen bestanden.
 
-Een volledige test ziet er zo uit:
-
-```python
-def test_meerdere_kastruimtes_tellen_samen_als_een(
-    sanitair, vergelijk_met_testreferentie
-):
-    """Meerdere kastruimtes in een badkamer krijgen samen 0,75 punt.
-
-    Bron: wettekst, Bijlage I onder A, onderdeel 6.2: "Kastruimte (minimale
-    breedte van 40 cm, en minimale hoogte van 40 cm) 0,75 punt (tot een maximum
-    van 0,75)".
-    """
-    eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.badkamer,
-                Installatiesoort.bad,
-                Installatiesoort.wastafel,
-                Installatiesoort.kastruimte,
-                Installatiesoort.kastruimte,
-            )
-        ]
-    )
-
-    groep = sanitair.waardeer(eenheid)
-
-    punten = punten_per_naam(groep)
-    assert punten[Installatiesoort.kastruimte.naam] == 1.5
-    assert punten["Max 0.75 punten voor Kastruimte"] == -0.75
-    assert groep.punten == 7.75
-    vergelijk_met_testreferentie(eenheid, groep)
-```
-
-### Bestand
-
-De tests van een stelselgroep staan in `tests/stelsels/<stelsel>/<stelselgroep>/`, in `test_<stelselgroep>_zel.py` of `test_<stelselgroep>_onz.py`. Het achtervoegsel is nodig omdat `pytest` geen twee testbestanden met dezelfde naam accepteert.
+Een voorbeeld is `test_meerdere_kastruimtes_tellen_samen_als_een` in `tests/stelsels/zelfstandige_woonruimten/sanitair/test_sanitair_zel.py`. Het achtervoegsel `_zel` of `_onz` van het testbestand is nodig omdat `pytest` geen twee testbestanden met dezelfde naam accepteert.
 
 ### Eén beleidsregel per test
 
-Een test controleert één beleidsregel, of één keuze van de package, zoals een waarschuwing bij onvolledige input. Je toetst dat aan de eerste zin van de docstring: die zegt in één bewering wat de test controleert. Heb je daar twee beweringen voor nodig, schrijf dan twee tests. Zo belooft de naam van de test precies wat de asserts controleren.
+Een test controleert één beleidsregel, of één keuze van de package, zoals een waarschuwing bij onvolledige input. Je toetst dat aan de eerste zin van de docstring: die zegt in één bewering wat de test controleert. Heb je daar twee beweringen voor nodig, schrijf dan twee tests.
 
 Een tabel uit één onderdeel van de bron, zoals de punten per aanrechtlengte in onderdeel 5.1 van de wettekst, is één beleidsregel. De eerste zin van de docstring noemt dan wat de tabel bepaalt, bijvoorbeeld "De punten voor een aanrecht hangen af van zijn lengte", en de asserts tonen de grenzen.
 
 ### Naam
 
-De naam noemt de beleidsregel in gewone taal: `test_meerdere_kastruimtes_tellen_samen_als_een`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Een waarde uit de input noem je niet: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, tenzij de bron die waarde zelf noemt, zoals in een rekenvoorbeeld. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, één ruimte, één punt): `test_een_vertrek_van_precies_8m2_geeft_geen_aftrek`. De stelselgroep staat al in het pad en hoeft niet in de naam. De naam wordt de bestandsnaam en de kop van de testreferentie, en is daarmee het eerste wat een reviewer in de pull request leest.
+De naam noemt de beleidsregel in gewone taal, niet de input of het rekenvoorbeeld: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, en `test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten_op_het_adres`, niet `test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, 0,01 m², één jaar, één ruimte, één punt): `test_een_vertrek_van_precies_8m2_geeft_geen_aftrek`.
 
 ### Docstring
 
 De docstring is verplicht en bestaat uit twee delen, soms drie:
 
-1. De beleidsregel in één zin. In de testreferentie staat die zin direct onder de kop. Hij moet zonder de rest te lezen zeggen wat de test controleert. Net als de naam noemt hij geen waarde uit de input.
-2. De bron, met een letterlijk citaat en de vindplaats. Een citaat bestaat uit een of meer letterlijke delen van de brontekst. Citeer de bron die de beleidsregel draagt, in de volgorde van autoriteit uit `CONTEXT.md`: wettekst, online beleidsboek, implementatietoelichting. Een citaat dat alleen naar een andere bron verwijst, laat je weg. Geldt de bron via zo'n verwijzing, zoals de toelichting onder bijlage I, onder A, voor onzelfstandige woonruimten, noem de verwijzing dan in de vindplaats: `Bron: wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding): "..."`. Bewaakt de test een keuze van de package, dan is de bron de toelichting waarin die keuze staat.
-3. Alleen als de asserts zonder een andere beleidsregel niet te volgen zijn: die andere beleidsregel in één zin, met de bron of bronnen daarvan. Een voorbeeld: bij gemeenschappelijke binnenruimten worden alle punten gedeeld door het aantal adressen. Een test over de verkoeling assert dan gedeelde punten, en de lezer moet weten waarom.
+1. De beleidsregel in één zin, die zonder de rest te lezen zegt wat de test controleert. Net als de naam noemt hij geen waarde uit de input.
+2. De vindplaats van de beleidsregel, zonder citaat: de diepste paragraaf van de implementatietoelichting waarin ze staat en, als ze ook in de wettekst staat, de wettekst erna. In de wettekst heet een regel uit de tabel `onderdeel 6.2` en een passage uit de toelichting `toelichting rubriek 6`, zo nodig met de verwijzing waarlangs ze geldt: `toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)`. `tests/test_vindplaatsen.py` controleert de vorm en of de vindplaats bestaat.
+3. Alleen als de asserts zonder een andere beleidsregel niet te volgen zijn: die andere beleidsregel in één zin, met haar vindplaats, zoals de deling door het aantal adressen in een test over verkoeling in gemeenschappelijke binnenruimten.
 
-De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Die staan in de testreferentie, en de waarschuwingen ook in de aanroep van `vergelijk_met_testreferentie`. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt leg je alleen uit als de test daarover gaat.
+De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt leg je alleen uit als de test daarover gaat.
 
-Legt de test gedrag vast dat de wettekst en het beleidsboek niet beschrijven, of wijkt de package daarvan af, dan hoort die keuze in de implementatietoelichting en citeer je die als bron. Wijkt de package af, citeer dan ook de bron waarvan ze afwijkt, zodat de lezer ziet welke beleidsregel niet wordt gevolgd. Staat de keuze daar nog niet, schrijf dan in de docstring een TODO, zoals `TODO: de implementatietoelichting noemt deze waarschuwing niet.`, zodat de testreferentie laat zien wat nog moet worden vastgelegd. De algemene uitleg over waarschuwingen in `docs/aan-de-slag` is geen bron voor zo'n keuze.
+Volgt de package een beleidsregel niet, of legt de test gedrag vast dat wettekst en beleidsboek niet beschrijven, dan staat die keuze in de implementatietoelichting: doorgestreept of in een toelichtingsblok. Staat ze er nog niet, vul de implementatietoelichting dan aan in dezelfde pull request. Een test van een waarschuwing omdat input ontbreekt, waarna het onderdeel geen punten krijgt, heeft geen bron: de test controleert de waarschuwing zelf.
 
 ### Input
 
-Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `element(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Waarom je de input zo kiest, zet je in één regel commentaar bij die input, niet in de docstring. Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
+Bouw de input op met de functies uit `tests/input.py`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Waarom je de input zo kiest, zet je in één regel commentaar bij die input. Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`.
 
 Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
 
@@ -109,22 +70,7 @@ Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sa
 
 ### Asserts
 
-Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`); de overige waarderingen staan in de testreferentie. In het voorbeeld hierboven horen het bad en de wastafel bij het scenario, maar de beleidsregel gaat over de kastruimte. Hoe je op een verwachte waarde komt, mag als commentaar bij de assert staan, zoals `# 10 punten gedeeld door 8 woonruimten`.
-
-Gebruik de helpers uit `tests/utils.py`: `punten_per_naam(groep)`, of `punten_per_bovenliggende(groep)` wanneer dezelfde naam in meer dan één ruimte voorkomt. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst; het totaal heeft dan geen eigen assert nodig:
-
-```python
-assert punten_per_naam(groep) == {Installatiesoort.bad_en_douche.naam: 7.0}
-```
-
-In een stelselgroep waarin een waardering geen eigen punten heeft, zoals de oppervlakte van vertrekken, assert je het aantal (daar de oppervlakte in m²) met `aantal_per_naam` of `aantal_per_bovenliggende`. Het totaal staat dan op de stelselgroep en krijgt een eigen assert:
-
-```python
-assert aantal_per_naam(groep) == {"Slaapkamer2": 4.0}
-assert groep.punten == 4.0
-```
-
-Schrijf de naam van een waardering zoals je de input schrijft. Is het de naam van een referentiedata-object, gebruik dan dat object: `Installatiesoort.kastruimte.naam`, niet `"Kastruimte"`. Een naam die de package zelf samenstelt, zoals `"Max 0.75 punten voor Kastruimte"`, of die je in de test zelf als tekst meegeeft, zoals `"Badkamer1"`, schrijf je als tekst, zoals hij in het rapport staat.
+Assert met de helpers uit `tests/utils.py` de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`); de overige waarderingen staan in de testreferentie. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst; het totaal heeft dan geen eigen assert nodig. Heeft een waardering geen eigen punten, zoals bij de oppervlakte van vertrekken, assert dan het aantal en het totaal op de stelselgroep. Hoe je op een verwachte waarde komt, mag als commentaar bij de assert staan.
 
 Sluit de test af met `vergelijk_met_testreferentie(eenheid, groep)`. Wat die controleert, staat in zijn docstring in `tests/conftest.py`.
 
@@ -132,37 +78,9 @@ Sluit de test af met `vergelijk_met_testreferentie(eenheid, groep)`. Wat die con
 
 Roept een scenario een `UserWarning` op, vang die dan op met `pytest.warns` en geef de opgevangen waarschuwingen als derde argument mee aan `vergelijk_met_testreferentie`. Alleen meegegeven waarschuwingen komen in de testreferentie.
 
-```python
-with pytest.warns(UserWarning, match="wastafel") as waarschuwingen:
-    groep = sanitair.waardeer(eenheid)
-
-assert punten_per_naam(groep) == {}
-vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
-```
-
 ### Meerdere gevallen in één test
 
-Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen, genummerde ruimte en vergelijk de hele uitkomst met `punten_per_bovenliggende`. Zo staan alle gevallen naast elkaar in één rapport. Dit kan alleen wanneer de ruimten elkaars waardering niet beïnvloeden.
-
-```python
-eenheid = EenhedenEenheid(
-    ruimten=[
-        ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.douche, naam="Badkamer1"),
-        ruimte(Ruimtedetailsoort.badkamer, Installatiesoort.bad, naam="Badkamer2"),
-        ruimte(
-            Ruimtedetailsoort.badkamer, Installatiesoort.bad_en_douche, naam="Badkamer3"
-        ),
-    ]
-)
-
-groep = sanitair.waardeer(eenheid)
-
-assert punten_per_bovenliggende(groep) == {
-    "Badkamer1": {Installatiesoort.douche.naam: 4.0},
-    "Badkamer2": {Installatiesoort.bad.naam: 6.0},
-    "Badkamer3": {Installatiesoort.bad_en_douche.naam: 7.0},
-}
-```
+Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen, genummerde ruimte en vergelijk de hele uitkomst met `punten_per_bovenliggende`, zoals in `test_punten_voor_bad_en_douche` (sanitair, zelfstandig). Zo staan alle gevallen naast elkaar in één rapport. Dit kan alleen wanneer de ruimten elkaars waardering niet beïnvloeden.
 
 ### Parametriseren
 
@@ -172,45 +90,8 @@ Parametriseer wanneer de gevallen niet samen in één eenheid passen, of wanneer
 2. **Tabel met toelichting.** Het geval hoort bij dezelfde beleidsregel, maar heeft één zin uitleg nodig, bijvoorbeeld een grenswaarde. Geef die mee met `pytest.mark.toelichting`; de zin komt in de testreferentie.
 3. **Eigen test.** Het geval heeft een eigen reden of bron, of is een uitzondering op de beleidsregel. Kies bij twijfel deze trede.
 
-```python
-@pytest.mark.parametrize(
-    ("aanrecht_mm", "verwachte_punten"),
-    [
-        pytest.param(
-            999, {"Wastafel (spoelbak in aanrecht < 1m)": 1.0}, id="net_onder_1m"
-        ),
-        pytest.param(
-            1000,
-            {},
-            id="precies_1m",
-            marks=pytest.mark.toelichting(
-                "de keuken heeft een aanrecht van minimaal 1 meter, dus de "
-                "spoelbak hoort bij de keuken en is geen wastafel"
-            ),
-        ),
-    ],
-)
-def test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel(
-    sanitair, vergelijk_met_testreferentie, aanrecht_mm, verwachte_punten
-):
-    """Een spoelbak in een aanrecht korter dan 1 meter telt als wastafel.
-
-    Bron: beleidsboek zelfstandige woonruimten, 2.6.1: niet als wastafel wordt
-    gewaardeerd "een spoelbak in het keukenaanrecht, tenzij deze onderdeel
-    uitmaakt van een keukenaanrecht dat korter is dan één meter".
-    """
-    eenheid = EenhedenEenheid(
-        ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(aanrecht_mm)])]
-    )
-
-    groep = sanitair.waardeer(eenheid)
-
-    assert punten_per_naam(groep) == verwachte_punten
-    vergelijk_met_testreferentie(eenheid, groep)
-```
-
-Geef elk geval een id met `pytest.param(..., id="...")`, als letterlijke tekst. De id noemt de situatie (`precies_1m`), niet de uitkomst; de verwachting staat in de kolom ernaast.
+Geef elk geval een id met `pytest.param(..., id="...")`, als letterlijke tekst. De id noemt de situatie (`precies_1m`), niet de uitkomst; de verwachting staat in de kolom ernaast. Zie `test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel` (sanitair, zelfstandig).
 
 ## Testreferenties beoordelen in een pull request
 
-De wijzigingen onder `**/testreferenties/**` zijn het overzicht van wat een pull request aan de output verandert. Elk bestand begint met de naam van de test, de beleidsregel en de bron, zodat de diff zelf zegt welke beleidsregel geraakt is. Beoordeel bij elke gewijzigde testreferentie of de wijziging de bedoeling is, en of de input, de output of beide zijn gewijzigd. De input staat erin omdat de functies uit `tests/input.py` velden invullen die niet in de test staan, zoals de id en de oppervlakte van een ruimte; verandert zo'n functie, dan zie je dat hier per test.
+De wijzigingen onder `**/testreferenties/**` zijn het overzicht van wat een pull request aan de output verandert. Beoordeel bij elke gewijzigde testreferentie of de wijziging de bedoeling is, en of de input, de output of beide zijn gewijzigd. De input staat erin omdat de functies uit `tests/input.py` velden invullen die niet in de test staan, zoals de id en de oppervlakte van een ruimte; verandert zo'n functie, dan zie je dat hier per test.

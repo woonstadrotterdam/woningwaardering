@@ -2,16 +2,7 @@
 
 Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-De package toetst de minimumafmeting alleen op de afmetingen die zijn
-ingevuld.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2: "Alleen
-als een waarde is ingevuld wordt deze getoetst tegen 2000 × 1500 × 1500
-mm."
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimte(n) op hetzelfde adres", "0,75 punt per m², gedeeld door het
-aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2.
 
 ## Rapport
 

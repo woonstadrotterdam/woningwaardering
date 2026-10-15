@@ -2,14 +2,8 @@
 
 Een ruimte kleiner dan 4 m² is een vertrek als zij met haar kast 4 m² of groter is.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Meting van de
-oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van
-1,50 meter boven de vloer, inclusief de oppervlakte van alle tot de woning
-behorende losse en vaste kasten."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-(4,00 m² voor vertrek, 2,00 m² voor overige ruimte)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 Dit geval: het vertrek van 3,50 m² en de kast van 0,50 m² zijn samen precies 4,00 m², de minimale oppervlakte van een vertrek
 

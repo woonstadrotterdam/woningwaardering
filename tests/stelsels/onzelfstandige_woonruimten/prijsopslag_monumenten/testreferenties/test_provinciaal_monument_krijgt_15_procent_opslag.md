@@ -2,10 +2,8 @@
 
 Een provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
-Bron: wettekst, artikel 8a, derde lid: "De maximale huurprijsgrens wordt
-met 15% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-een door het college van burgemeester en wethouders aangewezen gemeentelijk
-monument of een door gedeputeerde staten aangewezen provinciaal monument."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
+artikel 8a, derde lid.
 
 ## Rapport
 

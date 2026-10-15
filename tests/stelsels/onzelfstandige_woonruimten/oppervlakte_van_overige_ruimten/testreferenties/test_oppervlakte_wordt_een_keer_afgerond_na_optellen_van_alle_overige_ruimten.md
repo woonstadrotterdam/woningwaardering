@@ -2,30 +2,9 @@
 
 De oppervlakte wordt één keer afgerond op hele vierkante meters, nadat de toe te rekenen oppervlakte van alle overige ruimten is opgeteld.
 
-Het beleidsboek rondt privé en gemeenschappelijke overige ruimten
-afzonderlijk af; dat geeft hier 20 m² in plaats van 21 m². De package volgt
-de keuze uit de implementatietoelichting. De zolder heeft een vlizotrap:
-daardoor staat het subtotaal in de uitkomst en komt de aftrek voor die
-zolder daarop in mindering.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De afronding van
-de oppervlakte van alle overige ruimte samen vindt plaats op hele
-vierkante meters na saldering van de oppervlakte van de afzonderlijke
-overige ruimten; bij 0,5 m² of meer wordt naar boven afgerond, bij minder
-dan 0,5 m² naar beneden."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.2.2.1: "De oppervlakten
-voor privé- en gemeenschappelijke overige ruimten worden afzonderlijk
-berekend."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "per
-ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-daarna × 0,75." en "dat past bij delen vóór afronden (20,50 → 21 m²), niet
-bij apart afronden per categorie (20 m² → 15,00)".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
+wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

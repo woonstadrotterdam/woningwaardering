@@ -2,12 +2,7 @@
 
 Een aanrecht zonder lengte is in een verwarmde privéwoonkamer geen open keuken.
 
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privévertrek
-2 punten".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2: "Omdat wij
-in de package niet (kunnen) controleren op keukenkastjes, doen wij de
-aanname dat een aanrecht vanaf 1 meter een open keuken is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
 ## Rapport
 

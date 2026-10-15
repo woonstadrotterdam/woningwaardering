@@ -43,28 +43,10 @@ def test_parkeerplek_krijgt_9_6_of_4_punten_naar_type_gedeeld_door_het_aantal_ad
 ):
     """Een parkeerplek krijgt 9 punten als Type I, 6 punten als Type II en 4 punten als Type III, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 10: "Type I Parkeerplek in
-    afgesloten parkeergarage behorende tot het complex 9 punten gedeeld door het
-    aantal adressen dat toegang en gebruiksrecht heeft.", "Type II Parkeerplek
-    buiten behorende tot het complex met dak 6 punten gedeeld door het aantal
-    adressen dat toegang en gebruiksrecht heeft." en "Type III Parkeerplek
-    buiten behorende tot het complex zonder dak 4 punten gedeeld door het aantal
-    adressen dat toegang en gebruiksrecht heeft."
-
-    Welke ruimtedetailsoort bij welk type hoort, staat in de
-    implementatietoelichting. Een parkeerplek in een uitpandige afgesloten
-    parkeergarage is net als een inpandige Type I.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Type I:
-    `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage`
-    (`PIP`) en
-    `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage`
-    (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of
-    uitpandig is: de wettekst maakt dat onderscheid niet.", "Type II:
-    `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex`
-    (`PBD`)" en "Type III:
-    `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`)".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, onderdeel 10.
     """
+    # Vier plekken die alleen in type verschillen, met dezelfde deler.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -92,6 +74,8 @@ def test_parkeerplek_krijgt_9_6_of_4_punten_naar_type_gedeeld_door_het_aantal_ad
 
     groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # 9 punten gedeeld door 10 adressen is 0,9; voor Type II is dat 0,6 en voor
+    # Type III 0,4.
     assert punten_per_bovenliggende(groep) == {
         "Gedeeld met 10 adressen": {
             "Parkeerplek in inpandige afgesloten parkeergarage (Type I)": 0.9,
@@ -111,17 +95,8 @@ def test_gemeenschappelijke_carport_wordt_als_type_ii_gewaardeerd(
 ):
     """Een gemeenschappelijke carport wordt als Type II gewaardeerd.
 
-    Bron: beleidsboek zelfstandige woonruimten, 2.10.3: "Type II: een
-    parkeerplek buiten behorende tot het complex of de woning met dak
-    (hieronder telt een carpoort)".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Type II:
-    `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`)
-    en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`)."
-
-    Bron: wettekst, Bijlage I onder A, rubriek 10: "Type II Parkeerplek buiten
-    behorende tot het complex met dak 6 punten gedeeld door het aantal adressen
-    dat toegang en gebruiksrecht heeft."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, onderdeel 10.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -135,6 +110,7 @@ def test_gemeenschappelijke_carport_wordt_als_type_ii_gewaardeerd(
 
     groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # Type II: 6 punten gedeeld door 3 adressen.
     assert punten_per_bovenliggende(groep) == {
         "Gedeeld met 3 adressen": {"Carport (Type II)": 2.0}
     }
@@ -146,21 +122,8 @@ def test_gemeenschappelijke_parkeerplaats_wordt_als_type_iii_gewaardeerd(
 ):
     """Een gemeenschappelijke parkeerplaats wordt als Type III gewaardeerd.
 
-    De package waarschuwt dat bij een gemeenschappelijke parkeerplek een
-    Type-detailsoort hoort.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Type III:
-    `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en,
-    wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`).
-    Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op
-    zijn plaats is: `PAR` legt het type niet vast."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    Bron: wettekst, Bijlage I onder A, rubriek 10: "Type III Parkeerplek buiten
-    behorende tot het complex zonder dak 4 punten gedeeld door het aantal
-    adressen dat toegang en gebruiksrecht heeft."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, onderdeel 10.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -192,16 +155,8 @@ def test_laadpaal_bij_parkeerplek_krijgt_2_punten_gedeeld_door_het_aantal_adress
 ):
     """Een laadpaal bij een parkeerplek krijgt 2 punten extra, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-    is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-    punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
-    puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
-    parkeerplek(ken)."
-
-    Bron: beleidsboek zelfstandige woonruimten, 2.10.5: "Als de parkeerplek
-    beschikt over een laadpaal voor elektrisch rijden, die exclusief is voor
-    gebruik door bewoners, dan worden 2 extra punten toegekend, gedeeld door het
-    aantal adressen dat toegang en gebruiksrecht heeft."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -218,8 +173,8 @@ def test_laadpaal_bij_parkeerplek_krijgt_2_punten_gedeeld_door_het_aantal_adress
 
     # 2 punten gedeeld door 3 adressen is 0,666… punt: in het rapport 0,67.
     assert punten_per_naam(groep)["Laadpaal"] == 0.67
-    # Met de 2 punten van de carport samen 2,67 punten, afgerond op kwartpunten
-    # 2,75.
+    # Met de 2 punten van de carport (Type II: 6 punten gedeeld door 3 adressen)
+    # samen 2,67 punten, afgerond op kwartpunten 2,75.
     assert groep.punten == 2.75
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -229,11 +184,8 @@ def test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal(
 ):
     """Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-    is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-    punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
-    puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
-    parkeerplek(ken)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -274,35 +226,16 @@ def test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal(
 # Rekenmethode
 
 
-def test_rekenvoorbeeld_met_meerdere_parkeerplekken_uit_de_wettekst(
+def test_punten_van_parkeerplekken_en_laadpalen_worden_gedeeld_door_het_aantal_adressen_en_afgerond_op_een_kwart_punt(
     gemeenschappelijke_parkeerruimten, vergelijk_met_testreferentie
 ):
-    """Het rekenvoorbeeld uit de wettekst: tien adressen die vijf Type II-parkeerplekken met laadpaal en twee Type III-parkeerplekken delen, krijgen elk 4,75 punten.
+    """De punten van parkeerplekken en laadpalen worden opgeteld, gedeeld door het aantal adressen en afgerond op een kwart punt.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Tien adressen
-    delen vijf type II-parkeerplekken met laadpaal en twee type
-    III-parkeerplekken zonder laadpaal.", "Vijf parkeerplekken type II (zes
-    punten) + elke een laadpaal (twee punten) en twee parkeerplekken type III
-    (vier punten) = 5 x (6+2)+ 2 x 4 = 48 punten.", "48 / 10 adressen = 4,8
-    punten per adres." en "Afronden geschiedt op een kwart punt per adres op
-    4,75 punten."
-
-    De vijf Type II-parkeerplekken zijn een gemeenschappelijke carport met
-    `aantal` 5 en één laadpaal. De package telt die laadpaal voor elke
-    parkeerplek van de ruimte.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4: "Hierdoor
-    is het mogelijk om aan te geven tot hoeveel van elk parkeerplektype de
-    eenheid toegang heeft zonder dat elk parkeervak van een parkeergarage of
-    parkeerterrein meegegeven dient te worden. Wanneer een laadpaal als
-    bouwkundig element wordt meegegeven, wordt deze bij de ruimte meegeteld voor
-    de berekening van de punten, waarbij het aantal wordt bepaald door
-    `Eenhedenruimte.aantal`."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Type II:
-    `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`)
-    en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # De vijf Type II-plekken zijn één carport met `aantal` 5 en één laadpaal; de
+    # twee Type III-plekken zijn één ruimte met `aantal` 2.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -349,25 +282,10 @@ def test_carport_met_laadpaal_van_een_adres_krijgt_geen_punten(
 ):
     """Een carport met laadpaal van één adres krijgt in deze rubriek geen punten.
 
-    De carport is een privé-buitenruimte en hoort in rubriek 8.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een
-    parkeerruimte waartoe bewoners van één adres krachtens de huurovereenkomst
-    exclusieve toegang tot en gebruiksrecht op hebben, wordt gewaardeerd volgens
-    rubriek 2 (binnen, bijvoorbeeld een garagebox behorende tot de woning) of
-    rubriek 8 (buiten, bijvoorbeeld een oprit exclusief behorende tot de
-    woning)."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.3: "Een
-    `carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-    gewaardeerd, gemeenschappelijk in rubriek 10".
-
-    De laadpaal volgt de carport en hoort dan in rubriek 12.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3: "Krijgt die
-    ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle
-    andere gevallen hier, met dezelfde deler (aantal adressen)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # Carport van één adres: niet gemeenschappelijk.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -381,6 +299,7 @@ def test_carport_met_laadpaal_van_een_adres_krijgt_geen_punten(
 
     groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # De carport is een privé-buitenruimte en wordt in rubriek 8 gewaardeerd.
     assert punten_per_naam(groep) == {}
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -393,10 +312,10 @@ def test_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
 ):
     """Een parkeerplek met een oppervlakte onder 12 m² krijgt geen punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-    is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-    gangbare personenauto in zijn geheel op past."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # Onder de minimale 12 m², verder een gewone gemeenschappelijke plek.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -419,18 +338,10 @@ def test_laadpaal_bij_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
 ):
     """Een laadpaal bij een parkeerplek met een oppervlakte onder 12 m² krijgt in deze rubriek geen punten.
 
-    De gemeenschappelijke carport van 10 m² krijgt zelf geen punten.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-    is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-    gangbare personenauto in zijn geheel op past."
-
-    De laadpaal volgt de carport en hoort dan in rubriek 12.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3: "Krijgt die
-    ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in alle
-    andere gevallen hier, met dezelfde deler (aantal adressen)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # De carport is te klein voor een parkeerplek en krijgt zelf geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -456,20 +367,10 @@ def test_gemeenschappelijke_parkeerplaats_kleiner_dan_12_m2_geeft_ook_een_waarsc
 ):
     """Een gemeenschappelijke parkeerplaats geeft de waarschuwing over haar detailsoort ook wanneer zij met een oppervlakte onder 12 m² geen punten krijgt.
 
-    Dat de waarschuwing ook onder 12 m² volgt, is een keuze van de package die
-    in geen bron staat.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3: "Bij die
-    laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats
-    is: `PAR` legt het type niet vast."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-    is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-    gangbare personenauto in zijn geheel op past."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # Parkeerplaats (geen Type-detailsoort) onder de minimale 12 m².
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -493,30 +394,10 @@ def test_parkeerplek_zonder_aantal_adressen_wordt_als_parkeerplek_van_een_adres_
 ):
     """Een parkeerplek zonder aantal adressen wordt gewaardeerd als een parkeerplek van één adres.
 
-    De package waarschuwt dat `gedeeld_met_aantal_adressen` ontbreekt.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4: "Dit
-    attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt
-    het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere
-    adressen."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    De twee parkeerplekken van Type III worden ook voor één adres in deze
-    rubriek gewaardeerd: hun punten worden opgeteld en door 1 gedeeld.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2:
-    "waarderen we altijd in deze rubriek, ook wanneer de plek aan één adres is
-    toegewezen."
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Bij meerdere
-    parkeerplekken worden de punten bij elkaar opgeteld." en "Indien sprake is
-    van een privé parkeerplek voor één adres, wordt gedeeld door 1."
-
-    Bron: wettekst, Bijlage I onder A, rubriek 10: "Type III Parkeerplek buiten
-    behorende tot het complex zonder dak 4 punten".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 10.
     """
+    # Zonder aantal adressen; twee plekken (`aantal` 2) tonen het optellen.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -532,6 +413,7 @@ def test_parkeerplek_zonder_aantal_adressen_wordt_als_parkeerplek_van_een_adres_
     ) as waarschuwingen:
         groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # 2 plekken van 4 punten, gedeeld door 1 adres.
     assert punten_per_bovenliggende(groep) == {
         "Privé": {"Parkeerplek buiten behorend bij complex (Type III)": 8.0}
     }
@@ -543,22 +425,10 @@ def test_carport_zonder_aantal_adressen_krijgt_geen_punten(
 ):
     """Een carport zonder aantal adressen krijgt in deze rubriek geen punten.
 
-    De package leest het ontbrekende aantal als niet gedeeld met andere
-    adressen. De carport is dan een privé-buitenruimte en hoort in rubriek 8.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.3: "Een
-    `carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-    gewaardeerd, gemeenschappelijk in rubriek 10".
-
-    De implementatietoelichting zegt dat bij een ontbrekend aantal adressen een
-    waarschuwing volgt. Bij een carport geeft de package die in deze rubriek
-    niet; de test legt het huidige gedrag vast.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4: "Dit
-    attribuut dient ook op elk type parkeerplek meegegeven te worden. Ontbreekt
-    het, dan volgt een `UserWarning` en gaan we uit van niet gedeeld met andere
-    adressen."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4;
+    implementatietoelichting zelfstandige woonruimten, 2.8.3.
     """
+    # Zonder aantal adressen is de carport niet gedeeld.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -572,6 +442,7 @@ def test_carport_zonder_aantal_adressen_krijgt_geen_punten(
 
     groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # De carport is een privé-buitenruimte en wordt in rubriek 8 gewaardeerd.
     assert punten_per_naam(groep) == {}
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -579,18 +450,8 @@ def test_carport_zonder_aantal_adressen_krijgt_geen_punten(
 def test_parkeerplek_zonder_oppervlakte_geeft_een_waarschuwing(
     gemeenschappelijke_parkeerruimten, vergelijk_met_testreferentie
 ):
-    """Een parkeerplek zonder oppervlakte is incomplete input en wordt niet gewaardeerd.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    Zonder oppervlakte is niet vast te stellen of de parkeerplek de minimale
-    oppervlakte heeft.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-    is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-    gangbare personenauto in zijn geheel op past."
-    """
+    """Een parkeerplek zonder oppervlakte geeft een waarschuwing over incomplete input."""
+    # Zonder oppervlakte is niet vast te stellen of de plek de minimale 12 m² haalt.
     eenheid = EenhedenEenheid(
         ruimten=[
             EenhedenRuimte(
@@ -607,5 +468,6 @@ def test_parkeerplek_zonder_oppervlakte_geeft_een_waarschuwing(
     with pytest.warns(UserWarning, match="geen oppervlakte") as waarschuwingen:
         groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
+    # Zonder oppervlakte waardeert de package de parkeerplek niet.
     assert punten_per_naam(groep) == {}
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)

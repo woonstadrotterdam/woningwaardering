@@ -2,28 +2,8 @@
 
 Een rijksmonument krijgt geen minpunten voor de energieprestatie.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 4.2: "Indien de woonruimte
-bestaat uit of deel uitmaakt van een rijksmonument, een provinciaal monument
-of een gemeentelijke monument als bedoeld in artikel 8a worden voor deze
-rubriek geen minpunten toegekend. Voor energielabel E, F en G en daaraan
-gelijkgestelde Energie-indexen en bouwjaren, geldt in afwijking van de
-bovenstaande tabellen in dat geval een toekenning van nul punten."
-
-De eenheid heeft geen energieprestaties. De package waarschuwt daarvoor en
-waardeert op het bouwjaar.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 4.1: "Daar waar een
-geldig energielabel ontbreekt, wordt de waardering van de energieprestatie
-bepaald op basis van het bouwjaar van de woning."
-
-Een meergezinswoning met bouwjaar 1921 krijgt -15 punten.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 4.1, tabel met de kolommen
-energielabel, energie-index, bouwjaar, eengezinswoning en meergezinswoning:
-"G EI > 2,7 1976 of ouder –15 –15".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
+Bijlage I onder A, onderdeel 4.2.
 
 ## Rapport
 

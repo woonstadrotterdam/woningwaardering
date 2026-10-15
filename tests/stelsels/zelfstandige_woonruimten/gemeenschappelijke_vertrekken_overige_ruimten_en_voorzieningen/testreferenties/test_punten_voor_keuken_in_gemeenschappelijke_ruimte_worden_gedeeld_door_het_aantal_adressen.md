@@ -2,30 +2,8 @@
 
 De punten voor een keuken in een gemeenschappelijke ruimte worden gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal eventueel
-van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7;" en "Deel
-dit aantal punten door het aantal adressen dat toegang heeft tot de
-gemeenschappelijke binnenruimten."
-
-De keuken heeft een aanrecht van 1 meter en twee inbouwkoelkasten.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 5.1: "1 tot 2 m 4 punten".
-
-Bron: wettekst, Bijlage I onder A, onderdeel 5.2: "Inbouw koelkast 1 punt".
-
-In het totaal zitten ook de punten voor de oppervlakte en de verwarming van
-de keuken; het wordt afgerond op een kwart punt.
-
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke vertrek 1
-punt per m² gedeeld door het aantal adressen dat toegang en gebruiksrecht
-heeft."
-
-Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-punten".
-
-Bron: wettekst, Bijlage I onder A, toelichting, inleiding: "De waardering in
-punten per rubriek wordt na saldering afgerond op 0,25 punt waarbij een
-achtste (1/8) punt naar boven wordt afgerond."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder A, toelichting rubriek 9.
 
 ## Rapport
 

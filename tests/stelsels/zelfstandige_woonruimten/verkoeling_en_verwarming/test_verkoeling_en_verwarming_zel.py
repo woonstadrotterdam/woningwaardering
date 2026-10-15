@@ -40,14 +40,8 @@ def test_verwarmd_vertrek_met_verkoelingsfunctie_krijgt_een_punt_extra(
 ):
     """Een verwarmd vertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-    punten" en "Verkoelingsfunctie per vertrek (mits deze voorziening tevens een
-    verwarmingsfunctie heeft) 1 punt (maximaal 2 punten bij meerdere vertrekken
-    met verkoelingsfunctie)".
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Dit betekent dat
-    een vertrek met verkoelingsvoorziening (die ook kan verwarmen) ook als
-    verwarmd vertrek geldt en aanspraak kan maken op bijbehorende waardering."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.slaapkamer, verwarmd=True, verkoeld=True)]
@@ -67,8 +61,8 @@ def test_vertrekken_met_verkoelingsfunctie_krijgen_samen_hooguit_2_punten(
 ):
     """Vertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Er kan één punt
-    worden behaald per vertrek, met een totaal maximum van twee punten."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
+    wettekst, Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -111,8 +105,8 @@ def test_vertrek_met_verkoelingsfunctie_zonder_verwarming_krijgt_geen_punten(
 ):
     """Een vertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Een
-    verkoelingsvoorziening moet tevens kunnen verwarmen."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
+    wettekst, Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.woonkamer, verwarmd=False, verkoeld=True)]
@@ -129,10 +123,8 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmd
-    vertrek wordt, ongeacht de verwarmingswijze, een waardering van twee punten
-    toegepast, voor zover de verwarming tot de onroerende zaak en zijn
-    onroerende aanhorigheden behoort."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.keuken, verwarmd=False)]
@@ -149,8 +141,8 @@ def test_verwarmde_overige_ruimten_krijgen_samen_hooguit_4_punten(
 ):
     """Verwarmde overige ruimten krijgen samen hooguit 4 punten.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "verwarming per overige ruimte
-    en verkeersruimte 1 punt (maximaal 4 punten)".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -182,8 +174,8 @@ def test_verwarmde_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_pu
 ):
     """Verwarmde overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "verwarming per overige ruimte
-    en verkeersruimte 1 punt (maximaal 4 punten)".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -216,19 +208,17 @@ def test_verwarmde_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_pu
 def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een verwarmd woon- of slaapvertrek met een aanrecht krijgt 4 punten als vertrek met open keuken.
+    """Een aanrecht in een verwarmd woon- of slaapvertrek is een open keuken.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Voor deze rubriek
-    wordt, in tegenstelling tot de gegeven definities van afzonderlijke
-    vertrekken onder de inleiding, een open keuken als afzonderlijk verwarmd
-    vertrek beschouwd en krijgt dus twee punten indien er verwarming aanwezig
-    is."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-    Bron: beleidsboek zelfstandige woonruimten, 2.3.2: "Ook een aanrecht dat is
-    geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen
-    duidelijke afscheiding is tussen het keukengedeelte en de rest van het
-    vertrek."
+    Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
+    # Aanrechten langer dan 1 meter, de lengte vanaf waar de package een open
+    # keuken aanneemt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -251,6 +241,7 @@ def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Het vertrek en de open keuken krijgen elk 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
             "Woonkamer met open keuken": 4.0,
@@ -266,16 +257,12 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
 ):
     """Een aanrecht in een verwarmde woonkamer is vanaf 1 meter een open keuken.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-    punten".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-    als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-    er verwarming aanwezig is".
+    Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Omdat wij
-    in de package niet (kunnen) controleren op keukenkastjes, doen wij de
-    aanname dat een aanrecht vanaf 1 meter een open keuken is."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -302,6 +289,7 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Zonder open keuken krijgt een verwarmd vertrek 2 punten, met open keuken 4.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
             "Woonkamer1": 2.0,
@@ -317,12 +305,7 @@ def test_aanrecht_zonder_lengte_is_geen_open_keuken(
 ):
     """Een aanrecht zonder lengte is in een verwarmde woonkamer geen open keuken.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-    punten".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Omdat wij
-    in de package niet (kunnen) controleren op keukenkastjes, doen wij de
-    aanname dat een aanrecht vanaf 1 meter een open keuken is."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -336,6 +319,7 @@ def test_aanrecht_zonder_lengte_is_geen_open_keuken(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Zonder open keuken krijgt een verwarmd vertrek 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {Ruimtedetailsoort.woonkamer.naam: 2.0}
     }
@@ -345,16 +329,14 @@ def test_aanrecht_zonder_lengte_is_geen_open_keuken(
 def test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een verwarmde woonkamer/keuken of woon-/slaapkamer/keuken krijgt ook zonder aanrecht de 4 punten van een vertrek met open keuken.
+    """Een verwarmde woonkamer/keuken of woon-/slaapkamer/keuken is ook zonder aanrecht een vertrek met open keuken.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-    als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-    er verwarming aanwezig is".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2:
-    "Ruimtedetailsoorten die de keuken al in zich hebben
-    (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen
-    altijd als open keuken, ook zonder aanrecht in de input."
+    Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -365,6 +347,7 @@ def test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Het vertrek en de open keuken krijgen elk 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
             Ruimtedetailsoort.woonkamer_en_of_keuken.naam: 4.0,
@@ -379,16 +362,12 @@ def test_aanrecht_in_serre_overig_vertrek_of_berging_als_vertrek_is_een_open_keu
 ):
     """Een aanrecht in een verwarmde serre, een overig vertrek of een berging die als vertrek is aangeleverd, is een open keuken.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-    als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-    er verwarming aanwezig is".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Elke ruimte
-    (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en
-    `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht
-    vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een
-    `serre`, `overig vertrek` of een `berging` die als vertrek wordt
-    aangeleverd."
+    Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -413,6 +392,7 @@ def test_aanrecht_in_serre_overig_vertrek_of_berging_als_vertrek_is_een_open_keu
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Het vertrek en de open keuken krijgen elk 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
             "Serre met open keuken": 4.0,
@@ -428,14 +408,10 @@ def test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken(
 ):
     """Een aanrecht in een verwarmde keuken, doucheruimte of bijkeuken die als vertrek is aangeleverd, is geen open keuken.
 
-    Bron: wettekst, Bijlage I onder A, rubriek 3: "Verwarming per vertrek 2
-    punten".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "Elke ruimte
-    (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en
-    `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht
-    vanaf 1 meter staat, heeft dus een open keuken".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
     """
+    # Elk aanrecht is langer dan 1 meter, zodat alleen de ruimtesoort bepaalt of er
+    # een open keuken is.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -459,6 +435,7 @@ def test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Zonder open keuken krijgt een verwarmd vertrek 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
             Ruimtedetailsoort.keuken.naam: 2.0,
@@ -474,9 +451,8 @@ def test_open_keuken_in_een_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-    als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-    er verwarming aanwezig is".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -503,14 +479,8 @@ def test_vertrek_kleiner_dan_4m2_krijgt_ook_met_aanrecht_het_punt_van_een_overig
 ):
     """Een verwarmde ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², krijgt ook met een aanrecht alleen het punt van een overige ruimte.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Alleen vertrekken
-    die met oppervlaktepunten als vertrek zijn gewaardeerd, worden in dit kader
-    meegeteld." en "Per verwarmde overige ruimte en verkeersruimte wordt,
-    ongeacht de verwarmingswijze, een waardering van één punt toegepast".
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "wij lezen
-    dat als de eis dat de ruimte minimaal aan de voorwaarden van een vertrek
-    voldoet".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -536,15 +506,10 @@ def test_vertrek_kleiner_dan_4m2_krijgt_ook_met_aanrecht_het_punt_van_een_overig
 def test_doucheruimte_kleiner_dan_4m2_krijgt_de_punten_van_een_verwarmd_vertrek(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een verwarmde doucheruimte kleiner dan 4 m² krijgt de 2 punten van een verwarmd vertrek.
+    """Een verwarmde doucheruimte is ook kleiner dan 4 m² een vertrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "In afwijking van
-    bovenstaande eisen is een ruimte die uitsluitend als keuken dient en een
-    badkamer of doucheruimte altijd een vertrek."
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmd
-    vertrek wordt, ongeacht de verwarmingswijze, een waardering van twee punten
-    toegepast".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.doucheruimte, oppervlakte=2, verwarmd=True)]
@@ -552,6 +517,7 @@ def test_doucheruimte_kleiner_dan_4m2_krijgt_de_punten_van_een_verwarmd_vertrek(
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
+    # Zonder open keuken krijgt een verwarmd vertrek 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {Ruimtedetailsoort.doucheruimte.naam: 2.0}
     }

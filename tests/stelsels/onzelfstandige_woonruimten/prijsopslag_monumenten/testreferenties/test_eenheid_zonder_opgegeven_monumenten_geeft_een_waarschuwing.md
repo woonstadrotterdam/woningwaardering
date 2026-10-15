@@ -2,17 +2,6 @@
 
 Een eenheid waarvan `monumenten` niet is opgegeven, geeft een waarschuwing.
 
-De package vraagt om een lege lijst wanneer de eenheid geen monumentstatus
-heeft. De implementatietoelichting noemt die keuze niet; de test legt het
-huidige gedrag vast.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Na de waarschuwing zoekt de package de monumentstatus zelf op met de
-BAG-identificatie van de eenheid (README.md, Installatie). Deze eenheid
-heeft geen BAG-identificatie en krijgt geen waardering.
-
 ## Rapport
 
 Geen waarderingen voor Prijsopslag monumenten.

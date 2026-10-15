@@ -2,8 +2,8 @@
 
 De oppervlakte van de vertrekken wordt vanaf 0,5 m² naar boven afgerond op hele m².
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "bij 0,5 m² of
-meer wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.1;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

@@ -2,13 +2,7 @@
 
 De puntenwinst die de uitzonderingsruimte bepaalt, telt na deling door het aantal onzelfstandige woonruimten waarmee de ruimte wordt gedeeld.
 
-De slaapkamer levert zonder maximum de meeste punten op, maar wordt met 20
-onzelfstandige woonruimten gedeeld. Na deling wint de berging, die met 8
-onzelfstandige woonruimten wordt gedeeld.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1: "De
-kandidaat met de hoogste netto puntenwinst wint, na deling door het aantal
-adressen en onzelfstandige woonruimten waarmee de ruimte wordt gedeeld".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

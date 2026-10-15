@@ -2,12 +2,6 @@
 
 Een keuken zonder aanrecht is incomplete input en wordt niet gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 5: "Indien de keuken
-niet voldoet aan het basisniveau, worden geen punten toegekend."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 Geen waarderingen voor Keuken.

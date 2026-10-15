@@ -2,11 +2,7 @@
 
 Ook een privéruimte kan de uitzondering op het maximum voor wastafels krijgen.
 
-De berging is met 8 onzelfstandige woonruimten gedeeld; daarmee geldt de
-uitzondering op dit adres. De privéslaapkamer heeft de hoogste puntenwinst.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1: "Ook een
-privé-ruimte kan de uitzondering krijgen."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

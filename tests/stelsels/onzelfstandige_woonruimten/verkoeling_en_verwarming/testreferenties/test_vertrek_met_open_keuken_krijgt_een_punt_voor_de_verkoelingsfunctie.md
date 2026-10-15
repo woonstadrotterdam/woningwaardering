@@ -1,21 +1,9 @@
 # test_vertrek_met_open_keuken_krijgt_een_punt_voor_de_verkoelingsfunctie
 
-Een verwarmd privévertrek met open keuken krijgt voor de verkoelingsfunctie 1 punt: de open keuken telt alleen voor de verwarming als afzonderlijk vertrek.
+Een verwarmd privévertrek met open keuken krijgt voor de verkoelingsfunctie 1 punt.
 
-De bronnen noemen dit geval niet uitdrukkelijk; de test legt vast hoe de
-package ze leest.
-
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verkoelingsfunctie per
-privévertrek (mits deze voorziening tevens een verwarmingsfunctie heeft) 1
-punt".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-er verwarming aanwezig is".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
+wettekst, Bijlage I onder B, onderdeel 3.
 
 ## Rapport
 

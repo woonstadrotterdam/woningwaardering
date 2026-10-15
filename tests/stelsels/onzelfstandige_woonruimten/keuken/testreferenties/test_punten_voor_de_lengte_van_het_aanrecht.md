@@ -2,8 +2,8 @@
 
 De punten voor een aanrecht hangen af van zijn lengte.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "1 tot 2 m 4 punten",
-"2 tot 3 m 7 punten" en "3 m en meer 10 punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+Bijlage I onder B, onderdeel 5.1.
 
 ## Rapport
 

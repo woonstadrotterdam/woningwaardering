@@ -2,16 +2,7 @@
 
 Een buitenruimte die als gemeenschappelijke ruimte is aangeleverd, wordt als buitenruimte gewaardeerd.
 
-De package waarschuwt dat de aangeleverde ruimtesoort afwijkt van de
-ruimtesoort waarmee het balkon is gewaardeerd. Dat de package het balkon
-naar zijn detailsoort waardeert, is een keuze die in geen bron staat.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimte(n) op hetzelfde adres", "0,75 punt per m², gedeeld door het
-aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.
 
 ## Rapport
 

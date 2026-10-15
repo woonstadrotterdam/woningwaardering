@@ -2,9 +2,8 @@
 
 Een keuken en een badkamer zijn ook onder de 4 m² een vertrek.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "In afwijking van
-bovenstaande eisen is een ruimte die uitsluitend als keuken dient en een
-badkamer of doucheruimte altijd een vertrek."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

@@ -2,17 +2,9 @@
 
 Een zoldervertrek is een vertrek, tenzij het alleen via een vlizotrap bereikbaar is.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Zolderruimten
-slechts als vertrek gewaardeerd worden, indien deze bereikbaar zijn via een
-vaste trap en indien de vloer begaanbaar en het dak beschoten is."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "De
-detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-`vlizotrap` weerspreekt dat."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3;
+wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

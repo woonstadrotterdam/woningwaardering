@@ -2,49 +2,15 @@
 
 Een eenheid zonder WOZ-waarde wordt met een waarschuwing gewaardeerd met de minimum WOZ-waarde van € 85.806.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "de voor de woning
-laatstelijk vastgestelde waarde op voet van hoofdstuk IV van de Wet
-waardering onroerende zaken of 85% van de taxatiewaarde indien er geen
-WOZ-waarde is vastgesteld, en anders een minimumwaarde van € 85.806."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
+Bijlage I onder A, onderdeel 11.1.
 
-Bij de minimumwaarde horen de kengetallen van waardepeildatum 1 januari
-2025.
+Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en
+met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de
+WOZ-waarde.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "1 punt per € 16.954
-voor WOZ-beschikkingen met waardepeildatum 1 januari 2025, taxatiewaarden
-en minimumwaarden." en "€ 268 bij WOZ-beschikkingen met waardepeildatum 1
-januari 2025, taxatiewaarden en minimumwaarden."
-
-De oppervlakte in onderdeel II is die van de vijf vertrekken van de
-woning, afgerond op hele vierkante meters. De vaste kasten van de
-keuken en de woonkamer tellen daarin mee.
-
-Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Rond hierna de
-oppervlakte af op hele vierkante meters."
-
-Bron: implementatietoelichting, datamodel-uitbreidingen, "Ruimtedetailsoort
-kast": "Binnen het woningwaarderingsstelsel mag onder bepaalde voorwaarden
-de oppervlakte van vaste kasten worden opgeteld bij de ruimte waar de deur
-van de kast zich bevindt."
-
-De woning is in 2016 gebouwd en haalt voor de rubrieken 1 tot en met
-10 en 12 meer dan 110 punten. Het krijgt daarom minimaal 40 punten: de
-waardering 'Nieuwbouw: min. 40 punten' vult de punten van onderdeel I en II
-aan tot dat minimum.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 11.2: "Indien een woning is
-gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal
-aantal punten na saldering van de punten van de onderdelen 1 tot en met 10
-en 12, 110 of meer is, worden minimaal 40 punten toegekend."
-
-De package waarschuwt dat er geen WOZ-waarde is aangeleverd. De
-implementatietoelichting noemt die waarschuwing niet; de test legt het
-huidige gedrag vast. De eenheid heeft ook geen energieprestatie; daarvoor
-waarschuwt de rubriek energieprestatie, die de package voor het minimum
-van 40 punten meewaardeert.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
+Bijlage I onder A, onderdeel 11.2.
 
 ## Rapport
 

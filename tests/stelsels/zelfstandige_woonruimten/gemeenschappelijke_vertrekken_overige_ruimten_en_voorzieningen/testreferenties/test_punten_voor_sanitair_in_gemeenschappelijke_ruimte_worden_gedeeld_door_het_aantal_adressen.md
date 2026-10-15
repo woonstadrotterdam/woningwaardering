@@ -2,37 +2,8 @@
 
 De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal eventueel
-van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7;" en "Deel
-dit aantal punten door het aantal adressen dat toegang heeft tot de
-gemeenschappelijke binnenruimten."
-
-De badkamer heeft een bad, een wastafel en extra voorzieningen. De maxima
-van rubriek 6 gelden vóór het delen.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 6.1: "Wastafel 1 punt" en "Bad
-6 punten".
-
-Bron: wettekst, Bijlage I onder A, onderdeel 6.2: "Voorzieningen in de bad-
-of doucheruimte (tot maximaal het aantal punten extra dat reeds voor douche,
-bad en bad/douche is verkregen)", "Bubbelfunctie van het bad 1,5 punten",
-"Gemonteerde volledige afscheiding van de douche 1,25 punten",
-"Handdoekenradiator 0,75 punt", "Ingebouwd kastje met in- of opgebouwde
-wastafel 1 punt", "Kastruimte (minimale breedte van 40 cm, en minimale
-hoogte van 40 cm) 0,75 punt (tot een maximum van 0,75)", "Stopcontact 0,25
-punt", "Éénhandsmengkraan 0,25 punt" en "Thermostatische mengkraan 0,5
-punt".
-
-In het totaal zitten ook de punten voor de oppervlakte van de badkamer; het
-wordt afgerond op een kwart punt.
-
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke vertrek 1
-punt per m² gedeeld door het aantal adressen dat toegang en gebruiksrecht
-heeft."
-
-Bron: wettekst, Bijlage I onder A, toelichting, inleiding: "De waardering in
-punten per rubriek wordt na saldering afgerond op 0,25 punt waarbij een
-achtste (1/8) punt naar boven wordt afgerond."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder A, toelichting rubriek 9.
 
 ## Rapport
 

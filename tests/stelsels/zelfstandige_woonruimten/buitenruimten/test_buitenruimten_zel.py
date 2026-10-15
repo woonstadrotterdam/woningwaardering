@@ -30,9 +30,8 @@ def test_prive_buitenruimte_krijgt_2_punten_plus_035_punt_per_m2(
 ):
     """Een privé-buitenruimte krijgt 2 punten plus 0,35 punt per m².
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voor
-    privébuitenruimten worden in ieder geval twee punten toegekend, en daarna
-    per vierkante meter 0,35 punt."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.tuin, oppervlakte=30)])
 
@@ -53,17 +52,12 @@ def test_gemeenschappelijke_buitenruimte_krijgt_driekwart_punt_per_m2_gedeeld_do
 ):
     """Een gemeenschappelijke buitenruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang heeft.
 
-    De input is het rekenvoorbeeld uit de wettekst.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-    meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-    het aantal adressen dat toegang heeft tot de buitenruimte." en "Voorbeeld:
-    een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
-    adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5
-    punten."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Het rekenvoorbeeld uit de toelichting bij de wettekst.
             ruimte(
                 Ruimtedetailsoort.dakterras,
                 oppervlakte=30,
@@ -83,9 +77,8 @@ def test_gemeenschappelijke_buitenruimten_worden_elk_door_hun_eigen_aantal_adres
 ):
     """Van gemeenschappelijke buitenruimten met een verschillend aantal adressen worden de punten per buitenruimte door haar eigen aantal adressen gedeeld.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-    meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-    het aantal adressen dat toegang heeft tot de buitenruimte."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -118,15 +111,7 @@ def test_gemeenschappelijke_buitenruimte_zonder_afmetingen_wordt_gewaardeerd(
 ):
     """Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-    De package toetst de minimumafmeting alleen op de afmetingen die zijn
-    ingevuld.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2: "Alleen als
-    een waarde is ingevuld wordt deze getoetst tegen 2000 × 1500 × 1500 mm."
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-    meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-    het aantal adressen dat toegang heeft tot de buitenruimte."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -149,13 +134,8 @@ def test_gemeenschappelijke_buitenruimte_boven_de_minimumafmeting_wordt_gewaarde
 ):
     """Een gemeenschappelijke buitenruimte met een lengte en breedte boven de minimumafmeting wordt gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-    minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-    diepte)."
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-    meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-    het aantal adressen dat toegang heeft tot de buitenruimte."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -180,24 +160,18 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
 ):
     """Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-    Geen van de drie balkons wordt gewaardeerd. De woning heeft daardoor geen
-    gewaardeerde buitenruimte en krijgt de aftrek van 5 punten.
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-    minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-    diepte)."
+    Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2: "Indien een
-    van deze afmetingen kleiner is dan noodzakelijk voor waardering leidt dat
-    ertoe dat de ruimte niet wordt gewaardeerd."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5: "Daarom
-    passen we −5 alleen toe als er geen enkele gewaardeerde buitenruimte is
-    (bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen
-    punten en tellen dus niet mee tegen de aftrek)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Elk balkon blijft op één afmeting onder de minimumafmeting:
+            # Balkon1 in lengte, Balkon2 in breedte en Balkon3 in hoogte.
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon1",
@@ -242,22 +216,12 @@ def test_buitenruimten_krijgen_samen_hooguit_15_punten(
 ):
     """Buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voor de rubriek
-    buitenruimten (rubriek 8) kan in totaal maximaal vijftien punten worden
-    toegekend."
-
-    De punten vóór het maximum volgen uit de opgetelde oppervlakte van de tuin
-    en het balkon.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Indien sprake is
-    van meerdere buitenruimten die allen tot dezelfde categorie behoren, zijnde
-    allen gemeenschappelijk of privé, dan worden de oppervlaktes van die
-    buitenruimtes bij elkaar opgeteld." en "Voor privébuitenruimten worden in
-    ieder geval twee punten toegekend, en daarna per vierkante meter 0,35
-    punt."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Twee privé-buitenruimten die samen boven het maximum uitkomen.
             ruimte(Ruimtedetailsoort.tuin, oppervlakte=30),
             ruimte(Ruimtedetailsoort.balkon, oppervlakte=15),
         ]
@@ -265,6 +229,7 @@ def test_buitenruimten_krijgen_samen_hooguit_15_punten(
 
     groep = buitenruimten.waardeer(eenheid)
 
+    # Samen 45 m²: 45 x 0,35 = 15,75 punten plus 2 punten is 17,75; maximaal 15.
     assert punten_per_naam(groep) == {
         "Privé": 15.75,
         "Privé buitenruimten aanwezig": 2.0,
@@ -279,9 +244,8 @@ def test_maximum_van_15_punten_geldt_voor_prive_en_gemeenschappelijke_buitenruim
 ):
     """Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voor de rubriek
-    buitenruimten (rubriek 8) kan in totaal maximaal vijftien punten worden
-    toegekend."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -314,9 +278,8 @@ def test_woning_zonder_buitenruimte_krijgt_5_punten_aftrek(
 ):
     """Een woning zonder buitenruimte krijgt 5 punten aftrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Indien de woning
-    in het geheel geen privé-buitenruimte, geen gemeenschappelijke buitenruimte
-    of loggia heeft, wordt een aftrek toegepast van vijf punten."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(ruimten=[])
 
@@ -332,21 +295,16 @@ def test_woning_zonder_buitenruimte_krijgt_5_punten_aftrek(
 def test_buitenruimte_zonder_oppervlakte_geeft_een_waarschuwing(
     buitenruimten, vergelijk_met_testreferentie
 ):
-    """Een buitenruimte zonder oppervlakte is incomplete input en wordt niet gewaardeerd.
+    """Een buitenruimte zonder oppervlakte geeft een waarschuwing over incomplete input.
 
-    De woning heeft daardoor geen gewaardeerde buitenruimte en krijgt de aftrek
-    van 5 punten.
+    Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5: "Daarom
-    passen we −5 alleen toe als er geen enkele gewaardeerde buitenruimte is
-    (bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen
-    punten en tellen dus niet mee tegen de aftrek)."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+    Bijlage I onder A, toelichting rubriek 8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Zonder oppervlakte, daarom rechtstreeks als EenhedenRuimte opgebouwd.
             EenhedenRuimte(
                 id="balkon",
                 naam="Balkon",
@@ -368,19 +326,12 @@ def test_buitenruimte_aangeleverd_als_gemeenschappelijke_ruimte_wordt_als_buiten
 ):
     """Een buitenruimte die als gemeenschappelijke ruimte is aangeleverd, wordt als buitenruimte gewaardeerd.
 
-    De package waarschuwt dat de aangeleverde ruimtesoort afwijkt van de
-    ruimtesoort waarmee het dakterras is gewaardeerd.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Voorbeeld: een
-    woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
-    adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5
-    punten."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Als gemeenschappelijke ruimte aangeleverd, maar een dakterras is een
+            # buitenruimte.
             ruimte(
                 Ruimtedetailsoort.dakterras,
                 soort=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,

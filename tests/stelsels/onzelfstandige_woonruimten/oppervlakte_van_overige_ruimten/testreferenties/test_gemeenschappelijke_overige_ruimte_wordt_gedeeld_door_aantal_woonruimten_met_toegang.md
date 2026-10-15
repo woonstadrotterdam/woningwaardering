@@ -2,26 +2,9 @@
 
 Een gemeenschappelijke overige ruimte wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot die ruimte.
 
-De wettekst deelt de punten. De package deelt per ruimte de oppervlakte;
-punten delen zou hier 2,75 punten geven.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 2: "Oppervlakte
-gemeenschappelijke overige ruimte(n) op hetzelfde adres, niet zijnde
-verkeersruimten (o.a. berging, zolder, garage)", "0,75 punt per m², te
-delen door het aantal onzelfstandige woonruimten dat toegang en
-gebruiksrecht heeft".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-voorziening(en)."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "per
-ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-daarna × 0,75."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2; wettekst,
+Bijlage I onder B, onderdeel 2; wettekst, Bijlage I onder B, toelichting,
+inleiding.
 
 ## Rapport
 

@@ -2,19 +2,8 @@
 
 Een energieprestatie zonder soort telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
 
-De package slaat een energieprestatie zonder soort over zonder te
-waarschuwen. De implementatietoelichting noemt die keuze niet; de test legt
-het huidige gedrag vast. Het label heeft hier alleen een naam, geen code.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 4.1: "Daar waar een
-geldig energielabel ontbreekt, wordt de waardering van de energieprestatie
-bepaald op basis van het bouwjaar van de woning."
-
-Een meergezinswoning met bouwjaar 1921 krijgt -15 punten.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 4.1, tabel met de kolommen
-energielabel, energie-index, bouwjaar, eengezinswoning en meergezinswoning:
-"G EI > 2,7 1976 of ouder –15 –15".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3; wettekst,
+Bijlage I onder A, toelichting rubriek 4.1.
 
 ## Rapport
 

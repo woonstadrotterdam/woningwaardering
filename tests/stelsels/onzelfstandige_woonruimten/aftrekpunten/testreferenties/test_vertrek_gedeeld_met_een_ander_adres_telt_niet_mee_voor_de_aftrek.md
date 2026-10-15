@@ -2,12 +2,13 @@
 
 Een vertrek dat met een ander adres wordt gedeeld, telt niet mee voor de aftrek.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2; wettekst,
+Bijlage I onder B, onderdeel 1.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 1: "Oppervlakte
-gemeenschappelijk(e) vertrek(ken) op hetzelfde adres".
+Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
+Bijlage I onder B, onderdeel 13.
 
 ## Rapport
 

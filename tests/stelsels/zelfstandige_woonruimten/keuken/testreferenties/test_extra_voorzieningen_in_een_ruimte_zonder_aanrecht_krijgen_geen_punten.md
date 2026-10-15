@@ -2,10 +2,8 @@
 
 Extra voorzieningen in een ruimte zonder aanrecht krijgen geen punten.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.5.1: "Als een of meer van de
-basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor
-het onderdeel 'keuken' in de woningwaardering. Dus ook niet voor eventuele
-extra voorzieningen als hierna in paragraaf 2.5.3 benoemd."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1; wettekst,
+Bijlage I onder A, toelichting rubriek 5.
 
 ## Rapport
 

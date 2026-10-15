@@ -2,8 +2,7 @@
 
 Een ruimte zonder sanitair komt niet voor in de waardering.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.6: "Sanitair in de woonruimte
-komt voor waardering in aanmerking."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.
 
 ## Rapport
 

@@ -2,11 +2,8 @@
 
 De punten voor een aanrecht hangen af van zijn lengte.
 
-Het beleidsboek (2.5.2) geeft de 7 punten aan een aanrecht "Langer dan 2
-meter". De package volgt de wettekst en geeft ze ook bij precies 2 meter.
-
-Bron: wettekst, Bijlage I onder A, onderdeel 5.1: "1 tot 2 m 4 punten" en
-"2 m en meer 7 punten".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2; wettekst,
+Bijlage I onder A, onderdeel 5.1.
 
 ## Rapport
 

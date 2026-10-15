@@ -2,23 +2,9 @@
 
 Een gemeenschappelijke parkeerplaats geeft de waarschuwing over haar detailsoort ook wanneer zij met een oppervlakte onder 12 m² geen punten krijgt.
 
-Dat de waarschuwing ook onder 12 m² volgt, is een keuze van de package die
-in geen bron staat.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3: "Bij die
-laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats
-is: `PAR` legt het type niet vast."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-gangbare personenauto in zijn geheel op past."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

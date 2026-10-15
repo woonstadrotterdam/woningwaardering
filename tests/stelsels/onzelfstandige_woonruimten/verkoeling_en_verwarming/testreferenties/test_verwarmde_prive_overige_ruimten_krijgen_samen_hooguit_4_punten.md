@@ -2,18 +2,9 @@
 
 Verwarmde privé overige ruimten krijgen samen hooguit 4 punten.
 
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privé overige
-ruimte en verkeersruimte 1 punt".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmde
-overige ruimte en verkeersruimte wordt, ongeacht de verwarmingswijze, een
-waardering van één punt toegepast, voor zover de verwarming tot de
-onroerende zaak en zijn onroerende aanhorigheden behoort. Hiervoor geldt
-een maximum van vier punten."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

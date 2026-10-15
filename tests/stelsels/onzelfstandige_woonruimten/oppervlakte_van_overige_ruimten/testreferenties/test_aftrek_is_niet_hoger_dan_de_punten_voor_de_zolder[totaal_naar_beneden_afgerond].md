@@ -2,15 +2,9 @@
 
 De aftrek voor een zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd, doch niet met meer punten dan voor de
-oppervlakte van de zolderruimten wordt gegeven." en "Waardering in punten
-vindt na saldering en afronding plaats."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
 Dit geval: de zolder van 4,40 m² brengt het totaal van 6,00 op 10,40 m², afgerond van 6 op 10 m²; de 3 punten voor die 4 m² vervallen.
 

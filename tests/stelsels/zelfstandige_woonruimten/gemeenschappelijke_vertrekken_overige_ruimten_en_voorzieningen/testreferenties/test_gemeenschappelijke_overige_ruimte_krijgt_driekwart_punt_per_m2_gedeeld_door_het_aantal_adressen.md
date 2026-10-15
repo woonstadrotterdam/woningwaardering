@@ -2,9 +2,8 @@
 
 Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke overige
-ruimte 0,75 punt per m² gedeeld door het aantal adressen dat toegang en
-gebruiksrecht heeft."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9; wettekst,
+Bijlage I onder A, onderdeel 9.
 
 ## Rapport
 

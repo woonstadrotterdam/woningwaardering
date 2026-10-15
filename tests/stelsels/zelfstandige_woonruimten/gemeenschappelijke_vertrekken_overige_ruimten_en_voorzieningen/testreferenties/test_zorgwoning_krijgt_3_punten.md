@@ -2,17 +2,7 @@
 
 Een zorgwoning krijgt 3 punten voor de gemeenschappelijke ruimten en voorzieningen.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.9.4: "Om arbeidsintensief
-meetwerk te voorkomen kent de Huurcommissie in dat geval een waardering van
-3 punten per woning toe."
-
-De eenheid heeft de doelgroep zorg en alleen een eigen woonkamer; de
-gemeenschappelijke ruimten zijn niet meegegeven.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.4: "Dit
-voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op
-'zorg' te zetten. Voor een zorgwoning hoeven de gemeenschappelijke ruimten
-en voorzieningen niet verder gespecificeerd te worden."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9.4.
 
 ## Rapport
 

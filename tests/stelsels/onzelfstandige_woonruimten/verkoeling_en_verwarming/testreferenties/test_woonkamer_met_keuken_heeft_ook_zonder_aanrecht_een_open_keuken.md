@@ -1,14 +1,14 @@
 # test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken
 
-Een verwarmde privé woonkamer/keuken of woon-/slaapkamer/keuken krijgt ook zonder aanrecht de 4 punten van een vertrek met open keuken.
+Een verwarmde privé woonkamer/keuken of woon-/slaapkamer/keuken is ook zonder aanrecht een vertrek met open keuken.
 
-Bron: beleidsboek onzelfstandige woonruimten, 2.3.2: "Een privé verwarmde
-woonkamer met open keuken wordt dus gewaardeerd met 4 punten."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2:
-"Ruimtedetailsoorten die de keuken al in zich hebben
-(`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen
-altijd als open keuken, ook zonder aanrecht in de input."
+Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

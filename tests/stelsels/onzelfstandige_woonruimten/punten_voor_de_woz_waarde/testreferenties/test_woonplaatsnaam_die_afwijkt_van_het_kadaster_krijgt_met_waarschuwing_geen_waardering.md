@@ -2,23 +2,7 @@
 
 Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-De woonplaats van de eenheid heeft een naam en geen code. De package zoekt
-de woonplaats daarom op bij het Kadaster, met postcode en huisnummer.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Indien
-dit attribuut niet gespecificeerd is, wordt op basis van postcode,
-huisnummer, huisletter en huisnummertoevoeging bepaald in welke woonplaats
-een eenheid zich bevindt." en "Hierbij is het van belang dat deze waarden
-overeenkomen met de BAG-registratie."
-
-Het Kadaster geeft bij postcode 1013GS en huisnummer 22 de woonplaats
-Amsterdam; de eenheid noemt Rotterdam. De package rekent dan met geen van
-beide woonplaatsen: zij waarschuwt voor het verschil, en daarna dat zij
-geen woonplaats heeft gevonden. De implementatietoelichting noemt die keuze
-niet; de test legt het huidige gedrag vast.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2.
 
 ## Rapport
 

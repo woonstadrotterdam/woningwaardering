@@ -2,22 +2,8 @@
 
 Een buitenruimte die met meerdere adressen wordt gedeeld en zonder aantal onzelfstandige woonruimten is aangeleverd, wordt alleen door het aantal adressen gedeeld.
 
-De package leest een ontbrekend aantal onzelfstandige woonruimten als één
-woonruimte met toegang; die lezing staat in geen bron. Tuin1 wordt met 2
-adressen gedeeld en Tuin2 met 3 adressen.
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimten gedeeld met meerdere adressen", "0,75 punt per m², gedeeld
-door het aantal adressen dat toegang en gebruiksrecht heeft, en daarna
-gedeeld door het aantal onzelfstandige woonruimten op dat adres".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-voorziening(en)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4;
+implementatietoelichting onzelfstandige woonruimten, 2.8.2.
 
 ## Rapport
 

@@ -2,23 +2,9 @@
 
 Het maximum van 4 punten voor verwarmde verkeersruimten telt privéruimten en gemeenschappelijke ruimten niet bij elkaar op.
 
-Gang1 tot en met Gang3 zijn privé; Gang4 tot en met Gang6 worden met 2
-onzelfstandige woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privé overige
-ruimte en verkeersruimte 1 punt" en "Verwarming per gemeenschappelijke
-overige ruimte en verkeersruimte op hetzelfde adres 1 punt, te delen door
-het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft".
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.3: "1 punt per verwarmde
-privé overige ruimte of privé verkeersruimte (tot maximaal 4 punten)" en "1
-punt per verwarmde gemeenschappelijke overige ruimte of gemeenschappelijke
-verkeersruimte (tot maximaal 4 punten) / onzelfstandige wooneenheden met
-toegang en gebruiksrecht".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3: "De kaders
-hierboven geven max. 4 verwarmde overige/verkeersruimten en max. 2
-verkoelde vertrekken afzonderlijk voor privé en voor gemeenschappelijk."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder B, onderdeel 3; wettekst, Bijlage I onder A,
+toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding).
 
 ## Rapport
 

@@ -1,15 +1,9 @@
 # test_wastafels_buiten_de_badkamer_krijgen_een_maximum_per_ruimte
 
-Buiten de badkamer krijgen wastafels per ruimte hooguit de punten van één wastafel.
+Buiten de badkamer geldt per ruimte een maximum van 1 punt voor wastafels en 1,5 punt voor meerpersoonswastafels.
 
-Het maximum geldt apart voor wastafels (1 punt) en voor
-meerpersoonswastafels (1,5 punt).
-
-Bron: wettekst, Bijlage I onder A, onderdeel 6.1: "Wastafel 1 punt (tot een
-maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer)" en
-"Meerpersoonswastafel (minimale breedte van 70cm en met twee kranen) 1,5
-punten (tot een maximum van 1,5 punt per vertrek of overige ruimte m.u.v. de
-badkamer)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, onderdeel 6.1.
 
 ## Rapport
 

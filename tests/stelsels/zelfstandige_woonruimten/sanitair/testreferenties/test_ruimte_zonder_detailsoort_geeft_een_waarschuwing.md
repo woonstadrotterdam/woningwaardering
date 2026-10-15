@@ -2,9 +2,6 @@
 
 Een ruimte zonder detailsoort is incomplete input en wordt niet gewaardeerd.
 
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 Geen waarderingen voor Sanitair.

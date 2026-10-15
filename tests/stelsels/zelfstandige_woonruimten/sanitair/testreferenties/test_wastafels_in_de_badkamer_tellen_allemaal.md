@@ -2,11 +2,8 @@
 
 In een badkamer geldt geen maximum voor wastafels.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 6.1: "Wastafel 1 punt (tot een
-maximum van 1 punt per vertrek of overige ruimte m.u.v. de badkamer)" en
-"Meerpersoonswastafel (minimale breedte van 70cm en met twee kranen) 1,5
-punten (tot een maximum van 1,5 punt per vertrek of overige ruimte m.u.v. de
-badkamer)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, onderdeel 6.1.
 
 ## Rapport
 

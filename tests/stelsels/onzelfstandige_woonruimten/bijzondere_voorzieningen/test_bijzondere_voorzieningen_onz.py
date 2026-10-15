@@ -59,49 +59,20 @@ def test_BijzondereVoorzieningenZorgwoning_output(
 # Zorgwoning
 
 
-def test_zorgwoning_met_113_punten_in_de_rubrieken_1_tot_en_met_11_krijgt_39_5_punten_verhoging(
+def test_zorgwoning_krijgt_35_procent_van_de_punten_van_de_rubrieken_1_tot_en_met_11_als_verhoging(
     bijzondere_voorzieningen,
     vergelijk_met_testreferentie,
     vervanger_voor_package_monumenten,
 ):
-    """Een zorgwoning met 113 punten in de rubrieken 1 tot en met 11 krijgt 35% daarvan als verhoging: op een kwart punt afgerond 39,5 punten.
+    """Een zorgwoning krijgt 35% van de punten van de rubrieken 1 tot en met 11 als verhoging.
 
-    Bron: wettekst, Bijlage I onder B, rubriek 12: "Uitsluitend bij
-    zorgwoningen" en "bij: 35% van de ingevolge de onderdelen 1 tot en met 11
-    toegekende punten."
-
-    De verhoging is het totaal van deze rubriek en wordt op een kwart punt
-    afgerond.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.1.6: "Het totaal aantal
-    punten wordt per rubriek afgerond op 0,25 punt, waarbij vanaf een achtste
-    (1/8) punt naar boven wordt afgerond."
-
-    De package leest aan de doelgroep af dat de eenheid een zorgwoning is. De
-    implementatietoelichting voor onzelfstandige woonruimten noemt dat niet;
-    die voor zelfstandige woonruimten wel.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.1: "Wanneer
-    een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als
-    zorgwoning gewaardeerd."
-
-    De eenheid heeft alleen de doelgroep zorg en een verwarmde woonkamer. De
-    test geeft geen eerder resultaat mee; de package waardeert de andere
-    rubrieken daarom zelf en waarschuwt voor de monumenten, de energieprestatie
-    en de WOZ-waarde die ontbreken. Dat de gegevens voor de andere rubrieken
-    daarvoor in het model moeten staan, zegt alleen de implementatietoelichting
-    voor zelfstandige woonruimten.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12: "De extra
-    attributen in het model (zoals de WOZ-waarde, energielabel,
-    ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen
-    wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12; wettekst,
+    Bijlage I onder B, onderdeel 12.
     """
     eenheid = EenhedenEenheid(
         id="zorgwoning",
+        # De doelgroep zorg maakt de eenheid een zorgwoning; de package
+        # waardeert de rubrieken 1 tot en met 11 zelf.
         doelgroep=Doelgroep.zorg,
         ruimten=[
             ruimte(
@@ -131,49 +102,22 @@ def test_zorgwoning_met_113_punten_in_de_rubrieken_1_tot_en_met_11_krijgt_39_5_p
 def test_10_punten_voor_een_rijksmonument_tellen_niet_mee_voor_de_verhoging_van_een_zorgwoning(
     bijzondere_voorzieningen, vergelijk_met_testreferentie
 ):
-    """De 10 punten voor een rijksmonument met een huurovereenkomst van 1 januari 2024 tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
+    """De 10 punten voor een rijksmonument met een huurovereenkomst van vóór de inwerkingtreding van de Wet betaalbare huur tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-    De 10 punten komen op grond van artikel 8a bij de waardering. De verhoging
-    voor een zorgwoning is een percentage van de punten van de onderdelen 1 tot
-    en met 11.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12;
+    implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+    artikel 8a, tweede lid; wettekst, Bijlage I onder B, onderdeel 12.
 
-    Bron: wettekst, artikel 8a, tweede lid: "Indien de woonruimte bestaat uit
-    of deel uitmaakt van een rijksmonument als bedoeld in artikel 1.1 van de
-    Erfgoedwet en de huurovereenkomst betreffende die woonruimte is afgesloten
-    voor het tijdstip van inwerkingtreding van de Wet betaalbare huur, wordt de
-    waardering voor een zelfstandige woonruimte in bijlage I, onder A, met 50
-    punten vermeerderd en de waardering voor een onzelfstandige woonruimte in
-    bijlage I, onder B, met 10 punten vermeerderd."
+    Een rijksmonument krijgt in rubriek 4 geen minpunten.
 
-    Bron: wettekst, Bijlage I onder B, rubriek 12: "bij: 35% van de ingevolge
-    de onderdelen 1 tot en met 11 toegekende punten."
-
-    De eenheid heeft bouwjaar 1960 en geen energielabel. Bij dat bouwjaar geeft
-    rubriek 4 minpunten, maar niet aan een rijksmonument: de rubriek draagt 0
-    punten bij aan de punten waarover de verhoging wordt berekend.
-
-    Bron: wettekst, Bijlage I onder B, onderdeel 4.2: "Indien de woonruimte
-    bestaat uit of deel uitmaakt van een rijksmonument, een provinciaal
-    monument of een gemeentelijke monument als bedoeld in artikel 8a worden
-    voor deze rubriek geen minpunten toegekend."
-
-    De eenheid heeft verder de doelgroep zorg, de datum van de
-    huurovereenkomst en een verwarmde woonkamer. De test geeft geen eerder
-    resultaat mee; de package waardeert de andere rubrieken daarom zelf en
-    waarschuwt voor de energieprestatie en de WOZ-waarde die ontbreken. Dat de
-    verhoging van de gegevens voor de andere rubrieken afhangt, staat alleen in
-    de implementatietoelichting voor zelfstandige woonruimten.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12: "De extra
-    attributen in het model (zoals de WOZ-waarde, energielabel,
-    ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen
-    wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
+    wettekst, Bijlage I onder B, onderdeel 4.2.
     """
     eenheid = EenhedenEenheid(
         id="zorgwoning",
+        # Artikel 8a geldt alleen bij een huurovereenkomst van vóór de Wet
+        # betaalbare huur; het bouwjaar geeft zonder monument minpunten. De
+        # package waardeert de rubrieken 1 tot en met 11 zelf.
         datum_afsluiten_huurovereenkomst=date(2024, 1, 1),
         bouwjaar=1960,
         doelgroep=Doelgroep.zorg,
@@ -211,28 +155,13 @@ def test_aanbelfunctie_met_video_en_audioverbinding_krijgt_0_25_punt(
 ):
     """Een aanbelfunctie met video- en audioverbinding krijgt 0,25 punt.
 
-    Bron: wettekst, Bijlage I onder B, rubriek 12: "Aanbelfunctie met video- en
-    audioverbinding waarbij de voordeur automatisch kan worden geopend vanuit
-    de woning" en "0,25 punt".
-
-    De aanbelfunctie is een installatie van een ruimte, hier de woonkamer.
-
-    Bron: implementatietoelichting, datamodel-uitbreidingen, "Installaties":
-    "Op dit moment gebruiken wij `installaties` als attribuut op ruimte met als
-    type `Optional[list[Installatiesoort]]`."
-
-    Of de voordeur vanuit de woonruimte kan worden geopend, controleert de
-    package niet. De implementatietoelichting voor onzelfstandige woonruimten
-    neemt die voorwaarde ongewijzigd over en zegt niet dat ze niet wordt
-    gecontroleerd. De test legt het huidige gedrag vast.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.12.2: "Daarbij dient er ook
-    sprake te zijn van de mogelijkheid tot het openen van de
-    (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang
-    geeft tot het complex waarvan de woning onderdeel uitmaakt."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.2; wettekst,
+    Bijlage I onder B, onderdeel 12.
     """
     eenheid = EenhedenEenheid(
         id="aanbelfunctie",
+        # Zonder voordeur in de input: de package controleert niet of de
+        # voordeur vanuit de woning kan worden geopend.
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.woonkamer,
@@ -255,39 +184,24 @@ def test_aanbelfunctie_met_video_en_audioverbinding_krijgt_0_25_punt(
 # Laadpalen
 
 
-def test_twee_laadpalen_bij_een_garage_krijgen_samen_4_punten(
+def test_laadpaal_bij_een_garage_van_een_adres_krijgt_2_punten(
     bijzondere_voorzieningen, vergelijk_met_testreferentie
 ):
-    """Twee laadpalen bij een privégarage krijgen elk 2 punten: samen 4 punten.
+    """Een laadpaal bij een garage van één adres krijgt 2 punten.
 
-    Bron: wettekst, Bijlage I onder B, rubriek 12: "Laadpaal t.b.v. elektrisch
-    opladen" en "2 punten gedeeld door het aantal adressen dat toegang en
-    gebruiksrecht heeft."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3; wettekst,
+    Bijlage I onder B, onderdeel 12.
 
-    De laadpalen zijn bouwkundige elementen van de garage. De garage wordt niet
-    met andere adressen en niet met andere onzelfstandige woonruimten gedeeld;
-    de punten worden daarom niet gedeeld. Een garage van één adres krijgt in
-    rubriek 10 geen punten; de laadpalen worden daarom in deze rubriek
-    gewaardeerd.
+    Een garage van één adres krijgt in rubriek 10 geen punten; de laadpalen
+    worden daarom in deze rubriek gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een
-    parkeerruimte waartoe bewoners van één adres krachtens de huurovereenkomst
-    exclusieve toegang tot en gebruiksrecht op hebben, wordt gewaardeerd volgens
-    rubriek 2 (binnen, bijvoorbeeld een garagebox behorende tot de woning) of
-    rubriek 8 (buiten, bijvoorbeeld een oprit exclusief behorende tot de
-    woning)."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3: "Krijgt
-    die ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in
-    alle andere gevallen hier, met dezelfde deler (aantal adressen × aantal
-    onzelfstandige woonruimten)."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         id="2 laadpalen",
+        # De garage is van één adres, zodat ze in rubriek 10 geen punten krijgt.
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.garage,
@@ -305,5 +219,6 @@ def test_twee_laadpalen_bij_een_garage_krijgen_samen_4_punten(
     groep = bijzondere_voorzieningen.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {"Laadpalen": 2.0}
+    # 2 laadpalen x 2 punten, niet gedeeld
     assert punten_per_bovenliggende(groep) == {"Privé": {"Laadpalen": 4.0}}
     vergelijk_met_testreferentie(eenheid, groep)

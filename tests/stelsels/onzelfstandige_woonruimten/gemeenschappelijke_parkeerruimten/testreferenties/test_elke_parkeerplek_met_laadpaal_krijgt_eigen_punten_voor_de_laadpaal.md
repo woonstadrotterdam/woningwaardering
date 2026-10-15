@@ -2,18 +2,9 @@
 
 Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
 
-De carports worden met 4 adressen gedeeld; op het eigen adres heeft één
-onzelfstandige woonruimte toegang.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-punten extra per parkeerplek met laadpaal." en "Daarna wordt dit
-puntentotaal gedeeld door het aantal adressen dat gebruik kan maken van de
-parkeerplek(ken)."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.5; wettekst,
+Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

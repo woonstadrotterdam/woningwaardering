@@ -2,9 +2,8 @@
 
 Meerdere kastruimtes in een badkamer krijgen samen 0,75 punt.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 6.2: "Kastruimte (minimale
-breedte van 40 cm, en minimale hoogte van 40 cm) 0,75 punt (tot een maximum
-van 0,75)".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
+Bijlage I onder A, onderdeel 6.2.
 
 ## Rapport
 

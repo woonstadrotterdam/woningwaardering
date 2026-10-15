@@ -2,14 +2,7 @@
 
 Van de ruimten met meer dan één wastafel krijgt de ruimte met de hoogste puntenwinst de uitzondering op het maximum.
 
-De berging staat als tweede in de input en heeft evenveel wastafels als de
-woonkamer, maar het zijn meerpersoonswastafels. De uitzondering geldt voor
-één ruimte, voor wastafels en meerpersoonswastafels samen.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1:
-"Vervolgens kiezen we over alle niet-badkamer-ruimten van de eenheid precies
-één uitzonderingsruimte voor beide wastafelsoorten samen." en "De kandidaat
-met de hoogste netto puntenwinst wint".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

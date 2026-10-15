@@ -2,20 +2,9 @@
 
 Een gemeenschappelijke buitenruimte die in lengte en breedte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-De tuin is 1 meter lang en 1 meter breed; de hoogte van 2,5 meter voldoet
-wel aan de minimumafmeting.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Er geldt een
-minimumafmeting van 2 m x 1,5 m x 1,5 m (respectievelijk hoogte, breedte,
-diepte)."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2: "Indien
-een van deze afmetingen kleiner is dan noodzakelijk voor waardering leidt
-dat ertoe dat de ruimte niet wordt gewaardeerd."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

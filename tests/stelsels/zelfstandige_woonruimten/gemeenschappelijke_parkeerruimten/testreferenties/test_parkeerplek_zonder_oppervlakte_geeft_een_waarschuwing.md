@@ -1,16 +1,6 @@
 # test_parkeerplek_zonder_oppervlakte_geeft_een_waarschuwing
 
-Een parkeerplek zonder oppervlakte is incomplete input en wordt niet gewaardeerd.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Zonder oppervlakte is niet vast te stellen of de parkeerplek de minimale
-oppervlakte heeft.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-gangbare personenauto in zijn geheel op past."
+Een parkeerplek zonder oppervlakte geeft een waarschuwing over incomplete input.
 
 ## Rapport
 

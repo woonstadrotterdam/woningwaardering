@@ -2,11 +2,7 @@
 
 Een bad en een douche in dezelfde ruimte tellen samen als één bad/douche.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 6.1: "Bad/douche 7 punten".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1: "Een
-badruimte met een bad én een afzonderlijke douche kan als `bad_en_douche`
-worden meegegeven of als losse `bad` en `douche`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
 
 ## Rapport
 

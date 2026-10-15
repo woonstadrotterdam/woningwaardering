@@ -2,10 +2,8 @@
 
 Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
 
-De tuin wordt met 2 onzelfstandige woonruimten op hetzelfde adres gedeeld.
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Maximaal 15 punten te
-behalen".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
+Bijlage I onder B, onderdeel 8.
 
 ## Rapport
 

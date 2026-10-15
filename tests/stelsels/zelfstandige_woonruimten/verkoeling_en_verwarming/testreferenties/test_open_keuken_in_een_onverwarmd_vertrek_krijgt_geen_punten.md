@@ -2,9 +2,8 @@
 
 Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "een open keuken
-als afzonderlijk verwarmd vertrek beschouwd en krijgt dus twee punten indien
-er verwarming aanwezig is".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3.
 
 ## Rapport
 

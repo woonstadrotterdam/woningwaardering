@@ -2,15 +2,13 @@
 
 Een aanrecht in een verwarmde privéwoonkamer is vanaf 1 meter een open keuken.
 
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privévertrek
-2 punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
-Bron: beleidsboek onzelfstandige woonruimten, 2.3.2: "Een privé verwarmde
-woonkamer met open keuken wordt dus gewaardeerd met 4 punten."
+Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2: "Omdat wij
-in de package niet (kunnen) controleren op keukenkastjes, doen wij de
-aanname dat een aanrecht vanaf 1 meter een open keuken is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

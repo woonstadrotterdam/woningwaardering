@@ -2,9 +2,7 @@
 
 Een schuur die als vertrek is aangeleverd, wordt als vertrek gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2: "De
-gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte,
-voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2.
 
 ## Rapport
 

@@ -2,17 +2,11 @@
 
 Een drempelloze inrijdouche telt als douche voor het recht op extra voorzieningen.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 6.1: "Als douche
-moet worden meegeteld iedere door de verhuurder aangebrachte installatie
-voor het nemen van een stortbad."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 6.2: "Bad- of
-doucheruimten moeten voldoen aan de volgende eisen en hebben" onder meer
-"een douche of bad met aansluitpunten voor warm en koud water".
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1;
+implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
+Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek
+6.2 (via Bijlage I onder B, toelichting, inleiding).
 
 ## Rapport
 

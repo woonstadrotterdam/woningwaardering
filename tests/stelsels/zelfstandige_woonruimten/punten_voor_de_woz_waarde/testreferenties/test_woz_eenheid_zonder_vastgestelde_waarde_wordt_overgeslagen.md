@@ -2,28 +2,8 @@
 
 Een WOZ-eenheid zonder vastgestelde waarde slaat de package over: zij rekent met de meest recente WOZ-waarde die wel is vastgesteld.
 
-De WOZ-eenheid met waardepeildatum 1 januari 2025 heeft geen vastgestelde
-waarde. De package rekent met de WOZ-waarde van 1 januari 2024 en met de
-kengetallen die bij die waardepeildatum horen. De implementatietoelichting
-noemt die keuze niet; de test legt het huidige gedrag vast.
-
-Bron: beleidsboek zelfstandige woonruimten, 2.11.1: "Met de laatst
-vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de
-peildatum van de procedure bedoeld."
-
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "1 punt per € 15.329
-voor WOZ-beschikkingen met waardepeildatum 1 januari 2024." en "€ 242 bij
-WOZ-beschikkingen met waardepeildatum 1 januari 2024."
-
-De eenheid heeft alleen WOZ-eenheden en een woonkamer. Deze rubriek rekent
-met de uitkomst van de andere rubrieken: de oppervlakte uit rubriek 1 en 2,
-en de punten waaraan het minimum van 40 punten en de cap op de WOZ worden
-getoetst. De package waardeert die rubrieken daarom mee en waarschuwt voor
-de energieprestatie, de monumenten, de pandsoort, de keuken en het bouwjaar
-die ontbreken.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
+Bijlage I onder A, onderdeel 11.1.
 
 ## Rapport
 

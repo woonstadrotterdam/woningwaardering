@@ -2,26 +2,8 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke zolder zonder vaste trap.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Meting van de
-oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50 meter
-boven de vloer, inclusief de oppervlakte van alle losse en vaste tot de
-woning behorende kasten" en "Indien geen vaste trap aanwezig is, wordt het
-aantal punten van de vloeroppervlakte van de zolderruimte met vijf
-verminderd, doch niet met meer punten dan voor de oppervlakte van de
-zolderruimten wordt gegeven."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-(4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-onder meer energieprestatie, gemeenschappelijke ruimten en
-zoldercorrecties."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Met vertrekken en
-overige ruimten wordt onder deze rubriek aangesloten bij definities en de
-meetmethoden als gegeven onder rubriek 1 en 2.", "Gemeenschappelijke overige
-ruimten worden met driekwart punt per m² gewaardeerd." en "Deel dit aantal
-punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke
-binnenruimten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

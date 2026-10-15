@@ -2,9 +2,8 @@
 
 Extra voorzieningen in de badkamer krijgen samen hooguit de punten van het bad en de douche.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 6.2: "Voorzieningen in de bad-
-of doucheruimte (tot maximaal het aantal punten extra dat reeds voor douche,
-bad en bad/douche is verkregen)".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
+Bijlage I onder B, onderdeel 6.2.
 
 ## Rapport
 

@@ -1,34 +1,14 @@
 # test_woz_waarde_onder_de_minimum_woz_waarde_wordt_niet_verhoogd_tot_dat_minimum
 
-Een vastgestelde WOZ-waarde van € 79.999, lager dan de minimum WOZ-waarde van € 85.806, wordt niet tot dat minimum verhoogd.
+Een vastgestelde WOZ-waarde die lager is dan de minimum WOZ-waarde van € 85.806, wordt niet tot dat minimum verhoogd.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "de voor de woning
-laatstelijk vastgestelde waarde op voet van hoofdstuk IV van de Wet
-waardering onroerende zaken of 85% van de taxatiewaarde indien er geen
-WOZ-waarde is vastgesteld, en anders een minimumwaarde van € 85.806."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
+Bijlage I onder A, onderdeel 11.1.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.11.1: "De minimum WOZ-waarde
-komt pas aan bod als er voor een woonruimte geen relevante WOZ-waarde
-aanwezig is én de verhuurder geen taxatierapport (zoals hierboven bedoeld)
-heeft ingediend."
+De package rekent met de meest recent vastgestelde WOZ-waarde.
 
-De eenheid heeft WOZ-waarden met waardepeildatum 1 januari 2022, 2023 en
-2024. De package rekent met de meest recente, die van 1 januari 2024, en
-met de kengetallen die bij die waardepeildatum horen.
-
-Bron: beleidsboek zelfstandige woonruimten, 2.11.1: "Met de laatst
-vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de
-peildatum van de procedure bedoeld."
-
-Bron: wettekst, Bijlage I onder A, onderdeel 11.1: "1 punt per € 15.329
-voor WOZ-beschikkingen met waardepeildatum 1 januari 2024." en "€ 242 bij
-WOZ-beschikkingen met waardepeildatum 1 januari 2024."
-
-De oppervlakte in onderdeel II is die van de drie vertrekken, afgerond op
-hele vierkante meters.
-
-Bron: beleidsboek zelfstandige woonruimten, 2.11.2: "Rond hierna de
-oppervlakte af op hele vierkante meters."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
+Bijlage I onder A, onderdeel 11.1.
 
 ## Rapport
 

@@ -2,14 +2,8 @@
 
 Een gemeenschappelijke buitenruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang heeft.
 
-De input is het rekenvoorbeeld uit de wettekst.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Per vierkante
-meter geldt een waardering van driekwart punt. Dat wordt daarna gedeeld door
-het aantal adressen dat toegang heeft tot de buitenruimte." en "Voorbeeld:
-een woongebouw met een gemeenschappelijk dakterras van 30 m² waartoe drie
-adressen toegang hebben, wordt gewaardeerd met: (0,75 x 30) / 3 = 7,5
-punten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

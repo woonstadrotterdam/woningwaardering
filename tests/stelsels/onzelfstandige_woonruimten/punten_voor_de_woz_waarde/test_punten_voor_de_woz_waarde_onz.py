@@ -34,42 +34,19 @@ def test_PuntenVoorDeWozWaarde_output(
 # Punten naar het gemiddelde van het COROP-gebied
 
 
-def test_woz_waarde_per_m2_net_onder_het_gemiddelde_van_het_corop_gebied_geeft_12_punten(
+def test_woz_waarde_per_m2_binnen_10_procent_van_het_gemiddelde_van_het_corop_gebied_geeft_12_punten(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een WOZ-waarde per m² gebruiksoppervlakte die minder dan 1% onder het gemiddelde van het COROP-gebied ligt, geeft 12 punten.
+    """Een WOZ-waarde per m² gebruiksoppervlakte die maximaal 10% hoger of lager is dan het gemiddelde van het COROP-gebied, geeft 12 punten.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 11.1: "De WOZ-waarde of 85%
-    van de taxatiewaarde, indien er geen WOZ-waarde is vastgesteld, van het
-    adres waar de onzelfstandige woonruimte onderdeel van is, per m²
-    gebruiksoppervlakte is maximaal 10% hoger of lager dan de gemiddelde
-    WOZ-waarde per m² gebruiksoppervlakte van woningen in het COROP-gebied
-    waarbinnen de woonruimte is gelegen." en "12 punten".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
+    Bijlage I onder B, onderdeel 11.1.
 
-    Woonplaatscode 3086 is Rotterdam, in het COROP-gebied Groot-Rijnmond.
+    De package rekent met de meest recent vastgestelde WOZ-waarde.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Het
-    COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats
-    waarin de eenheid zich bevindt."
-
-    De eenheid heeft WOZ-waarden met waardepeildatum 1 januari 2022, 2023 en
-    2024. De package rekent met de meest recente, die van 1 januari 2024.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.11.1: "Met de laatst
-    vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de
-    peildatum van de procedure bedoeld."
-
-    Het gemiddelde van het COROP-gebied staat per waardepeildatum in de
-    Uitvoeringsregeling huurprijzen woonruimte (bijlage IIa): voor
-    Groot-Rijnmond bij waardepeildatum 1 januari 2024 is dat € 3.537 per m².
-
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 11: "In de
-    Uitvoeringsregeling huurprijzen woonruimte zijn de COROP-gebieden
-    weergegeven alsmede de daarbij behorende gemiddelde WOZ-waarde per m²
-    gebruiksoppervlakte van woningen." en "De kolommen geven op basis van de
-    peildatum van de WOZ-beschikking weer met welk bedrag moet worden
-    gerekend."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
     """
+    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond); net onder het gemiddelde.
     eenheid = EenhedenEenheid(
         adres=EenhedenEenheidadres(
             woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
@@ -92,6 +69,8 @@ def test_woz_waarde_per_m2_net_onder_het_gemiddelde_van_het_corop_gebied_geeft_1
 
     groep = punten_voor_de_woz_waarde.waardeer(eenheid)
 
+    # Het gemiddelde voor Groot-Rijnmond bij waardepeildatum 1 januari 2024 is
+    # € 3.537 per m². € 205.000 / 58 m² is € 3.534,48 per m²: 0,07% lager.
     assert aantal_per_naam(groep) == {
         "Percentage verschil": pytest.approx(-0.07, abs=0.005),
         "WOZ-waarde op waardepeildatum 01-01-2024": 205000.0,
@@ -103,42 +82,19 @@ def test_woz_waarde_per_m2_net_onder_het_gemiddelde_van_het_corop_gebied_geeft_1
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_woz_waarde_per_m2_ruim_60_procent_onder_het_gemiddelde_van_het_corop_gebied_geeft_10_punten(
+def test_woz_waarde_per_m2_meer_dan_10_procent_onder_het_gemiddelde_van_het_corop_gebied_geeft_10_punten(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een WOZ-waarde per m² gebruiksoppervlakte die ruim 60% onder het gemiddelde van het COROP-gebied ligt, geeft 10 punten.
+    """Een WOZ-waarde per m² gebruiksoppervlakte die meer dan 10% lager is dan het gemiddelde van het COROP-gebied, geeft 10 punten.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 11.1: "De WOZ-waarde of 85%
-    van de taxatiewaarde, indien er geen WOZ-waarde is vastgesteld, van het
-    adres waar de onzelfstandige woonruimte onderdeel van is, per m²
-    gebruiksoppervlakte is meer dan 10% lager dan de gemiddelde WOZ-waarde per
-    m² gebruiksoppervlakte van woningen in het COROP-gebied waarbinnen de
-    woonruimte is gelegen." en "10 punten".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
+    Bijlage I onder B, onderdeel 11.1.
 
-    Woonplaatscode 3086 is Rotterdam, in het COROP-gebied Groot-Rijnmond.
+    De package rekent met de meest recent vastgestelde WOZ-waarde.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Het
-    COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats
-    waarin de eenheid zich bevindt."
-
-    De eenheid heeft WOZ-waarden met waardepeildatum 1 januari 2022, 2023 en
-    2024. De package rekent met de meest recente, die van 1 januari 2024.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.11.1: "Met de laatst
-    vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de
-    peildatum van de procedure bedoeld."
-
-    Het gemiddelde van het COROP-gebied staat per waardepeildatum in de
-    Uitvoeringsregeling huurprijzen woonruimte (bijlage IIa): voor
-    Groot-Rijnmond bij waardepeildatum 1 januari 2024 is dat € 3.537 per m².
-
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 11: "In de
-    Uitvoeringsregeling huurprijzen woonruimte zijn de COROP-gebieden
-    weergegeven alsmede de daarbij behorende gemiddelde WOZ-waarde per m²
-    gebruiksoppervlakte van woningen." en "De kolommen geven op basis van de
-    peildatum van de WOZ-beschikking weer met welk bedrag moet worden
-    gerekend."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
     """
+    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond); ruim 60% onder het gemiddelde.
     eenheid = EenhedenEenheid(
         adres=EenhedenEenheidadres(
             woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
@@ -161,6 +117,8 @@ def test_woz_waarde_per_m2_ruim_60_procent_onder_het_gemiddelde_van_het_corop_ge
 
     groep = punten_voor_de_woz_waarde.waardeer(eenheid)
 
+    # Het gemiddelde voor Groot-Rijnmond bij waardepeildatum 1 januari 2024 is
+    # € 3.537 per m². € 78.000 / 58 m² is € 1.344,83 per m²: 61,98% lager.
     assert aantal_per_naam(groep) == {
         "Percentage verschil": pytest.approx(-61.98, abs=0.005),
         "WOZ-waarde op waardepeildatum 01-01-2024": 78000.0,
@@ -203,21 +161,12 @@ def test_punten_hangen_af_van_het_verschil_met_het_gemiddelde_van_het_corop_gebi
 ):
     """De punten voor de WOZ-waarde hangen af van hoeveel de WOZ-waarde per m² afwijkt van het gemiddelde van het COROP-gebied.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 11.1: "per m²
-    gebruiksoppervlakte is meer dan 10% hoger dan de gemiddelde WOZ-waarde per
-    m² gebruiksoppervlakte van woningen in het COROP-gebied waarbinnen de
-    woonruimte is gelegen." met "14 punten", "per m² gebruiksoppervlakte is
-    maximaal 10% hoger of lager dan de gemiddelde WOZ-waarde per m²
-    gebruiksoppervlakte" met "12 punten" en "per m² gebruiksoppervlakte is meer
-    dan 10% lager dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte" met
-    "10 punten".
-
-    Het gemiddelde van het COROP-gebied staat per waardepeildatum in de
-    Uitvoeringsregeling huurprijzen woonruimte (bijlage IIa): voor
-    Groot-Rijnmond bij waardepeildatum 1 januari 2024 is dat € 3.537 per m².
-    Bij 100 m² gebruiksoppervlakte ligt 10% lager op € 318.330 en 10% hoger
-    op € 389.070.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
+    Bijlage I onder B, onderdeel 11.1.
     """
+    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond) met 100 m²: bij een gemiddelde
+    # van € 3.537 per m² (waardepeildatum 1 januari 2024) ligt 10% lager op € 318.330
+    # en 10% hoger op € 389.070.
     eenheid = EenhedenEenheid(
         adres=EenhedenEenheidadres(
             woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
@@ -241,30 +190,20 @@ def test_punten_hangen_af_van_het_verschil_met_het_gemiddelde_van_het_corop_gebi
 # Geen WOZ-waarde
 
 
-def test_woz_waarde_met_waardepeildatum_1_januari_2021_krijgt_met_waarschuwing_het_laagste_puntenaantal(
+def test_eenheid_zonder_recente_woz_waarde_krijgt_met_waarschuwing_het_laagste_puntenaantal(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een eenheid met alleen een WOZ-waarde met waardepeildatum 1 januari 2021 krijgt met een waarschuwing het laagste puntenaantal van 10 punten.
+    """Een eenheid zonder recente WOZ-waarde krijgt met een waarschuwing het laagste puntenaantal van 10 punten.
 
-    Bron: beleidsboek onzelfstandige woonruimten, 2.11.1: "Wanneer er geen
-    enkele WOZ-waarde of taxatiewaarde bekend is voor het adres van de woning,
-    dan wordt het laagste puntenaantal voor de WOZ-waarde toegepast (10
-    punten)."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
 
-    De package rekent bij de peildatum van de waardering, hier 1 juli 2026,
-    alleen met een WOZ-waarde met waardepeildatum 1 januari 2025 of 1 januari
-    2024. Een WOZ-waarde met een oudere waardepeildatum behandelt zij als geen
-    WOZ-waarde. De implementatietoelichting noemt die keuze niet; de test legt
-    het huidige gedrag vast.
+    De package beschouwt alleen een WOZ-waarde met waardepeildatum 1 januari van
+    een van de twee jaren vóór de peildatum van de procedure als relevant.
 
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 11: "In deze
-    regeling zijn twee verschillende kolommen weergegeven: één voor de
-    gemiddelden waar nog geen nieuwe WOZ-beschikking voor is afgegeven en één
-    voor de gemiddelden waar wel een nieuwe WOZ-beschikking is afgegeven."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1; wettekst,
+    Bijlage I onder B, toelichting rubriek 11.
     """
+    # Alleen een WOZ-waarde met waardepeildatum 1 januari 2021, bij peildatum 2026.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -296,26 +235,8 @@ def test_woz_waarde_met_waardepeildatum_1_januari_2021_krijgt_met_waarschuwing_h
 def test_eenheid_zonder_gebruiksoppervlakte_krijgt_met_waarschuwing_geen_waardering(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een eenheid zonder gebruiksoppervlakte krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
-
-    De punten volgen uit de WOZ-waarde per m² gebruiksoppervlakte. Zonder
-    gebruiksoppervlakte kan de package die niet berekenen.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.11.2: "Deel de WOZ-waarde
-    door het aantal m² gebruiksoppervlakte van de woning".
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "De
-    gebruiksoppervlakte dient gespecificeerd te worden in het attribuut
-    `adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte` op de
-    eenheid."
-
-    De implementatietoelichting noemt niet dat de package bij een ontbrekende
-    gebruiksoppervlakte waarschuwt en geen waardering geeft; de test legt het
-    huidige gedrag vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een eenheid zonder gebruiksoppervlakte krijgt met een waarschuwing geen waardering voor de WOZ-waarde."""
+    # Alleen de gebruiksoppervlakte ontbreekt; de rest van de input is volledig.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -345,29 +266,11 @@ def test_eenheid_zonder_gebruiksoppervlakte_krijgt_met_waarschuwing_geen_waarder
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
-def test_gebruiksoppervlakte_van_0_m2_krijgt_met_waarschuwing_geen_waardering(
+def test_woz_waarde_die_niet_door_de_gebruiksoppervlakte_te_delen_is_krijgt_met_waarschuwing_geen_waardering(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een eenheid met een gebruiksoppervlakte van 0 m² krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
-
-    De punten volgen uit de WOZ-waarde per m² gebruiksoppervlakte. Door een
-    gebruiksoppervlakte van 0 m² is de WOZ-waarde niet te delen.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.11.2: "Deel de WOZ-waarde
-    door het aantal m² gebruiksoppervlakte van de woning".
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "De
-    gebruiksoppervlakte dient gespecificeerd te worden in het attribuut
-    `adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte` op de
-    eenheid."
-
-    De implementatietoelichting noemt niet dat de package bij een
-    gebruiksoppervlakte van 0 m² waarschuwt en geen waardering geeft; de test
-    legt het huidige gedrag vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een eenheid waarvan de WOZ-waarde niet door de gebruiksoppervlakte te delen is, krijgt met een waarschuwing geen waardering voor de WOZ-waarde."""
+    # Een gebruiksoppervlakte van 0 m², waardoor de WOZ-waarde niet te delen is.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -399,25 +302,8 @@ def test_gebruiksoppervlakte_van_0_m2_krijgt_met_waarschuwing_geen_waardering(
 def test_eenheid_zonder_adres_krijgt_met_waarschuwing_geen_waardering(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een eenheid zonder adres krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
-
-    De package bepaalt het COROP-gebied met de woonplaatscode, of zoekt de
-    woonplaats op met postcode en huisnummer. Zonder adres heeft zij geen van
-    beide.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Het
-    COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats
-    waarin de eenheid zich bevindt." en "Indien dit attribuut niet
-    gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en
-    huisnummertoevoeging bepaald in welke woonplaats een eenheid zich bevindt."
-
-    De implementatietoelichting noemt niet dat de package bij een ontbrekend
-    adres waarschuwt en geen waardering geeft; de test legt het huidige gedrag
-    vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een eenheid zonder adres krijgt met een waarschuwing geen waardering voor de WOZ-waarde."""
+    # Alleen het adres ontbreekt; de rest van de input is volledig.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
@@ -450,26 +336,8 @@ def test_eenheid_zonder_adres_krijgt_met_waarschuwing_geen_waardering(
 def test_woonplaatscode_zonder_corop_gebied_krijgt_met_waarschuwing_geen_waardering(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een eenheid met een woonplaatscode waarbij de package geen COROP-gebied kent, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Het
-    COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats
-    waarin de eenheid zich bevindt."
-
-    De package zoekt het COROP-gebied bij de woonplaatscode op in een extract
-    van CBS-data. Woonplaatscode 0100 staat daar niet in.
-
-    Bron: docs/voor-ontwikkelaars/data, Woonplaatsen en COROP-gebieden: "daarom
-    hebben we een script gemaakt dat een extract van deze data als resource in
-    de package opslaat in `woningwaardering/data/corop/corop.generated.csv`".
-
-    De implementatietoelichting noemt niet dat de package bij een onbekende
-    woonplaatscode waarschuwt en geen waardering geeft; de test legt het
-    huidige gedrag vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een eenheid met een woonplaatscode waarbij de package geen COROP-gebied kent, krijgt met een waarschuwing geen waardering voor de WOZ-waarde."""
+    # Woonplaatscode 0100 staat niet in het extract van CBS-data waarin de package de COROP-gebieden opzoekt.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -507,23 +375,7 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
 ):
     """Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-    De woonplaats van de eenheid heeft een naam en geen code. De package zoekt
-    de woonplaats daarom op bij het Kadaster, met postcode en huisnummer.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "Indien
-    dit attribuut niet gespecificeerd is, wordt op basis van postcode,
-    huisnummer, huisletter en huisnummertoevoeging bepaald in welke woonplaats
-    een eenheid zich bevindt." en "Hierbij is het van belang dat deze waarden
-    overeenkomen met de BAG-registratie."
-
-    Het Kadaster geeft bij postcode 1013GS en huisnummer 22 de woonplaats
-    Amsterdam; de eenheid noemt Rotterdam. De package rekent dan met geen van
-    beide woonplaatsen: zij waarschuwt voor het verschil, en daarna dat zij
-    geen woonplaats heeft gevonden. De implementatietoelichting noemt die keuze
-    niet; de test legt het huidige gedrag vast.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2.
     """
     # Het antwoord van het Kadaster op postcode 1013GS en huisnummer 22. Met
     # deze vervanger verloopt de waardering ook zonder netwerk hetzelfde.
@@ -535,6 +387,8 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
         "woningwaardering.stelsels.utils.requests.post",
         lambda *args, **kwargs: antwoord_van_het_kadaster,
     )
+    # De woonplaats heeft geen code, dus de package vraagt het Kadaster ernaar. De eenheid noemt
+    # Rotterdam, terwijl het Kadaster bij de postcode Amsterdam geeft.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -576,7 +430,7 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
 def test_gemiddelde_woz_voor_corop_gebied_weigert_onbekend_jaar(
     peildatum,
 ) -> None:
-    """De package geeft een foutmelding bij een waardepeildatum in 2026, waarvoor zij geen gemiddelde WOZ-waarden per COROP-gebied heeft.
+    """De package geeft een foutmelding bij een waardepeildatum waarvoor ze geen gemiddelde WOZ-waarden per COROP-gebied heeft.
 
     De gemiddelde WOZ-waarden per m² staan per jaar van de waardepeildatum in
     een lookuptabel. Ontbreekt het jaar daarin, dan rekent de package niet met
@@ -592,8 +446,9 @@ def test_gemiddelde_woz_voor_corop_gebied_weigert_onbekend_jaar(
     """
     punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde(peildatum)
 
-    with pytest.raises(ValueError, match="2026"):
+    # 2021 ligt voor het eerste jaar in de lookuptabel en komt er dus niet meer bij.
+    with pytest.raises(ValueError, match="2021"):
         punten_voor_de_woz_waarde._gemiddelde_woz_voor_corop_gebied(
             {"code": "40", "naam": "Groot-Rijnmond"},
-            2026,
+            2021,
         )

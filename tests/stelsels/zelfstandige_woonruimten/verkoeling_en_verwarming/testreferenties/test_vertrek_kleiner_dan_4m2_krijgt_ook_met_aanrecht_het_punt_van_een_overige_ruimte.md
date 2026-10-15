@@ -2,14 +2,8 @@
 
 Een verwarmde ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², krijgt ook met een aanrecht alleen het punt van een overige ruimte.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Alleen vertrekken
-die met oppervlaktepunten als vertrek zijn gewaardeerd, worden in dit kader
-meegeteld." en "Per verwarmde overige ruimte en verkeersruimte wordt,
-ongeacht de verwarmingswijze, een waardering van één punt toegepast".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2: "wij lezen
-dat als de eis dat de ruimte minimaal aan de voorwaarden van een vertrek
-voldoet".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3.
 
 ## Rapport
 

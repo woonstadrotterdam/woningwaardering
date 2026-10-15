@@ -2,20 +2,8 @@
 
 De punten van privé- en gemeenschappelijke buitenruimten worden pas na het optellen afgerond op een kwart punt.
 
-De input is het rekenvoorbeeld uit de toelichting bij de wettekst: Balkon1
-is privé, Balkon2 wordt met 4 onzelfstandige woonruimten op hetzelfde adres
-gedeeld en het dakterras met 5 adressen en met 4 onzelfstandige
-woonruimten op het adres.
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 8: "Voor huurder A
-resulteert dit in 2,35 punt + 0,84375 punt + 1,95 punt = 5,14375 punten,
-afgerond 5,25 punten."
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 8: "Het balkon wordt
-gedeeld door vier onzelfstandige woonruimten op hetzelfde adres, dus 3,375
-punt/4 = 0,84375 punt." en "Het dakterras wordt gedeeld door vijf adressen,
-dus 39 punten/5 = 7,8 punt. Op het adres van huurder A zijn vier
-onzelfstandige woonruimten, dus 7,8 punt/4 = 1,95 punt."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.6; wettekst,
+Bijlage I onder B, toelichting rubriek 8.
 
 ## Rapport
 

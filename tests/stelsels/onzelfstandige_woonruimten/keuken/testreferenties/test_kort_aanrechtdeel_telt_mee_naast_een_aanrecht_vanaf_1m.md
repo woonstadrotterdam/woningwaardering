@@ -2,13 +2,7 @@
 
 Een aanrechtdeel korter dan 1 meter telt mee in de aanrechtlengte naast een aanrecht vanaf 1 meter.
 
-De keuken wordt met 4 onzelfstandige woonruimten gedeeld.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2: "Als een
-ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij
-elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1
-meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van
-minimaal 1 meter aanwezig is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2.
 
 ## Rapport
 

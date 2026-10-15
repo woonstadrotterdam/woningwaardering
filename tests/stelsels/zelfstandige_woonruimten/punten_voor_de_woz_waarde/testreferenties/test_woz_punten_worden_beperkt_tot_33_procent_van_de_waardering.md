@@ -2,25 +2,15 @@
 
 De punten voor de WOZ-waarde zijn niet meer dan 33 procent van de waardering van een woning die zonder die beperking 187 punten of meer heeft.
 
-Bron: wettekst, Bijlage I onder A, onderdeel 11.3: "Het aandeel van de
-punten voor de WOZ-waarde in de waardering van de woning is niet groter dan
-33 procent. Deze beperking geldt niet voor woningen als bedoeld in
-onderdeel 11.1, onder a, en niet voor woningen waarvan de waardering zonder
-die beperking lager is dan 187 punten."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2;
+implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst, Bijlage
+I onder A, onderdeel 11.3.
 
-De woning haalt in de andere rubrieken 135,75 punten. Ook met de
-beperking komt de waardering boven 186 punten.
+Bij de beperking wordt het aantal punten voor de WOZ-waarde naar beneden
+afgerond op hele punten.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 11: "Indien met
-toepassing van 11.3 het puntenaandeel voor de WOZ-waarde wordt beperkt op
-ten hoogste 33%, wordt het aantal punten voor de WOZ-waarde afgerond naar
-beneden op hele punten."
-
-De keuken heeft geen aanrecht. Daarvoor waarschuwt de rubriek keuken, die
-de package voor de beperking meewaardeert.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
+Bijlage I onder A, toelichting rubriek 11.
 
 ## Rapport
 

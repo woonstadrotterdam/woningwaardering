@@ -41,14 +41,10 @@ def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_vertrekken(
 ):
     """De oppervlakten van alle vertrekken worden eerst opgeteld en dan afgerond op hele m².
 
-    Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De afronding van
-    de oppervlakte van alle vertrekken samen vindt plaats op hele vierkante
-    meters na saldering van de oppervlakte van alle vertrekken; bij 0,5 m² of
-    meer wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden." en
-    "Dit vertaalt zich dan naar 27 x 1 punt (per m²) = 27 punten".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.1;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # Het rekenvoorbeeld uit de toelichting bij de wettekst.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=15.49),
@@ -81,9 +77,10 @@ def test_oppervlakte_wordt_vanaf_een_halve_m2_naar_boven_afgerond(
 ):
     """De oppervlakte van de vertrekken wordt vanaf 0,5 m² naar boven afgerond op hele m².
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "bij 0,5 m² of
-    meer wordt afgerond naar boven, bij minder dan 0,5 m² naar beneden."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.1;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # Net onder en precies op de grens van 0,5 m².
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=oppervlakte)]
     )
@@ -103,9 +100,10 @@ def test_vertrek_moet_minimaal_4m2_groot_zijn(
 ):
     """Een ruimte kleiner dan 4 m² wordt niet als vertrek gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De ruimte dient
-    een oppervlakte te hebben van minimaal 4 m²."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # 0,01 m² onder de grens van 4 m² en precies op de grens.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=3.99),
@@ -125,10 +123,10 @@ def test_keuken_en_badkamer_zijn_ook_onder_4m2_een_vertrek(
 ):
     """Een keuken en een badkamer zijn ook onder de 4 m² een vertrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "In afwijking van
-    bovenstaande eisen is een ruimte die uitsluitend als keuken dient en een
-    badkamer of doucheruimte altijd een vertrek."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # Een keuken en een badkamer van 2 m², kleiner dan de 4 m² van een vertrek.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.keuken, oppervlakte=2),
@@ -169,15 +167,10 @@ def test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek(
 ):
     """Een ruimte kleiner dan 4 m² is een vertrek als zij met haar kast 4 m² of groter is.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Meting van de
-    oppervlakte van vertrekken vindt plaats van muur tot muur, op een hoogte van
-    1,50 meter boven de vloer, inclusief de oppervlakte van alle tot de woning
-    behorende losse en vaste kasten."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4: "De
-    kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-    (4,00 m² voor vertrek, 2,00 m² voor overige ruimte)".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # De slaapkamer haalt de 4 m² alleen met de kast van 0,5 m² erbij.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.5)
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -204,18 +197,11 @@ def test_keuken_aangeleverd_als_overige_ruimte_is_een_vertrek(
 ):
     """Een keuken die als overige ruimte is aangeleverd, wordt als vertrek gewaardeerd.
 
-    De package waarschuwt dat de aangeleverde ruimtesoort afwijkt van de
-    ruimtesoort waarmee de keuken is gewaardeerd.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "In afwijking van
-    bovenstaande eisen is een ruimte die uitsluitend als keuken dient en een
-    badkamer of doucheruimte altijd een vertrek."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2:
-    "Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het
-    beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het
-    meegegeven `Ruimtesoort`."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # De keuken is als overige ruimte aangeleverd, om te laten zien dat de
+    # aangeleverde ruimtesoort niet bepaalt of hij als vertrek telt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -239,10 +225,10 @@ def test_schuur_aangeleverd_als_vertrek_is_een_vertrek(
 ):
     """Een schuur die als vertrek is aangeleverd, wordt als vertrek gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2: "De
-    gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte,
-    voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2.
     """
+    # Een schuur kan tot rubriek 1 of 2 horen, dus de aangeleverde ruimtesoort
+    # beslist.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.schuur, soort=Ruimtesoort.vertrek, oppervlakte=6)
@@ -264,14 +250,12 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
 ):
     """Een zoldervertrek is een vertrek, tenzij het alleen via een vlizotrap bereikbaar is.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Zolderruimten
-    slechts als vertrek gewaardeerd worden, indien deze bereikbaar zijn via een
-    vaste trap en indien de vloer begaanbaar en het dak beschoten is."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "De
-    detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-    `vlizotrap` weerspreekt dat."
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.3;
+    implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 1.
     """
+    # De drie gevallen laten zien dat alleen een vlizotrap een zoldervertrek als
+    # vertrek uitsluit.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -305,17 +289,11 @@ def test_zolder_is_nooit_een_vertrek(
 ):
     """Een zolderruimte met de detailsoort `zolder` wordt nooit als vertrek gewaardeerd.
 
-    De package waarschuwt bij de zolder die als vertrek is aangeleverd: die
-    wordt als overige ruimte gewaardeerd.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Zolderruimten
-    slechts als vertrek gewaardeerd worden, indien deze bereikbaar zijn via een
-    vaste trap en indien de vloer begaanbaar en het dak beschoten is."
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Alleen
-    een `zoldervertrek` voldoet aan eis 2"; een `zolder` "voldoet niet aan de
-    afwerkingseisen" en "wordt daarom nooit als vertrek gewaardeerd".
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3;
+    wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
+    # De zolder wordt zowel als vertrek als als overige ruimte aangeleverd, om te
+    # laten zien dat de aangeleverde ruimtesoort niets verandert.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.zolder, naam="Zolder1", soort=Ruimtesoort.vertrek),

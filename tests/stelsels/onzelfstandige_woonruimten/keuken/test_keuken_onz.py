@@ -38,9 +38,11 @@ def test_Keuken_output(onzelfstandige_woonruimten_input_en_outputmodel, peildatu
 def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testreferentie):
     """De punten voor een aanrecht hangen af van zijn lengte.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "1 tot 2 m 4 punten",
-    "2 tot 3 m 7 punten" en "3 m en meer 10 punten".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # Per klasse de ondergrens en 1 mm onder de volgende grens, plus een ruim
+    # aanrecht van 3 m of meer.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -73,17 +75,22 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_van_5500mm_krijgt_13_punten_in_een_keuken_gedeeld_met_8_woonruimten(
+def test_aanrecht_van_5m_of_meer_krijgt_13_punten_bij_minimaal_8_woonruimten(
     keuken, vergelijk_met_testreferentie
 ):
-    """Een aanrecht van 5,5 meter krijgt 13 punten als de keuken met 8 onzelfstandige woonruimten wordt gedeeld.
+    """Een aanrecht van 5 meter of meer krijgt 13 punten als minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "5 m en meer (indien er
-    minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot
-    deze keuken) 13 punten" en "De hieronder weergegeven punten dienen te
-    worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en
-    gebruiksrecht heeft".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
+
+    De punten worden gedeeld door het aantal onzelfstandige woonruimten met
+    toegang en gebruiksrecht.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # Een aanrecht boven de 5 m, gedeeld met precies de 8 woonruimten waarbij 13
+    # punten gelden.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -103,17 +110,22 @@ def test_aanrecht_van_5500mm_krijgt_13_punten_in_een_keuken_gedeeld_met_8_woonru
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_keuken_gedeeld_met_7_woonruimten(
+def test_aanrecht_van_5m_of_meer_krijgt_10_punten_bij_minder_dan_8_woonruimten(
     keuken, vergelijk_met_testreferentie
 ):
-    """Een aanrecht van 5,5 meter krijgt 10 punten als de keuken met 7 onzelfstandige woonruimten wordt gedeeld.
+    """Een aanrecht van 5 meter of meer krijgt 10 punten als minder dan 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten",
-    "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
-    gebruiksrecht hebben tot deze keuken) 13 punten" en "De hieronder
-    weergegeven punten dienen te worden gedeeld door het aantal onzelfstandige
-    woonruimten dat toegang en gebruiksrecht heeft".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
+
+    De punten worden gedeeld door het aantal onzelfstandige woonruimten met
+    toegang en gebruiksrecht.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # Een aanrecht boven de 5 m, gedeeld met 7 woonruimten: één minder dan de 8
+    # waarbij 13 punten gelden.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -133,15 +145,15 @@ def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_keuken_gedeeld_met_7_woonru
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_privekeuken(
+def test_aanrecht_van_5m_of_meer_krijgt_10_punten_in_een_privekeuken(
     keuken, vergelijk_met_testreferentie
 ):
-    """Een aanrecht van 5,5 meter krijgt in een privékeuken 10 punten.
+    """Een aanrecht van 5 meter of meer krijgt in een privékeuken 10 punten.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten"
-    en "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
-    gebruiksrecht hebben tot deze keuken) 13 punten".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # Een aanrecht boven de 5 m in een privékeuken: er zijn geen 8 woonruimten.
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(5500)])]
     )
@@ -152,17 +164,22 @@ def test_aanrecht_van_5500mm_krijgt_10_punten_in_een_privekeuken(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_van_3001mm_krijgt_10_punten_in_een_keuken_gedeeld_met_8_woonruimten(
+def test_aanrecht_van_3_tot_5m_krijgt_10_punten_ook_bij_8_woonruimten(
     keuken, vergelijk_met_testreferentie
 ):
-    """Een aanrecht van net iets meer dan 3 meter krijgt 10 punten, ook in een keuken die met 8 onzelfstandige woonruimten wordt gedeeld.
+    """Een aanrecht van 3 tot 5 meter krijgt 10 punten, ook als minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten",
-    "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
-    gebruiksrecht hebben tot deze keuken) 13 punten" en "De hieronder
-    weergegeven punten dienen te worden gedeeld door het aantal onzelfstandige
-    woonruimten dat toegang en gebruiksrecht heeft".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
+
+    De punten worden gedeeld door het aantal onzelfstandige woonruimten met
+    toegang en gebruiksrecht.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # Een aanrecht net boven de 3 m, gedeeld met 8 woonruimten: het aantal waarbij
+    # een aanrecht van 5 m of meer wel 13 punten krijgt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -185,14 +202,10 @@ def test_aanrecht_korter_dan_1m_krijgt_geen_punten(
 ):
     """Een aanrecht korter dan 1 meter krijgt geen punten.
 
-    De package geeft daarbij een waarschuwing: de keuken heeft geen aanrecht
-    van minimaal 1 meter.
-
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "Minder dan 1 m 0 punten".
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # 1 mm onder de grens van 1 m.
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(999)])]
     )
@@ -238,18 +251,9 @@ def test_aanrecht_korter_dan_1m_krijgt_geen_punten(
 def test_keuken_zonder_aanrecht_geeft_een_waarschuwing(
     keuken, vergelijk_met_testreferentie, aanrechten, aantal_woonruimten
 ):
-    """Een keuken zonder aanrecht is incomplete input en wordt niet gewaardeerd.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 5: "Indien de keuken
-    niet voldoet aan het basisniveau, worden geen punten toegekend."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een keuken zonder aanrecht is incomplete input en wordt niet gewaardeerd."""
+    # Een aanrecht zonder lengte telt niet als aanrecht; delen met andere
+    # woonruimten verandert dat niet.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -270,13 +274,9 @@ def test_keuken_zonder_aanrecht_geeft_een_waarschuwing(
 def test_aanrecht_zonder_lengte_geeft_een_waarschuwing(
     keuken, vergelijk_met_testreferentie
 ):
-    """Een aanrecht zonder lengte is incomplete input.
-
-    De keuken wordt gewaardeerd op het aanrecht dat wel een lengte heeft.
-
-    Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-    genereert de package een `UserWarning`."
-    """
+    """Een aanrecht zonder lengte is incomplete input."""
+    # Naast een aanrecht met lengte een aanrecht zonder lengte: de keuken wordt
+    # gewaardeerd op het aanrecht dat wel een lengte heeft.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -304,14 +304,10 @@ def test_kort_aanrechtdeel_telt_mee_naast_een_aanrecht_vanaf_1m(
 ):
     """Een aanrechtdeel korter dan 1 meter telt mee in de aanrechtlengte naast een aanrecht vanaf 1 meter.
 
-    De keuken wordt met 4 onzelfstandige woonruimten gedeeld.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2: "Als een
-    ruimte meerdere `aanrecht`-elementen bevat, telt de package hun lengtes bij
-    elkaar op voordat de puntentabel wordt toegepast. Een deel korter dan 1
-    meter telt daarbij mee zodra in dezelfde ruimte ook een aanrechtdeel van
-    minimaal 1 meter aanwezig is."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2.
     """
+    # Het deel van 0,8 m is korter dan 1 m en telt alleen mee omdat er een deel
+    # van 1,2 m naast staat.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -338,12 +334,10 @@ def test_maximum_voor_extra_voorzieningen_volgt_uit_de_opgetelde_aanrechtlengte(
 ):
     """Bij meer dan één aanrecht volgt het maximum voor extra voorzieningen uit de opgetelde aanrechtlengte.
 
-    De keuken wordt met 2 onzelfstandige woonruimten gedeeld.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3: "Bij
-    meerdere `aanrecht`-elementen in dezelfde ruimte wordt deze maximering
-    gebaseerd op de basispunten uit de gesommeerde aanrechtlengte."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3.
     """
+    # De koelkasten leveren meer punten dan het aanrecht, zodat het maximum
+    # ingrijpt; de twee delen samen geven een ander maximum dan elk deel apart.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -374,13 +368,13 @@ def test_maximum_voor_extra_voorzieningen_volgt_uit_de_opgetelde_aanrechtlengte(
 # Extra voorzieningen
 
 
-def test_twee_inbouwkoelkasten_krijgen_elk_een_punt(
-    keuken, vergelijk_met_testreferentie
-):
-    """Twee inbouwkoelkasten in een keuken krijgen elk 1 punt.
+def test_elke_inbouwkoelkast_krijgt_1_punt(keuken, vergelijk_met_testreferentie):
+    """Elke inbouwkoelkast in een keuken krijgt 1 punt.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "Inbouw koelkast 1 punt".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.2.
     """
+    # Twee koelkasten, om te laten zien dat elke koelkast apart telt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -404,20 +398,12 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
 ):
     """Een inbouw koelvriescombinatie krijgt de punten van een koelkast en een vrieskast samen.
 
-    De keuken wordt met 2 onzelfstandige woonruimten gedeeld.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 5.2: "Wanneer een
-    object twee voorzieningen heeft, bijvoorbeeld een ingebouwde combi
-    magnetron/oven of een gecombineerde koel- en vrieskast, worden beide
-    voorzieningen in dit object gewaardeerd conform de rubriek."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "Inbouw koelkast 1 punt"
-    en "Inbouw vrieskast 0,75 punt".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
+    toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 5.2.
     """
+    # Eén object met twee voorzieningen; het aanrecht is nodig, want zonder
+    # aanrecht krijgen voorzieningen geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -450,7 +436,7 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
                 Installatiesoort.inbouw_koelkast.naam: 2.0,
                 Installatiesoort.inbouw_oven_elektrisch.naam: 1.0,
             },
-            id="3_punten_aan_voorzieningen",
+            id="voorzieningen_onder_het_aanrecht",
         ),
         pytest.param(
             4,
@@ -460,7 +446,7 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
                 Installatiesoort.inbouw_oven_elektrisch.naam: 1.0,
                 "Maximaal evenveel punten als aanrecht": -1.0,
             },
-            id="5_punten_aan_voorzieningen",
+            id="voorzieningen_boven_het_aanrecht",
         ),
     ],
 )
@@ -469,10 +455,11 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht(
 ):
     """Extra voorzieningen krijgen samen hooguit de punten van het aanrecht.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "Voorzieningen (tot
-    maximaal het aantal punten extra dat voor de lengte van het aanrecht is
-    verkregen)".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.2.
     """
+    # Een aanrecht van 1 m geeft 4 punten: 3 punten aan voorzieningen blijven
+    # eronder, 5 punten komen erboven.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -507,7 +494,7 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht(
             5.0,
             4.0,
             9.0,
-            id="aanrecht_van_10_punten",
+            id="aanrecht_van_3m_of_meer",
             marks=pytest.mark.toelichting(
                 "de 8 punten voor koelkasten blijven onder de 10 punten van het "
                 "aanrecht; bij een maximum van 7 punten zou er 1 punt afgaan. "
@@ -523,7 +510,7 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht(
             1.63,
             1.5,
             3.25,
-            id="aanrecht_van_13_punten",
+            id="aanrecht_van_5m_of_meer_met_8_woonruimten",
             marks=pytest.mark.toelichting(
                 "de 12 punten voor koelkasten blijven onder de 13 punten van het "
                 "aanrecht; bij een maximum van 10 punten zouden er 2 punten "
@@ -542,25 +529,29 @@ def test_maximum_voor_extra_voorzieningen_stijgt_mee_met_de_punten_van_het_aanre
     punten_koelkasten,
     totaal,
 ):
-    """Het maximum voor extra voorzieningen stijgt mee met de punten voor een aanrecht langer dan 3 meter.
+    """Het maximum voor extra voorzieningen stijgt mee met de punten voor een aanrecht van 3 meter of meer.
 
-    De toelichting onder A (rubriek 5.2) kent extra punten toe "tot maximaal
-    zeven punten indien het aanrecht op basis van rubriek 5.1. een lengte heeft
-    van 2 m of meer". De package volgt de tabel onder B, waarin het aanrecht 10
-    of 13 punten kan krijgen en de voorzieningen tot dat aantal meetellen.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.2; wettekst, Bijlage I onder B, toelichting
+    rubriek 5.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "Voorzieningen (tot
-    maximaal het aantal punten extra dat voor de lengte van het aanrecht is
-    verkregen)".
+    Een aanrecht van 3 meter of meer krijgt 10 punten, en een aanrecht van 5
+    meter of meer 13 punten als minimaal 8 onzelfstandige woonruimten toegang en
+    gebruiksrecht hebben tot de keuken.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten"
-    en "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
-    gebruiksrecht hebben tot deze keuken) 13 punten".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
 
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 5: "Ook geldt dat
-    een aanrecht tot 3 meter gewaardeerd kan worden tot 10 punten, in afwijking
-    van het maximum van 7 punten (tot 2 meter) onder de bijlage I, onder A."
+    De punten worden gedeeld door het aantal onzelfstandige woonruimten met
+    toegang en gebruiksrecht.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2;
+    implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.1; wettekst, Bijlage I onder B, onderdeel
+    5.2.
     """
+    # Een aanrecht dat 10 punten krijgt (gedeeld met 2 woonruimten) en een dat 13
+    # punten krijgt (gedeeld met 8), elk met koelkasten die onder dat aantal blijven.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -602,10 +593,11 @@ def test_extra_voorzieningen_in_een_ruimte_zonder_aanrecht_krijgen_geen_punten(
 ):
     """Extra voorzieningen in een ruimte zonder aanrecht krijgen geen punten.
 
-    Bron: beleidsboek onzelfstandige woonruimten, 2.5.3: "Een ruimte die
-    beschikt over de basisvoorzieningen voor een keuken kan ook extra punten
-    voor voorzieningen in de keuken krijgen."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
+    # De koelkasten staan in een badkamer: een ruimte zonder aanrecht.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -635,10 +627,10 @@ def test_extra_voorzieningen_in_een_ruimte_zonder_aanrecht_krijgen_geen_punten(
 def test_vertrek_met_aanrecht_telt_als_keuken(keuken, vergelijk_met_testreferentie):
     """Een vertrek telt voor de keuken mee zodra er een aanrecht in staat.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1: "Rubriek 5
-    stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een
-    aanrecht telt daarom in elke ruimte mee."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1.
     """
+    # Een aanrecht in elke soort vertrek, om te laten zien dat de soort ruimte niet
+    # uitmaakt; de slaapkamer zonder aanrecht krijgt geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -674,10 +666,11 @@ def test_punten_voor_het_aanrecht_worden_gedeeld_door_het_aantal_woonruimten(
 ):
     """De punten voor het aanrecht worden gedeeld door het aantal onzelfstandige woonruimten waarmee de keuken wordt gedeeld.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "De hieronder weergegeven
-    punten dienen te worden gedeeld door het aantal onzelfstandige woonruimten
-    dat toegang en gebruiksrecht heeft".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
+    Bijlage I onder B, onderdeel 5.1.
     """
+    # De deling geldt voor elke puntenklasse van het aanrecht; Keuken4 laat zien
+    # dat het aantal woonruimten de deler bepaalt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -718,19 +711,16 @@ def test_punten_voor_het_aanrecht_worden_gedeeld_door_het_aantal_woonruimten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_punten_voor_een_keuken_gedeeld_met_4_woonruimten_worden_door_4_gedeeld(
+def test_punten_voor_aanrecht_en_voorzieningen_samen_worden_gedeeld_door_het_aantal_woonruimten(
     keuken, vergelijk_met_testreferentie
 ):
-    """De punten voor een keuken die 4 onzelfstandige woonruimten delen, worden door 4 gedeeld.
+    """De punten voor het aanrecht en de extra voorzieningen samen worden gedeeld door het aantal onzelfstandige woonruimten dat de keuken deelt.
 
-    Het scenario is het rekenvoorbeeld uit de toelichting bij de wettekst: 7
-    punten voor het aanrecht en 3 voor de voorzieningen.
-
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 5: "Er is één
-    keuken, waarvoor 10 punten worden toegekend (7 voor het aanrecht, en 3 voor
-    de voorzieningen). Omdat de keuken wordt gedeeld door vier onzelfstandige
-    woonruimten, geldt 10/4 = 2,5 punt per onzelfstandige woonruimte."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, toelichting rubriek 5.
     """
+    # Het rekenvoorbeeld uit de toelichting bij de wettekst: 7 punten voor het
+    # aanrecht en 3 voor de voorzieningen.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -746,6 +736,8 @@ def test_punten_voor_een_keuken_gedeeld_met_4_woonruimten_worden_door_4_gedeeld(
 
     groep = keuken.waardeer(eenheid)
 
+    # 7 punten gedeeld door 4 woonruimten is 1,75; 3 punten gedeeld door 4 is
+    # 0,75, dus 0,25 per voorziening.
     assert punten_per_naam(groep) == {
         "Lengte aanrecht": 1.75,
         Installatiesoort.inbouw_koelkast.naam: 0.25,
@@ -756,15 +748,16 @@ def test_punten_voor_een_keuken_gedeeld_met_4_woonruimten_worden_door_4_gedeeld(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_extra_voorzieningen_in_een_keuken_gedeeld_met_2_woonruimten_krijgen_de_helft_van_hun_punten(
+def test_punten_voor_extra_voorzieningen_worden_gedeeld_door_het_aantal_woonruimten(
     keuken, vergelijk_met_testreferentie
 ):
-    """In een keuken die met 2 onzelfstandige woonruimten wordt gedeeld, krijgen extra voorzieningen de helft van hun punten.
+    """De punten voor extra voorzieningen worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot de keuken.
 
-    Bron: wettekst, Bijlage I onder B, onderdeel 5.2: "De hieronder weergegeven
-    punten dienen te worden gedeeld door het aantal onzelfstandige woonruimten
-    dat toegang en gebruiksrecht heeft" en "Inbouw koelkast 1 punt".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.2.
     """
+    # Twee koelkasten in een keuken die met 2 woonruimten wordt gedeeld: elke
+    # koelkast krijgt de helft van zijn punt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -779,6 +772,8 @@ def test_extra_voorzieningen_in_een_keuken_gedeeld_met_2_woonruimten_krijgen_de_
 
     groep = keuken.waardeer(eenheid)
 
+    # 2 punten voor de koelkasten gedeeld door 2 woonruimten is 1; het aanrecht
+    # van 1 m geeft 4 punten gedeeld door 2 is 2.
     assert punten_per_naam(groep)[Installatiesoort.inbouw_koelkast.naam] == 1.0
     assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
@@ -794,7 +789,7 @@ def test_extra_voorzieningen_in_een_keuken_gedeeld_met_2_woonruimten_krijgen_de_
                 Installatiesoort.inbouw_koelkast.naam: 1.0,
                 Installatiesoort.inbouw_oven_elektrisch.naam: 0.5,
             },
-            id="3_punten_aan_voorzieningen",
+            id="voorzieningen_onder_het_aanrecht",
         ),
         pytest.param(
             4,
@@ -804,7 +799,7 @@ def test_extra_voorzieningen_in_een_keuken_gedeeld_met_2_woonruimten_krijgen_de_
                 Installatiesoort.inbouw_oven_elektrisch.naam: 0.5,
                 "Maximaal evenveel punten als aanrecht": -0.5,
             },
-            id="5_punten_aan_voorzieningen",
+            id="voorzieningen_boven_het_aanrecht",
         ),
     ],
 )
@@ -813,16 +808,12 @@ def test_extra_voorzieningen_in_een_gedeelde_keuken_krijgen_hooguit_de_punten_va
 ):
     """Ook in een gedeelde keuken krijgen extra voorzieningen samen hooguit de punten van het aanrecht.
 
-    De keuken wordt met 2 onzelfstandige woonruimten gedeeld. De id van een
-    geval noemt de punten voor extra voorzieningen vóór de deling.
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.5.3: "Het aantal punten
-    voor de extra voorzieningen kan niet meer zijn dan het aantal punten voor de
-    basisvoorzieningen (de aanrechtlengte). Als het aantal punten voor de extra
-    voorzieningen hoger uitvalt, dan wordt dit afgetopt. De toegekende punten
-    worden gedeeld door het aantal onzelfstandige woningen dat toegang en
-    gebruiksrecht heeft."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
+    Bijlage I onder B, onderdeel 5.2.
     """
+    # De keuken wordt met 2 onzelfstandige woonruimten gedeeld. Een aanrecht van 1 m
+    # geeft vóór de deling 4 punten: 3 punten aan voorzieningen blijven eronder, 5
+    # punten komen erboven.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -846,14 +837,11 @@ def test_punten_voor_een_aanrecht_worden_per_vertrek_gedeeld_door_het_eigen_aant
 ):
     """Staat het aanrecht in gedeelde vertrekken, dan worden de punten per vertrek gedeeld door het aantal onzelfstandige woonruimten waarmee dat vertrek wordt gedeeld.
 
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-    adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-    een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-    aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-    het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-    toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-    voorziening(en)."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.5; wettekst,
+    Bijlage I onder B, toelichting, inleiding.
     """
+    # Elk vertrek heeft een eigen aantal woonruimten, zodat te zien is dat per
+    # vertrek wordt gedeeld; Slaapkamer2 heeft geen aanrecht en krijgt geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(

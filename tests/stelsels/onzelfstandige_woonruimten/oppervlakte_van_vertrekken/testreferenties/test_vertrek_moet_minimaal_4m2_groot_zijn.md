@@ -2,12 +2,9 @@
 
 Een ruimte kleiner dan 4 m² wordt niet als vertrek gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De ruimte dient
-een oppervlakte te hebben van minimaal 4 m²."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
+wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

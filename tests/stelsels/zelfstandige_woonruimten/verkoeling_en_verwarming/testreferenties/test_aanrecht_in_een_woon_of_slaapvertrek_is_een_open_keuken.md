@@ -1,17 +1,13 @@
 # test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken
 
-Een verwarmd woon- of slaapvertrek met een aanrecht krijgt 4 punten als vertrek met open keuken.
+Een aanrecht in een verwarmd woon- of slaapvertrek is een open keuken.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Voor deze rubriek
-wordt, in tegenstelling tot de gegeven definities van afzonderlijke
-vertrekken onder de inleiding, een open keuken als afzonderlijk verwarmd
-vertrek beschouwd en krijgt dus twee punten indien er verwarming aanwezig
-is."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.3.2: "Ook een aanrecht dat is
-geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen
-duidelijke afscheiding is tussen het keukengedeelte en de rest van het
-vertrek."
+Een open keuken geldt als afzonderlijk verwarmd vertrek.
+
+Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
+wettekst, Bijlage I onder A, toelichting rubriek 3.
 
 ## Rapport
 

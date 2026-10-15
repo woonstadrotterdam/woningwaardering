@@ -2,24 +2,6 @@
 
 Een eenheid zonder gebruiksoppervlakte krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-De punten volgen uit de WOZ-waarde per m² gebruiksoppervlakte. Zonder
-gebruiksoppervlakte kan de package die niet berekenen.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.11.2: "Deel de WOZ-waarde
-door het aantal m² gebruiksoppervlakte van de woning".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2: "De
-gebruiksoppervlakte dient gespecificeerd te worden in het attribuut
-`adresseerbaar_object_basisregistratie.bag_gebruikers_oppervlakte` op de
-eenheid."
-
-De implementatietoelichting noemt niet dat de package bij een ontbrekende
-gebruiksoppervlakte waarschuwt en geen waardering geeft; de test legt het
-huidige gedrag vast.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 Geen waarderingen voor Punten voor de WOZ-waarde.

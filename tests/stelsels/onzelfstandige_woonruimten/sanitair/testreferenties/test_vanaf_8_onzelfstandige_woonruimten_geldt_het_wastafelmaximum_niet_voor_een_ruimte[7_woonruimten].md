@@ -2,17 +2,8 @@
 
 Op een adres met 8 of meer onzelfstandige woonruimten geldt het maximum voor wastafels niet voor één ruimte buiten de badkamer.
 
-De package leest het aantal onzelfstandige woonruimten op het adres af aan
-de ruimten van de eenheid.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 6.1: "Op een adres met
-minimaal 8 of meer onzelfstandige woonruimten geldt het bovengenoemde
-maximum niet voor maximaal één ruimte."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1: "Omdat
-het VERA-model geen aantal onzelfstandige woonruimten op het adres bevat,
-geldt als benadering dat ten minste één ruimte
-`gedeeldMetAantalOnzelfstandigeWoonruimten >= 8` heeft."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder B, onderdeel 6.1.
 
 Dit geval: het adres blijft net onder de grens, dus het maximum geldt in elke ruimte buiten de badkamer
 

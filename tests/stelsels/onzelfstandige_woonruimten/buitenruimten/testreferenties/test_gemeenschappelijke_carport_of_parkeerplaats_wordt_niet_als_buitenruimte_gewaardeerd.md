@@ -2,25 +2,9 @@
 
 Een gemeenschappelijke carport of parkeerplaats wordt niet als buitenruimte gewaardeerd.
 
-De carport wordt met 3 onzelfstandige woonruimten op hetzelfde adres
-gedeeld, de parkeerplaats met 2 adressen.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 8: "Gedeelde
-buitenruimte die als parkeerplek bedoeld is, wordt gewaardeerd volgens
-rubriek 10."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3: "Een
-`carport` of `parkeerplaats` is een VERA-buitenruimte: privé wordt die hier
-gewaardeerd, gemeenschappelijk in rubriek 10".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2: "Voor
-een onzelfstandige woonruimte telt daarnaast
-`Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` groter dan 1
-als gemeenschappelijk: de plek wordt dan binnen het eigen adres gedeeld."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
+Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

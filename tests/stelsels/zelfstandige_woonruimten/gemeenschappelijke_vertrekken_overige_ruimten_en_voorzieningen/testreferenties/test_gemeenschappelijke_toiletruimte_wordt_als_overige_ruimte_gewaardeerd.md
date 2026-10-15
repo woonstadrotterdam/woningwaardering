@@ -2,17 +2,8 @@
 
 Een gemeenschappelijke toiletruimte wordt als overige ruimte gewaardeerd.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Met vertrekken en
-overige ruimten wordt onder deze rubriek aangesloten bij definities en de
-meetmethoden als gegeven onder rubriek 1 en 2."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Een toiletruimte
-wordt gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van
-een overige ruimte."
-
-Bron: wettekst, Bijlage I onder A, rubriek 9: "Gemeenschappelijke overige
-ruimte 0,75 punt per m² gedeeld door het aantal adressen dat toegang en
-gebruiksrecht heeft."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2; wettekst,
+Bijlage I onder A, toelichting rubriek 2.
 
 ## Rapport
 

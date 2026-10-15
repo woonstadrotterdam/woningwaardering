@@ -1,10 +1,11 @@
 # test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen
 
-Een drempelloze inrijdouche maakt van de ruimte een doucheruimte met extra voorzieningen.
+Een drempelloze inrijdouche telt als douche voor het recht op extra voorzieningen.
 
-Bron: beleidsboek zelfstandige woonruimten, 2.6.1: "Als douche wordt iedere,
-door de verhuurder aangebrachte, installatie voor het nemen van een stortbad
-geteld."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1;
+implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst, Bijlage
+I onder A, toelichting rubriek 6.1; wettekst, Bijlage I onder A, toelichting
+rubriek 6.2.
 
 ## Rapport
 

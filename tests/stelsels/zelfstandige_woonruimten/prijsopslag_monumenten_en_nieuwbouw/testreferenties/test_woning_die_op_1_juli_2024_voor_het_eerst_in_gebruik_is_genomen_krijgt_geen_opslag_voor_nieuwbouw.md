@@ -2,11 +2,8 @@
 
 Een woning die op 1 juli 2024 voor het eerst in gebruik is genomen, krijgt geen opslag voor nieuwbouw.
 
-Bron: wettekst, artikel 8a, vierde lid: "wordt met 10% vermeerderd indien
-die woonruimte na 1 juli 2024 voor het eerst in gebruik wordt genomen als
-woonruimte".
-
-De package leest de datum van ingebruikname uit `in_exploitatiedatum`.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.13.7.1; wettekst,
+artikel 8a, vierde lid.
 
 ## Rapport
 

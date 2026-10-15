@@ -2,21 +2,8 @@
 
 Een gemeenschappelijke carport wordt als Type II gewaardeerd.
 
-De carport wordt met 3 adressen gedeeld; op het eigen adres heeft één
-onzelfstandige woonruimte toegang.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.10.3: "Type II: een
-parkeerplek buiten behorende tot het complex of de woning met dak
-(hieronder telt een carport)".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3: "Type II:
-`Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`)
-en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`)."
-
-Bron: wettekst, Bijlage I onder B, rubriek 10: "Type II Parkeerplek buiten
-behorende tot het complex met dak 6 punten gedeeld door het aantal adressen
-dat toegang en gebruiksrecht heeft, en daarna gedeeld door het aantal
-onzelfstandige woonruimten op dat adres".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder B, onderdeel 10.
 
 ## Rapport
 

@@ -1,13 +1,15 @@
 # test_ruimte_kleiner_dan_4m2_telt_niet_mee_voor_de_aftrek
 
-Een slaapkamer van 3,5 m² is geen vertrek en telt niet mee voor de aftrek.
+Een ruimte kleiner dan 4 m² is geen vertrek en telt niet mee voor de aftrek.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
+wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B,
+toelichting, inleiding).
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "De ruimte dient
-een oppervlakte te hebben van minimaal 4 m²."
+Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
+Bijlage I onder B, onderdeel 13.
 
 ## Rapport
 

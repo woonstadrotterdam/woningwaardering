@@ -2,22 +2,10 @@
 
 Een laadpaal bij een parkeerplek met een oppervlakte onder 12 m² krijgt in deze rubriek geen punten.
 
-De gemeenschappelijke carport van 10 m² krijgt zelf geen punten.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Een parkeerplek
-is een afgebakend vak en heeft een oppervlakte van minimaal 12 m² waar een
-gangbare personenauto in zijn geheel op past."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-De laadpaal volgt de carport en hoort dan in rubriek 12.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3: "Krijgt
-die ruimte in rubriek 10 punten, dan wordt de laadpaal daar gewaardeerd; in
-alle andere gevallen hier, met dezelfde deler (aantal adressen × aantal
-onzelfstandige woonruimten)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.5;
+implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
+Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

@@ -2,17 +2,8 @@
 
 Een keuken die met andere adressen wordt gedeeld, krijgt in rubriek 5 geen punten.
 
-Zo'n keuken hoort bij rubriek 9. De package geeft hier een waarschuwing,
-omdat de eenheid zonder deze keuken geen keuken heeft.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal eventueel
-van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7".
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2: "Een waarde
-van 2 of hoger wordt geïnterpreteerd als een gemeenschappelijke ruimte."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder A, toelichting rubriek 9.
 
 ## Rapport
 

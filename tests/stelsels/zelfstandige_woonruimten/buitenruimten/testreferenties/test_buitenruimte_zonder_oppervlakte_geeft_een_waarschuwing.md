@@ -1,17 +1,11 @@
 # test_buitenruimte_zonder_oppervlakte_geeft_een_waarschuwing
 
-Een buitenruimte zonder oppervlakte is incomplete input en wordt niet gewaardeerd.
+Een buitenruimte zonder oppervlakte geeft een waarschuwing over incomplete input.
 
-De woning heeft daardoor geen gewaardeerde buitenruimte en krijgt de aftrek
-van 5 punten.
+Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5: "Daarom
-passen we −5 alleen toe als er geen enkele gewaardeerde buitenruimte is
-(bijv. te kleine gedeelde ruimten of privé zonder oppervlakte leveren geen
-punten en tellen dus niet mee tegen de aftrek)."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
+Bijlage I onder A, toelichting rubriek 8.
 
 ## Rapport
 

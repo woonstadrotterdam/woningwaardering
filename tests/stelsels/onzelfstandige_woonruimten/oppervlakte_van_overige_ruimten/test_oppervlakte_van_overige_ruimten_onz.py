@@ -44,22 +44,8 @@ def test_prive_en_toe_te_rekenen_gemeenschappelijke_oppervlakte_worden_opgeteld(
 ):
     """De oppervlakte van privé overige ruimten en de toe te rekenen oppervlakte van gemeenschappelijke overige ruimten worden opgeteld.
 
-    De garage en de bijkeuken komen uit het rekenvoorbeeld in de toelichting
-    bij de wettekst en zijn hier gemeenschappelijk voor drie onzelfstandige
-    woonruimten. De wettekst deelt de punten, haar rekenvoorbeeld bij rubriek 1
-    de oppervlakte. De package deelt de oppervlakte; punten delen zou hier
-    9,25 punten geven. Het scenario onderscheidt niet of er één keer of per
-    soort ruimte wordt afgerond: beide geven 9 punten.
-
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 2: "De punten voor
-    de oppervlakte van overige ruimten worden gedeeld door het aantal
-    onzelfstandige woonruimten op één adres dat toegang en gebruiksrecht
-    heeft."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "het
-    rekenvoorbeeld in de wettekst deelt m²-aandelen en telt die op" en "per
-    ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-    daarna × 0,75."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
+    wettekst, Bijlage I onder B, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -70,6 +56,8 @@ def test_prive_en_toe_te_rekenen_gemeenschappelijke_oppervlakte_worden_opgeteld(
                 soort=Ruimtesoort.overige_ruimten,
                 oppervlakte=4,
             ),
+            # Garage en bijkeuken uit het rekenvoorbeeld in de toelichting bij de
+            # wettekst, gedeeld met 3 onzelfstandige woonruimten.
             ruimte(
                 Ruimtedetailsoort.garage,
                 oppervlakte=19.34,
@@ -92,6 +80,9 @@ def test_prive_en_toe_te_rekenen_gemeenschappelijke_oppervlakte_worden_opgeteld(
             Ruimtedetailsoort.bijkeuken.naam: 6.06,
         },
     }
+    # De toe te rekenen oppervlakte is 4 + (19,34 + 6,06) / 3 = 12,47 m²,
+    # afgerond 12 m². Punten delen zou 9,25 punten geven. Eén keer of per soort
+    # ruimte afronden maakt hier geen verschil: beide geven 9 punten.
     assert groep.punten == 9.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -101,26 +92,9 @@ def test_gemeenschappelijke_overige_ruimte_wordt_gedeeld_door_aantal_woonruimten
 ):
     """Een gemeenschappelijke overige ruimte wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot die ruimte.
 
-    De wettekst deelt de punten. De package deelt per ruimte de oppervlakte;
-    punten delen zou hier 2,75 punten geven.
-
-    Bron: wettekst, Bijlage I onder B, onderdeel 2: "Oppervlakte
-    gemeenschappelijke overige ruimte(n) op hetzelfde adres, niet zijnde
-    verkeersruimten (o.a. berging, zolder, garage)", "0,75 punt per m², te
-    delen door het aantal onzelfstandige woonruimten dat toegang en
-    gebruiksrecht heeft".
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Wanneer op een
-    adres slechts een aantal onzelfstandige woonruimten gebruik mogen maken van
-    een gemeenschappelijk vertrek, ruimte of voorziening, en dus niet alle
-    aanwezige onzelfstandige woonruimten, worden de punten enkel gedeeld door
-    het aantal onzelfstandige woonruimten dat krachtens de huurovereenkomst
-    toegang en gebruiksrecht heeft tot dat vertrek, die ruimte of die
-    voorziening(en)."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "per
-    ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-    daarna × 0,75."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2; wettekst,
+    Bijlage I onder B, onderdeel 2; wettekst, Bijlage I onder B, toelichting,
+    inleiding.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -145,6 +119,8 @@ def test_gemeenschappelijke_overige_ruimte_wordt_gedeeld_door_aantal_woonruimten
             Ruimtedetailsoort.garage.naam: 10.0
         },
     }
+    # De toe te rekenen oppervlakte is 10 / 5 + 10 / 6 = 3,67 m², afgerond 4 m².
+    # Punten delen zou 2,75 punten geven.
     assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
 
@@ -154,34 +130,14 @@ def test_oppervlakte_wordt_een_keer_afgerond_na_optellen_van_alle_overige_ruimte
 ):
     """De oppervlakte wordt één keer afgerond op hele vierkante meters, nadat de toe te rekenen oppervlakte van alle overige ruimten is opgeteld.
 
-    Het beleidsboek rondt privé en gemeenschappelijke overige ruimten
-    afzonderlijk af; dat geeft hier 20 m² in plaats van 21 m². De package volgt
-    de keuze uit de implementatietoelichting. De zolder heeft een vlizotrap:
-    daardoor staat het subtotaal in de uitkomst en komt de aftrek voor die
-    zolder daarop in mindering.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De afronding van
-    de oppervlakte van alle overige ruimte samen vindt plaats op hele
-    vierkante meters na saldering van de oppervlakte van de afzonderlijke
-    overige ruimten; bij 0,5 m² of meer wordt naar boven afgerond, bij minder
-    dan 0,5 m² naar beneden."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.2.2.1: "De oppervlakten
-    voor privé- en gemeenschappelijke overige ruimten worden afzonderlijk
-    berekend."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "per
-    ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-    daarna × 0,75." en "dat past bij delen vóór afronden (20,50 → 21 m²), niet
-    bij apart afronden per categorie (20 m² → 15,00)".
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
+    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.berging, oppervlakte=10.4),
+            # De vlizotrap zorgt dat het subtotaal in de uitkomst staat.
             ruimte(
                 Ruimtedetailsoort.zolder,
                 oppervlakte=40.4,
@@ -201,19 +157,20 @@ def test_oppervlakte_wordt_een_keer_afgerond_na_optellen_van_alle_overige_ruimte
             Ruimtedetailsoort.zolder.naam: 40.4
         },
     }
+    # De toe te rekenen oppervlakte is 10,4 + 40,4 / 4 = 20,5 m², afgerond 21 m²;
+    # apart afronden geeft 10 + 10 = 20 m². Het totaal is het subtotaal min de
+    # aftrek voor de zolder zonder vaste trap (5 / 4 = 1,25 punten).
     assert punten_per_naam(groep)["Subtotaal"] == 15.75
     assert groep.punten == 14.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_overige_ruimte_gedeeld_met_0_onzelfstandige_woonruimten_is_prive(
+def test_overige_ruimte_gedeeld_met_minder_dan_2_onzelfstandige_woonruimten_is_prive(
     oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
 ):
-    """Een overige ruimte met `gedeeld_met_aantal_onzelfstandige_woonruimten` 0 wordt als privéruimte gewaardeerd.
+    """Een overige ruimte met `gedeeld_met_aantal_onzelfstandige_woonruimten` kleiner dan 2 wordt als privéruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4: "Indien
-    deze property leeg is of kleiner is dan 2, tellen we de ruimte mee als
-    zijnde niet gedeeld."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -242,25 +199,13 @@ def test_overige_ruimte_die_niet_met_een_ander_adres_wordt_gedeeld_valt_onder_ru
 ):
     """Een overige ruimte die niet met een ander adres wordt gedeeld, wordt in rubriek 2 gewaardeerd.
 
-    De bijkeuken heeft `gedeeld_met_aantal_adressen` 1. Pas vanaf twee adressen
-    hoort een ruimte in rubriek 9.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 9:
-    "Gemeenschappelijke vertrekken en overige ruimten zijn tot het woongebouw
-    behorende binnenruimten waar de bewoners van tenminste twee adressen in het
-    woongebouw krachtens de huurovereenkomst exclusieve toegang en
-    gebruiksrecht toe hebben."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.2: "Gemeenschappelijke
-    ruimten die worden gedeeld met twee of meer adressen worden gewaardeerd
-    onder rubriek 9."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Gedeeld met 1 adres: pas vanaf 2 adressen hoort een ruimte in rubriek 9.
             ruimte(
                 Ruimtedetailsoort.bijkeuken,
                 oppervlakte=8,
@@ -286,17 +231,14 @@ def test_overige_ruimte_moet_minimaal_2m2_groot_zijn(
 ):
     """Een ruimte kleiner dan 2 m² wordt niet als overige ruimte gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "De ruimte dient
-    een oppervlakte te hebben van minimaal 2 m²." en "Een toiletruimte wordt
-    gewaardeerd als overige ruimte als het voldoet aan de voorwaarden van een
-    overige ruimte."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Een toiletruimte telt als overige ruimte als ze aan de voorwaarden
+            # van een overige ruimte voldoet (wettekst, toelichting rubriek 2).
             ruimte(Ruimtedetailsoort.toiletruimte, oppervlakte=1),
             ruimte(Ruimtedetailsoort.bijkeuken, oppervlakte=2),
         ]
@@ -314,18 +256,9 @@ def test_vertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
 ):
     """Een ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², wordt als overige ruimte gewaardeerd.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: een overige ruimte
-    is een ruimte waarvoor geldt "De ruimte voldoet niet aan de eisen voor een
-    vertrek (zie vaste toelichting onder 1) of een verkeersruimte".
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2: "Een
-    ruimte met `Ruimtesoort` `vertrek` komt in aanmerking voor waardering in de
-    rubriek 'Oppervlakte van overige ruimten' als de oppervlakte minder dan 4 m²
-    en minimaal 2 m² is."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
+    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -359,20 +292,13 @@ def test_zolder_zonder_vaste_trap_krijgt_5_punten_aftrek(
 ):
     """Een zolder zonder vaste trap krijgt 5 punten aftrek.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd".
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "Is er
-    een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van
-    2.2.2.3."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Een vlizotrap is geen vaste trap (implementatietoelichting 2.2.1.3).
             ruimte(
                 Ruimtedetailsoort.zolder,
                 elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
@@ -395,37 +321,26 @@ def test_alleen_zolder_met_vlizotrap_krijgt_de_aftrek(
 ):
     """Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-    Zolder2 is als vertrek aangeleverd; de package waardeert haar als overige
-    ruimte en waarschuwt daarbij. Zolder3 is gemeenschappelijk voor drie
-    onzelfstandige woonruimten, waardoor de maximale aftrek door drie wordt
-    gedeeld.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+    implementatietoelichting onzelfstandige woonruimten, 2.2.1.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd".
+    De maximale aftrek voor een gemeenschappelijke zolder wordt gedeeld door het
+    aantal onzelfstandige woonruimten.
 
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: beleidsboek onzelfstandige woonruimten, 2.1.6: "Het totaal aantal
-    punten wordt per rubriek afgerond op 0,25 punt".
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "De
-    detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-    `vlizotrap` weerspreekt dat." en "Dat gebeurt ook wanneer de ruimte is
-    ingeschoten met `ruimtesoort` `vertrek`".
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3: "De
-    maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige
-    woonruimten."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+    wettekst, Bijlage I onder B, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
             # Zonder trap als bouwkundig element: de detailsoort gaat uit van
             # een vaste trap.
             ruimte(Ruimtedetailsoort.zolder, naam="Zolder1"),
+            # Aangeleverd als vertrek: de package waardeert haar als overige ruimte
+            # en waarschuwt daarbij.
             ruimte(Ruimtedetailsoort.zolder, naam="Zolder2", soort=Ruimtesoort.vertrek),
+            # Gedeeld met 3 woonruimten: de maximale aftrek wordt door 3 gedeeld.
             ruimte(
                 Ruimtedetailsoort.zolder,
                 naam="Zolder3",
@@ -459,9 +374,7 @@ def test_zolder_met_trap_en_vlizotrap_krijgt_geen_aftrek(
 ):
     """Een zolder met zowel een trap als een vlizotrap krijgt geen aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "Staan
-    er zowel een `trap` als een `vlizotrap` op de ruimte, dan is de vaste trap
-    leidend."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -525,15 +438,9 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_zolder(
 ):
     """De aftrek voor een zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-    trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-    zolderruimte met vijf verminderd, doch niet met meer punten dan voor de
-    oppervlakte van de zolderruimten wordt gegeven." en "Waardering in punten
-    vindt na saldering en afronding plaats."
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -561,22 +468,12 @@ def test_maximale_aftrek_voor_zolder_wordt_gedeeld_door_aantal_woonruimten(
 ):
     """De maximale aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal onzelfstandige woonruimten.
 
-    Het scenario is het voorbeeld uit de implementatietoelichting. Volgens die
-    toelichting trekt de huurprijscheck hier de volle 5 punten af; de package
-    volgt de wettekst.
-
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 2: "De punten voor
-    de oppervlakte van overige ruimten worden gedeeld door het aantal
-    onzelfstandige woonruimten op één adres dat toegang en gebruiksrecht
-    heeft."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3: "De
-    maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige
-    woonruimten.", "maximumaftrek: 5 / 4 = 1,25" en "Omdat wettekst en tool
-    botsen, volgen wij de wettekst (gedeelde cap)."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+    wettekst, Bijlage I onder B, toelichting rubriek 2.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
+            # Het voorbeeld uit de implementatietoelichting.
             ruimte(Ruimtedetailsoort.berging, oppervlakte=10.4),
             ruimte(
                 Ruimtedetailsoort.zolder,
@@ -591,6 +488,8 @@ def test_maximale_aftrek_voor_zolder_wordt_gedeeld_door_aantal_woonruimten(
 
     assert punten_per_naam(groep) == {
         "Subtotaal": 15.75,
+        # De huurprijscheck trekt hier de volle 5 punten af; de wettekst deelt
+        # de aftrek door 4 woonruimten.
         "Correctie: zolder zonder vaste trap": -1.25,
     }
     assert groep.punten == 14.5
@@ -605,31 +504,18 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_overige_ruimte(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van de overige ruimte waarop de kast uitkomt.
 
-    De zolder zonder vaste trap hoort bij het scenario: de aftrek voor die
-    zolder hangt af van de oppervlakte van de andere overige ruimten, en dus
-    van de berging met haar kast.
-
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Meting van de
-    oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50 meter
-    boven de vloer, inclusief de oppervlakte van alle losse en vaste tot de
-    woning behorende kasten".
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4: "De
-    kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-    (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-    onder meer energieprestatie, gemeenschappelijke ruimten en
-    zoldercorrecties."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
+    # Met de kast komt de berging van 2,4 op 2,6 m²: afgerond 3 m² in plaats van 2.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.berging, oppervlakte=2.4, verbonden_ruimten=[kast]
             ),
+            # De aftrek voor deze zolder hangt af van de oppervlakte van de berging.
             ruimte(
                 Ruimtedetailsoort.zolder,
                 oppervlakte=2.4,
@@ -659,21 +545,11 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_zolder_zonder_vaste_trap(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een zolder zonder vaste trap.
 
-    Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Meting van de
-    oppervlakte vindt plaats van muur tot muur, op een hoogte van 1,50 meter
-    boven de vloer, inclusief de oppervlakte van alle losse en vaste tot de
-    woning behorende kasten".
-
-    Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-    dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-    overeenkomstige toepassing is."
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4: "De
-    kastoppervlakte telt ook mee bij de drempeltoets in `classificeer_ruimte`
-    (4,00 m² voor vertrek, 2,00 m² voor overige ruimte) en bij totalen voor
-    onder meer energieprestatie, gemeenschappelijke ruimten en
-    zoldercorrecties."
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
+    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
+    # Met de kast komt de zolder van 2,4 op 2,6 m²: afgerond 3 m² in plaats van 2.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
     eenheid = EenhedenEenheid(
         ruimten=[

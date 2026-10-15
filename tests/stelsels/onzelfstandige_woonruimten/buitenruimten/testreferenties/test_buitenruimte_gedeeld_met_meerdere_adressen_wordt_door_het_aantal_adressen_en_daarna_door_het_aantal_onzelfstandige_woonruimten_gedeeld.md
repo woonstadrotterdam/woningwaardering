@@ -2,13 +2,8 @@
 
 Een gemeenschappelijke buitenruimte die met meerdere adressen wordt gedeeld, krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Tuin1 wordt met 2 adressen gedeeld en Tuin2 met 3 adressen; tot beide
-hebben 2 onzelfstandige woonruimten op het adres toegang.
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimten gedeeld met meerdere adressen", "0,75 punt per m², gedeeld
-door het aantal adressen dat toegang en gebruiksrecht heeft, en daarna
-gedeeld door het aantal onzelfstandige woonruimten op dat adres".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
+Bijlage I onder B, onderdeel 8.
 
 ## Rapport
 

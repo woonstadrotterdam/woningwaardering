@@ -2,14 +2,8 @@
 
 Een kort aanrechtdeel telt niet als wastafel naast een aanrecht vanaf 1 meter.
 
-Het korte deel telt dan mee in de aanrechtlengte van de keuken (rubriek 5).
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 5: "Een spoelbak in
-een keuken die voldoet aan het basisniveau, krijgt geen waardering."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1: "Staat in
-dezelfde ruimte ook een aanrecht vanaf 1 meter, dan telt het korte deel mee
-in de aanrechtlengte van de keuken en niet als wastafel."
+Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder A, toelichting rubriek 5.
 
 ## Rapport
 

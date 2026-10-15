@@ -2,20 +2,8 @@
 
 De punten voor de WOZ-waarde hangen af van hoeveel de WOZ-waarde per m² afwijkt van het gemiddelde van het COROP-gebied.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 11.1: "per m²
-gebruiksoppervlakte is meer dan 10% hoger dan de gemiddelde WOZ-waarde per
-m² gebruiksoppervlakte van woningen in het COROP-gebied waarbinnen de
-woonruimte is gelegen." met "14 punten", "per m² gebruiksoppervlakte is
-maximaal 10% hoger of lager dan de gemiddelde WOZ-waarde per m²
-gebruiksoppervlakte" met "12 punten" en "per m² gebruiksoppervlakte is meer
-dan 10% lager dan de gemiddelde WOZ-waarde per m² gebruiksoppervlakte" met
-"10 punten".
-
-Het gemiddelde van het COROP-gebied staat per waardepeildatum in de
-Uitvoeringsregeling huurprijzen woonruimte (bijlage IIa): voor
-Groot-Rijnmond bij waardepeildatum 1 januari 2024 is dat € 3.537 per m².
-Bij 100 m² gebruiksoppervlakte ligt 10% lager op € 318.330 en 10% hoger
-op € 389.070.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
+Bijlage I onder B, onderdeel 11.1.
 
 ## Rapport
 

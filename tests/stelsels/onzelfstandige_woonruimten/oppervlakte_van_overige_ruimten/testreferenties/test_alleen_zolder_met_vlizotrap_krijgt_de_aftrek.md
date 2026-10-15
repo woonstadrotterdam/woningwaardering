@@ -2,30 +2,16 @@
 
 Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-Zolder2 is als vertrek aangeleverd; de package waardeert haar als overige
-ruimte en waarschuwt daarbij. Zolder3 is gemeenschappelijk voor drie
-onzelfstandige woonruimten, waardoor de maximale aftrek door drie wordt
-gedeeld.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+implementatietoelichting onzelfstandige woonruimten, 2.2.1.3; wettekst,
+Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding).
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd".
+De maximale aftrek voor een gemeenschappelijke zolder wordt gedeeld door het
+aantal onzelfstandige woonruimten.
 
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.1.6: "Het totaal aantal
-punten wordt per rubriek afgerond op 0,25 punt".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "De
-detailsoort draagt eis 1 dus zelf; alleen het `Bouwkundigelement`
-`vlizotrap` weerspreekt dat." en "Dat gebeurt ook wanneer de ruimte is
-ingeschoten met `ruimtesoort` `vertrek`".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3: "De
-maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige
-woonruimten."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+wettekst, Bijlage I onder B, toelichting rubriek 2.
 
 ## Rapport
 

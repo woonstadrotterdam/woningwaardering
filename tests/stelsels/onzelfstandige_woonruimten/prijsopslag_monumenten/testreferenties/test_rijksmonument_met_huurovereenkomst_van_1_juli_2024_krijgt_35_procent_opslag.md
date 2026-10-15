@@ -2,16 +2,8 @@
 
 Een rijksmonument waarvan de huurovereenkomst op 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
-Bron: wettekst, artikel 8a, eerste lid: "De maximale huurprijsgrens wordt
-met 35% vermeerderd indien de woonruimte bestaat uit of deel uitmaakt van
-een rijksmonument als bedoeld in artikel 1.1 van de Erfgoedwet en de
-huurovereenkomst betreffende die woonruimte is afgesloten na het tijdstip
-van inwerkingtreding van de Wet betaalbare huur."
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.14.4: "als de
-huurovereenkomst is afgesloten op of na het tijdstip van inwerkingtreding
-van de Wet betaalbare huur (vanaf 1 juli 2024) dan wordt de maximale
-huurprijs vermeerderd met 35%."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
+artikel 8a, eerste lid.
 
 ## Rapport
 

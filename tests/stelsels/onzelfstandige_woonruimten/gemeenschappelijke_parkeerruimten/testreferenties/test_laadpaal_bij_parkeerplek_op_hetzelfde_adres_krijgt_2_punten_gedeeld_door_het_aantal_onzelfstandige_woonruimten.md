@@ -2,34 +2,11 @@
 
 Een laadpaal bij een parkeerplek die alleen door onzelfstandige woonruimten op hetzelfde adres wordt gedeeld, krijgt 2 punten extra, gedeeld door het aantal onzelfstandige woonruimten.
 
-De carport hoort bij één adres en wordt daar met 2 onzelfstandige
-woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "Indien er sprake
-is van een laadpaal voor exclusief gebruik door de bewoners, geldt twee
-punten extra per parkeerplek met laadpaal."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 10: "De punten voor
-een parkeerplaats worden na eventuele verdeling over de meerdere adressen
-nog gedeeld door het aantal onzelfstandige woonruimten op dat adres."
-
-Het beleidsboek noemt bij de laadpaal alleen de deling door het aantal
-adressen. De package deelt de laadpaal door dezelfde deler als de
-parkeerplek waar hij bij hoort.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.10.5: "dan worden 2 extra
-punten toegekend, gedeeld door het aantal adressen dat toegang en
-gebruiksrecht heeft."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3: "de
-laadpaal deelt de rubriek én de deler van de parkeerruimte waar hij bij
-hoort. Krijgt die ruimte in rubriek 10 punten, dan wordt de laadpaal daar
-gewaardeerd; in alle andere gevallen hier, met dezelfde deler (aantal
-adressen × aantal onzelfstandige woonruimten)."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3;
+implementatietoelichting onzelfstandige woonruimten, 2.10.5; wettekst,
+Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder B, toelichting rubriek
+10.
 
 ## Rapport
 

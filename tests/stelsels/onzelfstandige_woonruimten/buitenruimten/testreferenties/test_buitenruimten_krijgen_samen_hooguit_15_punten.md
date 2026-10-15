@@ -2,15 +2,8 @@
 
 Buitenruimten krijgen samen hooguit 15 punten.
 
-De tuin en het balkon worden elk met 2 onzelfstandige woonruimten op
-hetzelfde adres gedeeld.
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Maximaal 15 punten te
-behalen".
-
-Bron: wettekst, Bijlage I onder B, rubriek 8: "Gemeenschappelijke
-buitenruimte(n) op hetzelfde adres", "0,75 punt per m², gedeeld door het
-aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
+Bijlage I onder B, onderdeel 8.
 
 ## Rapport
 

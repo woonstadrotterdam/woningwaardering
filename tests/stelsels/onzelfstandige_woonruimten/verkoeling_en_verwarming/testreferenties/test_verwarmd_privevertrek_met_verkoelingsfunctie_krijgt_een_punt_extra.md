@@ -2,10 +2,8 @@
 
 Een verwarmd privévertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verwarming per privévertrek
-2 punten" en "Verkoelingsfunctie per privévertrek (mits deze voorziening
-tevens een verwarmingsfunctie heeft) 1 punt (maximaal 2 punten bij meerdere
-privévertrekken met verkoelingsfunctie)".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder B, onderdeel 3.
 
 ## Rapport
 

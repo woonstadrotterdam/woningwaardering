@@ -2,16 +2,8 @@
 
 Een zolderruimte met de detailsoort `zolder` wordt nooit als vertrek gewaardeerd.
 
-De package waarschuwt bij de zolder die als vertrek is aangeleverd: die
-wordt als overige ruimte gewaardeerd.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 1: "Zolderruimten
-slechts als vertrek gewaardeerd worden, indien deze bereikbaar zijn via een
-vaste trap en indien de vloer begaanbaar en het dak beschoten is."
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3: "Alleen
-een `zoldervertrek` voldoet aan eis 2"; een `zolder` "voldoet niet aan de
-afwerkingseisen" en "wordt daarom nooit als vertrek gewaardeerd".
+Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3;
+wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ## Rapport
 

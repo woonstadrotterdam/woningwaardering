@@ -2,18 +2,9 @@
 
 Een vertrek dat niet met een ander adres wordt gedeeld, wordt in rubriek 1 gewaardeerd en niet in rubriek 9.
 
-Het vertrek heeft `gedeeld_met_aantal_adressen` 1. Pas vanaf twee adressen
-hoort een ruimte in rubriek 9.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.2: "Gemeenschappelijke
-ruimten die worden gedeeld met twee of meer adressen worden gewaardeerd
-onder rubriek 9."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4:
-"Gemeenschappelijke vertrekken die met meerdere adressen worden gedeeld
-(`gedeeldMetAantalAdressen` ≥ 2)" en "Rubriek 1 dekt alleen privévertrekken
-en gemeenschappelijke vertrekken op hetzelfde adres; ruimten gedeeld met
-meerdere adressen vallen onder rubriek 9".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2;
+wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder
+B, toelichting, inleiding).
 
 ## Rapport
 

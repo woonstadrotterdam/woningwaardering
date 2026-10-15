@@ -2,22 +2,8 @@
 
 De oppervlakte van privé overige ruimten en de toe te rekenen oppervlakte van gemeenschappelijke overige ruimten worden opgeteld.
 
-De garage en de bijkeuken komen uit het rekenvoorbeeld in de toelichting
-bij de wettekst en zijn hier gemeenschappelijk voor drie onzelfstandige
-woonruimten. De wettekst deelt de punten, haar rekenvoorbeeld bij rubriek 1
-de oppervlakte. De package deelt de oppervlakte; punten delen zou hier
-9,25 punten geven. Het scenario onderscheidt niet of er één keer of per
-soort ruimte wordt afgerond: beide geven 9 punten.
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 2: "De punten voor
-de oppervlakte van overige ruimten worden gedeeld door het aantal
-onzelfstandige woonruimten op één adres dat toegang en gebruiksrecht
-heeft."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1: "het
-rekenvoorbeeld in de wettekst deelt m²-aandelen en telt die op" en "per
-ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m²,
-daarna × 0,75."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
+wettekst, Bijlage I onder B, toelichting rubriek 2.
 
 ## Rapport
 

@@ -2,11 +2,6 @@
 
 Een aanrecht zonder lengte is incomplete input.
 
-De keuken wordt gewaardeerd op het aanrecht dat wel een lengte heeft.
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
 ## Rapport
 
 ```text

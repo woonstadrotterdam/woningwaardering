@@ -2,28 +2,10 @@
 
 De aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal adressen dat toegang heeft.
 
-De ruimten worden niet met andere onzelfstandige woonruimten op het adres
-gedeeld; het scenario toont daardoor alleen de deling door het aantal
-adressen.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 2: "Indien geen vaste
-trap aanwezig is, wordt het aantal punten van de vloeroppervlakte van de
-zolderruimte met vijf verminderd".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Met vertrekken en
-overige ruimten wordt onder deze rubriek aangesloten bij definities en de
-meetmethoden als gegeven onder rubriek 1 en 2.", "Gemeenschappelijke overige
-ruimten worden met driekwart punt per m² gewaardeerd." en "Deel dit aantal
-punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke
-binnenruimten."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3: "Is er
-een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van
-2.2.2.3."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
+implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
+Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 9.
 
 ## Rapport
 

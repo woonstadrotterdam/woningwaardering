@@ -2,9 +2,9 @@
 
 Extra voorzieningen in een ruimte zonder aanrecht krijgen geen punten.
 
-Bron: beleidsboek onzelfstandige woonruimten, 2.5.3: "Een ruimte die
-beschikt over de basisvoorzieningen voor een keuken kan ook extra punten
-voor voorzieningen in de keuken krijgen."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1; wettekst,
+Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

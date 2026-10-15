@@ -2,19 +2,7 @@
 
 Een ruimte met een detailsoort die de package niet kent, wordt niet als vertrek geteld.
 
-De ruimte van 10 m² heeft een detailsoort met de code BRG, die niet in de
-VERA-referentiedata staat (een berging heeft de code BER). De package
-classificeert zo'n ruimte niet en geeft daar geen waarschuwing voor. De
-woonruimte heeft daardoor geen vertrekken en krijgt 4 punten aftrek. De
-test legt dat huidige gedrag vast; de implementatietoelichting spreekt er
-niet over.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 13: "Wanneer de totale
-oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²", "– 4
-punten".
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2.
 
 ## Rapport
 

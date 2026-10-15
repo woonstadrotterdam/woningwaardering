@@ -2,9 +2,7 @@
 
 Een vertrek telt voor de keuken mee zodra er een aanrecht in staat.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1: "Rubriek 5
-stelt eisen aan de keuken zelf, niet aan de ruimte waarin die ligt. Een
-aanrecht telt daarom in elke ruimte mee."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1.
 
 ## Rapport
 

@@ -2,56 +2,16 @@
 
 Voor gemeenschappelijke vertrekken met verkoelingsfunctie geldt in deze rubriek geen maximum van 2 punten.
 
-De wettekst verwijst voor verkoeling en verwarming naar rubriek 3, die voor
-de verkoelingsfunctie een maximum van 2 punten kent. De package neemt de
-puntwaarden van rubriek 3 over en de maxima niet; de test legt dat gedrag
-vast.
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal de punten
-voor verkoeling en verwarming conform rubriek 3;"
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Er kan één punt
-worden behaald per vertrek, met een totaal maximum van twee punten."
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2: "Wij
-nemen daarvan de puntwaarden over (2 per verwarmd vertrek, 1 extra per
-verwarmd én verkoeld vertrek, 1 per verwarmde overige ruimte of
-verkeersruimte), niet de maxima van rubriek 3 (max. 4 verwarmde
-overige/verkeersruimten, max. 2 extra verkoelingspunten). Dit is conform de
-huurprijscheck die in deze rubriek geen maximering toepast."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
+toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek 3
+(via Bijlage I onder B, toelichting, inleiding).
 
 Elk punt wordt gedeeld door het aantal adressen en daarna door het aantal
 onzelfstandige woonruimten op het adres.
 
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Deel dit aantal
-punten door het aantal adressen dat toegang heeft tot de gemeenschappelijke
-binnenruimten."
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 9: "De punten voor
-een gemeenschappelijke binnenruimte worden na verdeling over de meerdere
-adressen nog gedeeld door het aantal onzelfstandige woonruimten op dat
-adres."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-In het totaal zitten ook de punten voor de oppervlakte en de verwarming van
-de drie vertrekken en voor het aanrecht van ruim 3 meter in beide keukens.
-
-Bron: wettekst, Bijlage I onder B, rubriek 9: "Gemeenschappelijke vertrek 1
-punt per m² gedeeld door het aantal adressen dat toegang en gebruiksrecht
-heeft, en daarna gedeeld door het aantal onzelfstandige woonruimten op dat
-adres".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 3: "Per verwarmd
-vertrek wordt, ongeacht de verwarmingswijze, een waardering van twee punten
-toegepast".
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 9: "Bepaal eventueel
-van toepassing zijnde extra punten conform rubriek 5, 6 en/of 7;"
-
-Bron: wettekst, Bijlage I onder B, onderdeel 5.1: "3 m en meer 10 punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
+Bijlage I onder B, toelichting rubriek 9.
 
 ## Rapport
 

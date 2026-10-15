@@ -1,34 +1,10 @@
 # test_energie_index_zonder_label_wordt_op_de_index_gewaardeerd
 
-Bij een energie-index uit 2018 zonder label bepaalt de index de punten per m².
+Een energie-index zonder label bepaalt de punten per m².
 
-Bron: beleidsboek onzelfstandige woonruimten, 2.4.2: "een energie-index die
-is opgenomen op of na 1 januari 2015 tot 1 januari 2021".
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.4.4: "Bij een energie-index
-wordt het puntenaantal bepaald door het relevante cijfer."
-
-Een energie-index van 1,0 geeft 0,65 punt per m².
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1, tabel met de kolommen
-energieprestatie, energie-index, bouwjaar en punten per m²: "A 0,8 < EI ≤
-1,2 2002 en later 0,65 punt".
-
-De m² zijn die van de vertrekken die aan de huurder zijn toe te rekenen:
-elk gemeenschappelijk vertrek gedeeld door het aantal onzelfstandige
-woonruimten, onafgerond opgeteld.
-
-Bron: wettekst, Bijlage I onder B, onderdeel 4.1: "Punten per m² die
-volgens rubriek 1 zijn toe te rekenen aan de huurder".
-
-Bron: wettekst, Bijlage I onder B, onderdeel 1: "Oppervlakte
-gemeenschappelijk(e) vertrek(ken) op hetzelfde adres", "1 punt per m², te
-delen door het aantal onzelfstandige woonruimten dat toegang en
-gebruiksrecht heeft".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4: volgens
-rubriek 1 toe te rekenen "is de onafgeronde toerekening (eerst delen, dan
-salderen), niet het afgeronde puntenresultaat van rubriek 1."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.2;
+implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
+Bijlage I onder B, onderdeel 4.1.
 
 ## Rapport
 

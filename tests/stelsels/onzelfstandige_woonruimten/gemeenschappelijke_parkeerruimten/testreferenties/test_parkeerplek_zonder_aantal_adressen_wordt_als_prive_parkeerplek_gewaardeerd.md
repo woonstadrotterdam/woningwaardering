@@ -2,43 +2,9 @@
 
 Een parkeerplek zonder aantal adressen wordt gewaardeerd als een privé-parkeerplek van één adres.
 
-De package waarschuwt dat `gedeeld_met_aantal_adressen` ontbreekt en gaat
-uit van één adres. Ook het aantal onzelfstandige woonruimten is niet
-aangeleverd; de package leest dat zonder waarschuwing als niet gedeeld. De
-implementatietoelichting voor onzelfstandige woonruimten vraagt beide
-attributen, maar noemt de waarschuwing en de aanname van één adres niet.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2:
-"Daarnaast zijn ook `Eenhedenruimte.gedeeld_met_aantal_adressen` en
-`Eenhedenruimte.gedeeld_met_aantal_onzelfstandige_woonruimten` als
-uitbreiding toegevoegd. Deze attributen dienen ook op elk type parkeerplek
-meegegeven te worden wanneer het een onzelfstandige woonruimte betreft."
-
-Bron: docs/aan-de-slag, Warnings: "Bij incomplete of onjuiste inputdata
-genereert de package een `UserWarning`."
-
-De twee parkeerplekken van Type III worden ook als privé-parkeerplek in
-deze rubriek gewaardeerd: hun punten worden opgeteld en door 1 gedeeld. De
-wettekst waardeert in deze rubriek alleen parkeerplekken in een
-gemeenschappelijke parkeerruimte; de package volgt hier de
-implementatietoelichting.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2:
-"waarderen we altijd in deze rubriek, ook wanneer ze privé zijn of alleen
-tussen onzelfstandige woonruimten op hetzelfde adres worden gedeeld."
-
-Bron: wettekst, Bijlage I onder A, toelichting rubriek 10: "In deze rubriek
-worden alleen parkeerplekken gewaardeerd die zich in een gemeenschappelijke
-parkeerruimte bevinden.", "Bij meerdere parkeerplekken worden de punten bij
-elkaar opgeteld." en "Indien sprake is van een privé parkeerplek voor één
-adres, wordt gedeeld door 1."
-
-Bron: wettekst, Bijlage I onder B, toelichting, inleiding: "Dit betekent
-dat de toelichting onder bijlage I, onder A, voor alle rubrieken van
-overeenkomstige toepassing is."
-
-Bron: wettekst, Bijlage I onder B, rubriek 10: "Type III Parkeerplek buiten
-behorende tot het complex zonder dak 4 punten".
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2; wettekst,
+Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
+toelichting, inleiding).
 
 ## Rapport
 

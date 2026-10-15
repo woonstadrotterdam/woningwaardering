@@ -2,18 +2,14 @@
 
 De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten waarmee de ruimte wordt gedeeld.
 
-Het adres heeft 8 onzelfstandige woonruimten. Daardoor geldt het maximum
-voor wastafels niet in de slaapkamer, naast de badkamer waar het nooit
-geldt.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
+Bijlage I onder B, onderdeel 6.1.
 
-Bron: wettekst, Bijlage I onder B, onderdeel 6.1: "De hieronder weergegeven
-punten dienen te worden gedeeld door het aantal onzelfstandige woonruimten
-dat toegang en gebruiksrecht heeft".
+Op een adres met 8 of meer onzelfstandige woonruimten geldt het maximum
+voor wastafels niet voor één ruimte naast de badkamer.
 
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 6: "Daarnaast geldt
-er voor adressen met 8 of meer onzelfstandige woonruimten dat er voor
-maximaal één ruimte, naast de badkamer, een ruimte mag zijn met meer dan
-één wastafel die voor waardering in aanmerking komt."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
+Bijlage I onder B, toelichting rubriek 6.
 
 ## Rapport
 

@@ -2,21 +2,8 @@
 
 Het maximum van 2 punten voor vertrekken met verkoelingsfunctie geldt apart voor privévertrekken en voor gemeenschappelijke vertrekken.
 
-Slaapkamer1 tot en met Slaapkamer3 zijn privé; Slaapkamer4 tot en met
-Slaapkamer6 worden met 2 onzelfstandige woonruimten gedeeld.
-
-Bron: wettekst, Bijlage I onder B, rubriek 3: "Verkoelingsfunctie per
-privévertrek (mits deze voorziening tevens een verwarmingsfunctie heeft) 1
-punt (maximaal 2 punten bij meerdere privévertrekken met
-verkoelingsfunctie)" en "Verkoelingsfunctie per gemeenschappelijk vertrek
-op hetzelfde adres (mits deze voorziening tevens een verwarmingsfunctie
-heeft) 1 punt (maximaal 2 punten bij meerdere gemeenschappelijke vertrekken
-met verkoelingsfunctie) te delen door het aantal onzelfstandige
-woonruimten dat toegang en gebruiksrecht heeft".
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3: "De kaders
-hierboven geven max. 4 verwarmde overige/verkeersruimten en max. 2
-verkoelde vertrekken afzonderlijk voor privé en voor gemeenschappelijk."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder B, onderdeel 3.
 
 ## Rapport
 

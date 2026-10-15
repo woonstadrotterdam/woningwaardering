@@ -1,20 +1,8 @@
 # test_prive_buitenruimte_onder_de_minimumafmeting_wordt_gewaardeerd
 
-Een privé-buitenruimte met een breedte onder de minimumafmeting voor gemeenschappelijke buitenruimten wordt gewaardeerd.
+Een privé-buitenruimte wordt ook gewaardeerd als zij onder de minimumafmeting voor gemeenschappelijke buitenruimten blijft.
 
-Het balkon is de privé-buitenruimte uit het rekenvoorbeeld in de
-toelichting bij de wettekst: 2 meter lang en een halve meter breed.
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.8.1: "Voor de
-privé-buitenruimte(n) geldt géén minimumafmeting."
-
-Bron: beleidsboek onzelfstandige woonruimten, 2.8.2: "er moet sprake zijn
-van een minimumafmeting van 2,00 meter x 1,50 meter, 1,50 meter (hoogte,
-breedte, diepte)".
-
-Bron: wettekst, Bijlage I onder B, toelichting rubriek 8: "De woning van A
-beschikt over een privé-buitenruimte van 2 m x 0,5 m = 1 m². Dit resulteert
-in 2 punten + 0,35 punt x 1 m² = 2,35 punten."
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1.
 
 ## Rapport
 
