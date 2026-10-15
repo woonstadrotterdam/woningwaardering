@@ -62,7 +62,7 @@ def test_toe_te_rekenen_oppervlakte_telt_onafgerond_mee_voor_de_energieprestatie
                 label=Energielabel.a,
             )
         ],
-        # Het voorbeeld uit de implementatietoelichting: 10,40 m² privé en 40,40 m² gedeeld met vier huurders.
+        # Het voorbeeld uit de implementatietoelichting: 10,40 m² privé en 40,40 m² gedeeld met drie andere huurders.
         ruimten=[
             ruimte(Ruimtedetailsoort.slaapkamer, oppervlakte=10.4),
             ruimte(
@@ -377,6 +377,7 @@ def test_energie_index_zonder_label_wordt_op_de_index_gewaardeerd(
 # Zonder geldige energieprestatie: het bouwjaar
 
 
+# Beide einddata liggen na de peildatum, zodat alleen de afgiftedatum het label tegenhoudt.
 @pytest.mark.parametrize(
     ("begindatum", "einddatum"),
     [

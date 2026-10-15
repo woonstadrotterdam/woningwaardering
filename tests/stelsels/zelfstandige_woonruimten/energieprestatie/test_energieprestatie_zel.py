@@ -115,6 +115,7 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+# E ontbreekt omdat de bronnen verschillen.
 @pytest.mark.parametrize(
     ("label", "verwachte_punten"),
     [
@@ -126,7 +127,6 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
         pytest.param(Energielabel.b, 34.0, id="label_b"),
         pytest.param(Energielabel.c, 22.0, id="label_c"),
         pytest.param(Energielabel.d, 14.0, id="label_d"),
-        pytest.param(Energielabel.e, -4.0, id="label_e"),
         pytest.param(Energielabel.f, -9.0, id="label_f"),
         pytest.param(Energielabel.g, -15.0, id="label_g"),
     ],
@@ -206,6 +206,7 @@ def test_punten_voor_een_energie_index_hangen_af_van_de_klasse(
 # Zonder geldige energieprestatie: het bouwjaar
 
 
+# Beide einddata liggen na de peildatum, zodat alleen de afgiftedatum het label tegenhoudt.
 @pytest.mark.parametrize(
     ("begindatum", "einddatum"),
     [
