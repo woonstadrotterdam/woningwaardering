@@ -1,6 +1,6 @@
-# test_gerenoveerde_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten[renovatie_2019_label_a4plus]
+# test_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten[gebouwd_in_2019]
 
-Een gerenoveerde woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
+Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
 Bijlage I onder A, onderdeel 11.2.
@@ -22,14 +22,14 @@ PUNTEN VOOR DE WOZ-WAARDE
 
 ## Waarschuwingen
 
-Geen.
+- UserWarning: Eenheid (meergezinswoning_van_71_m2): 'energieprestaties' is None
 
 ## Input
 
 ```json
 {
   "id": "meergezinswoning_van_71_m2",
-  "bouwjaar": 2016,
+  "bouwjaar": 2019,
   "adres": {
     "huisnummer": "44",
     "huisnummerToevoeging": "",
@@ -41,25 +41,7 @@ Geen.
   "adresseerbaarObjectBasisregistratie": {
     "bagIdentificatie": "0599010000320510"
   },
-  "energieprestaties": [
-    {
-      "soort": {
-        "code": "NTA",
-        "naam": "Energielabel conform NTA8800"
-      },
-      "status": {
-        "code": "DEF",
-        "naam": "Definitief"
-      },
-      "begindatum": "2021-02-23",
-      "einddatum": "2027-02-23",
-      "label": {
-        "code": "AP4",
-        "naam": "A++++"
-      },
-      "waarde": "1.48"
-    }
-  ],
+  "energieprestaties": [],
   "gebruiksoppervlakte": 71,
   "monumenten": [],
   "panden": [
@@ -70,11 +52,6 @@ Geen.
       }
     }
   ],
-  "renovatie": {
-    "omschrijving": "hoogniveau renovatie",
-    "datum": "2019-01-01",
-    "bedragInvestering": 10000.0
-  },
   "ruimten": [
     {
       "id": "balkon",
@@ -461,14 +438,6 @@ Geen.
     }
   ],
   "wozEenheden": [
-    {
-      "vastgesteldeWaarde": 219999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 239999.0,
-      "waardepeildatum": "2023-01-01"
-    },
     {
       "vastgesteldeWaarde": 259999.0,
       "waardepeildatum": "2024-01-01"

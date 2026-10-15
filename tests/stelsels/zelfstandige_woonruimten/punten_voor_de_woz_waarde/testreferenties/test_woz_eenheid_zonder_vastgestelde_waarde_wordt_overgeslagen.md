@@ -51,14 +51,6 @@ PUNTEN VOOR DE WOZ-WAARDE
   "wozEenheden": [
     {
       "vastgesteldeWaarde": 100000.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 100000.0,
-      "waardepeildatum": "2023-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 100000.0,
       "waardepeildatum": "2024-01-01"
     },
     {

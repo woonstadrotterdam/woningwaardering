@@ -26,14 +26,6 @@ Geen waarderingen voor Punten voor de WOZ-waarde.
   },
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 148000.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 184000.0,
-      "waardepeildatum": "2023-01-01"
-    },
-    {
       "vastgesteldeWaarde": 205000.0,
       "waardepeildatum": "2024-01-01"
     }

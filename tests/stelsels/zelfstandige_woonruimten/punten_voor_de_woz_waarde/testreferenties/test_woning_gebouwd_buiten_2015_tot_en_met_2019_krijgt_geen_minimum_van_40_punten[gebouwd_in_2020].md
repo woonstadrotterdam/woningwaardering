@@ -1,6 +1,6 @@
-# test_gerenoveerde_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten[renovatie_2021_waarde_0_3]
+# test_woning_gebouwd_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_punten[gebouwd_in_2020]
 
-Een gerenoveerde woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
+Een woning gebouwd buiten 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
 Bijlage I onder A, onderdeel 11.2.
@@ -15,21 +15,21 @@ PUNTEN VOOR DE WOZ-WAARDE
   Onderdeel II                                                                   17.91 pt
     - Oppervlakte van vertrekken en overige ruimten                  60.00 m²
     - Factor II                                                     242.00 EUR
-  Nieuwbouw: min. 40 punten                                                       5.13 pt
+  Afronding op kwartpunten                                                       -0.12 pt
                                                                                 ------
-  Totaal                                                                         40.00 pt
+  Totaal                                                                         34.75 pt
 ```
 
 ## Waarschuwingen
 
-Geen.
+- UserWarning: Eenheid (meergezinswoning_van_71_m2): 'energieprestaties' is None
 
 ## Input
 
 ```json
 {
   "id": "meergezinswoning_van_71_m2",
-  "bouwjaar": 2016,
+  "bouwjaar": 2020,
   "adres": {
     "huisnummer": "44",
     "huisnummerToevoeging": "",
@@ -41,25 +41,7 @@ Geen.
   "adresseerbaarObjectBasisregistratie": {
     "bagIdentificatie": "0599010000320510"
   },
-  "energieprestaties": [
-    {
-      "soort": {
-        "code": "NTA",
-        "naam": "Energielabel conform NTA8800"
-      },
-      "status": {
-        "code": "DEF",
-        "naam": "Definitief"
-      },
-      "begindatum": "2021-02-23",
-      "einddatum": "2027-02-23",
-      "label": {
-        "code": "APP",
-        "naam": "A++"
-      },
-      "waarde": "0.3"
-    }
-  ],
+  "energieprestaties": [],
   "gebruiksoppervlakte": 71,
   "monumenten": [],
   "panden": [
@@ -70,11 +52,6 @@ Geen.
       }
     }
   ],
-  "renovatie": {
-    "omschrijving": "hoogniveau renovatie",
-    "datum": "2021-01-01",
-    "bedragInvestering": 10000.0
-  },
   "ruimten": [
     {
       "id": "balkon",
@@ -462,14 +439,6 @@ Geen.
   ],
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 219999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 239999.0,
-      "waardepeildatum": "2023-01-01"
-    },
-    {
       "vastgesteldeWaarde": 259999.0,
       "waardepeildatum": "2024-01-01"
     }
@@ -491,7 +460,7 @@ Geen.
       "naam": "Punten voor de WOZ-waarde"
     }
   },
-  "punten": 40.0,
+  "punten": 34.75,
   "woningwaarderingen": [
     {
       "aantal": 259999.0,
@@ -562,10 +531,10 @@ Geen.
     },
     {
       "criterium": {
-        "id": "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten",
-        "naam": "Nieuwbouw: min. 40 punten"
+        "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+        "naam": "Afronding op kwartpunten"
       },
-      "punten": 5.13
+      "punten": -0.12
     }
   ]
 }

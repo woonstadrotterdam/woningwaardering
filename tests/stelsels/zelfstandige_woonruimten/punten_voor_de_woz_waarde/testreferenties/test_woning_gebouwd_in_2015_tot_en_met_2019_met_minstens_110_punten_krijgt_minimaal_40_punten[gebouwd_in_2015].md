@@ -1,4 +1,4 @@
-# test_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten
+# test_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten[gebouwd_in_2015]
 
 Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
 
@@ -29,7 +29,7 @@ PUNTEN VOOR DE WOZ-WAARDE
 ```json
 {
   "id": "meergezinswoning_van_71_m2",
-  "bouwjaar": 2016,
+  "bouwjaar": 2015,
   "adres": {
     "huisnummer": "44",
     "huisnummerToevoeging": "",
@@ -438,14 +438,6 @@ PUNTEN VOOR DE WOZ-WAARDE
     }
   ],
   "wozEenheden": [
-    {
-      "vastgesteldeWaarde": 219999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 239999.0,
-      "waardepeildatum": "2023-01-01"
-    },
     {
       "vastgesteldeWaarde": 259999.0,
       "waardepeildatum": "2024-01-01"

@@ -5,145 +5,34 @@ Een vastgestelde WOZ-waarde die lager is dan de minimum WOZ-waarde van € 85.80
 Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
 Bijlage I onder A, onderdeel 11.1.
 
-De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-Bijlage I onder A, onderdeel 11.1.
-
 ## Rapport
 
 ```text
 PUNTEN VOOR DE WOZ-WAARDE
-  WOZ-waarde op waardepeildatum 01-01-2024                        79999.00 EUR
-  Onderdeel I                                                                     5.22 pt
+  WOZ-waarde op waardepeildatum 01-01-2024                        85805.00 EUR
+  Onderdeel I                                                                     5.60 pt
     - Factor I                                                    15329.00 EUR
-  Onderdeel II                                                                   11.81 pt
+  Onderdeel II                                                                   12.66 pt
     - Oppervlakte van vertrekken en overige ruimten                  28.00 m²
     - Factor II                                                     242.00 EUR
-  Afronding op kwartpunten                                                       -0.03 pt
+  Afronding op kwartpunten                                                       -0.01 pt
                                                                                 ------
-  Totaal                                                                         17.00 pt
+  Totaal                                                                         18.25 pt
 ```
 
 ## Waarschuwingen
 
-Geen.
+- UserWarning: Eenheid (None): 'energieprestaties' is None
+- UserWarning: Eenheid (None): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.
+- UserWarning: Eenheid (None) heeft geen pandsoort Eengezinswoning of Meergezinswoning en komt daarom niet in aanmerking voor waardering onder stelselgroep Energieprestatie.
+- UserWarning: Eenheid (None) kan niet gewaardeerd worden voor stelselgroep Keuken omdat er geen keuken is gevonden.
 
 ## Input
 
 ```json
 {
   "bouwjaar": 1990,
-  "energieprestaties": [
-    {
-      "soort": {
-        "code": "EI",
-        "naam": "Energie-index"
-      },
-      "status": {
-        "code": "DEF",
-        "naam": "Definitief"
-      },
-      "begindatum": "2018-06-22",
-      "einddatum": "2028-06-22",
-      "label": {
-        "code": "C",
-        "naam": "C"
-      },
-      "waarde": "1.67"
-    }
-  ],
-  "monumenten": [],
-  "panden": [
-    {
-      "soort": {
-        "code": "MGW",
-        "naam": "Meergezinswoning"
-      }
-    }
-  ],
   "ruimten": [
-    {
-      "id": "keuken",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "KEU",
-        "naam": "Keuken"
-      },
-      "naam": "Keuken",
-      "oppervlakte": 3.59507,
-      "bouwkundigeElementen": [
-        {
-          "id": "aanrecht",
-          "naam": "Aanrecht",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 2100.0
-        }
-      ],
-      "verwarmd": true
-    },
-    {
-      "id": "badkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "BAD",
-        "naam": "Badkamer"
-      },
-      "naam": "Badkamer",
-      "oppervlakte": 3.13436,
-      "bouwkundigeElementen": [
-        {
-          "id": "element_1",
-          "naam": "Douche",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "DOU",
-            "naam": "Douche"
-          }
-        },
-        {
-          "id": "element_2",
-          "naam": "Wastafel",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "WAS",
-            "naam": "Wastafel"
-          }
-        },
-        {
-          "id": "element_3",
-          "naam": "Closetcombinatie",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "CLO",
-            "naam": "Closetcombinatie"
-          }
-        }
-      ],
-      "verwarmd": true
-    },
     {
       "id": "woonkamer",
       "soort": {
@@ -155,21 +44,12 @@ Geen.
         "naam": "Woonkamer"
       },
       "naam": "Woonkamer",
-      "oppervlakte": 21.4327,
-      "verwarmd": true
+      "oppervlakte": 28.0
     }
   ],
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 59999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 69999.0,
-      "waardepeildatum": "2023-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 79999.0,
+      "vastgesteldeWaarde": 85805.0,
       "waardepeildatum": "2024-01-01"
     }
   ]
@@ -190,10 +70,10 @@ Geen.
       "naam": "Punten voor de WOZ-waarde"
     }
   },
-  "punten": 17.0,
+  "punten": 18.25,
   "woningwaarderingen": [
     {
-      "aantal": 79999.0,
+      "aantal": 85805.0,
       "criterium": {
         "id": "punten_voor_de_woz_waarde__woz_waarde",
         "naam": "WOZ-waarde op waardepeildatum 01-01-2024",
@@ -208,7 +88,7 @@ Geen.
         "id": "punten_voor_de_woz_waarde__onderdeel_I",
         "naam": "Onderdeel I"
       },
-      "punten": 5.22
+      "punten": 5.6
     },
     {
       "aantal": 15329.0,
@@ -229,7 +109,7 @@ Geen.
         "id": "punten_voor_de_woz_waarde__onderdeel_II",
         "naam": "Onderdeel II"
       },
-      "punten": 11.81
+      "punten": 12.66
     },
     {
       "aantal": 28.0,
@@ -264,7 +144,7 @@ Geen.
         "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
         "naam": "Afronding op kwartpunten"
       },
-      "punten": -0.03
+      "punten": -0.01
     }
   ]
 }

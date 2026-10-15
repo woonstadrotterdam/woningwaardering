@@ -456,14 +456,6 @@ Geen.
   ],
   "wozEenheden": [
     {
-      "vastgesteldeWaarde": 219999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 239999.0,
-      "waardepeildatum": "2023-01-01"
-    },
-    {
       "vastgesteldeWaarde": 259999.0,
       "waardepeildatum": "2024-01-01"
     }

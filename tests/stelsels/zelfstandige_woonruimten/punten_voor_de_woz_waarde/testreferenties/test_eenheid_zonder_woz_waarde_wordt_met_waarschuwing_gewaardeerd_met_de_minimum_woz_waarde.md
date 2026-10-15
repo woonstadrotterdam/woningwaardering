@@ -5,13 +5,6 @@ Een eenheid zonder WOZ-waarde wordt met een waarschuwing gewaardeerd met de mini
 Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
 Bijlage I onder A, onderdeel 11.1.
 
-Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en
-met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de
-WOZ-waarde.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-Bijlage I onder A, onderdeel 11.2.
-
 ## Rapport
 
 ```text
@@ -24,9 +17,9 @@ PUNTEN VOOR DE WOZ-WAARDE
     - Minimum WOZ-waarde gebruikt voor berekening                 85806.00 EUR
     - Oppervlakte van vertrekken en overige ruimten                  60.00 m²
     - Factor II                                                     268.00 EUR
-  Nieuwbouw: min. 40 punten                                                      29.60 pt
+  Afronding op kwartpunten                                                        0.10 pt
                                                                                 ------
-  Totaal                                                                         40.00 pt
+  Totaal                                                                         10.50 pt
 ```
 
 ## Waarschuwingen
@@ -39,7 +32,7 @@ PUNTEN VOOR DE WOZ-WAARDE
 ```json
 {
   "id": "meergezinswoning_van_71_m2",
-  "bouwjaar": 2016,
+  "bouwjaar": 1981,
   "adres": {
     "huisnummer": "44",
     "huisnummerToevoeging": "",
@@ -464,7 +457,7 @@ PUNTEN VOOR DE WOZ-WAARDE
       "naam": "Punten voor de WOZ-waarde"
     }
   },
-  "punten": 40.0,
+  "punten": 10.5,
   "woningwaarderingen": [
     {
       "aantal": 85806.0,
@@ -563,10 +556,10 @@ PUNTEN VOOR DE WOZ-WAARDE
     },
     {
       "criterium": {
-        "id": "punten_voor_de_woz_waarde__nieuwbouw_minimum_punten",
-        "naam": "Nieuwbouw: min. 40 punten"
+        "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
+        "naam": "Afronding op kwartpunten"
       },
-      "punten": 29.6
+      "punten": 0.1
     }
   ]
 }

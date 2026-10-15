@@ -17,12 +17,12 @@ PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024                       100000.00 EUR
   Onderdeel I                                                                     6.52 pt
     - Factor I                                                    15329.00 EUR
-  Onderdeel II                                                                   13.77 pt
-    - Oppervlakte van vertrekken en overige ruimten                  30.00 m²
+  Onderdeel II                                                                   11.81 pt
+    - Oppervlakte van vertrekken en overige ruimten                  35.00 m²
     - Factor II                                                     242.00 EUR
-  Afronding op kwartpunten                                                       -0.04 pt
+  Afronding op kwartpunten                                                       -0.08 pt
                                                                                 ------
-  Totaal                                                                         20.25 pt
+  Totaal                                                                         18.25 pt
 ```
 
 ## Waarschuwingen
@@ -91,7 +91,7 @@ PUNTEN VOOR DE WOZ-WAARDE
       "naam": "Parkeerplek1",
       "oppervlakte": 20.0,
       "gedeeldMetAantalAdressen": 4,
-      "aantal": 2
+      "aantal": 3
     },
     {
       "id": "parkeerplek2",
@@ -132,7 +132,7 @@ PUNTEN VOOR DE WOZ-WAARDE
       "naam": "Punten voor de WOZ-waarde"
     }
   },
-  "punten": 20.25,
+  "punten": 18.25,
   "woningwaarderingen": [
     {
       "aantal": 100000.0,
@@ -171,10 +171,10 @@ PUNTEN VOOR DE WOZ-WAARDE
         "id": "punten_voor_de_woz_waarde__onderdeel_II",
         "naam": "Onderdeel II"
       },
-      "punten": 13.77
+      "punten": 11.81
     },
     {
-      "aantal": 30.0,
+      "aantal": 35.0,
       "criterium": {
         "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
         "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -206,7 +206,7 @@ PUNTEN VOOR DE WOZ-WAARDE
         "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
         "naam": "Afronding op kwartpunten"
       },
-      "punten": -0.04
+      "punten": -0.08
     }
   ]
 }

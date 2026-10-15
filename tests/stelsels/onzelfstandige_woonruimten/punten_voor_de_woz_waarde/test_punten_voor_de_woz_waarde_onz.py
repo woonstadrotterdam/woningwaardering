@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tests.utils import aantal_per_naam, assert_stelselgroep_output, punten_per_naam
+from tests.utils import assert_stelselgroep_output, punten_per_naam
 from woningwaardering.stelsels.onzelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.vera.bvg.generated import (
     EenhedenAdresseerbaarObjectBasisregistratie,
@@ -32,102 +32,6 @@ def test_PuntenVoorDeWozWaarde_output(
 
 
 # Punten naar het gemiddelde van het COROP-gebied
-
-
-def test_woz_waarde_per_m2_binnen_10_procent_van_het_gemiddelde_van_het_corop_gebied_geeft_12_punten(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
-):
-    """Een WOZ-waarde per m² gebruiksoppervlakte die maximaal 10% hoger of lager is dan het gemiddelde van het COROP-gebied, geeft 12 punten.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
-    Bijlage I onder B, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
-    """
-    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond); net onder het gemiddelde.
-    eenheid = EenhedenEenheid(
-        adres=EenhedenEenheidadres(
-            woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_gebruikers_oppervlakte=58
-        ),
-        woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=178000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=194000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=205000
-            ),
-        ],
-    )
-
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
-
-    # Het gemiddelde voor Groot-Rijnmond bij waardepeildatum 1 januari 2024 is
-    # € 3.537 per m². € 205.000 / 58 m² is € 3.534,48 per m²: 0,07% lager.
-    assert aantal_per_naam(groep) == {
-        "Percentage verschil": pytest.approx(-0.07, abs=0.005),
-        "WOZ-waarde op waardepeildatum 01-01-2024": 205000.0,
-        "Gebruiksoppervlakte": 58.0,
-        "WOZ-waarde per m²": pytest.approx(3534.48, abs=0.005),
-        "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond": 3537.0,
-    }
-    assert punten_per_naam(groep) == {"Percentage verschil": 12.0}
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-def test_woz_waarde_per_m2_meer_dan_10_procent_onder_het_gemiddelde_van_het_corop_gebied_geeft_10_punten(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
-):
-    """Een WOZ-waarde per m² gebruiksoppervlakte die meer dan 10% lager is dan het gemiddelde van het COROP-gebied, geeft 10 punten.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
-    Bijlage I onder B, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
-    """
-    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond); ruim 60% onder het gemiddelde.
-    eenheid = EenhedenEenheid(
-        adres=EenhedenEenheidadres(
-            woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_gebruikers_oppervlakte=58
-        ),
-        woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=58000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=68000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=78000
-            ),
-        ],
-    )
-
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
-
-    # Het gemiddelde voor Groot-Rijnmond bij waardepeildatum 1 januari 2024 is
-    # € 3.537 per m². € 78.000 / 58 m² is € 1.344,83 per m²: 61,98% lager.
-    assert aantal_per_naam(groep) == {
-        "Percentage verschil": pytest.approx(-61.98, abs=0.005),
-        "WOZ-waarde op waardepeildatum 01-01-2024": 78000.0,
-        "Gebruiksoppervlakte": 58.0,
-        "WOZ-waarde per m²": pytest.approx(1344.83, abs=0.005),
-        "Gemiddelde WOZ-waarde per m² voor Groot-Rijnmond": 3537.0,
-    }
-    assert punten_per_naam(groep) == {"Percentage verschil": 10.0}
-    vergelijk_met_testreferentie(eenheid, groep)
 
 
 @pytest.mark.parametrize(
@@ -164,9 +68,7 @@ def test_punten_hangen_af_van_het_verschil_met_het_gemiddelde_van_het_corop_gebi
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
     Bijlage I onder B, onderdeel 11.1.
     """
-    # Rotterdam (woonplaatscode 3086, Groot-Rijnmond) met 100 m²: bij een gemiddelde
-    # van € 3.537 per m² (waardepeildatum 1 januari 2024) ligt 10% lager op € 318.330
-    # en 10% hoger op € 389.070.
+    # Rotterdam (Groot-Rijnmond, € 3.537 per m²) met 100 m²: 10% lager is € 318.330, 10% hoger € 389.070.
     eenheid = EenhedenEenheid(
         adres=EenhedenEenheidadres(
             woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
@@ -203,7 +105,7 @@ def test_eenheid_zonder_recente_woz_waarde_krijgt_met_waarschuwing_het_laagste_p
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1; wettekst,
     Bijlage I onder B, toelichting rubriek 11.
     """
-    # Alleen een WOZ-waarde met waardepeildatum 1 januari 2021, bij peildatum 2026.
+    # Alleen een WOZ-waarde met waardepeildatum 1 januari 2023, één jaar te oud bij peildatum 2026.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -214,7 +116,7 @@ def test_eenheid_zonder_recente_woz_waarde_krijgt_met_waarschuwing_het_laagste_p
         ),
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2021, 1, 1), vastgestelde_waarde=124000
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=124000
             ),
         ],
     )
@@ -243,12 +145,6 @@ def test_eenheid_zonder_gebruiksoppervlakte_krijgt_met_waarschuwing_geen_waarder
             woonplaats=EenhedenWoonplaats(code="3086", naam="ROTTERDAM")
         ),
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=148000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=184000
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=205000
             ),
@@ -311,12 +207,6 @@ def test_eenheid_zonder_adres_krijgt_met_waarschuwing_geen_waardering(
         ),
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=148000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=184000
-            ),
-            EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=205000
             ),
         ],
@@ -348,12 +238,6 @@ def test_woonplaatscode_zonder_corop_gebied_krijgt_met_waarschuwing_geen_waarder
         ),
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=148000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=184000
-            ),
-            EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=205000
             ),
         ],
@@ -377,8 +261,7 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2.
     """
-    # Het antwoord van het Kadaster op postcode 1013GS en huisnummer 22. Met
-    # deze vervanger verloopt de waardering ook zonder netwerk hetzelfde.
+    # Het antwoord van het Kadaster op 1013GS 22, zodat de test zonder netwerk draait.
     antwoord_van_het_kadaster = SimpleNamespace(
         raise_for_status=lambda: None,
         json=lambda: [{"identificatie": "3594", "naam": "Amsterdam"}],
@@ -387,8 +270,7 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
         "woningwaardering.stelsels.utils.requests.post",
         lambda *args, **kwargs: antwoord_van_het_kadaster,
     )
-    # De woonplaats heeft geen code, dus de package vraagt het Kadaster ernaar. De eenheid noemt
-    # Rotterdam, terwijl het Kadaster bij de postcode Amsterdam geeft.
+    # Zonder woonplaatscode vraagt de package het Kadaster; dat geeft Amsterdam, de eenheid noemt Rotterdam.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(
@@ -400,12 +282,6 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
             bag_gebruikers_oppervlakte=58
         ),
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=178000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=194000
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=205000
             ),

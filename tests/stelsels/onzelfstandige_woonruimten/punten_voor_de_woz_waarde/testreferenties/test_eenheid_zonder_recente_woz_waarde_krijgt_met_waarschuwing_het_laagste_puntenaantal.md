@@ -40,7 +40,7 @@ PUNTEN VOOR DE WOZ-WAARDE
   "wozEenheden": [
     {
       "vastgesteldeWaarde": 124000.0,
-      "waardepeildatum": "2021-01-01"
+      "waardepeildatum": "2023-01-01"
     }
   ]
 }

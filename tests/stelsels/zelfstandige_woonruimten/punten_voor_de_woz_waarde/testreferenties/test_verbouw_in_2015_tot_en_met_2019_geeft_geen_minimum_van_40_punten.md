@@ -1,9 +1,8 @@
-# test_woning_gebouwd_voor_2015_met_renovatie_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_punten[renovatie_2022]
+# test_verbouw_in_2015_tot_en_met_2019_geeft_geen_minimum_van_40_punten
 
-Een woning gebouwd voor 2015 die buiten 2015 tot en met 2019 is gerenoveerd, krijgt geen minimum van 40 punten voor de WOZ-waarde.
+Een woning die in 2015 tot en met 2019 is verbouwd, krijgt geen minimum van 40 punten voor de WOZ-waarde: alleen het bouwjaar telt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-Bijlage I onder A, onderdeel 11.2.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5.
 
 ## Rapport
 
@@ -56,8 +55,7 @@ Geen.
       "label": {
         "code": "AP4",
         "naam": "A++++"
-      },
-      "waarde": "1.48"
+      }
     }
   ],
   "gebruiksoppervlakte": 71,
@@ -72,8 +70,7 @@ Geen.
   ],
   "renovatie": {
     "omschrijving": "hoogniveau renovatie",
-    "datum": "2022-01-01",
-    "bedragInvestering": 10000.0
+    "datum": "2016-01-01"
   },
   "ruimten": [
     {
@@ -461,14 +458,6 @@ Geen.
     }
   ],
   "wozEenheden": [
-    {
-      "vastgesteldeWaarde": 219999.0,
-      "waardepeildatum": "2022-01-01"
-    },
-    {
-      "vastgesteldeWaarde": 239999.0,
-      "waardepeildatum": "2023-01-01"
-    },
     {
       "vastgesteldeWaarde": 259999.0,
       "waardepeildatum": "2024-01-01"

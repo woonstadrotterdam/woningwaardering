@@ -7,9 +7,6 @@ from types import SimpleNamespace
 import pytest
 
 from tests.input import (
-    aanrecht,
-    element,
-    elementen,
     meergezinswoning_van_71_m2,
     ruimte,
 )
@@ -21,22 +18,17 @@ from tests.utils import (
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.vera.bvg.generated import (
-    EenhedenAdresseerbaarObjectBasisregistratie,
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenEnergieprestatie,
-    EenhedenPand,
     EenhedenRenovatie,
     EenhedenWoonplaats,
     EenhedenWozEenheid,
 )
 from woningwaardering.vera.referentiedata import (
-    Bouwkundigelementdetailsoort,
     Energielabel,
     Energieprestatiesoort,
-    EnergieprestatiesoortReferentiedata,
     Energieprestatiestatus,
-    Pandsoort,
     Ruimtedetailsoort,
 )
 
@@ -157,81 +149,46 @@ def test_onderdeel_i_en_ii_worden_niet_afgerond_voordat_ze_worden_opgeteld(
 
 
 def test_woz_waarde_onder_de_minimum_woz_waarde_wordt_niet_verhoogd_tot_dat_minimum(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    vervanger_voor_package_monumenten,
 ):
     """Een vastgestelde WOZ-waarde die lager is dan de minimum WOZ-waarde van € 85.806, wordt niet tot dat minimum verhoogd.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
     Bijlage I onder A, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
     """
-    # De meest recente WOZ-waarde (€ 79.999) is lager dan het minimum van € 85.806.
+    # Eén euro onder de minimum WOZ-waarde.
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
-        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=59999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=69999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=79999
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=85805
             ),
         ],
-        energieprestaties=[
-            EenhedenEnergieprestatie(
-                soort=Energieprestatiesoort.energie_index,
-                status=Energieprestatiestatus.definitief,
-                begindatum=date(2018, 6, 22),
-                einddatum=date(2028, 6, 22),
-                label=Energielabel.c,
-                waarde="1.67",
-            )
-        ],
-        monumenten=[],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                oppervlakte=3.59507,
-                verwarmd=True,
-                elementen=[aanrecht(2100)],
-            ),
-            ruimte(
-                Ruimtedetailsoort.badkamer,
-                oppervlakte=3.13436,
-                verwarmd=True,
-                elementen=elementen(
-                    Bouwkundigelementdetailsoort.douche,
-                    Bouwkundigelementdetailsoort.wastafel,
-                    Bouwkundigelementdetailsoort.closetcombinatie,
-                ),
-            ),
-            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=21.4327, verwarmd=True),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=28.0)],
     )
 
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+    with pytest.warns(UserWarning) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
 
-    # De drie ruimten zijn samen 28,16 m², afgerond op 28 m².
     assert aantal_per_naam(groep) == {
-        "WOZ-waarde op waardepeildatum 01-01-2024": 79999.0,
+        "WOZ-waarde op waardepeildatum 01-01-2024": 85805.0,
         "Factor I": 15329.0,
         "Oppervlakte van vertrekken en overige ruimten": 28.0,
         "Factor II": 242.0,
     }
-    # € 79.999 / € 15.329 = 5,22 en € 79.999 / 28 m² / € 242 = 11,81: samen 17,02,
-    # afgerond op 17 punten.
-    punten = punten_per_naam(groep)
-    assert punten["Onderdeel I"] == 5.22
-    assert punten["Onderdeel II"] == 11.81
-    assert groep.punten == 17.0
-    vergelijk_met_testreferentie(eenheid, groep)
+    # € 85.805 / € 15.329 = 5,60 en € 85.805 / 28 m² / € 242 = 12,66: samen 18,26,
+    # afgerond op 18,25 punten.
+    assert punten_per_naam(groep) == {
+        "Onderdeel I": 5.6,
+        "Onderdeel II": 12.66,
+        "Afronding op kwartpunten": -0.01,
+    }
+    assert groep.punten == 18.25
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 def test_woz_eenheid_zonder_vastgestelde_waarde_wordt_overgeslagen(
@@ -248,12 +205,6 @@ def test_woz_eenheid_zonder_vastgestelde_waarde_wordt_overgeslagen(
     eenheid = EenhedenEenheid(
         id="eenheid",
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=100000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=100000
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=100000
             ),
@@ -285,17 +236,9 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
     Bijlage I onder A, onderdeel 11.1.
-
-    Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en
-    met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de
-    WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
     """
-    # Een woning van 2016 zonder WOZ-waarde, zodat ook het minimum van 40 punten geldt.
-    # De vaste kasten tellen mee in de 60 m²: hun oppervlakte komt bij de ruimte met de deur.
-    eenheid = meergezinswoning_van_71_m2(bouwjaar=2016)
+    # Een woning zonder WOZ-waarde, buiten de nieuwbouwjaren 2015 tot en met 2019.
+    eenheid = meergezinswoning_van_71_m2(bouwjaar=1981)
 
     with pytest.warns(
         UserWarning, match="geen WOZ-waarde aangeleverd"
@@ -315,13 +258,13 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
             "Factor II": 268.0,
         },
     }
-    # 5,06 + 5,34 + 29,60 = 40 punten
+    # 5,06 + 5,34 = 10,40, afgerond op 10,50 punten
     assert punten_per_naam(groep) == {
         "Onderdeel I": 5.06,
         "Onderdeel II": 5.34,
-        "Nieuwbouw: min. 40 punten": 29.6,
+        "Afronding op kwartpunten": 0.1,
     }
-    assert groep.punten == 40.0
+    assert groep.punten == 10.5
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
@@ -364,7 +307,7 @@ def test_onderdeel_ii_rekent_met_de_oppervlakte_van_vertrekken_overige_ruimten_e
                 Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
                 naam="Parkeerplek1",
                 oppervlakte=20.0,
-                aantal=2,
+                aantal=3,
                 gedeeld_met_aantal_adressen=4,
             ),
             ruimte(
@@ -382,300 +325,138 @@ def test_onderdeel_ii_rekent_met_de_oppervlakte_van_vertrekken_overige_ruimten_e
         # houdt de input in de testreferentie zoals de test hem opgeeft.
         groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
 
-    # 10 (woonkamer) + 10 (Toiletruimte1) + 2 x 20 / 4 adressen (Parkeerplek1) = 30 m²
+    # 10 (woonkamer) + 10 (Toiletruimte1) + 3 x 20 / 4 adressen (Parkeerplek1) = 35 m²
     assert aantal_per_naam(groep) == {
         "WOZ-waarde op waardepeildatum 01-01-2024": 100000.0,
         "Factor I": 15329.0,
-        "Oppervlakte van vertrekken en overige ruimten": 30.0,
+        "Oppervlakte van vertrekken en overige ruimten": 35.0,
         "Factor II": 242.0,
     }
-    assert punten_per_naam(groep)["Onderdeel II"] == 13.77
-    assert groep.punten == 20.25
+    # € 100.000 / 35 m² / € 242
+    assert punten_per_naam(groep)["Onderdeel II"] == 11.81
+    assert groep.punten == 18.25
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 # Kleine nieuwbouwwoningen in het COROP-gebied Amsterdam of Utrecht
 
 
-def test_woning_tot_40_m2_gebouwd_in_2018_tot_en_met_2022_in_corop_gebied_amsterdam_krijgt_in_onderdeel_ii_het_lagere_kengetal(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    ("woonplaatscode", "bouwjaar"),
+    [
+        pytest.param("3594", 2018, id="amsterdam_gebouwd_in_2018"),
+        pytest.param("3295", 2022, id="utrecht_gebouwd_in_2022"),
+    ],
+)
+def test_woning_kleiner_dan_40_m2_gebouwd_in_2018_tot_en_met_2022_in_corop_gebied_amsterdam_of_utrecht_krijgt_in_onderdeel_ii_het_lagere_kengetal(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie, woonplaatscode, bouwjaar
 ):
-    """Een woning tot 40 m² die in 2018 tot en met 2022 is gebouwd en in het COROP-gebied Amsterdam ligt, krijgt in onderdeel II het lagere kengetal van € 103.
+    """Een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd en in het COROP-gebied Amsterdam of Utrecht ligt, krijgt in onderdeel II het lagere kengetal van € 103.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
     Bijlage I onder A, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
     """
-    # Onder de 40 m² en gebouwd in 2020, zodat het lagere kengetal geldt; woonplaatscode 3594 ligt in COROP-gebied Groot-Amsterdam.
     eenheid = EenhedenEenheid(
-        bouwjaar=2020,
-        adres=EenhedenEenheidadres(
-            huisnummer="1",
-            huisnummer_toevoeging="",
-            postcode="1012LG",
-            woonplaats=EenhedenWoonplaats(code="3594", naam="Amsterdam"),
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_identificatie="0363010012111931"
-        ),
-        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
+        bouwjaar=bouwjaar,
+        adres=EenhedenEenheidadres(woonplaats=EenhedenWoonplaats(code=woonplaatscode)),
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=300000
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=310000
             ),
         ],
-        energieprestaties=[
-            EenhedenEnergieprestatie(
-                # De soortcode is geen VERA-code (die is "EI"). De package
-                # gebruikt deze energieprestatie daardoor niet en waardeert de
-                # energieprestatie naar het bouwjaar.
-                soort=EnergieprestatiesoortReferentiedata(
-                    code="energie_index", naam="Energie-index"
-                ),
-                status=Energieprestatiestatus.definitief,
-                label=Energielabel.c,
-                waarde="1.2",
-                begindatum=date(2020, 1, 1),
-                einddatum=date(2030, 1, 1),
-            )
-        ],
-        gebruiksoppervlakte=35,
+        # Eén m² onder de grens van 40 m².
+        gebruiksoppervlakte=39,
         monumenten=[],
-        ruimten=[
-            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=20.0, verwarmd=True),
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                oppervlakte=8.0,
-                verwarmd=True,
-                elementen=[aanrecht(1800)],
-            ),
-            ruimte(Ruimtedetailsoort.badkamer, oppervlakte=4.0, verwarmd=True),
-            ruimte(Ruimtedetailsoort.toiletruimte, oppervlakte=3.0),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=39.0)],
     )
 
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+    with pytest.warns(UserWarning) as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {
         "WOZ-waarde op waardepeildatum 01-01-2024": 310000.0,
         "Factor I": 15329.0,
-        "Oppervlakte van vertrekken en overige ruimten": 35.0,
+        "Oppervlakte van vertrekken en overige ruimten": 39.0,
         "Factor II": 103.0,
     }
-    # € 310.000 / 35 m² / € 103
-    assert punten_per_naam(groep)["Onderdeel II"] == 85.99
-    assert groep.punten == 106.25
-    vergelijk_met_testreferentie(eenheid, groep)
+    # € 310.000 / 39 m² / € 103
+    assert punten_per_naam(groep)["Onderdeel II"] == 77.17
+    assert groep.punten == 97.5
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
-def test_woning_tot_40_m2_gebouwd_in_2018_tot_en_met_2022_in_corop_gebied_utrecht_krijgt_in_onderdeel_ii_het_lagere_kengetal(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    ("woonplaatscode", "bouwjaar", "gebruiksoppervlakte"),
+    [
+        pytest.param("3594", 2017, 39, id="gebouwd_in_2017"),
+        pytest.param("3594", 2023, 39, id="gebouwd_in_2023"),
+        pytest.param("3594", 2018, 40, id="precies_40_m2"),
+        pytest.param("3086", 2018, 39, id="buiten_corop_gebied"),
+    ],
+)
+def test_woning_die_niet_aan_alle_eisen_voor_het_lagere_kengetal_voldoet_krijgt_in_onderdeel_ii_het_gewone_kengetal(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    woonplaatscode,
+    bouwjaar,
+    gebruiksoppervlakte,
 ):
-    """Een woning tot 40 m² die in 2018 tot en met 2022 is gebouwd en in het COROP-gebied Utrecht ligt, krijgt in onderdeel II het lagere kengetal van € 103.
+    """Een woning die niet aan alle eisen voor het lagere kengetal van onderdeel II voldoet, krijgt in onderdeel II het gewone kengetal van € 242.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
     Bijlage I onder A, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
     """
-    # Onder de 40 m² en gebouwd in 2021, zodat het lagere kengetal geldt; woonplaatscode 3295 ligt in COROP-gebied Utrecht.
+    # Elk geval wijkt op één eis af van Amsterdam, 2018 en 39 m², die het lagere kengetal krijgen.
     eenheid = EenhedenEenheid(
-        bouwjaar=2021,
-        adres=EenhedenEenheidadres(
-            huisnummer="100",
-            huisnummer_toevoeging="",
-            postcode="3511AD",
-            woonplaats=EenhedenWoonplaats(code="3295", naam="Utrecht"),
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_identificatie="0344010000000001"
-        ),
-        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
+        bouwjaar=bouwjaar,
+        adres=EenhedenEenheidadres(woonplaats=EenhedenWoonplaats(code=woonplaatscode)),
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=280000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=290000
-            ),
-        ],
-        energieprestaties=[
-            EenhedenEnergieprestatie(
-                # De soortcode is geen VERA-code (die is "EI"). De package
-                # gebruikt deze energieprestatie daardoor niet en waardeert de
-                # energieprestatie naar het bouwjaar.
-                soort=EnergieprestatiesoortReferentiedata(
-                    code="energie_index", naam="Energie-index"
-                ),
-                status=Energieprestatiestatus.definitief,
-                label=Energielabel.c,
-                waarde="1.2",
-                begindatum=date(2021, 1, 1),
-                einddatum=date(2031, 1, 1),
-            )
-        ],
-        gebruiksoppervlakte=38,
-        monumenten=[],
-        ruimten=[
-            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=22.0, verwarmd=True),
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                oppervlakte=9.0,
-                verwarmd=True,
-                elementen=[aanrecht(2000)],
-            ),
-            ruimte(
-                Ruimtedetailsoort.badkamer,
-                oppervlakte=4.5,
-                verwarmd=True,
-                elementen=elementen(
-                    Bouwkundigelementdetailsoort.douche,
-                    Bouwkundigelementdetailsoort.wastafel,
-                ),
-            ),
-            ruimte(
-                Ruimtedetailsoort.toiletruimte,
-                oppervlakte=2.5,
-                elementen=[element(Bouwkundigelementdetailsoort.closetcombinatie)],
-            ),
-        ],
-    )
-
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
-
-    assert aantal_per_naam(groep) == {
-        "WOZ-waarde op waardepeildatum 01-01-2024": 290000.0,
-        "Factor I": 15329.0,
-        "Oppervlakte van vertrekken en overige ruimten": 38.0,
-        "Factor II": 103.0,
-    }
-    # € 290.000 / 38 m² / € 103
-    assert punten_per_naam(groep)["Onderdeel II"] == 74.09
-    assert groep.punten == 93.0
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-def test_woning_tot_40_m2_gebouwd_na_2022_in_corop_gebied_amsterdam_krijgt_in_onderdeel_ii_het_gewone_kengetal(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
-):
-    """Een woning tot 40 m² in het COROP-gebied Amsterdam die na 2022 is gebouwd, krijgt in onderdeel II het gewone kengetal van € 242.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
-
-    De package rekent met de meest recent vastgestelde WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
-    """
-    # Onder de 40 m² maar na 2022 gebouwd, zodat het lagere kengetal niet geldt; woonplaatscode 3594 ligt in Amsterdam.
-    eenheid = EenhedenEenheid(
-        bouwjaar=2023,
-        adres=EenhedenEenheidadres(
-            huisnummer="2",
-            huisnummer_toevoeging="",
-            postcode="1012LG",
-            woonplaats=EenhedenWoonplaats(code="3594", naam="Amsterdam"),
-        ),
-        adresseerbaar_object_basisregistratie=EenhedenAdresseerbaarObjectBasisregistratie(
-            bag_identificatie="0363010000000002"
-        ),
-        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
-        woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=300000
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=310000
             ),
         ],
-        energieprestaties=[
-            EenhedenEnergieprestatie(
-                # De soortcode is geen VERA-code (die is "EI"). De package
-                # gebruikt deze energieprestatie daardoor niet en waardeert de
-                # energieprestatie naar het bouwjaar.
-                soort=EnergieprestatiesoortReferentiedata(
-                    code="energie_index", naam="Energie-index"
-                ),
-                status=Energieprestatiestatus.definitief,
-                label=Energielabel.c,
-                waarde="1.2",
-                begindatum=date(2023, 1, 1),
-                einddatum=date(2033, 1, 1),
-            )
-        ],
-        gebruiksoppervlakte=35,
+        gebruiksoppervlakte=gebruiksoppervlakte,
         monumenten=[],
-        ruimten=[
-            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=20.0, verwarmd=True),
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                oppervlakte=8.0,
-                verwarmd=True,
-                elementen=[aanrecht(1800)],
-            ),
-            ruimte(
-                Ruimtedetailsoort.badkamer,
-                oppervlakte=4.0,
-                verwarmd=True,
-                elementen=elementen(
-                    Bouwkundigelementdetailsoort.douche,
-                    Bouwkundigelementdetailsoort.wastafel,
-                ),
-            ),
-            ruimte(
-                Ruimtedetailsoort.toiletruimte,
-                oppervlakte=3.0,
-                elementen=[element(Bouwkundigelementdetailsoort.closetcombinatie)],
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=39.0)],
     )
 
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+    with pytest.warns(UserWarning) as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {
         "WOZ-waarde op waardepeildatum 01-01-2024": 310000.0,
         "Factor I": 15329.0,
-        "Oppervlakte van vertrekken en overige ruimten": 35.0,
+        "Oppervlakte van vertrekken en overige ruimten": 39.0,
         "Factor II": 242.0,
     }
-    # € 310.000 / 35 m² / € 242
-    assert punten_per_naam(groep)["Onderdeel II"] == 36.6
-    assert groep.punten == 56.75
-    vergelijk_met_testreferentie(eenheid, groep)
+    # € 310.000 / 39 m² / € 242
+    assert punten_per_naam(groep)["Onderdeel II"] == 32.85
+    assert groep.punten == 53.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 # Het minimum van 40 punten voor woningen uit 2015 tot en met 2019
 
 
+@pytest.mark.parametrize(
+    "bouwjaar",
+    [
+        pytest.param(2015, id="gebouwd_in_2015"),
+        pytest.param(2019, id="gebouwd_in_2019"),
+    ],
+)
 def test_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie, bouwjaar
 ):
     """Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
     Bijlage I onder A, onderdeel 11.2.
     """
-    # Een woning van 2016 met meer dan 110 punten voor rubriek 1 tot en met 10 en 12.
+    # Een woning met meer dan 110 punten voor rubriek 1 tot en met 10 en 12.
     eenheid = meergezinswoning_van_71_m2(
-        bouwjaar=2016,
+        bouwjaar=bouwjaar,
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
             ),
@@ -713,12 +494,6 @@ def test_woning_gebouwd_in_2015_tot_en_met_2019_met_minder_dan_110_punten_krijgt
         ],
         woz_eenheden=[
             EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
-            ),
-            EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
             ),
         ],
@@ -731,97 +506,18 @@ def test_woning_gebouwd_in_2015_tot_en_met_2019_met_minder_dan_110_punten_krijgt
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-@pytest.mark.parametrize(
-    ("renovatiedatum", "energieprestatie"),
-    [
-        pytest.param(
-            date(2019, 1, 1),
-            EenhedenEnergieprestatie(
-                soort=Energieprestatiesoort.energielabel_conform_nta8800,
-                status=Energieprestatiestatus.definitief,
-                begindatum=date(2021, 2, 23),
-                einddatum=date(2027, 2, 23),
-                label=Energielabel.ap4,
-                waarde="1.48",
-            ),
-            id="renovatie_2019_label_a4plus",
-        ),
-        pytest.param(
-            date(2021, 1, 1),
-            EenhedenEnergieprestatie(
-                soort=Energieprestatiesoort.energielabel_conform_nta8800,
-                status=Energieprestatiestatus.definitief,
-                begindatum=date(2021, 2, 23),
-                einddatum=date(2027, 2, 23),
-                label=Energielabel.app,
-                waarde="0.3",
-            ),
-            id="renovatie_2021_waarde_0_3",
-        ),
-    ],
-)
-def test_gerenoveerde_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_minimaal_40_punten(
-    punten_voor_de_woz_waarde,
-    vergelijk_met_testreferentie,
-    renovatiedatum,
-    energieprestatie,
+def test_verbouw_in_2015_tot_en_met_2019_geeft_geen_minimum_van_40_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
 ):
-    """Een gerenoveerde woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
+    """Een woning die in 2015 tot en met 2019 is verbouwd, krijgt geen minimum van 40 punten voor de WOZ-waarde: alleen het bouwjaar telt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5.
     """
-    # Een woning van 2016 met meer dan 110 punten; de renovatie verschilt per geval.
-    eenheid = meergezinswoning_van_71_m2(
-        bouwjaar=2016,
-        renovatie=EenhedenRenovatie(
-            omschrijving="hoogniveau renovatie",
-            datum=renovatiedatum,
-            bedrag_investering=10000,
-        ),
-        energieprestaties=[energieprestatie],
-        woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
-            ),
-        ],
-    )
-
-    groep = punten_voor_de_woz_waarde.waardeer(eenheid)
-
-    assert punten_per_naam(groep)["Nieuwbouw: min. 40 punten"] == 5.13
-    assert groep.punten == 40.0
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-@pytest.mark.parametrize(
-    "renovatiedatum",
-    [
-        pytest.param(date(2014, 12, 31), id="renovatie_eind_2014"),
-        pytest.param(date(2022, 1, 1), id="renovatie_2022"),
-    ],
-)
-def test_woning_gebouwd_voor_2015_met_renovatie_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_punten(
-    punten_voor_de_woz_waarde, vergelijk_met_testreferentie, renovatiedatum
-):
-    """Een woning gebouwd voor 2015 die buiten 2015 tot en met 2019 is gerenoveerd, krijgt geen minimum van 40 punten voor de WOZ-waarde.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
-    """
-    # Een woning van 1912 met meer dan 110 punten, gerenoveerd buiten 2015-2019.
+    # Een woning van 1912 met meer dan 110 punten, verbouwd in 2016.
     eenheid = meergezinswoning_van_71_m2(
         bouwjaar=1912,
         renovatie=EenhedenRenovatie(
-            omschrijving="hoogniveau renovatie",
-            datum=renovatiedatum,
-            bedrag_investering=10000,
+            omschrijving="hoogniveau renovatie", datum=date(2016, 1, 1)
         ),
         energieprestaties=[
             EenhedenEnergieprestatie(
@@ -830,16 +526,9 @@ def test_woning_gebouwd_voor_2015_met_renovatie_buiten_2015_tot_en_met_2019_krij
                 begindatum=date(2021, 2, 23),
                 einddatum=date(2027, 2, 23),
                 label=Energielabel.ap4,
-                waarde="1.48",
             )
         ],
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=219999
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=239999
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
             ),
@@ -851,6 +540,39 @@ def test_woning_gebouwd_voor_2015_met_renovatie_buiten_2015_tot_en_met_2019_krij
     assert "Nieuwbouw: min. 40 punten" not in punten_per_naam(groep)
     assert groep.punten == 34.75
     vergelijk_met_testreferentie(eenheid, groep)
+
+
+@pytest.mark.parametrize(
+    "bouwjaar",
+    [
+        pytest.param(2014, id="gebouwd_in_2014"),
+        pytest.param(2020, id="gebouwd_in_2020"),
+    ],
+)
+def test_woning_gebouwd_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_punten(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie, bouwjaar
+):
+    """Een woning gebouwd buiten 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
+    Bijlage I onder A, onderdeel 11.2.
+    """
+    # Een woning met meer dan 110 punten voor rubriek 1 tot en met 10 en 12.
+    eenheid = meergezinswoning_van_71_m2(
+        bouwjaar=bouwjaar,
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=259999
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning, match="energieprestaties") as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert "Nieuwbouw: min. 40 punten" not in punten_per_naam(groep)
+    assert groep.punten == 34.75
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 # De cap op de WOZ
@@ -886,12 +608,6 @@ def test_woz_punten_worden_beperkt_tot_33_procent_van_de_waardering(
             )
         ],
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=497000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=553900
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=613900
             ),
@@ -931,12 +647,6 @@ def test_woning_die_door_de_cap_onder_187_punten_komt_krijgt_186_punten(
             )
         ],
         woz_eenheden=[
-            EenhedenWozEenheid(
-                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=597000
-            ),
-            EenhedenWozEenheid(
-                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=653900
-            ),
             EenhedenWozEenheid(
                 waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=713900
             ),
