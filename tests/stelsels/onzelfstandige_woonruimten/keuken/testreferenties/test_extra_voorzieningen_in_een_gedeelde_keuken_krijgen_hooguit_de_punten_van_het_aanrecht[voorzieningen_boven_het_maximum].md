@@ -1,4 +1,4 @@
-# test_extra_voorzieningen_in_een_gedeelde_keuken_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_boven_het_aanrecht]
+# test_extra_voorzieningen_in_een_gedeelde_keuken_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_boven_het_maximum]
 
 Ook in een gedeelde keuken krijgen extra voorzieningen samen hooguit de punten van het aanrecht.
 

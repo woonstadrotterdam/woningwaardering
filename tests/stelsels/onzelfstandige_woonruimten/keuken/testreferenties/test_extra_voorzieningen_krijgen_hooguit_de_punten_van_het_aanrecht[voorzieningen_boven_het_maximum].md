@@ -1,6 +1,6 @@
-# test_extra_voorzieningen_in_een_gedeelde_keuken_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_onder_het_aanrecht]
+# test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_boven_het_maximum]
 
-Ook in een gedeelde keuken krijgen extra voorzieningen samen hooguit de punten van het aanrecht.
+Extra voorzieningen krijgen samen hooguit de punten van het aanrecht.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
 Bijlage I onder B, onderdeel 5.2.
@@ -9,14 +9,15 @@ Bijlage I onder B, onderdeel 5.2.
 
 ```text
 KEUKEN
-  Gedeeld met 2 onzelfstandige woonruimten
+  Privé
     - Keuken
-      - Lengte aanrecht                                            1000.00 mm     2.00 pt
+      - Lengte aanrecht                                            1000.00 mm     4.00 pt
       - Extra voorzieningen
-        - Inbouw koelkast                                             2.00 st     1.00 pt
-        - Inbouw oven elektrisch                                      1.00 st     0.50 pt
+        - Inbouw koelkast                                             4.00 st     4.00 pt
+        - Inbouw oven elektrisch                                      1.00 st     1.00 pt
+        - Maximaal evenveel punten als aanrecht                                  -1.00 pt
                                                                                 ------
-  Totaal                                                                          3.50 pt
+  Totaal                                                                          8.00 pt
 ```
 
 ## Waarschuwingen
@@ -65,11 +66,18 @@ Geen.
           "naam": "Inbouw koelkast"
         },
         {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
+          "code": "IKO",
+          "naam": "Inbouw koelkast"
+        },
+        {
           "code": "IOE",
           "naam": "Inbouw oven elektrisch"
         }
-      ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      ]
     }
   ]
 }
@@ -89,54 +97,69 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 3.5,
+  "punten": 8.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+        "id": "keuken__prive",
+        "naam": "Privé"
       }
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken",
+        "id": "keuken__prive__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+          "id": "keuken__prive"
         }
       }
     },
     {
       "aantal": 1000.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
+        "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         },
         "meeteenheid": {
           "code": "MIL",
           "naam": "Millimeter"
         }
       },
-      "punten": 2.0
+      "punten": 4.0
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+        "id": "keuken__prive__keuken__extra_voorzieningen",
         "naam": "Extra voorzieningen",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         }
       }
     },
     {
-      "aantal": 2.0,
+      "aantal": 4.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+        "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
         "naam": "Inbouw koelkast",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+          "id": "keuken__prive__keuken__extra_voorzieningen"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 4.0
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_oven_elektrisch",
+        "naam": "Inbouw oven elektrisch",
+        "bovenliggendeCriterium": {
+          "id": "keuken__prive__keuken__extra_voorzieningen"
         },
         "meeteenheid": {
           "code": "STU",
@@ -146,19 +169,14 @@ Geen.
       "punten": 1.0
     },
     {
-      "aantal": 1.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_oven_elektrisch",
-        "naam": "Inbouw oven elektrisch",
+        "id": "keuken__prive__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
+        "naam": "Maximaal evenveel punten als aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
+          "id": "keuken__prive__keuken__extra_voorzieningen"
         }
       },
-      "punten": 0.5
+      "punten": -1.0
     }
   ]
 }

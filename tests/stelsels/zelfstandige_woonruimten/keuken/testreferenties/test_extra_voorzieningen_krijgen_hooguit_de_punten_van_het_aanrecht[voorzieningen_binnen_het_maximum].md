@@ -1,4 +1,4 @@
-# test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_onder_het_aanrecht]
+# test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_binnen_het_maximum]
 
 Extra voorzieningen krijgen samen hooguit de punten van het aanrecht.
 

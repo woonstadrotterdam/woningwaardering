@@ -314,7 +314,7 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
                 Installatiesoort.inbouw_koelkast.naam: 2.0,
                 Installatiesoort.inbouw_oven_elektrisch.naam: 1.0,
             },
-            id="voorzieningen_onder_het_aanrecht",
+            id="voorzieningen_binnen_het_maximum",
         ),
         pytest.param(
             4,
@@ -324,7 +324,7 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
                 Installatiesoort.inbouw_oven_elektrisch.naam: 1.0,
                 "Maximaal evenveel punten als aanrecht": -1.0,
             },
-            id="voorzieningen_boven_het_aanrecht",
+            id="voorzieningen_boven_het_maximum",
         ),
     ],
 )

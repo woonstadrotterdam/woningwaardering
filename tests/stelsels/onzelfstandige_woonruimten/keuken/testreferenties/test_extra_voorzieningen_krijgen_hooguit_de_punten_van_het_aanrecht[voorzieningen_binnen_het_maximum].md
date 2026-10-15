@@ -1,4 +1,4 @@
-# test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_boven_het_aanrecht]
+# test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht[voorzieningen_binnen_het_maximum]
 
 Extra voorzieningen krijgen samen hooguit de punten van het aanrecht.
 
@@ -13,11 +13,10 @@ KEUKEN
     - Keuken
       - Lengte aanrecht                                            1000.00 mm     4.00 pt
       - Extra voorzieningen
-        - Inbouw koelkast                                             4.00 st     4.00 pt
+        - Inbouw koelkast                                             2.00 st     2.00 pt
         - Inbouw oven elektrisch                                      1.00 st     1.00 pt
-        - Maximaal evenveel punten als aanrecht                                  -1.00 pt
                                                                                 ------
-  Totaal                                                                          8.00 pt
+  Totaal                                                                          7.00 pt
 ```
 
 ## Waarschuwingen
@@ -66,14 +65,6 @@ Geen.
           "naam": "Inbouw koelkast"
         },
         {
-          "code": "IKO",
-          "naam": "Inbouw koelkast"
-        },
-        {
-          "code": "IKO",
-          "naam": "Inbouw koelkast"
-        },
-        {
           "code": "IOE",
           "naam": "Inbouw oven elektrisch"
         }
@@ -97,7 +88,7 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 8.0,
+  "punten": 7.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -139,7 +130,7 @@ Geen.
       }
     },
     {
-      "aantal": 4.0,
+      "aantal": 2.0,
       "criterium": {
         "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
         "naam": "Inbouw koelkast",
@@ -151,7 +142,7 @@ Geen.
           "naam": "Stuks"
         }
       },
-      "punten": 4.0
+      "punten": 2.0
     },
     {
       "aantal": 1.0,
@@ -167,16 +158,6 @@ Geen.
         }
       },
       "punten": 1.0
-    },
-    {
-      "criterium": {
-        "id": "keuken__prive__keuken__extra_voorzieningen__maximering_extra_voorzieningen",
-        "naam": "Maximaal evenveel punten als aanrecht",
-        "bovenliggendeCriterium": {
-          "id": "keuken__prive__keuken__extra_voorzieningen"
-        }
-      },
-      "punten": -1.0
     }
   ]
 }
