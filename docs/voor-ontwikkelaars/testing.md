@@ -64,7 +64,7 @@ Volgt de package een beleidsregel niet, of legt de test gedrag vast dat wettekst
 
 Bouw de input op met de functies uit `tests/input.py`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Waarom je de input zo kiest, zet je in één regel commentaar bij die input. Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`.
 
-Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
+Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft de functie alleen argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
 
 Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sanitair`), de `peildatum` en `vergelijk_met_testreferentie`. Een scenario dat in een fixture staat, is in de test niet meer te lezen.
 
