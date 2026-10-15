@@ -1,6 +1,8 @@
 """Energieprestatie, onzelfstandige woonruimten (rubriek 4)."""
 
+import sys
 from datetime import date
+from types import SimpleNamespace
 
 import pytest
 
@@ -495,6 +497,26 @@ def test_energieprestatie_zonder_soort_telt_niet_mee(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_zonder_energieprestatie_en_bouwjaar_krijgt_de_woonruimte_met_waarschuwing_geen_punten(
+    energieprestatie, vergelijk_met_testreferentie
+):
+    """Zonder energieprestatie en zonder bouwjaar krijgt de woonruimte met een waarschuwing geen punten voor de energieprestatie."""
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        monumenten=[],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
+    )
+
+    with pytest.warns(
+        UserWarning, match="'energieprestaties' is None"
+    ) as waarschuwingen:
+        groep = energieprestatie.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {}
+    assert groep.punten == 0.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
 # Monumenten
 
 
@@ -570,6 +592,40 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
     assert punten_per_naam(groep) == {"C (Energie-index)": 3.5}
     assert groep.punten == 3.5
     vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_eenheid_zonder_opgegeven_monumenten_geeft_een_waarschuwing(
+    energieprestatie, vergelijk_met_testreferentie, monkeypatch
+):
+    """Een eenheid waarvan `monumenten` niet is opgegeven, geeft een waarschuwing."""
+    # Vervangt de optionele package monumenten, zodat elke omgeving gelijk werkt.
+    monkeypatch.setitem(
+        sys.modules, "monumenten", SimpleNamespace(MonumentenClient=None)
+    )
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 3, 27),
+                einddatum=date(2031, 3, 27),
+                label=Energielabel.c,
+            )
+        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
+    )
+
+    with pytest.warns(
+        UserWarning, match="'monumenten' is niet gespecificeerd"
+    ) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = energieprestatie.waardeer(eenheid.model_copy())
+
+    # Zonder BAG-identificatie vindt de package geen monumentstatus: 10 m² x 0,35 punt.
+    assert punten_per_naam(groep) == {Energielabel.c.naam: 3.5}
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 # Energieprestatievergoeding

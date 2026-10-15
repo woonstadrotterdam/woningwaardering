@@ -323,6 +323,40 @@ def test_energieprestatie_zonder_soort_telt_niet_mee(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_energieprestatie_van_een_andere_soort_telt_niet_mee(
+    energieprestatie, vergelijk_met_testreferentie
+):
+    """Een energieprestatie van een andere soort dan een energielabel, energie-index of primair energieverbruik telt niet mee.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+
+    Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
+    Bijlage I onder A, onderdeel 4.1.
+    """
+    eenheid = EenhedenEenheid(
+        bouwjaar=1921,
+        monumenten=[],
+        panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.compactheid,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2031, 2, 23),
+                label=Energielabel.c,
+            )
+        ],
+    )
+
+    groep = energieprestatie.waardeer(eenheid)
+
+    # Bouwjaar 1976 of ouder geeft een meergezinswoning -15 punten.
+    assert punten_per_naam(groep) == {"Bouwjaar 1921": -15.0}
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 # Monumenten
 
 

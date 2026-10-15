@@ -435,6 +435,41 @@ def test_woning_die_niet_aan_alle_eisen_voor_het_lagere_kengetal_voldoet_krijgt_
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
+def test_woning_kleiner_dan_40_m2_gebouwd_in_2018_tot_en_met_2022_zonder_adres_krijgt_met_waarschuwing_het_gewone_kengetal(
+    punten_voor_de_woz_waarde, vergelijk_met_testreferentie
+):
+    """Zonder adres krijgt een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd, met een waarschuwing in onderdeel II het gewone kengetal van € 242.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6.
+    """
+    # Zonder adres is het COROP-gebied niet te bepalen.
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        bouwjaar=2018,
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=310000
+            ),
+        ],
+        gebruiksoppervlakte=39,
+        monumenten=[],
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=39.0)],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid)
+
+    assert any(
+        "geen adres gevonden voor COROP-gebied" in str(w.message)
+        for w in waarschuwingen
+    )
+    assert aantal_per_naam(groep)["Factor II"] == 242.0
+    # € 310.000 / 39 m² / € 242
+    assert punten_per_naam(groep)["Onderdeel II"] == 32.85
+    assert groep.punten == 53.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
 # Het minimum van 40 punten voor woningen uit 2015 tot en met 2019
 
 

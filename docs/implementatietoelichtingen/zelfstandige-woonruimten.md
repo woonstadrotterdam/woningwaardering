@@ -631,7 +631,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 >
 > - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
 > - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
-> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee; de waardering valt terug op het bouwjaar.
+> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee, net als een energieprestatie van een andere soort dan energielabel, voorlopig energielabel, energie-index of primair energieverbruik woningbouw (zoals compactheid); de waardering valt terug op het bouwjaar.
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -1534,7 +1534,7 @@ Voor het toepassen van deze aparte berekeningsmethode moet de woning voldoen aan
 > [!NOTE]
 > Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
 >
-> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
+> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie. Heeft de eenheid geen adres, dan volgt een `UserWarning` en krijgt de woning het gewone kengetal.
 
 Alleen als aan de bovenstaande eisen wordt voldaan dient bij de berekening van de WOZ-waarde gerekend te worden met de volgende kengetallen:
 
