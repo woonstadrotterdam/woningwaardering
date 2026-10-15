@@ -345,6 +345,28 @@ def test_alleen_zolder_met_vlizotrap_krijgt_de_aftrek(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
+def test_zolder_die_als_vertrek_is_aangeleverd_wordt_als_overige_ruimte_gewaardeerd(
+    oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
+):
+    """Een zolder die als vertrek is aangeleverd, wordt als overige ruimte gewaardeerd.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting,
+    inleiding).
+    """
+    # De detailsoort zolder voldoet niet aan de afwerkingseisen van een vertrek.
+    eenheid = EenhedenEenheid(
+        ruimten=[ruimte(Ruimtedetailsoort.zolder, soort=Ruimtesoort.vertrek)]
+    )
+
+    with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
+        groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.zolder.naam: 10.0}
+    assert groep.punten == 7.5
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
 def test_zolder_met_trap_en_vlizotrap_krijgt_geen_aftrek(
     oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
 ):
