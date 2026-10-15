@@ -76,7 +76,7 @@ De verwachte output van de tests staat op drie plekken: de testreferenties van w
 - Draai `task genereer-test-output` wanneer uit de taak blijkt dat de output gaat wijzigen (punten, namen, criterium-id's, rapport), zoals bij een bugfix voor verkeerde punten, of wanneer de gebruiker vooraf heeft gezegd dat de output mag wijzigen. Een nieuwe test heeft nog geen verwachte output en valt hier ook onder.
 - Bekijk daarna de diff: alleen de verwachte output die de taak hoort te raken is gewijzigd. Is er meer gewijzigd, zet die bestanden dan terug.
 - Wijkt een test af terwijl de taak geen outputwijziging voorziet: herstel de code en laat de verwachte output zoals hij was. Kom je er niet uit, laat de test dan rood en meld welke test afwijkt, wat er verschilt en wat volgens jou de oorzaak is.
-- `task genereer-test-output` is de enige schrijver van verwachte output; bewerk die bestanden niet met de hand. Een bestand verwijderen mag alleen wanneer de bijbehorende test of het bijbehorende model bewust is verwijderd of hernoemd.
+- Werk verwachte output alleen bij met `task genereer-test-output`; bewerk die bestanden niet met de hand. Een bestand verwijderen mag alleen wanneer de bijbehorende test of het bijbehorende model bewust is verwijderd of hernoemd.
 - Meld in je eindbericht en in de PR-beschrijving welke verwachte output is gewijzigd en waarom.
 
 ## Pull Requests

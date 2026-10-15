@@ -46,7 +46,7 @@ Een tabel uit één onderdeel van de bron, zoals de punten per aanrechtlengte in
 
 ### Naam
 
-De naam noemt de beleidsregel in gewone taal, niet de input of het rekenvoorbeeld: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, en `test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten_op_het_adres`, niet `test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, 0,01 m², één jaar, één ruimte, één punt): `test_precies_8m2_aan_vertrekken_geeft_geen_aftrek`.
+De naam noemt de beleidsregel in gewone taal, niet de input of het rekenvoorbeeld: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, en `test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten_op_het_adres`, niet `test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Controleert de test een grens uit de bron, dan noemt de naam die grens, en is de input gelijk aan die grens of wijkt hij er één kleinste stap van af (1 mm, 0,01 m², één jaar, één ruimte, één punt): `test_precies_8m2_aan_vertrekken_geeft_geen_aftrek`.
 
 ### Docstring
 
