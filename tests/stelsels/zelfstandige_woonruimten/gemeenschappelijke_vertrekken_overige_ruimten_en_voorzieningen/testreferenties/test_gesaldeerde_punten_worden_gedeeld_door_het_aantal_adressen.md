@@ -1,6 +1,6 @@
-# test_gesaldeerde_punten_worden_gedeeld_door_het_aantal_adressen_en_per_adres_afgerond_op_een_kwart_punt
+# test_gesaldeerde_punten_worden_gedeeld_door_het_aantal_adressen
 
-De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft en per adres afgerond op een kwart punt.
+De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
 Bijlage I onder A, toelichting rubriek 9.

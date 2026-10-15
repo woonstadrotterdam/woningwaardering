@@ -16,20 +16,8 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
       - Badkamer
         - Wastafel                                                    1.00 st     0.50 pt
         - Bad                                                         1.00 st     3.00 pt
-        - Extra voorzieningen
-          - Bubbelfunctie van het bad                                 1.00 st     0.75 pt
-          - Douchewand                                                1.00 st     0.63 pt
-          - Handdoekenradiator                                        1.00 st     0.38 pt
-          - Ingebouwd kastje met in- of opgebouwde wastafel           1.00 st     0.50 pt
-          - Kastruimte                                                2.00 st     0.75 pt
-          - Maximering voor Kastruimte                                           -0.38 pt
-          - Stopcontact bij wastafel                                  1.00 st     0.13 pt
-          - Éénhandsmengkraan                                         1.00 st     0.13 pt
-          - Thermostatische mengkraan                                 1.00 st     0.25 pt
-          - Max verdubbeling punten bad en douche                                -0.13 pt
-  Afronding op kwartpunten                                                       -0.01 pt
                                                                                 ------
-  Totaal                                                                         11.50 pt
+  Totaal                                                                          8.50 pt
 ```
 
 ## Waarschuwingen
@@ -62,42 +50,6 @@ Geen.
         {
           "code": "WAS",
           "naam": "Wastafel"
-        },
-        {
-          "code": "BUB",
-          "naam": "Bubbelfunctie van het bad"
-        },
-        {
-          "code": "DOW",
-          "naam": "Douchewand"
-        },
-        {
-          "code": "HRA",
-          "naam": "Handdoekenradiator"
-        },
-        {
-          "code": "IKW",
-          "naam": "Ingebouwd kastje met in- of opgebouwde wastafel"
-        },
-        {
-          "code": "KAS",
-          "naam": "Kastruimte"
-        },
-        {
-          "code": "KAS",
-          "naam": "Kastruimte"
-        },
-        {
-          "code": "STW",
-          "naam": "Stopcontact bij wastafel"
-        },
-        {
-          "code": "EHM",
-          "naam": "Éénhandsmengkraan"
-        },
-        {
-          "code": "TME",
-          "naam": "Thermostatische mengkraan"
         }
       ]
     }
@@ -119,7 +71,7 @@ Geen.
       "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
     }
   },
-  "punten": 11.5,
+  "punten": 8.5,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -198,162 +150,6 @@ Geen.
         }
       },
       "punten": 3.0
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen",
-        "naam": "Extra voorzieningen",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer"
-        }
-      }
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__bubbelfunctie_van_het_bad",
-        "naam": "Bubbelfunctie van het bad",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.75
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__douchewand",
-        "naam": "Douchewand",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.63
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__handdoekenradiator",
-        "naam": "Handdoekenradiator",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.38
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__ingebouwd_kastje_met_in_of_opgebouwde_wastafel",
-        "naam": "Ingebouwd kastje met in- of opgebouwde wastafel",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.5
-    },
-    {
-      "aantal": 2.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__kastruimte",
-        "naam": "Kastruimte",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.75
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__max_punten_kastruimte",
-        "naam": "Maximering voor Kastruimte",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        }
-      },
-      "punten": -0.38
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__stopcontact_bij_wastafel",
-        "naam": "Stopcontact bij wastafel",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.13
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__eenhandsmengkraan",
-        "naam": "Éénhandsmengkraan",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.13
-    },
-    {
-      "aantal": 1.0,
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__thermostatische_mengkraan",
-        "naam": "Thermostatische mengkraan",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.25
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen__maximering_punten_voorzieningen",
-        "naam": "Max verdubbeling punten bad en douche",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__sanitair__badkamer__extra_voorzieningen"
-        }
-      },
-      "punten": -0.13
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.01
     }
   ]
 }

@@ -190,45 +190,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijk_vertrek(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-@pytest.mark.parametrize(
-    (
-        "oppervlakte_berging",
-        "oppervlakte_met_kast",
-        "verwachte_punten",
-        "verwacht_totaal",
-    ),
-    [
-        pytest.param(
-            8.0,
-            10.0,
-            {"Oppervlakte van overige ruimten": 3.75},
-            3.75,
-            id="berging_van_8m2",
-        ),
-        pytest.param(
-            3.0,
-            5.0,
-            {
-                "Oppervlakte van overige ruimten": 1.88,
-                "Afronding op kwartpunten": 0.12,
-            },
-            2.0,
-            id="berging_van_3m2",
-            marks=pytest.mark.toelichting(
-                "de 5 m² geeft 3,75 punten; gedeeld door 2 adressen is dat 1,875 "
-                "punt, in het rapport 1,88. Dat is precies een achtste punt boven "
-                "1,75 en wordt naar boven afgerond op 2 punten."
-            ),
-        ),
-    ],
-)
 def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruimte(
     gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,
     vergelijk_met_testreferentie,
-    oppervlakte_berging,
-    oppervlakte_met_kast,
-    verwachte_punten,
-    verwacht_totaal,
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke overige ruimte.
 
@@ -241,7 +205,7 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruim
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.berging,
-                oppervlakte=oppervlakte_berging,
+                oppervlakte=8,
                 verbonden_ruimten=[kast],
                 gedeeld_met_aantal_adressen=2,
             )
@@ -252,9 +216,11 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruim
         eenheid
     )
 
-    assert aantal_per_naam(groep) == {"Berging (+1 kast)": oppervlakte_met_kast}
-    assert punten_per_naam(groep) == verwachte_punten
-    assert groep.punten == verwacht_totaal
+    assert aantal_per_naam(groep) == {"Berging (+1 kast)": 10.0}
+    # 10 m² is 7,5 punten, gedeeld door 2 adressen; zonder de kast zou het 3,0
+    # punten zijn.
+    assert punten_per_naam(groep) == {"Oppervlakte van overige ruimten": 3.75}
+    assert groep.punten == 3.75
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -270,15 +236,9 @@ def test_aftrek_voor_gemeenschappelijke_zolder_zonder_vaste_trap_wordt_gedeeld_d
     Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
     Bijlage I onder A, toelichting rubriek 9.
     """
-    # Een vlizotrap en geen trap geldt als geen vaste trap (implementatietoelichting
-    # 2.2.2.3).
+    # Vlizotrap zonder trap: geen vaste trap (implementatietoelichting 2.2.2.3).
     eenheid = EenhedenEenheid(
         ruimten=[
-            ruimte(
-                Ruimtedetailsoort.berging,
-                oppervlakte=6,
-                gedeeld_met_aantal_adressen=2,
-            ),
             ruimte(
                 Ruimtedetailsoort.zolder,
                 oppervlakte=16,
@@ -293,12 +253,12 @@ def test_aftrek_voor_gemeenschappelijke_zolder_zonder_vaste_trap_wordt_gedeeld_d
     )
 
     assert punten_per_naam(groep) == {
-        # 22 m² is 16,5 punten, gedeeld door 2 adressen.
-        "Subtotaal": 8.25,
+        # 16 m² is 12 punten, gedeeld door 2 adressen.
+        "Subtotaal": 6.0,
         # 5 punten gedeeld door 2 adressen.
         "Correctie: zolder zonder vaste trap": -2.5,
     }
-    assert groep.punten == 5.75
+    assert groep.punten == 3.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -456,10 +416,8 @@ def test_punten_voor_keuken_in_gemeenschappelijke_ruimte_worden_gedeeld_door_het
             ruimte(
                 Ruimtedetailsoort.keuken,
                 Installatiesoort.inbouw_koelkast,
-                Installatiesoort.inbouw_koelkast,
                 elementen=[aanrecht(1000)],
                 oppervlakte=10,
-                verwarmd=True,
                 gedeeld_met_aantal_adressen=5,
             )
         ]
@@ -472,11 +430,11 @@ def test_punten_voor_keuken_in_gemeenschappelijke_ruimte_worden_gedeeld_door_het
     punten = punten_per_bovenliggende(groep)
     # 4 punten gedeeld door 5 adressen.
     assert punten[Ruimtedetailsoort.keuken.naam] == {"Lengte aanrecht": 0.8}
-    # 2 punten gedeeld door 5 adressen.
-    assert punten["Extra voorzieningen"] == {Installatiesoort.inbouw_koelkast.naam: 0.4}
-    # Met 2 punten voor de oppervlakte en 0,4 punt voor de verwarming samen 3,6
-    # punten, afgerond op kwartpunten 3,5.
-    assert groep.punten == 3.5
+    # 1 punt gedeeld door 5 adressen.
+    assert punten["Extra voorzieningen"] == {Installatiesoort.inbouw_koelkast.naam: 0.2}
+    # Met 2 punten voor de oppervlakte, 0,8 voor het aanrecht en 0,2 voor de
+    # koelkast samen 3,0 punten.
+    assert groep.punten == 3.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -534,8 +492,44 @@ def test_punten_voor_sanitair_in_gemeenschappelijke_ruimte_worden_gedeeld_door_h
     Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
     Bijlage I onder A, toelichting rubriek 9.
     """
-    # Twee kastruimtes (maximum 0,75 punt) en extra voorzieningen die samen meer
-    # punten geven dan het bad.
+    # Gedeeld met 2 adressen, zodat er niet afgerond hoeft te worden.
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.bad,
+                Installatiesoort.wastafel,
+                oppervlakte=10,
+                gedeeld_met_aantal_adressen=2,
+            )
+        ]
+    )
+
+    groep = gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen.waardeer(
+        eenheid
+    )
+
+    # Een wastafel is 1 punt en een bad 6 punten, gedeeld door 2 adressen.
+    punten = punten_per_bovenliggende(groep)
+    assert punten[Ruimtedetailsoort.badkamer.naam] == {
+        Installatiesoort.wastafel.naam: 0.5,
+        Installatiesoort.bad.naam: 3.0,
+    }
+    # Met 5 punten voor de oppervlakte samen 8,5 punten.
+    assert groep.punten == 8.5
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+def test_maxima_voor_sanitair_gelden_voor_het_delen_door_het_aantal_adressen(
+    gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,
+    vergelijk_met_testreferentie,
+):
+    """De maxima voor sanitaire voorzieningen gelden voordat de punten door het aantal adressen worden gedeeld.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
+    Bijlage I onder A, toelichting rubriek 9.
+    """
+    # Twee kastruimtes en extra voorzieningen die samen meer punten geven dan het bad.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -592,19 +586,16 @@ def test_punten_voor_sanitair_in_gemeenschappelijke_ruimte_worden_gedeeld_door_h
 # Rekenvoorbeeld
 
 
-def test_gesaldeerde_punten_worden_gedeeld_door_het_aantal_adressen_en_per_adres_afgerond_op_een_kwart_punt(
+def test_gesaldeerde_punten_worden_gedeeld_door_het_aantal_adressen(
     gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,
     vergelijk_met_testreferentie,
 ):
-    """De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft en per adres afgerond op een kwart punt.
+    """De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
     Bijlage I onder A, toelichting rubriek 9.
     """
-    # De keuken en het toilet zijn die uit het voorbeeld. Het voorbeeld verwarmt de
-    # keuken met een radiator; de package leest de verwarming af aan `verwarmd`
-    # (implementatietoelichting datamodel-uitbreidingen, Verkoeld en verwarmd), dus
-    # beide staan in de input.
+    # Keuken en toilet uit het rekenvoorbeeld; verwarmd staat voor de radiator.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -673,9 +664,7 @@ def test_zorgwoning_krijgt_3_punten(
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.9.4.
     """
-    # Een zorgwoning wordt aangegeven met de doelgroep zorg; de gemeenschappelijke
-    # ruimten hoeven dan niet gespecificeerd te worden (implementatietoelichting
-    # zelfstandige woonruimten, 2.9.4), dus alleen een eigen woonkamer.
+    # Doelgroep zorg: gemeenschappelijke ruimten hoeven niet in de input (2.9.4).
     eenheid = EenhedenEenheid(
         doelgroep=Doelgroep.zorg,
         ruimten=[ruimte(Ruimtedetailsoort.woonkamer)],

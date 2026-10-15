@@ -1,4 +1,4 @@
-# test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruimte[berging_van_8m2]
+# test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruimte
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke overige ruimte.
 

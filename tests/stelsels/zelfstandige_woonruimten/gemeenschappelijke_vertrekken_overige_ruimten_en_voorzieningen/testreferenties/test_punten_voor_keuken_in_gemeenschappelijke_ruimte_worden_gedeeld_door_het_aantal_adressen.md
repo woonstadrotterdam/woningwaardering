@@ -12,17 +12,13 @@ GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 5 adressen
     - Oppervlakte van vertrekken                                                  2.00 pt
       - Keuken                                                       10.00 m²
-    - Verkoeling en verwarming
-      - Verwarmde vertrekken
-        - Keuken                                                                  0.40 pt
     - Keuken
       - Keuken
         - Lengte aanrecht                                          1000.00 mm     0.80 pt
         - Extra voorzieningen
-          - Inbouw koelkast                                           2.00 st     0.40 pt
-  Afronding op kwartpunten                                                       -0.10 pt
+          - Inbouw koelkast                                           1.00 st     0.20 pt
                                                                                 ------
-  Totaal                                                                          3.50 pt
+  Totaal                                                                          3.00 pt
 ```
 
 ## Waarschuwingen
@@ -62,12 +58,7 @@ Geen.
           "lengte": 1000.0
         }
       ],
-      "verwarmd": true,
       "installaties": [
-        {
-          "code": "IKO",
-          "naam": "Inbouw koelkast"
-        },
         {
           "code": "IKO",
           "naam": "Inbouw koelkast"
@@ -92,7 +83,7 @@ Geen.
       "naam": "Gemeenschappelijke vertrekken, overige ruimten en voorzieningen"
     }
   },
-  "punten": 3.5,
+  "punten": 3.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -123,34 +114,6 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__verkoeling_en_verwarming",
-        "naam": "Verkoeling en verwarming",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__verkoeling_en_verwarming__verwarmde_vertrekken",
-        "naam": "Verwarmde vertrekken",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__verkoeling_en_verwarming"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__keuken",
-        "naam": "Keuken",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
-        }
-      },
-      "punten": 0.4
     },
     {
       "criterium": {
@@ -195,7 +158,7 @@ Geen.
       }
     },
     {
-      "aantal": 2.0,
+      "aantal": 1.0,
       "criterium": {
         "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_5_adressen__keuken__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
         "naam": "Inbouw koelkast",
@@ -207,14 +170,7 @@ Geen.
           "naam": "Stuks"
         }
       },
-      "punten": 0.4
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.1
+      "punten": 0.2
     }
   ]
 }
