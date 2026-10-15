@@ -514,7 +514,7 @@ Binnen rubriek 3 van de woningwaardering wordt van de bovenstaande regel afgewek
 Ook een aanrecht dat is geplaatst in een woon- of slaapvertrek is een open keuken, ook als er geen duidelijke afscheiding is tussen het keukengedeelte en de rest van het vertrek.
 
 > [!NOTE]
-> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Een aanrecht zonder lengte telt niet als open keuken. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
+> Omdat wij in de package niet (kunnen) controleren op keukenkastjes, doen wij de aanname dat een aanrecht vanaf 1 meter een open keuken is. Het beleidsboek spreekt hier van een "woon- of slaapvertrek"; wij lezen dat als de eis dat de ruimte minimaal aan [de voorwaarden van een vertrek](#2212-de-voorwaarden-van-een-vertrek) voldoet. Elke ruimte (uitgezonderd `keuken`, `bijkeuken`, `badkamer`, `badkamer_met_toilet` en `doucheruimte`) die als vertrek wordt gewaardeerd en waarin een aanrecht vanaf 1 meter staat, heeft dus een open keuken, ook bijvoorbeeld een `serre`, `overig vertrek` of een `berging` die als vertrek wordt aangeleverd. Ruimtedetailsoorten die de keuken al in zich hebben (`woonkamer_en_of_keuken`, `woon_en_of_slaapkamer_en_of_keuken`) tellen altijd als open keuken, ook zonder aanrecht in de input.
 
 #### 2.3.3 Extra punten bij verkoelingsfunctie
 
@@ -597,7 +597,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 >
 > - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
 > - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
-> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee, net als een energieprestatie van een andere soort dan energielabel, voorlopig energielabel, energie-index of primair energieverbruik woningbouw (zoals compactheid); de waardering valt terug op het bouwjaar.
+> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee, net als een energieprestatie van een andere soort dan energielabel, voorlopig energielabel, energie-index of primair energieverbruik woningbouw (zoals compactheid). De waardering valt dan terug op het bouwjaar.
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -734,7 +734,7 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
 
 > [!NOTE]
-> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn. Een ruimte zonder een aanrecht van minimaal 1 meter lang krijgt dus ook geen punten voor extra voorzieningen.
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: er moet een aanrecht van minimaal 1 meter lang aanwezig zijn in de ruimte.
 
 > [!NOTE]
 > Geef alleen aanrechten mee indien de keuken voldoet aan de basisvoorzieningen. Geef een spoelbak niet als `wastafel` mee.
