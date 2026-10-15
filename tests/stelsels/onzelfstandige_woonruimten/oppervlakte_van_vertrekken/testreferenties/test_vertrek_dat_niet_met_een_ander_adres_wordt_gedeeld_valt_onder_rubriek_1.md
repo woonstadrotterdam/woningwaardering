@@ -11,7 +11,7 @@ B, toelichting, inleiding).
 ```text
 OPPERVLAKTE VAN VERTREKKEN
   Privé
-    - Slaapkamer                                                      5.00 m²
+    - Slaapkamer1                                                     5.00 m²
                                                                                 ------
   Totaal                                                                          5.00 pt
 ```
@@ -26,7 +26,7 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "slaapkamer",
+      "id": "slaapkamer1",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
@@ -35,9 +35,23 @@ Geen.
         "code": "SLA",
         "naam": "Slaapkamer"
       },
-      "naam": "Slaapkamer",
+      "naam": "Slaapkamer1",
       "oppervlakte": 5.0,
       "gedeeldMetAantalAdressen": 1
+    },
+    {
+      "id": "slaapkamer2",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "SLA",
+        "naam": "Slaapkamer"
+      },
+      "naam": "Slaapkamer2",
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalAdressen": 2
     }
   ]
 }
@@ -68,8 +82,8 @@ Geen.
     {
       "aantal": 5.0,
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__prive__slaapkamer",
-        "naam": "Slaapkamer",
+        "id": "oppervlakte_van_vertrekken__prive__slaapkamer1",
+        "naam": "Slaapkamer1",
         "bovenliggendeCriterium": {
           "id": "oppervlakte_van_vertrekken__prive"
         },

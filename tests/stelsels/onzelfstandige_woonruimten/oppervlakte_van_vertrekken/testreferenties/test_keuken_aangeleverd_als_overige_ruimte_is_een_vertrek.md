@@ -11,9 +11,9 @@ B, toelichting, inleiding).
 ```text
 OPPERVLAKTE VAN VERTREKKEN
   Privé
-    - Keuken                                                          1.00 m²
+    - Keuken                                                         10.00 m²
                                                                                 ------
-  Totaal                                                                          1.00 pt
+  Totaal                                                                         10.00 pt
 ```
 
 ## Waarschuwingen
@@ -36,7 +36,7 @@ OPPERVLAKTE VAN VERTREKKEN
         "naam": "Keuken"
       },
       "naam": "Keuken",
-      "oppervlakte": 1.0
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -56,7 +56,7 @@ OPPERVLAKTE VAN VERTREKKEN
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 1.0,
+  "punten": 10.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -65,7 +65,7 @@ OPPERVLAKTE VAN VERTREKKEN
       }
     },
     {
-      "aantal": 1.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__prive__keuken",
         "naam": "Keuken",

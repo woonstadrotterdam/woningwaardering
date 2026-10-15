@@ -1,18 +1,15 @@
-# test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek[samen_meer_dan_4m2]
+# test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek[samen_net_onder_4m2]
 
 Een ruimte kleiner dan 4 m² is een vertrek als zij met haar kast 4 m² of groter is.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4;
 wettekst, Bijlage I onder A, toelichting rubriek 1.
 
+Dit geval: het vertrek van 3,49 m² en de kast van 0,50 m² zijn samen 3,99 m², net onder de minimale oppervlakte van een vertrek
+
 ## Rapport
 
-```text
-OPPERVLAKTE VAN VERTREKKEN
-  Slaapkamer (+1 kast)                                                4.20 m²
-                                                                    ------      ------
-  Totaal                                                              4.20 m²     4.00 pt
-```
+Geen waarderingen voor Oppervlakte van vertrekken.
 
 ## Waarschuwingen
 
@@ -34,7 +31,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 3.7,
+      "oppervlakte": 3.49,
       "verbondenRuimten": [
         {
           "id": "kast",
@@ -69,19 +66,7 @@ Geen.
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 4.0,
-  "woningwaarderingen": [
-    {
-      "aantal": 4.2,
-      "criterium": {
-        "id": "oppervlakte_van_vertrekken__slaapkamer",
-        "naam": "Slaapkamer (+1 kast)",
-        "meeteenheid": {
-          "code": "M2",
-          "naam": "Vierkante meter, m2"
-        }
-      }
-    }
-  ]
+  "punten": 0.0,
+  "woningwaarderingen": []
 }
 ```

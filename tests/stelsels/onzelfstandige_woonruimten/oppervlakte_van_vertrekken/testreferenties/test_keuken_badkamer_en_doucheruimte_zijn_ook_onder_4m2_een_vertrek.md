@@ -1,6 +1,6 @@
-# test_keuken_en_badkamer_zijn_ook_onder_4m2_een_vertrek
+# test_keuken_badkamer_en_doucheruimte_zijn_ook_onder_4m2_een_vertrek
 
-Een keuken en een badkamer zijn ook onder de 4 m² een vertrek.
+Een keuken, badkamer en doucheruimte zijn ook onder de 4 m² een vertrek.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1;
 wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
@@ -11,10 +11,12 @@ B, toelichting, inleiding).
 ```text
 OPPERVLAKTE VAN VERTREKKEN
   Privé
-    - Keuken                                                          2.00 m²
-    - Badkamer met toilet                                             2.00 m²
+    - Keuken                                                          3.99 m²
+    - Badkamer                                                        3.99 m²
+    - Badkamer met toilet                                             3.99 m²
+    - Doucheruimte                                                    3.99 m²
                                                                                 ------
-  Totaal                                                                          4.00 pt
+  Totaal                                                                         16.00 pt
 ```
 
 ## Waarschuwingen
@@ -37,7 +39,20 @@ Geen.
         "naam": "Keuken"
       },
       "naam": "Keuken",
-      "oppervlakte": 2.0
+      "oppervlakte": 3.99
+    },
+    {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "oppervlakte": 3.99
     },
     {
       "id": "badkamer_met_toilet",
@@ -50,7 +65,20 @@ Geen.
         "naam": "Badkamer met toilet"
       },
       "naam": "Badkamer met toilet",
-      "oppervlakte": 2.0
+      "oppervlakte": 3.99
+    },
+    {
+      "id": "doucheruimte",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "DOU",
+        "naam": "Doucheruimte"
+      },
+      "naam": "Doucheruimte",
+      "oppervlakte": 3.99
     }
   ]
 }
@@ -70,7 +98,7 @@ Geen.
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 4.0,
+  "punten": 16.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -79,7 +107,7 @@ Geen.
       }
     },
     {
-      "aantal": 2.0,
+      "aantal": 3.99,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__prive__keuken",
         "naam": "Keuken",
@@ -93,10 +121,38 @@ Geen.
       }
     },
     {
-      "aantal": 2.0,
+      "aantal": 3.99,
+      "criterium": {
+        "id": "oppervlakte_van_vertrekken__prive__badkamer",
+        "naam": "Badkamer",
+        "bovenliggendeCriterium": {
+          "id": "oppervlakte_van_vertrekken__prive"
+        },
+        "meeteenheid": {
+          "code": "M2",
+          "naam": "Vierkante meter, m2"
+        }
+      }
+    },
+    {
+      "aantal": 3.99,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__prive__badkamer_met_toilet",
         "naam": "Badkamer met toilet",
+        "bovenliggendeCriterium": {
+          "id": "oppervlakte_van_vertrekken__prive"
+        },
+        "meeteenheid": {
+          "code": "M2",
+          "naam": "Vierkante meter, m2"
+        }
+      }
+    },
+    {
+      "aantal": 3.99,
+      "criterium": {
+        "id": "oppervlakte_van_vertrekken__prive__doucheruimte",
+        "naam": "Doucheruimte",
         "bovenliggendeCriterium": {
           "id": "oppervlakte_van_vertrekken__prive"
         },

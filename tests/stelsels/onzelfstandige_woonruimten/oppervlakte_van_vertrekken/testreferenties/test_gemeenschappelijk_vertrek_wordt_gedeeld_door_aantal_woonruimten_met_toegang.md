@@ -2,21 +2,19 @@
 
 Een gemeenschappelijk vertrek wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot dat vertrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1;
-implementatietoelichting onzelfstandige woonruimten, 2.1.5; wettekst,
-Bijlage I onder B, onderdeel 1; wettekst, Bijlage I onder B,
-toelichting, inleiding.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1; wettekst,
+Bijlage I onder B, onderdeel 1.
 
 ## Rapport
 
 ```text
 OPPERVLAKTE VAN VERTREKKEN
   Gedeeld met 6 onzelfstandige woonruimten
-    - Woonkamer                                                      10.00 m²
-  Gedeeld met 5 onzelfstandige woonruimten
-    - Slaapkamer                                                     10.00 m²
+    - Woonkamer                                                      12.00 m²
+  Gedeeld met 4 onzelfstandige woonruimten
+    - Slaapkamer                                                     20.00 m²
                                                                                 ------
-  Totaal                                                                          4.00 pt
+  Totaal                                                                          7.00 pt
 ```
 
 ## Waarschuwingen
@@ -39,7 +37,7 @@ Geen.
         "naam": "Woonkamer"
       },
       "naam": "Woonkamer",
-      "oppervlakte": 10.0,
+      "oppervlakte": 12.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
     },
     {
@@ -53,8 +51,8 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
+      "oppervlakte": 20.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ]
 }
@@ -74,7 +72,7 @@ Geen.
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 4.0,
+  "punten": 7.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -83,7 +81,7 @@ Geen.
       }
     },
     {
-      "aantal": 10.0,
+      "aantal": 12.0,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__gedeeld_met_6_onzelfstandige_woonruimten__woonkamer",
         "naam": "Woonkamer",
@@ -98,17 +96,17 @@ Geen.
     },
     {
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__gedeeld_met_5_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 5 onzelfstandige woonruimten"
+        "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten",
+        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
       }
     },
     {
-      "aantal": 10.0,
+      "aantal": 20.0,
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__gedeeld_met_5_onzelfstandige_woonruimten__slaapkamer",
+        "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten__slaapkamer",
         "naam": "Slaapkamer",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_vertrekken__gedeeld_met_5_onzelfstandige_woonruimten"
+          "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten"
         },
         "meeteenheid": {
           "code": "M2",

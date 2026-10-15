@@ -5,8 +5,8 @@ De oppervlakte van privévertrekken en de toe te rekenen oppervlakte van gemeens
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
 wettekst, Bijlage I onder B, toelichting rubriek 1.
 
-De oppervlakte per vertrek wordt afgerond op twee decimalen, en die van
-alle vertrekken samen na saldering op hele vierkante meters.
+De oppervlakte van alle vertrekken samen wordt na saldering afgerond op hele
+vierkante meters.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
 wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
@@ -17,11 +17,11 @@ B, toelichting, inleiding).
 ```text
 OPPERVLAKTE VAN VERTREKKEN
   Privé
-    - Slaapkamer                                                     15.49 m²
-  Gedeeld met 3 onzelfstandige woonruimten
-    - Keuken                                                         11.24 m²
+    - Slaapkamer                                                     10.40 m²
+  Gedeeld met 4 onzelfstandige woonruimten
+    - Keuken                                                         40.40 m²
                                                                                 ------
-  Totaal                                                                         19.00 pt
+  Totaal                                                                         21.00 pt
 ```
 
 ## Waarschuwingen
@@ -44,7 +44,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 15.4912
+      "oppervlakte": 10.4
     },
     {
       "id": "keuken",
@@ -57,8 +57,8 @@ Geen.
         "naam": "Keuken"
       },
       "naam": "Keuken",
-      "oppervlakte": 11.2395,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 3
+      "oppervlakte": 40.4,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ]
 }
@@ -78,7 +78,7 @@ Geen.
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 19.0,
+  "punten": 21.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -87,7 +87,7 @@ Geen.
       }
     },
     {
-      "aantal": 15.49,
+      "aantal": 10.4,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__prive__slaapkamer",
         "naam": "Slaapkamer",
@@ -102,17 +102,17 @@ Geen.
     },
     {
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__gedeeld_met_3_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 3 onzelfstandige woonruimten"
+        "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten",
+        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
       }
     },
     {
-      "aantal": 11.24,
+      "aantal": 40.4,
       "criterium": {
-        "id": "oppervlakte_van_vertrekken__gedeeld_met_3_onzelfstandige_woonruimten__keuken",
+        "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_vertrekken__gedeeld_met_3_onzelfstandige_woonruimten"
+          "id": "oppervlakte_van_vertrekken__gedeeld_met_4_onzelfstandige_woonruimten"
         },
         "meeteenheid": {
           "code": "M2",

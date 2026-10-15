@@ -118,37 +118,43 @@ def test_vertrek_moet_minimaal_4m2_groot_zijn(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_keuken_en_badkamer_zijn_ook_onder_4m2_een_vertrek(
+def test_keuken_badkamer_en_doucheruimte_zijn_ook_onder_4m2_een_vertrek(
     oppervlakte_van_vertrekken, vergelijk_met_testreferentie
 ):
-    """Een keuken en een badkamer zijn ook onder de 4 m² een vertrek.
+    """Een keuken, badkamer en doucheruimte zijn ook onder de 4 m² een vertrek.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
     wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
-    # Een keuken en een badkamer van 2 m², kleiner dan de 4 m² van een vertrek.
+    # Elk van de vier ruimten is 0,01 m² onder de 4 m² van een vertrek.
     eenheid = EenhedenEenheid(
         ruimten=[
-            ruimte(Ruimtedetailsoort.keuken, oppervlakte=2),
-            ruimte(Ruimtedetailsoort.badkamer_met_toilet, oppervlakte=2),
+            ruimte(Ruimtedetailsoort.keuken, oppervlakte=3.99),
+            ruimte(Ruimtedetailsoort.badkamer, oppervlakte=3.99),
+            ruimte(Ruimtedetailsoort.badkamer_met_toilet, oppervlakte=3.99),
+            ruimte(Ruimtedetailsoort.doucheruimte, oppervlakte=3.99),
         ]
     )
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {
-        Ruimtedetailsoort.keuken.naam: 2.0,
-        Ruimtedetailsoort.badkamer_met_toilet.naam: 2.0,
+        Ruimtedetailsoort.keuken.naam: 3.99,
+        Ruimtedetailsoort.badkamer.naam: 3.99,
+        Ruimtedetailsoort.badkamer_met_toilet.naam: 3.99,
+        Ruimtedetailsoort.doucheruimte.naam: 3.99,
     }
-    assert groep.punten == 4.0
+    # 4 × 3,99 m² is 15,96 m², afgerond 16.
+    assert groep.punten == 16.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
 @pytest.mark.parametrize(
-    ("oppervlakte_zonder_kast", "oppervlakte_met_kast"),
+    ("oppervlakte_zonder_kast", "verwachte_aantallen", "verwachte_punten"),
     [
         pytest.param(
             3.5,
+            {"Slaapkamer (+1 kast)": 4.0},
             4.0,
             id="samen_precies_4m2",
             marks=pytest.mark.toelichting(
@@ -156,21 +162,31 @@ def test_keuken_en_badkamer_zijn_ook_onder_4m2_een_vertrek(
                 "4,00 m², de minimale oppervlakte van een vertrek"
             ),
         ),
-        pytest.param(3.7, 4.2, id="samen_meer_dan_4m2"),
+        pytest.param(
+            3.49,
+            {},
+            0.0,
+            id="samen_net_onder_4m2",
+            marks=pytest.mark.toelichting(
+                "het vertrek van 3,49 m² en de kast van 0,50 m² zijn samen 3,99 m², "
+                "net onder de minimale oppervlakte van een vertrek"
+            ),
+        ),
     ],
 )
 def test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek(
     oppervlakte_van_vertrekken,
     vergelijk_met_testreferentie,
     oppervlakte_zonder_kast,
-    oppervlakte_met_kast,
+    verwachte_aantallen,
+    verwachte_punten,
 ):
     """Een ruimte kleiner dan 4 m² is een vertrek als zij met haar kast 4 m² of groter is.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4;
     wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
-    # De slaapkamer haalt de 4 m² alleen met de kast van 0,5 m² erbij.
+    # De slaapkamer haalt de 4 m² alleen met de kast van 0,5 m² erbij, of net niet.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.5)
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -184,8 +200,8 @@ def test_kast_telt_mee_voor_de_minimale_oppervlakte_van_een_vertrek(
 
     groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {"Slaapkamer (+1 kast)": oppervlakte_met_kast}
-    assert groep.punten == 4.0
+    assert aantal_per_naam(groep) == verwachte_aantallen
+    assert groep.punten == verwachte_punten
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -200,23 +216,16 @@ def test_keuken_aangeleverd_als_overige_ruimte_is_een_vertrek(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
     wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
-    # De keuken is als overige ruimte aangeleverd, om te laten zien dat de
-    # aangeleverde ruimtesoort niet bepaalt of hij als vertrek telt.
+    # Als overige ruimte aangeleverd: de ruimtesoort bepaalt niet of een keuken een vertrek is.
     eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                soort=Ruimtesoort.overige_ruimten,
-                oppervlakte=1,
-            )
-        ]
+        ruimten=[ruimte(Ruimtedetailsoort.keuken, soort=Ruimtesoort.overige_ruimten)]
     )
 
     with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
         groep = oppervlakte_van_vertrekken.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {Ruimtedetailsoort.keuken.naam: 1.0}
-    assert groep.punten == 1.0
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.keuken.naam: 10.0}
+    assert groep.punten == 10.0
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
@@ -227,8 +236,7 @@ def test_schuur_aangeleverd_als_vertrek_is_een_vertrek(
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2.
     """
-    # Een schuur kan tot rubriek 1 of 2 horen, dus de aangeleverde ruimtesoort
-    # beslist.
+    # Een schuur kan in rubriek 1 of 2 horen, dus de aangeleverde ruimtesoort beslist.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.schuur, soort=Ruimtesoort.vertrek, oppervlakte=6)
@@ -254,8 +262,7 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
     implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
     Bijlage I onder A, toelichting rubriek 1.
     """
-    # De drie gevallen laten zien dat alleen een vlizotrap een zoldervertrek als
-    # vertrek uitsluit.
+    # Alleen een vlizotrap sluit een zoldervertrek als vertrek uit.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -263,8 +270,7 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
                 naam="Zoldervertrek1",
                 elementen=[element(Bouwkundigelementdetailsoort.trap)],
             ),
-            # Zonder trap als bouwkundig element: de detailsoort gaat uit van
-            # een vaste trap.
+            # Zonder trap als element: de detailsoort gaat uit van een vaste trap.
             ruimte(Ruimtedetailsoort.zoldervertrek, naam="Zoldervertrek2"),
             ruimte(
                 Ruimtedetailsoort.zoldervertrek,
@@ -292,8 +298,7 @@ def test_zolder_is_nooit_een_vertrek(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3;
     wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
-    # De zolder wordt zowel als vertrek als als overige ruimte aangeleverd, om te
-    # laten zien dat de aangeleverde ruimtesoort niets verandert.
+    # Als vertrek en als overige ruimte aangeleverd: de ruimtesoort verandert niets.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.zolder, naam="Zolder1", soort=Ruimtesoort.vertrek),

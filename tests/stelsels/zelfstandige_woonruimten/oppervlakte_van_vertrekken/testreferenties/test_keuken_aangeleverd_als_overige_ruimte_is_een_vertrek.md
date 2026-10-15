@@ -9,9 +9,9 @@ wettekst, Bijlage I onder A, toelichting rubriek 1.
 
 ```text
 OPPERVLAKTE VAN VERTREKKEN
-  Keuken                                                              1.00 m²
+  Keuken                                                             10.00 m²
                                                                     ------      ------
-  Totaal                                                              1.00 m²     1.00 pt
+  Totaal                                                             10.00 m²    10.00 pt
 ```
 
 ## Waarschuwingen
@@ -34,7 +34,7 @@ OPPERVLAKTE VAN VERTREKKEN
         "naam": "Keuken"
       },
       "naam": "Keuken",
-      "oppervlakte": 1.0
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -54,10 +54,10 @@ OPPERVLAKTE VAN VERTREKKEN
       "naam": "Oppervlakte van vertrekken"
     }
   },
-  "punten": 1.0,
+  "punten": 10.0,
   "woningwaarderingen": [
     {
-      "aantal": 1.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "oppervlakte_van_vertrekken__keuken",
         "naam": "Keuken",
