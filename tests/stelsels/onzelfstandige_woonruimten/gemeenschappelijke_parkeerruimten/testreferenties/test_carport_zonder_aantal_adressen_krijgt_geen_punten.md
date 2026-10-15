@@ -29,22 +29,7 @@ Geen.
         "naam": "Carport"
       },
       "naam": "Carport",
-      "oppervlakte": 12.0,
-      "bouwkundigeElementen": [
-        {
-          "id": "laadpaal",
-          "naam": "Laadpaal",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "LAA",
-            "naam": "Laadpaal"
-          }
-        }
-      ],
-      "aantal": 5
+      "oppervlakte": 12.0
     }
   ]
 }

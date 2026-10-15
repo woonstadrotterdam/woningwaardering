@@ -10,9 +10,9 @@ Bijlage I onder A, toelichting rubriek 10.
 ```text
 GEMEENSCHAPPELIJKE PARKEERRUIMTEN
   Privé
-    - Parkeerplek buiten behorend bij complex (Type III)              2.00 st     8.00 pt
+    - Parkeerplek buiten behorend bij complex (Type III)              1.00 st     4.00 pt
                                                                                 ------
-  Totaal                                                                          8.00 pt
+  Totaal                                                                          4.00 pt
 ```
 
 ## Waarschuwingen
@@ -35,8 +35,7 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
         "naam": "Parkeerplek buiten behorend bij complex"
       },
       "naam": "Parkeerplek buiten behorend bij complex",
-      "oppervlakte": 12.0,
-      "aantal": 2
+      "oppervlakte": 12.0
     }
   ]
 }
@@ -56,7 +55,7 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
       "naam": "Gemeenschappelijke parkeerruimten"
     }
   },
-  "punten": 8.0,
+  "punten": 4.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -65,7 +64,7 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
       }
     },
     {
-      "aantal": 2.0,
+      "aantal": 1.0,
       "criterium": {
         "id": "gemeenschappelijke_parkeerruimten__prive__parkeerplek_buiten_behorend_bij_complex_type_iii",
         "naam": "Parkeerplek buiten behorend bij complex (Type III)",
@@ -77,7 +76,7 @@ GEMEENSCHAPPELIJKE PARKEERRUIMTEN
           "naam": "Stuks"
         }
       },
-      "punten": 8.0
+      "punten": 4.0
     }
   ]
 }

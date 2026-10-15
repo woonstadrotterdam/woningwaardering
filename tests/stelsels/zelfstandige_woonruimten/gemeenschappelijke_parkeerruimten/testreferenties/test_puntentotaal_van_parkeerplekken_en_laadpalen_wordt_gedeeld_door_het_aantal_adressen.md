@@ -1,6 +1,6 @@
-# test_punten_van_parkeerplekken_en_laadpalen_worden_gedeeld_door_het_aantal_adressen_en_afgerond_op_een_kwart_punt
+# test_puntentotaal_van_parkeerplekken_en_laadpalen_wordt_gedeeld_door_het_aantal_adressen
 
-De punten van parkeerplekken en laadpalen worden opgeteld, gedeeld door het aantal adressen en afgerond op een kwart punt.
+Het puntentotaal van parkeerplekken en laadpalen wordt gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplekken.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
 Bijlage I onder A, toelichting rubriek 10.

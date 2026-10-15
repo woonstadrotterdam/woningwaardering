@@ -29,7 +29,7 @@ Geen.
         "naam": "Carport"
       },
       "naam": "Carport",
-      "oppervlakte": 10.0,
+      "oppervlakte": 11.99,
       "gedeeldMetAantalAdressen": 3,
       "bouwkundigeElementen": [
         {

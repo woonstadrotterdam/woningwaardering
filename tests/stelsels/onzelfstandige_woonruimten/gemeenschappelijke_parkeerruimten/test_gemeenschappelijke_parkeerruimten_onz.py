@@ -100,11 +100,9 @@ def test_gemeenschappelijke_carport_wordt_als_type_ii_gewaardeerd(
 ):
     """Een gemeenschappelijke carport wordt als Type II gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder B, onderdeel 10.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3.
     """
-    # Eén onzelfstandige woonruimte op het adres, zodat alleen de deling door het
-    # aantal adressen meetelt.
+    # Eén woonruimte op het adres, zodat alleen het aantal adressen deelt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -131,11 +129,9 @@ def test_gemeenschappelijke_parkeerplaats_wordt_als_type_iii_gewaardeerd(
 ):
     """Een gemeenschappelijke parkeerplaats wordt als Type III gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder B, onderdeel 10.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3.
     """
-    # Eén onzelfstandige woonruimte op het adres, zodat alleen de deling door het
-    # aantal adressen meetelt.
+    # Eén woonruimte op het adres, zodat alleen het aantal adressen deelt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -262,8 +258,7 @@ def test_laadpaal_bij_parkeerplek_krijgt_2_punten_gedeeld_door_het_aantal_adress
     Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
     toelichting, inleiding).
     """
-    # Eén onzelfstandige woonruimte op het adres, zodat alleen de deling door het
-    # aantal adressen meetelt.
+    # Eén woonruimte op het adres, zodat alleen het aantal adressen deelt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -295,8 +290,7 @@ def test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal(
     Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
     toelichting, inleiding).
     """
-    # Twee plekken met dezelfde deler, om te tonen dat elke plek zijn eigen
-    # laadpaal krijgt.
+    # Twee plekken met dezelfde deler: elke plek krijgt een eigen laadpaal.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -353,8 +347,7 @@ def test_carport_gedeeld_met_onzelfstandige_woonruimten_op_hetzelfde_adres_wordt
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
     Bijlage I onder B, toelichting rubriek 10.
     """
-    # Eén adres met meerdere onzelfstandige woonruimten: de carport is alleen
-    # binnen het eigen adres gedeeld.
+    # Alleen binnen het eigen adres gedeeld, met meerdere woonruimten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -387,8 +380,7 @@ def test_laadpaal_bij_parkeerplek_op_hetzelfde_adres_krijgt_2_punten_gedeeld_doo
     toelichting, inleiding); wettekst, Bijlage I onder B, toelichting rubriek
     10.
     """
-    # Eén adres met meerdere onzelfstandige woonruimten, zodat de deler van de
-    # laadpaal niet uit het aantal adressen komt.
+    # Alleen binnen het eigen adres gedeeld, zodat de woonruimten de deler zijn.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -422,8 +414,7 @@ def test_prive_carport_krijgt_geen_punten(
     Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
     toelichting, inleiding).
     """
-    # Eén adres en geen onzelfstandige woonruimten om mee te delen: de carport is
-    # niet gemeenschappelijk.
+    # Eén adres en geen woonruimten om mee te delen: niet gemeenschappelijk.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -458,10 +449,9 @@ def test_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
-                oppervlakte=11,
+                oppervlakte=11.99,
                 gedeeld_met_aantal_adressen=10,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=2,
-                aantal=2,
             )
         ]
     )
@@ -488,7 +478,7 @@ def test_laadpaal_bij_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
             ruimte(
                 Ruimtedetailsoort.carport,
                 elementen=[element(Bouwkundigelementdetailsoort.laadpaal)],
-                oppervlakte=10,
+                oppervlakte=11.99,
                 gedeeld_met_aantal_adressen=3,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=1,
             )
@@ -518,8 +508,7 @@ def test_gemeenschappelijke_parkeerplaats_kleiner_dan_12_m2_geeft_ook_een_waarsc
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.parkeerplaats,
-                elementen=[element(Bouwkundigelementdetailsoort.laadpaal)],
-                oppervlakte=10,
+                oppervlakte=11.99,
                 gedeeld_met_aantal_adressen=3,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=1,
             )
@@ -542,13 +531,12 @@ def test_parkeerplek_zonder_aantal_adressen_wordt_als_prive_parkeerplek_gewaarde
     Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
     toelichting, inleiding).
     """
-    # Zonder aantallen voor de deling; twee plekken (`aantal` 2) tonen het optellen.
+    # Zonder gedeeld_met_aantal_adressen, zodat de package van één adres uitgaat.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex,
                 oppervlakte=12,
-                aantal=2,
             )
         ]
     )
@@ -558,9 +546,9 @@ def test_parkeerplek_zonder_aantal_adressen_wordt_als_prive_parkeerplek_gewaarde
     ) as waarschuwingen:
         groep = gemeenschappelijke_parkeerruimten.waardeer(eenheid)
 
-    # 2 plekken van 4 punten, gedeeld door 1.
+    # Type III: 4 punten gedeeld door 1 adres.
     assert punten_per_bovenliggende(groep) == {
-        "Privé": {"Parkeerplek buiten behorend bij complex (Type III)": 8.0}
+        "Privé": {"Parkeerplek buiten behorend bij complex (Type III)": 4.0}
     }
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
@@ -578,9 +566,7 @@ def test_carport_zonder_aantal_adressen_krijgt_geen_punten(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.carport,
-                elementen=[element(Bouwkundigelementdetailsoort.laadpaal)],
                 oppervlakte=12,
-                aantal=5,
             )
         ]
     )

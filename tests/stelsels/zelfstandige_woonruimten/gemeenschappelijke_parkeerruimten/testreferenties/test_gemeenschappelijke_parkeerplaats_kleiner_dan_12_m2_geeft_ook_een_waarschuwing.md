@@ -29,22 +29,8 @@ Geen waarderingen voor Gemeenschappelijke parkeerruimten.
         "naam": "Parkeerplaats"
       },
       "naam": "Parkeerplaats",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalAdressen": 3,
-      "bouwkundigeElementen": [
-        {
-          "id": "laadpaal",
-          "naam": "Laadpaal",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "LAA",
-            "naam": "Laadpaal"
-          }
-        }
-      ]
+      "oppervlakte": 11.99,
+      "gedeeldMetAantalAdressen": 3
     }
   ]
 }

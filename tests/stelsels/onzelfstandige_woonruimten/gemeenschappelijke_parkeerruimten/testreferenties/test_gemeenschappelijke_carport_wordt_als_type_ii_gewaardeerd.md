@@ -2,8 +2,7 @@
 
 Een gemeenschappelijke carport wordt als Type II gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
-Bijlage I onder B, onderdeel 10.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3.
 
 ## Rapport
 

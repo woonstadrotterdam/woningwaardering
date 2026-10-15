@@ -29,9 +29,8 @@ Geen.
         "naam": "Parkeerplek buiten behorend bij complex"
       },
       "naam": "Parkeerplek buiten behorend bij complex",
-      "oppervlakte": 11.0,
-      "gedeeldMetAantalAdressen": 10,
-      "aantal": 2
+      "oppervlakte": 11.99,
+      "gedeeldMetAantalAdressen": 10
     }
   ]
 }

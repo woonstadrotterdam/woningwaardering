@@ -1282,7 +1282,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 >
 > - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
-> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast. Die waarschuwing volgt ook als de parkeerplaats kleiner is dan 12 m² en daardoor geen punten krijgt.
 >
 > `PIP`, `PUP`, `PBD` en `PBC` zijn uitbreidingen op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
