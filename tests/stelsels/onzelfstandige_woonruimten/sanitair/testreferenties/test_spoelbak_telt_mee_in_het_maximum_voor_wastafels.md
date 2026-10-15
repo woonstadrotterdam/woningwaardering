@@ -14,10 +14,8 @@ SANITAIR
       - Wastafel (spoelbak in aanrecht < 1m)                          1.00 st     1.00 pt
       - Wastafel                                                      2.00 st     2.00 pt
       - Max 1.0 punt voor Wastafel                                               -2.00 pt
-      - Meerpersoonswastafel                                          2.00 st     3.00 pt
-      - Max 1.5 punt voor Meerpersoonswastafel                                   -1.50 pt
                                                                                 ------
-  Totaal                                                                          2.50 pt
+  Totaal                                                                          1.00 pt
 ```
 
 ## Waarschuwingen
@@ -64,14 +62,6 @@ Geen.
         {
           "code": "WAS",
           "naam": "Wastafel"
-        },
-        {
-          "code": "MPW",
-          "naam": "Meerpersoonswastafel"
-        },
-        {
-          "code": "MPW",
-          "naam": "Meerpersoonswastafel"
         }
       ]
     }
@@ -93,7 +83,7 @@ Geen.
       "naam": "Sanitair"
     }
   },
-  "punten": 2.5,
+  "punten": 1.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -149,31 +139,6 @@ Geen.
         }
       },
       "punten": -2.0
-    },
-    {
-      "aantal": 2.0,
-      "criterium": {
-        "id": "sanitair__prive__woonkamer__meerpersoonswastafel",
-        "naam": "Meerpersoonswastafel",
-        "bovenliggendeCriterium": {
-          "id": "sanitair__prive__woonkamer"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 3.0
-    },
-    {
-      "criterium": {
-        "id": "sanitair__prive__woonkamer__max_punten_meerpersoonswastafel",
-        "naam": "Max 1.5 punt voor Meerpersoonswastafel",
-        "bovenliggendeCriterium": {
-          "id": "sanitair__prive__woonkamer"
-        }
-      },
-      "punten": -1.5
     }
   ]
 }

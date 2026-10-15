@@ -7,11 +7,17 @@ Bijlage I onder A, toelichting rubriek 6.2.
 
 ## Rapport
 
-Geen waarderingen voor Sanitair.
+```text
+SANITAIR
+  Badkamer
+    - Wastafel                                                        1.00 st     1.00 pt
+                                                                                ------
+  Totaal                                                                          1.00 pt
+```
 
 ## Waarschuwingen
 
-Geen.
+- UserWarning: Ruimte 'Badkamer' (badkamer): geen bad of douche aanwezig in Badkamer, extra voorzieningen worden niet gewaardeerd.
 
 ## Input
 
@@ -19,18 +25,22 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "toiletruimte",
+      "id": "badkamer",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
+        "code": "VTK",
+        "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "TOI",
-        "naam": "Toiletruimte"
+        "code": "BAD",
+        "naam": "Badkamer"
       },
-      "naam": "Toiletruimte",
+      "naam": "Badkamer",
       "oppervlakte": 10.0,
       "installaties": [
+        {
+          "code": "WAS",
+          "naam": "Wastafel"
+        },
         {
           "code": "BUB",
           "naam": "Bubbelfunctie van het bad"
@@ -83,7 +93,29 @@ Geen.
       "naam": "Sanitair"
     }
   },
-  "punten": 0.0,
-  "woningwaarderingen": []
+  "punten": 1.0,
+  "woningwaarderingen": [
+    {
+      "criterium": {
+        "id": "sanitair__badkamer",
+        "naam": "Badkamer"
+      }
+    },
+    {
+      "aantal": 1.0,
+      "criterium": {
+        "id": "sanitair__badkamer__wastafel",
+        "naam": "Wastafel",
+        "bovenliggendeCriterium": {
+          "id": "sanitair__badkamer"
+        },
+        "meeteenheid": {
+          "code": "STU",
+          "naam": "Stuks"
+        }
+      },
+      "punten": 1.0
+    }
+  ]
 }
 ```

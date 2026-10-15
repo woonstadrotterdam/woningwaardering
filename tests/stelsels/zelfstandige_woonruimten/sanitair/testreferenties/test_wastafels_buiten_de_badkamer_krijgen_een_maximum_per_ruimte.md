@@ -75,21 +75,6 @@ Geen.
       },
       "naam": "Woonkamer",
       "oppervlakte": 10.0,
-      "bouwkundigeElementen": [
-        {
-          "id": "aanrecht",
-          "naam": "Aanrecht",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 1000.0
-        }
-      ],
       "installaties": [
         {
           "code": "WAS",

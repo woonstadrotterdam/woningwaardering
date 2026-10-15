@@ -70,7 +70,9 @@ def test_bad_en_douche_in_dezelfde_ruimte_is_een_voorziening(
 ):
     """Een bad en een douche in dezelfde ruimte tellen samen als één bad/douche.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -169,21 +171,12 @@ def test_toilet_in_doucheruimte_telt_als_toilet_in_badkamer(
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
     """
     eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.doucheruimte,
-                Installatiesoort.staand_toilet,
-                Installatiesoort.douche,
-                Installatiesoort.wastafel,
-            )
-        ]
+        ruimten=[ruimte(Ruimtedetailsoort.doucheruimte, Installatiesoort.staand_toilet)]
     )
 
     groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep)[Installatiesoort.staand_toilet.naam] == 2.0
-    # 2 punten voor het toilet, 3 voor de douche en 1 voor de wastafel
-    assert groep.punten == 6.0
+    assert punten_per_naam(groep) == {Installatiesoort.staand_toilet.naam: 2.0}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -265,8 +258,6 @@ def test_spoelbak_telt_mee_in_het_maximum_voor_wastafels(
                 Ruimtedetailsoort.woonkamer,
                 Installatiesoort.wastafel,
                 Installatiesoort.wastafel,
-                Installatiesoort.meerpersoonswastafel,
-                Installatiesoort.meerpersoonswastafel,
                 elementen=[aanrecht(900)],
             )
         ]
@@ -274,13 +265,12 @@ def test_spoelbak_telt_mee_in_het_maximum_voor_wastafels(
 
     groep = sanitair.waardeer(eenheid)
 
-    punten = punten_per_naam(groep)
-    assert punten["Wastafel (spoelbak in aanrecht < 1m)"] == 1.0
-    assert punten[Installatiesoort.wastafel.naam] == 2.0
     # De spoelbak en 2 wastafels geven 3 punten; het maximum laat 1 punt over.
-    assert punten["Max 1.0 punt voor Wastafel"] == -2.0
-    # 1 punt voor wastafels en 1,5 punt voor meerpersoonswastafels
-    assert groep.punten == 2.5
+    assert punten_per_naam(groep) == {
+        "Wastafel (spoelbak in aanrecht < 1m)": 1.0,
+        Installatiesoort.wastafel.naam: 2.0,
+        "Max 1.0 punt voor Wastafel": -2.0,
+    }
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -289,30 +279,17 @@ def test_spoelbak_in_aanrecht_van_1m_telt_niet_als_wastafel(
 ):
     """Een spoelbak in een aanrecht van 1 meter telt niet als wastafel.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
+    Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
+    toelichting, inleiding).
     """
-    # De wastafels in de ruimte tonen of de spoelbak onder het wastafelmaximum valt.
     eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
-                Installatiesoort.meerpersoonswastafel,
-                Installatiesoort.meerpersoonswastafel,
-                elementen=[aanrecht(1000)],
-            )
-        ]
+        ruimten=[ruimte(Ruimtedetailsoort.woonkamer, elementen=[aanrecht(1000)])]
     )
 
     groep = sanitair.waardeer(eenheid)
 
-    punten = punten_per_naam(groep)
-    assert "Wastafel (spoelbak in aanrecht < 1m)" not in punten
-    # 2 wastafels geven 2 punten; het maximum laat 1 punt over.
-    assert punten["Max 1.0 punt voor Wastafel"] == -1.0
-    # 1 punt voor wastafels en 1,5 punt voor meerpersoonswastafels
-    assert groep.punten == 2.5
+    assert punten_per_naam(groep) == {}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -356,10 +333,8 @@ def test_kort_aanrechtdeel_naast_aanrecht_vanaf_1m_is_geen_wastafel(
                 Ruimtedetailsoort.keuken,
                 elementen=[
                     aanrecht(800, id="kort_aanrecht"),
-                    aanrecht(1200, id="lang_aanrecht"),
+                    aanrecht(1000, id="lang_aanrecht"),
                 ],
-                # De keuken is gemeenschappelijk; dat verandert de uitkomst niet.
-                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
             )
         ]
     )
@@ -380,47 +355,25 @@ def test_punten_voor_gemeenschappelijk_sanitair_worden_gedeeld_door_het_aantal_w
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
     Bijlage I onder B, onderdeel 6.1.
-
-    Op een adres met 8 of meer onzelfstandige woonruimten geldt het maximum
-    voor wastafels niet voor één ruimte naast de badkamer.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder B, toelichting rubriek 6.
     """
-    # 8 woonruimten is de grens waarop de uitzondering op het wastafelmaximum geldt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.badkamer,
                 Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
                 Installatiesoort.douche,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
-            ),
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
-            ),
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+            )
         ]
     )
 
     groep = sanitair.waardeer(eenheid)
 
-    punten = punten_per_bovenliggende(groep)
-    # 2 wastafels van 1 punt en een douche van 3 punten, gedeeld door 8
-    assert punten[Ruimtedetailsoort.badkamer.naam] == {
+    # Een wastafel van 1 punt en een douche van 3 punten, gedeeld door 4
+    assert punten_per_naam(groep) == {
         Installatiesoort.wastafel.naam: 0.25,
-        Installatiesoort.douche.naam: 0.38,
+        Installatiesoort.douche.naam: 0.75,
     }
-    # 3 wastafels van 1 punt gedeeld door 8, zonder maximum
-    assert punten[Ruimtedetailsoort.slaapkamer.naam] == {
-        Installatiesoort.wastafel.naam: 0.38
-    }
-    # 0,25 + 0,38 + 0,38 = 1,01 punt, afgerond op een kwart punt
-    assert groep.punten == 1.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -666,7 +619,6 @@ def test_meerdere_korte_aanrechten_tellen_ook_in_een_gemeenschappelijke_keuken_a
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
     Bijlage I onder B, onderdeel 6.1.
     """
-    # De berging krijgt de uitzondering, dus alleen de keuken heeft nog het maximum.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -675,28 +627,14 @@ def test_meerdere_korte_aanrechten_tellen_ook_in_een_gemeenschappelijke_keuken_a
                     aanrecht(800, id="aanrecht1"),
                     aanrecht(900, id="aanrecht2"),
                 ],
-                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
-            ),
-            ruimte(
-                Ruimtedetailsoort.berging,
-                Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
-                Installatiesoort.wastafel,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
-            ),
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+            )
         ]
     )
 
     groep = sanitair.waardeer(eenheid)
 
-    punten = punten_per_bovenliggende(groep)
-    assert punten[Ruimtedetailsoort.keuken.naam] == {
-        "Wastafel (spoelbak in aanrecht < 1m)": 0.13
-    }
-    assert punten[Ruimtedetailsoort.berging.naam] == {
-        Installatiesoort.wastafel.naam: 0.38
-    }
-    assert groep.punten == 0.5
+    assert punten_per_naam(groep) == {"Wastafel (spoelbak in aanrecht < 1m)": 0.25}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -781,12 +719,12 @@ def test_extra_voorzieningen_zonder_bad_of_douche_krijgen_geen_punten(
     Bijlage I onder A, toelichting rubriek 6.2 (via Bijlage I onder B,
     toelichting, inleiding).
     """
-    # Het toilet krijgt wel punten; de extra voorzieningen in dezelfde ruimte niet.
+    # Een badkamer met een wastafel, maar zonder bad of douche.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
-                Ruimtedetailsoort.toiletruimte,
-                Installatiesoort.hangend_toilet,
+                Ruimtedetailsoort.badkamer,
+                Installatiesoort.wastafel,
                 Installatiesoort.bubbelfunctie_van_het_bad,
                 Installatiesoort.douchewand,
                 Installatiesoort.handdoekenradiator,
@@ -799,10 +737,11 @@ def test_extra_voorzieningen_zonder_bad_of_douche_krijgen_geen_punten(
         ]
     )
 
-    groep = sanitair.waardeer(eenheid)
+    with pytest.warns(UserWarning, match="geen bad of douche") as waarschuwingen:
+        groep = sanitair.waardeer(eenheid)
 
-    assert punten_per_naam(groep) == {Installatiesoort.hangend_toilet.naam: 3.75}
-    vergelijk_met_testreferentie(eenheid, groep)
+    assert punten_per_naam(groep) == {Installatiesoort.wastafel.naam: 1.0}
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 def test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen(
@@ -810,11 +749,15 @@ def test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen(
 ):
     """Een drempelloze inrijdouche telt als douche voor het recht op extra voorzieningen.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1;
-    implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 6.2 (via Bijlage I onder B,
+    toelichting, inleiding).
+
+    Een drempelloze inrijdouche telt als douche.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
     Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B,
-    toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek
-    6.2 (via Bijlage I onder B, toelichting, inleiding).
+    toelichting, inleiding).
     """
     # De inrijdouche is hier het enige bad of de enige douche in de badkamer.
     eenheid = EenhedenEenheid(

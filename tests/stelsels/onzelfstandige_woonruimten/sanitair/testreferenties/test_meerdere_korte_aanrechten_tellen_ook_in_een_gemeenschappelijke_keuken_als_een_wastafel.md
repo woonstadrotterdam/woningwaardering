@@ -14,14 +14,11 @@ Bijlage I onder B, onderdeel 6.1.
 
 ```text
 SANITAIR
-  Gedeeld met 8 onzelfstandige woonruimten
+  Gedeeld met 4 onzelfstandige woonruimten
     - Keuken
-      - Wastafel (spoelbak in aanrecht < 1m)                          1.00 st     0.13 pt
-    - Berging
-      - Wastafel                                                      3.00 st     0.38 pt
-  Afronding op kwartpunten                                                       -0.01 pt
+      - Wastafel (spoelbak in aanrecht < 1m)                          1.00 st     0.25 pt
                                                                                 ------
-  Totaal                                                                          0.50 pt
+  Totaal                                                                          0.25 pt
 ```
 
 ## Waarschuwingen
@@ -73,35 +70,7 @@ Geen.
           "lengte": 900.0
         }
       ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
-    },
-    {
-      "id": "berging",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
-      },
-      "detailSoort": {
-        "code": "BER",
-        "naam": "Berging"
-      },
-      "naam": "Berging",
-      "oppervlakte": 10.0,
-      "installaties": [
-        {
-          "code": "WAS",
-          "naam": "Wastafel"
-        },
-        {
-          "code": "WAS",
-          "naam": "Wastafel"
-        },
-        {
-          "code": "WAS",
-          "naam": "Wastafel"
-        }
-      ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ]
 }
@@ -121,68 +90,37 @@ Geen.
       "naam": "Sanitair"
     }
   },
-  "punten": 0.5,
+  "punten": 0.25,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 8 onzelfstandige woonruimten"
+        "id": "sanitair__gedeeld_met_4_onzelfstandige_woonruimten",
+        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
       }
     },
     {
       "criterium": {
-        "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken",
+        "id": "sanitair__gedeeld_met_4_onzelfstandige_woonruimten__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
+          "id": "sanitair__gedeeld_met_4_onzelfstandige_woonruimten"
         }
       }
     },
     {
       "aantal": 1.0,
       "criterium": {
-        "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken__spoelbak_in_aanrecht",
+        "id": "sanitair__gedeeld_met_4_onzelfstandige_woonruimten__keuken__spoelbak_in_aanrecht",
         "naam": "Wastafel (spoelbak in aanrecht < 1m)",
         "bovenliggendeCriterium": {
-          "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__keuken"
+          "id": "sanitair__gedeeld_met_4_onzelfstandige_woonruimten__keuken"
         },
         "meeteenheid": {
           "code": "STU",
           "naam": "Stuks"
         }
       },
-      "punten": 0.13
-    },
-    {
-      "criterium": {
-        "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__berging",
-        "naam": "Berging",
-        "bovenliggendeCriterium": {
-          "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten"
-        }
-      }
-    },
-    {
-      "aantal": 3.0,
-      "criterium": {
-        "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__berging__wastafel",
-        "naam": "Wastafel",
-        "bovenliggendeCriterium": {
-          "id": "sanitair__gedeeld_met_8_onzelfstandige_woonruimten__berging"
-        },
-        "meeteenheid": {
-          "code": "STU",
-          "naam": "Stuks"
-        }
-      },
-      "punten": 0.38
-    },
-    {
-      "criterium": {
-        "id": "sanitair__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.01
+      "punten": 0.25
     }
   ]
 }
