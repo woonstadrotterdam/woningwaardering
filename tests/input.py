@@ -331,3 +331,27 @@ def meergezinswoning_van_79_m2(
             ruimte(Ruimtedetailsoort.toiletruimte, oppervlakte=1.28113),
         ],
     )
+
+
+def woz_eenheden_voor_149_punten() -> list[EenhedenWozEenheid]:
+    """Geef de WOZ-waarden die `meergezinswoning_van_79_m2` op 149 punten brengen.
+
+    Daarmee valt de woning in de middensector (144 t/m 186 punten).
+    """
+    waarden = {
+        2024: 313000,
+        2023: 307000,
+        2022: 341000,
+        2021: 283000,
+        2020: 273000,
+        2019: 237000,
+        2018: 201000,
+        2017: 163000,
+        2016: 142000,
+        2015: 135000,
+        2014: 125000,
+    }
+    return [
+        EenhedenWozEenheid(waardepeildatum=date(jaar, 1, 1), vastgestelde_waarde=waarde)
+        for jaar, waarde in waarden.items()
+    ]

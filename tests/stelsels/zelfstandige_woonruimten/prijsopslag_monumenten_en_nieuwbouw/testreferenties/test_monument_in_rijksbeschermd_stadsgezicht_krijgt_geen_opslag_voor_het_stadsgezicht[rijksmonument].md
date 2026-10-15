@@ -1,20 +1,16 @@
-# test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht
+# test_monument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht[rijksmonument]
 
-Een rijksmonument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
+Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.1;
-implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
 artikel 8a, vijfde lid.
 
-Een rijksmonument krijgt 35% opslag op de maximale huurprijs.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-artikel 8a, eerste lid.
+Dit geval: het rijksmonument krijgt zelf 35% opslag
 
 ## Rapport
 
 ```text
-PRIJSOPSLAG MONUMENTEN
+PRIJSOPSLAG MONUMENTEN EN NIEUWBOUW
   Rijksmonument                                                                                35%
                                                                                 ------
   Totaal                                                                          0.00 pt      35%
@@ -22,7 +18,7 @@ PRIJSOPSLAG MONUMENTEN
 
 ## Waarschuwingen
 
-- UserWarning: Eenheid (None): 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.
+Geen.
 
 ## Input
 
@@ -38,7 +34,8 @@ PRIJSOPSLAG MONUMENTEN
       "code": "SGR",
       "naam": "Rijksbeschermd stadsgezicht"
     }
-  ]
+  ],
+  "datumAfsluitenHuurovereenkomst": "2024-07-01"
 }
 ```
 
@@ -48,19 +45,19 @@ PRIJSOPSLAG MONUMENTEN
 {
   "criteriumGroep": {
     "stelsel": {
-      "code": "ONZ",
-      "naam": "Onzelfstandige woonruimten"
+      "code": "ZEL",
+      "naam": "Zelfstandige woonruimten"
     },
     "stelselgroep": {
-      "code": "PMO",
-      "naam": "Prijsopslag monumenten"
+      "code": "PMN",
+      "naam": "Prijsopslag monumenten en nieuwbouw"
     }
   },
   "punten": 0.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "prijsopslag_monumenten__rijksmonument",
+        "id": "prijsopslag_monumenten_en_nieuwbouw__rijksmonument",
         "naam": "Rijksmonument"
       },
       "opslagpercentage": 0.35

@@ -1,6 +1,6 @@
 # test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_opslag
 
-Een rijksmonument waarvan de huurovereenkomst op 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
+Een rijksmonument waarvan de huurovereenkomst op of na 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
 artikel 8a, eerste lid.

@@ -39,7 +39,7 @@ def test_PrijsopslagMonumenten_output(
 def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_opslag(
     prijsopslag_monumenten, vergelijk_met_testreferentie
 ):
-    """Een rijksmonument waarvan de huurovereenkomst op 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
+    """Een rijksmonument waarvan de huurovereenkomst op of na 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
     artikel 8a, eerste lid.
@@ -112,34 +112,22 @@ def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_krijgt_met_waarschuw
 # Gemeentelijke en provinciale monumenten
 
 
-def test_gemeentelijk_monument_krijgt_15_procent_opslag(
-    prijsopslag_monumenten, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    "monument",
+    [
+        pytest.param(Eenheidmonument.gemeentelijk_monument, id="gemeentelijk_monument"),
+        pytest.param(Eenheidmonument.provinciaal_monument, id="provinciaal_monument"),
+    ],
+)
+def test_gemeentelijk_of_provinciaal_monument_krijgt_15_procent_opslag(
+    prijsopslag_monumenten, vergelijk_met_testreferentie, monument
 ):
-    """Een gemeentelijk monument krijgt 15% opslag op de maximale huurprijs.
+    """Een gemeentelijk of provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
     artikel 8a, derde lid.
     """
-    eenheid = EenhedenEenheid(monumenten=[Eenheidmonument.gemeentelijk_monument])
-
-    groep = prijsopslag_monumenten.waardeer(eenheid)
-
-    assert opslagpercentage_per_naam(groep) == {
-        "Gemeentelijk of provinciaal monument": 0.15
-    }
-    assert groep.opslagpercentage == 0.15
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-def test_provinciaal_monument_krijgt_15_procent_opslag(
-    prijsopslag_monumenten, vergelijk_met_testreferentie
-):
-    """Een provinciaal monument krijgt 15% opslag op de maximale huurprijs.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
-    artikel 8a, derde lid.
-    """
-    eenheid = EenhedenEenheid(monumenten=[Eenheidmonument.provinciaal_monument])
+    eenheid = EenhedenEenheid(monumenten=[monument])
 
     groep = prijsopslag_monumenten.waardeer(eenheid)
 
@@ -154,69 +142,54 @@ def test_provinciaal_monument_krijgt_15_procent_opslag(
 
 
 @pytest.mark.parametrize(
-    ("bouwjaar", "verwachte_opslag", "verwacht_opslagpercentage"),
+    ("monument", "bouwjaar", "verwachte_opslag", "verwacht_opslagpercentage"),
     [
         pytest.param(
+            Eenheidmonument.rijksbeschermd_stadsgezicht,
             1964,
             {"Rijksbeschermd stads- of dorpsgezicht": 0.05},
             0.05,
-            id="bouwjaar_1964",
+            id="stadsgezicht_bouwjaar_1964",
         ),
         pytest.param(
+            Eenheidmonument.rijksbeschermd_stadsgezicht,
             1965,
             {},
             0.0,
-            id="bouwjaar_1965",
+            id="stadsgezicht_bouwjaar_1965",
             marks=pytest.mark.toelichting(
                 "een woning uit 1965 is niet vóór 1965 gebouwd, dus de woonruimte "
                 "krijgt geen opslag"
             ),
         ),
+        pytest.param(
+            Eenheidmonument.rijksbeschermd_dorpsgezicht,
+            1964,
+            {"Rijksbeschermd stads- of dorpsgezicht": 0.05},
+            0.05,
+            id="dorpsgezicht_bouwjaar_1964",
+        ),
     ],
 )
-def test_rijksbeschermd_stadsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag(
+def test_rijksbeschermd_stads_of_dorpsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag(
     prijsopslag_monumenten,
     vergelijk_met_testreferentie,
+    monument,
     bouwjaar,
     verwachte_opslag,
     verwacht_opslagpercentage,
 ):
-    """Een woonruimte in een rijksbeschermd stadsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
+    """Een woonruimte in een rijksbeschermd stads- of dorpsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
     artikel 8a, vijfde lid.
     """
-    eenheid = EenhedenEenheid(
-        bouwjaar=bouwjaar,
-        monumenten=[Eenheidmonument.rijksbeschermd_stadsgezicht],
-    )
+    eenheid = EenhedenEenheid(bouwjaar=bouwjaar, monumenten=[monument])
 
     groep = prijsopslag_monumenten.waardeer(eenheid)
 
     assert opslagpercentage_per_naam(groep) == verwachte_opslag
     assert groep.opslagpercentage == verwacht_opslagpercentage
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-def test_rijksbeschermd_dorpsgezicht_krijgt_bij_bouwjaar_voor_1965_5_procent_opslag(
-    prijsopslag_monumenten, vergelijk_met_testreferentie
-):
-    """Een woonruimte in een rijksbeschermd dorpsgezicht die vóór 1965 is gebouwd, krijgt 5% opslag op de maximale huurprijs.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
-    artikel 8a, vijfde lid.
-    """
-    eenheid = EenhedenEenheid(
-        bouwjaar=1964,
-        monumenten=[Eenheidmonument.rijksbeschermd_dorpsgezicht],
-    )
-
-    groep = prijsopslag_monumenten.waardeer(eenheid)
-
-    assert opslagpercentage_per_naam(groep) == {
-        "Rijksbeschermd stads- of dorpsgezicht": 0.05
-    }
-    assert groep.opslagpercentage == 0.05
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -264,41 +237,60 @@ def test_rijksbeschermd_stadsgezicht_zonder_bouwjaar_krijgt_met_waarschuwing_gee
 # Samenloop van opslagen
 
 
-def test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht(
-    prijsopslag_monumenten, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    ("monument", "verwachte_opslag", "verwacht_opslagpercentage"),
+    [
+        pytest.param(
+            Eenheidmonument.rijksmonument,
+            {Eenheidmonument.rijksmonument.naam: 0.35},
+            0.35,
+            id="rijksmonument",
+            marks=pytest.mark.toelichting("het rijksmonument krijgt zelf 35% opslag"),
+        ),
+        pytest.param(
+            Eenheidmonument.gemeentelijk_monument,
+            {"Gemeentelijk of provinciaal monument": 0.15},
+            0.15,
+            id="gemeentelijk_monument",
+            marks=pytest.mark.toelichting(
+                "het gemeentelijk monument krijgt zelf 15% opslag"
+            ),
+        ),
+        pytest.param(
+            Eenheidmonument.provinciaal_monument,
+            {"Gemeentelijk of provinciaal monument": 0.15},
+            0.15,
+            id="provinciaal_monument",
+            marks=pytest.mark.toelichting(
+                "het provinciaal monument krijgt zelf 15% opslag"
+            ),
+        ),
+    ],
+)
+def test_monument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht(
+    prijsopslag_monumenten,
+    vergelijk_met_testreferentie,
+    monument,
+    verwachte_opslag,
+    verwacht_opslagpercentage,
 ):
-    """Een rijksmonument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
+    """Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.1;
-    implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
     artikel 8a, vijfde lid.
-
-    Een rijksmonument krijgt 35% opslag op de maximale huurprijs.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-    artikel 8a, eerste lid.
     """
-    # Het bouwjaar voldoet aan de eis; alleen het rijksmonument sluit de opslag uit.
+    # Gebouwd vóór 1965: alleen het monument sluit de opslag voor het stadsgezicht uit.
     eenheid = EenhedenEenheid(
         bouwjaar=1964,
-        monumenten=[
-            Eenheidmonument.rijksmonument,
-            Eenheidmonument.rijksbeschermd_stadsgezicht,
-        ],
+        datum_afsluiten_huurovereenkomst=date(2024, 7, 1),
+        monumenten=[monument, Eenheidmonument.rijksbeschermd_stadsgezicht],
     )
 
-    with pytest.warns(
-        UserWarning, match="'datum_afsluiten_huurovereenkomst' is niet gespecificeerd"
-    ) as waarschuwingen:
-        groep = prijsopslag_monumenten.waardeer(eenheid)
+    groep = prijsopslag_monumenten.waardeer(eenheid)
 
-    # Zonder datum van afsluiten rekent de package met de peildatum (1 juli 2026),
-    # dus het rijksmonument krijgt 35% opslag.
-    assert opslagpercentage_per_naam(groep) == {
-        Eenheidmonument.rijksmonument.naam: 0.35
-    }
-    assert groep.opslagpercentage == 0.35
-    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+    assert opslagpercentage_per_naam(groep) == verwachte_opslag
+    assert groep.opslagpercentage == verwacht_opslagpercentage
+    vergelijk_met_testreferentie(eenheid, groep)
 
 
 # Monumenten niet opgegeven
@@ -308,10 +300,7 @@ def test_eenheid_zonder_opgegeven_monumenten_geeft_een_waarschuwing(
     prijsopslag_monumenten, vergelijk_met_testreferentie, monkeypatch
 ):
     """Een eenheid waarvan `monumenten` niet is opgegeven, geeft een waarschuwing."""
-    # De package `monumenten` is optioneel; zonder haar geeft de waardering een
-    # tweede waarschuwing. Met deze vervanger verloopt de waardering in elke
-    # omgeving hetzelfde: zonder BAG-identificatie wordt `MonumentenClient`
-    # niet aangeroepen.
+    # Vervangt de optionele package monumenten, zodat elke omgeving gelijk werkt.
     monkeypatch.setitem(
         sys.modules, "monumenten", SimpleNamespace(MonumentenClient=None)
     )

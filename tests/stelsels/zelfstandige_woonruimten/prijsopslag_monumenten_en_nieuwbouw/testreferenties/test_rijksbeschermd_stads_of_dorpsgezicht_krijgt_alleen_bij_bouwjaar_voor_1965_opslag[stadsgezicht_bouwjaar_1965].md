@@ -1,6 +1,6 @@
-# test_rijksbeschermd_stadsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag[bouwjaar_1965]
+# test_rijksbeschermd_stads_of_dorpsgezicht_krijgt_alleen_bij_bouwjaar_voor_1965_opslag[stadsgezicht_bouwjaar_1965]
 
-Een woonruimte in een rijksbeschermd stadsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
+Een woonruimte in een rijksbeschermd stads- of dorpsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
 artikel 8a, vijfde lid.

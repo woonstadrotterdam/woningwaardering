@@ -202,6 +202,52 @@ Geen.
       "naam": "Toiletruimte",
       "oppervlakte": 1.28113
     }
+  ],
+  "wozEenheden": [
+    {
+      "vastgesteldeWaarde": 313000.0,
+      "waardepeildatum": "2024-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 307000.0,
+      "waardepeildatum": "2023-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 341000.0,
+      "waardepeildatum": "2022-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 283000.0,
+      "waardepeildatum": "2021-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 273000.0,
+      "waardepeildatum": "2020-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 237000.0,
+      "waardepeildatum": "2019-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 201000.0,
+      "waardepeildatum": "2018-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 163000.0,
+      "waardepeildatum": "2017-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 142000.0,
+      "waardepeildatum": "2016-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 135000.0,
+      "waardepeildatum": "2015-01-01"
+    },
+    {
+      "vastgesteldeWaarde": 125000.0,
+      "waardepeildatum": "2014-01-01"
+    }
   ]
 }
 ```

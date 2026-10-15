@@ -1,6 +1,6 @@
-# test_provinciaal_monument_krijgt_15_procent_opslag
+# test_gemeentelijk_of_provinciaal_monument_krijgt_15_procent_opslag[provinciaal_monument]
 
-Een provinciaal monument krijgt 15% opslag op de maximale huurprijs.
+Een gemeentelijk of provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
 artikel 8a, derde lid.

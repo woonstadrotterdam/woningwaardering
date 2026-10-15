@@ -1,9 +1,11 @@
-# test_gemeentelijk_monument_krijgt_15_procent_opslag
+# test_monument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht[provinciaal_monument]
 
-Een gemeentelijk monument krijgt 15% opslag op de maximale huurprijs.
+Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
-artikel 8a, derde lid.
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
+artikel 8a, vijfde lid.
+
+Dit geval: het provinciaal monument krijgt zelf 15% opslag
 
 ## Rapport
 
@@ -22,12 +24,18 @@ Geen.
 
 ```json
 {
+  "bouwjaar": 1964,
   "monumenten": [
     {
-      "code": "GEM",
-      "naam": "Gemeentelijk monument"
+      "code": "PRO",
+      "naam": "Provinciaal monument"
+    },
+    {
+      "code": "SGR",
+      "naam": "Rijksbeschermd stadsgezicht"
     }
-  ]
+  ],
+  "datumAfsluitenHuurovereenkomst": "2024-07-01"
 }
 ```
 

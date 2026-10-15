@@ -1,15 +1,10 @@
-# test_rijksmonument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_stadsgezicht
+# test_rijksmonument_zonder_datum_van_de_huurovereenkomst_wordt_met_waarschuwing_naar_de_peildatum_gewaardeerd
 
-Een rijksmonument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
+Zonder datum van afsluiten van de huurovereenkomst waardeert de package een rijksmonument met een waarschuwing alsof de huurovereenkomst op de peildatum is afgesloten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.1;
-implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst, artikel
-8a, vijfde lid.
-
-Een rijksmonument krijgt 35% opslag op de maximale huurprijs.
-
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4; wettekst,
-artikel 8a, eerste lid.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4;
+implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten
+huurovereenkomst"; wettekst, artikel 8a, eerste lid.
 
 ## Rapport
 
@@ -22,21 +17,17 @@ PRIJSOPSLAG MONUMENTEN EN NIEUWBOUW
 
 ## Waarschuwingen
 
-- UserWarning: Eenheid (None): 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.
+- UserWarning: Eenheid (eenheid): 'datum_afsluiten_huurovereenkomst' is niet gespecificeerd voor dit rijksmonument.
 
 ## Input
 
 ```json
 {
-  "bouwjaar": 1964,
+  "id": "eenheid",
   "monumenten": [
     {
       "code": "RIJ",
       "naam": "Rijksmonument"
-    },
-    {
-      "code": "SGR",
-      "naam": "Rijksbeschermd stadsgezicht"
     }
   ]
 }
