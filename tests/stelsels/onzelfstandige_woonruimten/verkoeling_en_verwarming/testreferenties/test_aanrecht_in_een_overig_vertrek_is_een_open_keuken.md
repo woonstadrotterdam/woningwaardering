@@ -1,6 +1,6 @@
 # test_aanrecht_in_een_overig_vertrek_is_een_open_keuken
 
-Een aanrecht in een verwarmd overig vertrek is een open keuken.
+Een aanrecht in een verwarmd privé overig vertrek is een open keuken.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
@@ -14,11 +14,11 @@ B, toelichting, inleiding).
 
 ```text
 VERKOELING EN VERWARMING
-  Gedeeld met 2 onzelfstandige woonruimten
+  Privé
     - Verwarmde vertrekken
-      - Overig vertrek met open keuken                                            2.00 pt
+      - Overig vertrek met open keuken                                            4.00 pt
                                                                                 ------
-  Totaal                                                                          2.00 pt
+  Totaal                                                                          4.00 pt
 ```
 
 ## Waarschuwingen
@@ -57,8 +57,7 @@ Geen.
           "lengte": 1500.0
         }
       ],
-      "verwarmd": true,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      "verwarmd": true
     }
   ]
 }
@@ -78,32 +77,32 @@ Geen.
       "naam": "Verkoeling en verwarming"
     }
   },
-  "punten": 2.0,
+  "punten": 4.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+        "id": "verkoeling_en_verwarming__prive",
+        "naam": "Privé"
       }
     },
     {
       "criterium": {
-        "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken",
+        "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken",
         "naam": "Verwarmde vertrekken",
         "bovenliggendeCriterium": {
-          "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten"
+          "id": "verkoeling_en_verwarming__prive"
         }
       }
     },
     {
       "criterium": {
-        "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken__overig_vertrek",
+        "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken__overig_vertrek",
         "naam": "Overig vertrek met open keuken",
         "bovenliggendeCriterium": {
-          "id": "verkoeling_en_verwarming__gedeeld_met_2_onzelfstandige_woonruimten__verwarmde_vertrekken"
+          "id": "verkoeling_en_verwarming__prive__verwarmde_vertrekken"
         }
       },
-      "punten": 2.0
+      "punten": 4.0
     }
   ]
 }

@@ -35,7 +35,7 @@ Geen.
         "naam": "Doucheruimte"
       },
       "naam": "Doucheruimte",
-      "oppervlakte": 2.0,
+      "oppervlakte": 3.99,
       "verwarmd": true
     }
   ]

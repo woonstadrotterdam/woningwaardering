@@ -42,7 +42,7 @@ def test_verwarmd_privevertrek_met_verkoelingsfunctie_krijgt_een_punt_extra(
 ):
     """Een verwarmd privévertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
     wettekst, Bijlage I onder B, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
@@ -128,8 +128,7 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
     wettekst, Bijlage I onder B, onderdeel 3.
     """
-    # Een privévertrek en een gemeenschappelijk vertrek, omdat de bron voor beide
-    # een verwarmingspunt toekent.
+    # Een privé- en een gemeenschappelijk vertrek: de bron waardeert beide.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.keuken, naam="Keuken1", verwarmd=False),
@@ -145,40 +144,6 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
     assert punten_per_naam(groep) == {}
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
-def test_verwarmde_prive_overige_ruimten_krijgen_samen_hooguit_4_punten(
-    verkoeling_en_verwarming, vergelijk_met_testreferentie
-):
-    """Verwarmde privé overige ruimten krijgen samen hooguit 4 punten.
-
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
-    """
-    eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(Ruimtedetailsoort.berging, naam="Berging1", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging2", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging3", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging4", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging5", verwarmd=True),
-        ]
-    )
-
-    groep = verkoeling_en_verwarming.waardeer(eenheid)
-
-    assert punten_per_bovenliggende(groep) == {
-        "Verwarmde overige en verkeersruimten": {
-            "Berging1": 1.0,
-            "Berging2": 1.0,
-            "Berging3": 1.0,
-            "Berging4": 1.0,
-            "Berging5": 1.0,
-            "Maximaal 4 punten": -1.0,
-        }
-    }
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -365,9 +330,13 @@ def test_maximum_voor_verkoelingsfunctie_geldt_apart_voor_prive_en_gemeenschappe
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
     wettekst, Bijlage I onder B, onderdeel 3.
+
+    De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder B, onderdeel 3.
     """
-    # Drie privévertrekken en drie gemeenschappelijke vertrekken, zodat de
-    # maxima van beide soorten bereikt worden.
+    # Drie privé- en drie gemeenschappelijke vertrekken: beide maxima bereikt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -439,9 +408,13 @@ def test_maximum_voor_verwarmde_verkeersruimten_telt_prive_en_gemeenschappelijk_
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
     wettekst, Bijlage I onder B, onderdeel 3; wettekst, Bijlage I onder A,
     toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding).
+
+    De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
+    Bijlage I onder B, onderdeel 3.
     """
-    # Drie privégangen en drie gemeenschappelijke gangen: samen meer dan 4 punten,
-    # maar per soort onder het maximum.
+    # Drie privé- en drie gemeenschappelijke gangen: per soort onder het maximum.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.gang, naam="Gang1", verwarmd=True),
@@ -501,8 +474,7 @@ def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
     wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
     B, toelichting, inleiding).
     """
-    # Aanrechten langer dan 1 meter, de lengte vanaf waar de package een open
-    # keuken aanneemt.
+    # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -538,8 +510,7 @@ def test_vertrek_met_open_keuken_krijgt_een_punt_voor_de_verkoelingsfunctie(
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
     wettekst, Bijlage I onder B, onderdeel 3.
     """
-    # Aanrecht langer dan 1 meter, de lengte vanaf waar de package een open keuken
-    # aanneemt.
+    # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -668,49 +639,55 @@ def test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_in_keuken_of_bijkeuken_is_geen_open_keuken(
+def test_aanrecht_in_keuken_bijkeuken_badkamer_of_doucheruimte_is_geen_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een aanrecht in een verwarmde keuken, of in een verwarmde bijkeuken die als vertrek is aangeleverd, is geen open keuken.
+    """Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
     """
-    # Elk aanrecht is langer dan 1 meter, zodat alleen de ruimtesoort bepaalt of er
-    # een open keuken is; een privévertrek en gemeenschappelijke vertrekken tonen
-    # dat voor beide.
+    # Aanrechten vanaf 1 m, zodat alleen de detailsoort de open keuken uitsluit.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.keuken,
-                naam="Keuken1",
-                elementen=[aanrecht(2700)],
+                elementen=[aanrecht(1500)],
                 verwarmd=True,
-            ),
-            ruimte(
-                Ruimtedetailsoort.keuken,
-                naam="Keuken2",
-                elementen=[aanrecht(2700)],
-                verwarmd=True,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=2,
             ),
             ruimte(
                 Ruimtedetailsoort.bijkeuken,
                 soort=Ruimtesoort.vertrek,
                 elementen=[aanrecht(1500)],
                 verwarmd=True,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=2,
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                elementen=[aanrecht(1500)],
+                verwarmd=True,
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer_met_toilet,
+                elementen=[aanrecht(1500)],
+                verwarmd=True,
+            ),
+            ruimte(
+                Ruimtedetailsoort.doucheruimte,
+                elementen=[aanrecht(1500)],
+                verwarmd=True,
             ),
         ]
     )
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
-    # Keuken2 en de bijkeuken krijgen de helft van de 2 punten voor verwarming.
+    # Zonder open keuken krijgt een verwarmd vertrek 2 punten.
     assert punten_per_bovenliggende(groep) == {
         "Verwarmde vertrekken": {
-            "Keuken1": 2.0,
-            "Keuken2": 1.0,
-            Ruimtedetailsoort.bijkeuken.naam: 1.0,
+            Ruimtedetailsoort.keuken.naam: 2.0,
+            Ruimtedetailsoort.bijkeuken.naam: 2.0,
+            Ruimtedetailsoort.badkamer.naam: 2.0,
+            Ruimtedetailsoort.badkamer_met_toilet.naam: 2.0,
+            Ruimtedetailsoort.doucheruimte.naam: 2.0,
         }
     }
     vergelijk_met_testreferentie(eenheid, groep)
@@ -725,8 +702,7 @@ def test_open_keuken_in_een_onverwarmd_vertrek_krijgt_geen_punten(
     wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
     B, toelichting, inleiding).
     """
-    # Een open keuken via een aanrecht en via de ruimtesoort, elk in een privé en
-    # een gemeenschappelijk vertrek.
+    # Open keuken via aanrecht en via detailsoort, privé en gemeenschappelijk.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -817,7 +793,7 @@ def test_gemeenschappelijk_vertrek_met_open_keuken_krijgt_de_punten_gedeeld_door
 def test_aanrecht_in_een_overig_vertrek_is_een_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een aanrecht in een verwarmd overig vertrek is een open keuken.
+    """Een aanrecht in een verwarmd privé overig vertrek is een open keuken.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
 
@@ -827,23 +803,21 @@ def test_aanrecht_in_een_overig_vertrek_is_een_open_keuken(
     wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
     B, toelichting, inleiding).
     """
-    # Een aanrecht van meer dan 1 meter in een overig vertrek: de ruimtesoort is
-    # geen woon- of slaapvertrek, maar telt toch als open keuken.
+    # Een overig vertrek is geen woon- of slaapvertrek, maar telt toch mee.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.overig_vertrek,
                 elementen=[aanrecht(1500)],
                 verwarmd=True,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=2,
             )
         ]
     )
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)
 
-    # 4 punten voor vertrek en open keuken, gedeeld door 2 woonruimten.
+    # Het vertrek en de open keuken krijgen elk 2 punten.
     assert punten_per_bovenliggende(groep) == {
-        "Verwarmde vertrekken": {"Overig vertrek met open keuken": 2.0}
+        "Verwarmde vertrekken": {"Overig vertrek met open keuken": 4.0}
     }
     vergelijk_met_testreferentie(eenheid, groep)

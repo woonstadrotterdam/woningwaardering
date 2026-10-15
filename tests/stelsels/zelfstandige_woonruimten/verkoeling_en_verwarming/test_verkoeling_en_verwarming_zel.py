@@ -40,7 +40,7 @@ def test_verwarmd_vertrek_met_verkoelingsfunctie_krijgt_een_punt_extra(
 ):
     """Een verwarmd vertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3; wettekst,
     Bijlage I onder A, onderdeel 3.
     """
     eenheid = EenhedenEenheid(
@@ -136,39 +136,6 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_verwarmde_overige_ruimten_krijgen_samen_hooguit_4_punten(
-    verkoeling_en_verwarming, vergelijk_met_testreferentie
-):
-    """Verwarmde overige ruimten krijgen samen hooguit 4 punten.
-
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
-    Bijlage I onder A, onderdeel 3.
-    """
-    eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(Ruimtedetailsoort.berging, naam="Berging1", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging2", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging3", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging4", verwarmd=True),
-            ruimte(Ruimtedetailsoort.berging, naam="Berging5", verwarmd=True),
-        ]
-    )
-
-    groep = verkoeling_en_verwarming.waardeer(eenheid)
-
-    assert punten_per_bovenliggende(groep) == {
-        "Verwarmde overige en verkeersruimten": {
-            "Berging1": 1.0,
-            "Berging2": 1.0,
-            "Berging3": 1.0,
-            "Berging4": 1.0,
-            "Berging5": 1.0,
-            "Maximaal 4 punten": -1.0,
-        }
-    }
-    vergelijk_met_testreferentie(eenheid, groep)
-
-
 def test_verwarmde_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_punten(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
@@ -217,8 +184,7 @@ def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
     wettekst, Bijlage I onder A, toelichting rubriek 3.
     """
-    # Aanrechten langer dan 1 meter, de lengte vanaf waar de package een open
-    # keuken aanneemt.
+    # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -403,15 +369,14 @@ def test_aanrecht_in_serre_overig_vertrek_of_berging_als_vertrek_is_een_open_keu
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken(
+def test_aanrecht_in_keuken_bijkeuken_badkamer_of_doucheruimte_is_geen_open_keuken(
     verkoeling_en_verwarming, vergelijk_met_testreferentie
 ):
-    """Een aanrecht in een verwarmde keuken, doucheruimte of bijkeuken die als vertrek is aangeleverd, is geen open keuken.
+    """Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
     """
-    # Elk aanrecht is langer dan 1 meter, zodat alleen de ruimtesoort bepaalt of er
-    # een open keuken is.
+    # Aanrechten vanaf 1 m, zodat alleen de detailsoort de open keuken uitsluit.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -422,6 +387,16 @@ def test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken(
             ruimte(
                 Ruimtedetailsoort.bijkeuken,
                 soort=Ruimtesoort.vertrek,
+                elementen=[aanrecht(1500)],
+                verwarmd=True,
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer,
+                elementen=[aanrecht(1500)],
+                verwarmd=True,
+            ),
+            ruimte(
+                Ruimtedetailsoort.badkamer_met_toilet,
                 elementen=[aanrecht(1500)],
                 verwarmd=True,
             ),
@@ -440,6 +415,8 @@ def test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken(
         "Verwarmde vertrekken": {
             Ruimtedetailsoort.keuken.naam: 2.0,
             Ruimtedetailsoort.bijkeuken.naam: 2.0,
+            Ruimtedetailsoort.badkamer.naam: 2.0,
+            Ruimtedetailsoort.badkamer_met_toilet.naam: 2.0,
             Ruimtedetailsoort.doucheruimte.naam: 2.0,
         }
     }
@@ -479,14 +456,16 @@ def test_vertrek_kleiner_dan_4m2_krijgt_ook_met_aanrecht_het_punt_van_een_overig
 ):
     """Een verwarmde ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², krijgt ook met een aanrecht alleen het punt van een overige ruimte.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
+    implementatietoelichting zelfstandige woonruimten, 2.3.2; wettekst,
+    Bijlage I onder A, toelichting rubriek 1; wettekst, Bijlage I onder A,
+    toelichting rubriek 3.
     """
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.overig_vertrek,
-                oppervlakte=3,
+                oppervlakte=3.99,
                 elementen=[aanrecht(1500)],
                 verwarmd=True,
             )
@@ -512,7 +491,9 @@ def test_doucheruimte_kleiner_dan_4m2_krijgt_de_punten_van_een_verwarmd_vertrek(
     wettekst, Bijlage I onder A, toelichting rubriek 1.
     """
     eenheid = EenhedenEenheid(
-        ruimten=[ruimte(Ruimtedetailsoort.doucheruimte, oppervlakte=2, verwarmd=True)]
+        ruimten=[
+            ruimte(Ruimtedetailsoort.doucheruimte, oppervlakte=3.99, verwarmd=True)
+        ]
     )
 
     groep = verkoeling_en_verwarming.waardeer(eenheid)

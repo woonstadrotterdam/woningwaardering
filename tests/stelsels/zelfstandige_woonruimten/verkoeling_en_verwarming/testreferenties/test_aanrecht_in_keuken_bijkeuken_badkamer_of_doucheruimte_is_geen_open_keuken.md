@@ -1,6 +1,6 @@
-# test_aanrecht_in_keuken_bijkeuken_of_doucheruimte_is_geen_open_keuken
+# test_aanrecht_in_keuken_bijkeuken_badkamer_of_doucheruimte_is_geen_open_keuken
 
-Een aanrecht in een verwarmde keuken, doucheruimte of bijkeuken die als vertrek is aangeleverd, is geen open keuken.
+Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
 
@@ -11,9 +11,11 @@ VERKOELING EN VERWARMING
   Verwarmde vertrekken
     - Keuken                                                                      2.00 pt
     - Bijkeuken                                                                   2.00 pt
+    - Badkamer                                                                    2.00 pt
+    - Badkamer met toilet                                                         2.00 pt
     - Doucheruimte                                                                2.00 pt
                                                                                 ------
-  Totaal                                                                          6.00 pt
+  Totaal                                                                         10.00 pt
 ```
 
 ## Waarschuwingen
@@ -84,6 +86,64 @@ Geen.
       "verwarmd": true
     },
     {
+      "id": "badkamer",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAD",
+        "naam": "Badkamer"
+      },
+      "naam": "Badkamer",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500.0
+        }
+      ],
+      "verwarmd": true
+    },
+    {
+      "id": "badkamer_met_toilet",
+      "soort": {
+        "code": "VTK",
+        "naam": "Vertrek"
+      },
+      "detailSoort": {
+        "code": "BAT",
+        "naam": "Badkamer met toilet"
+      },
+      "naam": "Badkamer met toilet",
+      "oppervlakte": 10.0,
+      "bouwkundigeElementen": [
+        {
+          "id": "aanrecht",
+          "naam": "Aanrecht",
+          "soort": {
+            "code": "VOO",
+            "naam": "Voorziening"
+          },
+          "detailSoort": {
+            "code": "AAN",
+            "naam": "Aanrecht"
+          },
+          "lengte": 1500.0
+        }
+      ],
+      "verwarmd": true
+    },
+    {
       "id": "doucheruimte",
       "soort": {
         "code": "VTK",
@@ -130,7 +190,7 @@ Geen.
       "naam": "Verkoeling en verwarming"
     }
   },
-  "punten": 6.0,
+  "punten": 10.0,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -152,6 +212,26 @@ Geen.
       "criterium": {
         "id": "verkoeling_en_verwarming__verwarmde_vertrekken__bijkeuken",
         "naam": "Bijkeuken",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+        }
+      },
+      "punten": 2.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__verwarmde_vertrekken__badkamer",
+        "naam": "Badkamer",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
+        }
+      },
+      "punten": 2.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__verwarmde_vertrekken__badkamer_met_toilet",
+        "naam": "Badkamer met toilet",
         "bovenliggendeCriterium": {
           "id": "verkoeling_en_verwarming__verwarmde_vertrekken"
         }

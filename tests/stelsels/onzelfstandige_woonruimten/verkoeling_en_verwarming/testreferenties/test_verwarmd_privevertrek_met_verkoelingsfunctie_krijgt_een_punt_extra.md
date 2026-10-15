@@ -2,7 +2,7 @@
 
 Een verwarmd privévertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
 wettekst, Bijlage I onder B, onderdeel 3.
 
 ## Rapport

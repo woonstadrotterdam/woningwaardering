@@ -6,6 +6,11 @@ Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
 wettekst, Bijlage I onder B, onderdeel 3; wettekst, Bijlage I onder A,
 toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding).
 
+De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
+Bijlage I onder B, onderdeel 3.
+
 ## Rapport
 
 ```text
