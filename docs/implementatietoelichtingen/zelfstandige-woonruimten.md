@@ -316,7 +316,7 @@ Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
 > [!NOTE]
 >
 > - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
-> - Een ruimte waarvan de `Ruimtedetailsoort` niet tot rubriek 1 of 2 kan horen, is geen vertrek en geen overige ruimte. Dat geldt ook voor een detailsoortcode die niet in de VERA-referentiedata staat.
+> - Een ruimte waarvan de `Ruimtedetailsoort` niet tot rubriek 1 of 2 kan horen, zoals een meterruimte, is geen vertrek en geen overige ruimte. Dat geldt ook voor een detailsoortcode die niet in de VERA-referentiedata staat.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 > - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
