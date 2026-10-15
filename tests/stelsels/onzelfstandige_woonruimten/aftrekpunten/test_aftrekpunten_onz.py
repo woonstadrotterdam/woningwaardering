@@ -63,7 +63,7 @@ def test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek(
         pytest.param(Ruimtedetailsoort.keuken, id="keuken"),
     ],
 )
-def test_een_vertrek_van_precies_8m2_geeft_geen_aftrek(
+def test_precies_8m2_aan_vertrekken_geeft_geen_aftrek(
     aftrekpunten, vergelijk_met_testreferentie, detailsoort
 ):
     """Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.

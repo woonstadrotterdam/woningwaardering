@@ -1,4 +1,4 @@
-# test_een_vertrek_van_precies_8m2_geeft_geen_aftrek[keuken]
+# test_precies_8m2_aan_vertrekken_geeft_geen_aftrek[woonkamer]
 
 Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.
 
@@ -19,16 +19,16 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "keuken",
+      "id": "woonkamer",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "KEU",
-        "naam": "Keuken"
+        "code": "WOO",
+        "naam": "Woonkamer"
       },
-      "naam": "Keuken",
+      "naam": "Woonkamer",
       "oppervlakte": 8.0
     }
   ]

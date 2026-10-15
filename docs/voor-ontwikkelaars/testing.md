@@ -30,11 +30,11 @@ De stappen:
 
 1. Zoek de beleidsregel op in de bron en bereken zelf hoeveel punten het scenario oplevert, zonder de bestaande code te gebruiken. Zo controleert de test de beleidsregel en niet de code.
 2. Schrijf de test. De onderdelen hieronder beschrijven hoe.
-3. Draai `pytest`. De nieuwe test faalt met de melding `Geen testreferentie`; alle andere tests slagen. Faalt er meer, los dat dan eerst op: de volgende stap overschrijft alle verwachte output.
-4. Draai `task genereer-test-output`. Die schrijft de testreferentie van de test in `testreferenties/` naast de testmodule. Controleer in de diff dat alleen die testreferentie erbij is gekomen, en dat het rapport erin overeenkomt met wat je in stap 1 hebt berekend.
+3. Draai `pytest`. De nieuwe test faalt met de melding `Geen testreferentie`, een geparametriseerde test per geval; alle andere tests slagen. Faalt er meer, los dat dan eerst op: de volgende stap overschrijft alle verwachte output.
+4. Draai `task genereer-test-output`. Die schrijft de testreferenties van de test in `testreferenties/` naast de testmodule. Controleer met `git status` dat alleen die testreferenties erbij zijn gekomen, en dat het rapport erin overeenkomt met wat je in stap 1 hebt berekend.
 5. Draai de [tests en checks](index.md#tests-en-checks).
 
-Hernoem of verwijder je een test, verwijder dan zelf zijn oude testreferentie: het bijwerken verwijdert geen bestanden.
+Hernoem of verwijder je een test of een id, verwijder dan zelf de oude testreferentie: het bijwerken verwijdert geen bestanden.
 
 Een voorbeeld is `test_meerdere_kastruimtes_tellen_samen_als_een` in `tests/stelsels/zelfstandige_woonruimten/sanitair/test_sanitair_zel.py`. Het achtervoegsel `_zel` of `_onz` van het testbestand is nodig omdat `pytest` geen twee testbestanden met dezelfde naam accepteert.
 
@@ -46,7 +46,7 @@ Een tabel uit één onderdeel van de bron, zoals de punten per aanrechtlengte in
 
 ### Naam
 
-De naam noemt de beleidsregel in gewone taal, niet de input of het rekenvoorbeeld: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, en `test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten_op_het_adres`, niet `test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, 0,01 m², één jaar, één ruimte, één punt): `test_een_vertrek_van_precies_8m2_geeft_geen_aftrek`.
+De naam noemt de beleidsregel in gewone taal, niet de input of het rekenvoorbeeld: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, en `test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten_op_het_adres`, niet `test_rekenvoorbeeld_met_keuken_en_toilet_uit_de_wettekst`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, 0,01 m², één jaar, één ruimte, één punt): `test_precies_8m2_aan_vertrekken_geeft_geen_aftrek`.
 
 ### Docstring
 
@@ -56,7 +56,7 @@ De docstring is verplicht en bestaat uit twee delen, soms drie:
 2. De vindplaats van de beleidsregel, zonder citaat: de diepste paragraaf van de implementatietoelichting waarin ze staat en, als ze ook in de wettekst staat, de wettekst erna. In de wettekst heet een regel uit de tabel `onderdeel 6.2` en een passage uit de toelichting `toelichting rubriek 6`, zo nodig met de verwijzing waarlangs ze geldt: `toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)`. `tests/test_vindplaatsen.py` controleert de vorm en of de vindplaats bestaat.
 3. Alleen als de asserts zonder een andere beleidsregel niet te volgen zijn: die andere beleidsregel in één zin, met haar vindplaats, zoals de deling door het aantal adressen in een test over verkoeling in gemeenschappelijke binnenruimten.
 
-De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt leg je alleen uit als de test daarover gaat.
+De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt hoort bij de uitkomst; je legt haar alleen uit als de test daarover gaat.
 
 Volgt de package een beleidsregel niet, of legt de test gedrag vast dat wettekst en beleidsboek niet beschrijven, dan staat die keuze in de implementatietoelichting: doorgestreept of in een toelichtingsblok. Staat ze er nog niet, vul de implementatietoelichting dan aan in dezelfde pull request. Een test van een waarschuwing omdat input ontbreekt, waarna het onderdeel geen punten krijgt, heeft geen bron: de test controleert de waarschuwing zelf.
 
@@ -80,7 +80,7 @@ Roept een scenario een `UserWarning` op, vang die dan op met `pytest.warns` en g
 
 ### Meerdere gevallen in één test
 
-Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen, genummerde ruimte en vergelijk de hele uitkomst met `punten_per_bovenliggende`, zoals in `test_punten_voor_bad_en_douche` (sanitair, zelfstandig). Zo staan alle gevallen naast elkaar in één rapport. Dit kan alleen wanneer de ruimten elkaars waardering niet beïnvloeden.
+Verschillen de gevallen van een beleidsregel alleen in wat er in een ruimte staat, zet ze dan samen in één test. Geef elk geval een eigen, genummerde ruimte en vergelijk de hele uitkomst met `punten_per_bovenliggende`, zoals in `test_punten_voor_bad_en_douche` (sanitair, zelfstandig). Zo staan alle gevallen naast elkaar in één rapport. Dit kan alleen wanneer de ruimten elkaars waardering niet beïnvloeden, zoals via een gezamenlijk maximum of een opgetelde oppervlakte.
 
 ### Parametriseren
 
