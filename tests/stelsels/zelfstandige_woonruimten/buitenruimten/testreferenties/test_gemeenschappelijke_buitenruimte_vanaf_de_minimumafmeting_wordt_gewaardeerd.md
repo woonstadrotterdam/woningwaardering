@@ -1,6 +1,6 @@
-# test_gemeenschappelijke_buitenruimte_boven_de_minimumafmeting_wordt_gewaardeerd
+# test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaardeerd
 
-Een gemeenschappelijke buitenruimte met een lengte en breedte boven de minimumafmeting wordt gewaardeerd.
+Een gemeenschappelijke buitenruimte met een lengte, breedte en hoogte van ten minste de minimumafmeting wordt gewaardeerd.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
 Bijlage I onder A, toelichting rubriek 8.
@@ -35,8 +35,9 @@ Geen.
         "naam": "Tuin"
       },
       "naam": "Tuin",
-      "breedte": 2000.0,
-      "lengte": 10000.0,
+      "breedte": 1500.0,
+      "hoogte": 2000.0,
+      "lengte": 1500.0,
       "oppervlakte": 6.0,
       "gedeeldMetAantalAdressen": 2
     }

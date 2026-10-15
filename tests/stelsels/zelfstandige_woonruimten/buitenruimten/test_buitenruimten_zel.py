@@ -129,10 +129,10 @@ def test_gemeenschappelijke_buitenruimte_zonder_afmetingen_wordt_gewaardeerd(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_gemeenschappelijke_buitenruimte_boven_de_minimumafmeting_wordt_gewaardeerd(
+def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaardeerd(
     buitenruimten, vergelijk_met_testreferentie
 ):
-    """Een gemeenschappelijke buitenruimte met een lengte en breedte boven de minimumafmeting wordt gewaardeerd.
+    """Een gemeenschappelijke buitenruimte met een lengte, breedte en hoogte van ten minste de minimumafmeting wordt gewaardeerd.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
     Bijlage I onder A, toelichting rubriek 8.
@@ -143,8 +143,9 @@ def test_gemeenschappelijke_buitenruimte_boven_de_minimumafmeting_wordt_gewaarde
                 Ruimtedetailsoort.tuin,
                 oppervlakte=6,
                 gedeeld_met_aantal_adressen=2,
-                lengte=10000,
-                breedte=2000,
+                lengte=1500,
+                breedte=1500,
+                hoogte=2000,
             )
         ]
     )
@@ -170,34 +171,33 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Elk balkon blijft op één afmeting onder de minimumafmeting:
-            # Balkon1 in lengte, Balkon2 in breedte en Balkon3 in hoogte.
+            # Elk balkon zit op één afmeting één millimeter onder het minimum.
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon1",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte=1150,
-                breedte=2800,
-                hoogte=3170,
+                lengte=1499,
+                breedte=1500,
+                hoogte=2000,
             ),
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon2",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte=2800,
-                breedte=1150,
-                hoogte=3170,
+                lengte=1500,
+                breedte=1499,
+                hoogte=2000,
             ),
             ruimte(
                 Ruimtedetailsoort.balkon,
                 naam="Balkon3",
                 oppervlakte=3.14196,
                 gedeeld_met_aantal_adressen=2,
-                lengte=3170,
-                breedte=2800,
-                hoogte=1150,
+                lengte=1500,
+                breedte=1500,
+                hoogte=1999,
             ),
         ]
     )
@@ -330,8 +330,7 @@ def test_buitenruimte_aangeleverd_als_gemeenschappelijke_ruimte_wordt_als_buiten
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Als gemeenschappelijke ruimte aangeleverd, maar een dakterras is een
-            # buitenruimte.
+            # Als gemeenschappelijke ruimte aangeleverd, maar een dakterras is een buitenruimte.
             ruimte(
                 Ruimtedetailsoort.dakterras,
                 soort=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,

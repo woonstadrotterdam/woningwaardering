@@ -10,11 +10,10 @@ Bijlage I onder B, onderdeel 8.
 ```text
 BUITENRUIMTEN
   Privé
-    - Balkon                                                          1.00 m²     0.35 pt
+    - Balkon                                                         10.00 m²     3.50 pt
     - Privé buitenruimten aanwezig                                                2.00 pt
-  Afronding op kwartpunten                                                       -0.10 pt
                                                                                 ------
-  Totaal                                                                          2.25 pt
+  Totaal                                                                          5.50 pt
 ```
 
 ## Waarschuwingen
@@ -37,7 +36,7 @@ Geen.
         "naam": "Balkon"
       },
       "naam": "Balkon",
-      "oppervlakte": 1.0
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -57,7 +56,7 @@ Geen.
       "naam": "Buitenruimten"
     }
   },
-  "punten": 2.25,
+  "punten": 5.5,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -66,7 +65,7 @@ Geen.
       }
     },
     {
-      "aantal": 1.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "buitenruimten__prive__balkon",
         "naam": "Balkon",
@@ -78,7 +77,7 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 0.35
+      "punten": 3.5
     },
     {
       "criterium": {
@@ -89,13 +88,6 @@ Geen.
         }
       },
       "punten": 2.0
-    },
-    {
-      "criterium": {
-        "id": "buitenruimten__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.1
     }
   ]
 }

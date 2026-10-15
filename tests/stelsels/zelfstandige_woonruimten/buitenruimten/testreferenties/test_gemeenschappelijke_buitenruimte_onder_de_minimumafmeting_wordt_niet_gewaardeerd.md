@@ -39,9 +39,9 @@ Geen.
         "naam": "Balkon"
       },
       "naam": "Balkon1",
-      "breedte": 2800.0,
-      "hoogte": 3170.0,
-      "lengte": 1150.0,
+      "breedte": 1500.0,
+      "hoogte": 2000.0,
+      "lengte": 1499.0,
       "oppervlakte": 3.14196,
       "gedeeldMetAantalAdressen": 2
     },
@@ -56,9 +56,9 @@ Geen.
         "naam": "Balkon"
       },
       "naam": "Balkon2",
-      "breedte": 1150.0,
-      "hoogte": 3170.0,
-      "lengte": 2800.0,
+      "breedte": 1499.0,
+      "hoogte": 2000.0,
+      "lengte": 1500.0,
       "oppervlakte": 3.14196,
       "gedeeldMetAantalAdressen": 2
     },
@@ -73,9 +73,9 @@ Geen.
         "naam": "Balkon"
       },
       "naam": "Balkon3",
-      "breedte": 2800.0,
-      "hoogte": 1150.0,
-      "lengte": 3170.0,
+      "breedte": 1500.0,
+      "hoogte": 1999.0,
+      "lengte": 1500.0,
       "oppervlakte": 3.14196,
       "gedeeldMetAantalAdressen": 2
     }

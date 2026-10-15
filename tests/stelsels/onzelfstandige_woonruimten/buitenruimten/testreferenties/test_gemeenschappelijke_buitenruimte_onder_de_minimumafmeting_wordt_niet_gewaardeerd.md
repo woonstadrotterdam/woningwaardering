@@ -1,6 +1,6 @@
 # test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gewaardeerd
 
-Een gemeenschappelijke buitenruimte die in lengte en breedte onder de minimumafmeting blijft, wordt niet gewaardeerd.
+Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
 Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
@@ -20,7 +20,7 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "tuin",
+      "id": "tuin1",
       "soort": {
         "code": "BTR",
         "naam": "Buitenruimte"
@@ -29,10 +29,44 @@ Geen.
         "code": "TUI",
         "naam": "Tuin"
       },
-      "naam": "Tuin",
-      "breedte": 1000.0,
-      "hoogte": 2500.0,
-      "lengte": 1000.0,
+      "naam": "Tuin1",
+      "breedte": 1500.0,
+      "hoogte": 2000.0,
+      "lengte": 1499.0,
+      "oppervlakte": 6.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    },
+    {
+      "id": "tuin2",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin2",
+      "breedte": 1499.0,
+      "hoogte": 2000.0,
+      "lengte": 1500.0,
+      "oppervlakte": 6.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+    },
+    {
+      "id": "tuin3",
+      "soort": {
+        "code": "BTR",
+        "naam": "Buitenruimte"
+      },
+      "detailSoort": {
+        "code": "TUI",
+        "naam": "Tuin"
+      },
+      "naam": "Tuin3",
+      "breedte": 1500.0,
+      "hoogte": 1999.0,
+      "lengte": 1500.0,
       "oppervlakte": 6.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }

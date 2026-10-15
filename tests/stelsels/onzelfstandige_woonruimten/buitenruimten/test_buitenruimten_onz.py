@@ -41,16 +41,17 @@ def test_prive_buitenruimte_krijgt_2_punten_plus_035_punt_per_m2(
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1; wettekst,
     Bijlage I onder B, onderdeel 8.
     """
-    # Het balkon uit het rekenvoorbeeld in de toelichting bij de wettekst.
-    eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.balkon, oppervlakte=1)])
+    # Het voorbeeld uit 2.8.1: 10 m² privé-buitenruimte.
+    eenheid = EenhedenEenheid(
+        ruimten=[ruimte(Ruimtedetailsoort.balkon, oppervlakte=10)]
+    )
 
     groep = buitenruimten.waardeer(eenheid)
 
     punten = punten_per_naam(groep)
-    assert punten[Ruimtedetailsoort.balkon.naam] == 0.35
+    assert punten[Ruimtedetailsoort.balkon.naam] == 3.5
     assert punten["Privé buitenruimten aanwezig"] == 2.0
-    # Samen 2,35 punten, afgerond op kwartpunten 2,25.
-    assert groep.punten == 2.25
+    assert groep.punten == 5.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -63,8 +64,7 @@ def test_prive_buitenruimte_onder_de_minimumafmeting_wordt_gewaardeerd(
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Het balkon van 2 m x 0,5 m uit het rekenvoorbeeld in de toelichting
-            # bij de wettekst: smaller dan de minimumafmeting van 1,5 m.
+            # Het balkon van 2 × 0,5 m uit het rekenvoorbeeld bij de wettekst, smaller dan 1,5 m.
             ruimte(
                 Ruimtedetailsoort.balkon,
                 oppervlakte=1,
@@ -155,8 +155,7 @@ def test_buitenruimte_gedeeld_met_meerdere_adressen_wordt_door_het_aantal_adress
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Twee tuinen met een verschillend aantal adressen laten zien dat
-            # elke tuin door zijn eigen aantal adressen wordt gedeeld.
+            # Twee tuinen, elk gedeeld door haar eigen aantal adressen.
             ruimte(
                 Ruimtedetailsoort.tuin,
                 naam="Tuin1",
@@ -197,9 +196,7 @@ def test_buitenruimte_gedeeld_met_meerdere_adressen_zonder_aantal_onzelfstandige
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Zonder aantal onzelfstandige woonruimten; twee tuinen met een
-            # verschillend aantal adressen laten zien dat alleen dat aantal als
-            # deler dient.
+            # Zonder aantal onzelfstandige woonruimten: alleen het aantal adressen van elke tuin is de deler.
             ruimte(
                 Ruimtedetailsoort.tuin,
                 naam="Tuin1",
@@ -307,8 +304,7 @@ def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaarde
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Gedeeld, want alleen gemeenschappelijke buitenruimten hebben een
-            # minimumafmeting.
+            # Gedeeld, want alleen een gemeenschappelijke buitenruimte heeft een minimumafmeting.
             ruimte(
                 detail_soort,
                 oppervlakte=oppervlakte,
@@ -329,7 +325,7 @@ def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaarde
 def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gewaardeerd(
     buitenruimten, vergelijk_met_testreferentie
 ):
-    """Een gemeenschappelijke buitenruimte die in lengte en breedte onder de minimumafmeting blijft, wordt niet gewaardeerd.
+    """Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
     Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
@@ -337,16 +333,34 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # De hoogte voldoet, zodat alleen de lengte en breedte de ruimte
-            # laten afvallen.
+            # Elke tuin zit op één afmeting één millimeter onder het minimum.
             ruimte(
                 Ruimtedetailsoort.tuin,
+                naam="Tuin1",
                 oppervlakte=6,
                 gedeeld_met_aantal_onzelfstandige_woonruimten=4,
-                lengte=1000,
-                breedte=1000,
-                hoogte=2500,
-            )
+                lengte=1499,
+                breedte=1500,
+                hoogte=2000,
+            ),
+            ruimte(
+                Ruimtedetailsoort.tuin,
+                naam="Tuin2",
+                oppervlakte=6,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+                lengte=1500,
+                breedte=1499,
+                hoogte=2000,
+            ),
+            ruimte(
+                Ruimtedetailsoort.tuin,
+                naam="Tuin3",
+                oppervlakte=6,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+                lengte=1500,
+                breedte=1500,
+                hoogte=1999,
+            ),
         ]
     )
 
@@ -367,8 +381,7 @@ def test_gemeenschappelijke_carport_of_parkeerplaats_wordt_niet_als_buitenruimte
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Binnen het eigen adres gedeelde plekken tellen ook als
-            # gemeenschappelijk (implementatietoelichting 2.10.2).
+            # Binnen het eigen adres gedeeld telt ook als gemeenschappelijk (implementatietoelichting 2.10.2).
             ruimte(
                 Ruimtedetailsoort.carport,
                 oppervlakte=12,
@@ -485,8 +498,7 @@ def test_maximum_van_15_punten_geldt_voor_prive_en_gemeenschappelijke_buitenruim
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.balkon, oppervlakte=20),
-            # Een privé- en een gemeenschappelijke buitenruimte die samen boven
-            # het maximum uitkomen.
+            # Een privé- en een gemeenschappelijke buitenruimte, samen boven het maximum.
             ruimte(
                 Ruimtedetailsoort.tuin,
                 oppervlakte=30,
@@ -565,8 +577,7 @@ def test_buitenruimte_aangeleverd_als_gemeenschappelijke_ruimte_wordt_als_buiten
     """
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Als gemeenschappelijke ruimte aangeleverd, maar een balkon is een
-            # buitenruimte.
+            # Als gemeenschappelijke ruimte aangeleverd, maar een balkon is een buitenruimte.
             ruimte(
                 Ruimtedetailsoort.balkon,
                 soort=Ruimtesoort.gemeenschappelijke_ruimten_en_voorzieningen,
