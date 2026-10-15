@@ -25,8 +25,8 @@ Geen.
     {
       "id": "berging",
       "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
+        "code": "VTK",
+        "naam": "Vertrek"
       },
       "detailSoort": {
         "code": "BRG",

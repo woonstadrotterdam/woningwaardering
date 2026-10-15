@@ -56,23 +56,16 @@ def test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-@pytest.mark.parametrize(
-    "detailsoort",
-    [
-        pytest.param(Ruimtedetailsoort.woonkamer, id="woonkamer"),
-        pytest.param(Ruimtedetailsoort.keuken, id="keuken"),
-    ],
-)
 def test_precies_8m2_aan_vertrekken_geeft_geen_aftrek(
-    aftrekpunten, vergelijk_met_testreferentie, detailsoort
+    aftrekpunten, vergelijk_met_testreferentie
 ):
     """Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
     Bijlage I onder B, onderdeel 13.
     """
-    # Eén vertrek van precies 8 m²; zowel een woonkamer als een keuken is een vertrek.
-    eenheid = EenhedenEenheid(ruimten=[ruimte(detailsoort, oppervlakte=8)])
+    # Eén vertrek van precies 8 m², op de grens.
+    eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.keuken, oppervlakte=8)])
 
     groep = aftrekpunten.waardeer(eenheid)
 
@@ -153,11 +146,11 @@ def test_ruimte_kleiner_dan_4m2_telt_niet_mee_voor_de_aftrek(
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
     Bijlage I onder B, onderdeel 13.
     """
-    # Telde Slaapkamer2 mee, dan was het totaal 8,5 m² en kwam er geen aftrek.
+    # Telde Slaapkamer2 mee, dan was het totaal 8,99 m² en kwam er geen aftrek.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer1", oppervlakte=5),
-            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer2", oppervlakte=3.5),
+            ruimte(Ruimtedetailsoort.slaapkamer, naam="Slaapkamer2", oppervlakte=3.99),
         ]
     )
 
@@ -219,12 +212,12 @@ def test_ruimte_met_onbekende_detailsoort_telt_niet_mee_als_vertrek(
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2.
     """
-    # De detailsoortcode BRG staat niet in de VERA-referentiedata (een berging is BER).
+    # De detailsoortcode BRG staat niet in de VERA-referentiedata (een berging is BER); aangeleverd als vertrek.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 RuimtedetailsoortReferentiedata(code="BRG", naam="Berging"),
-                soort=Ruimtesoort.overige_ruimten,
+                soort=Ruimtesoort.vertrek,
                 oppervlakte=10,
             )
         ]

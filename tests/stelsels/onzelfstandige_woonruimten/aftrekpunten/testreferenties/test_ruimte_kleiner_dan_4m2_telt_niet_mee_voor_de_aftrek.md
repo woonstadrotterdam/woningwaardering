@@ -53,7 +53,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer2",
-      "oppervlakte": 3.5
+      "oppervlakte": 3.99
     }
   ]
 }
