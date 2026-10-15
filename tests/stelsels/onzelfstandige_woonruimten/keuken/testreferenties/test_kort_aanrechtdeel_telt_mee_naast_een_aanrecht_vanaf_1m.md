@@ -8,13 +8,13 @@ Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2.
 
 ```text
 KEUKEN
-  Gedeeld met 4 onzelfstandige woonruimten
+  Privé
     - Keuken
-      - Totale aanrechtlengte                                      2000.00 mm     1.75 pt
+      - Totale aanrechtlengte                                      2000.00 mm     7.00 pt
         - Lengte aanrecht                                           800.00 mm
         - Lengte aanrecht                                          1200.00 mm
                                                                                 ------
-  Totaal                                                                          1.75 pt
+  Totaal                                                                          7.00 pt
 ```
 
 ## Waarschuwingen
@@ -65,8 +65,7 @@ Geen.
           },
           "lengte": 1200.0
         }
-      ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
+      ]
     }
   ]
 }
@@ -86,45 +85,45 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 1.75,
+  "punten": 7.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
+        "id": "keuken__prive",
+        "naam": "Privé"
       }
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken",
+        "id": "keuken__prive__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten"
+          "id": "keuken__prive"
         }
       }
     },
     {
       "aantal": 2000.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken__subtotaal",
+        "id": "keuken__prive__keuken__subtotaal",
         "naam": "Totale aanrechtlengte",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         },
         "meeteenheid": {
           "code": "MIL",
           "naam": "Millimeter"
         }
       },
-      "punten": 1.75
+      "punten": 7.0
     },
     {
       "aantal": 800.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken__subtotaal__lengte_aanrecht_kort_aanrecht",
+        "id": "keuken__prive__keuken__subtotaal__lengte_aanrecht_kort_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken__subtotaal"
+          "id": "keuken__prive__keuken__subtotaal"
         },
         "meeteenheid": {
           "code": "MIL",
@@ -135,10 +134,10 @@ Geen.
     {
       "aantal": 1200.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken__subtotaal__lengte_aanrecht_lang_aanrecht",
+        "id": "keuken__prive__keuken__subtotaal__lengte_aanrecht_lang_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_4_onzelfstandige_woonruimten__keuken__subtotaal"
+          "id": "keuken__prive__keuken__subtotaal"
         },
         "meeteenheid": {
           "code": "MIL",

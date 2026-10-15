@@ -3,37 +3,26 @@
 Het maximum voor extra voorzieningen stijgt mee met de punten voor een aanrecht van 3 meter of meer.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder B, onderdeel 5.2; wettekst, Bijlage I onder B, toelichting
-rubriek 5.
+Bijlage I onder B, onderdeel 5.2.
 
-Een aanrecht van 3 meter of meer krijgt 10 punten, en een aanrecht van 5
-meter of meer 13 punten als minimaal 8 onzelfstandige woonruimten toegang en
-gebruiksrecht hebben tot de keuken.
+Een aanrecht van 3 meter of meer krijgt 10 punten, en vanaf 5 meter bij minimaal 8 onzelfstandige woonruimten 13 punten, gedeeld door het aantal woonruimten.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
 Bijlage I onder B, onderdeel 5.1.
 
-De punten worden gedeeld door het aantal onzelfstandige woonruimten met
-toegang en gebruiksrecht.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2;
-implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder B, onderdeel 5.1; wettekst, Bijlage I onder B, onderdeel
-5.2.
-
-Dit geval: de 8 punten voor koelkasten blijven onder de 10 punten van het aanrecht; bij een maximum van 7 punten zou er 1 punt afgaan. De keuken wordt met 2 onzelfstandige woonruimten gedeeld.
+Dit geval: de 8 punten voor koelkasten blijven onder de 10 punten van het aanrecht; bij een maximum van 7 punten zou er 1 punt afgaan.
 
 ## Rapport
 
 ```text
 KEUKEN
-  Gedeeld met 2 onzelfstandige woonruimten
+  Privé
     - Keuken
-      - Lengte aanrecht                                            3500.00 mm     5.00 pt
+      - Lengte aanrecht                                            3500.00 mm    10.00 pt
       - Extra voorzieningen
-        - Inbouw koelkast                                             8.00 st     4.00 pt
+        - Inbouw koelkast                                             8.00 st     8.00 pt
                                                                                 ------
-  Totaal                                                                          9.00 pt
+  Totaal                                                                         18.00 pt
 ```
 
 ## Waarschuwingen
@@ -105,8 +94,7 @@ Geen.
           "code": "IKO",
           "naam": "Inbouw koelkast"
         }
-      ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      ]
     }
   ]
 }
@@ -126,61 +114,61 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 9.0,
+  "punten": 18.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+        "id": "keuken__prive",
+        "naam": "Privé"
       }
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken",
+        "id": "keuken__prive__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+          "id": "keuken__prive"
         }
       }
     },
     {
       "aantal": 3500.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
+        "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         },
         "meeteenheid": {
           "code": "MIL",
           "naam": "Millimeter"
         }
       },
-      "punten": 5.0
+      "punten": 10.0
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+        "id": "keuken__prive__keuken__extra_voorzieningen",
         "naam": "Extra voorzieningen",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         }
       }
     },
     {
       "aantal": 8.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
+        "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelkast",
         "naam": "Inbouw koelkast",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+          "id": "keuken__prive__keuken__extra_voorzieningen"
         },
         "meeteenheid": {
           "code": "STU",
           "naam": "Stuks"
         }
       },
-      "punten": 4.0
+      "punten": 8.0
     }
   ]
 }

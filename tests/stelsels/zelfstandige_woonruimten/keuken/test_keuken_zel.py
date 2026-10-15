@@ -125,8 +125,7 @@ def test_aanrecht_zonder_lengte_geeft_een_waarschuwing(
     keuken, vergelijk_met_testreferentie
 ):
     """Een aanrecht zonder lengte is incomplete input."""
-    # Naast een aanrecht met lengte een aanrecht zonder lengte: de keuken wordt
-    # gewaardeerd op het aanrecht dat wel een lengte heeft.
+    # Naast een aanrecht met lengte een aanrecht zonder lengte: alleen het eerste telt mee.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -220,8 +219,7 @@ def test_maximum_voor_extra_voorzieningen_volgt_uit_de_opgetelde_aanrechtlengte(
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3.
     """
-    # Aanrechtdelen die samen 2 m of meer zijn (7 punten), met 8 koelkasten (8
-    # punten) erboven.
+    # Aanrechtdelen van samen 2 m of meer (7 punten), met 8 koelkasten (8 punten) erboven.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -283,8 +281,7 @@ def test_koelvriescombinatie_krijgt_de_punten_van_koelkast_en_vrieskast(
     Bijlage I onder A, toelichting rubriek 5; wettekst, Bijlage I onder A,
     onderdeel 5.2.
     """
-    # Eén object met twee voorzieningen; het aanrecht is nodig, want zonder
-    # aanrecht krijgen voorzieningen geen punten.
+    # Mét aanrecht, want zonder aanrecht krijgen voorzieningen geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -336,8 +333,7 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_aanrecht(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3; wettekst,
     Bijlage I onder A, onderdeel 5.2.
     """
-    # Een aanrecht van 1 m geeft 4 punten: 3 punten aan voorzieningen blijven
-    # eronder, 5 punten komen erboven.
+    # Een aanrecht van 1 m (4 punten): 3 punten aan voorzieningen blijven eronder, 5 punten erboven.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -363,8 +359,7 @@ def test_extra_voorzieningen_boven_de_punten_van_het_aanrecht_worden_afgetopt(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3; wettekst,
     Bijlage I onder A, onderdeel 5.2.
     """
-    # Het rekenvoorbeeld uit het beleidsboek (2.5.3): een aanrecht van 1,6 m (4
-    # punten) met voorzieningen die samen 4,5 punten zouden geven.
+    # Het rekenvoorbeeld uit het beleidsboek: aanrecht van 1,6 m (4 punten), voorzieningen samen 4,5 punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -429,8 +424,7 @@ def test_vertrek_met_aanrecht_telt_als_keuken(keuken, vergelijk_met_testreferent
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1.
     """
-    # Een aanrecht in elke soort vertrek, om te laten zien dat de soort ruimte niet
-    # uitmaakt; de slaapkamer zonder aanrecht krijgt geen punten.
+    # Een aanrecht in elke soort vertrek; de slaapkamer zonder aanrecht krijgt geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -465,9 +459,7 @@ def test_overige_ruimte_met_aanrecht_telt_als_keuken(
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1.
     """
-    # Overige ruimten (geen vertrek) om te laten zien dat ook daar een aanrecht
-    # meetelt; de twee puntenklassen tonen dat elk aanrecht op zijn eigen lengte
-    # wordt gewaardeerd.
+    # Overige ruimten met een aanrecht in twee puntenklassen: elk aanrecht telt op zijn eigen lengte.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(Ruimtedetailsoort.bijkeuken, elementen=[aanrecht(2200)]),
@@ -495,8 +487,7 @@ def test_keuken_gedeeld_met_andere_adressen_telt_niet_mee(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
     Bijlage I onder A, toelichting rubriek 9.
     """
-    # Ook de extra voorzieningen in de gedeelde keuken krijgen in rubriek 5 geen
-    # punten.
+    # Ook de extra voorzieningen in de gedeelde keuken krijgen in rubriek 5 geen punten.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(

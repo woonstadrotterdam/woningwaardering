@@ -3,25 +3,14 @@
 Het maximum voor extra voorzieningen stijgt mee met de punten voor een aanrecht van 3 meter of meer.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder B, onderdeel 5.2; wettekst, Bijlage I onder B, toelichting
-rubriek 5.
+Bijlage I onder B, onderdeel 5.2.
 
-Een aanrecht van 3 meter of meer krijgt 10 punten, en een aanrecht van 5
-meter of meer 13 punten als minimaal 8 onzelfstandige woonruimten toegang en
-gebruiksrecht hebben tot de keuken.
+Een aanrecht van 3 meter of meer krijgt 10 punten, en vanaf 5 meter bij minimaal 8 onzelfstandige woonruimten 13 punten, gedeeld door het aantal woonruimten.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
 Bijlage I onder B, onderdeel 5.1.
 
-De punten worden gedeeld door het aantal onzelfstandige woonruimten met
-toegang en gebruiksrecht.
-
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2;
-implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder B, onderdeel 5.1; wettekst, Bijlage I onder B, onderdeel
-5.2.
-
-Dit geval: de 12 punten voor koelkasten blijven onder de 13 punten van het aanrecht; bij een maximum van 10 punten zouden er 2 punten afgaan. De keuken wordt met 8 onzelfstandige woonruimten gedeeld.
+Dit geval: de 12 punten voor koelkasten blijven onder de 13 punten van het aanrecht; bij een maximum van 10 punten zouden er 2 punten afgaan.
 
 ## Rapport
 

@@ -10,14 +10,13 @@ toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 5.2.
 
 ```text
 KEUKEN
-  Gedeeld met 2 onzelfstandige woonruimten
+  Privé
     - Keuken
-      - Lengte aanrecht                                            2500.00 mm     3.50 pt
+      - Lengte aanrecht                                            2500.00 mm     7.00 pt
       - Extra voorzieningen
-        - Inbouw koelvriescombinatie                                  1.00 st     0.88 pt
-  Afronding op kwartpunten                                                        0.12 pt
+        - Inbouw koelvriescombinatie                                  1.00 st     1.75 pt
                                                                                 ------
-  Totaal                                                                          4.50 pt
+  Totaal                                                                          8.75 pt
 ```
 
 ## Waarschuwingen
@@ -61,8 +60,7 @@ Geen.
           "code": "IKV",
           "naam": "Inbouw koelvriescombinatie"
         }
-      ],
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
+      ]
     }
   ]
 }
@@ -82,68 +80,61 @@ Geen.
       "naam": "Keuken"
     }
   },
-  "punten": 4.5,
+  "punten": 8.75,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 2 onzelfstandige woonruimten"
+        "id": "keuken__prive",
+        "naam": "Privé"
       }
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken",
+        "id": "keuken__prive__keuken",
         "naam": "Keuken",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten"
+          "id": "keuken__prive"
         }
       }
     },
     {
       "aantal": 2500.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
+        "id": "keuken__prive__keuken__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         },
         "meeteenheid": {
           "code": "MIL",
           "naam": "Millimeter"
         }
       },
-      "punten": 3.5
+      "punten": 7.0
     },
     {
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen",
+        "id": "keuken__prive__keuken__extra_voorzieningen",
         "naam": "Extra voorzieningen",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken"
+          "id": "keuken__prive__keuken"
         }
       }
     },
     {
       "aantal": 1.0,
       "criterium": {
-        "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelvriescombinatie",
+        "id": "keuken__prive__keuken__extra_voorzieningen__extra_voorziening_inbouw_koelvriescombinatie",
         "naam": "Inbouw koelvriescombinatie",
         "bovenliggendeCriterium": {
-          "id": "keuken__gedeeld_met_2_onzelfstandige_woonruimten__keuken__extra_voorzieningen"
+          "id": "keuken__prive__keuken__extra_voorzieningen"
         },
         "meeteenheid": {
           "code": "STU",
           "naam": "Stuks"
         }
       },
-      "punten": 0.88
-    },
-    {
-      "criterium": {
-        "id": "keuken__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": 0.12
+      "punten": 1.75
     }
   ]
 }

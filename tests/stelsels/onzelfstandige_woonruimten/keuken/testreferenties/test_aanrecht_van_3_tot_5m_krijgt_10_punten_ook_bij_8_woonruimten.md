@@ -17,7 +17,7 @@ Bijlage I onder B, onderdeel 5.1.
 KEUKEN
   Gedeeld met 8 onzelfstandige woonruimten
     - Keuken
-      - Lengte aanrecht                                            3001.00 mm     1.25 pt
+      - Lengte aanrecht                                            4999.00 mm     1.25 pt
                                                                                 ------
   Totaal                                                                          1.25 pt
 ```
@@ -55,7 +55,7 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 3001.0
+          "lengte": 4999.0
         }
       ],
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 8
@@ -96,7 +96,7 @@ Geen.
       }
     },
     {
-      "aantal": 3001.0,
+      "aantal": 4999.0,
       "criterium": {
         "id": "keuken__gedeeld_met_8_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
