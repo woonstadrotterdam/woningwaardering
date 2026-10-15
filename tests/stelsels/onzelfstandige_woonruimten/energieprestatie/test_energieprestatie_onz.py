@@ -13,7 +13,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEnergieprestatie,
     EenhedenPrijscomponent,
-    Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
     Eenheidmonument,
@@ -43,6 +42,50 @@ def test_Energieprestatie_output(
 # De oppervlakte waarover de punten gelden
 
 
+def test_toe_te_rekenen_oppervlakte_telt_onafgerond_mee_voor_de_energieprestatie(
+    energieprestatie, vergelijk_met_testreferentie
+):
+    """De oppervlakte die aan de huurder is toe te rekenen, telt voor de energieprestatie onafgerond mee.
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
+    Bijlage I onder B, onderdeel 4.1.
+    """
+    eenheid = EenhedenEenheid(
+        bouwjaar=1990,
+        monumenten=[],
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 1, 1),
+                einddatum=date(2031, 1, 1),
+                label=Energielabel.a,
+            )
+        ],
+        # Het voorbeeld uit de implementatietoelichting: 10,40 m² privé en 40,40 m² gedeeld met vier huurders.
+        ruimten=[
+            ruimte(Ruimtedetailsoort.slaapkamer, oppervlakte=10.4),
+            ruimte(
+                Ruimtedetailsoort.woonkamer,
+                oppervlakte=40.4,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=4,
+            ),
+        ],
+    )
+
+    groep = energieprestatie.waardeer(eenheid)
+
+    # 10,40 m² slaapkamer + 40,40 m² woonkamer gedeeld door 4
+    assert aantal_per_naam(groep) == {Energielabel.a.naam: 20.5}
+    # 20,50 m² x 0,65 punt = 13,325 punten, afgerond op 13,25
+    assert punten_per_naam(groep) == {
+        Energielabel.a.naam: 13.33,
+        "Afronding op kwartpunten": -0.08,
+    }
+    assert groep.punten == 13.25
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
 def test_gemeenschappelijk_vertrek_telt_voor_de_energieprestatie_mee_met_de_toe_te_rekenen_oppervlakte(
     energieprestatie, vergelijk_met_testreferentie
 ):
@@ -64,8 +107,7 @@ def test_gemeenschappelijk_vertrek_telt_voor_de_energieprestatie_mee_met_de_toe_
                 waarde="0.9",
             )
         ],
-        # Zoals in het rekenvoorbeeld deelt de huurder de woonkamer met drie
-        # andere huurders; de privéslaapkamer is niet gedeeld.
+        # Zoals in het rekenvoorbeeld: de woonkamer gedeeld met drie andere huurders, de slaapkamer privé.
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.slaapkamer,
@@ -110,8 +152,7 @@ def test_vertrek_gedeeld_met_meerdere_adressen_telt_niet_mee(
                 waarde="0.9",
             )
         ],
-        # Twee adressen is de kleinste waarde waarmee het vertrek met meerdere
-        # adressen wordt gedeeld; de slaapkamer is privé.
+        # Gedeeld met twee adressen, het kleinste aantal voor meerdere adressen; de slaapkamer is privé.
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.slaapkamer,
@@ -150,8 +191,7 @@ def test_kast_telt_mee_in_de_oppervlakte_voor_de_energieprestatie(
         # Zonder energieprestaties bepaalt het bouwjaar de punten per m².
         bouwjaar=1970,
         monumenten=[],
-        # Een kast is geen vertrek; ze telt mee omdat ze met de slaapkamer
-        # verbonden is.
+        # Een kast is geen vertrek, maar telt mee omdat ze met de slaapkamer verbonden is.
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.slaapkamer,
@@ -191,13 +231,13 @@ def test_alleen_de_geldige_energieprestatie_telt_mee(
     eenheid = EenhedenEenheid(
         bouwjaar=1993,
         monumenten=[],
-        # Het eerste label is op de peildatum vervallen en afgegeven in 2019.
+        # Het eerste label is op de peildatum vervallen.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energielabel_conform_nta8800,
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2019, 3, 27),
-                einddatum=date(2021, 3, 27),
+                begindatum=date(2014, 3, 27),
+                einddatum=date(2024, 3, 27),
                 label=Energielabel.f,
                 waarde="160",
             ),
@@ -210,37 +250,37 @@ def test_alleen_de_geldige_energieprestatie_telt_mee(
                 waarde="170",
             ),
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {Energielabel.a.naam: 3.67}
-    # 3,67 m² x 0,65 punt
-    assert punten_per_naam(groep) == {
-        Energielabel.a.naam: 2.38,
-        "Afronding op kwartpunten": 0.12,
-    }
-    assert groep.punten == 2.5
+    assert aantal_per_naam(groep) == {Energielabel.a.naam: 10.0}
+    # 10 m² x 0,65 punt
+    assert punten_per_naam(groep) == {Energielabel.a.naam: 6.5}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_energielabel_f_geeft_minpunten_per_m2(
-    energieprestatie, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    ("label", "verwachte_punten"),
+    [
+        pytest.param(Energielabel.ap4, 10.0, id="label_a4plus"),
+        pytest.param(Energielabel.ap3, 9.5, id="label_a3plus"),
+        pytest.param(Energielabel.app, 8.5, id="label_a2plus"),
+        pytest.param(Energielabel.ap, 7.5, id="label_aplus"),
+        pytest.param(Energielabel.a, 6.5, id="label_a"),
+        pytest.param(Energielabel.b, 5.0, id="label_b"),
+        pytest.param(Energielabel.c, 3.5, id="label_c"),
+        pytest.param(Energielabel.d, 2.0, id="label_d"),
+        pytest.param(Energielabel.e, -0.5, id="label_e"),
+        pytest.param(Energielabel.f, -1.0, id="label_f"),
+        pytest.param(Energielabel.g, -1.5, id="label_g"),
+    ],
+)
+def test_punten_per_m2_voor_een_energielabel_hangen_af_van_de_labelklasse(
+    energieprestatie, vergelijk_met_testreferentie, label, verwachte_punten
 ):
-    """Een energielabel F geeft 0,10 minpunt per m² van de vertrekken.
+    """De punten per m² van de vertrekken voor een energielabel hangen af van de labelklasse.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
     Bijlage I onder B, onderdeel 4.1.
@@ -254,32 +294,17 @@ def test_energielabel_f_geeft_minpunten_per_m2(
                 status=Energieprestatiestatus.definitief,
                 begindatum=date(2021, 3, 27),
                 einddatum=date(2031, 3, 27),
-                label=Energielabel.f,
-                waarde="160.92",
+                label=label,
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=20.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=30.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {Energielabel.f.naam: 9.0}
-    assert punten_per_naam(groep) == {
-        Energielabel.f.naam: -0.9,
-        "Afronding op kwartpunten": -0.1,
-    }
-    assert groep.punten == -1.0
+    assert aantal_per_naam(groep) == {label.naam: 10.0}
+    # 10 m² x de punten per m² van het label
+    assert punten_per_naam(groep) == {label.naam: verwachte_punten}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -305,30 +330,14 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
                 waarde="1.48",
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"A -> C (Energie-index)": 3.67}
-    # 3,67 m² x 0,35 punt
-    assert punten_per_naam(groep) == {
-        "A -> C (Energie-index)": 1.28,
-        "Afronding op kwartpunten": -0.03,
-    }
-    assert groep.punten == 1.25
+    assert aantal_per_naam(groep) == {"A -> C (Energie-index)": 10.0}
+    # 10 m² x 0,35 punt
+    assert punten_per_naam(groep) == {"A -> C (Energie-index)": 3.5}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -354,82 +363,67 @@ def test_energie_index_zonder_label_wordt_op_de_index_gewaardeerd(
                 waarde="1.0",
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Energie-index": 3.67}
-    # 3,67 m² x 0,65 punt
-    assert punten_per_naam(groep) == {
-        "Energie-index": 2.38,
-        "Afronding op kwartpunten": 0.12,
-    }
-    assert groep.punten == 2.5
+    assert aantal_per_naam(groep) == {"Energie-index": 10.0}
+    # 10 m² x 0,65 punt
+    assert punten_per_naam(groep) == {"Energie-index": 6.5}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
 # Zonder geldige energieprestatie: het bouwjaar
 
 
+@pytest.mark.parametrize(
+    ("begindatum", "einddatum"),
+    [
+        pytest.param(
+            date(2015, 1, 1),
+            date(2027, 1, 1),
+            id="afgegeven_op_1_januari_2015",
+        ),
+        pytest.param(
+            date(2020, 12, 31),
+            date(2030, 12, 31),
+            id="afgegeven_op_31_december_2020",
+        ),
+    ],
+)
 def test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee(
-    energieprestatie, vergelijk_met_testreferentie
+    energieprestatie, vergelijk_met_testreferentie, begindatum, einddatum
 ):
-    """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021 telt niet mee: het bouwjaar bepaalt de punten per m².
+    """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021, telt niet mee.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3;
-    implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+
+    Zonder geldige energieprestatie bepaalt het bouwjaar de punten per m².
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
     Bijlage I onder B, onderdeel 4.1.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1970,
         monumenten=[],
-        # Het label is afgegeven in 2018, in de periode waarin labels niet meetellen.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.voorlopig_energielabel,
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2018, 6, 1),
-                einddatum=date(2028, 6, 1),
+                begindatum=begindatum,
+                einddatum=einddatum,
                 label=Energielabel.a,
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Bouwjaar 1970": 3.67}
-    # 3,67 m² x -0,15 punt
-    assert punten_per_naam(groep) == {
-        "Bouwjaar 1970": -0.55,
-        "Afronding op kwartpunten": 0.05,
-    }
-    assert groep.punten == -0.5
+    assert aantal_per_naam(groep) == {"Bouwjaar 1970": 10.0}
+    # 10 m² x -0,15 punt
+    assert punten_per_naam(groep) == {"Bouwjaar 1970": -1.5}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -452,90 +446,69 @@ def test_energie_index_zonder_waarde_wordt_met_waarschuwing_op_het_bouwjaar_gewa
                 einddatum=date(2028, 6, 1),
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     with pytest.warns(UserWarning, match="energie-index mist waarde") as waarschuwingen:
         groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Bouwjaar 1970": 3.67}
-    # 3,67 m² x -0,15 punt
-    assert punten_per_naam(groep) == {
-        "Bouwjaar 1970": -0.55,
-        "Afronding op kwartpunten": 0.05,
-    }
-    assert groep.punten == -0.5
+    assert aantal_per_naam(groep) == {"Bouwjaar 1970": 10.0}
+    # 10 m² x -0,15 punt
+    assert punten_per_naam(groep) == {"Bouwjaar 1970": -1.5}
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
 def test_energieprestatie_zonder_soort_telt_niet_mee(
     energieprestatie, vergelijk_met_testreferentie
 ):
-    """Een energieprestatie zonder soort telt niet mee: het bouwjaar bepaalt de punten per m².
+    """Een energieprestatie zonder soort telt niet mee.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3;
-    implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+
+    Zonder geldige energieprestatie bepaalt het bouwjaar de punten per m².
+
+    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
     Bijlage I onder B, onderdeel 4.1.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
         monumenten=[],
-        # De energieprestatie heeft geen soort; het label heeft alleen een naam.
+        # De energieprestatie heeft geen soort.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2017, 2, 23),
-                einddatum=date(2027, 2, 23),
-                label=Referentiedata(naam="C"),
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2031, 2, 23),
+                label=Energielabel.c,
                 waarde="1.48",
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Bouwjaar 1921": 3.67}
-    # 3,67 m² x -0,15 punt
-    assert punten_per_naam(groep) == {
-        "Bouwjaar 1921": -0.55,
-        "Afronding op kwartpunten": 0.05,
-    }
-    assert groep.punten == -0.5
+    assert aantal_per_naam(groep) == {"Bouwjaar 1921": 10.0}
+    # 10 m² x -0,15 punt
+    assert punten_per_naam(groep) == {"Bouwjaar 1921": -1.5}
     vergelijk_met_testreferentie(eenheid, groep)
 
 
 # Monumenten
 
 
-def test_rijksmonument_krijgt_geen_minpunten(
-    energieprestatie, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    "monument",
+    [
+        pytest.param(Eenheidmonument.rijksmonument, id="rijksmonument"),
+        pytest.param(Eenheidmonument.provinciaal_monument, id="provinciaal_monument"),
+        pytest.param(Eenheidmonument.gemeentelijk_monument, id="gemeentelijk_monument"),
+    ],
+)
+def test_monument_krijgt_geen_minpunten(
+    energieprestatie, vergelijk_met_testreferentie, monument
 ):
-    """Een rijksmonument krijgt geen minpunten voor de energieprestatie.
+    """Een rijks-, provinciaal of gemeentelijk monument krijgt geen minpunten voor de energieprestatie.
 
     Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
     wettekst, Bijlage I onder B, onderdeel 4.2.
@@ -543,21 +516,10 @@ def test_rijksmonument_krijgt_geen_minpunten(
     eenheid = EenhedenEenheid(
         id="eenheid",
         bouwjaar=1921,
-        monumenten=[Eenheidmonument.rijksmonument],
+        monumenten=[monument],
         # Zonder energieprestaties bepaalt het bouwjaar de punten.
         energieprestaties=[],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     with pytest.warns(
@@ -565,12 +527,11 @@ def test_rijksmonument_krijgt_geen_minpunten(
     ) as waarschuwingen:
         groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Bouwjaar 1921": 3.67}
-    # De correctie heft de minpunten van 3,67 m² x -0,15 punt op
+    assert aantal_per_naam(groep) == {"Bouwjaar 1921": 10.0}
+    # De correctie heft de minpunten van 10 m² x -0,15 punt op
     assert punten_per_naam(groep) == {
-        "Bouwjaar 1921": -0.55,
-        "Correctie monument": 0.55,
+        "Bouwjaar 1921": -1.5,
+        "Correctie monument": 1.5,
     }
     assert groep.punten == 0.0
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
@@ -587,8 +548,7 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
         monumenten=[Eenheidmonument.rijksmonument],
-        # De energieprestatievergoeding geeft pluspunten, ook al zou het bouwjaar
-        # minpunten geven.
+        # Een geldige energie-index C geeft pluspunten.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energie_index,
@@ -599,35 +559,15 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
                 waarde="1.48",
             )
         ],
-        prijscomponenten=[
-            EenhedenPrijscomponent(
-                detail_soort=Prijscomponentdetailsoort.energieprestatievergoeding
-            )
-        ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Energieprestatievergoeding": 3.67}
-    # 3,67 m² x 0,50 punt
-    assert punten_per_naam(groep) == {
-        "Energieprestatievergoeding": 1.83,
-        "Afronding op kwartpunten": -0.08,
-    }
-    assert groep.punten == 1.75
+    assert aantal_per_naam(groep) == {"C (Energie-index)": 10.0}
+    # 10 m² x 0,35 punt
+    assert punten_per_naam(groep) == {"C (Energie-index)": 3.5}
+    assert groep.punten == 3.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -644,6 +584,7 @@ def test_energieprestatievergoeding_geeft_een_vast_aantal_punten_per_m2(
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
         monumenten=[],
+        # Een geldige energie-index, zodat de vergoeding voorgaat op de tabel.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energie_index,
@@ -659,28 +600,12 @@ def test_energieprestatievergoeding_geeft_een_vast_aantal_punten_per_m2(
                 detail_soort=Prijscomponentdetailsoort.energieprestatievergoeding
             )
         ],
-        ruimten=[
-            ruimte(
-                Ruimtedetailsoort.slaapkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=5,
-            ),
-            ruimte(
-                Ruimtedetailsoort.woonkamer,
-                oppervlakte=10.0,
-                gedeeld_met_aantal_onzelfstandige_woonruimten=6,
-            ),
-        ],
+        ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    # 10 m² gedeeld door 5 + 10 m² gedeeld door 6
-    assert aantal_per_naam(groep) == {"Energieprestatievergoeding": 3.67}
-    # 3,67 m² x 0,50 punt
-    assert punten_per_naam(groep) == {
-        "Energieprestatievergoeding": 1.83,
-        "Afronding op kwartpunten": -0.08,
-    }
-    assert groep.punten == 1.75
+    assert aantal_per_naam(groep) == {"Energieprestatievergoeding": 10.0}
+    # 10 m² x 0,50 punt
+    assert punten_per_naam(groep) == {"Energieprestatievergoeding": 5.0}
     vergelijk_met_testreferentie(eenheid, groep)

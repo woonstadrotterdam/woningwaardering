@@ -8,10 +8,9 @@ Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
 
 ```text
 ENERGIEPRESTATIE
-  Bouwjaar 1970                                                       3.67 m²    -0.55 pt
-  Afronding op kwartpunten                                                        0.05 pt
+  Bouwjaar 1970                                                      10.00 m²    -1.50 pt
                                                                                 ------
-  Totaal                                                                         -0.50 pt
+  Totaal                                                                         -1.50 pt
 ```
 
 ## Waarschuwingen
@@ -51,22 +50,7 @@ ENERGIEPRESTATIE
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -86,10 +70,10 @@ ENERGIEPRESTATIE
       "naam": "Energieprestatie"
     }
   },
-  "punten": -0.5,
+  "punten": -1.5,
   "woningwaarderingen": [
     {
-      "aantal": 3.67,
+      "aantal": 10.0,
       "criterium": {
         "id": "energieprestatie__bouwjaar",
         "naam": "Bouwjaar 1970",
@@ -98,14 +82,7 @@ ENERGIEPRESTATIE
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": -0.55
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": 0.05
+      "punten": -1.5
     }
   ]
 }

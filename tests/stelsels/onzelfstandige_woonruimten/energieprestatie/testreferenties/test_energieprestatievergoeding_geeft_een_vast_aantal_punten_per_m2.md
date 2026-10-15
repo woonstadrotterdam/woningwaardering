@@ -8,10 +8,9 @@ Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.3.
 
 ```text
 ENERGIEPRESTATIE
-  Energieprestatievergoeding                                          3.67 m²     1.83 pt
-  Afronding op kwartpunten                                                       -0.08 pt
+  Energieprestatievergoeding                                         10.00 m²     5.00 pt
                                                                                 ------
-  Totaal                                                                          1.75 pt
+  Totaal                                                                          5.00 pt
 ```
 
 ## Waarschuwingen
@@ -63,22 +62,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -98,10 +82,10 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 1.75,
+  "punten": 5.0,
   "woningwaarderingen": [
     {
-      "aantal": 3.67,
+      "aantal": 10.0,
       "criterium": {
         "id": "energieprestatie__energieprestatievergoeding",
         "naam": "Energieprestatievergoeding",
@@ -110,14 +94,7 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 1.83
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.08
+      "punten": 5.0
     }
   ]
 }

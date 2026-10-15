@@ -1,9 +1,13 @@
 # test_energieprestatie_zonder_soort_telt_niet_mee
 
-Een energieprestatie zonder soort telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
+Een energieprestatie zonder soort telt niet mee.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3; wettekst,
-Bijlage I onder A, toelichting rubriek 4.1.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+
+Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
+
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
+Bijlage I onder A, onderdeel 4.1.
 
 ## Rapport
 
@@ -29,9 +33,10 @@ Geen.
         "code": "DEF",
         "naam": "Definitief"
       },
-      "begindatum": "2017-02-23",
-      "einddatum": "2027-02-23",
+      "begindatum": "2021-02-23",
+      "einddatum": "2031-02-23",
       "label": {
+        "code": "C",
         "naam": "C"
       },
       "waarde": "1.48"

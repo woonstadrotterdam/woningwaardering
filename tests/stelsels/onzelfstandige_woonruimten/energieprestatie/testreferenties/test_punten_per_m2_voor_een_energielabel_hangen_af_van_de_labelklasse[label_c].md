@@ -1,6 +1,6 @@
-# test_energielabel_f_geeft_minpunten_per_m2
+# test_punten_per_m2_voor_een_energielabel_hangen_af_van_de_labelklasse[label_c]
 
-Een energielabel F geeft 0,10 minpunt per m² van de vertrekken.
+De punten per m² van de vertrekken voor een energielabel hangen af van de labelklasse.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
 Bijlage I onder B, onderdeel 4.1.
@@ -9,10 +9,9 @@ Bijlage I onder B, onderdeel 4.1.
 
 ```text
 ENERGIEPRESTATIE
-  F                                                                   9.00 m²    -0.90 pt
-  Afronding op kwartpunten                                                       -0.10 pt
+  C                                                                  10.00 m²     3.50 pt
                                                                                 ------
-  Totaal                                                                         -1.00 pt
+  Totaal                                                                          3.50 pt
 ```
 
 ## Waarschuwingen
@@ -37,10 +36,9 @@ Geen.
       "begindatum": "2021-03-27",
       "einddatum": "2031-03-27",
       "label": {
-        "code": "F",
-        "naam": "F"
-      },
-      "waarde": "160.92"
+        "code": "C",
+        "naam": "C"
+      }
     }
   ],
   "monumenten": [],
@@ -56,22 +54,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 20.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 30.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -91,26 +74,19 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": -1.0,
+  "punten": 3.5,
   "woningwaarderingen": [
     {
-      "aantal": 9.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "energieprestatie__label",
-        "naam": "F",
+        "naam": "C",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": -0.9
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.1
+      "punten": 3.5
     }
   ]
 }

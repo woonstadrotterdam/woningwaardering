@@ -1,18 +1,17 @@
-# test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee
+# test_punten_voor_een_energielabel_hangen_af_van_de_labelklasse[label_a]
 
-Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021 telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
+De punten voor een energielabel hangen af van de labelklasse.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3;
-implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst, Bijlage
-I onder A, toelichting rubriek 4.1.
+Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
+Bijlage I onder A, onderdeel 4.1.
 
 ## Rapport
 
 ```text
 ENERGIEPRESTATIE
-  Bouwjaar 1990                                                                  14.00 pt
+  A                                                                              41.00 pt
                                                                                 ------
-  Totaal                                                                         14.00 pt
+  Totaal                                                                         41.00 pt
 ```
 
 ## Waarschuwingen
@@ -23,19 +22,19 @@ Geen.
 
 ```json
 {
-  "bouwjaar": 1990,
+  "bouwjaar": 1921,
   "energieprestaties": [
     {
       "soort": {
-        "code": "VEL",
-        "naam": "Voorlopig energielabel"
+        "code": "NTA",
+        "naam": "Energielabel conform NTA8800"
       },
       "status": {
         "code": "DEF",
         "naam": "Definitief"
       },
-      "begindatum": "2018-06-01",
-      "einddatum": "2028-06-01",
+      "begindatum": "2021-03-27",
+      "einddatum": "2031-03-27",
       "label": {
         "code": "A",
         "naam": "A"
@@ -68,14 +67,14 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 14.0,
+  "punten": 41.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "energieprestatie__bouwjaar",
-        "naam": "Bouwjaar 1990"
+        "id": "energieprestatie__label",
+        "naam": "A"
       },
-      "punten": 14.0
+      "punten": 41.0
     }
   ]
 }

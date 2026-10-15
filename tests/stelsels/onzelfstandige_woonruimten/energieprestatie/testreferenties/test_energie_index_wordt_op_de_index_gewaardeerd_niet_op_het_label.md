@@ -9,10 +9,9 @@ Bijlage I onder B, onderdeel 4.1.
 
 ```text
 ENERGIEPRESTATIE
-  A -> C (Energie-index)                                              3.67 m²     1.28 pt
-  Afronding op kwartpunten                                                       -0.03 pt
+  A -> C (Energie-index)                                             10.00 m²     3.50 pt
                                                                                 ------
-  Totaal                                                                          1.25 pt
+  Totaal                                                                          3.50 pt
 ```
 
 ## Waarschuwingen
@@ -56,22 +55,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -91,10 +75,10 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 1.25,
+  "punten": 3.5,
   "woningwaarderingen": [
     {
-      "aantal": 3.67,
+      "aantal": 10.0,
       "criterium": {
         "id": "energieprestatie__label",
         "naam": "A -> C (Energie-index)",
@@ -103,14 +87,7 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 1.28
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.03
+      "punten": 3.5
     }
   ]
 }

@@ -9,9 +9,9 @@ Bijlage I onder A, onderdeel 4.2.
 
 ```text
 ENERGIEPRESTATIE
-  Energieprestatievergoeding Eengezinswoning                                     32.00 pt
+  C (Energie-index)                                                              22.00 pt
                                                                                 ------
-  Totaal                                                                         32.00 pt
+  Totaal                                                                         22.00 pt
 ```
 
 ## Waarschuwingen
@@ -55,14 +55,6 @@ Geen.
         "naam": "Eengezinswoning"
       }
     }
-  ],
-  "prijscomponenten": [
-    {
-      "detailSoort": {
-        "code": "EPV",
-        "naam": "Energieprestatievergoeding"
-      }
-    }
   ]
 }
 ```
@@ -81,14 +73,14 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 32.0,
+  "punten": 22.0,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "energieprestatie__energieprestatievergoeding",
-        "naam": "Energieprestatievergoeding Eengezinswoning"
+        "id": "energieprestatie__label",
+        "naam": "C (Energie-index)"
       },
-      "punten": 32.0
+      "punten": 22.0
     }
   ]
 }

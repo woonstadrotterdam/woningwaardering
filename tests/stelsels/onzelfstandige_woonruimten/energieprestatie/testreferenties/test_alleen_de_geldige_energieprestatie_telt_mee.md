@@ -9,10 +9,9 @@ Bijlage I onder B, onderdeel 4.1.
 
 ```text
 ENERGIEPRESTATIE
-  A                                                                   3.67 m²     2.38 pt
-  Afronding op kwartpunten                                                        0.12 pt
+  A                                                                  10.00 m²     6.50 pt
                                                                                 ------
-  Totaal                                                                          2.50 pt
+  Totaal                                                                          6.50 pt
 ```
 
 ## Waarschuwingen
@@ -34,8 +33,8 @@ Geen.
         "code": "DEF",
         "naam": "Definitief"
       },
-      "begindatum": "2019-03-27",
-      "einddatum": "2021-03-27",
+      "begindatum": "2014-03-27",
+      "einddatum": "2024-03-27",
       "label": {
         "code": "F",
         "naam": "F"
@@ -73,22 +72,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -108,10 +92,10 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 2.5,
+  "punten": 6.5,
   "woningwaarderingen": [
     {
-      "aantal": 3.67,
+      "aantal": 10.0,
       "criterium": {
         "id": "energieprestatie__label",
         "naam": "A",
@@ -120,14 +104,7 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 2.38
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": 0.12
+      "punten": 6.5
     }
   ]
 }

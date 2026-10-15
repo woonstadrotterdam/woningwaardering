@@ -9,10 +9,9 @@ wettekst, Bijlage I onder B, onderdeel 4.2.
 
 ```text
 ENERGIEPRESTATIE
-  Energieprestatievergoeding                                          3.67 m²     1.83 pt
-  Afronding op kwartpunten                                                       -0.08 pt
+  C (Energie-index)                                                  10.00 m²     3.50 pt
                                                                                 ------
-  Totaal                                                                          1.75 pt
+  Totaal                                                                          3.50 pt
 ```
 
 ## Waarschuwingen
@@ -49,14 +48,6 @@ Geen.
       "naam": "Rijksmonument"
     }
   ],
-  "prijscomponenten": [
-    {
-      "detailSoort": {
-        "code": "EPV",
-        "naam": "Energieprestatievergoeding"
-      }
-    }
-  ],
   "ruimten": [
     {
       "id": "slaapkamer",
@@ -69,22 +60,7 @@ Geen.
         "naam": "Slaapkamer"
       },
       "naam": "Slaapkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
-    },
-    {
-      "id": "woonkamer",
-      "soort": {
-        "code": "VTK",
-        "naam": "Vertrek"
-      },
-      "detailSoort": {
-        "code": "WOO",
-        "naam": "Woonkamer"
-      },
-      "naam": "Woonkamer",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
+      "oppervlakte": 10.0
     }
   ]
 }
@@ -104,26 +80,19 @@ Geen.
       "naam": "Energieprestatie"
     }
   },
-  "punten": 1.75,
+  "punten": 3.5,
   "woningwaarderingen": [
     {
-      "aantal": 3.67,
+      "aantal": 10.0,
       "criterium": {
-        "id": "energieprestatie__energieprestatievergoeding",
-        "naam": "Energieprestatievergoeding",
+        "id": "energieprestatie__label",
+        "naam": "C (Energie-index)",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 1.83
-    },
-    {
-      "criterium": {
-        "id": "energieprestatie__afronding_op_kwartpunten",
-        "naam": "Afronding op kwartpunten"
-      },
-      "punten": -0.08
+      "punten": 3.5
     }
   ]
 }

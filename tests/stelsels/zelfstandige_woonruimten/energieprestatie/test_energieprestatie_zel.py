@@ -13,7 +13,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEnergieprestatie,
     EenhedenPand,
     EenhedenPrijscomponent,
-    Referentiedata,
 )
 from woningwaardering.vera.referentiedata import (
     Eenheidmonument,
@@ -55,13 +54,13 @@ def test_alleen_de_geldige_energieprestatie_telt_mee(
         bouwjaar=1993,
         monumenten=[],
         panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
-        # Het eerste label is op de peildatum vervallen en afgegeven in 2019.
+        # Het eerste label is op de peildatum vervallen.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energielabel_conform_nta8800,
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2019, 3, 27),
-                einddatum=date(2021, 3, 27),
+                begindatum=date(2014, 3, 27),
+                einddatum=date(2024, 3, 27),
                 label=Energielabel.f,
                 waarde="160",
             ),
@@ -116,8 +115,52 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-# Elke index ligt op de bovengrens van zijn klasse, behalve 2,71. A++ en E ontbreken:
-# daar verschillen de bronnen.
+@pytest.mark.parametrize(
+    ("label", "verwachte_punten"),
+    [
+        pytest.param(Energielabel.ap4, 62.0, id="label_a4plus"),
+        pytest.param(Energielabel.ap3, 57.0, id="label_a3plus"),
+        pytest.param(Energielabel.app, 52.0, id="label_a2plus"),
+        pytest.param(Energielabel.ap, 47.0, id="label_aplus"),
+        pytest.param(Energielabel.a, 41.0, id="label_a"),
+        pytest.param(Energielabel.b, 34.0, id="label_b"),
+        pytest.param(Energielabel.c, 22.0, id="label_c"),
+        pytest.param(Energielabel.d, 14.0, id="label_d"),
+        pytest.param(Energielabel.e, -4.0, id="label_e"),
+        pytest.param(Energielabel.f, -9.0, id="label_f"),
+        pytest.param(Energielabel.g, -15.0, id="label_g"),
+    ],
+)
+def test_punten_voor_een_energielabel_hangen_af_van_de_labelklasse(
+    energieprestatie, vergelijk_met_testreferentie, label, verwachte_punten
+):
+    """De punten voor een energielabel hangen af van de labelklasse.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
+    Bijlage I onder A, onderdeel 4.1.
+    """
+    eenheid = EenhedenEenheid(
+        bouwjaar=1921,
+        monumenten=[],
+        panden=[EenhedenPand(soort=Pandsoort.eengezinswoning)],
+        energieprestaties=[
+            EenhedenEnergieprestatie(
+                soort=Energieprestatiesoort.energielabel_conform_nta8800,
+                status=Energieprestatiestatus.definitief,
+                begindatum=date(2021, 3, 27),
+                einddatum=date(2031, 3, 27),
+                label=label,
+            )
+        ],
+    )
+
+    groep = energieprestatie.waardeer(eenheid)
+
+    assert punten_per_naam(groep) == {label.naam: verwachte_punten}
+    vergelijk_met_testreferentie(eenheid, groep)
+
+
+# Elke index op de bovengrens van zijn klasse, behalve 2,71; A++ en E ontbreken omdat de bronnen verschillen.
 @pytest.mark.parametrize(
     ("energie_index", "verwachte_punten"),
     [
@@ -163,26 +206,43 @@ def test_punten_voor_een_energie_index_hangen_af_van_de_klasse(
 # Zonder geldige energieprestatie: het bouwjaar
 
 
+@pytest.mark.parametrize(
+    ("begindatum", "einddatum"),
+    [
+        pytest.param(
+            date(2015, 1, 1),
+            date(2027, 1, 1),
+            id="afgegeven_op_1_januari_2015",
+        ),
+        pytest.param(
+            date(2020, 12, 31),
+            date(2030, 12, 31),
+            id="afgegeven_op_31_december_2020",
+        ),
+    ],
+)
 def test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee(
-    energieprestatie, vergelijk_met_testreferentie
+    energieprestatie, vergelijk_met_testreferentie, begindatum, einddatum
 ):
-    """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021 telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
+    """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021, telt niet mee.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3;
-    implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst, Bijlage
-    I onder A, toelichting rubriek 4.1.
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+
+    Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
+    Bijlage I onder A, onderdeel 4.1.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
         monumenten=[],
         panden=[EenhedenPand(soort=Pandsoort.eengezinswoning)],
-        # Het label is afgegeven in 2018, in de periode waarin labels niet meetellen.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.voorlopig_energielabel,
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2018, 6, 1),
-                einddatum=date(2028, 6, 1),
+                begindatum=begindatum,
+                einddatum=einddatum,
                 label=Energielabel.a,
             )
         ],
@@ -230,22 +290,26 @@ def test_energie_index_zonder_waarde_wordt_met_waarschuwing_op_het_bouwjaar_gewa
 def test_energieprestatie_zonder_soort_telt_niet_mee(
     energieprestatie, vergelijk_met_testreferentie
 ):
-    """Een energieprestatie zonder soort telt niet mee: de woning wordt op het bouwjaar gewaardeerd.
+    """Een energieprestatie zonder soort telt niet mee.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 4.1.
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+
+    Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
+    Bijlage I onder A, onderdeel 4.1.
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
         monumenten=[],
         panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
-        # De energieprestatie heeft geen soort; het label heeft alleen een naam.
+        # De energieprestatie heeft geen soort.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 status=Energieprestatiestatus.definitief,
-                begindatum=date(2017, 2, 23),
-                einddatum=date(2027, 2, 23),
-                label=Referentiedata(naam="C"),
+                begindatum=date(2021, 2, 23),
+                einddatum=date(2031, 2, 23),
+                label=Energielabel.c,
                 waarde="1.48",
             )
         ],
@@ -261,10 +325,18 @@ def test_energieprestatie_zonder_soort_telt_niet_mee(
 # Monumenten
 
 
-def test_rijksmonument_krijgt_geen_minpunten(
-    energieprestatie, vergelijk_met_testreferentie
+@pytest.mark.parametrize(
+    "monument",
+    [
+        pytest.param(Eenheidmonument.rijksmonument, id="rijksmonument"),
+        pytest.param(Eenheidmonument.provinciaal_monument, id="provinciaal_monument"),
+        pytest.param(Eenheidmonument.gemeentelijk_monument, id="gemeentelijk_monument"),
+    ],
+)
+def test_monument_krijgt_geen_minpunten(
+    energieprestatie, vergelijk_met_testreferentie, monument
 ):
-    """Een rijksmonument krijgt geen minpunten voor de energieprestatie.
+    """Een rijks-, provinciaal of gemeentelijk monument krijgt geen minpunten voor de energieprestatie.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
     Bijlage I onder A, onderdeel 4.2.
@@ -272,7 +344,7 @@ def test_rijksmonument_krijgt_geen_minpunten(
     eenheid = EenhedenEenheid(
         id="eenheid",
         bouwjaar=1921,
-        monumenten=[Eenheidmonument.rijksmonument],
+        monumenten=[monument],
         panden=[EenhedenPand(soort=Pandsoort.meergezinswoning)],
         # Zonder energieprestaties bepaalt het bouwjaar de punten.
         energieprestaties=[],
@@ -304,6 +376,7 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
         bouwjaar=1921,
         monumenten=[Eenheidmonument.rijksmonument],
         panden=[EenhedenPand(soort=Pandsoort.eengezinswoning)],
+        # Een geldige energie-index C geeft pluspunten.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energie_index,
@@ -314,20 +387,12 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
                 waarde="1.48",
             )
         ],
-        # De energieprestatievergoeding wijkt af van de tabel, ook met een
-        # geldige energie-index.
-        prijscomponenten=[
-            EenhedenPrijscomponent(
-                detail_soort=Prijscomponentdetailsoort.energieprestatievergoeding
-            )
-        ],
     )
 
     groep = energieprestatie.waardeer(eenheid)
 
-    assert punten_per_naam(groep) == {
-        "Energieprestatievergoeding Eengezinswoning": 32.0
-    }
+    assert punten_per_naam(groep) == {"C (Energie-index)": 22.0}
+    assert groep.punten == 22.0
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -361,6 +426,7 @@ def test_energieprestatievergoeding_geeft_een_vast_aantal_punten(
         bouwjaar=1921,
         monumenten=[],
         panden=[EenhedenPand(soort=pandsoort)],
+        # Een geldige energie-index, zodat de vergoeding voorgaat op de tabel.
         energieprestaties=[
             EenhedenEnergieprestatie(
                 soort=Energieprestatiesoort.energie_index,
