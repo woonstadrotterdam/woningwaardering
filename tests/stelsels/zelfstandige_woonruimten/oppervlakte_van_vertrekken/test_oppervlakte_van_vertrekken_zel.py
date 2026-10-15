@@ -158,7 +158,7 @@ def test_keuken_badkamer_en_doucheruimte_zijn_ook_onder_4m2_een_vertrek(
             4.0,
             id="samen_precies_4m2",
             marks=pytest.mark.toelichting(
-                "het vertrek van 3,50 m² en de kast van 0,50 m² zijn samen precies "
+                "de slaapkamer van 3,50 m² en de kast van 0,50 m² zijn samen precies "
                 "4,00 m², de minimale oppervlakte van een vertrek"
             ),
         ),
@@ -168,7 +168,7 @@ def test_keuken_badkamer_en_doucheruimte_zijn_ook_onder_4m2_een_vertrek(
             0.0,
             id="samen_net_onder_4m2",
             marks=pytest.mark.toelichting(
-                "het vertrek van 3,49 m² en de kast van 0,50 m² zijn samen 3,99 m², "
+                "de slaapkamer van 3,49 m² en de kast van 0,50 m² zijn samen 3,99 m², "
                 "net onder de minimale oppervlakte van een vertrek"
             ),
         ),
