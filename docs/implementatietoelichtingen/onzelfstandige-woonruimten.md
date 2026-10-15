@@ -1407,26 +1407,29 @@ Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijg
 
 Er is sprake van een zorgwoning als aan de volgende vier voorwaarden is voldaan.
 
-1. de woning ligt in een woongebouw;
-2. de woning en het woongebouw waarin de woning ligt zijn bestemd voor mensen met een fysieke beperking wat minimaal blijkt uit de aanwezigheid van drempelloze toegankelijkheid en doorgankelijkheid;
-3. de huurovereenkomst van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt;
-4. de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie.
+> [!NOTE]
+> De onderstaande doorgehaalde voorwaarden worden niet gecontroleerd door de woningwaardering package. Wanneer een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als zorgwoning gewaardeerd.
 
-_Drempelloze toegankelijkheid en doorgankelijkheid_
-Deze drempelloze toegankelijkheid en doorgankelijkheid houden ten minste in dat:
+1. ~~de woning ligt in een woongebouw;~~
+2. ~~de woning en het woongebouw waarin de woning ligt zijn bestemd voor mensen met een fysieke beperking wat minimaal blijkt uit de aanwezigheid van drempelloze toegankelijkheid en doorgankelijkheid;~~
+3. ~~de huurovereenkomst van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt;~~
+4. ~~de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie~~
 
-- alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 meter, en
-- er is een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 centimeter of hoger.
+~~_Drempelloze toegankelijkheid en doorgankelijkheid_~~  
+~~Deze drempelloze toegankelijkheid en doorgankelijkheid houden ten minste in dat:~~
 
-_Toelichting alarmsysteem_  
-Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale. Hierbij gaat het zowel om de woning als het complex waarvan de woning deel uitmaakt. De uitrusting in het gebouw moet bijvoorbeeld in staat zijn om een signaal van een persoonsalarm op te vangen als dat signaal uit de lift van het complex wordt verzonden of vanuit een tuin of dakterras. Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op het lichaam wordt gedragen met een halskoord.
+- ~~alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 meter, en~~
+- ~~er is een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 centimeter of hoger.~~
 
-_Gemeenschappelijke ruimten voor maaltijden en recreatie_
-Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uitmaken van een huurovereenkomst om een woning als zorgwoning te kunnen aan te merken.
+~~_Toelichting alarmsysteem_~~  
+~~Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale. Hierbij gaat het zowel om de woning als het complex waarvan de woning deel uitmaakt. De uitrusting in het gebouw moet bijvoorbeeld in staat zijn om een signaal van een persoonsalarm op te vangen als dat signaal uit de lift van het complex wordt verzonden of vanuit een tuin of dakterras. Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op het lichaam wordt gedragen met een halskoord.~~
 
-Deze gedeelde ruimten moeten bij het woongebouw horen (of als onroerende aanhorigheid van het complex kunnen worden aangemerkt, zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste, maar de ruimtes moeten wel in de eerste plaats beschikbaar zijn voor de huurders van het woongebouw.
+~~_Gemeenschappelijke ruimten voor maaltijden en recreatie_~~  
+~~Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uitmaken van een huurovereenkomst om een woning als zorgwoning te kunnen aan te merken.~~
 
-Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Bhw te kwalificeren.
+~~Deze gedeelde ruimten moeten bij het woongebouw horen (of als onroerende aanhorigheid van het complex kunnen worden aangemerkt, zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste, maar de ruimtes moeten wel in de eerste plaats beschikbaar zijn voor de huurders van het woongebouw.~~
+
+~~Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Bhw te kwalificeren.~~
 
 #### 2.12.2 Aanbelfunctie met video- en audioverbinding
 

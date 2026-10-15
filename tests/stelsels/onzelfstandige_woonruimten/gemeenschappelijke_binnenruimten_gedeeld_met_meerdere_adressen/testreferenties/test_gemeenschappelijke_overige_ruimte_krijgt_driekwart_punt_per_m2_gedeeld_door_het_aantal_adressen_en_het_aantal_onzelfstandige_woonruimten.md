@@ -2,8 +2,7 @@
 
 Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9;
-implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
 Bijlage I onder B, onderdeel 9.
 
 ## Rapport
@@ -14,10 +13,7 @@ GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
     - Gedeeld met 10 adressen
       - Oppervlakte van overige ruimten                                           0.71 pt
         - Berging                                                    19.00 m²
-      - Verkoeling en verwarming
-        - Verwarmde overige en verkeersruimten
-          - Berging                                                               0.05 pt
-  Afronding op kwartpunten                                                       -0.01 pt
+  Afronding op kwartpunten                                                        0.04 pt
                                                                                 ------
   Totaal                                                                          0.75 pt
 ```
@@ -44,7 +40,6 @@ Geen.
       "naam": "Berging",
       "oppervlakte": 19.0,
       "gedeeldMetAantalAdressen": 10,
-      "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
   ]
@@ -108,38 +103,10 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__verkoeling_en_verwarming",
-        "naam": "Verkoeling en verwarming",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
-        "naam": "Verwarmde overige en verkeersruimten",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__verkoeling_en_verwarming"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__berging",
-        "naam": "Berging",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_10_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
-        }
-      },
-      "punten": 0.05
-    },
-    {
-      "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__afronding_op_kwartpunten",
         "naam": "Afronding op kwartpunten"
       },
-      "punten": -0.01
+      "punten": 0.04
     }
   ]
 }

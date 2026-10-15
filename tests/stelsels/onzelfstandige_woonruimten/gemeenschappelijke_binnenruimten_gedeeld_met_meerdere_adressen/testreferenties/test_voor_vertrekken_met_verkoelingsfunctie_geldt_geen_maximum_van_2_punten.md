@@ -19,26 +19,21 @@ Bijlage I onder B, toelichting rubriek 9.
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Gedeeld met 2 adressen
-      - Oppervlakte van vertrekken                                               15.00 pt
-        - Woonkamer                                                  20.00 m²
-        - Keuken1                                                    20.00 m²
-        - Keuken2                                                    20.00 m²
+      - Oppervlakte van vertrekken                                                7.50 pt
+        - Woonkamer                                                  10.00 m²
+        - Slaapkamer1                                                10.00 m²
+        - Slaapkamer2                                                10.00 m²
       - Verkoeling en verwarming
         - Verwarmde vertrekken
           - Woonkamer                                                             0.50 pt
-          - Keuken1                                                               0.50 pt
-          - Keuken2                                                               0.50 pt
+          - Slaapkamer1                                                           0.50 pt
+          - Slaapkamer2                                                           0.50 pt
         - Verkoelde vertrekken
           - Woonkamer                                                             0.25 pt
-          - Keuken1                                                               0.25 pt
-          - Keuken2                                                               0.25 pt
-      - Keuken
-        - Keuken1
-          - Lengte aanrecht                                        3001.00 mm     2.50 pt
-        - Keuken2
-          - Lengte aanrecht                                        3001.00 mm     2.50 pt
+          - Slaapkamer1                                                           0.25 pt
+          - Slaapkamer2                                                           0.25 pt
                                                                                 ------
-  Totaal                                                                         22.25 pt
+  Totaal                                                                          9.75 pt
 ```
 
 ## Waarschuwingen
@@ -61,72 +56,42 @@ Geen.
         "naam": "Woonkamer"
       },
       "naam": "Woonkamer",
-      "oppervlakte": 20.0,
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "verkoeld": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     },
     {
-      "id": "keuken1",
+      "id": "slaapkamer1",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "KEU",
-        "naam": "Keuken"
+        "code": "SLA",
+        "naam": "Slaapkamer"
       },
-      "naam": "Keuken1",
-      "oppervlakte": 20.0,
+      "naam": "Slaapkamer1",
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
-      "bouwkundigeElementen": [
-        {
-          "id": "aanrecht",
-          "naam": "Aanrecht",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 3001.0
-        }
-      ],
       "verwarmd": true,
       "verkoeld": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     },
     {
-      "id": "keuken2",
+      "id": "slaapkamer2",
       "soort": {
         "code": "VTK",
         "naam": "Vertrek"
       },
       "detailSoort": {
-        "code": "KEU",
-        "naam": "Keuken"
+        "code": "SLA",
+        "naam": "Slaapkamer"
       },
-      "naam": "Keuken2",
-      "oppervlakte": 20.0,
+      "naam": "Slaapkamer2",
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
-      "bouwkundigeElementen": [
-        {
-          "id": "aanrecht",
-          "naam": "Aanrecht",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "AAN",
-            "naam": "Aanrecht"
-          },
-          "lengte": 3001.0
-        }
-      ],
       "verwarmd": true,
       "verkoeld": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
@@ -149,7 +114,7 @@ Geen.
       "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
     }
   },
-  "punten": 22.25,
+  "punten": 9.75,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -174,10 +139,10 @@ Geen.
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen"
         }
       },
-      "punten": 15.0
+      "punten": 7.5
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__woonkamer",
         "naam": "Woonkamer",
@@ -191,10 +156,10 @@ Geen.
       }
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__keuken1",
-        "naam": "Keuken1",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__slaapkamer1",
+        "naam": "Slaapkamer1",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken"
         },
@@ -205,10 +170,10 @@ Geen.
       }
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__keuken2",
-        "naam": "Keuken2",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken__slaapkamer2",
+        "naam": "Slaapkamer2",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_vertrekken"
         },
@@ -248,8 +213,8 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__keuken1",
-        "naam": "Keuken1",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__slaapkamer1",
+        "naam": "Slaapkamer1",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
         }
@@ -258,8 +223,8 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__keuken2",
-        "naam": "Keuken2",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken__slaapkamer2",
+        "naam": "Slaapkamer2",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_vertrekken"
         }
@@ -287,8 +252,8 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken__keuken1",
-        "naam": "Keuken1",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken__slaapkamer1",
+        "naam": "Slaapkamer1",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken"
         }
@@ -297,70 +262,13 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken__keuken2",
-        "naam": "Keuken2",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken__slaapkamer2",
+        "naam": "Slaapkamer2",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verkoelde_vertrekken"
         }
       },
       "punten": 0.25
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken",
-        "naam": "Keuken",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken1",
-        "naam": "Keuken1",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken"
-        }
-      }
-    },
-    {
-      "aantal": 3001.0,
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken1__lengte_aanrecht_aanrecht",
-        "naam": "Lengte aanrecht",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken1"
-        },
-        "meeteenheid": {
-          "code": "MIL",
-          "naam": "Millimeter"
-        }
-      },
-      "punten": 2.5
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken2",
-        "naam": "Keuken2",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken"
-        }
-      }
-    },
-    {
-      "aantal": 3001.0,
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken2__lengte_aanrecht_aanrecht",
-        "naam": "Lengte aanrecht",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__keuken__keuken2"
-        },
-        "meeteenheid": {
-          "code": "MIL",
-          "naam": "Millimeter"
-        }
-      },
-      "punten": 2.5
     }
   ]
 }

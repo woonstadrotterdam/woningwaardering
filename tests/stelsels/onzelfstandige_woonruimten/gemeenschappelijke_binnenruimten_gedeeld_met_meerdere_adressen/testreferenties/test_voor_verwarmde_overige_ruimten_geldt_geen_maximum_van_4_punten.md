@@ -1,4 +1,4 @@
-# test_vijfde_verwarmde_overige_ruimte_krijgt_ook_een_punt
+# test_voor_verwarmde_overige_ruimten_geldt_geen_maximum_van_4_punten
 
 Voor verwarmde gemeenschappelijke overige ruimten geldt in deze rubriek geen maximum van 4 punten.
 
@@ -19,26 +19,22 @@ Bijlage I onder B, toelichting rubriek 9.
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 2 onzelfstandige woonruimten
     - Gedeeld met 2 adressen
-      - Oppervlakte van overige ruimten                                          15.00 pt
-        - Berging1                                                   20.00 m²
-        - Berging2                                                   20.00 m²
-        - Berging3                                                   20.00 m²
-        - Berging4                                                   20.00 m²
+      - Oppervlakte van overige ruimten                                           9.38 pt
+        - Berging1                                                   10.00 m²
+        - Berging2                                                   10.00 m²
+        - Berging3                                                   10.00 m²
+        - Berging4                                                   10.00 m²
+        - Berging5                                                   10.00 m²
       - Verkoeling en verwarming
         - Verwarmde overige en verkeersruimten
           - Berging1                                                              0.25 pt
           - Berging2                                                              0.25 pt
           - Berging3                                                              0.25 pt
           - Berging4                                                              0.25 pt
-    - Gedeeld met 3 adressen
-      - Oppervlakte van overige ruimten                                           2.50 pt
-        - Berging5                                                   20.00 m²
-      - Verkoeling en verwarming
-        - Verwarmde overige en verkeersruimten
-          - Berging5                                                              0.17 pt
-  Afronding op kwartpunten                                                        0.08 pt
+          - Berging5                                                              0.25 pt
+  Afronding op kwartpunten                                                        0.12 pt
                                                                                 ------
-  Totaal                                                                         18.75 pt
+  Totaal                                                                         10.75 pt
 ```
 
 ## Waarschuwingen
@@ -61,7 +57,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging1",
-      "oppervlakte": 20.0,
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
@@ -77,7 +73,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging2",
-      "oppervlakte": 20.0,
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
@@ -93,7 +89,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging3",
-      "oppervlakte": 20.0,
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
@@ -109,7 +105,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging4",
-      "oppervlakte": 20.0,
+      "oppervlakte": 10.0,
       "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
@@ -125,8 +121,8 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging5",
-      "oppervlakte": 20.0,
-      "gedeeldMetAantalAdressen": 3,
+      "oppervlakte": 10.0,
+      "gedeeldMetAantalAdressen": 2,
       "verwarmd": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
     }
@@ -148,7 +144,7 @@ Geen.
       "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
     }
   },
-  "punten": 18.75,
+  "punten": 10.75,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -173,10 +169,10 @@ Geen.
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen"
         }
       },
-      "punten": 15.0
+      "punten": 9.38
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__berging1",
         "naam": "Berging1",
@@ -190,7 +186,7 @@ Geen.
       }
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__berging2",
         "naam": "Berging2",
@@ -204,7 +200,7 @@ Geen.
       }
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__berging3",
         "naam": "Berging3",
@@ -218,10 +214,24 @@ Geen.
       }
     },
     {
-      "aantal": 20.0,
+      "aantal": 10.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__berging4",
         "naam": "Berging4",
+        "bovenliggendeCriterium": {
+          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten"
+        },
+        "meeteenheid": {
+          "code": "M2",
+          "naam": "Vierkante meter, m2"
+        }
+      }
+    },
+    {
+      "aantal": 10.0,
+      "criterium": {
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__berging5",
+        "naam": "Berging5",
         "bovenliggendeCriterium": {
           "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten"
         },
@@ -291,71 +301,20 @@ Geen.
     },
     {
       "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen",
-        "naam": "Gedeeld met 3 adressen",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__oppervlakte_van_overige_ruimten",
-        "naam": "Oppervlakte van overige ruimten",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen"
-        }
-      },
-      "punten": 2.5
-    },
-    {
-      "aantal": 20.0,
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__oppervlakte_van_overige_ruimten__berging5",
+        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__berging5",
         "naam": "Berging5",
         "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__oppervlakte_van_overige_ruimten"
-        },
-        "meeteenheid": {
-          "code": "M2",
-          "naam": "Vierkante meter, m2"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming",
-        "naam": "Verkoeling en verwarming",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten",
-        "naam": "Verwarmde overige en verkeersruimten",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten__berging5",
-        "naam": "Berging5",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_3_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
+          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_onzelfstandige_woonruimten__gedeeld_met_2_adressen__verkoeling_en_verwarming__verwarmde_overige_en_verkeersruimten"
         }
       },
-      "punten": 0.17
+      "punten": 0.25
     },
     {
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__afronding_op_kwartpunten",
         "naam": "Afronding op kwartpunten"
       },
-      "punten": 0.08
+      "punten": 0.12
     }
   ]
 }

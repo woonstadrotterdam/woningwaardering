@@ -13,12 +13,11 @@ toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 9.
 GEMEENSCHAPPELIJKE BINNENRUIMTEN GEDEELD MET MEERDERE ADRESSEN
   Gedeeld met 2 adressen
     - Oppervlakte van overige ruimten
-      - Subtotaal                                                    22.00 m²     8.25 pt
-        - Berging                                                     6.00 m²
+      - Subtotaal                                                    16.00 m²     6.00 pt
         - Zolder                                                     16.00 m²
       - Correctie: zolder zonder vaste trap                                      -2.50 pt
                                                                                 ------
-  Totaal                                                                          5.75 pt
+  Totaal                                                                          3.50 pt
 ```
 
 ## Waarschuwingen
@@ -30,20 +29,6 @@ Geen.
 ```json
 {
   "ruimten": [
-    {
-      "id": "berging",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
-      },
-      "detailSoort": {
-        "code": "BER",
-        "naam": "Berging"
-      },
-      "naam": "Berging",
-      "oppervlakte": 6.0,
-      "gedeeldMetAantalAdressen": 2
-    },
     {
       "id": "zolder",
       "soort": {
@@ -90,7 +75,7 @@ Geen.
       "naam": "Gemeenschappelijke binnenruimten gedeeld met meerdere adressen"
     }
   },
-  "punten": 5.75,
+  "punten": 3.5,
   "woningwaarderingen": [
     {
       "criterium": {
@@ -108,7 +93,7 @@ Geen.
       }
     },
     {
-      "aantal": 22.0,
+      "aantal": 16.0,
       "criterium": {
         "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal",
         "naam": "Subtotaal",
@@ -120,21 +105,7 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 8.25
-    },
-    {
-      "aantal": 6.0,
-      "criterium": {
-        "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal__berging",
-        "naam": "Berging",
-        "bovenliggendeCriterium": {
-          "id": "gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal"
-        },
-        "meeteenheid": {
-          "code": "M2",
-          "naam": "Vierkante meter, m2"
-        }
-      }
+      "punten": 6.0
     },
     {
       "aantal": 16.0,

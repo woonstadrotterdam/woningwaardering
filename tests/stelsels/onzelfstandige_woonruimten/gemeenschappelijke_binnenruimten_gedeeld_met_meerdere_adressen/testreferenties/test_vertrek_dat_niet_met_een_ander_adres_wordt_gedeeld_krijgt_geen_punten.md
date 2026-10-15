@@ -47,6 +47,7 @@ Geen.
       },
       "naam": "Slaapkamer2",
       "oppervlakte": 10.0,
+      "gedeeldMetAantalAdressen": 1,
       "verwarmd": true,
       "verkoeld": true,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 2
