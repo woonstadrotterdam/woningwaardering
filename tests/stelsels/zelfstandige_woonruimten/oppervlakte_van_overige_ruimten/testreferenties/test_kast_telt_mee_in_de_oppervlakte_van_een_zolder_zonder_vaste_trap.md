@@ -9,11 +9,11 @@ Bijlage I onder A, toelichting rubriek 2.
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                           2.80 m²     2.25 pt
-    - Zolder (+1 kast)                                                2.80 m²
-  Correctie: zolder zonder vaste trap                                            -2.25 pt
+  Subtotaal                                                           3.50 m²     3.00 pt
+    - Zolder (+1 kast)                                                3.50 m²
+  Correctie: zolder zonder vaste trap                                            -3.00 pt
                                                                     ------      ------
-  Totaal                                                              2.80 m²     0.00 pt
+  Totaal                                                              3.50 m²     0.00 pt
 ```
 
 ## Waarschuwingen
@@ -63,7 +63,7 @@ Geen.
             "naam": "Kast"
           },
           "naam": "Kast",
-          "oppervlakte": 0.2
+          "oppervlakte": 0.9
         }
       ]
     }
@@ -88,7 +88,7 @@ Geen.
   "punten": 0.0,
   "woningwaarderingen": [
     {
-      "aantal": 2.8,
+      "aantal": 3.5,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal",
         "naam": "Subtotaal",
@@ -97,10 +97,10 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 2.25
+      "punten": 3.0
     },
     {
-      "aantal": 2.8,
+      "aantal": 3.5,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal__zolder",
         "naam": "Zolder (+1 kast)",
@@ -118,7 +118,7 @@ Geen.
         "id": "oppervlakte_van_overige_ruimten__zolder__correctie_zolder_zonder_vaste_trap",
         "naam": "Correctie: zolder zonder vaste trap"
       },
-      "punten": -2.25
+      "punten": -3.0
     }
   ]
 }

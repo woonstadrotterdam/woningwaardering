@@ -11,7 +11,7 @@ toelichting, inleiding).
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Privé
-    - Bijkeuken                                                       2.00 m²
+    - Bijkeuken2                                                      2.00 m²
                                                                                 ------
   Totaal                                                                          1.50 pt
 ```
@@ -26,20 +26,7 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "toiletruimte",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
-      },
-      "detailSoort": {
-        "code": "TOI",
-        "naam": "Toiletruimte"
-      },
-      "naam": "Toiletruimte",
-      "oppervlakte": 1.0
-    },
-    {
-      "id": "bijkeuken",
+      "id": "bijkeuken1",
       "soort": {
         "code": "OVR",
         "naam": "Overige ruimten"
@@ -48,7 +35,20 @@ Geen.
         "code": "BIJ",
         "naam": "Bijkeuken"
       },
-      "naam": "Bijkeuken",
+      "naam": "Bijkeuken1",
+      "oppervlakte": 1.99
+    },
+    {
+      "id": "bijkeuken2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BIJ",
+        "naam": "Bijkeuken"
+      },
+      "naam": "Bijkeuken2",
       "oppervlakte": 2.0
     }
   ]
@@ -80,8 +80,8 @@ Geen.
     {
       "aantal": 2.0,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__prive__bijkeuken",
-        "naam": "Bijkeuken",
+        "id": "oppervlakte_van_overige_ruimten__prive__bijkeuken2",
+        "naam": "Bijkeuken2",
         "bovenliggendeCriterium": {
           "id": "oppervlakte_van_overige_ruimten__prive"
         },

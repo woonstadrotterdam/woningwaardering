@@ -11,10 +11,10 @@ Bijlage I onder A, toelichting rubriek 2.
 GEMEENSCHAPPELIJKE VERTREKKEN, OVERIGE RUIMTEN EN VOORZIENINGEN
   Gedeeld met 2 adressen
     - Oppervlakte van overige ruimten
-      - Subtotaal                                                    12.33 m²     4.50 pt
-        - Berging                                                     6.00 m²
-        - Zolder                                                      6.33 m²
-      - Correctie: zolder zonder vaste trap                                      -2.25 pt
+      - Subtotaal                                                     9.80 m²     3.75 pt
+        - Berging                                                     6.40 m²
+        - Zolder                                                      3.40 m²
+      - Correctie: zolder zonder vaste trap                                      -1.50 pt
                                                                                 ------
   Totaal                                                                          2.25 pt
 ```
@@ -39,7 +39,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging",
-      "oppervlakte": 6.0,
+      "oppervlakte": 6.4,
       "gedeeldMetAantalAdressen": 2
     },
     {
@@ -53,7 +53,7 @@ Geen.
         "naam": "Zolder"
       },
       "naam": "Zolder",
-      "oppervlakte": 6.33,
+      "oppervlakte": 3.4,
       "gedeeldMetAantalAdressen": 2,
       "bouwkundigeElementen": [
         {
@@ -106,7 +106,7 @@ Geen.
       }
     },
     {
-      "aantal": 12.33,
+      "aantal": 9.8,
       "criterium": {
         "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal",
         "naam": "Subtotaal",
@@ -118,10 +118,10 @@ Geen.
           "naam": "Vierkante meter, m2"
         }
       },
-      "punten": 4.5
+      "punten": 3.75
     },
     {
-      "aantal": 6.0,
+      "aantal": 6.4,
       "criterium": {
         "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal__berging",
         "naam": "Berging",
@@ -135,7 +135,7 @@ Geen.
       }
     },
     {
-      "aantal": 6.33,
+      "aantal": 3.4,
       "criterium": {
         "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten__subtotaal__zolder",
         "naam": "Zolder",
@@ -156,7 +156,7 @@ Geen.
           "id": "gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen__gedeeld_met_2_adressen__oppervlakte_van_overige_ruimten"
         }
       },
-      "punten": -2.25
+      "punten": -1.5
     }
   ]
 }

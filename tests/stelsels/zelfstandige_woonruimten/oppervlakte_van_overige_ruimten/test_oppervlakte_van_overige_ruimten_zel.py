@@ -46,21 +46,21 @@ def test_oppervlakte_wordt_afgerond_na_optellen_van_alle_overige_ruimten(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.1; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
+    # Elke ruimte apart afgerond geeft 2 + 2 = 4 m²; samen opgeteld is het 4,8 m², afgerond 5.
     eenheid = EenhedenEenheid(
         ruimten=[
-            # Het rekenvoorbeeld uit de toelichting bij de wettekst.
-            ruimte(Ruimtedetailsoort.garage, oppervlakte=19.3392),
-            ruimte(Ruimtedetailsoort.bijkeuken, oppervlakte=6.0557),
+            ruimte(Ruimtedetailsoort.bijkeuken, oppervlakte=2.4),
+            ruimte(Ruimtedetailsoort.berging, oppervlakte=2.4),
         ]
     )
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
     assert aantal_per_naam(groep) == {
-        Ruimtedetailsoort.garage.naam: 19.34,
-        Ruimtedetailsoort.bijkeuken.naam: 6.06,
+        Ruimtedetailsoort.bijkeuken.naam: 2.4,
+        Ruimtedetailsoort.berging.naam: 2.4,
     }
-    assert groep.punten == 18.75
+    assert groep.punten == 3.75
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -75,24 +75,22 @@ def test_toiletruimte_kleiner_dan_2m2_wordt_niet_gewaardeerd(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.2; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
+    # 0,01 m² onder de grens van 2 m² en precies op de grens.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
-                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte1", oppervlakte=1.9
+                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte1", oppervlakte=1.99
             ),
             ruimte(
                 Ruimtedetailsoort.toiletruimte, naam="Toiletruimte2", oppervlakte=2.0
-            ),
-            ruimte(
-                Ruimtedetailsoort.toiletruimte, naam="Toiletruimte3", oppervlakte=2.1
             ),
         ]
     )
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {"Toiletruimte2": 2.0, "Toiletruimte3": 2.1}
-    assert groep.punten == 3.0
+    assert aantal_per_naam(groep) == {"Toiletruimte2": 2.0}
+    assert groep.punten == 1.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -139,17 +137,12 @@ def test_garage_wordt_als_overige_ruimte_gewaardeerd(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.5; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
-    eenheid = EenhedenEenheid(
-        ruimten=[
-            ruimte(Ruimtedetailsoort.garage, naam="Garage1", oppervlakte=15),
-            ruimte(Ruimtedetailsoort.garage, naam="Garage2", oppervlakte=15),
-        ]
-    )
+    eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.garage)])
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {"Garage1": 15.0, "Garage2": 15.0}
-    assert groep.punten == 22.5
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.garage.naam: 10.0}
+    assert groep.punten == 7.5
     vergelijk_met_testreferentie(eenheid, groep)
 
 
@@ -199,8 +192,7 @@ def test_alleen_zolder_met_vlizotrap_krijgt_de_aftrek(
                 naam="Zolder1",
                 elementen=[element(Bouwkundigelementdetailsoort.trap)],
             ),
-            # Zonder trap als bouwkundig element: de detailsoort gaat uit van
-            # een vaste trap.
+            # Zonder trap-element: de detailsoort gaat uit van een vaste trap.
             ruimte(Ruimtedetailsoort.zolder, naam="Zolder2"),
             ruimte(
                 Ruimtedetailsoort.zolder,
@@ -263,25 +255,25 @@ def test_zolder_met_trap_en_vlizotrap_krijgt_geen_aftrek(
     ),
     [
         pytest.param(
-            6.0,
-            4.4,
-            -3.0,
-            4.5,
+            6.6,
+            2.6,
+            -1.5,
+            5.25,
             id="totaal_naar_beneden_afgerond",
             marks=pytest.mark.toelichting(
-                "de zolder van 4,40 m² brengt het totaal van 6,00 op 10,40 m², "
-                "afgerond van 6 op 10 m²; de 3 punten voor die 4 m² vervallen."
+                "de zolder van 2,60 m² brengt het totaal van 6,60 op 9,20 m², "
+                "afgerond van 7 op 9 m²; de 1,5 punt voor die 2 m² vervalt."
             ),
         ),
         pytest.param(
-            6.85,
-            2.67,
+            6.4,
+            2.4,
             -2.25,
-            5.25,
+            4.5,
             id="totaal_naar_boven_afgerond",
             marks=pytest.mark.toelichting(
-                "de zolder van 2,67 m² brengt het totaal van 6,85 op 9,52 m², "
-                "afgerond van 7 op 10 m²; de 2,25 punten voor die 3 m² vervallen."
+                "de zolder van 2,40 m² brengt het totaal van 6,40 op 8,80 m², "
+                "afgerond van 6 op 9 m²; de 2,25 punten voor die 3 m² vervallen."
             ),
         ),
     ],
@@ -313,7 +305,7 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_zolder(
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
     assert punten_per_naam(groep) == {
-        "Subtotaal": 7.5,
+        "Subtotaal": 6.75,
         "Correctie: zolder zonder vaste trap": verwachte_aftrek,
     }
     assert groep.punten == verwachte_punten
@@ -355,53 +347,52 @@ def test_zoldervertrek_met_alleen_een_vlizotrap_krijgt_de_aftrek(
     vergelijk_met_testreferentie(eenheid, groep)
 
 
-def test_zolderruimte_die_geen_vertrek_kan_zijn_wordt_als_overige_ruimte_gewaardeerd(
+def test_zolder_die_als_vertrek_is_aangeleverd_wordt_als_overige_ruimte_gewaardeerd(
     oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
 ):
-    """Een zolderruimte die als vertrek is aangeleverd maar niet aan de eisen van een vertrek voldoet, wordt als overige ruimte gewaardeerd.
+    """Een zolder die als vertrek is aangeleverd, wordt als overige ruimte gewaardeerd.
 
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
+    # De detailsoort zolder voldoet niet aan de afwerkingseisen van een vertrek.
     eenheid = EenhedenEenheid(
-        ruimten=[
-            # Te klein voor een vertrek.
-            ruimte(
-                Ruimtedetailsoort.zoldervertrek,
-                naam="Zoldervertrek1",
-                soort=Ruimtesoort.vertrek,
-                oppervlakte=3,
-            ),
-            # Geen vaste trap; als overige ruimte geldt daarvoor de aftrek.
-            ruimte(
-                Ruimtedetailsoort.zoldervertrek,
-                naam="Zoldervertrek2",
-                soort=Ruimtesoort.vertrek,
-                elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
-            ),
-            # De detailsoort zolder voldoet niet aan de afwerkingseisen van een
-            # vertrek.
-            ruimte(Ruimtedetailsoort.zolder, soort=Ruimtesoort.vertrek),
-        ]
+        ruimten=[ruimte(Ruimtedetailsoort.zolder, soort=Ruimtesoort.vertrek)]
     )
 
-    # De package waarschuwt alleen bij de ruimte met de detailsoort zolder.
     with pytest.warns(UserWarning, match="aangeleverd als") as waarschuwingen:
         groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {
-        "Subtotaal": 23.0,
-        "Zoldervertrek1": 3.0,
-        "Zoldervertrek2": 10.0,
-        Ruimtedetailsoort.zolder.naam: 10.0,
-    }
-    assert zolders_met_aftrek(groep) == ["zoldervertrek2"]
-    assert punten_per_naam(groep) == {
-        "Subtotaal": 17.25,
-        "Correctie: zolder zonder vaste trap": -5.0,
-    }
-    assert groep.punten == 12.25
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.zolder.naam: 10.0}
+    assert groep.punten == 7.5
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_zoldervertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
+    oppervlakte_van_overige_ruimten, vergelijk_met_testreferentie
+):
+    """Een zoldervertrek dat als vertrek is aangeleverd maar kleiner is dan 4 m², wordt als overige ruimte gewaardeerd.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
+    Bijlage I onder A, toelichting rubriek 2.
+    """
+    # 0,01 m² onder de grens van 4 m² van een vertrek.
+    eenheid = EenhedenEenheid(
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.zoldervertrek,
+                soort=Ruimtesoort.vertrek,
+                oppervlakte=3.99,
+            )
+        ]
+    )
+
+    groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
+
+    assert aantal_per_naam(groep) == {Ruimtedetailsoort.zoldervertrek.naam: 3.99}
+    # 3,99 m² is afgerond 4 m², 3 punten.
+    assert groep.punten == 3.0
+    vergelijk_met_testreferentie(eenheid, groep)
 
 
 # Kasten
@@ -455,7 +446,8 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_zolder_zonder_vaste_trap(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
-    kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
+    # Met de kast komt de zolder van 2,6 op 3,5 m²: afgerond 4 m² in plaats van 3.
+    kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.9)
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -469,11 +461,12 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_zolder_zonder_vaste_trap(
 
     groep = oppervlakte_van_overige_ruimten.waardeer(eenheid)
 
-    assert aantal_per_naam(groep) == {"Subtotaal": 2.8, "Zolder (+1 kast)": 2.8}
+    assert aantal_per_naam(groep) == {"Subtotaal": 3.5, "Zolder (+1 kast)": 3.5}
     assert punten_per_naam(groep) == {
-        "Subtotaal": 2.25,
-        # De zolder is 2,25 punten waard; meer dan dat vervalt er niet.
-        "Correctie: zolder zonder vaste trap": -2.25,
+        "Subtotaal": 3.0,
+        # De zolder met kast is 3,50 m², afgerond 4 m², en daarmee 3 punten waard;
+        # meer dan dat vervalt er niet. Zonder de kast zou de aftrek 2,25 zijn.
+        "Correctie: zolder zonder vaste trap": -3.0,
     }
     assert groep.punten == 0.0
     vergelijk_met_testreferentie(eenheid, groep)

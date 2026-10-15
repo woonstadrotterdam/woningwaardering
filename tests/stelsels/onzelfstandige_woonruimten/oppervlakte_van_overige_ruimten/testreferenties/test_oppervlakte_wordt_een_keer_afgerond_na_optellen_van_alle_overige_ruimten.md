@@ -10,14 +10,12 @@ toelichting, inleiding).
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                                      15.75 pt
-    - Privé
-      - Berging                                                      10.40 m²
-    - Gedeeld met 4 onzelfstandige woonruimten
-      - Zolder                                                       40.40 m²
-  Correctie: zolder zonder vaste trap                                            -1.25 pt
+  Privé
+    - Berging                                                        10.40 m²
+  Gedeeld met 4 onzelfstandige woonruimten
+    - Zolder                                                         40.40 m²
                                                                                 ------
-  Totaal                                                                         14.50 pt
+  Totaal                                                                         15.75 pt
 ```
 
 ## Waarschuwingen
@@ -54,20 +52,6 @@ Geen.
       },
       "naam": "Zolder",
       "oppervlakte": 40.4,
-      "bouwkundigeElementen": [
-        {
-          "id": "vlizotrap",
-          "naam": "Vlizotrap",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "VTR",
-            "naam": "Vlizotrap"
-          }
-        }
-      ],
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     }
   ]
@@ -88,31 +72,21 @@ Geen.
       "naam": "Oppervlakte van overige ruimten"
     }
   },
-  "punten": 14.5,
+  "punten": 15.75,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal",
-        "naam": "Subtotaal"
-      },
-      "punten": 15.75
-    },
-    {
-      "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
-        "naam": "Privé",
-        "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal"
-        }
+        "id": "oppervlakte_van_overige_ruimten__prive",
+        "naam": "Privé"
       }
     },
     {
       "aantal": 10.4,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__berging",
+        "id": "oppervlakte_van_overige_ruimten__prive__berging",
         "naam": "Berging",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
+          "id": "oppervlakte_van_overige_ruimten__prive"
         },
         "meeteenheid": {
           "code": "M2",
@@ -122,33 +96,23 @@ Geen.
     },
     {
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 4 onzelfstandige woonruimten",
-        "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal"
-        }
+        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten",
+        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
       }
     },
     {
       "aantal": 40.4,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
+        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten__zolder",
         "naam": "Zolder",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal__gedeeld_met_4_onzelfstandige_woonruimten"
+          "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten"
         },
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
         }
       }
-    },
-    {
-      "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__zolder__correctie_zolder_zonder_vaste_trap",
-        "naam": "Correctie: zolder zonder vaste trap"
-      },
-      "punten": -1.25
     }
   ]
 }

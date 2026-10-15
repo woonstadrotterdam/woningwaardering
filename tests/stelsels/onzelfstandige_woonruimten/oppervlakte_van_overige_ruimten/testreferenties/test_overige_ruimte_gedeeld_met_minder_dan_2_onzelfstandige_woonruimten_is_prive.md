@@ -35,7 +35,7 @@ Geen.
       },
       "naam": "Slaapkamer",
       "oppervlakte": 4.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 0
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 1
     }
   ]
 }

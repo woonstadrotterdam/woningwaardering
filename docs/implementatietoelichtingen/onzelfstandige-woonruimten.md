@@ -363,6 +363,8 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > [!NOTE]
 > De maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige woonruimten.
 >
+> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
+>
 > Voorbeeld (4 onzelfstandige woonruimten):
 >
 > 1. privé berging 10,40 m² plus vlizotrap-zolder 40,40 m² / 4 → 20,50 m² toe te rekenen

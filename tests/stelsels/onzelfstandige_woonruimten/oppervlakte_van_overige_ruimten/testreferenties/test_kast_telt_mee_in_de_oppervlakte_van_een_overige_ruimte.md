@@ -10,11 +10,8 @@ toelichting, inleiding).
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                                       3.75 pt
-    - Privé
-      - Berging (+1 kast)                                             2.60 m²
-      - Zolder                                                        2.40 m²
-  Correctie: zolder zonder vaste trap                                            -1.50 pt
+  Privé
+    - Berging (+1 kast)                                               2.60 m²
                                                                                 ------
   Totaal                                                                          2.25 pt
 ```
@@ -55,33 +52,6 @@ Geen.
           "oppervlakte": 0.2
         }
       ]
-    },
-    {
-      "id": "zolder",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
-      },
-      "detailSoort": {
-        "code": "ZOL",
-        "naam": "Zolder"
-      },
-      "naam": "Zolder",
-      "oppervlakte": 2.4,
-      "bouwkundigeElementen": [
-        {
-          "id": "vlizotrap",
-          "naam": "Vlizotrap",
-          "soort": {
-            "code": "VOO",
-            "naam": "Voorziening"
-          },
-          "detailSoort": {
-            "code": "VTR",
-            "naam": "Vlizotrap"
-          }
-        }
-      ]
     }
   ]
 }
@@ -105,54 +75,23 @@ Geen.
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal",
-        "naam": "Subtotaal"
-      },
-      "punten": 3.75
-    },
-    {
-      "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__prive",
-        "naam": "Privé",
-        "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal"
-        }
+        "id": "oppervlakte_van_overige_ruimten__prive",
+        "naam": "Privé"
       }
     },
     {
       "aantal": 2.6,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__berging",
+        "id": "oppervlakte_van_overige_ruimten__prive__berging",
         "naam": "Berging (+1 kast)",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
+          "id": "oppervlakte_van_overige_ruimten__prive"
         },
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
         }
       }
-    },
-    {
-      "aantal": 2.4,
-      "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__zolder",
-        "naam": "Zolder",
-        "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__subtotaal__prive"
-        },
-        "meeteenheid": {
-          "code": "M2",
-          "naam": "Vierkante meter, m2"
-        }
-      }
-    },
-    {
-      "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__zolder__correctie_zolder_zonder_vaste_trap",
-        "naam": "Correctie: zolder zonder vaste trap"
-      },
-      "punten": -1.5
     }
   ]
 }

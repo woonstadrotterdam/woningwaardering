@@ -311,17 +311,17 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_gemeenschappelijke_zolder(
     Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
     Bijlage I onder A, toelichting rubriek 2.
     """
-    # De zolder levert op het totaal 4,5 punten op: minder dan de aftrek van 5.
+    # De zolder levert op het totaal 3 punten op: minder dan de aftrek van 5.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.berging,
-                oppervlakte=6,
+                oppervlakte=6.4,
                 gedeeld_met_aantal_adressen=2,
             ),
             ruimte(
                 Ruimtedetailsoort.zolder,
-                oppervlakte=6.33,
+                oppervlakte=3.4,
                 elementen=[element(Bouwkundigelementdetailsoort.vlizotrap)],
                 gedeeld_met_aantal_adressen=2,
             ),
@@ -333,11 +333,11 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_gemeenschappelijke_zolder(
     )
 
     assert punten_per_naam(groep) == {
-        # 12,33 m² is afgerond 12 m² en 9 punten, gedeeld door 2 adressen.
-        "Subtotaal": 4.5,
-        # De zolder brengt het totaal van 6 op 12 hele m²; de 4,5 punten
-        # daarvoor vervallen, gedeeld door 2 adressen.
-        "Correctie: zolder zonder vaste trap": -2.25,
+        # 9,8 m² is afgerond 10 m² en 7,5 punten, gedeeld door 2 adressen.
+        "Subtotaal": 3.75,
+        # De zolder brengt het totaal van 6 op 10 hele m²; de 3 punten daarvoor
+        # vervallen, gedeeld door 2 adressen.
+        "Correctie: zolder zonder vaste trap": -1.5,
     }
     assert groep.punten == 2.25
     vergelijk_met_testreferentie(eenheid, groep)

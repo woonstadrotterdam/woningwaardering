@@ -6,19 +6,19 @@ Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
 wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
 toelichting, inleiding).
 
-Dit geval: de zolder van 2,67 m² brengt het totaal van 6,85 op 9,52 m², afgerond van 7 op 10 m²; de 2,25 punten voor die 3 m² vervallen.
+Dit geval: de zolder van 2,40 m² brengt het totaal van 6,40 op 8,80 m², afgerond van 6 op 9 m²; de 2,25 punten voor die 3 m² vervallen.
 
 ## Rapport
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Subtotaal                                                                       7.50 pt
+  Subtotaal                                                                       6.75 pt
     - Privé
-      - Berging                                                       6.85 m²
-      - Zolder                                                        2.67 m²
+      - Berging                                                       6.40 m²
+      - Zolder                                                        2.40 m²
   Correctie: zolder zonder vaste trap                                            -2.25 pt
                                                                                 ------
-  Totaal                                                                          5.25 pt
+  Totaal                                                                          4.50 pt
 ```
 
 ## Waarschuwingen
@@ -41,7 +41,7 @@ Geen.
         "naam": "Berging"
       },
       "naam": "Berging",
-      "oppervlakte": 6.85
+      "oppervlakte": 6.4
     },
     {
       "id": "zolder",
@@ -54,7 +54,7 @@ Geen.
         "naam": "Zolder"
       },
       "naam": "Zolder",
-      "oppervlakte": 2.67,
+      "oppervlakte": 2.4,
       "bouwkundigeElementen": [
         {
           "id": "vlizotrap",
@@ -88,14 +88,14 @@ Geen.
       "naam": "Oppervlakte van overige ruimten"
     }
   },
-  "punten": 5.25,
+  "punten": 4.5,
   "woningwaarderingen": [
     {
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal",
         "naam": "Subtotaal"
       },
-      "punten": 7.5
+      "punten": 6.75
     },
     {
       "criterium": {
@@ -107,7 +107,7 @@ Geen.
       }
     },
     {
-      "aantal": 6.85,
+      "aantal": 6.4,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__berging",
         "naam": "Berging",
@@ -121,7 +121,7 @@ Geen.
       }
     },
     {
-      "aantal": 2.67,
+      "aantal": 2.4,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__zolder",
         "naam": "Zolder",

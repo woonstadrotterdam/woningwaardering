@@ -437,6 +437,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 > - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2).
 > - Andersom geldt dit niet: een zolderruimte die is ingeschoten met `ruimtesoort` `overige ruimte` wordt nooit als vertrek gewaardeerd.
 > - Een zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3.
+> - De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 

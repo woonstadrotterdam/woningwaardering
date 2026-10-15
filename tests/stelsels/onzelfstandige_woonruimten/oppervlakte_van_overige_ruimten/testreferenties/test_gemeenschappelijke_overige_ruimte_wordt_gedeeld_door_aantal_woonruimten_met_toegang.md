@@ -10,12 +10,12 @@ inleiding.
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Gedeeld met 5 onzelfstandige woonruimten
-    - Bijkeuken                                                      10.00 m²
+  Gedeeld met 4 onzelfstandige woonruimten
+    - Bijkeuken                                                      12.00 m²
   Gedeeld met 6 onzelfstandige woonruimten
-    - Garage                                                         10.00 m²
+    - Garage                                                         12.00 m²
                                                                                 ------
-  Totaal                                                                          3.00 pt
+  Totaal                                                                          3.75 pt
 ```
 
 ## Waarschuwingen
@@ -38,8 +38,8 @@ Geen.
         "naam": "Bijkeuken"
       },
       "naam": "Bijkeuken",
-      "oppervlakte": 10.0,
-      "gedeeldMetAantalOnzelfstandigeWoonruimten": 5
+      "oppervlakte": 12.0,
+      "gedeeldMetAantalOnzelfstandigeWoonruimten": 4
     },
     {
       "id": "garage",
@@ -52,7 +52,7 @@ Geen.
         "naam": "Garage"
       },
       "naam": "Garage",
-      "oppervlakte": 10.0,
+      "oppervlakte": 12.0,
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 6
     }
   ]
@@ -73,21 +73,21 @@ Geen.
       "naam": "Oppervlakte van overige ruimten"
     }
   },
-  "punten": 3.0,
+  "punten": 3.75,
   "woningwaarderingen": [
     {
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten",
-        "naam": "Gedeeld met 5 onzelfstandige woonruimten"
+        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten",
+        "naam": "Gedeeld met 4 onzelfstandige woonruimten"
       }
     },
     {
-      "aantal": 10.0,
+      "aantal": 12.0,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten__bijkeuken",
+        "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten__bijkeuken",
         "naam": "Bijkeuken",
         "bovenliggendeCriterium": {
-          "id": "oppervlakte_van_overige_ruimten__gedeeld_met_5_onzelfstandige_woonruimten"
+          "id": "oppervlakte_van_overige_ruimten__gedeeld_met_4_onzelfstandige_woonruimten"
         },
         "meeteenheid": {
           "code": "M2",
@@ -102,7 +102,7 @@ Geen.
       }
     },
     {
-      "aantal": 10.0,
+      "aantal": 12.0,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__gedeeld_met_6_onzelfstandige_woonruimten__garage",
         "naam": "Garage",

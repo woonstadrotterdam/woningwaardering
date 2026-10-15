@@ -9,10 +9,10 @@ Bijlage I onder A, toelichting rubriek 2.
 
 ```text
 OPPERVLAKTE VAN OVERIGE RUIMTEN
-  Garage                                                             19.34 m²
-  Bijkeuken                                                           6.06 m²
+  Bijkeuken                                                           2.40 m²
+  Berging                                                             2.40 m²
                                                                     ------      ------
-  Totaal                                                             25.40 m²    18.75 pt
+  Totaal                                                              4.80 m²     3.75 pt
 ```
 
 ## Waarschuwingen
@@ -25,19 +25,6 @@ Geen.
 {
   "ruimten": [
     {
-      "id": "garage",
-      "soort": {
-        "code": "OVR",
-        "naam": "Overige ruimten"
-      },
-      "detailSoort": {
-        "code": "GAR",
-        "naam": "Garage"
-      },
-      "naam": "Garage",
-      "oppervlakte": 19.3392
-    },
-    {
       "id": "bijkeuken",
       "soort": {
         "code": "OVR",
@@ -48,7 +35,20 @@ Geen.
         "naam": "Bijkeuken"
       },
       "naam": "Bijkeuken",
-      "oppervlakte": 6.0557
+      "oppervlakte": 2.4
+    },
+    {
+      "id": "berging",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging",
+      "oppervlakte": 2.4
     }
   ]
 }
@@ -68,13 +68,13 @@ Geen.
       "naam": "Oppervlakte van overige ruimten"
     }
   },
-  "punten": 18.75,
+  "punten": 3.75,
   "woningwaarderingen": [
     {
-      "aantal": 19.34,
+      "aantal": 2.4,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__garage",
-        "naam": "Garage",
+        "id": "oppervlakte_van_overige_ruimten__bijkeuken",
+        "naam": "Bijkeuken",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"
@@ -82,10 +82,10 @@ Geen.
       }
     },
     {
-      "aantal": 6.06,
+      "aantal": 2.4,
       "criterium": {
-        "id": "oppervlakte_van_overige_ruimten__bijkeuken",
-        "naam": "Bijkeuken",
+        "id": "oppervlakte_van_overige_ruimten__berging",
+        "naam": "Berging",
         "meeteenheid": {
           "code": "M2",
           "naam": "Vierkante meter, m2"

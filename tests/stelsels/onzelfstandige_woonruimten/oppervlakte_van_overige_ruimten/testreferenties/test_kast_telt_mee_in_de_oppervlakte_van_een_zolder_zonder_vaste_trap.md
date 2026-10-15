@@ -12,7 +12,7 @@ toelichting, inleiding).
 OPPERVLAKTE VAN OVERIGE RUIMTEN
   Subtotaal                                                                       2.25 pt
     - Privé
-      - Zolder (+1 kast)                                              2.60 m²
+      - Zolder (+1 kast)                                              3.30 m²
   Correctie: zolder zonder vaste trap                                            -2.25 pt
                                                                                 ------
   Totaal                                                                          0.00 pt
@@ -65,7 +65,7 @@ Geen.
             "naam": "Kast"
           },
           "naam": "Kast",
-          "oppervlakte": 0.2
+          "oppervlakte": 0.9
         }
       ]
     }
@@ -106,7 +106,7 @@ Geen.
       }
     },
     {
-      "aantal": 2.6,
+      "aantal": 3.3,
       "criterium": {
         "id": "oppervlakte_van_overige_ruimten__subtotaal__prive__zolder",
         "naam": "Zolder (+1 kast)",
