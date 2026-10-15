@@ -22,6 +22,8 @@ from woningwaardering.vera.bvg.generated import (
 from woningwaardering.vera.referentiedata import (
     Bouwkundigelementdetailsoort,
     BouwkundigelementdetailsoortReferentiedata,
+    Doelgroep,
+    EenheidmonumentReferentiedata,
     Energielabel,
     Energieprestatiesoort,
     Energieprestatiestatus,
@@ -244,6 +246,27 @@ def meergezinswoning_van_71_m2(
             kast4,
         ],
     )
+
+
+def zorgwoning_van_71_m2(
+    *,
+    bouwjaar: int,
+    monumenten: Sequence[EenheidmonumentReferentiedata] = (),
+    datum_afsluiten_huurovereenkomst: date | None = None,
+) -> EenhedenEenheid:
+    """Maak de meergezinswoning van 71 m² als zorgwoning: de eenheid heeft de doelgroep zorg.
+
+    Gebruik haar voor een beleidsregel over de verhoging van een zorgwoning, die
+    het puntentotaal van de rubrieken 1 tot en met 11 nodig heeft.
+
+    Zonder `monumenten` is de woning geen monument, en zonder
+    `datum_afsluiten_huurovereenkomst` heeft ze er geen.
+    """
+    zorgwoning = meergezinswoning_van_71_m2(bouwjaar=bouwjaar)
+    zorgwoning.doelgroep = Doelgroep.zorg
+    zorgwoning.monumenten = list(monumenten)
+    zorgwoning.datum_afsluiten_huurovereenkomst = datum_afsluiten_huurovereenkomst
+    return zorgwoning
 
 
 def meergezinswoning_van_79_m2(

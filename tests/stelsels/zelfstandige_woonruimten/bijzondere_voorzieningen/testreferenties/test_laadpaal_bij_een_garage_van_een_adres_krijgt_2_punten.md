@@ -42,7 +42,7 @@ Geen.
         "naam": "Garage"
       },
       "naam": "Garage",
-      "oppervlakte": 19.1488,
+      "oppervlakte": 10.0,
       "bouwkundigeElementen": [
         {
           "id": "element_1",
@@ -68,9 +68,7 @@ Geen.
             "naam": "Laadpaal"
           }
         }
-      ],
-      "verwarmd": true,
-      "verkoeld": false
+      ]
     }
   ]
 }

@@ -35,9 +35,7 @@ Geen.
         "naam": "Woonkamer"
       },
       "naam": "Woonkamer",
-      "oppervlakte": 19.1488,
-      "verwarmd": true,
-      "verkoeld": false,
+      "oppervlakte": 10.0,
       "installaties": [
         {
           "code": "ABF",
