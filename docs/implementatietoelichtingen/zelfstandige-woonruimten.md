@@ -1726,7 +1726,7 @@ De punten die aan de hand van de rubrieken worden toegekend aan een woonruimte l
 
 #### 2.13.1 Cumulatie van opslagen beperkt mogelijk
 
-Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8, vijfde lid, onder c van het Bhw).
+Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8a, vijfde lid, onder c van het Bhw).
 
 Het toekennen van de monumentenopslag of de opslag voor beschermd stad- of dorpsgezicht mét de nieuwbouwopslag is wel mogelijk. Vereist is dan wel dat aan alle vereisten van de beide opslagen - dus ieder voor zich - is voldaan. Naar verwachting komt deze situatie in de praktijk dan ook niet vaak voor.
 
