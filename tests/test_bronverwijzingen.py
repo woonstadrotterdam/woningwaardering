@@ -1,4 +1,4 @@
-"""De vindplaatsen in de docstrings van waarderingstests bestaan.
+"""De bronverwijzingen in de docstrings van waarderingstests bestaan.
 
 De toegestane vormen zijn de reguliere expressies hieronder;
 `docs/voor-ontwikkelaars/testing.md` noemt onder "Docstring" de gangbare.
@@ -53,8 +53,8 @@ def _waarderingstests() -> list[tuple[str, str | None]]:
     return tests
 
 
-def _vindplaatsen(docstring: str) -> list[list[str]]:
-    """Geef per alinea die met "Bron:" begint de vindplaatsen."""
+def _bronverwijzingen(docstring: str) -> list[list[str]]:
+    """Geef per alinea die met "Bron:" begint de bronverwijzingen."""
     bronnen = []
     for alinea in docstring.split("\n\n"):
         if alinea.startswith("Bron: "):
@@ -105,34 +105,34 @@ def _wettekst() -> dict[str, set[str]]:
     return nummers
 
 
-def _fout_in(vindplaats: str) -> str | None:
-    """Geef wat er niet klopt aan een vindplaats, of None als ze bestaat."""
-    if match := TOELICHTING.fullmatch(vindplaats):
+def _fout_in(bronverwijzing: str) -> str | None:
+    """Geef wat er niet klopt aan een bronverwijzing, of None als ze bestaat."""
+    if match := TOELICHTING.fullmatch(bronverwijzing):
         stelsel, nummer = match.groups()
         koppen = _koppen(TOELICHTINGEN / f"{stelsel}-woonruimten.md")
         if not any(re.match(rf"{re.escape(nummer)}( |$)", kop) for kop in koppen):
             return "paragraaf bestaat niet"
-    elif match := TOELICHTING_DATAMODEL.fullmatch(vindplaats):
+    elif match := TOELICHTING_DATAMODEL.fullmatch(bronverwijzing):
         if match.group(1) not in _koppen(TOELICHTINGEN / "datamodel-uitbreidingen.md"):
             return "kop bestaat niet"
-    elif match := ONTWIKKELAARSDOCS.fullmatch(vindplaats):
+    elif match := ONTWIKKELAARSDOCS.fullmatch(bronverwijzing):
         bestand, kop = match.groups()
         pad = REPO / "docs/voor-ontwikkelaars" / f"{bestand}.md"
         if not pad.exists() or kop not in _koppen(pad):
             return "kop bestaat niet"
-    elif match := ONDERDEEL.fullmatch(vindplaats):
+    elif match := ONDERDEEL.fullmatch(bronverwijzing):
         onder, nummer = match.groups()
         if nummer not in _wettekst()[f"{onder} onderdeel"]:
             return "onderdeel bestaat niet"
-    elif match := RUBRIEK.fullmatch(vindplaats):
+    elif match := RUBRIEK.fullmatch(bronverwijzing):
         onder, nummer, via = match.groups()
         if nummer not in _wettekst()[f"{onder} rubriek"]:
             return "rubriek bestaat niet in de toelichting"
         if via and onder != "A":
             return "alleen de toelichting onder A geldt via de inleiding onder B"
-    elif INLEIDING.fullmatch(vindplaats):
+    elif INLEIDING.fullmatch(bronverwijzing):
         pass
-    elif match := ARTIKEL.fullmatch(vindplaats):
+    elif match := ARTIKEL.fullmatch(bronverwijzing):
         artikel, lid = match.groups()
         leden = _wettekst().get(f"artikel {artikel}")
         if leden is None:
@@ -144,25 +144,25 @@ def _fout_in(vindplaats: str) -> str | None:
     return None
 
 
-def test_vindplaatsen_van_waarderingstests_bestaan():
-    """Elke vindplaats in de docstring van een waarderingstest bestaat.
+def test_bronverwijzingen_van_waarderingstests_bestaan():
+    """Elke bronverwijzing in de docstring van een waarderingstest bestaat.
 
     Een alinea die met "Bron:" begint, noemt eerst de paragraaf van de
     implementatietoelichting en daarna eventueel de wettekst.
     """
     fouten = []
     for plek, docstring in _waarderingstests():
-        for vindplaatsen in _vindplaatsen(docstring or ""):
-            if not vindplaatsen[0].startswith("implementatietoelichting"):
+        for bronverwijzingen in _bronverwijzingen(docstring or ""):
+            if not bronverwijzingen[0].startswith("implementatietoelichting"):
                 fouten.append(f"{plek}: begint niet met de implementatietoelichting")
-            for vindplaats in vindplaatsen:
-                if fout := _fout_in(vindplaats):
-                    fouten.append(f"{plek}: {fout}: {vindplaats}")
+            for bronverwijzing in bronverwijzingen:
+                if fout := _fout_in(bronverwijzing):
+                    fouten.append(f"{plek}: {fout}: {bronverwijzing}")
     assert fouten == []
 
 
 @pytest.mark.parametrize(
-    ("vindplaats", "fout"),
+    ("bronverwijzing", "fout"),
     [
         ("implementatietoelichting zelfstandige woonruimten, 2.6.2", None),
         (
@@ -201,5 +201,5 @@ def test_vindplaatsen_van_waarderingstests_bestaan():
         ('wettekst, Bijlage I onder A, onderdeel 6.2: "Bad"', "onbekende vorm"),
     ],
 )
-def test_fout_in_vindplaats(vindplaats, fout):
-    assert _fout_in(vindplaats) == fout
+def test_fout_in_bronverwijzing(bronverwijzing, fout):
+    assert _fout_in(bronverwijzing) == fout
