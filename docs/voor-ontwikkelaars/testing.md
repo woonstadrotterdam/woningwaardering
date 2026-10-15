@@ -79,26 +79,29 @@ De tests van een stelselgroep staan in `tests/stelsels/<stelsel>/<stelselgroep>/
 
 ### Eén beleidsregel per test
 
-Een test controleert één beleidsregel, of één keuze van de package, zoals een waarschuwing bij onvolledige input. Je toetst dat aan de eerste zin van de docstring: die zegt in één bewering wat de test controleert. Heb je daar "en" voor nodig, schrijf dan twee tests. Zo belooft de naam van de test precies wat de asserts controleren.
+Een test controleert één beleidsregel, of één keuze van de package, zoals een waarschuwing bij onvolledige input. Je toetst dat aan de eerste zin van de docstring: die zegt in één bewering wat de test controleert. Heb je daar twee beweringen voor nodig, schrijf dan twee tests. Zo belooft de naam van de test precies wat de asserts controleren.
 
 Een tabel uit één onderdeel van de bron, zoals de punten per aanrechtlengte in onderdeel 5.1 van de wettekst, is één beleidsregel. De eerste zin van de docstring noemt dan wat de tabel bepaalt, bijvoorbeeld "De punten voor een aanrecht hangen af van zijn lengte", en de asserts tonen de grenzen.
 
 ### Naam
 
-De naam beschrijft het gedrag in gewone taal: `test_meerdere_kastruimtes_tellen_samen_als_een`. De stelselgroep staat al in het pad en hoeft niet in de naam. De naam wordt de bestandsnaam en de kop van de testreferentie, en is daarmee het eerste wat een reviewer in de pull request leest.
+De naam noemt de beleidsregel in gewone taal: `test_meerdere_kastruimtes_tellen_samen_als_een`. Getallen uit de bron, zoals een grens, een puntental of een percentage, mogen in de naam. Een waarde uit de input noem je niet: `test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek`, niet `test_een_vertrek_van_7m2_geeft_4_punten_aftrek`, tenzij de bron die waarde zelf noemt, zoals in een rekenvoorbeeld. Controleert de test een grens uit de bron, dan noemt de naam die grens, en ligt de input erop of één kleinste stap ervandaan (1 mm, één ruimte, één punt): `test_een_vertrek_van_precies_8m2_geeft_geen_aftrek`. De stelselgroep staat al in het pad en hoeft niet in de naam. De naam wordt de bestandsnaam en de kop van de testreferentie, en is daarmee het eerste wat een reviewer in de pull request leest.
 
 ### Docstring
 
-De docstring is verplicht en bestaat uit twee delen:
+De docstring is verplicht en bestaat uit twee delen, soms drie:
 
-1. De beleidsregel in één zin. In de testreferentie staat die zin direct onder de kop. Hij moet zonder de rest te lezen zeggen wat de test controleert.
-2. De bron, met een letterlijk citaat en de vindplaats. Gebruik de bron die de beleidsregel draagt, in de volgorde van autoriteit uit `CONTEXT.md`: wettekst, online beleidsboek, implementatietoelichting. Bewaakt de test een keuze van de package, dan is de bron de toelichting waarin die keuze staat.
+1. De beleidsregel in één zin. In de testreferentie staat die zin direct onder de kop. Hij moet zonder de rest te lezen zeggen wat de test controleert. Net als de naam noemt hij geen waarde uit de input.
+2. De bron, met een letterlijk citaat en de vindplaats. Een citaat bestaat uit een of meer letterlijke delen van de brontekst. Citeer de bron die de beleidsregel draagt, in de volgorde van autoriteit uit `CONTEXT.md`: wettekst, online beleidsboek, implementatietoelichting. Een citaat dat alleen naar een andere bron verwijst, laat je weg. Geldt de bron via zo'n verwijzing, zoals de toelichting onder bijlage I, onder A, voor onzelfstandige woonruimten, noem de verwijzing dan in de vindplaats: `Bron: wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding): "..."`. Bewaakt de test een keuze van de package, dan is de bron de toelichting waarin die keuze staat.
+3. Alleen als de asserts zonder een andere beleidsregel niet te volgen zijn: die andere beleidsregel in één zin, met de bron of bronnen daarvan. Een voorbeeld: bij gemeenschappelijke binnenruimten worden alle punten gedeeld door het aantal adressen. Een test over de verkoeling assert dan gedeelde punten, en de lezer moet weten waarom.
 
-De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening.
+De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Die staan in de testreferentie, en de waarschuwingen ook in de aanroep van `vergelijk_met_testreferentie`. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt leg je alleen uit als de test daarover gaat.
+
+Legt de test gedrag vast dat de wettekst en het beleidsboek niet beschrijven, of wijkt de package daarvan af, dan hoort die keuze in de implementatietoelichting en citeer je die als bron. Wijkt de package af, citeer dan ook de bron waarvan ze afwijkt, zodat de lezer ziet welke beleidsregel niet wordt gevolgd. Staat de keuze daar nog niet, schrijf dan in de docstring een TODO, zoals `TODO: de implementatietoelichting noemt deze waarschuwing niet.`, zodat de testreferentie laat zien wat nog moet worden vastgelegd. De algemene uitleg over waarschuwingen in `docs/aan-de-slag` is geen bron voor zo'n keuze.
 
 ### Input
 
-Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `element(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
+Bouw de input op met de functies uit `tests/input.py`, zoals `ruimte(...)`, `element(...)` en `aanrecht(...)`. Wat de beleidsregel raakt, geef je in de test mee; de rest krijgt een standaardwaarde in de functie. Heeft een eenheid meer ruimten van dezelfde detailsoort, nummer ze dan met `naam` (`Badkamer1`, `Badkamer2`). Waarom je de input zo kiest, zet je in één regel commentaar bij die input, niet in de docstring. Heeft de beleidsregel het puntentotaal van andere rubrieken nodig, gebruik dan een volledige woning uit `tests/input.py`, zoals `meergezinswoning_van_71_m2(...)`, en geef ook daar mee wat de beleidsregel raakt.
 
 Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/input.py`. Een functie hoort daar als ze velden afleidt of een standaardwaarde geeft die de beleidsregel niet raakt. Geeft ze alleen haar argumenten door, gebruik dan het VERA-model zelf, zoals `EenhedenEnergieprestatie(...)`.
 
@@ -106,7 +109,7 @@ Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sa
 
 ### Asserts
 
-Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`); de overige waarderingen staan in de testreferentie. In het voorbeeld hierboven horen het bad en de wastafel bij het scenario, maar de beleidsregel gaat over de kastruimte.
+Assert de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`); de overige waarderingen staan in de testreferentie. In het voorbeeld hierboven horen het bad en de wastafel bij het scenario, maar de beleidsregel gaat over de kastruimte. Hoe je op een verwachte waarde komt, mag als commentaar bij de assert staan, zoals `# 10 punten gedeeld door 8 woonruimten`.
 
 Gebruik de helpers uit `tests/utils.py`: `punten_per_naam(groep)`, of `punten_per_bovenliggende(groep)` wanneer dezelfde naam in meer dan één ruimte voorkomt. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst; het totaal heeft dan geen eigen assert nodig:
 
