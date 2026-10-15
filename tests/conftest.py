@@ -176,15 +176,3 @@ def onzelfstandige_woonruimten_input_en_outputmodel(
 @pytest.fixture()
 def woningwaardering_resultaat():
     return WoningwaarderingResultatenWoningwaarderingResultaat()
-
-
-def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
-    # Controleer of de test een exception heeft gegeven
-    if call.excinfo is not None:
-        # Controleer of de exception een NotImplementedError is
-        if call.excinfo is NotImplementedError:
-            # Maak een aangepast rapport om de test over te slaan
-            rep = pytest.TestReport.from_item_and_call(item, call)
-            rep.outcome = "skipped"
-            rep.longrepr = call.excinfo
-            return rep
