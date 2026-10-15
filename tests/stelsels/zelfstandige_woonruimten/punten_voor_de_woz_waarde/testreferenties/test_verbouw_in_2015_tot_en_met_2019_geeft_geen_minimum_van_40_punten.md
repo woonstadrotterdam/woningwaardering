@@ -1,6 +1,6 @@
 # test_verbouw_in_2015_tot_en_met_2019_geeft_geen_minimum_van_40_punten
 
-Een woning die in 2015 tot en met 2019 is verbouwd, krijgt geen minimum van 40 punten voor de WOZ-waarde: alleen het bouwjaar telt.
+De package past het minimum van 40 punten voor de WOZ-waarde alleen toe op het bouwjaar, niet op een verbouw in 2015 tot en met 2019.
 
 Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5.
 
