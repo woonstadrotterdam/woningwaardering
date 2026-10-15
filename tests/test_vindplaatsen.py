@@ -1,7 +1,7 @@
 """De vindplaatsen in de docstrings van waarderingstests bestaan.
 
-De vormen van een vindplaats staan in `docs/voor-ontwikkelaars/testing.md`
-onder "Docstring".
+De toegestane vormen zijn de reguliere expressies hieronder;
+`docs/voor-ontwikkelaars/testing.md` noemt onder "Docstring" de gangbare.
 """
 
 import ast
