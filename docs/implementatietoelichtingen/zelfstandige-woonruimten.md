@@ -316,6 +316,7 @@ Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
 > [!NOTE]
 >
 > - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
+> - Een ruimte waarvan de `Ruimtedetailsoort` niet tot rubriek 1 of 2 kan horen, is geen vertrek en geen overige ruimte. Dat geldt ook voor een detailsoortcode die niet in de VERA-referentiedata staat.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 > - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
@@ -770,7 +771,7 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
 
 > [!NOTE]
-> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn. Een ruimte zonder een aanrecht van minimaal 1 meter lang krijgt dus ook geen punten voor extra voorzieningen.
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
@@ -1106,6 +1107,9 @@ Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaa
 
 Buitenruimten komen voor waardering in aanmerking. Het woningwaarderingsstelsel maakt hierbij onderscheid tussen privé-buitenruimten en gemeenschappelijke buitenruimten. Er worden **maximaal 15 punten** toegekend voor de privé-buitenruimte en gemeenschappelijke buitenruimte samen.
 
+> [!NOTE]
+> Een ruimte met de `Ruimtedetailsoort` van een buitenruimte, zoals een balkon, dakterras of tuin, waarderen wij als buitenruimte, los van de meegegeven `Ruimtesoort`. Wijkt de meegegeven `Ruimtesoort` daarvan af, dan geeft de package een waarschuwing.
+
 #### 2.8.1 Punten voor privé-buitenruimte
 
 ~~Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning **volgens de huurovereenkomst** het exclusieve gebruiksrecht en toegang heeft.~~ Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit die exclusief tot de woning behoort. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, gelden de parkeerplek en de weg daar naartoe als privé-buitenruimte.
@@ -1399,6 +1403,9 @@ Er zijn drie manieren waarop een woonruimte punten kan krijgen. Deze manieren zi
 
 _Laatst vastgestelde WOZ-waarde_  
 Met de laatst vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de peildatum van de procedure bedoeld. Sluiten partijen bijvoorbeeld een huurovereenkomst op 1 augustus 2026, dan wordt in de woningwaardering rekening gehouden met de WOZ-waarde welke per 1 januari 2026 is vastgesteld. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. De WOZ-waarde in de WOZ-beschikking van 1 januari 2026 heeft dus een waardepeildatum van 1 januari 2025.
+
+> [!NOTE]
+> De package gebruikt de WOZ-waarde met waardepeildatum 1 januari van het jaar vóór de peildatum. Ontbreekt die, dan gebruikt ze de WOZ-waarde met waardepeildatum 1 januari twee jaar vóór de peildatum. Een WOZ-waarde met een andere waardepeildatum telt niet mee. Is er geen relevante WOZ-waarde gevonden, dan geeft de package een waarschuwing en waardeert ze met de minimum WOZ-waarde.
 
 _Taxatiewaarde door erkend Register-Taxateur_  
 De taxatiewaarde van de woonruimte moet blijken uit een (hybride)taxatierapport dat door een Register-Taxateur is opgesteld. De verhuurder is verantwoordelijk voor het (laten) opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld. Als er een WOZ-waarde is vastgesteld dan vervalt de taxatiewaarde voor de toepassing van deze rubriek.
@@ -1781,7 +1788,7 @@ De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er 
 Omdat deze laatste regel effect heeft op het puntenaantal in plaats van de maximale huurprijs kan de toepassing van deze regel tot gevolg hebben dat de woning in de vrije sector valt.
 
 > [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69)
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69). Ontbreekt de datum bij een rijksmonument, dan geeft de package een waarschuwing en rekent ze met de peildatum.
 
 #### 2.13.5 Gemeentelijke en provinciale monumenten
 
