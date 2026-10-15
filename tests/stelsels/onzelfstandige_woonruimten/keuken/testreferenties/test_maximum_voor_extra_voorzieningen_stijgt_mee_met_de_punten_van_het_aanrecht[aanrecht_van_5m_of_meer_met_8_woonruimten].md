@@ -5,7 +5,8 @@ Het maximum voor extra voorzieningen stijgt mee met de punten voor een aanrecht 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
 Bijlage I onder B, onderdeel 5.2.
 
-Een aanrecht van 3 meter of meer krijgt 10 punten, en vanaf 5 meter bij minimaal 8 onzelfstandige woonruimten 13 punten, gedeeld door het aantal woonruimten.
+Een aanrecht van 3 meter of meer krijgt 10 punten, en vanaf 5 meter bij minimaal 8
+onzelfstandige woonruimten 13 punten, gedeeld door het aantal woonruimten.
 
 Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
 Bijlage I onder B, onderdeel 5.1.
