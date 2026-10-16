@@ -19,6 +19,10 @@ Er zijn verschillende "test-scopes" te bedenken, zoals het testen van details en
 Daarnaast is het testen van een hele keten of stelselgroep-object ook vereist.
 Bij het opleveren van nieuwe code moet aan beide test-scopes gedacht worden.
 
+## Geen externe aanroepen
+
+Tests hangen niet af van externe diensten. Een fixture in `tests/conftest.py` laat elke aanroep via `requests` falen; mock de aanroep in de test, zoals in `tests/stelsels/utils/test_get_woonplaats.py`.
+
 ## Expected test outputs genereren
 
 Bij code-wijzigingen die leiden tot wijzigingen in de output moeten de expected outputs onder `tests/data/**/output/*.json`, `tests/docs/output_json_*.json` en de gerelateerde output-txt bestanden opnieuw gegenereerd worden. Gebruik hiervoor:

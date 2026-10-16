@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -51,6 +52,26 @@ def test_gemiddelde_woz_voor_corop_gebied_weigert_onbekend_jaar(
         )
 
 
+@pytest.fixture(autouse=True)
+def locatieserver_woonplaats():
+    """Woonplaats die de PDOK Locatieserver teruggeeft voor inconsistent_adres.json."""
+    response = MagicMock()
+    response.json.return_value = {
+        "response": {
+            "docs": [
+                {
+                    "woonplaatscode": "3295",
+                    "woonplaatsnaam": "Utrecht",
+                    "postcode": "3511AD",
+                    "huisnummer": 100,
+                }
+            ]
+        }
+    }
+    with patch("woningwaardering.stelsels.utils.requests.get", return_value=response):
+        yield
+
+
 warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/geen_geldige_woz_waarde.json",
@@ -64,7 +85,7 @@ warning_configs = [
     WarningConfig(
         file=f"{current_file_path}/input/inconsistent_adres.json",
         warnings={
-            UserWarning: "woonplaats",
+            UserWarning: "Kan geen woonplaats bepalen",
         },
     ),
     WarningConfig(
