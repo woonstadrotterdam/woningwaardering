@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+import pytest
+
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
@@ -119,3 +121,32 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
     assert "nieuwbouw_minimum_punten" not in segmenten
+
+
+@pytest.mark.parametrize(
+    ("overige_punten", "verwacht_minimum"),
+    [
+        pytest.param(110.0, Decimal("40"), id="precies_110_punten"),
+        pytest.param(109.75, Decimal("0"), id="een_kwart_punt_onder_110_punten"),
+    ],
+)
+def test_minimum_van_40_punten_geldt_vanaf_110_punten_voor_de_rubrieken_1_tot_en_met_10_en_12(
+    overige_punten, verwacht_minimum
+):
+    """Het minimum van 40 punten voor de WOZ-waarde geldt vanaf 110 punten voor de rubrieken 1 tot en met 10 en 12.
+
+    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
+    Bijlage I onder A, onderdeel 11.2.
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
+    eenheid = EenhedenEenheid(id="test", bouwjaar=2016)
+    resultaat = _maak_resultaat_met_overige_punten(
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
+        (Woningwaarderingstelselgroep.keuken, 30.0),
+        (Woningwaarderingstelselgroep.sanitair, overige_punten - 90.0),
+    )
+
+    assert (
+        stelselgroep._bereken_minimum_punten_nieuwbouw(eenheid, resultaat)
+        == verwacht_minimum
+    )

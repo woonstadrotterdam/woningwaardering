@@ -25,6 +25,8 @@ repos:
         description: "Prettier is an opinionated code formatter for various languages, including JSON, YAML, Markdown, and more."
         additional_dependencies:
           - prettier@2.8.1
+        # Testreferenties worden alleen door de fixture vergelijk_met_testreferentie bijgewerkt.
+        exclude: "/testreferenties/"
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0

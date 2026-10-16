@@ -1,0 +1,201 @@
+# test_verwarmde_prive_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_punten
+
+Verwarmde privé overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
+
+Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
+wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
+B, toelichting, inleiding).
+
+## Rapport
+
+```text
+VERKOELING EN VERWARMING
+  Privé
+    - Verwarmde overige en verkeersruimten
+      - Berging1                                                                  1.00 pt
+      - Berging2                                                                  1.00 pt
+      - Berging3                                                                  1.00 pt
+      - Gang1                                                                     1.00 pt
+      - Gang2                                                                     1.00 pt
+      - Maximaal 4 punten                                                        -1.00 pt
+                                                                                ------
+  Totaal                                                                          4.00 pt
+```
+
+## Waarschuwingen
+
+Geen.
+
+## Input
+
+```json
+{
+  "ruimten": [
+    {
+      "id": "berging1",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging1",
+      "oppervlakte": 10.0,
+      "verwarmd": true
+    },
+    {
+      "id": "berging2",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging2",
+      "oppervlakte": 10.0,
+      "verwarmd": true
+    },
+    {
+      "id": "berging3",
+      "soort": {
+        "code": "OVR",
+        "naam": "Overige ruimten"
+      },
+      "detailSoort": {
+        "code": "BER",
+        "naam": "Berging"
+      },
+      "naam": "Berging3",
+      "oppervlakte": 10.0,
+      "verwarmd": true
+    },
+    {
+      "id": "gang1",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang1",
+      "oppervlakte": 10.0,
+      "verwarmd": true
+    },
+    {
+      "id": "gang2",
+      "soort": {
+        "code": "VRK",
+        "naam": "Verkeersruimte"
+      },
+      "detailSoort": {
+        "code": "GAN",
+        "naam": "Gang"
+      },
+      "naam": "Gang2",
+      "oppervlakte": 10.0,
+      "verwarmd": true
+    }
+  ]
+}
+```
+
+## Output
+
+```json
+{
+  "criteriumGroep": {
+    "stelsel": {
+      "code": "ONZ",
+      "naam": "Onzelfstandige woonruimten"
+    },
+    "stelselgroep": {
+      "code": "VKV",
+      "naam": "Verkoeling en verwarming"
+    }
+  },
+  "punten": 4.0,
+  "woningwaarderingen": [
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive",
+        "naam": "Privé"
+      }
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten",
+        "naam": "Verwarmde overige en verkeersruimten",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive"
+        }
+      }
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__berging1",
+        "naam": "Berging1",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": 1.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__berging2",
+        "naam": "Berging2",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": 1.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__berging3",
+        "naam": "Berging3",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": 1.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__gang1",
+        "naam": "Gang1",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": 1.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__gang2",
+        "naam": "Gang2",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": 1.0
+    },
+    {
+      "criterium": {
+        "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten__max_aantal_punten",
+        "naam": "Maximaal 4 punten",
+        "bovenliggendeCriterium": {
+          "id": "verkoeling_en_verwarming__prive__verwarmde_overige_en_verkeersruimten"
+        }
+      },
+      "punten": -1.0
+    }
+  ]
+}
+```

@@ -10,10 +10,8 @@ from pydantic import ValidationError
 
 from woningwaardering import Woningwaardering
 from woningwaardering.rapport import naar_rapport
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
 STELSELS = ("zelfstandige_woonruimten", "onzelfstandige_woonruimten")
@@ -25,10 +23,6 @@ def _write_text_if_changed(path: Path, content: str) -> bool:
 
     path.write_text(content)
     return True
-
-
-def _is_stelselgroep_input(input_file_path: Path) -> bool:
-    return input_file_path.parent.parent.parent.name == "stelselgroepen"
 
 
 def _output_path_for_input(input_file_path: Path) -> Path:
@@ -111,33 +105,14 @@ def main() -> int:
             logger.remove(stdout_id)
 
             try:
-                if _is_stelselgroep_input(input_file_path):
-                    stelselgroep_naam = input_file_path.parent.parent.name
-                    stelselgroep_class = import_module(
-                        f"woningwaardering.stelsels.{stelsel_naam}." + stelselgroep_naam
-                    )
-                    stelselgroep: Stelselgroep = getattr(
-                        stelselgroep_class,
-                        string.capwords(stelselgroep_naam.replace("_", " ")).replace(
-                            " ", ""
-                        ),
-                    )(peildatum=peildatum)
-                    woningwaardering_resultaat = (
-                        WoningwaarderingResultatenWoningwaarderingResultaat(
-                            groepen=[stelselgroep.waardeer(eenheid_input)]
-                        )
-                    )
-                else:
-                    stelsel_class = import_module(
-                        f"woningwaardering.stelsels.{stelsel_naam}.{stelsel_naam}"
-                    )
-                    stelsel = getattr(
-                        stelsel_class,
-                        string.capwords(stelsel_naam.replace("_", " ")).replace(
-                            " ", ""
-                        ),
-                    )(peildatum=peildatum)
-                    woningwaardering_resultaat = stelsel.waardeer(eenheid_input)
+                stelsel_class = import_module(
+                    f"woningwaardering.stelsels.{stelsel_naam}.{stelsel_naam}"
+                )
+                stelsel = getattr(
+                    stelsel_class,
+                    string.capwords(stelsel_naam.replace("_", " ")).replace(" ", ""),
+                )(peildatum=peildatum)
+                woningwaardering_resultaat = stelsel.waardeer(eenheid_input)
             except Exception:
                 logger.exception(f"Fout bij waarderen van {input_file_path}")
                 errors += 1

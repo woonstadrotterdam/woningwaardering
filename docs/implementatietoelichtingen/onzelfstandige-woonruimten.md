@@ -203,7 +203,7 @@ Een gemeenschappelijk vertrek wordt ook gewaardeerd met 1 punt per vierkante met
 > [!NOTE]
 > Wij hebben `gedeeldMetAantalOnzelfstandigeWoonruimten` toegevoegd als property van ruimten om te kunnen specificeren of een ruimte gedeeld wordt met andere personen op hetzelfde adres.
 
-##### 2.1.1.1 Rekenregels vertrekken
+##### 2.2.1.1 Rekenregels vertrekken
 
 De oppervlakten voor privé- en gemeenschappelijke vertrekken worden afzonderlijk berekend. De rekenmethode is als volgt:
 
@@ -223,6 +223,7 @@ De oppervlakten voor privé- en gemeenschappelijke vertrekken worden afzonderlij
 > [!NOTE]
 >
 > - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
+> - Een ruimte waarvan de `Ruimtedetailsoort` niet tot rubriek 1 of 2 kan horen, zoals een meterruimte, is geen vertrek en geen overige ruimte. Dat geldt ook voor een detailsoortcode die niet in de VERA-referentiedata staat.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 > - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
@@ -338,7 +339,7 @@ De oppervlakten voor privé- en gemeenschappelijke overige ruimten worden afzond
 - Bepaal het puntenaantal voor de overige ruimtes op basis van de m².
 
 > [!NOTE]
-> Dezelfde volgorde als bij [§2.2.1.1](#2111-rekenregels-vertrekken): per ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m², daarna × 0,75.
+> Dezelfde volgorde als bij [§2.2.1.1](#2211-rekenregels-vertrekken): per ruimte delen waar nodig, salderen, daarna éénmaal afronden op hele m², daarna × 0,75.
 >
 > Wettekst en beleidsboek zijn niet sluitend. Het beleidsboek beschrijft privé en gemeenschappelijk **afzonderlijk** afronden en daarna optellen; het rekenvoorbeeld in de wettekst deelt m²-aandelen en telt die op. Bij privé berging 10,40 m² plus gedeelde berging 40,40 m² / 4 (zonder vlizotrap) geeft de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) rubriek 2 = **15,75** — dat past bij delen vóór afronden (20,50 → 21 m²), niet bij apart afronden per categorie (20 m² → 15,00). Daarom volgen wij die volgorde ook voor rubriek 2.
 
@@ -361,6 +362,8 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 
 > [!NOTE]
 > De maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige woonruimten.
+>
+> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
 >
 > Voorbeeld (4 onzelfstandige woonruimten):
 >
@@ -594,6 +597,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 >
 > - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
 > - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
+> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee, net als een energieprestatie van een andere soort dan energielabel, voorlopig energielabel, energie-index of primair energieverbruik woningbouw (zoals compactheid). De waardering valt dan terug op het bouwjaar.
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -730,7 +734,7 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
 
 > [!NOTE]
-> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: er moet een aanrecht van minimaal 1 meter lang aanwezig zijn in de ruimte.
 
 > [!NOTE]
 > Geef alleen aanrechten mee indien de keuken voldoet aan de basisvoorzieningen. Geef een spoelbak niet als `wastafel` mee.
@@ -1042,6 +1046,9 @@ Omdat de badkamer wordt gedeeld door 4 onzelfstandige wooneenheden is het punten
 
 Buitenruimten komen voor waardering in aanmerking. Het woningwaarderingsstelsel maakt hierbij onderscheid tussen privé-buitenruimten en gemeenschappelijke buitenruimten. Er worden **maximaal 15 punten** toegekend voor zowel de privé-buitenruimte als gemeenschappelijke buitenruimte samen.
 
+> [!NOTE]
+> Een ruimte met de `Ruimtedetailsoort` van een buitenruimte, zoals een balkon, dakterras of tuin, waarderen wij als buitenruimte, los van de meegegeven `Ruimtesoort`. Wijkt de meegegeven `Ruimtesoort` daarvan af, dan geeft de package een waarschuwing.
+
 #### 2.8.1 Punten voor privé-buitenruimte
 
 Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning **volgens de huurovereenkomst het exclusieve gebruiksrecht en toegang heeft**. Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit die exclusief tot de woning behoort. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, gelden de parkeerplek en de weg daar naartoe als privé-buitenruimte.
@@ -1167,6 +1174,9 @@ Gemeenschappelijke vertrekken en overige ruimtes die tot het woongebouw behoren 
 Het Bhw schrijft voor dat de punten voor een gemeenschappelijke binnenruimte moeten worden berekend door het puntenaantal voor de oppervlakte eerst te delen door de meerdere adressen en daarna nog gedeeld door het aantal onzelfstandige woonruimten op het adres waar het gehuurde onderdeel van uitmaakt.
 
 > [!NOTE]
+> Het aantal adressen dient doorgegeven te worden op het attribuut `gedeeld_met_aantal_adressen`, waarbij ook het adres van de betreffende eenheid meegeteld dient te worden in het totaal. Alleen een ruimte met een waarde van 2 of hoger wordt in deze rubriek gewaardeerd. Een ruimte zonder deze waarde of met waarde 1 valt onder rubriek 1 tot en met 6, ook als ze met andere onzelfstandige woonruimten op hetzelfde adres wordt gedeeld.
+
+> [!NOTE]
 > Anders dan rubriek 1 en 2 deelt rubriek 9 niet de oppervlakte, maar de punten. Dat is geverifieerd met de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte).
 
 #### 2.9.2 Punten voor voorzieningen in gemeenschappelijke ruimten
@@ -1272,7 +1282,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 >
 > - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
-> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast. Die waarschuwing volgt ook als de parkeerplaats kleiner is dan 12 m² en daardoor geen punten krijgt.
 >
 > `PIP`, `PUP`, `PBD` en `PBC` zijn uitbreidingen op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
@@ -1329,6 +1339,9 @@ Wanneer er geen enkele WOZ-waarde of taxatiewaarde bekend is voor het adres van 
 
 _Laatst vastgestelde WOZ-waarde_  
 Met de laatst vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de peildatum van de procedure bedoeld. Sluiten partijen bijvoorbeeld een huurovereenkomst op 1 augustus 2026, dan wordt in de woningwaardering rekening gehouden met de WOZ-waarde welke per 1 januari 2026 is vastgesteld. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. De WOZ-waarde in de WOZ-beschikking van 1 januari 2026 heeft dus een waardepeildatum van 1 januari 2025.
+
+> [!NOTE]
+> De package gebruikt de WOZ-waarde met waardepeildatum 1 januari van het jaar vóór de peildatum. Ontbreekt die, dan gebruikt ze de WOZ-waarde met waardepeildatum 1 januari twee jaar vóór de peildatum. Een WOZ-waarde met een andere waardepeildatum telt niet mee. Is er geen relevante WOZ-waarde gevonden, dan geeft de package een waarschuwing en krijgt de woonruimte het laagste puntenaantal (10 punten).
 
 _Taxatiewaarde door erkend Register-Taxateur_  
 De taxatiewaarde van de woonruimte moet blijken uit een (hybride)taxatierapport dat door een Register-Taxateur is opgesteld. Is er sprake van een procedure ‘toetsing aanvangshuurprijs’? Dan dient bij de opname van de taxatiewaarde te worden uitgegaan van de waarde op de ingangsdatum van de huurovereenkomst. De verhuurder is verantwoordelijk voor het (laten) opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld. Als er een WOZ-waarde is vastgesteld dan vervalt de taxatiewaarde voor de toepassing van deze rubriek.
@@ -1397,26 +1410,29 @@ Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijg
 
 Er is sprake van een zorgwoning als aan de volgende vier voorwaarden is voldaan.
 
-1. de woning ligt in een woongebouw;
-2. de woning en het woongebouw waarin de woning ligt zijn bestemd voor mensen met een fysieke beperking wat minimaal blijkt uit de aanwezigheid van drempelloze toegankelijkheid en doorgankelijkheid;
-3. de huurovereenkomst van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt;
-4. de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie.
+> [!NOTE]
+> De onderstaande doorgehaalde voorwaarden worden niet gecontroleerd door de woningwaardering package. Wanneer een eenheid de doelgroep Zorg heeft, wordt de woning automatisch als zorgwoning gewaardeerd.
 
-_Drempelloze toegankelijkheid en doorgankelijkheid_
-Deze drempelloze toegankelijkheid en doorgankelijkheid houden ten minste in dat:
+1. ~~de woning ligt in een woongebouw;~~
+2. ~~de woning en het woongebouw waarin de woning ligt zijn bestemd voor mensen met een fysieke beperking wat minimaal blijkt uit de aanwezigheid van drempelloze toegankelijkheid en doorgankelijkheid;~~
+3. ~~de huurovereenkomst van de woning voorziet op de aanwezigheid van technische voorzieningen in het gebouw die het mogelijk maken dat een individuele persoonsalarmering verbinding kan maken met de noodalarmcentrale in zowel de woning als het complex waarvan de woning deel uitmaakt;~~
+4. ~~de huurovereenkomst van de woning moet zien op het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie~~
 
-- alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 meter, en
-- er is een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 centimeter of hoger.
+~~_Drempelloze toegankelijkheid en doorgankelijkheid_~~  
+~~Deze drempelloze toegankelijkheid en doorgankelijkheid houden ten minste in dat:~~
 
-_Toelichting alarmsysteem_  
-Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale. Hierbij gaat het zowel om de woning als het complex waarvan de woning deel uitmaakt. De uitrusting in het gebouw moet bijvoorbeeld in staat zijn om een signaal van een persoonsalarm op te vangen als dat signaal uit de lift van het complex wordt verzonden of vanuit een tuin of dakterras. Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op het lichaam wordt gedragen met een halskoord.
+- ~~alle gangen, waar de bewoners doorheen moeten om de eigen woning en andere relevante (gemeenschappelijke) ruimten in het woongebouw te bereiken, een minimale breedte hebben van 1,2 meter, en~~
+- ~~er is een lift of hellingbaan indien de eigen woning en andere relevante ruimten drempels hebben van 2 centimeter of hoger.~~
 
-_Gemeenschappelijke ruimten voor maaltijden en recreatie_
-Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uitmaken van een huurovereenkomst om een woning als zorgwoning te kunnen aan te merken.
+~~_Toelichting alarmsysteem_~~  
+~~Het woongebouw moet zodanig zijn uitgerust dat een afgegeven persoonsalarm door individuele persoonsalarmering overal verbinding kan maken met de noodalarmcentrale. Hierbij gaat het zowel om de woning als het complex waarvan de woning deel uitmaakt. De uitrusting in het gebouw moet bijvoorbeeld in staat zijn om een signaal van een persoonsalarm op te vangen als dat signaal uit de lift van het complex wordt verzonden of vanuit een tuin of dakterras. Voorbeelden van technische voorzieningen zijn een noodoproepinstallatie of een persoonlijk alarmsysteem dat op het lichaam wordt gedragen met een halskoord.~~
 
-Deze gedeelde ruimten moeten bij het woongebouw horen (of als onroerende aanhorigheid van het complex kunnen worden aangemerkt, zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste, maar de ruimtes moeten wel in de eerste plaats beschikbaar zijn voor de huurders van het woongebouw.
+~~_Gemeenschappelijke ruimten voor maaltijden en recreatie_~~  
+~~Het gebruik van gemeenschappelijke ruimten voor maaltijden of recreatie moet deel uitmaken van een huurovereenkomst om een woning als zorgwoning te kunnen aan te merken.~~
 
-Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Bhw te kwalificeren.
+~~Deze gedeelde ruimten moeten bij het woongebouw horen (of als onroerende aanhorigheid van het complex kunnen worden aangemerkt, zie [paragraaf 2.1.1](#211-waardering-van-de-woning-als-onroerende-zaak)). Het exclusieve gebruik van deze ruimten door de huurders van het woongebouw is geen vereiste, maar de ruimtes moeten wel in de eerste plaats beschikbaar zijn voor de huurders van het woongebouw.~~
+
+~~Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetzelfde maar geheel of gedeeltelijk in een naastgelegen (woon)gebouw zijn gelegen, dienen deze voorzieningen binnendoor (gesloten loopbrug, corridor, etc.) bereikbaar te zijn om als zorgwoning in de zin van het Bhw te kwalificeren.~~
 
 #### 2.12.2 Aanbelfunctie met video- en audioverbinding
 
@@ -1426,7 +1442,7 @@ Als de gemeenschappelijke ruimten voor maaltijden of recreatie niet binnen hetze
 
 ==}
 
-Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. Daarbij dient er ook sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt. Als aan deze voorwaarden wordt voldaan wordt de aanbelfunctie gewaardeerd met 0,25 punt.
+Een aanbelfunctie met video- en audioverbinding is een systeem dat tweewegcommunicatie mogelijk maakt met beeld en geluid tussen degene die aanbelt en een aanwezige in de woonruimte. ~~Daarbij dient er ook sprake te zijn van de mogelijkheid tot het openen van de (gemeenschappelijke) voordeur vanuit de woonruimte (op afstand) die toegang geeft tot het complex waarvan de woning onderdeel uitmaakt. Als aan deze voorwaarden wordt voldaan~~ wordt de aanbelfunctie gewaardeerd met 0,25 punt.
 
 #### 2.12.3 Laadpalen
 
@@ -1487,7 +1503,7 @@ De punten die aan de hand van de rubrieken worden toegekend aan een woonruimte l
 
 #### 2.14.1 Cumulatie van opslagen beperkt mogelijk
 
-Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht _niet_ tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8, vijfde lid, onder c van het Bhw).
+Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht _niet_ tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8a, vijfde lid, onder c van het Bhw).
 
 #### 2.14.2 Opslag heeft geen invloed op huursector op basis van punten
 
@@ -1543,7 +1559,7 @@ De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er 
 - als de huurovereenkomst is afgesloten vóór 1 juli 2024 dan worden 10 punten extra toegekend.  
 
 > [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie <https://github.com/Aedes-datastandaarden/vera-openapi/issues/69>
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor Rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie <https://github.com/Aedes-datastandaarden/vera-openapi/issues/69>. Ontbreekt de datum bij een rijksmonument, dan geeft de package een waarschuwing en rekent ze met de peildatum.
 
 #### 2.14.5 Gemeentelijke en provinciale monumenten
 

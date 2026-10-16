@@ -316,6 +316,7 @@ Keuken: 2,95 x 3,81 = 11,2395 m², afgerond op 2 decimalen: 11,24 m²
 > [!NOTE]
 >
 > - De gespecificeerde ruimtesoort is leidend bij de waardering van een ruimte, voor de `Ruimtedetailsoorten` die tot rubriek 1 of 2 kunnen horen. Een ruimte dient `Ruimtesoort` `vertrek` te hebben om in aanmerking te komen voor een waardering in de rubriek 'Oppervlakte van vertrekken'. Uitzonderingen: keuken, badkamer en doucheruimte zijn volgens het beleidsboek altijd een vertrek, en zo waarderen wij die ook, los van het meegegeven `Ruimtesoort`.
+> - Een ruimte waarvan de `Ruimtedetailsoort` niet tot rubriek 1 of 2 kan horen, zoals een meterruimte, is geen vertrek en geen overige ruimte. Dat geldt ook voor een detailsoortcode die niet in de VERA-referentiedata staat.
 > - Een ruimte dient alleen als vertrek gespecificeerd te worden wanneer deze voldoet aan alle onderstaande eisen. De doorgehaalde eisen worden niet door het systeem gecontroleerd.
 > - Wanneer een ruimte met `Ruimtesoort` `vertrek` niet voldoet aan de minimale oppervlakte van 4,00 m², wordt er gekeken of de ruimte gewaardeerd kan worden onder de rubriek 'Oppervlakte van overige ruimten'.
 
@@ -436,6 +437,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een 'vert
 > - Voldoet een zolderruimte niet aan die eisen, dan wordt gekeken of deze als overige ruimte kan worden gewaardeerd. Dat gebeurt ook wanneer de ruimte is ingeschoten met `ruimtesoort` `vertrek`, net zoals bij andere vertrekken die de minimale oppervlakte van 4m2 niet halen (zie 2.2.1.2).
 > - Andersom geldt dit niet: een zolderruimte die is ingeschoten met `ruimtesoort` `overige ruimte` wordt nooit als vertrek gewaardeerd.
 > - Een zolderruimte van minimaal 2m2 wordt daarmee altijd gewaardeerd onder `Oppervlakte van overige ruimten`. Is er een `vlizotrap` en geen `trap`, dan geldt daarbij de puntenaftrek van 2.2.2.3.
+> - De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
@@ -629,6 +631,7 @@ De woonruimte krijgt punten voor de energieprestatie als de woning een geldend e
 >
 > - Het VERA-model kent geen veld voor de EP-online-vlag 'geldig voor WWS' (2.4.3, punt 2); deze vlag wordt daarom niet gecontroleerd.
 > - Een energieprestatie van een ander soort dan energie-index in de periode 2015-2021, of een energie-index zonder bruikbare `waarde`, telt niet mee (2.4.3, punt 4); de waardering valt dan terug op het bouwjaar (2.4.5). Bij een energie-index zonder `waarde` gebeurt dit met een `UserWarning` (standaard een error).
+> - Een energieprestatie zonder soort, status, begindatum of einddatum telt niet mee, net als een energieprestatie van een andere soort dan energielabel, voorlopig energielabel, energie-index of primair energieverbruik woningbouw (zoals compactheid). De waardering valt dan terug op het bouwjaar.
 
 #### 2.4.4 Punten voor geldige energieprestaties
 
@@ -770,7 +773,7 @@ Om punten te krijgen in de rubriek 'keuken' moet er in de ruimte een aantal basi
 ~~Als een of meer van de basisvoorzieningen niet aanwezig zijn, dan worden geen punten toegekend voor het onderdeel ‘keuken’ in de woningwaardering. Dus ook niet voor eventuele extra voorzieningen als hierna in [paragraaf 2.5.3](#253-punten-voor-extra-voorzieningen-keuken) benoemd.~~
 
 > [!NOTE]
-> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: het aanrecht moet minimaal 1 meter lang zijn.
+> Deze voorwaarde past de package alleen toe op de niet-doorgestreepte voorwaarde erboven: er moet een aanrecht van minimaal 1 meter lang aanwezig zijn in de ruimte.
 
 #### 2.5.2 Punten voor basisvoorzieningen keuken
 
@@ -1106,6 +1109,9 @@ Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaa
 
 Buitenruimten komen voor waardering in aanmerking. Het woningwaarderingsstelsel maakt hierbij onderscheid tussen privé-buitenruimten en gemeenschappelijke buitenruimten. Er worden **maximaal 15 punten** toegekend voor de privé-buitenruimte en gemeenschappelijke buitenruimte samen.
 
+> [!NOTE]
+> Een ruimte met de `Ruimtedetailsoort` van een buitenruimte, zoals een balkon, dakterras of tuin, waarderen wij als buitenruimte, los van de meegegeven `Ruimtesoort`. Wijkt de meegegeven `Ruimtesoort` daarvan af, dan geeft de package een waarschuwing.
+
 #### 2.8.1 Punten voor privé-buitenruimte
 
 ~~Privé-buitenruimten zijn tot de woning behorende buitenruimten, waarvan de huurder van de desbetreffende woning **volgens de huurovereenkomst** het exclusieve gebruiksrecht en toegang heeft.~~ Dit kunnen onder meer voor-, zij- of achtertuinen, balkons, platjes of terrassen zijn, maar ook een oprit die exclusief tot de woning behoort. Wanneer zich binnen de privé-buitenruimte een parkeerplek bevindt, gelden de parkeerplek en de weg daar naartoe als privé-buitenruimte.
@@ -1328,7 +1334,7 @@ Een parkeerplek is een afgebakend vak en heeft een oppervlakte van minimaal 12 m
 >
 > - Type I: `Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage` (`PIP`) en `Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage` (`PUP`). Bepalend is de afgesloten parkeergarage, niet of die in- of uitpandig is: de wettekst maakt dat onderscheid niet.
 > - Type II: `Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex` (`PBD`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.carport` (`CAR`).
-> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast.
+> - Type III: `Ruimtedetailsoort.parkeerplek_buiten_behorend_bij_complex` (`PBC`) en, wanneer die gemeenschappelijk is, `Ruimtedetailsoort.parkeerplaats` (`PAR`). Bij die laatste volgt een `UserWarning` dat een Type-detailsoort meer op zijn plaats is: `PAR` legt het type niet vast. Die waarschuwing volgt ook als de parkeerplaats kleiner is dan 12 m² en daardoor geen punten krijgt.
 >
 > `PIP`, `PUP`, `PBD` en `PBC` zijn uitbreidingen op VERA; zie [datamodel-uitbreidingen](datamodel-uitbreidingen.md#parkeergelegenheden).
 
@@ -1399,6 +1405,9 @@ Er zijn drie manieren waarop een woonruimte punten kan krijgen. Deze manieren zi
 
 _Laatst vastgestelde WOZ-waarde_  
 Met de laatst vastgestelde WOZ-waarde wordt de meest recent vastgestelde WOZ-waarde op de peildatum van de procedure bedoeld. Sluiten partijen bijvoorbeeld een huurovereenkomst op 1 augustus 2026, dan wordt in de woningwaardering rekening gehouden met de WOZ-waarde welke per 1 januari 2026 is vastgesteld. De waardepeildatum van de WOZ-waarde ligt op 1 januari van het voorafgaande kalenderjaar. De WOZ-waarde in de WOZ-beschikking van 1 januari 2026 heeft dus een waardepeildatum van 1 januari 2025.
+
+> [!NOTE]
+> De package gebruikt de WOZ-waarde met waardepeildatum 1 januari van het jaar vóór de peildatum. Ontbreekt die, dan gebruikt ze de WOZ-waarde met waardepeildatum 1 januari twee jaar vóór de peildatum. Een WOZ-waarde met een andere waardepeildatum telt niet mee. Is er geen relevante WOZ-waarde gevonden, dan geeft de package een waarschuwing en waardeert ze met de minimum WOZ-waarde.
 
 _Taxatiewaarde door erkend Register-Taxateur_  
 De taxatiewaarde van de woonruimte moet blijken uit een (hybride)taxatierapport dat door een Register-Taxateur is opgesteld. De verhuurder is verantwoordelijk voor het (laten) opstellen van dit rapport. De taxatiewaarde geldt totdat een WOZ-waarde is vastgesteld. Als er een WOZ-waarde is vastgesteld dan vervalt de taxatiewaarde voor de toepassing van deze rubriek.
@@ -1525,7 +1534,7 @@ Voor het toepassen van deze aparte berekeningsmethode moet de woning voldoen aan
 > [!NOTE]
 > Wij gaan er vanuit dat de 40m2 verwijst naar de gebruiksoppervlakte van de woning.
 >
-> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie.
+> Het COROP-gebied wordt bepaald op basis van de woonplaatscode van de woonplaats waarin de eenheid zich bevindt. Hiervoor dient de BAG-woonplaatscode in het attribuut `code` van de woonplaats op het adres van de eenheid gespecificeerd te zijn. Indien dit attribuut niet gespecificeerd is, wordt op basis van postcode, huisnummer, huisletter en huisnummertoevoeging bij het Kadaster opgevraagd in welke woonplaats een eenheid zich bevindt. Hierbij is het van belang dat deze waarden overeenkomen met de BAG-registratie. Heeft de eenheid geen adres, dan volgt een `UserWarning` en krijgt de woning het gewone kengetal.
 
 Alleen als aan de bovenstaande eisen wordt voldaan dient bij de berekening van de WOZ-waarde gerekend te worden met de volgende kengetallen:
 
@@ -1719,7 +1728,7 @@ De punten die aan de hand van de rubrieken worden toegekend aan een woonruimte l
 
 #### 2.13.1 Cumulatie van opslagen beperkt mogelijk
 
-Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8, vijfde lid, onder c van het Bhw).
+Als meerdere toeslagen van toepassing zijn, dan worden de percentages eerst bij elkaar opgeteld en daarna wordt met het totale percentage de huurprijs vermeerderd. Maar de samenloop van verschillende opslagen is in beperkte mate mogelijk. Zo kunnen de monumentenopslag (zowel de Rijksmonumenten als provinciale en gemeentelijke monumenten) en de opslag voor een beschermd stads- of dorpsgezicht niet tegelijkertijd voor dezelfde woonruimte worden toegekend (dit staat in artikel 8a, vijfde lid, onder c van het Bhw).
 
 Het toekennen van de monumentenopslag of de opslag voor beschermd stad- of dorpsgezicht mét de nieuwbouwopslag is wel mogelijk. Vereist is dan wel dat aan alle vereisten van de beide opslagen - dus ieder voor zich - is voldaan. Naar verwachting komt deze situatie in de praktijk dan ook niet vaak voor.
 
@@ -1781,7 +1790,7 @@ De opslag is hierna afhankelijk van wanneer de huurovereenkomst is gesloten. Er 
 Omdat deze laatste regel effect heeft op het puntenaantal in plaats van de maximale huurprijs kan de toepassing van deze regel tot gevolg hebben dat de woning in de vrije sector valt.
 
 > [!NOTE]
-> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69)
+> De datum van afsluiten van de huurovereenkomst dient gespecificeerd te worden voor rijksmonumenten. Het VERA model heeft hier echter geen attribuut voor. Daarom is hiervoor het attribuut `datum_afsluiten_huurovereenkomst` toegevoegd aan het `EenhedenEenheid` model. Zie [https://github.com/Aedes-datastandaarden/vera-openapi/issues/69](https://github.com/Aedes-datastandaarden/vera-openapi/issues/69). Ontbreekt de datum bij een rijksmonument, dan geeft de package een waarschuwing en rekent ze met de peildatum.
 
 #### 2.13.5 Gemeentelijke en provinciale monumenten
 

@@ -1,5 +1,5 @@
-from pathlib import Path
-
+from tests.input import aanrecht
+from tests.input import ruimte as maak_ruimte
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.sanitair.sanitair import (
     bepaal_wastafel_uitzonderingsruimte,
@@ -20,23 +20,84 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
-INPUT = (
-    Path(__file__).parents[2]
-    / "data/onzelfstandige_woonruimten/stelselgroepen/sanitair/input/maximering_wastafels_8_onz_gunstigste_ruimte.json"
-)
-PRIVE_INPUT = (
-    Path(__file__).parents[2]
-    / "data/onzelfstandige_woonruimten/stelselgroepen/sanitair/input/8_onzelfstandige_woonruimten_prive_wastafels.json"
-)
-SPOELBAKKEN_INPUT = (
-    Path(__file__).parents[2]
-    / "data/onzelfstandige_woonruimten/stelselgroepen/sanitair/input/spoelbakken_8_onzelfstandige_woonruimten.json"
-)
+
+def _eenheid_met_wastafels_en_meerpersoonswastafels() -> EenhedenEenheid:
+    """Maak een eenheid met twee ruimten die elk met 8 onzelfstandige woonruimten worden gedeeld.
+
+    De woonkamer heeft drie wastafels, de berging drie meerpersoonswastafels.
+    """
+    return EenhedenEenheid(
+        ruimten=[
+            maak_ruimte(
+                Ruimtedetailsoort.woonkamer,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                naam="woonkamer_wastafels",
+                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
+            ),
+            maak_ruimte(
+                Ruimtedetailsoort.berging,
+                Installatiesoort.meerpersoonswastafel,
+                Installatiesoort.meerpersoonswastafel,
+                Installatiesoort.meerpersoonswastafel,
+                naam="bergruimte_meerpersoons",
+                soort=Ruimtesoort.vertrek,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
+            ),
+        ]
+    )
 
 
-def _lees_eenheid(pad: Path) -> EenhedenEenheid:
-    with pad.open() as f:
-        return EenhedenEenheid.model_validate_json(f.read())
+def _eenheid_met_prive_wastafels() -> EenhedenEenheid:
+    """Maak een eenheid met een privéslaapkamer en een berging gedeeld met 8 onzelfstandige woonruimten.
+
+    De slaapkamer heeft drie wastafels, de berging twee.
+    """
+    return EenhedenEenheid(
+        ruimten=[
+            maak_ruimte(
+                Ruimtedetailsoort.slaapkamer,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+            ),
+            maak_ruimte(
+                Ruimtedetailsoort.berging,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                soort=Ruimtesoort.vertrek,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
+            ),
+        ]
+    )
+
+
+def _eenheid_met_korte_aanrechten() -> EenhedenEenheid:
+    """Maak een eenheid met een keuken en een berging, elk gedeeld met 8 onzelfstandige woonruimten.
+
+    De keuken heeft twee aanrechten korter dan 1 m, de berging drie wastafels.
+    """
+    return EenhedenEenheid(
+        ruimten=[
+            maak_ruimte(
+                Ruimtedetailsoort.keuken,
+                elementen=[
+                    aanrecht(800, id="aanrecht_1"),
+                    aanrecht(900, id="aanrecht_2"),
+                ],
+                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
+            ),
+            maak_ruimte(
+                Ruimtedetailsoort.berging,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                Installatiesoort.wastafel,
+                soort=Ruimtesoort.vertrek,
+                gedeeld_met_aantal_onzelfstandige_woonruimten=8,
+            ),
+        ]
+    )
 
 
 def _maximeringsregels_per_ruimte(
@@ -55,7 +116,7 @@ def _maximeringsregels_per_ruimte(
 
 
 def test_wastafelmaximering_stelt_precies_een_uitzonderingsruimte_vrij():
-    eenheid = _lees_eenheid(INPUT)
+    eenheid = _eenheid_met_wastafels_en_meerpersoonswastafels()
 
     uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
     assert uitzonderingsruimte is not None
@@ -98,7 +159,7 @@ def test_wastafelmaximering_stelt_precies_een_uitzonderingsruimte_vrij():
 
 
 def test_adresdrempel_maakt_prive_ruimte_kandidaat():
-    eenheid = _lees_eenheid(PRIVE_INPUT)
+    eenheid = _eenheid_met_prive_wastafels()
 
     uitzonderingsruimte = bepaal_wastafel_uitzonderingsruimte(eenheid)
 
@@ -107,7 +168,7 @@ def test_adresdrempel_maakt_prive_ruimte_kandidaat():
 
 
 def test_uitzonderingsruimte_kan_in_beide_stelselgroepen_vallen():
-    eenheid = _lees_eenheid(INPUT)
+    eenheid = _eenheid_met_wastafels_en_meerpersoonswastafels()
     assert eenheid.ruimten is not None
     ruimte_op_adres, ruimte_gedeeld_met_adressen = eenheid.ruimten
     ruimte_gedeeld_met_adressen.gedeeld_met_aantal_adressen = 2
@@ -125,7 +186,7 @@ def test_uitzonderingsruimte_kan_in_beide_stelselgroepen_vallen():
 
 
 def test_beide_stelselgroepen_gebruiken_dezelfde_uitzonderingsruimte():
-    eenheid = _lees_eenheid(INPUT)
+    eenheid = _eenheid_met_wastafels_en_meerpersoonswastafels()
     assert eenheid.ruimten is not None
     _, ruimte_gedeeld_met_adressen = eenheid.ruimten
     ruimte_gedeeld_met_adressen.gedeeld_met_aantal_adressen = 2
@@ -155,7 +216,7 @@ def test_beide_stelselgroepen_gebruiken_dezelfde_uitzonderingsruimte():
 
 
 def test_zorgwoning_sluit_ruimte_gedeeld_met_adressen_uit():
-    eenheid = _lees_eenheid(INPUT)
+    eenheid = _eenheid_met_wastafels_en_meerpersoonswastafels()
     assert eenheid.ruimten is not None
     ruimte_op_adres, ruimte_gedeeld_met_adressen = eenheid.ruimten
     ruimte_gedeeld_met_adressen.gedeeld_met_aantal_adressen = 2
@@ -171,7 +232,7 @@ def test_zorgwoning_sluit_ruimte_gedeeld_met_adressen_uit():
 
 
 def test_spoelbak_in_kort_aanrecht_telt_mee_bij_selectie():
-    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
+    eenheid = _eenheid_met_korte_aanrechten()
     assert eenheid.ruimten is not None
     keuken, bergruimte = eenheid.ruimten
     keuken.installaties = [Installatiesoort.wastafel]
@@ -184,7 +245,7 @@ def test_spoelbak_in_kort_aanrecht_telt_mee_bij_selectie():
 
 
 def test_spoelbak_in_kort_aanrecht_in_woon_slaap_keuken_telt_mee():
-    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
+    eenheid = _eenheid_met_korte_aanrechten()
     assert eenheid.ruimten is not None
     keuken, bergruimte = eenheid.ruimten
     keuken.detail_soort = Ruimtedetailsoort.woon_en_of_slaapkamer_en_of_keuken
@@ -198,7 +259,7 @@ def test_spoelbak_in_kort_aanrecht_in_woon_slaap_keuken_telt_mee():
 
 
 def test_meerdere_korte_aanrechten_tellen_als_een_wastafel_bij_selectie():
-    eenheid = _lees_eenheid(SPOELBAKKEN_INPUT)
+    eenheid = _eenheid_met_korte_aanrechten()
     assert eenheid.ruimten is not None
     keuken, bergruimte = eenheid.ruimten
     bergruimte.installaties = [Installatiesoort.wastafel, Installatiesoort.wastafel]

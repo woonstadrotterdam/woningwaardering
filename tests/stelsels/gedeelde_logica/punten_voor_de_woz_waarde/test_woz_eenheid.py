@@ -30,6 +30,19 @@ def _woz_eenheid(
     )
 
 
+def test_meest_recente_relevante_woz_eenheid_kiest_de_meest_recente():
+    meest_recente = _woz_eenheid(date(2025, 1, 1), 350_000)
+    eenheid = EenhedenEenheid(
+        id="test",
+        woz_eenheden=[
+            _woz_eenheid(date(2024, 1, 1), 300_000),
+            meest_recente,
+        ],
+    )
+
+    assert meest_recente_relevante_woz_eenheid(eenheid, PEILDATUM) == meest_recente
+
+
 def test_meest_recente_relevante_woz_eenheid_valt_terug_op_voorgaande():
     voorgaande = _woz_eenheid(date(2024, 1, 1), 300_000)
     eenheid = EenhedenEenheid(
