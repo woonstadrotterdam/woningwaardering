@@ -2,8 +2,9 @@
 
 Een zolder zonder vaste trap krijgt 5 punten aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

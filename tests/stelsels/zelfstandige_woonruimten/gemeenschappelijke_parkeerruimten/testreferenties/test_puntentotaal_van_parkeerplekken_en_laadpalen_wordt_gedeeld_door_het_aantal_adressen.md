@@ -2,8 +2,9 @@
 
 Het puntentotaal van parkeerplekken en laadpalen wordt gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplekken.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
-Bijlage I onder A, toelichting rubriek 10.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.10.4
+- wettekst, Bijlage I onder A, toelichting rubriek 10
 
 ## Rapport
 

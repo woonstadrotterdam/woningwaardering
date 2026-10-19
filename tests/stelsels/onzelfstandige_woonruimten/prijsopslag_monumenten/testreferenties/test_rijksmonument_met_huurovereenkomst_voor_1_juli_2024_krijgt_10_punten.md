@@ -2,8 +2,9 @@
 
 Een rijksmonument waarvan de huurovereenkomst vóór 1 juli 2024 is afgesloten, krijgt 10 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-artikel 8a, tweede lid.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.14.4
+- wettekst, artikel 8a, tweede lid
 
 ## Rapport
 

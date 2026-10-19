@@ -2,8 +2,9 @@
 
 De maxima voor sanitaire voorzieningen gelden voordat de punten door het aantal adressen worden gedeeld.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
-Bijlage I onder A, toelichting rubriek 9.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9.7
+- wettekst, Bijlage I onder A, toelichting rubriek 9
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een gemeenschappelijk vertrek krijgt 1 punt per m², gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9; wettekst,
-Bijlage I onder A, onderdeel 9.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9
+- wettekst, Bijlage I onder A, onderdeel 9
 
 ## Rapport
 

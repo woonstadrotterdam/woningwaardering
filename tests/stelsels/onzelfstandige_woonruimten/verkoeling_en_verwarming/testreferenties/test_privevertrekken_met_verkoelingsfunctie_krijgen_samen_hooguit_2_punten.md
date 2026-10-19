@@ -2,8 +2,9 @@
 
 Privévertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Vertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
-wettekst, Bijlage I onder A, onderdeel 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.3
+- wettekst, Bijlage I onder A, onderdeel 3
 
 ## Rapport
 

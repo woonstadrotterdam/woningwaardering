@@ -2,8 +2,9 @@
 
 Een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd en in het COROP-gebied Amsterdam of Utrecht ligt, krijgt in onderdeel II het lagere kengetal van € 103.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
-Bijlage I onder A, onderdeel 11.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.6
+- wettekst, Bijlage I onder A, onderdeel 11.1
 
 ## Rapport
 

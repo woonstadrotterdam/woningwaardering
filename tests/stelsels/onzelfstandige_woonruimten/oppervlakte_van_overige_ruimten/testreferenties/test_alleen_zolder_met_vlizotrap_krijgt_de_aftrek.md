@@ -2,10 +2,10 @@
 
 Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-implementatietoelichting onzelfstandige woonruimten, 2.2.1.3; wettekst,
-Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

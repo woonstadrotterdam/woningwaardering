@@ -2,7 +2,8 @@
 
 Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.11.2
 
 ## Rapport
 

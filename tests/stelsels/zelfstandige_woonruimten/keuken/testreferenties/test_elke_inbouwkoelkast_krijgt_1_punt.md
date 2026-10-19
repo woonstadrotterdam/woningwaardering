@@ -2,8 +2,9 @@
 
 Elke inbouwkoelkast in een keuken krijgt 1 punt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder A, onderdeel 5.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.3
+- wettekst, Bijlage I onder A, onderdeel 5.2
 
 ## Rapport
 

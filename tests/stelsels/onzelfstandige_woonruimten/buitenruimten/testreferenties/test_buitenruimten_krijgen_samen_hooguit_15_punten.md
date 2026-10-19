@@ -2,8 +2,9 @@
 
 Buitenruimten krijgen samen hooguit 15 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
-Bijlage I onder B, onderdeel 8.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8
+- wettekst, Bijlage I onder B, onderdeel 8
 
 ## Rapport
 

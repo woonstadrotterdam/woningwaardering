@@ -2,9 +2,9 @@
 
 Een gemeenschappelijke carport of parkeerplaats wordt niet als buitenruimte gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
-Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.3
+- wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

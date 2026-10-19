@@ -2,8 +2,9 @@
 
 Bij een energie-index bepaalt de index de punten per m², niet het label dat erbij is meegegeven.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-Bijlage I onder B, onderdeel 4.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.4
+- wettekst, Bijlage I onder B, onderdeel 4.1
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een privé-buitenruimte krijgt 2 punten plus 0,35 punt per m².
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.1; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.1
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

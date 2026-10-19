@@ -2,9 +2,10 @@
 
 De punten voor een gemeenschappelijke binnenruimte worden na verdeling over de meerdere adressen nog gedeeld door het aantal onzelfstandige woonruimten op dat adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1;
-implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder B, toelichting rubriek 9.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.1
+- implementatietoelichting onzelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder B, toelichting rubriek 9
 
 ## Rapport
 

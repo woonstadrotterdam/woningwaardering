@@ -2,8 +2,9 @@
 
 Een ruimte kleiner dan 4 m² is een vertrek als zij met haar kast 4 m² of groter is.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4;
-wettekst, Bijlage I onder A, toelichting rubriek 1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 1
 
 Dit geval: de slaapkamer van 3,50 m² en de kast van 0,50 m² zijn samen precies 4,00 m², de minimale oppervlakte van een vertrek
 

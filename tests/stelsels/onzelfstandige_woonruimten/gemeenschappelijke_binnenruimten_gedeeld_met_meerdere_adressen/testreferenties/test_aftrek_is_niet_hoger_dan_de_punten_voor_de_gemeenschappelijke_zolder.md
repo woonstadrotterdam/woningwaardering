@@ -2,9 +2,9 @@
 
 De aftrek voor een gemeenschappelijke zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

@@ -2,7 +2,8 @@
 
 Zonder adres krijgt een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd, met een waarschuwing in onderdeel II het gewone kengetal van € 242.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.6
 
 ## Rapport
 

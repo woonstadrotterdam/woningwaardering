@@ -2,8 +2,9 @@
 
 Een kort aanrechtdeel telt niet als wastafel naast een aanrecht vanaf 1 meter.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, toelichting rubriek 5.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, toelichting rubriek 5
 
 ## Rapport
 

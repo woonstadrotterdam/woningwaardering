@@ -2,8 +2,9 @@
 
 Een woning die op 1 juli 2024 voor het eerst in gebruik is genomen, krijgt geen opslag voor nieuwbouw.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.7.1; wettekst,
-artikel 8a, vierde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.7.1
+- wettekst, artikel 8a, vierde lid
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een drempelloze inrijdouche telt als een gewone douche.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, toelichting rubriek 6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, toelichting rubriek 6.1
 
 ## Rapport
 

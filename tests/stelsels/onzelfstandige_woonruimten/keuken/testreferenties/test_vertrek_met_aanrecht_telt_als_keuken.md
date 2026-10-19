@@ -2,7 +2,8 @@
 
 Een vertrek telt voor de keuken mee zodra er een aanrecht in staat.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.1
 
 ## Rapport
 

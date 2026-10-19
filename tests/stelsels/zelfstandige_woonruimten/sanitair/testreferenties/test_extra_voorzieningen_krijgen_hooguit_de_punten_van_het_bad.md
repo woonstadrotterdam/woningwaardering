@@ -2,8 +2,9 @@
 
 Extra voorzieningen in de badkamer krijgen samen hooguit de punten van het bad.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-Bijlage I onder A, onderdeel 6.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.2
+- wettekst, Bijlage I onder A, onderdeel 6.2
 
 ## Rapport
 

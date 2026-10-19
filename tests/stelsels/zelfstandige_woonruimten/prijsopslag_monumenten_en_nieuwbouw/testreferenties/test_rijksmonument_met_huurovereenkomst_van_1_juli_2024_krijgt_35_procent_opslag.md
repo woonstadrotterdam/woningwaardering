@@ -2,8 +2,9 @@
 
 Een rijksmonument waarvan de huurovereenkomst op of na 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4; wettekst,
-artikel 8a, eerste lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.4
+- wettekst, artikel 8a, eerste lid
 
 ## Rapport
 

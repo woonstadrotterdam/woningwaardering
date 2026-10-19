@@ -38,8 +38,9 @@ def test_prive_buitenruimte_krijgt_2_punten_plus_035_punt_per_m2(
 ):
     """Een privé-buitenruimte krijgt 2 punten plus 0,35 punt per m².
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.1
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     # Het voorbeeld uit 2.8.1: 10 m² privé-buitenruimte.
     eenheid = EenhedenEenheid(
@@ -60,7 +61,8 @@ def test_prive_buitenruimte_onder_de_minimumafmeting_wordt_gewaardeerd(
 ):
     """Een privé-buitenruimte wordt ook gewaardeerd als zij onder de minimumafmeting voor gemeenschappelijke buitenruimten blijft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -96,10 +98,10 @@ def test_prive_carport_of_parkeerplaats_wordt_als_prive_buitenruimte_gewaardeerd
 ):
     """Een privé-carport of privé-parkeerplaats wordt als privé-buitenruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1;
-    implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.1
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Niet gedeeld met andere adressen of woonruimten, dus privé.
     eenheid = EenhedenEenheid(ruimten=[ruimte(detail_soort, oppervlakte=12)])
@@ -122,8 +124,9 @@ def test_gemeenschappelijke_buitenruimte_op_hetzelfde_adres_krijgt_driekwart_pun
 ):
     """Een gemeenschappelijke buitenruimte op hetzelfde adres krijgt 0,75 punt per m², gedeeld door het aantal onzelfstandige woonruimten dat toegang heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -150,8 +153,9 @@ def test_buitenruimte_gedeeld_met_meerdere_adressen_wordt_door_het_aantal_adress
 ):
     """Een gemeenschappelijke buitenruimte die met meerdere adressen wordt gedeeld, krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -191,8 +195,9 @@ def test_buitenruimte_gedeeld_met_meerdere_adressen_zonder_aantal_onzelfstandige
 ):
     """Een buitenruimte die met meerdere adressen wordt gedeeld en zonder aantal onzelfstandige woonruimten is aangeleverd, wordt alleen door het aantal adressen gedeeld.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4;
-    implementatietoelichting onzelfstandige woonruimten, 2.8.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.1.4
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -226,7 +231,8 @@ def test_gemeenschappelijke_buitenruimte_zonder_afmetingen_wordt_gewaardeerd(
 ):
     """Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -298,9 +304,9 @@ def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaarde
 ):
     """Een gemeenschappelijke buitenruimte met een lengte en breedte van ten minste de minimumafmeting wordt gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -327,9 +333,9 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
 ):
     """Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -375,9 +381,9 @@ def test_gemeenschappelijke_carport_of_parkeerplaats_wordt_niet_als_buitenruimte
 ):
     """Een gemeenschappelijke carport of parkeerplaats wordt niet als buitenruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -410,8 +416,9 @@ def test_punten_van_alle_buitenruimten_worden_na_het_optellen_afgerond_op_een_kw
 ):
     """De punten van privé- en gemeenschappelijke buitenruimten worden pas na het optellen afgerond op een kwart punt.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.6; wettekst,
-    Bijlage I onder B, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8.6
+    - wettekst, Bijlage I onder B, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -454,8 +461,9 @@ def test_buitenruimten_krijgen_samen_hooguit_15_punten(
 ):
     """Buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -492,8 +500,9 @@ def test_maximum_van_15_punten_geldt_voor_prive_en_gemeenschappelijke_buitenruim
 ):
     """Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -528,8 +537,9 @@ def test_woonruimte_zonder_buitenruimte_krijgt_geen_aftrek(
 ):
     """Een onzelfstandige woonruimte zonder buitenruimte krijgt geen aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
-    Bijlage I onder B, onderdeel 8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8
+    - wettekst, Bijlage I onder B, onderdeel 8
     """
     eenheid = EenhedenEenheid(ruimten=[])
 
@@ -573,7 +583,8 @@ def test_buitenruimte_aangeleverd_als_gemeenschappelijke_ruimte_wordt_als_buiten
 ):
     """Een buitenruimte die als gemeenschappelijke ruimte is aangeleverd, wordt als buitenruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.8
     """
     eenheid = EenhedenEenheid(
         ruimten=[

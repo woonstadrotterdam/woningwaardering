@@ -2,8 +2,9 @@
 
 Een aanrecht van 5 meter of meer krijgt in een privékeuken 10 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder B, onderdeel 5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder B, onderdeel 5.1
 
 ## Rapport
 

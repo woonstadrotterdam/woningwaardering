@@ -2,13 +2,15 @@
 
 In onderdeel II telt de oppervlakte mee van de vertrekken en overige ruimten uit rubriek 1 en 2 en van de parkeerplekken type I uit rubriek 10.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
-Bijlage I onder A, onderdeel 11.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
+- wettekst, Bijlage I onder A, onderdeel 11.1
 
 Van een parkeerplek type I telt de oppervlakte gedeeld door het aantal
 adressen dat toegang heeft tot de parkeerplek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
 
 ## Rapport
 

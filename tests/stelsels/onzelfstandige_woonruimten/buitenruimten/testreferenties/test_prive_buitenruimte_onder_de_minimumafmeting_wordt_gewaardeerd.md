@@ -2,7 +2,8 @@
 
 Een privé-buitenruimte wordt ook gewaardeerd als zij onder de minimumafmeting voor gemeenschappelijke buitenruimten blijft.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.1
 
 ## Rapport
 

@@ -2,9 +2,9 @@
 
 Een gemeenschappelijke buitenruimte met een lengte en breedte van ten minste de minimumafmeting wordt gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
 
 Dit geval: de breedte van 1,5 meter is precies de minimumafmeting; het balkon is het gemeenschappelijke balkon uit het rekenvoorbeeld in de toelichting bij de wettekst
 

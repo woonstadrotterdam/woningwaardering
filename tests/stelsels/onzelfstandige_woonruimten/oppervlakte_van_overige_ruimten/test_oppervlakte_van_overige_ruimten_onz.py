@@ -44,8 +44,9 @@ def test_prive_en_toe_te_rekenen_gemeenschappelijke_oppervlakte_worden_opgeteld(
 ):
     """De oppervlakte van privé overige ruimten en de toe te rekenen oppervlakte van gemeenschappelijke overige ruimten worden opgeteld.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
-    wettekst, Bijlage I onder B, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.1
+    - wettekst, Bijlage I onder B, toelichting rubriek 2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -90,9 +91,10 @@ def test_gemeenschappelijke_overige_ruimte_wordt_gedeeld_door_aantal_woonruimten
 ):
     """Een gemeenschappelijke overige ruimte wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot die ruimte.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2; wettekst,
-    Bijlage I onder B, onderdeel 2; wettekst, Bijlage I onder B, toelichting,
-    inleiding.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2
+    - wettekst, Bijlage I onder B, onderdeel 2
+    - wettekst, Bijlage I onder B, toelichting, inleiding
     """
     # Elke ruimte heeft een eigen aantal woonruimten; één deler voor alle ruimten geeft een ander totaal.
     eenheid = EenhedenEenheid(
@@ -131,9 +133,9 @@ def test_oppervlakte_wordt_een_keer_afgerond_na_optellen_van_alle_overige_ruimte
 ):
     """De oppervlakte wordt één keer afgerond op hele vierkante meters, nadat de toe te rekenen oppervlakte van alle overige ruimten is opgeteld.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -165,7 +167,8 @@ def test_overige_ruimte_gedeeld_met_minder_dan_2_onzelfstandige_woonruimten_is_p
 ):
     """Een overige ruimte met `gedeeld_met_aantal_onzelfstandige_woonruimten` kleiner dan 2 wordt als privéruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.1.4
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -193,9 +196,9 @@ def test_overige_ruimte_die_niet_met_een_ander_adres_wordt_gedeeld_valt_onder_ru
 ):
     """Een overige ruimte die niet met een ander adres wordt gedeeld, wordt in rubriek 2 gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -225,9 +228,9 @@ def test_overige_ruimte_moet_minimaal_2m2_groot_zijn(
 ):
     """Een ruimte kleiner dan 2 m² wordt niet als overige ruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # 0,01 m² onder de grens van 2 m² en precies op de grens.
     eenheid = EenhedenEenheid(
@@ -249,9 +252,9 @@ def test_vertrek_kleiner_dan_4m2_wordt_als_overige_ruimte_gewaardeerd(
 ):
     """Een ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², wordt als overige ruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -285,9 +288,9 @@ def test_zolder_zonder_vaste_trap_krijgt_5_punten_aftrek(
 ):
     """Een zolder zonder vaste trap krijgt 5 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -314,10 +317,10 @@ def test_alleen_zolder_met_vlizotrap_krijgt_de_aftrek(
 ):
     """Alleen een zolder met een vlizotrap krijgt de aftrek voor een zolder zonder vaste trap.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    implementatietoelichting onzelfstandige woonruimten, 2.2.1.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -350,9 +353,9 @@ def test_zolder_die_als_vertrek_is_aangeleverd_wordt_als_overige_ruimte_gewaarde
 ):
     """Een zolder die als vertrek is aangeleverd, wordt als overige ruimte gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting,
-    inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # De detailsoort zolder voldoet niet aan de afwerkingseisen van een vertrek.
     eenheid = EenhedenEenheid(
@@ -372,7 +375,8 @@ def test_zolder_met_trap_en_vlizotrap_krijgt_geen_aftrek(
 ):
     """Een zolder met zowel een trap als een vlizotrap krijgt geen aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -436,9 +440,9 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_zolder(
 ):
     """De aftrek voor een zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -466,8 +470,9 @@ def test_maximale_aftrek_voor_zolder_wordt_gedeeld_door_aantal_woonruimten(
 ):
     """De maximale aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal onzelfstandige woonruimten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    wettekst, Bijlage I onder B, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder B, toelichting rubriek 2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -502,9 +507,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_overige_ruimte(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van de overige ruimte waarop de kast uitkomt.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Met de kast komt de berging van 2,4 op 2,6 m²: afgerond 3 m² in plaats van 2.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.2)
@@ -526,9 +531,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_zolder_zonder_vaste_trap(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een zolder zonder vaste trap.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Met de kast van 0,9 m² komt de zolder van 2,4 op 3,3 m²: afgerond 3 m² in plaats van 2.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.9)

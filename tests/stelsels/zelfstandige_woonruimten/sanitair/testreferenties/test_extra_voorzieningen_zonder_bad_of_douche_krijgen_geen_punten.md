@@ -2,8 +2,9 @@
 
 Extra voorzieningen tellen alleen in een ruimte met een bad of een douche.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-Bijlage I onder A, toelichting rubriek 6.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.2
+- wettekst, Bijlage I onder A, toelichting rubriek 6.2
 
 ## Rapport
 

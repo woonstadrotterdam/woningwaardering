@@ -2,7 +2,8 @@
 
 Bij meer dan één aanrecht volgt het maximum voor extra voorzieningen uit de opgetelde aanrechtlengte.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.3
 
 ## Rapport
 

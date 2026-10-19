@@ -2,12 +2,14 @@
 
 Een aanrecht in een verwarmde woonkamer is vanaf 1 meter een open keuken.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
 
 Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-wettekst, Bijlage I onder A, toelichting rubriek 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
+- wettekst, Bijlage I onder A, toelichting rubriek 3
 
 ## Rapport
 

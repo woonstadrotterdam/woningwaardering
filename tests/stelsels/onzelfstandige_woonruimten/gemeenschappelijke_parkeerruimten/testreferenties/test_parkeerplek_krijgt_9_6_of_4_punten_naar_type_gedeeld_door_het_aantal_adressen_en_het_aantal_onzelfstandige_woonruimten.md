@@ -2,9 +2,10 @@
 
 Een parkeerplek krijgt 9 punten als Type I, 6 punten als Type II en 4 punten als Type III, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3;
-implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
-Bijlage I onder B, onderdeel 10.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.3
+- implementatietoelichting onzelfstandige woonruimten, 2.10.4
+- wettekst, Bijlage I onder B, onderdeel 10
 
 ## Rapport
 

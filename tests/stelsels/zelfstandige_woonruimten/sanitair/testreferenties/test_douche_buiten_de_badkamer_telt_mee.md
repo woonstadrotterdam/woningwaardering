@@ -2,7 +2,8 @@
 
 Een douche telt ook mee buiten de badkamer.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6
 
 ## Rapport
 

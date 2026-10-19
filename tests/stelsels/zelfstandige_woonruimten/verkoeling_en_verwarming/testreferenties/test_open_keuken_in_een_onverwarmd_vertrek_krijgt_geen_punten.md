@@ -2,8 +2,9 @@
 
 Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-wettekst, Bijlage I onder A, toelichting rubriek 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
+- wettekst, Bijlage I onder A, toelichting rubriek 3
 
 ## Rapport
 

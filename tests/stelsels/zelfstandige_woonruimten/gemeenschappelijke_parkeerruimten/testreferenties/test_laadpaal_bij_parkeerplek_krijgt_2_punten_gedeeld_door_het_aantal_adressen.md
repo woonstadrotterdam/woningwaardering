@@ -2,8 +2,9 @@
 
 Een laadpaal bij een parkeerplek krijgt 2 punten extra, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
-Bijlage I onder A, toelichting rubriek 10.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.10.5
+- wettekst, Bijlage I onder A, toelichting rubriek 10
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
-artikel 8a, vijfde lid.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.14.6
+- wettekst, artikel 8a, vijfde lid
 
 Dit geval: het rijksmonument krijgt zelf 35% opslag
 

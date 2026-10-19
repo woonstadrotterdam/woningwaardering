@@ -2,14 +2,16 @@
 
 Een aanrecht van 5 meter of meer krijgt 13 punten als minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot de keuken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder B, onderdeel 5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder B, onderdeel 5.1
 
 De punten worden gedeeld door het aantal onzelfstandige woonruimten met
 toegang en gebruiksrecht.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder B, onderdeel 5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder B, onderdeel 5.1
 
 ## Rapport
 

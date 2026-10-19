@@ -2,8 +2,9 @@
 
 In een badkamer geldt geen maximum voor wastafels.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, onderdeel 6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, onderdeel 6.1
 
 ## Rapport
 

@@ -42,15 +42,16 @@ def test_prive_en_toe_te_rekenen_gemeenschappelijke_oppervlakte_worden_opgeteld(
 ):
     """De oppervlakte van privévertrekken en de toe te rekenen oppervlakte van gemeenschappelijke vertrekken worden opgeteld.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-    wettekst, Bijlage I onder B, toelichting rubriek 1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+    - wettekst, Bijlage I onder B, toelichting rubriek 1
 
     De oppervlakte van alle vertrekken samen wordt na saldering afgerond op hele
     vierkante meters.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Het voorbeeld uit 2.2.1.1: apart afronden zou 20 punten geven.
     eenheid = EenhedenEenheid(
@@ -82,8 +83,9 @@ def test_gemeenschappelijk_vertrek_wordt_gedeeld_door_aantal_woonruimten_met_toe
 ):
     """Een gemeenschappelijk vertrek wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot dat vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1; wettekst,
-    Bijlage I onder B, onderdeel 1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1
+    - wettekst, Bijlage I onder B, onderdeel 1
     """
     # Elk vertrek heeft een eigen aantal woonruimten; één deler voor alle vertrekken geeft een ander totaal.
     eenheid = EenhedenEenheid(
@@ -121,9 +123,9 @@ def test_vertrek_dat_niet_met_een_ander_adres_wordt_gedeeld_valt_onder_rubriek_1
 ):
     """Een vertrek dat niet met een ander adres wordt gedeeld, wordt in rubriek 1 gewaardeerd en niet in rubriek 9.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Slaapkamer1 is alleen van dit adres, Slaapkamer2 wordt met een tweede adres gedeeld.
     eenheid = EenhedenEenheid(
@@ -167,9 +169,9 @@ def test_oppervlakte_wordt_vanaf_een_halve_m2_naar_boven_afgerond(
 ):
     """De oppervlakte van de vertrekken wordt vanaf 0,5 m² naar boven afgerond op hele m².
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Net onder en precies op de grens van 0,5 m².
     eenheid = EenhedenEenheid(
@@ -191,9 +193,9 @@ def test_vertrek_moet_minimaal_4m2_groot_zijn(
 ):
     """Een ruimte kleiner dan 4 m² wordt niet als vertrek gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # 0,01 m² onder de grens van 4 m² en precies op de grens.
     eenheid = EenhedenEenheid(
@@ -215,9 +217,9 @@ def test_keuken_badkamer_en_doucheruimte_zijn_ook_onder_4m2_een_vertrek(
 ):
     """Een keuken, badkamer en doucheruimte zijn ook onder de 4 m² een vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Elk van de vier ruimten is 0,01 m² onder de 4 m² van een vertrek.
     eenheid = EenhedenEenheid(
@@ -250,9 +252,9 @@ def test_keuken_aangeleverd_als_overige_ruimte_is_een_vertrek(
 ):
     """Een keuken die als overige ruimte is aangeleverd, wordt als vertrek gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Als overige ruimte aangeleverd: de ruimtesoort bepaalt niet of een keuken een vertrek is.
     eenheid = EenhedenEenheid(
@@ -275,9 +277,9 @@ def test_zoldervertrek_is_een_vertrek_tenzij_er_alleen_een_vlizotrap_is(
 ):
     """Een zoldervertrek is een vertrek, tenzij het alleen via een vlizotrap bereikbaar is.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Alleen een vlizotrap sluit een zoldervertrek als vertrek uit.
     eenheid = EenhedenEenheid(
@@ -312,9 +314,9 @@ def test_zolder_is_nooit_een_vertrek(
 ):
     """Een zolderruimte met de detailsoort `zolder` wordt nooit als vertrek gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Als vertrek en als overige ruimte aangeleverd: de ruimtesoort verandert niets.
     eenheid = EenhedenEenheid(

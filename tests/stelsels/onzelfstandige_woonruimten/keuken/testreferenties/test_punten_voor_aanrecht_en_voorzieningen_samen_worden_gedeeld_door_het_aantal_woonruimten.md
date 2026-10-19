@@ -2,8 +2,9 @@
 
 De punten voor het aanrecht en de extra voorzieningen samen worden gedeeld door het aantal onzelfstandige woonruimten dat de keuken deelt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder B, toelichting rubriek 5.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.3
+- wettekst, Bijlage I onder B, toelichting rubriek 5
 
 ## Rapport
 

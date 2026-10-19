@@ -2,8 +2,9 @@
 
 Extra voorzieningen in een ruimte zonder aanrecht krijgen geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1; wettekst,
-Bijlage I onder A, toelichting rubriek 5.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.1
+- wettekst, Bijlage I onder A, toelichting rubriek 5
 
 ## Rapport
 

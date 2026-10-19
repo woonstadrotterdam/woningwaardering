@@ -2,7 +2,8 @@
 
 De punten van onderdeel I en onderdeel II worden niet afgerond voordat ze bij elkaar worden opgeteld.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
 
 ## Rapport
 

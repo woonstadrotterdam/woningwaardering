@@ -2,7 +2,8 @@
 
 De punten voor de WOZ-waarde zijn de som van onderdeel I en onderdeel II, afgerond op een kwart punt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
 
 ## Rapport
 

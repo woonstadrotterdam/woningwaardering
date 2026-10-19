@@ -2,13 +2,14 @@
 
 Een verwarmde privé woonkamer/keuken of woon-/slaapkamer/keuken is ook zonder aanrecht een vertrek met open keuken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
 Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.2
+- wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

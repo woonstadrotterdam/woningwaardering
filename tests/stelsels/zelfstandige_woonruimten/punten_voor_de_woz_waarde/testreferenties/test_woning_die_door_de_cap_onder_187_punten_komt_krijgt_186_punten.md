@@ -2,8 +2,9 @@
 
 Een woning die zonder de cap op de WOZ meer dan 186 punten heeft en met de cap minder dan 187, krijgt een waardering van 186 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst,
-Bijlage I onder A, onderdeel 11.3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.7
+- wettekst, Bijlage I onder A, onderdeel 11.3
 
 ## Rapport
 

@@ -2,7 +2,8 @@
 
 Van de ruimten met meer dan één wastafel krijgt de ruimte met de hoogste puntenwinst de uitzondering op het maximum.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

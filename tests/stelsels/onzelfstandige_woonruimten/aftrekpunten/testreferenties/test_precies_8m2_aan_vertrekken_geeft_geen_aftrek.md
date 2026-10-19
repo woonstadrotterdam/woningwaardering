@@ -2,8 +2,9 @@
 
 Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-Bijlage I onder B, onderdeel 13.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.13
+- wettekst, Bijlage I onder B, onderdeel 13
 
 ## Rapport
 

@@ -2,9 +2,9 @@
 
 Een vertrek dat niet met een ander adres wordt gedeeld, wordt in rubriek 1 gewaardeerd en niet in rubriek 9.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2;
-wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2
+- wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Parkeerplekken met een verschillend aantal adressen en onzelfstandige woonruimten worden elk door hun eigen aantallen gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
-Bijlage I onder B, toelichting, inleiding.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.4
+- wettekst, Bijlage I onder B, toelichting, inleiding
 
 ## Rapport
 

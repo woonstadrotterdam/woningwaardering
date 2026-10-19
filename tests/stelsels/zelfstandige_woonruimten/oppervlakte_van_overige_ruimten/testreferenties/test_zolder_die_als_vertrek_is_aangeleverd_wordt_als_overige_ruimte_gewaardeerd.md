@@ -2,8 +2,9 @@
 
 Een zolder die als vertrek is aangeleverd, wordt als overige ruimte gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

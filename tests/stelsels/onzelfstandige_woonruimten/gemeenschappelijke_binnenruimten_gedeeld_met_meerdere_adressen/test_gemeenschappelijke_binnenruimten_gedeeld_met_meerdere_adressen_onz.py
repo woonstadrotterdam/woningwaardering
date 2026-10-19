@@ -47,8 +47,9 @@ def test_gemeenschappelijke_overige_ruimte_krijgt_driekwart_punt_per_m2_gedeeld_
 ):
     """Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-    Bijlage I onder B, onderdeel 9.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.1
+    - wettekst, Bijlage I onder B, onderdeel 9
     """
     # Per woonruimte 0,95 m², minder dan de 2 m² van een overige ruimte: de punten worden gedeeld, niet de oppervlakte.
     eenheid = EenhedenEenheid(
@@ -82,9 +83,9 @@ def test_vertrek_dat_niet_met_een_ander_adres_wordt_gedeeld_krijgt_geen_punten(
 ):
     """Een gemeenschappelijk vertrek dat niet met een ander adres wordt gedeeld, krijgt in deze rubriek geen punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Slaapkamer1 zonder aantal adressen, Slaapkamer2 met één adres: geen van beide is met een ander adres gedeeld.
     eenheid = EenhedenEenheid(
@@ -125,10 +126,11 @@ def test_aftrek_voor_gemeenschappelijke_zolder_zonder_vaste_trap_wordt_gedeeld_d
 ):
     """De aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 9.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
+    - wettekst, Bijlage I onder B, onderdeel 9
     """
     # Een vlizotrap en geen trap geldt als geen vaste trap (implementatietoelichting 2.2.1.3).
     eenheid = EenhedenEenheid(
@@ -162,9 +164,9 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_gemeenschappelijke_zolder(
 ):
     """De aftrek voor een gemeenschappelijke zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # De zolder levert op het totaal 4,5 punten op: minder dan de aftrek van 5.
     eenheid = EenhedenEenheid(
@@ -204,16 +206,16 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_zolder_zonde
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke zolder zonder vaste trap.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
     Voor een zolder zonder vaste trap worden 5 punten afgetrokken, niet meer dan
     de punten voor de zolder zelf.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
     """
     # De kast van 0,9 m² maakt de oppervlakte van de zolder 3,5 m² (zonder kast 2,6).
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.9)
@@ -264,16 +266,17 @@ def test_voor_vertrekken_met_verkoelingsfunctie_geldt_geen_maximum_van_2_punten(
 ):
     """Voor gemeenschappelijke vertrekken met verkoelingsfunctie geldt in deze rubriek geen maximum van 2 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-    toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek 3
-    (via Bijlage I onder B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
     Elk punt wordt gedeeld door het aantal adressen en daarna door het aantal
     onzelfstandige woonruimten op het adres.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder B, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder B, toelichting rubriek 9
     """
     # Drie verkoelde vertrekken: samen meer dan het maximum van 2 punten.
     eenheid = EenhedenEenheid(
@@ -326,16 +329,17 @@ def test_voor_verwarmde_overige_ruimten_geldt_geen_maximum_van_4_punten(
 ):
     """Voor verwarmde gemeenschappelijke overige ruimten geldt in deze rubriek geen maximum van 4 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-    toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek 3
-    (via Bijlage I onder B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
     Elk punt wordt gedeeld door het aantal adressen en daarna door het aantal
     onzelfstandige woonruimten op het adres.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder B, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder B, toelichting rubriek 9
     """
     # Vijf verwarmde bergingen: één meer dan het maximum van 4 punten.
     eenheid = EenhedenEenheid(
@@ -375,9 +379,10 @@ def test_punten_worden_na_verdeling_over_de_adressen_gedeeld_door_de_woonruimten
 ):
     """De punten voor een gemeenschappelijke binnenruimte worden na verdeling over de meerdere adressen nog gedeeld door het aantal onzelfstandige woonruimten op dat adres.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1;
-    implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder B, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.1
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder B, toelichting rubriek 9
     """
     # Ongelijke delers, zodat te zien is dat door beide wordt gedeeld.
     eenheid = EenhedenEenheid(
@@ -412,7 +417,8 @@ def test_zorgwoning_krijgt_3_punten(
 ):
     """Een zorgwoning krijgt 3 punten voor de gemeenschappelijke ruimten en voorzieningen.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.4.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.9.4
     """
     # Alleen een eigen woonkamer: de gemeenschappelijke ruimten zijn niet meegegeven.
     eenheid = EenhedenEenheid(

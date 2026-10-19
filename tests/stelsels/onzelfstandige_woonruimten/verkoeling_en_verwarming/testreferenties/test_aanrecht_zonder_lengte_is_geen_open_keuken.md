@@ -2,7 +2,8 @@
 
 Een aanrecht zonder lengte is in een verwarmde privéwoonkamer geen open keuken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
 ## Rapport
 

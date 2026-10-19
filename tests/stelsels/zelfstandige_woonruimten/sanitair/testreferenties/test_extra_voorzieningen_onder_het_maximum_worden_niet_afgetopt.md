@@ -2,8 +2,9 @@
 
 Extra voorzieningen die samen minder punten opleveren dan de douche, het bad en de bad/douche, worden niet afgetopt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-Bijlage I onder A, toelichting rubriek 6.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.2
+- wettekst, Bijlage I onder A, toelichting rubriek 6.2
 
 ## Rapport
 

@@ -2,9 +2,9 @@
 
 De oppervlakte van de vertrekken wordt vanaf 0,5 m² naar boven afgerond op hele m².
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

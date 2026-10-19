@@ -2,8 +2,9 @@
 
 Een douche krijgt 3 punten, een bad 5 punten en een bad/douche 6 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder B, onderdeel 6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder B, onderdeel 6.1
 
 ## Rapport
 

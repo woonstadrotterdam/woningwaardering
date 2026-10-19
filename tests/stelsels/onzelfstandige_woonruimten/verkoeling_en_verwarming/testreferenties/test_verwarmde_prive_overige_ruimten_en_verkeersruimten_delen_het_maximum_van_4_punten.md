@@ -2,9 +2,9 @@
 
 Verwarmde privé overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

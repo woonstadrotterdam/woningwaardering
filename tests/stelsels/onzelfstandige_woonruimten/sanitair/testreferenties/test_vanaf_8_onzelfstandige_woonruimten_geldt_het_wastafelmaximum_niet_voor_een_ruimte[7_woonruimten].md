@@ -2,8 +2,9 @@
 
 Op een adres met 8 of meer onzelfstandige woonruimten geldt het maximum voor wastafels niet voor één ruimte buiten de badkamer.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder B, onderdeel 6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder B, onderdeel 6.1
 
 Dit geval: het adres blijft net onder de grens, dus het maximum geldt in elke ruimte buiten de badkamer
 

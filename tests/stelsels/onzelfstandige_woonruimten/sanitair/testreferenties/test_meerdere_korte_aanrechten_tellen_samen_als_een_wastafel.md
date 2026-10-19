@@ -2,7 +2,8 @@
 
 Meerdere aanrechten korter dan 1 meter in dezelfde ruimte tellen samen als één wastafel.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

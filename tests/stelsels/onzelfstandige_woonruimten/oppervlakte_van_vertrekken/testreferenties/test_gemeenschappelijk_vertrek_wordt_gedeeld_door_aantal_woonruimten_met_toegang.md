@@ -2,8 +2,9 @@
 
 Een gemeenschappelijk vertrek wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot dat vertrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1; wettekst,
-Bijlage I onder B, onderdeel 1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1
+- wettekst, Bijlage I onder B, onderdeel 1
 
 ## Rapport
 

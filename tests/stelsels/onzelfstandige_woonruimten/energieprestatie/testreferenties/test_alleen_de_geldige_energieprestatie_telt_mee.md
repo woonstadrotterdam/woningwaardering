@@ -2,8 +2,9 @@
 
 Alleen een geldige energieprestatie bepaalt de punten per m² van de vertrekken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3; wettekst,
-Bijlage I onder B, onderdeel 4.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.3
+- wettekst, Bijlage I onder B, onderdeel 4.1
 
 ## Rapport
 

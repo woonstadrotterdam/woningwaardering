@@ -42,8 +42,9 @@ def test_minder_dan_8m2_aan_vertrekken_geeft_4_punten_aftrek(
 ):
     """Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Eén vertrek van 7 m², onder de grens van 8 m².
     eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.keuken, oppervlakte=7)])
@@ -61,8 +62,9 @@ def test_precies_8m2_aan_vertrekken_geeft_geen_aftrek(
 ):
     """Een totale oppervlakte van vertrekken van precies 8 m² geeft geen aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Eén vertrek van precies 8 m², op de grens.
     eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.keuken, oppervlakte=8)])
@@ -78,13 +80,15 @@ def test_gemeenschappelijk_vertrek_telt_voor_de_aftrek_met_de_toe_te_rekenen_opp
 ):
     """Een gemeenschappelijk vertrek telt voor de aftrek mee met de oppervlakte die aan de huurder is toe te rekenen.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1; wettekst,
-    Bijlage I onder B, toelichting rubriek 1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1
+    - wettekst, Bijlage I onder B, toelichting rubriek 1
 
     Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Het vertrek van 12 m² is zelf niet minder dan 8 m²; toe te rekenen is dat 6 m².
     eenheid = EenhedenEenheid(
@@ -114,8 +118,9 @@ def test_oppervlakte_van_alle_vertrekken_samen_telt_voor_de_aftrek(
 ):
     """Voor de aftrek telt de totale oppervlakte van alle vertrekken samen.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Twee vertrekken van 4 m² zijn elk kleiner dan 8 m², samen niet.
     eenheid = EenhedenEenheid(
@@ -137,14 +142,15 @@ def test_ruimte_kleiner_dan_4m2_telt_niet_mee_voor_de_aftrek(
 ):
     """Een ruimte kleiner dan 4 m² is geen vertrek en telt niet mee voor de aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
     Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Telde Slaapkamer2 mee, dan was het totaal 8,99 m² en kwam er geen aftrek.
     eenheid = EenhedenEenheid(
@@ -171,13 +177,15 @@ def test_vertrek_gedeeld_met_een_ander_adres_telt_niet_mee_voor_de_aftrek(
 ):
     """Een vertrek dat met een ander adres wordt gedeeld, telt niet mee voor de aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2; wettekst,
-    Bijlage I onder B, onderdeel 1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2
+    - wettekst, Bijlage I onder B, onderdeel 1
 
     Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Telde de gedeelde woonkamer wel mee, dan was het totaal niet minder dan 8 m².
     eenheid = EenhedenEenheid(
@@ -210,7 +218,8 @@ def test_ruimte_met_onbekende_detailsoort_telt_niet_mee_als_vertrek(
 ):
     """Een ruimte met een detailsoort die de package niet kent, wordt niet als vertrek geteld.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
     """
     # De detailsoortcode BRG staat niet in de VERA-referentiedata (een berging is BER); aangeleverd als vertrek.
     eenheid = EenhedenEenheid(
@@ -239,8 +248,9 @@ def test_eenheid_zonder_ruimten_krijgt_4_punten_aftrek(
 ):
     """Een eenheid zonder ruimten krijgt 4 punten aftrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-    Bijlage I onder B, onderdeel 13.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.13
+    - wettekst, Bijlage I onder B, onderdeel 13
     """
     # Zonder ruimten is de oppervlakte van vertrekken 0 m², minder dan 8 m².
     eenheid = EenhedenEenheid()

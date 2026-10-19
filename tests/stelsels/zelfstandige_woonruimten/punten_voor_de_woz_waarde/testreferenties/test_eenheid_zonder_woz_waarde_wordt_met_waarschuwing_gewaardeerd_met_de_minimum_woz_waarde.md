@@ -2,8 +2,9 @@
 
 Een eenheid zonder WOZ-waarde wordt met een waarschuwing gewaardeerd met de minimum WOZ-waarde van € 85.806.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-Bijlage I onder A, onderdeel 11.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.1
+- wettekst, Bijlage I onder A, onderdeel 11.1
 
 ## Rapport
 

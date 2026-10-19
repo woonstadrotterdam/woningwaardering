@@ -2,9 +2,10 @@
 
 Een zoldervertrek is een vertrek, tenzij het alleen via een vlizotrap bereikbaar is.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.3;
-implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
-Bijlage I onder A, toelichting rubriek 1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.1.3
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 1
 
 ## Rapport
 

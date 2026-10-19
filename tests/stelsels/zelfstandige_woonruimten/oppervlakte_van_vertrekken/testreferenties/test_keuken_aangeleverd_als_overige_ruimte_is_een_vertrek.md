@@ -2,8 +2,9 @@
 
 Een keuken die als overige ruimte is aangeleverd, wordt als vertrek gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
-wettekst, Bijlage I onder A, toelichting rubriek 1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.1.2
+- wettekst, Bijlage I onder A, toelichting rubriek 1
 
 ## Rapport
 

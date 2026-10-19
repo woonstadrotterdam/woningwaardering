@@ -2,7 +2,8 @@
 
 Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
 
 ## Rapport
 

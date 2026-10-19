@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-Bijlage I onder B, onderdeel 9.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.1
+- wettekst, Bijlage I onder B, onderdeel 9
 
 ## Rapport
 

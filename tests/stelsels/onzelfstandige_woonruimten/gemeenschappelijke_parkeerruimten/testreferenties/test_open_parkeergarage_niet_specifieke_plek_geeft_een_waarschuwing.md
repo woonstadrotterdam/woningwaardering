@@ -2,8 +2,8 @@
 
 Een ruimte met de detailsoort open parkeergarage, niet specifieke plek, geeft een waarschuwing dat een andere detailsoort nodig is.
 
-Bron: implementatietoelichting datamodel-uitbreidingen,
-"Parkeergelegenheden".
+Bron:
+- implementatietoelichting datamodel-uitbreidingen, "Parkeergelegenheden"
 
 ## Rapport
 

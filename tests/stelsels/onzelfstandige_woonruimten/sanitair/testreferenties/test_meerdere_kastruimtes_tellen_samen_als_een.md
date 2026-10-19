@@ -2,8 +2,9 @@
 
 Meerdere kastruimtes in een badkamer krijgen samen 0,75 punt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
-Bijlage I onder B, onderdeel 6.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.2
+- wettekst, Bijlage I onder B, onderdeel 6.2
 
 ## Rapport
 

@@ -2,9 +2,10 @@
 
 Een verwarmd gemeenschappelijk vertrek krijgt 2 punten, gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder A, toelichting rubriek 9; wettekst, Bijlage I onder A,
-onderdeel 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder A, toelichting rubriek 9
+- wettekst, Bijlage I onder A, onderdeel 3
 
 ## Rapport
 

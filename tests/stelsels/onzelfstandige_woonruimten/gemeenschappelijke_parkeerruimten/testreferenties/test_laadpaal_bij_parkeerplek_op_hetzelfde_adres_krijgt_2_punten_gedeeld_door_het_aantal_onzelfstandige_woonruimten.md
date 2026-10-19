@@ -2,11 +2,11 @@
 
 Een laadpaal bij een parkeerplek die alleen door onzelfstandige woonruimten op hetzelfde adres wordt gedeeld, krijgt 2 punten extra, gedeeld door het aantal onzelfstandige woonruimten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3;
-implementatietoelichting onzelfstandige woonruimten, 2.10.5; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding); wettekst, Bijlage I onder B, toelichting rubriek
-10.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.12.3
+- implementatietoelichting onzelfstandige woonruimten, 2.10.5
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
+- wettekst, Bijlage I onder B, toelichting rubriek 10
 
 ## Rapport
 

@@ -47,8 +47,9 @@ def test_alleen_de_geldige_energieprestatie_telt_mee(
 ):
     """Alleen een geldige energieprestatie bepaalt de punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1993,
@@ -87,8 +88,9 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
 ):
     """Een energie-index wordt gewaardeerd op de index, niet op het label dat erbij is meegegeven.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -136,8 +138,9 @@ def test_punten_voor_een_energielabel_hangen_af_van_de_labelklasse(
 ):
     """De punten voor een energielabel hangen af van de labelklasse.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -178,8 +181,9 @@ def test_punten_voor_een_energie_index_hangen_af_van_de_klasse(
 ):
     """De punten voor een energie-index hangen af van de klasse waarin de index valt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -227,12 +231,14 @@ def test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee(
 ):
     """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021, telt niet mee.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.3
 
     Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.5
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
@@ -261,7 +267,8 @@ def test_energie_index_zonder_waarde_wordt_met_waarschuwing_op_het_bouwjaar_gewa
 ):
     """Een energie-index zonder waarde wordt met een waarschuwing op het bouwjaar gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.3
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -293,12 +300,14 @@ def test_energieprestatie_zonder_soort_telt_niet_mee(
 ):
     """Een energieprestatie zonder soort telt niet mee.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.3
 
     Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.5
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -328,12 +337,14 @@ def test_energieprestatie_van_een_andere_soort_telt_niet_mee(
 ):
     """Een energieprestatie van een andere soort dan een energielabel, energie-index of primair energieverbruik telt niet mee.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.3
 
     Zonder geldige energieprestatie bepaalt het bouwjaar de punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.5; wettekst,
-    Bijlage I onder A, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.5
+    - wettekst, Bijlage I onder A, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -373,8 +384,9 @@ def test_monument_krijgt_geen_minpunten(
 ):
     """Een rijks-, provinciaal of gemeentelijk monument krijgt geen minpunten voor de energieprestatie.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
-    Bijlage I onder A, onderdeel 4.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.6.1
+    - wettekst, Bijlage I onder A, onderdeel 4.2
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -404,8 +416,9 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
 ):
     """Een rijksmonument met een positief aantal punten voor de energieprestatie houdt die punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
-    Bijlage I onder A, onderdeel 4.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.6.1
+    - wettekst, Bijlage I onder A, onderdeel 4.2
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -454,8 +467,9 @@ def test_energieprestatievergoeding_geeft_een_vast_aantal_punten(
 ):
     """Bij een energieprestatievergoeding krijgt een eengezinswoning 32 punten en een meergezinswoning 28 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.3; wettekst,
-    Bijlage I onder A, onderdeel 4.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.4.6.3
+    - wettekst, Bijlage I onder A, onderdeel 4.3
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,

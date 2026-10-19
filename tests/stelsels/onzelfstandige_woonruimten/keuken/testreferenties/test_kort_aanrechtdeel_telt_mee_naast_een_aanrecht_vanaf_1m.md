@@ -2,7 +2,8 @@
 
 Een aanrechtdeel korter dan 1 meter telt mee in de aanrechtlengte naast een aanrecht vanaf 1 meter.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
 
 ## Rapport
 

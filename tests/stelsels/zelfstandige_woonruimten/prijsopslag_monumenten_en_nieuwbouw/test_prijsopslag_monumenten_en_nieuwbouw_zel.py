@@ -42,8 +42,9 @@ def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_op
 ):
     """Een rijksmonument waarvan de huurovereenkomst op of na 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4; wettekst,
-    artikel 8a, eerste lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.4
+    - wettekst, artikel 8a, eerste lid
     """
     eenheid = EenhedenEenheid(
         datum_afsluiten_huurovereenkomst=date(2024, 7, 1),
@@ -65,8 +66,9 @@ def test_rijksmonument_met_huurovereenkomst_voor_1_juli_2024_krijgt_50_punten(
 ):
     """Een rijksmonument waarvan de huurovereenkomst vóór 1 juli 2024 is afgesloten, krijgt 50 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4; wettekst,
-    artikel 8a, tweede lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.4
+    - wettekst, artikel 8a, tweede lid
     """
     # Eén dag vóór de inwerkingtreding van de Wet betaalbare huur.
     eenheid = EenhedenEenheid(
@@ -86,9 +88,10 @@ def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_wordt_met_waarschuwi
 ):
     """Zonder datum van afsluiten van de huurovereenkomst waardeert de package een rijksmonument met een waarschuwing alsof de huurovereenkomst op de peildatum is afgesloten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4;
-    implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten
-    huurovereenkomst"; wettekst, artikel 8a, eerste lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.4
+    - implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten huurovereenkomst"
+    - wettekst, artikel 8a, eerste lid
     """
     # Zonder datum waarschuwt de package en valt ze terug op de peildatum.
     eenheid = EenhedenEenheid(
@@ -126,8 +129,9 @@ def test_gemeentelijk_of_provinciaal_monument_krijgt_15_procent_opslag(
 ):
     """Een gemeentelijk of provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.5; wettekst,
-    artikel 8a, derde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.5
+    - wettekst, artikel 8a, derde lid
     """
     eenheid = EenhedenEenheid(monumenten=[monument])
 
@@ -183,8 +187,9 @@ def test_rijksbeschermd_stads_of_dorpsgezicht_krijgt_alleen_bij_bouwjaar_voor_19
 ):
     """Een woonruimte in een rijksbeschermd stads- of dorpsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.6
+    - wettekst, artikel 8a, vijfde lid
     """
     eenheid = EenhedenEenheid(bouwjaar=bouwjaar, monumenten=[monument])
 
@@ -200,8 +205,9 @@ def test_gemeentelijk_beschermd_stads_of_dorpsgezicht_krijgt_geen_opslag(
 ):
     """Een woonruimte in een gemeentelijk beschermd stads- of dorpsgezicht krijgt geen opslag.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.6
+    - wettekst, artikel 8a, vijfde lid
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1964,
@@ -244,8 +250,9 @@ def test_nieuwbouwwoning_in_de_middensector_krijgt_10_procent_opslag(
 ):
     """Een woning in de middensector die na 1 juli 2024 voor het eerst in gebruik is genomen en waarvan de bouw voor 1 januari 2028 is gestart, krijgt 10 procent opslag.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.7.1; wettekst,
-    artikel 8a, vierde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.7.1
+    - wettekst, artikel 8a, vierde lid
     """
     # De WOZ-waarden geven 149 punten, binnen de middensector (144 t/m 186).
     eenheid = meergezinswoning_van_79_m2(
@@ -267,8 +274,9 @@ def test_woning_die_op_1_juli_2024_voor_het_eerst_in_gebruik_is_genomen_krijgt_g
 ):
     """Een woning die op 1 juli 2024 voor het eerst in gebruik is genomen, krijgt geen opslag voor nieuwbouw.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.7.1; wettekst,
-    artikel 8a, vierde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.7.1
+    - wettekst, artikel 8a, vierde lid
     """
     # Op de grens: eerste ingebruikname op 1 juli 2024, niet erna.
     eenheid = meergezinswoning_van_79_m2(
@@ -326,8 +334,9 @@ def test_monument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_sta
 ):
     """Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.13.6
+    - wettekst, artikel 8a, vijfde lid
     """
     # Gebouwd vóór 1965: alleen het monument sluit de opslag voor het stadsgezicht uit.
     eenheid = EenhedenEenheid(

@@ -2,8 +2,9 @@
 
 De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
-Bijlage I onder A, toelichting rubriek 9.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9.7
+- wettekst, Bijlage I onder A, toelichting rubriek 9
 
 ## Rapport
 

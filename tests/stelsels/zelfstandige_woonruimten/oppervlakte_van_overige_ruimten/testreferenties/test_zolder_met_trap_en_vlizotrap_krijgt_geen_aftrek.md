@@ -2,7 +2,8 @@
 
 Een zolder met zowel een trap als een vlizotrap krijgt geen aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.3
 
 ## Rapport
 

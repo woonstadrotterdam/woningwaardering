@@ -2,9 +2,9 @@
 
 Een ruimte kleiner dan 4 m² wordt niet als vertrek gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
-wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

@@ -2,13 +2,15 @@
 
 Een eenheid zonder recente WOZ-waarde krijgt met een waarschuwing het laagste puntenaantal van 10 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.11.1
 
 De package beschouwt alleen een WOZ-waarde met waardepeildatum 1 januari van
 een van de twee jaren vóór de peildatum van de procedure als relevant.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1; wettekst,
-Bijlage I onder B, toelichting rubriek 11.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.11.1
+- wettekst, Bijlage I onder B, toelichting rubriek 11
 
 ## Rapport
 

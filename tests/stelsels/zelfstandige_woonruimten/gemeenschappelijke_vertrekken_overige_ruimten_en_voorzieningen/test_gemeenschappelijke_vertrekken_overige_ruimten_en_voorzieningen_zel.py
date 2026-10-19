@@ -48,8 +48,9 @@ def test_gemeenschappelijk_vertrek_krijgt_1_punt_per_m2_gedeeld_door_het_aantal_
 ):
     """Een gemeenschappelijk vertrek krijgt 1 punt per m², gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9; wettekst,
-    Bijlage I onder A, onderdeel 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9
+    - wettekst, Bijlage I onder A, onderdeel 9
     """
     # Twee vertrekken van dezelfde grootte met een ander aantal adressen.
     eenheid = EenhedenEenheid(
@@ -88,8 +89,9 @@ def test_gemeenschappelijke_overige_ruimte_krijgt_driekwart_punt_per_m2_gedeeld_
 ):
     """Een gemeenschappelijke overige ruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9; wettekst,
-    Bijlage I onder A, onderdeel 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9
+    - wettekst, Bijlage I onder A, onderdeel 9
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -125,8 +127,9 @@ def test_gemeenschappelijke_toiletruimte_wordt_als_overige_ruimte_gewaardeerd(
 ):
     """Een gemeenschappelijke toiletruimte wordt als overige ruimte gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -165,8 +168,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijk_vertrek(
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijk vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 1
     """
     # Een kast is een aparte ruimte, verbonden aan de ruimte waarin ze staat.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=2)
@@ -196,8 +200,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_overige_ruim
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke overige ruimte.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 2
     """
     # Een kast is een aparte ruimte, verbonden aan de ruimte waarin ze staat.
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=2)
@@ -233,8 +238,9 @@ def test_aftrek_voor_gemeenschappelijke_zolder_zonder_vaste_trap_wordt_gedeeld_d
 ):
     """De aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.7
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # Vlizotrap zonder trap: geen vaste trap (implementatietoelichting 2.2.2.3).
     eenheid = EenhedenEenheid(
@@ -268,8 +274,9 @@ def test_aftrek_is_niet_hoger_dan_de_punten_voor_de_gemeenschappelijke_zolder(
 ):
     """De aftrek voor een gemeenschappelijke zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 2
     """
     # De zolder levert op het totaal 3 punten op: minder dan de aftrek van 5.
     eenheid = EenhedenEenheid(
@@ -309,8 +316,9 @@ def test_kast_telt_mee_in_de_oppervlakte_van_een_gemeenschappelijke_zolder_zonde
 ):
     """De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke zolder zonder vaste trap.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 2
     """
     # De kast van 0,9 m² maakt de oppervlakte van de zolder 3,5 m² (zonder kast 2,6).
     kast = ruimte(Ruimtedetailsoort.kast, oppervlakte=0.9)
@@ -361,9 +369,10 @@ def test_verwarmd_gemeenschappelijk_vertrek_krijgt_2_punten_gedeeld_door_het_aan
 ):
     """Een verwarmd gemeenschappelijk vertrek krijgt 2 punten, gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9; wettekst, Bijlage I onder A,
-    onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     # Twee verwarmde vertrekken van dezelfde grootte met een ander aantal adressen.
     eenheid = EenhedenEenheid(
@@ -407,8 +416,9 @@ def test_punten_voor_keuken_in_gemeenschappelijke_ruimte_worden_gedeeld_door_het
 ):
     """De punten voor een keuken in een gemeenschappelijke ruimte worden gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # Het aanrecht van precies 1 m ligt op de ondergrens van de klasse 1 tot 2 m.
     eenheid = EenhedenEenheid(
@@ -444,14 +454,16 @@ def test_keuken_wordt_altijd_als_vertrek_gewaardeerd(
 ):
     """Een keuken wordt altijd als vertrek gewaardeerd, ook als ze met een andere ruimtesoort is aangeleverd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.1.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 1
 
     De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal
     adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # De aangeleverde ruimtesoort wijkt af van de ruimtesoort die voor een keuken geldt.
     eenheid = EenhedenEenheid(
@@ -489,8 +501,9 @@ def test_punten_voor_sanitair_in_gemeenschappelijke_ruimte_worden_gedeeld_door_h
 ):
     """De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # Gedeeld met 2 adressen, zodat er niet afgerond hoeft te worden.
     eenheid = EenhedenEenheid(
@@ -526,8 +539,9 @@ def test_maxima_voor_sanitair_gelden_voor_het_delen_door_het_aantal_adressen(
 ):
     """De maxima voor sanitaire voorzieningen gelden voordat de punten door het aantal adressen worden gedeeld.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.7
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # Twee kastruimtes en extra voorzieningen die samen meer punten geven dan het bad.
     eenheid = EenhedenEenheid(
@@ -592,8 +606,9 @@ def test_gesaldeerde_punten_worden_gedeeld_door_het_aantal_adressen(
 ):
     """De gesaldeerde punten van gemeenschappelijke binnenruimten worden gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.7; wettekst,
-    Bijlage I onder A, toelichting rubriek 9.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.7
+    - wettekst, Bijlage I onder A, toelichting rubriek 9
     """
     # Keuken en toilet uit het rekenvoorbeeld; verwarmd staat voor de radiator.
     eenheid = EenhedenEenheid(
@@ -662,7 +677,8 @@ def test_zorgwoning_krijgt_3_punten(
 ):
     """Een zorgwoning krijgt 3 punten voor de gemeenschappelijke ruimten en voorzieningen.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.9.4.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.9.4
     """
     # Doelgroep zorg: gemeenschappelijke ruimten hoeven niet in de input (2.9.4).
     eenheid = EenhedenEenheid(

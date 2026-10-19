@@ -2,10 +2,11 @@
 
 De aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding); wettekst, Bijlage I onder B, onderdeel 9.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+- implementatietoelichting onzelfstandige woonruimten, 2.9.1
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
+- wettekst, Bijlage I onder B, onderdeel 9
 
 ## Rapport
 

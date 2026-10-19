@@ -2,9 +2,10 @@
 
 Een gemeenschappelijke overige ruimte wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft tot die ruimte.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2; wettekst,
-Bijlage I onder B, onderdeel 2; wettekst, Bijlage I onder B, toelichting,
-inleiding.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2
+- wettekst, Bijlage I onder B, onderdeel 2
+- wettekst, Bijlage I onder B, toelichting, inleiding
 
 ## Rapport
 

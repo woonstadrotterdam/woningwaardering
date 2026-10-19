@@ -2,8 +2,9 @@
 
 Extra voorzieningen krijgen samen hooguit de punten van het aanrecht.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.3; wettekst,
-Bijlage I onder A, onderdeel 5.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.3
+- wettekst, Bijlage I onder A, onderdeel 5.2
 
 ## Rapport
 

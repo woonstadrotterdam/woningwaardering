@@ -2,8 +2,9 @@
 
 De oppervlakte van een kast telt mee in het subtotaal van de overige ruimten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

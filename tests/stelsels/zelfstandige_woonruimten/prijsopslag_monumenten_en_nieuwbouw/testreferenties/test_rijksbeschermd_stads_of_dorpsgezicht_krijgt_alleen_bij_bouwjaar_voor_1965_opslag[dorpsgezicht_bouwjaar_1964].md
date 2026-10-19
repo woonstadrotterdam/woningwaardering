@@ -2,8 +2,9 @@
 
 Een woonruimte in een rijksbeschermd stads- of dorpsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-artikel 8a, vijfde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.6
+- wettekst, artikel 8a, vijfde lid
 
 ## Rapport
 

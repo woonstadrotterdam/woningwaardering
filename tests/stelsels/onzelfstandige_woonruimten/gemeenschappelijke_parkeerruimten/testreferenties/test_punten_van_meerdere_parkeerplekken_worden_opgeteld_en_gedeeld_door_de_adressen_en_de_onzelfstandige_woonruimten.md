@@ -2,8 +2,9 @@
 
 De punten van meerdere parkeerplekken worden opgeteld, gedeeld door het aantal adressen en daarna door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
-Bijlage I onder B, toelichting rubriek 10.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.4
+- wettekst, Bijlage I onder B, toelichting rubriek 10
 
 ## Rapport
 

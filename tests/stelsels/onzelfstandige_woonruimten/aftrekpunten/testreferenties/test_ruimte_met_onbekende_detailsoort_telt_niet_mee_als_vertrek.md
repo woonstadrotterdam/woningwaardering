@@ -2,7 +2,8 @@
 
 Een ruimte met een detailsoort die de package niet kent, wordt niet als vertrek geteld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
 
 ## Rapport
 

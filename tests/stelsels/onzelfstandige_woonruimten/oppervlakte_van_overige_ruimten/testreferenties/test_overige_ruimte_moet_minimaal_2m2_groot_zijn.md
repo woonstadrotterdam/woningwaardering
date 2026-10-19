@@ -2,9 +2,9 @@
 
 Een ruimte kleiner dan 2 m² wordt niet als overige ruimte gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.2;
-wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.2
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke buitenruimte op hetzelfde adres krijgt 0,75 punt per m², gedeeld door het aantal onzelfstandige woonruimten dat toegang heeft.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder B, onderdeel 8.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder B, onderdeel 8
 
 ## Rapport
 

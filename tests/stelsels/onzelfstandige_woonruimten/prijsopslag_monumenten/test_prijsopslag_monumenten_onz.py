@@ -41,8 +41,9 @@ def test_rijksmonument_met_huurovereenkomst_van_1_juli_2024_krijgt_35_procent_op
 ):
     """Een rijksmonument waarvan de huurovereenkomst op of na 1 juli 2024 is afgesloten, krijgt 35% opslag op de maximale huurprijs.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-    artikel 8a, eerste lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.4
+    - wettekst, artikel 8a, eerste lid
     """
     # Precies op de dag van inwerkingtreding van de Wet betaalbare huur.
     eenheid = EenhedenEenheid(
@@ -65,8 +66,9 @@ def test_rijksmonument_met_huurovereenkomst_voor_1_juli_2024_krijgt_10_punten(
 ):
     """Een rijksmonument waarvan de huurovereenkomst vóór 1 juli 2024 is afgesloten, krijgt 10 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-    artikel 8a, tweede lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.4
+    - wettekst, artikel 8a, tweede lid
     """
     # Eén dag vóór de inwerkingtreding van de Wet betaalbare huur.
     eenheid = EenhedenEenheid(
@@ -86,9 +88,10 @@ def test_rijksmonument_zonder_datum_van_de_huurovereenkomst_wordt_met_waarschuwi
 ):
     """Zonder datum van afsluiten van de huurovereenkomst waardeert de package een rijksmonument met een waarschuwing alsof de huurovereenkomst op de peildatum is afgesloten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.4;
-    implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten
-    huurovereenkomst"; wettekst, artikel 8a, eerste lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.4
+    - implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten huurovereenkomst"
+    - wettekst, artikel 8a, eerste lid
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -125,8 +128,9 @@ def test_gemeentelijk_of_provinciaal_monument_krijgt_15_procent_opslag(
 ):
     """Een gemeentelijk of provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.5; wettekst,
-    artikel 8a, derde lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.5
+    - wettekst, artikel 8a, derde lid
     """
     eenheid = EenhedenEenheid(monumenten=[monument])
 
@@ -182,8 +186,9 @@ def test_rijksbeschermd_stads_of_dorpsgezicht_krijgt_alleen_bij_bouwjaar_voor_19
 ):
     """Een woonruimte in een rijksbeschermd stads- of dorpsgezicht krijgt alleen 5% opslag op de maximale huurprijs als de woning vóór 1965 is gebouwd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.6
+    - wettekst, artikel 8a, vijfde lid
     """
     eenheid = EenhedenEenheid(bouwjaar=bouwjaar, monumenten=[monument])
 
@@ -199,8 +204,9 @@ def test_gemeentelijk_beschermd_stads_of_dorpsgezicht_krijgt_geen_opslag(
 ):
     """Een woonruimte in een gemeentelijk beschermd stads- of dorpsgezicht krijgt geen opslag.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.6
+    - wettekst, artikel 8a, vijfde lid
     """
     # Het bouwjaar voldoet aan de eis; alleen de soort gezicht sluit de opslag uit.
     eenheid = EenhedenEenheid(
@@ -277,8 +283,9 @@ def test_monument_in_rijksbeschermd_stadsgezicht_krijgt_geen_opslag_voor_het_sta
 ):
     """Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.14.6; wettekst,
-    artikel 8a, vijfde lid.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.6
+    - wettekst, artikel 8a, vijfde lid
     """
     # Gebouwd vóór 1965: alleen het monument sluit de opslag voor het stadsgezicht uit.
     eenheid = EenhedenEenheid(

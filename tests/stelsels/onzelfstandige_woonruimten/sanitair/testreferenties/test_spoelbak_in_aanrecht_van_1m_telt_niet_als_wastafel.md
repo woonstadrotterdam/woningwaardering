@@ -2,9 +2,9 @@
 
 Een spoelbak in een aanrecht van 1 meter telt niet als wastafel.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, toelichting rubriek 5 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

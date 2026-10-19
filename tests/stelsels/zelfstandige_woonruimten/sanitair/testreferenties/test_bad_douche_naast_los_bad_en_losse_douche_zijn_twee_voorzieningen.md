@@ -2,7 +2,8 @@
 
 Een bad/douche naast een los bad en een losse douche telt als twee keer bad/douche.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

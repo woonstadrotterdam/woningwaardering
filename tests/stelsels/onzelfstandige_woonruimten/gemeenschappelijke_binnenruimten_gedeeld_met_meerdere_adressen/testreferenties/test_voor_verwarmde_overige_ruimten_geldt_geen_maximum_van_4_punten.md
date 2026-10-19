@@ -2,16 +2,17 @@
 
 Voor verwarmde gemeenschappelijke overige ruimten geldt in deze rubriek geen maximum van 4 punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-toelichting, inleiding); wettekst, Bijlage I onder A, toelichting rubriek 3
-(via Bijlage I onder B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
+- wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
 Elk punt wordt gedeeld door het aantal adressen en daarna door het aantal
 onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder B, toelichting rubriek 9.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder B, toelichting rubriek 9
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Een rijks-, provinciaal of gemeentelijk monument krijgt geen minpunten voor de energieprestatie.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
-wettekst, Bijlage I onder B, onderdeel 4.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.6.1
+- wettekst, Bijlage I onder B, onderdeel 4.2
 
 ## Rapport
 

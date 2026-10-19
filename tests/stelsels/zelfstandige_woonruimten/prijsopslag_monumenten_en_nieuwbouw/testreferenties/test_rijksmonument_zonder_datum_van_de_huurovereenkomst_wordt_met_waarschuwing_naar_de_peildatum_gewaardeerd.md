@@ -2,9 +2,10 @@
 
 Zonder datum van afsluiten van de huurovereenkomst waardeert de package een rijksmonument met een waarschuwing alsof de huurovereenkomst op de peildatum is afgesloten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.4;
-implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten
-huurovereenkomst"; wettekst, artikel 8a, eerste lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.4
+- implementatietoelichting datamodel-uitbreidingen, "Datum afsluiten huurovereenkomst"
+- wettekst, artikel 8a, eerste lid
 
 ## Rapport
 

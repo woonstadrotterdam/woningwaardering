@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke buitenruimte met een lengte, breedte en hoogte van ten minste de minimumafmeting wordt gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

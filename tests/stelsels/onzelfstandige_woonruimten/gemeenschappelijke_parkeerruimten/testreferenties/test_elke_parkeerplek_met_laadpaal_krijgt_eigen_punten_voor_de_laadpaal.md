@@ -2,9 +2,9 @@
 
 Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.5; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.5
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 De punten van privé- en gemeenschappelijke buitenruimten worden pas na het optellen afgerond op een kwart punt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.6; wettekst,
-Bijlage I onder B, toelichting rubriek 8.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.6
+- wettekst, Bijlage I onder B, toelichting rubriek 8
 
 ## Rapport
 

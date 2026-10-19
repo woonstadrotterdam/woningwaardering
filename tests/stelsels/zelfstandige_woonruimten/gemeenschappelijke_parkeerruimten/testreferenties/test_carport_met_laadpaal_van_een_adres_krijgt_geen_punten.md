@@ -2,8 +2,9 @@
 
 Een carport met laadpaal van één adres krijgt in deze rubriek geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2; wettekst,
-Bijlage I onder A, toelichting rubriek 10.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.10.2
+- wettekst, Bijlage I onder A, toelichting rubriek 10
 
 ## Rapport
 

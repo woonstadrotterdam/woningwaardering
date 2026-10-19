@@ -2,10 +2,10 @@
 
 Een privé-carport of privé-parkeerplaats wordt als privé-buitenruimte gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.1;
-implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
-Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.1
+- implementatietoelichting onzelfstandige woonruimten, 2.8.3
+- wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

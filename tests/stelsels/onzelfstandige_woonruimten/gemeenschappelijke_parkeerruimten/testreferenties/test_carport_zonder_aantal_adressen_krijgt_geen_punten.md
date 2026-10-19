@@ -2,8 +2,9 @@
 
 Een carport zonder aantal adressen krijgt in deze rubriek geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2;
-implementatietoelichting onzelfstandige woonruimten, 2.8.3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.2
+- implementatietoelichting onzelfstandige woonruimten, 2.8.3
 
 ## Rapport
 

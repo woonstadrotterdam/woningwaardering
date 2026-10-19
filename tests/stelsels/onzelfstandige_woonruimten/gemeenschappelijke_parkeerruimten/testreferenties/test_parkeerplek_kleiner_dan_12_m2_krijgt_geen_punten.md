@@ -2,9 +2,9 @@
 
 Een parkeerplek met een oppervlakte onder 12 m² krijgt geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.3; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.3
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

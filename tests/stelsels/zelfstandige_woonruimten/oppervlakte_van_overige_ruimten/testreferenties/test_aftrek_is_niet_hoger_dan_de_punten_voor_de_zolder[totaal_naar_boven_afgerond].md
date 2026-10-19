@@ -2,8 +2,9 @@
 
 De aftrek voor een zolder zonder vaste trap is niet hoger dan de punten die voor de zolder worden gegeven.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.3; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 Dit geval: de zolder van 2,40 m² brengt het totaal van 6,40 op 8,80 m², afgerond van 6 op 9 m²; de 2,25 punten voor die 3 m² vervallen.
 

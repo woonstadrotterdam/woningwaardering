@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke buitenruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

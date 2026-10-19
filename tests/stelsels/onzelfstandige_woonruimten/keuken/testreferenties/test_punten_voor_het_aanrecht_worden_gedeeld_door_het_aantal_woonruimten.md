@@ -2,8 +2,9 @@
 
 De punten voor het aanrecht worden gedeeld door het aantal onzelfstandige woonruimten waarmee de keuken wordt gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder B, onderdeel 5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder B, onderdeel 5.1
 
 ## Rapport
 

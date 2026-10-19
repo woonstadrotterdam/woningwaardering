@@ -2,8 +2,9 @@
 
 Een eenheid zonder ruimten krijgt 4 punten aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-Bijlage I onder B, onderdeel 13.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.13
+- wettekst, Bijlage I onder B, onderdeel 13
 
 ## Rapport
 

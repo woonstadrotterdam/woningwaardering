@@ -2,8 +2,10 @@
 
 Een gemeenschappelijk vertrek telt voor de energieprestatie mee met de oppervlakte die aan de huurder is toe te rekenen.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-Bijlage I onder B, onderdeel 4.1; wettekst, Bijlage I onder B, onderdeel 1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.4
+- wettekst, Bijlage I onder B, onderdeel 4.1
+- wettekst, Bijlage I onder B, onderdeel 1
 
 ## Rapport
 

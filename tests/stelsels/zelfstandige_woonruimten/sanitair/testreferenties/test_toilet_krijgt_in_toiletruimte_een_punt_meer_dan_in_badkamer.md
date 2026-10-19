@@ -2,8 +2,9 @@
 
 Een toilet krijgt in een toiletruimte meer punten dan in een badkamer.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, onderdeel 6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, onderdeel 6.1
 
 ## Rapport
 

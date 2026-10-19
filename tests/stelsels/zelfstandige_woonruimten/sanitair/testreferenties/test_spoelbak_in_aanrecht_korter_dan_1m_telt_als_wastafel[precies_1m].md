@@ -2,7 +2,8 @@
 
 Een spoelbak in een aanrecht korter dan 1 meter telt als wastafel.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
 
 Dit geval: de keuken heeft een aanrecht van minimaal 1 meter, dus de spoelbak hoort bij de keuken en is geen wastafel
 

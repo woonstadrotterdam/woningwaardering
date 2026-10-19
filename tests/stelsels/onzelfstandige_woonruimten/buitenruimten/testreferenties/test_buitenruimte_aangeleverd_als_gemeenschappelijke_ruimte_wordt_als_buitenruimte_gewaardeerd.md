@@ -2,7 +2,8 @@
 
 Een buitenruimte die als gemeenschappelijke ruimte is aangeleverd, wordt als buitenruimte gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8
 
 ## Rapport
 

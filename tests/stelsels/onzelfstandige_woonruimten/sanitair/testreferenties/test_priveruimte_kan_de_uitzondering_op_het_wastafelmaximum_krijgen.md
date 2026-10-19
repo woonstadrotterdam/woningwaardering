@@ -2,7 +2,8 @@
 
 Ook een privéruimte kan de uitzondering op het maximum voor wastafels krijgen.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

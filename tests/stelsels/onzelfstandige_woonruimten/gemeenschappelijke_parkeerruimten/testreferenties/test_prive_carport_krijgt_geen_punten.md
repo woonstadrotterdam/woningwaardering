@@ -2,9 +2,9 @@
 
 Een privé-carport krijgt in deze rubriek geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.3; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.3
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

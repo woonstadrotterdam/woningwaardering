@@ -2,8 +2,9 @@
 
 Een aanrecht korter dan 1 meter krijgt geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder A, onderdeel 5.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder A, onderdeel 5.1
 
 ## Rapport
 

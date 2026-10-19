@@ -2,13 +2,15 @@
 
 Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.5
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

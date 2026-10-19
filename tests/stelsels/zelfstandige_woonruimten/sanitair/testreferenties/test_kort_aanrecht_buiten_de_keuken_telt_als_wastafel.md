@@ -2,7 +2,8 @@
 
 Een aanrecht korter dan 1 meter buiten de keuken telt als wastafel.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.2
 
 ## Rapport
 

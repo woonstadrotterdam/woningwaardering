@@ -2,8 +2,9 @@
 
 Een woning in de middensector die na 1 juli 2024 voor het eerst in gebruik is genomen en waarvan de bouw voor 1 januari 2028 is gestart, krijgt 10 procent opslag.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.7.1; wettekst,
-artikel 8a, vierde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.7.1
+- wettekst, artikel 8a, vierde lid
 
 ## Rapport
 

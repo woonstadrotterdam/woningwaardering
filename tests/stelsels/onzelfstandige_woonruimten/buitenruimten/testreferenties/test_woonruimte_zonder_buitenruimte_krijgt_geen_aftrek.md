@@ -2,8 +2,9 @@
 
 Een onzelfstandige woonruimte zonder buitenruimte krijgt geen aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8; wettekst,
-Bijlage I onder B, onderdeel 8.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8
+- wettekst, Bijlage I onder B, onderdeel 8
 
 ## Rapport
 

@@ -2,9 +2,9 @@
 
 Een gemeenschappelijk vertrek dat niet met een ander adres wordt gedeeld, krijgt in deze rubriek geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.1; wettekst,
-Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.1
+- wettekst, Bijlage I onder A, toelichting rubriek 9 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

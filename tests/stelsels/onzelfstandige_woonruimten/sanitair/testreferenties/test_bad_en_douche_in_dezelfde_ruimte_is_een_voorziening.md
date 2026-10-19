@@ -2,9 +2,9 @@
 
 Een bad en een douche in dezelfde ruimte tellen samen als één bad/douche.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, toelichting rubriek 6.1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

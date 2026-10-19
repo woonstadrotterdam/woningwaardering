@@ -2,7 +2,8 @@
 
 Een zorgwoning krijgt 3 punten voor de gemeenschappelijke ruimten en voorzieningen.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.9.4.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.9.4
 
 ## Rapport
 

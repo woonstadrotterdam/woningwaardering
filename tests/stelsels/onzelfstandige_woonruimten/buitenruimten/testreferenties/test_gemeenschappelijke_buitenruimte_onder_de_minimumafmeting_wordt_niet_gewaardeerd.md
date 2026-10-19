@@ -2,9 +2,9 @@
 
 Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2; wettekst,
-Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.2
+- wettekst, Bijlage I onder A, toelichting rubriek 8 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

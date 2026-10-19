@@ -2,8 +2,9 @@
 
 Een vertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
-wettekst, Bijlage I onder A, onderdeel 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.3
+- wettekst, Bijlage I onder A, onderdeel 3
 
 ## Rapport
 

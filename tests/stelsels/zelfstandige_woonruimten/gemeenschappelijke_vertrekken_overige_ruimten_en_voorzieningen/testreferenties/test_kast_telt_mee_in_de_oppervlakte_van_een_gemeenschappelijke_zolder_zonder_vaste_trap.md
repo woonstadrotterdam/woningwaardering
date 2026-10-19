@@ -2,8 +2,9 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke zolder zonder vaste trap.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

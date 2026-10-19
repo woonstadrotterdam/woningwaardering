@@ -2,8 +2,9 @@
 
 Voor de aftrek telt de totale oppervlakte van alle vertrekken samen.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-Bijlage I onder B, onderdeel 13.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.13
+- wettekst, Bijlage I onder B, onderdeel 13
 
 ## Rapport
 

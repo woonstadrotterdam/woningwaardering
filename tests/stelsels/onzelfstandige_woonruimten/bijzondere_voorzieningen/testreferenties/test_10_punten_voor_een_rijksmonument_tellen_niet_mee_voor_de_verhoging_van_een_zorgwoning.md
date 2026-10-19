@@ -2,9 +2,11 @@
 
 De 10 punten voor een rijksmonument met een huurovereenkomst van vóór de inwerkingtreding van de Wet betaalbare huur tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12;
-implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-artikel 8a, tweede lid; wettekst, Bijlage I onder B, onderdeel 12.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.12
+- implementatietoelichting onzelfstandige woonruimten, 2.14.4
+- wettekst, artikel 8a, tweede lid
+- wettekst, Bijlage I onder B, onderdeel 12
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Verwarmde overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
-Bijlage I onder A, onderdeel 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder A, onderdeel 3
 
 ## Rapport
 

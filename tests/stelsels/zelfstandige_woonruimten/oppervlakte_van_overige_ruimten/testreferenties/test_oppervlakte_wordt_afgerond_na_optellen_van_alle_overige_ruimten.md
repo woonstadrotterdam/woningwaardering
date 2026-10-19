@@ -2,8 +2,9 @@
 
 De oppervlakten van alle overige ruimten worden eerst opgeteld en dan afgerond op hele m².
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2.1; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2.1
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

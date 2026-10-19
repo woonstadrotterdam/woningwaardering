@@ -2,7 +2,8 @@
 
 Een overige ruimte met `gedeeld_met_aantal_onzelfstandige_woonruimten` kleiner dan 2 wordt als privéruimte gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.1.4
 
 ## Rapport
 

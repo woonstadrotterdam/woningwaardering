@@ -2,8 +2,9 @@
 
 Een aanbelfunctie met video- en audioverbinding krijgt 0,25 punt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.2; wettekst,
-Bijlage I onder B, onderdeel 12.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.12.2
+- wettekst, Bijlage I onder B, onderdeel 12
 
 ## Rapport
 

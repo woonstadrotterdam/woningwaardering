@@ -2,15 +2,16 @@
 
 De oppervlakte van privévertrekken en de toe te rekenen oppervlakte van gemeenschappelijke vertrekken worden opgeteld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-wettekst, Bijlage I onder B, toelichting rubriek 1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+- wettekst, Bijlage I onder B, toelichting rubriek 1
 
 De oppervlakte van alle vertrekken samen wordt na saldering afgerond op hele
 vierkante meters.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.1;
-wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.1
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

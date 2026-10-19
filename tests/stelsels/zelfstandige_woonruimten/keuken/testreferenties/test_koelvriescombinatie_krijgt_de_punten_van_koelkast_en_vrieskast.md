@@ -2,9 +2,10 @@
 
 Een inbouw koelvriescombinatie krijgt de punten van een koelkast en een vrieskast samen.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.4; wettekst,
-Bijlage I onder A, toelichting rubriek 5; wettekst, Bijlage I onder A,
-onderdeel 5.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.4
+- wettekst, Bijlage I onder A, toelichting rubriek 5
+- wettekst, Bijlage I onder A, onderdeel 5.2
 
 ## Rapport
 

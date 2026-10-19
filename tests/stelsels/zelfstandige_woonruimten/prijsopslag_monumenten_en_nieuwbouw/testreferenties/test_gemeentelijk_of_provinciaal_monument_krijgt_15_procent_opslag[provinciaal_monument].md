@@ -2,8 +2,9 @@
 
 Een gemeentelijk of provinciaal monument krijgt 15% opslag op de maximale huurprijs.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.5; wettekst,
-artikel 8a, derde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.5
+- wettekst, artikel 8a, derde lid
 
 ## Rapport
 

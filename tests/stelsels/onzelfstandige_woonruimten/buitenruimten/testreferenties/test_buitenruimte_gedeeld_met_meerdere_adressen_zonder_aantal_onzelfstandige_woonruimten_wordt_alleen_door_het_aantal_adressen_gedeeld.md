@@ -2,8 +2,9 @@
 
 Een buitenruimte die met meerdere adressen wordt gedeeld en zonder aantal onzelfstandige woonruimten is aangeleverd, wordt alleen door het aantal adressen gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.1.4;
-implementatietoelichting onzelfstandige woonruimten, 2.8.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.1.4
+- implementatietoelichting onzelfstandige woonruimten, 2.8.2
 
 ## Rapport
 

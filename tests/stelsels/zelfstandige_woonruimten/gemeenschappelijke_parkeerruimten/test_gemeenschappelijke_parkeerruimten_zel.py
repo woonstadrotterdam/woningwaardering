@@ -43,8 +43,9 @@ def test_parkeerplek_krijgt_9_6_of_4_punten_naar_type_gedeeld_door_het_aantal_ad
 ):
     """Een parkeerplek krijgt 9 punten als Type I, 6 punten als Type II en 4 punten als Type III, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder A, onderdeel 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
+    - wettekst, Bijlage I onder A, onderdeel 10
     """
     # Vier plekken die alleen in type verschillen, met dezelfde deler.
     eenheid = EenhedenEenheid(
@@ -95,7 +96,8 @@ def test_gemeenschappelijke_carport_wordt_als_type_ii_gewaardeerd(
 ):
     """Een gemeenschappelijke carport wordt als Type II gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -121,7 +123,8 @@ def test_gemeenschappelijke_parkeerplaats_wordt_als_type_iii_gewaardeerd(
 ):
     """Een gemeenschappelijke parkeerplaats wordt als Type III gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -153,8 +156,9 @@ def test_laadpaal_bij_parkeerplek_krijgt_2_punten_gedeeld_door_het_aantal_adress
 ):
     """Een laadpaal bij een parkeerplek krijgt 2 punten extra, gedeeld door het aantal adressen dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.5
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -182,8 +186,9 @@ def test_elke_parkeerplek_met_laadpaal_krijgt_eigen_punten_voor_de_laadpaal(
 ):
     """Elke parkeerplek met laadpaal krijgt 2 punten extra, ook als de plekken met dezelfde adressen worden gedeeld.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.5; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.5
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -229,8 +234,9 @@ def test_puntentotaal_van_parkeerplekken_en_laadpalen_wordt_gedeeld_door_het_aan
 ):
     """Het puntentotaal van parkeerplekken en laadpalen wordt gedeeld door het aantal adressen dat gebruik kan maken van de parkeerplekken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # Vijf Type II-carports met laadpaal en twee Type III-plekken, via aantal.
     eenheid = EenhedenEenheid(
@@ -279,8 +285,9 @@ def test_carport_met_laadpaal_van_een_adres_krijgt_geen_punten(
 ):
     """Een carport met laadpaal van één adres krijgt in deze rubriek geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # Carport van één adres: niet gemeenschappelijk.
     eenheid = EenhedenEenheid(
@@ -309,8 +316,9 @@ def test_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
 ):
     """Een parkeerplek met een oppervlakte onder 12 m² krijgt geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # Onder de minimale 12 m², verder een gewone gemeenschappelijke plek.
     eenheid = EenhedenEenheid(
@@ -334,8 +342,9 @@ def test_laadpaal_bij_parkeerplek_kleiner_dan_12_m2_krijgt_geen_punten(
 ):
     """Een laadpaal bij een parkeerplek met een oppervlakte onder 12 m² krijgt in deze rubriek geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # De carport is te klein voor een parkeerplek en krijgt zelf geen punten.
     eenheid = EenhedenEenheid(
@@ -363,8 +372,9 @@ def test_gemeenschappelijke_parkeerplaats_kleiner_dan_12_m2_geeft_ook_een_waarsc
 ):
     """Een gemeenschappelijke parkeerplaats geeft de waarschuwing over haar detailsoort ook wanneer zij met een oppervlakte onder 12 m² geen punten krijgt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # Parkeerplaats (geen Type-detailsoort) onder de minimale 12 m².
     eenheid = EenhedenEenheid(
@@ -389,8 +399,9 @@ def test_parkeerplek_zonder_aantal_adressen_wordt_als_parkeerplek_van_een_adres_
 ):
     """Een parkeerplek zonder aantal adressen wordt gewaardeerd als een parkeerplek van één adres.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     # Zonder gedeeld_met_aantal_adressen, zodat de package van één adres uitgaat.
     eenheid = EenhedenEenheid(
@@ -419,8 +430,9 @@ def test_carport_zonder_aantal_adressen_krijgt_geen_punten(
 ):
     """Een carport zonder aantal adressen krijgt in deze rubriek geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.10.4;
-    implementatietoelichting zelfstandige woonruimten, 2.8.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.4
+    - implementatietoelichting zelfstandige woonruimten, 2.8.3
     """
     # Zonder aantal adressen is de carport niet gedeeld.
     eenheid = EenhedenEenheid(

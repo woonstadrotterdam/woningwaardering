@@ -2,7 +2,8 @@
 
 Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.8.2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.8.2
 
 ## Rapport
 

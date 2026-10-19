@@ -2,8 +2,9 @@
 
 Een woonruimte in een gemeentelijk beschermd stads- of dorpsgezicht krijgt geen opslag.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-artikel 8a, vijfde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.6
+- wettekst, artikel 8a, vijfde lid
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 De punten voor een aanrecht hangen af van zijn lengte.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder A, onderdeel 5.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder A, onderdeel 5.1
 
 ## Rapport
 

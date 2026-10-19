@@ -2,8 +2,9 @@
 
 De punten per m² van de vertrekken voor een energielabel hangen af van de labelklasse.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-Bijlage I onder B, onderdeel 4.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.4
+- wettekst, Bijlage I onder B, onderdeel 4.1
 
 ## Rapport
 

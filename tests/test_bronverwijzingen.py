@@ -53,14 +53,21 @@ def _waarderingstests() -> list[tuple[str, str | None]]:
     return tests
 
 
-def _bronverwijzingen(docstring: str) -> list[list[str]]:
-    """Geef per alinea die met "Bron:" begint de bronverwijzingen."""
-    bronnen = []
-    for alinea in docstring.split("\n\n"):
-        if alinea.startswith("Bron: "):
-            tekst = " ".join(alinea.removeprefix("Bron: ").split())
-            bronnen.append(tekst.removesuffix(".").split("; "))
-    return bronnen
+def _bron_alineas(docstring: str) -> list[str]:
+    """Geef de alinea's die met "Bron:" beginnen."""
+    return [alinea for alinea in docstring.split("\n\n") if alinea.startswith("Bron:")]
+
+
+def _bronverwijzingen(alinea: str) -> list[str] | None:
+    """Geef de bronverwijzingen van een "Bron:"-alinea, of None als de vorm niet klopt.
+
+    "Bron:" staat op een eigen regel, met daaronder elke bronverwijzing als
+    lijstregel.
+    """
+    kop, *regels = alinea.split("\n")
+    if kop != "Bron:" or not regels or not all(r.startswith("- ") for r in regels):
+        return None
+    return [regel.removeprefix("- ") for regel in regels]
 
 
 @cache
@@ -164,7 +171,13 @@ def test_bronverwijzingen_van_waarderingstests_bestaan():
     """
     fouten = []
     for plek, docstring in _waarderingstests():
-        for bronverwijzingen in _bronverwijzingen(docstring or ""):
+        for alinea in _bron_alineas(docstring or ""):
+            bronverwijzingen = _bronverwijzingen(alinea)
+            if bronverwijzingen is None:
+                fouten.append(
+                    f"{plek}: zet 'Bron:' op een eigen regel en elke bron als lijstregel"
+                )
+                continue
             if not bronverwijzingen[0].startswith("implementatietoelichting"):
                 fouten.append(f"{plek}: begint niet met de implementatietoelichting")
             for bronverwijzing in bronverwijzingen:
@@ -215,3 +228,31 @@ def test_bronverwijzingen_van_waarderingstests_bestaan():
 )
 def test_fout_in_bronverwijzing(bronverwijzing, fout):
     assert _fout_in(bronverwijzing) == fout
+
+
+@pytest.mark.parametrize(
+    ("alinea", "bronverwijzingen"),
+    [
+        pytest.param(
+            "Bron:\n- implementatietoelichting zelfstandige woonruimten, 2.6.2\n"
+            "- wettekst, Bijlage I onder A, onderdeel 6.2",
+            [
+                "implementatietoelichting zelfstandige woonruimten, 2.6.2",
+                "wettekst, Bijlage I onder A, onderdeel 6.2",
+            ],
+            id="lijst",
+        ),
+        pytest.param(
+            "Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2.",
+            None,
+            id="op_de_regel_van_bron",
+        ),
+        pytest.param(
+            "Bron:\nimplementatietoelichting zelfstandige woonruimten, 2.6.2",
+            None,
+            id="zonder_lijstteken",
+        ),
+    ],
+)
+def test_vorm_van_een_bron_alinea(alinea, bronverwijzingen):
+    assert _bronverwijzingen(alinea) == bronverwijzingen

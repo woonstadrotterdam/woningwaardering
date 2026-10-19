@@ -2,9 +2,9 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van de overige ruimte waarop de kast uitkomt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

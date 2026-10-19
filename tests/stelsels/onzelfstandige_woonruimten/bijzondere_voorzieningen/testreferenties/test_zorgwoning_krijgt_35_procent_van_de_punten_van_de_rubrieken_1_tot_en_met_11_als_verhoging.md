@@ -2,8 +2,9 @@
 
 Een zorgwoning krijgt 35% van de punten van de rubrieken 1 tot en met 11 als verhoging.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.12; wettekst,
-Bijlage I onder B, onderdeel 12.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.12
+- wettekst, Bijlage I onder B, onderdeel 12
 
 ## Rapport
 

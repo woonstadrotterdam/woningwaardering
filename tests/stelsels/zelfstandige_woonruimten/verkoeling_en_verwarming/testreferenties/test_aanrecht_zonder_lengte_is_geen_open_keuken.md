@@ -2,7 +2,8 @@
 
 Een aanrecht zonder lengte is in een verwarmde woonkamer geen open keuken.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
 
 ## Rapport
 

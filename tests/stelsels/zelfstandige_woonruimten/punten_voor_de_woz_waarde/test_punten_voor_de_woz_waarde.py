@@ -135,8 +135,9 @@ def test_minimum_van_40_punten_geldt_vanaf_110_punten_voor_de_rubrieken_1_tot_en
 ):
     """Het minimum van 40 punten voor de WOZ-waarde geldt vanaf 110 punten voor de rubrieken 1 tot en met 10 en 12.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
     """
     stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
     eenheid = EenhedenEenheid(id="test", bouwjaar=2016)

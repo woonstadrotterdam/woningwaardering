@@ -2,7 +2,8 @@
 
 Een schuur die als vertrek is aangeleverd, wordt als vertrek gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.1.2
 
 ## Rapport
 

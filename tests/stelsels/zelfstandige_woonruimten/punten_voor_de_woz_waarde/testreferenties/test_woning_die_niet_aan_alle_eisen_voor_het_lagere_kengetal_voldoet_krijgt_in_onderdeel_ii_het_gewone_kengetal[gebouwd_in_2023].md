@@ -2,8 +2,9 @@
 
 Een woning die niet aan alle eisen voor het lagere kengetal van onderdeel II voldoet, krijgt in onderdeel II het gewone kengetal van € 242.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
-Bijlage I onder A, onderdeel 11.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.6
+- wettekst, Bijlage I onder A, onderdeel 11.1
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 Bij een energieprestatievergoeding krijgt een eengezinswoning 32 punten en een meergezinswoning 28 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.3; wettekst,
-Bijlage I onder A, onderdeel 4.3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.4.6.3
+- wettekst, Bijlage I onder A, onderdeel 4.3
 
 ## Rapport
 

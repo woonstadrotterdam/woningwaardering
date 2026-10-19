@@ -2,8 +2,9 @@
 
 Een aanrecht korter dan 1 meter krijgt geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.5.2; wettekst,
-Bijlage I onder B, onderdeel 5.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.5.2
+- wettekst, Bijlage I onder B, onderdeel 5.1
 
 ## Rapport
 

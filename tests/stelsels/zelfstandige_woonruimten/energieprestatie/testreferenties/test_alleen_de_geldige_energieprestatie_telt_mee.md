@@ -2,8 +2,9 @@
 
 Alleen een geldige energieprestatie bepaalt de punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.3; wettekst,
-Bijlage I onder A, toelichting rubriek 4.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.4.3
+- wettekst, Bijlage I onder A, toelichting rubriek 4.1
 
 ## Rapport
 

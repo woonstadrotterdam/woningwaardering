@@ -2,8 +2,9 @@
 
 De punten voor een keuken in een gemeenschappelijke ruimte worden gedeeld door het aantal adressen dat toegang heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder A, toelichting rubriek 9.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder A, toelichting rubriek 9
 
 ## Rapport
 

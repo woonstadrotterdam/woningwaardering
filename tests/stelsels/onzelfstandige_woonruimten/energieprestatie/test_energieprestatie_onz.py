@@ -49,8 +49,9 @@ def test_toe_te_rekenen_oppervlakte_telt_onafgerond_mee_voor_de_energieprestatie
 ):
     """De oppervlakte die aan de huurder is toe te rekenen, telt voor de energieprestatie onafgerond mee.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
@@ -93,8 +94,10 @@ def test_gemeenschappelijk_vertrek_telt_voor_de_energieprestatie_mee_met_de_toe_
 ):
     """Een gemeenschappelijk vertrek telt voor de energieprestatie mee met de oppervlakte die aan de huurder is toe te rekenen.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1; wettekst, Bijlage I onder B, onderdeel 1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
+    - wettekst, Bijlage I onder B, onderdeel 1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
@@ -138,8 +141,9 @@ def test_vertrek_gedeeld_met_meerdere_adressen_telt_niet_mee(
 ):
     """Een vertrek dat met meerdere adressen wordt gedeeld, telt niet mee in de m² voor de energieprestatie.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1990,
@@ -184,9 +188,9 @@ def test_kast_telt_mee_in_de_oppervlakte_voor_de_energieprestatie(
 ):
     """De oppervlakte van een kast die met een vertrek is verbonden, telt mee in de m² voor de energieprestatie.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-    Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.2.4
+    - wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -227,8 +231,9 @@ def test_alleen_de_geldige_energieprestatie_telt_mee(
 ):
     """Alleen een geldige energieprestatie bepaalt de punten per m² van de vertrekken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.3
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1993,
@@ -284,8 +289,9 @@ def test_punten_per_m2_voor_een_energielabel_hangen_af_van_de_labelklasse(
 ):
     """De punten per m² van de vertrekken voor een energielabel hangen af van de labelklasse.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1993,
@@ -315,8 +321,9 @@ def test_energie_index_wordt_op_de_index_gewaardeerd_niet_op_het_label(
 ):
     """Bij een energie-index bepaalt de index de punten per m², niet het label dat erbij is meegegeven.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -348,9 +355,10 @@ def test_energie_index_zonder_label_wordt_op_de_index_gewaardeerd(
 ):
     """Een energie-index zonder label bepaalt de punten per m².
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.2;
-    implementatietoelichting onzelfstandige woonruimten, 2.4.4; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.2
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.4
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1970,
@@ -400,12 +408,14 @@ def test_energielabel_afgegeven_van_2015_tot_2021_telt_niet_mee(
 ):
     """Een energielabel dat is afgegeven van 1 januari 2015 tot 1 januari 2021, telt niet mee.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.3
 
     Zonder geldige energieprestatie bepaalt het bouwjaar de punten per m².
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.5
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1970,
@@ -435,7 +445,8 @@ def test_energie_index_zonder_waarde_wordt_met_waarschuwing_op_het_bouwjaar_gewa
 ):
     """Een energie-index zonder waarde wordt met een waarschuwing op het bouwjaar gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.3
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -466,12 +477,14 @@ def test_energieprestatie_zonder_soort_telt_niet_mee(
 ):
     """Een energieprestatie zonder soort telt niet mee.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.3
 
     Zonder geldige energieprestatie bepaalt het bouwjaar de punten per m².
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
-    Bijlage I onder B, onderdeel 4.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.5
+    - wettekst, Bijlage I onder B, onderdeel 4.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -533,8 +546,9 @@ def test_monument_krijgt_geen_minpunten(
 ):
     """Een rijks-, provinciaal of gemeentelijk monument krijgt geen minpunten voor de energieprestatie.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
-    wettekst, Bijlage I onder B, onderdeel 4.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.6.1
+    - wettekst, Bijlage I onder B, onderdeel 4.2
     """
     eenheid = EenhedenEenheid(
         id="eenheid",
@@ -565,8 +579,9 @@ def test_rijksmonument_met_pluspunten_krijgt_geen_correctie(
 ):
     """Een rijksmonument met een positief aantal punten voor de energieprestatie houdt die punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.1;
-    wettekst, Bijlage I onder B, onderdeel 4.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.6.1
+    - wettekst, Bijlage I onder B, onderdeel 4.2
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,
@@ -636,7 +651,8 @@ def test_energieprestatievergoeding_geeft_een_vast_aantal_punten_per_m2(
 ):
     """Bij een energieprestatievergoeding krijgt de woonruimte 0,50 punt per m² van de vertrekken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.4.6.3
     """
     eenheid = EenhedenEenheid(
         bouwjaar=1921,

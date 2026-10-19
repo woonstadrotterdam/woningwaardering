@@ -2,15 +2,17 @@
 
 De punten voor de WOZ-waarde zijn niet meer dan 33 procent van de waardering van een woning die zonder die beperking 187 punten of meer heeft.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2;
-implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst, Bijlage
-I onder A, onderdeel 11.3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
+- implementatietoelichting zelfstandige woonruimten, 2.11.7
+- wettekst, Bijlage I onder A, onderdeel 11.3
 
 Bij de beperking wordt het aantal punten voor de WOZ-waarde naar beneden
 afgerond op hele punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
-Bijlage I onder A, toelichting rubriek 11.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.2
+- wettekst, Bijlage I onder A, toelichting rubriek 11
 
 ## Rapport
 

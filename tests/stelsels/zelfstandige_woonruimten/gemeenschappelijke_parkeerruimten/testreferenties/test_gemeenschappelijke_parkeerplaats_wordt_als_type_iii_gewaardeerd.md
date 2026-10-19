@@ -2,7 +2,8 @@
 
 Een gemeenschappelijke parkeerplaats wordt als Type III gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.10.3
 
 ## Rapport
 

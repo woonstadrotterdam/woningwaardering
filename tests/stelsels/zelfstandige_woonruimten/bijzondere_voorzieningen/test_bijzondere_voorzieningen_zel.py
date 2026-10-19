@@ -46,8 +46,9 @@ def test_zorgwoning_krijgt_35_procent_van_de_punten_van_de_rubrieken_1_tot_en_me
 ):
     """Een zorgwoning krijgt 35% van de punten van de rubrieken 1 tot en met 11.1 als verhoging.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12; wettekst,
-    Bijlage I onder A, onderdeel 12.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12
+    - wettekst, Bijlage I onder A, onderdeel 12
     """
     eenheid = zorgwoning_van_71_m2(bouwjaar=1960)
 
@@ -64,9 +65,11 @@ def test_50_punten_voor_een_rijksmonument_tellen_niet_mee_voor_de_verhoging_van_
 ):
     """De 50 punten voor een rijksmonument met een huurovereenkomst van vóór de inwerkingtreding van de Wet betaalbare huur tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12;
-    implementatietoelichting zelfstandige woonruimten, 2.13.4; wettekst, artikel
-    8a, tweede lid; wettekst, Bijlage I onder A, onderdeel 12.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12
+    - implementatietoelichting zelfstandige woonruimten, 2.13.4
+    - wettekst, artikel 8a, tweede lid
+    - wettekst, Bijlage I onder A, onderdeel 12
     """
     # Artikel 8a geldt alleen bij een huurovereenkomst van vóór de Wet betaalbare huur.
     eenheid = zorgwoning_van_71_m2(
@@ -88,14 +91,16 @@ def test_punten_van_het_minimum_voor_nieuwbouw_tellen_niet_mee_voor_de_verhoging
 ):
     """De punten waarmee het minimum voor nieuwbouw de punten voor de WOZ-waarde aanvult, tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12; wettekst,
-    Bijlage I onder A, onderdeel 12.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12
+    - wettekst, Bijlage I onder A, onderdeel 12
 
     Het minimum voor nieuwbouw is 40 punten voor de WOZ-waarde bij een woning
     uit 2015 tot en met 2019 met minimaal 110 punten in de andere rubrieken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
     """
     # Een woning uit 2018 heeft genoeg punten in de andere rubrieken voor het minimum.
     eenheid = zorgwoning_van_71_m2(bouwjaar=2018)
@@ -116,8 +121,9 @@ def test_aanbelfunctie_met_video_en_audioverbinding_krijgt_0_25_punt(
 ):
     """Een aanbelfunctie met video- en audioverbinding krijgt 0,25 punt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.2; wettekst,
-    Bijlage I onder A, onderdeel 12.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12.2
+    - wettekst, Bijlage I onder A, onderdeel 12
     """
     eenheid = EenhedenEenheid(
         id="aanbelfunctie",
@@ -146,14 +152,16 @@ def test_laadpaal_bij_een_garage_van_een_adres_krijgt_2_punten(
 ):
     """Een laadpaal bij een garage van één adres krijgt 2 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3; wettekst,
-    Bijlage I onder A, onderdeel 12.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12.3
+    - wettekst, Bijlage I onder A, onderdeel 12
 
     Een garage van één adres krijgt in rubriek 10 geen punten; de laadpalen
     worden daarom in deze rubriek gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 10.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.12.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
     """
     eenheid = EenhedenEenheid(
         id="2 laadpalen",

@@ -2,13 +2,15 @@
 
 Het maximum van 2 punten voor vertrekken met verkoelingsfunctie geldt apart voor privévertrekken en voor gemeenschappelijke vertrekken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
-Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

@@ -40,8 +40,9 @@ def test_verwarmd_vertrek_met_verkoelingsfunctie_krijgt_een_punt_extra(
 ):
     """Een verwarmd vertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3; wettekst,
-    Bijlage I onder A, onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.slaapkamer, verwarmd=True, verkoeld=True)]
@@ -61,8 +62,9 @@ def test_vertrekken_met_verkoelingsfunctie_krijgen_samen_hooguit_2_punten(
 ):
     """Vertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder A, onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -105,8 +107,9 @@ def test_vertrek_met_verkoelingsfunctie_zonder_verwarming_krijgt_geen_punten(
 ):
     """Een vertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder A, onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.woonkamer, verwarmd=False, verkoeld=True)]
@@ -123,8 +126,9 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
-    Bijlage I onder A, onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.keuken, verwarmd=False)]
@@ -141,8 +145,9 @@ def test_verwarmde_overige_ruimten_en_verkeersruimten_delen_het_maximum_van_4_pu
 ):
     """Verwarmde overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3; wettekst,
-    Bijlage I onder A, onderdeel 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder A, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -177,12 +182,14 @@ def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
 ):
     """Een aanrecht in een verwarmd woon- of slaapvertrek is een open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
@@ -223,12 +230,14 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
 ):
     """Een aanrecht in een verwarmde woonkamer is vanaf 1 meter een open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -271,7 +280,8 @@ def test_aanrecht_zonder_lengte_is_geen_open_keuken(
 ):
     """Een aanrecht zonder lengte is in een verwarmde woonkamer geen open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -297,12 +307,14 @@ def test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken(
 ):
     """Een verwarmde woonkamer/keuken of woon-/slaapkamer/keuken is ook zonder aanrecht een vertrek met open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -328,12 +340,14 @@ def test_aanrecht_in_serre_overig_vertrek_of_berging_als_vertrek_is_een_open_keu
 ):
     """Een aanrecht in een verwarmde serre, een overig vertrek of een berging die als vertrek is aangeleverd, is een open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -374,7 +388,8 @@ def test_aanrecht_in_keuken_bijkeuken_badkamer_of_doucheruimte_is_geen_open_keuk
 ):
     """Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
     """
     # Aanrechten vanaf 1 m, zodat alleen de detailsoort de open keuken uitsluit.
     eenheid = EenhedenEenheid(
@@ -428,8 +443,9 @@ def test_open_keuken_in_een_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -456,10 +472,11 @@ def test_vertrek_kleiner_dan_4m2_krijgt_ook_met_aanrecht_het_punt_van_een_overig
 ):
     """Een verwarmde ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², krijgt ook met een aanrecht alleen het punt van een overige ruimte.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
-    implementatietoelichting zelfstandige woonruimten, 2.3.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 1; wettekst, Bijlage I onder A,
-    toelichting rubriek 3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.1.2
+    - implementatietoelichting zelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 1
+    - wettekst, Bijlage I onder A, toelichting rubriek 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -487,8 +504,9 @@ def test_doucheruimte_kleiner_dan_4m2_krijgt_de_punten_van_een_verwarmd_vertrek(
 ):
     """Een verwarmde doucheruimte is ook kleiner dan 4 m² een vertrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
-    wettekst, Bijlage I onder A, toelichting rubriek 1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.2.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 1
     """
     eenheid = EenhedenEenheid(
         ruimten=[

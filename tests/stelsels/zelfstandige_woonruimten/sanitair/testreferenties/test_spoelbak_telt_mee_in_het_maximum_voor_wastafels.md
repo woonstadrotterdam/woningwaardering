@@ -2,8 +2,9 @@
 
 Een spoelbak in een kort aanrecht valt onder het maximum van 1 punt voor wastafels.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-Bijlage I onder A, onderdeel 6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
+- wettekst, Bijlage I onder A, onderdeel 6.1
 
 ## Rapport
 

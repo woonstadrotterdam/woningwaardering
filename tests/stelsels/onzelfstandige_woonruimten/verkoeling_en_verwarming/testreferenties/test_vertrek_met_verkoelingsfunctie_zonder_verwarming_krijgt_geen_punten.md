@@ -2,8 +2,9 @@
 
 Een privévertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

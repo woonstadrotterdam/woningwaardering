@@ -2,7 +2,8 @@
 
 Een ruimte zonder sanitair komt niet voor in de waardering.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6
 
 ## Rapport
 

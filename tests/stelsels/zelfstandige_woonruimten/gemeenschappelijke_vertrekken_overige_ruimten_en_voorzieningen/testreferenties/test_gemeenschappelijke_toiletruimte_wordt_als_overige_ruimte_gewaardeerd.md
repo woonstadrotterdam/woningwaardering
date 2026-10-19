@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke toiletruimte wordt als overige ruimte gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.2; wettekst,
-Bijlage I onder A, toelichting rubriek 2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.2
+- wettekst, Bijlage I onder A, toelichting rubriek 2
 
 ## Rapport
 

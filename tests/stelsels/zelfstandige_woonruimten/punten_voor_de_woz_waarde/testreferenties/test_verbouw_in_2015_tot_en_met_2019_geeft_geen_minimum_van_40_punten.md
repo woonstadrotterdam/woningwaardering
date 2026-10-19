@@ -2,7 +2,8 @@
 
 De package past het minimum van 40 punten voor de WOZ-waarde alleen toe op het bouwjaar, niet op een verbouw in 2015 tot en met 2019.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.5
 
 ## Rapport
 

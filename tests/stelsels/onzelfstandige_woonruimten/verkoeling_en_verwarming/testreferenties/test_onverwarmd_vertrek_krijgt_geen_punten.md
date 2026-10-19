@@ -2,8 +2,9 @@
 
 Een vertrek zonder verwarming krijgt geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

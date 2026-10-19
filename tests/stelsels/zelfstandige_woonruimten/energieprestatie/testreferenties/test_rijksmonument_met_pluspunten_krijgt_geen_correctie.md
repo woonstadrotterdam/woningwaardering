@@ -2,8 +2,9 @@
 
 Een rijksmonument met een positief aantal punten voor de energieprestatie houdt die punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.6.1; wettekst,
-Bijlage I onder A, onderdeel 4.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.4.6.1
+- wettekst, Bijlage I onder A, onderdeel 4.2
 
 ## Rapport
 

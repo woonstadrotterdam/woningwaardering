@@ -2,8 +2,9 @@
 
 Een verwarmd privévertrek met open keuken krijgt voor de verkoelingsfunctie 1 punt.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

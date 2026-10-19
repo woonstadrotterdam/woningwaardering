@@ -2,7 +2,8 @@
 
 Bij een energieprestatievergoeding krijgt de woonruimte 0,50 punt per m² van de vertrekken.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.6.3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.6.3
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 De punten voor verwarming en verkoelingsfunctie van een gemeenschappelijk vertrek worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-wettekst, Bijlage I onder B, onderdeel 3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.3
+- wettekst, Bijlage I onder B, onderdeel 3
 
 ## Rapport
 

@@ -2,7 +2,8 @@
 
 Een overige ruimte met een aanrecht telt voor de keuken mee.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.5.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.5.1
 
 ## Rapport
 

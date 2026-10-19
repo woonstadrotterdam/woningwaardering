@@ -2,8 +2,9 @@
 
 Een gemeenschappelijke parkeerplaats geeft de waarschuwing over haar detailsoort ook wanneer zij met een oppervlakte onder 12 m² geen punten krijgt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.10.3; wettekst,
-Bijlage I onder A, toelichting rubriek 10.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.10.3
+- wettekst, Bijlage I onder A, toelichting rubriek 10
 
 ## Rapport
 

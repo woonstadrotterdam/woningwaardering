@@ -2,9 +2,9 @@
 
 Extra voorzieningen in een ruimte zonder bad of douche krijgen geen punten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.2; wettekst,
-Bijlage I onder A, toelichting rubriek 6.2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.2
+- wettekst, Bijlage I onder A, toelichting rubriek 6.2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

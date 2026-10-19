@@ -42,8 +42,9 @@ def test_verwarmd_privevertrek_met_verkoelingsfunctie_krijgt_een_punt_extra(
 ):
     """Een verwarmd privévertrek met verkoelingsfunctie krijgt 1 punt naast de 2 punten voor verwarming.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.slaapkamer, verwarmd=True, verkoeld=True)]
@@ -63,8 +64,9 @@ def test_privevertrekken_met_verkoelingsfunctie_krijgen_samen_hooguit_2_punten(
 ):
     """Privévertrekken met verkoelingsfunctie krijgen daarvoor samen hooguit 2 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -107,8 +109,9 @@ def test_vertrek_met_verkoelingsfunctie_zonder_verwarming_krijgt_geen_punten(
 ):
     """Een privévertrek met verkoelingsfunctie dat niet verwarmd is, krijgt geen punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.woonkamer, verwarmd=False, verkoeld=True)]
@@ -125,8 +128,9 @@ def test_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     # Een privé- en een gemeenschappelijk vertrek: de bron waardeert beide.
     eenheid = EenhedenEenheid(
@@ -152,9 +156,9 @@ def test_verwarmde_prive_overige_ruimten_en_verkeersruimten_delen_het_maximum_va
 ):
     """Verwarmde privé overige ruimten en verkeersruimten krijgen samen hooguit 4 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -189,8 +193,9 @@ def test_punten_voor_een_gemeenschappelijk_vertrek_worden_gedeeld_door_het_aanta
 ):
     """De punten voor verwarming en verkoelingsfunctie van een gemeenschappelijk vertrek worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -218,8 +223,9 @@ def test_maximum_voor_gemeenschappelijke_vertrekken_met_verkoelingsfunctie_wordt
 ):
     """Het maximum van 2 punten voor gemeenschappelijke vertrekken met verkoelingsfunctie wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -267,9 +273,10 @@ def test_maximum_voor_verwarmde_gemeenschappelijke_overige_ruimten_wordt_gedeeld
 ):
     """Het maximum van 4 punten voor verwarmde gemeenschappelijke overige ruimten wordt gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3; wettekst, Bijlage I onder A,
-    toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -328,13 +335,15 @@ def test_maximum_voor_verkoelingsfunctie_geldt_apart_voor_prive_en_gemeenschappe
 ):
     """Het maximum van 2 punten voor vertrekken met verkoelingsfunctie geldt apart voor privévertrekken en voor gemeenschappelijke vertrekken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
 
     De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
-    Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     # Drie privé- en drie gemeenschappelijke vertrekken: beide maxima bereikt.
     eenheid = EenhedenEenheid(
@@ -405,14 +414,16 @@ def test_maximum_voor_verwarmde_verkeersruimten_telt_prive_en_gemeenschappelijk_
 ):
     """Het maximum van 4 punten voor verwarmde verkeersruimten telt privéruimten en gemeenschappelijke ruimten niet bij elkaar op.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3; wettekst, Bijlage I onder A,
-    toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
 
     De punten van een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3; wettekst,
-    Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     # Drie privé- en drie gemeenschappelijke gangen: per soort onder het maximum.
     eenheid = EenhedenEenheid(
@@ -466,13 +477,14 @@ def test_aanrecht_in_een_woon_of_slaapvertrek_is_een_open_keuken(
 ):
     """Een aanrecht in een verwarmd privé woon- of slaapvertrek is een open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
@@ -507,8 +519,9 @@ def test_vertrek_met_open_keuken_krijgt_een_punt_voor_de_verkoelingsfunctie(
 ):
     """Een verwarmd privévertrek met open keuken krijgt voor de verkoelingsfunctie 1 punt.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.3
+    - wettekst, Bijlage I onder B, onderdeel 3
     """
     # Aanrecht(en) langer dan 1 m, de lengte vanaf waar een open keuken geldt.
     eenheid = EenhedenEenheid(
@@ -537,13 +550,14 @@ def test_aanrecht_is_vanaf_1m_een_open_keuken(
 ):
     """Een aanrecht in een verwarmde privéwoonkamer is vanaf 1 meter een open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -586,7 +600,8 @@ def test_aanrecht_zonder_lengte_is_geen_open_keuken(
 ):
     """Een aanrecht zonder lengte is in een verwarmde privéwoonkamer geen open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -612,13 +627,14 @@ def test_woonkamer_met_keuken_heeft_ook_zonder_aanrecht_een_open_keuken(
 ):
     """Een verwarmde privé woonkamer/keuken of woon-/slaapkamer/keuken is ook zonder aanrecht een vertrek met open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -644,7 +660,8 @@ def test_aanrecht_in_keuken_bijkeuken_badkamer_of_doucheruimte_is_geen_open_keuk
 ):
     """Een aanrecht in een verwarmde keuken, badkamer, doucheruimte of als vertrek aangeleverde bijkeuken is geen open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
     """
     # Aanrechten vanaf 1 m, zodat alleen de detailsoort de open keuken uitsluit.
     eenheid = EenhedenEenheid(
@@ -698,9 +715,9 @@ def test_open_keuken_in_een_onverwarmd_vertrek_krijgt_geen_punten(
 ):
     """Een open keuken in een vertrek zonder verwarming krijgt geen punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Open keuken via aanrecht en via detailsoort, privé en gemeenschappelijk.
     eenheid = EenhedenEenheid(
@@ -746,14 +763,15 @@ def test_gemeenschappelijk_vertrek_met_open_keuken_krijgt_de_punten_gedeeld_door
 ):
     """Een verwarmd gemeenschappelijk vertrek met open keuken krijgt de punten gedeeld door het aantal onzelfstandige woonruimten dat toegang en gebruiksrecht heeft.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3;
-    wettekst, Bijlage I onder B, onderdeel 3.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3
+    - wettekst, Bijlage I onder B, onderdeel 3
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -795,13 +813,14 @@ def test_aanrecht_in_een_overig_vertrek_is_een_open_keuken(
 ):
     """Een aanrecht in een verwarmd overig vertrek is een open keuken.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
 
     Een open keuken geldt als afzonderlijk verwarmd vertrek.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.3.2;
-    wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder
-    B, toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.3.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 3 (via Bijlage I onder B, toelichting, inleiding)
     """
     # Een overig vertrek is geen woon- of slaapvertrek, maar telt toch mee.
     eenheid = EenhedenEenheid(

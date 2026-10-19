@@ -2,8 +2,9 @@
 
 Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

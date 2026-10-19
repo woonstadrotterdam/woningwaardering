@@ -2,9 +2,9 @@
 
 Een parkeerplek zonder aantal adressen wordt gewaardeerd als een privé-parkeerplek van één adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.2
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

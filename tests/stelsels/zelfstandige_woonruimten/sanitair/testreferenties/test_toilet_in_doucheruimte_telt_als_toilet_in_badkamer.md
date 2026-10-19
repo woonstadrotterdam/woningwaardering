@@ -2,7 +2,8 @@
 
 Een toilet in een doucheruimte krijgt de punten van een toilet in een badkamer.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

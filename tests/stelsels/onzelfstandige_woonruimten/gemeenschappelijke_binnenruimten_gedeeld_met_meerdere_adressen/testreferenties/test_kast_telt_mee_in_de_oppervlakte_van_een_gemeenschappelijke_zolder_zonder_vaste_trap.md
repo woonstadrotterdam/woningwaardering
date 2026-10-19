@@ -2,16 +2,16 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijke zolder zonder vaste trap.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 Voor een zolder zonder vaste trap worden 5 punten afgetrokken, niet meer dan
 de punten voor de zolder zelf.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder A, toelichting rubriek 2 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

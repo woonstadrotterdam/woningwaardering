@@ -2,8 +2,9 @@
 
 Een keuken die met andere adressen wordt gedeeld, krijgt in rubriek 5 geen punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.9.2; wettekst,
-Bijlage I onder A, toelichting rubriek 9.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.9.2
+- wettekst, Bijlage I onder A, toelichting rubriek 9
 
 ## Rapport
 

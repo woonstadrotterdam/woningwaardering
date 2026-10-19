@@ -4,8 +4,9 @@ Een buitenruimte zonder oppervlakte geeft een waarschuwing over incomplete input
 
 Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
-Bijlage I onder A, toelichting rubriek 8.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.8.5
+- wettekst, Bijlage I onder A, toelichting rubriek 8
 
 ## Rapport
 

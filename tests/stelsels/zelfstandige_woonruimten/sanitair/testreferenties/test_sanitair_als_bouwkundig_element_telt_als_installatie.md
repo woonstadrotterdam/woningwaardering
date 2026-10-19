@@ -2,8 +2,8 @@
 
 Sanitair dat als bouwkundig element is meegegeven, telt als de installatie.
 
-Bron: implementatietoelichting datamodel-uitbreidingen, "Bouwkundige
-elementen naast installaties".
+Bron:
+- implementatietoelichting datamodel-uitbreidingen, "Bouwkundige elementen naast installaties"
 
 ## Rapport
 

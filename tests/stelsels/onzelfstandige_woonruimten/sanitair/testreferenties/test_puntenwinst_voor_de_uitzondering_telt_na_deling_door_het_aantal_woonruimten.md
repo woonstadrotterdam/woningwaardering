@@ -2,7 +2,8 @@
 
 De puntenwinst die de uitzonderingsruimte bepaalt, telt na deling door het aantal onzelfstandige woonruimten waarmee de ruimte wordt gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
 
 ## Rapport
 

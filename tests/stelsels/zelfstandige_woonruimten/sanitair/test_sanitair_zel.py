@@ -36,8 +36,9 @@ def test_Sanitair_output(zelfstandige_woonruimten_input_en_outputmodel, peildatu
 def test_punten_voor_bad_en_douche(sanitair, vergelijk_met_testreferentie):
     """Een douche krijgt 4 punten, een bad 6 punten en een bad/douche 7 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, onderdeel 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, onderdeel 6.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -68,8 +69,9 @@ def test_bad_en_douche_in_dezelfde_ruimte_is_een_voorziening(
 ):
     """Een bad en een douche in dezelfde ruimte tellen samen als één bad/douche.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -92,7 +94,8 @@ def test_bad_douche_naast_los_bad_en_losse_douche_zijn_twee_voorzieningen(
 ):
     """Een bad/douche naast een los bad en een losse douche telt als twee keer bad/douche.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
     """
     # Het losse bad en de losse douche vormen samen een tweede bad/douche.
     eenheid = EenhedenEenheid(
@@ -116,7 +119,8 @@ def test_bad_douche_naast_los_bad_en_losse_douche_zijn_twee_voorzieningen(
 def test_douche_buiten_de_badkamer_telt_mee(sanitair, vergelijk_met_testreferentie):
     """Een douche telt ook mee buiten de badkamer.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.slaapkamer, Installatiesoort.douche)]
@@ -133,8 +137,9 @@ def test_drempelloze_inrijdouche_telt_als_douche(
 ):
     """Een drempelloze inrijdouche telt als een gewone douche.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.1
     """
     inrijdouche = Installatiesoort.drempelloze_inrijdouche
     bad = Installatiesoort.bad
@@ -181,8 +186,9 @@ def test_toilet_krijgt_in_toiletruimte_een_punt_meer_dan_in_badkamer(
 ):
     """Een toilet krijgt in een toiletruimte meer punten dan in een badkamer.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, onderdeel 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, onderdeel 6.1
     """
     toiletten = (Installatiesoort.staand_toilet, Installatiesoort.hangend_toilet)
     eenheid = EenhedenEenheid(
@@ -212,7 +218,8 @@ def test_toilet_in_doucheruimte_telt_als_toilet_in_badkamer(
 ):
     """Een toilet in een doucheruimte krijgt de punten van een toilet in een badkamer.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.doucheruimte, Installatiesoort.staand_toilet)]
@@ -232,8 +239,9 @@ def test_wastafels_in_de_badkamer_tellen_allemaal(
 ):
     """In een badkamer geldt geen maximum voor wastafels.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, onderdeel 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, onderdeel 6.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -261,8 +269,9 @@ def test_wastafels_buiten_de_badkamer_krijgen_een_maximum_per_ruimte(
 ):
     """Buiten de badkamer geldt per ruimte een maximum van 1 punt voor wastafels en 1,5 punt voor meerpersoonswastafels.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, onderdeel 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, onderdeel 6.1
     """
     wastafels = (
         Installatiesoort.wastafel,
@@ -314,7 +323,8 @@ def test_spoelbak_in_aanrecht_korter_dan_1m_telt_als_wastafel(
 ):
     """Een spoelbak in een aanrecht korter dan 1 meter telt als wastafel.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
     """
     eenheid = EenhedenEenheid(
         ruimten=[ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(aanrecht_mm)])]
@@ -331,7 +341,8 @@ def test_kort_aanrecht_buiten_de_keuken_telt_als_wastafel(
 ):
     """Een aanrecht korter dan 1 meter buiten de keuken telt als wastafel.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.5.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.5.2
     """
     # Een bijkeuken: de beleidsregel geldt ook in een andere ruimte dan de keuken.
     eenheid = EenhedenEenheid(
@@ -349,8 +360,9 @@ def test_spoelbak_telt_mee_in_het_maximum_voor_wastafels(
 ):
     """Een spoelbak in een kort aanrecht valt onder het maximum van 1 punt voor wastafels.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, onderdeel 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, onderdeel 6.1
     """
     # De spoelbak komt bovenop de wastafels in dezelfde ruimte, waar het maximum geldt.
     eenheid = EenhedenEenheid(
@@ -380,8 +392,9 @@ def test_kort_aanrechtdeel_naast_aanrecht_vanaf_1m_is_geen_wastafel(
 ):
     """Een kort aanrechtdeel telt niet als wastafel naast een aanrecht vanaf 1 meter.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 5.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 5
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -409,8 +422,9 @@ def test_meerdere_kastruimtes_tellen_samen_als_een(
 ):
     """Meerdere kastruimtes in een badkamer krijgen samen 0,75 punt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-    Bijlage I onder A, onderdeel 6.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.2
+    - wettekst, Bijlage I onder A, onderdeel 6.2
     """
     # Een bad en een wastafel maken de badkamer geschikt voor extra voorzieningen.
     eenheid = EenhedenEenheid(
@@ -440,8 +454,9 @@ def test_extra_voorzieningen_krijgen_hooguit_de_punten_van_het_bad(
 ):
     """Extra voorzieningen in de badkamer krijgen samen hooguit de punten van het bad.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-    Bijlage I onder A, onderdeel 6.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.2
+    - wettekst, Bijlage I onder A, onderdeel 6.2
     """
     # Samen leveren de extra voorzieningen 6,25 punten op, meer dan het bad (6).
     eenheid = EenhedenEenheid(
@@ -477,8 +492,9 @@ def test_extra_voorzieningen_zonder_bad_of_douche_krijgen_geen_punten(
 ):
     """Extra voorzieningen tellen alleen in een ruimte met een bad of een douche.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.2
     """
     # Een badkamer met een wastafel, maar zonder bad of douche.
     eenheid = EenhedenEenheid(
@@ -510,13 +526,15 @@ def test_drempelloze_inrijdouche_geeft_recht_op_extra_voorzieningen(
 ):
     """Een drempelloze inrijdouche telt als douche voor het recht op extra voorzieningen.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.2
 
     Een drempelloze inrijdouche telt als douche.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.1
     """
     # De inrijdouche is hier het enige bad of de enige douche in de badkamer.
     eenheid = EenhedenEenheid(
@@ -546,8 +564,9 @@ def test_extra_voorzieningen_onder_het_maximum_worden_niet_afgetopt(
 ):
     """Extra voorzieningen die samen minder punten opleveren dan de douche, het bad en de bad/douche, worden niet afgetopt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 6.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 6.2
     """
     # Het voorbeeld uit 2.6.2, met de wastafel die de package voor extra voorzieningen eist.
     eenheid = EenhedenEenheid(
@@ -615,8 +634,8 @@ def test_sanitair_als_bouwkundig_element_telt_als_installatie(
 ):
     """Sanitair dat als bouwkundig element is meegegeven, telt als de installatie.
 
-    Bron: implementatietoelichting datamodel-uitbreidingen, "Bouwkundige
-    elementen naast installaties".
+    Bron:
+    - implementatietoelichting datamodel-uitbreidingen, "Bouwkundige elementen naast installaties"
     """
     bad = Bouwkundigelementdetailsoort.bad
     douche = Bouwkundigelementdetailsoort.douche
@@ -672,7 +691,8 @@ def test_ruimte_zonder_sanitair_krijgt_geen_waardering(
 ):
     """Een ruimte zonder sanitair komt niet voor in de waardering.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.6.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.6
     """
     eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.slaapkamer)])
 

@@ -2,8 +2,9 @@
 
 Een energie-index wordt gewaardeerd op de index, niet op het label dat erbij is meegegeven.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
-Bijlage I onder A, onderdeel 4.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.4.4
+- wettekst, Bijlage I onder A, onderdeel 4.1
 
 ## Rapport
 

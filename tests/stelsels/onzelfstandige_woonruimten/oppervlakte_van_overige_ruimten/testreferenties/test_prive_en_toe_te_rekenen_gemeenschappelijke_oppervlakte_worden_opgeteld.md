@@ -2,8 +2,9 @@
 
 De oppervlakte van privé overige ruimten en de toe te rekenen oppervlakte van gemeenschappelijke overige ruimten worden opgeteld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.1;
-wettekst, Bijlage I onder B, toelichting rubriek 2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.1
+- wettekst, Bijlage I onder B, toelichting rubriek 2
 
 ## Rapport
 

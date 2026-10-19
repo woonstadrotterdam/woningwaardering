@@ -2,8 +2,9 @@
 
 Een woning gebouwd buiten 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-Bijlage I onder A, onderdeel 11.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.5
+- wettekst, Bijlage I onder A, onderdeel 11.2
 
 ## Rapport
 

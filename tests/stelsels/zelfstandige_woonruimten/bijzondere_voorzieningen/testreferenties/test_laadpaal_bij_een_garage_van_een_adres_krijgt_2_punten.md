@@ -2,14 +2,16 @@
 
 Een laadpaal bij een garage van één adres krijgt 2 punten.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3; wettekst,
-Bijlage I onder A, onderdeel 12.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.12.3
+- wettekst, Bijlage I onder A, onderdeel 12
 
 Een garage van één adres krijgt in rubriek 10 geen punten; de laadpalen
 worden daarom in deze rubriek gewaardeerd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12.3; wettekst,
-Bijlage I onder A, toelichting rubriek 10.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.12.3
+- wettekst, Bijlage I onder A, toelichting rubriek 10
 
 ## Rapport
 

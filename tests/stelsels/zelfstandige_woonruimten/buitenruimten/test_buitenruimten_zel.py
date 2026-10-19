@@ -30,8 +30,9 @@ def test_prive_buitenruimte_krijgt_2_punten_plus_035_punt_per_m2(
 ):
     """Een privé-buitenruimte krijgt 2 punten plus 0,35 punt per m².
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.1; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.1
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(ruimten=[ruimte(Ruimtedetailsoort.tuin, oppervlakte=30)])
 
@@ -52,8 +53,9 @@ def test_gemeenschappelijke_buitenruimte_krijgt_driekwart_punt_per_m2_gedeeld_do
 ):
     """Een gemeenschappelijke buitenruimte krijgt 0,75 punt per m², gedeeld door het aantal adressen dat toegang heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -77,8 +79,9 @@ def test_gemeenschappelijke_buitenruimten_worden_elk_door_hun_eigen_aantal_adres
 ):
     """Van gemeenschappelijke buitenruimten met een verschillend aantal adressen worden de punten per buitenruimte door haar eigen aantal adressen gedeeld.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -111,7 +114,8 @@ def test_gemeenschappelijke_buitenruimte_zonder_afmetingen_wordt_gewaardeerd(
 ):
     """Een gemeenschappelijke buitenruimte zonder lengte, breedte en hoogte wordt gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.2
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -134,8 +138,9 @@ def test_gemeenschappelijke_buitenruimte_vanaf_de_minimumafmeting_wordt_gewaarde
 ):
     """Een gemeenschappelijke buitenruimte met een lengte, breedte en hoogte van ten minste de minimumafmeting wordt gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -161,13 +166,15 @@ def test_gemeenschappelijke_buitenruimte_onder_de_minimumafmeting_wordt_niet_gew
 ):
     """Een gemeenschappelijke buitenruimte die in lengte, breedte of hoogte onder de minimumafmeting blijft, wordt niet gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
 
     Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.5
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -216,8 +223,9 @@ def test_buitenruimten_krijgen_samen_hooguit_15_punten(
 ):
     """Buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -244,8 +252,9 @@ def test_maximum_van_15_punten_geldt_voor_prive_en_gemeenschappelijke_buitenruim
 ):
     """Privé- en gemeenschappelijke buitenruimten krijgen samen hooguit 15 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -278,8 +287,9 @@ def test_woning_zonder_buitenruimte_krijgt_5_punten_aftrek(
 ):
     """Een woning zonder buitenruimte krijgt 5 punten aftrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.5
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(ruimten=[])
 
@@ -299,8 +309,9 @@ def test_buitenruimte_zonder_oppervlakte_geeft_een_waarschuwing(
 
     Een woning zonder gewaardeerde buitenruimte krijgt 5 punten aftrek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.5; wettekst,
-    Bijlage I onder A, toelichting rubriek 8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8.5
+    - wettekst, Bijlage I onder A, toelichting rubriek 8
     """
     eenheid = EenhedenEenheid(
         ruimten=[
@@ -326,7 +337,8 @@ def test_buitenruimte_aangeleverd_als_gemeenschappelijke_ruimte_wordt_als_buiten
 ):
     """Een buitenruimte die als gemeenschappelijke ruimte is aangeleverd, wordt als buitenruimte gewaardeerd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.8.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.8
     """
     eenheid = EenhedenEenheid(
         ruimten=[

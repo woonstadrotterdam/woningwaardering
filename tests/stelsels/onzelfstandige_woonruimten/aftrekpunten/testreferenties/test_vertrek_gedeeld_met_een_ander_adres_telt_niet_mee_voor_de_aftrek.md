@@ -2,13 +2,15 @@
 
 Een vertrek dat met een ander adres wordt gedeeld, telt niet mee voor de aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2; wettekst,
-Bijlage I onder B, onderdeel 1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2
+- wettekst, Bijlage I onder B, onderdeel 1
 
 Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-Bijlage I onder B, onderdeel 13.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.13
+- wettekst, Bijlage I onder B, onderdeel 13
 
 ## Rapport
 

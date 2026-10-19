@@ -2,13 +2,15 @@
 
 Meerdere aanrechten korter dan 1 meter tellen ook in een gemeenschappelijke keuken samen als één wastafel.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6.1
 
 De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door
 het aantal onzelfstandige woonruimten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
-Bijlage I onder B, onderdeel 6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6
+- wettekst, Bijlage I onder B, onderdeel 6.1
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 De punten voor sanitair in een gemeenschappelijke ruimte worden gedeeld door het aantal onzelfstandige woonruimten waarmee de ruimte wordt gedeeld.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.6; wettekst,
-Bijlage I onder B, onderdeel 6.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.6
+- wettekst, Bijlage I onder B, onderdeel 6.1
 
 ## Rapport
 

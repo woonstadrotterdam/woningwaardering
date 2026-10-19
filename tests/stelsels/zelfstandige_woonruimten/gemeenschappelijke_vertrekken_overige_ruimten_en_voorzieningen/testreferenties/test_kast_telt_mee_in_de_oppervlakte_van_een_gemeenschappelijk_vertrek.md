@@ -2,8 +2,9 @@
 
 De oppervlakte van een kast telt mee in de oppervlakte van een gemeenschappelijk vertrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 1
 
 ## Rapport
 

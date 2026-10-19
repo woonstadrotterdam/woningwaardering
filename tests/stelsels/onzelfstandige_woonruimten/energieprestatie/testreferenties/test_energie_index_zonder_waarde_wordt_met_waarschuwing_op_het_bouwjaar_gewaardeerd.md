@@ -2,7 +2,8 @@
 
 Een energie-index zonder waarde wordt met een waarschuwing op het bouwjaar gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.3
 
 ## Rapport
 

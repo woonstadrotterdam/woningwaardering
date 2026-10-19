@@ -73,7 +73,8 @@ def test_punten_voor_de_woz_waarde_zijn_de_som_van_onderdeel_i_en_ii_afgerond_op
 ):
     """De punten voor de WOZ-waarde zijn de som van onderdeel I en onderdeel II, afgerond op een kwart punt.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
     """
     # Dezelfde WOZ-waarde en oppervlakte als in het rekenvoorbeeld, zodat de uitkomst te vergelijken is.
     eenheid = EenhedenEenheid(
@@ -114,7 +115,8 @@ def test_onderdeel_i_en_ii_worden_niet_afgerond_voordat_ze_worden_opgeteld(
 ):
     """De punten van onderdeel I en onderdeel II worden niet afgerond voordat ze bij elkaar worden opgeteld.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
     """
     # Een WOZ-waarde en oppervlakte waarbij eerder afronden een ander totaal geeft.
     eenheid = EenhedenEenheid(
@@ -155,8 +157,9 @@ def test_woz_waarde_onder_de_minimum_woz_waarde_wordt_niet_verhoogd_tot_dat_mini
 ):
     """Een vastgestelde WOZ-waarde die lager is dan de minimum WOZ-waarde van € 85.806, wordt niet tot dat minimum verhoogd.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.1
+    - wettekst, Bijlage I onder A, onderdeel 11.1
     """
     # Eén euro onder de minimum WOZ-waarde.
     eenheid = EenhedenEenheid(
@@ -198,8 +201,9 @@ def test_woz_eenheid_zonder_vastgestelde_waarde_wordt_overgeslagen(
 ):
     """Een WOZ-eenheid zonder vastgestelde waarde slaat de package over: zij rekent met de meest recente WOZ-waarde die wel is vastgesteld.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.1
+    - wettekst, Bijlage I onder A, onderdeel 11.1
     """
     # De WOZ-eenheid van 1 januari 2025 heeft geen waarde, die van 2024 wel.
     eenheid = EenhedenEenheid(
@@ -234,8 +238,9 @@ def test_eenheid_zonder_woz_waarde_wordt_met_waarschuwing_gewaardeerd_met_de_min
 ):
     """Een eenheid zonder WOZ-waarde wordt met een waarschuwing gewaardeerd met de minimum WOZ-waarde van € 85.806.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.1
+    - wettekst, Bijlage I onder A, onderdeel 11.1
     """
     # Een woning zonder WOZ-waarde, buiten de nieuwbouwjaren 2015 tot en met 2019.
     eenheid = meergezinswoning_van_71_m2(bouwjaar=1981)
@@ -278,13 +283,15 @@ def test_onderdeel_ii_rekent_met_de_oppervlakte_van_vertrekken_overige_ruimten_e
 ):
     """In onderdeel II telt de oppervlakte mee van de vertrekken en overige ruimten uit rubriek 1 en 2 en van de parkeerplekken type I uit rubriek 10.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder A, onderdeel 11.1
 
     Van een parkeerplek type I telt de oppervlakte gedeeld door het aantal
     adressen dat toegang heeft tot de parkeerplek.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
     """
     # Een toiletruimte van 1,9 m² en een parkeerplek van 10 m² tellen niet mee.
     eenheid = EenhedenEenheid(
@@ -353,8 +360,9 @@ def test_woning_kleiner_dan_40_m2_gebouwd_in_2018_tot_en_met_2022_in_corop_gebie
 ):
     """Een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd en in het COROP-gebied Amsterdam of Utrecht ligt, krijgt in onderdeel II het lagere kengetal van € 103.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.6
+    - wettekst, Bijlage I onder A, onderdeel 11.1
     """
     eenheid = EenhedenEenheid(
         bouwjaar=bouwjaar,
@@ -403,8 +411,9 @@ def test_woning_die_niet_aan_alle_eisen_voor_het_lagere_kengetal_voldoet_krijgt_
 ):
     """Een woning die niet aan alle eisen voor het lagere kengetal van onderdeel II voldoet, krijgt in onderdeel II het gewone kengetal van € 242.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6; wettekst,
-    Bijlage I onder A, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.6
+    - wettekst, Bijlage I onder A, onderdeel 11.1
     """
     # Elk geval wijkt op één eis af van Amsterdam, 2018 en 39 m², die het lagere kengetal krijgen.
     eenheid = EenhedenEenheid(
@@ -440,7 +449,8 @@ def test_woning_kleiner_dan_40_m2_gebouwd_in_2018_tot_en_met_2022_zonder_adres_k
 ):
     """Zonder adres krijgt een woning kleiner dan 40 m² die in 2018 tot en met 2022 is gebouwd, met een waarschuwing in onderdeel II het gewone kengetal van € 242.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.6.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.6
     """
     # Zonder adres is het COROP-gebied niet te bepalen.
     eenheid = EenhedenEenheid(
@@ -485,8 +495,9 @@ def test_woning_gebouwd_in_2015_tot_en_met_2019_met_minstens_110_punten_krijgt_m
 ):
     """Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt minimaal 40 punten voor de WOZ-waarde.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
     """
     # Een woning met meer dan 110 punten voor rubriek 1 tot en met 10 en 12.
     eenheid = meergezinswoning_van_71_m2(
@@ -512,8 +523,9 @@ def test_woning_gebouwd_in_2015_tot_en_met_2019_met_minder_dan_110_punten_krijgt
 ):
     """Een woning gebouwd in 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minder dan 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
     """
     # Een woning van 2016 die met energielabel C minder dan 110 punten haalt.
     eenheid = meergezinswoning_van_71_m2(
@@ -546,7 +558,8 @@ def test_verbouw_in_2015_tot_en_met_2019_geeft_geen_minimum_van_40_punten(
 ):
     """De package past het minimum van 40 punten voor de WOZ-waarde alleen toe op het bouwjaar, niet op een verbouw in 2015 tot en met 2019.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
     """
     # Een woning van 1912 met meer dan 110 punten, verbouwd in 2016.
     eenheid = meergezinswoning_van_71_m2(
@@ -589,8 +602,9 @@ def test_woning_gebouwd_buiten_2015_tot_en_met_2019_krijgt_geen_minimum_van_40_p
 ):
     """Een woning gebouwd buiten 2015 tot en met 2019 die voor de rubrieken 1 tot en met 10 en 12 minstens 110 punten haalt, krijgt geen minimum van 40 punten voor de WOZ-waarde.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-    Bijlage I onder A, onderdeel 11.2.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
     """
     # Een woning met meer dan 110 punten voor rubriek 1 tot en met 10 en 12.
     eenheid = meergezinswoning_van_71_m2(
@@ -618,15 +632,17 @@ def test_woz_punten_worden_beperkt_tot_33_procent_van_de_waardering(
 ):
     """De punten voor de WOZ-waarde zijn niet meer dan 33 procent van de waardering van een woning die zonder die beperking 187 punten of meer heeft.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2;
-    implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst, Bijlage
-    I onder A, onderdeel 11.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - implementatietoelichting zelfstandige woonruimten, 2.11.7
+    - wettekst, Bijlage I onder A, onderdeel 11.3
 
     Bij de beperking wordt het aantal punten voor de WOZ-waarde naar beneden
     afgerond op hele punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.2; wettekst,
-    Bijlage I onder A, toelichting rubriek 11.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 11
     """
     # 135,75 punten in de andere rubrieken: ook mét de beperking boven 186 punten.
     eenheid = meergezinswoning_van_71_m2(
@@ -664,8 +680,9 @@ def test_woning_die_door_de_cap_onder_187_punten_komt_krijgt_186_punten(
 ):
     """Een woning die zonder de cap op de WOZ meer dan 186 punten heeft en met de cap minder dan 187, krijgt een waardering van 186 punten.
 
-    Bron: implementatietoelichting zelfstandige woonruimten, 2.11.7; wettekst,
-    Bijlage I onder A, onderdeel 11.3.
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.7
+    - wettekst, Bijlage I onder A, onderdeel 11.3
     """
     # 119,75 punten in de andere rubrieken: mét de beperking onder 187 punten.
     eenheid = meergezinswoning_van_71_m2(

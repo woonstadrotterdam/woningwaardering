@@ -65,8 +65,9 @@ def test_punten_hangen_af_van_het_verschil_met_het_gemiddelde_van_het_corop_gebi
 ):
     """De punten voor de WOZ-waarde hangen af van hoeveel de WOZ-waarde per m² afwijkt van het gemiddelde van het COROP-gebied.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
-    Bijlage I onder B, onderdeel 11.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder B, onderdeel 11.1
     """
     # Rotterdam (Groot-Rijnmond, € 3.537 per m²) met 100 m²: 10% lager is € 318.330, 10% hoger € 389.070.
     eenheid = EenhedenEenheid(
@@ -97,13 +98,15 @@ def test_eenheid_zonder_recente_woz_waarde_krijgt_met_waarschuwing_het_laagste_p
 ):
     """Een eenheid zonder recente WOZ-waarde krijgt met een waarschuwing het laagste puntenaantal van 10 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.11.1
 
     De package beschouwt alleen een WOZ-waarde met waardepeildatum 1 januari van
     een van de twee jaren vóór de peildatum van de procedure als relevant.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.1; wettekst,
-    Bijlage I onder B, toelichting rubriek 11.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.11.1
+    - wettekst, Bijlage I onder B, toelichting rubriek 11
     """
     # Alleen een WOZ-waarde met waardepeildatum 1 januari 2023, één jaar te oud bij peildatum 2026.
     eenheid = EenhedenEenheid(
@@ -259,7 +262,8 @@ def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_gee
 ):
     """Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.11.2
     """
     # Het antwoord van het Kadaster op 1013GS 22, zodat de test zonder netwerk draait.
     antwoord_van_het_kadaster = SimpleNamespace(
@@ -312,13 +316,9 @@ def test_gemiddelde_woz_voor_corop_gebied_weigert_onbekend_jaar(
     een lookuptabel. Ontbreekt het jaar daarin, dan rekent de package niet met
     het gemiddelde van een ander jaar.
 
-    Bron: wettekst, Bijlage I onder B, toelichting rubriek 11: "De kolommen
-    geven op basis van de peildatum van de WOZ-beschikking weer met welk bedrag
-    moet worden gerekend."
-
-    Bron: docs/voor-ontwikkelaars/data, Gemiddelde WOZ-waarden per vierkante
-    meter per COROP-gebied: "door een kolom toe te voegen met als kolomnaam het
-    jaar van de waardepeildatum waarvoor de nieuwe gemiddelde waarden gelden".
+    Bron:
+    - wettekst, Bijlage I onder B, toelichting rubriek 11
+    - docs/voor-ontwikkelaars/data, "Gemiddelde WOZ-waarden per vierkante meter per COROP-gebied"
     """
     punten_voor_de_woz_waarde = PuntenVoorDeWozWaarde(peildatum)
 

@@ -2,14 +2,15 @@
 
 Een ruimte kleiner dan 4 m² is geen vertrek en telt niet mee voor de aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.2;
-wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.2
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 Minder dan 8 m² aan vertrekken geeft 4 punten aftrek.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.13; wettekst,
-Bijlage I onder B, onderdeel 13.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.13
+- wettekst, Bijlage I onder B, onderdeel 13
 
 ## Rapport
 

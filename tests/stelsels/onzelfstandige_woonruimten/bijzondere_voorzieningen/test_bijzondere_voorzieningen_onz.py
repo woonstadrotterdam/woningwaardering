@@ -46,8 +46,9 @@ def test_zorgwoning_krijgt_35_procent_van_de_punten_van_de_rubrieken_1_tot_en_me
 ):
     """Een zorgwoning krijgt 35% van de punten van de rubrieken 1 tot en met 11 als verhoging.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12; wettekst,
-    Bijlage I onder B, onderdeel 12.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.12
+    - wettekst, Bijlage I onder B, onderdeel 12
     """
     eenheid = zorgwoning_van_71_m2(bouwjaar=1960)
 
@@ -64,9 +65,11 @@ def test_10_punten_voor_een_rijksmonument_tellen_niet_mee_voor_de_verhoging_van_
 ):
     """De 10 punten voor een rijksmonument met een huurovereenkomst van vóór de inwerkingtreding van de Wet betaalbare huur tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12;
-    implementatietoelichting onzelfstandige woonruimten, 2.14.4; wettekst,
-    artikel 8a, tweede lid; wettekst, Bijlage I onder B, onderdeel 12.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.12
+    - implementatietoelichting onzelfstandige woonruimten, 2.14.4
+    - wettekst, artikel 8a, tweede lid
+    - wettekst, Bijlage I onder B, onderdeel 12
     """
     # Artikel 8a geldt alleen bij een huurovereenkomst van vóór de Wet betaalbare huur.
     eenheid = zorgwoning_van_71_m2(
@@ -91,8 +94,9 @@ def test_aanbelfunctie_met_video_en_audioverbinding_krijgt_0_25_punt(
 ):
     """Een aanbelfunctie met video- en audioverbinding krijgt 0,25 punt.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.2; wettekst,
-    Bijlage I onder B, onderdeel 12.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.12.2
+    - wettekst, Bijlage I onder B, onderdeel 12
     """
     eenheid = EenhedenEenheid(
         id="aanbelfunctie",
@@ -121,15 +125,16 @@ def test_laadpaal_bij_een_garage_van_een_adres_krijgt_2_punten(
 ):
     """Een laadpaal bij een garage van één adres krijgt 2 punten.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3; wettekst,
-    Bijlage I onder B, onderdeel 12.
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.12.3
+    - wettekst, Bijlage I onder B, onderdeel 12
 
     Een garage van één adres krijgt in rubriek 10 geen punten; de laadpalen
     worden daarom in deze rubriek gewaardeerd.
 
-    Bron: implementatietoelichting onzelfstandige woonruimten, 2.12.3; wettekst,
-    Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-    toelichting, inleiding).
+    Bron:
+    - implementatietoelichting onzelfstandige woonruimten, 2.12.3
+    - wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
     """
     eenheid = EenhedenEenheid(
         id="2 laadpalen",

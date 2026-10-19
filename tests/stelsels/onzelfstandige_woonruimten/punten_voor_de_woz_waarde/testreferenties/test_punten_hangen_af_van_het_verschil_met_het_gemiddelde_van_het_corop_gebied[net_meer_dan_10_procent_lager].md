@@ -2,8 +2,9 @@
 
 De punten voor de WOZ-waarde hangen af van hoeveel de WOZ-waarde per m² afwijkt van het gemiddelde van het COROP-gebied.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.11.2; wettekst,
-Bijlage I onder B, onderdeel 11.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.11.2
+- wettekst, Bijlage I onder B, onderdeel 11.1
 
 Dit geval: het verschil is -10,0003%; het rapport rondt af op -10,00
 

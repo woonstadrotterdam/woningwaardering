@@ -2,9 +2,9 @@
 
 De oppervlakte van een kast die met een vertrek is verbonden, telt mee in de m² voor de energieprestatie.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.4; wettekst,
-Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.4
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

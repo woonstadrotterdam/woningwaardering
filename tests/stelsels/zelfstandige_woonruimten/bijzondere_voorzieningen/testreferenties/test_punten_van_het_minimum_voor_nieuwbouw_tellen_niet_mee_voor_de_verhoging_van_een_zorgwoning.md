@@ -2,14 +2,16 @@
 
 De punten waarmee het minimum voor nieuwbouw de punten voor de WOZ-waarde aanvult, tellen niet mee in de punten waarover een zorgwoning 35% verhoging krijgt.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.12; wettekst,
-Bijlage I onder A, onderdeel 12.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.12
+- wettekst, Bijlage I onder A, onderdeel 12
 
 Het minimum voor nieuwbouw is 40 punten voor de WOZ-waarde bij een woning
 uit 2015 tot en met 2019 met minimaal 110 punten in de andere rubrieken.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst,
-Bijlage I onder A, onderdeel 11.2.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.5
+- wettekst, Bijlage I onder A, onderdeel 11.2
 
 ## Rapport
 

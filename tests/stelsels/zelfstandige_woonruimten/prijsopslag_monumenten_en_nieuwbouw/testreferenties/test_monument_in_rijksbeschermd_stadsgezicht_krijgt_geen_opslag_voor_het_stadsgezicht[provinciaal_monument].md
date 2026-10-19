@@ -2,8 +2,9 @@
 
 Een monument in een rijksbeschermd stadsgezicht krijgt de opslag van 5% voor het stadsgezicht niet.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.13.6; wettekst,
-artikel 8a, vijfde lid.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.13.6
+- wettekst, artikel 8a, vijfde lid
 
 Dit geval: het provinciaal monument krijgt zelf 15% opslag
 

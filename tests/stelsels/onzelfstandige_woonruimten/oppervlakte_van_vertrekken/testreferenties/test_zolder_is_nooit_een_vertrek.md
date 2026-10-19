@@ -2,9 +2,9 @@
 
 Een zolderruimte met de detailsoort `zolder` wordt nooit als vertrek gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.1.3;
-wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder
-B, toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.1.3
+- wettekst, Bijlage I onder A, toelichting rubriek 1 (via Bijlage I onder B, toelichting, inleiding)
 
 ## Rapport
 

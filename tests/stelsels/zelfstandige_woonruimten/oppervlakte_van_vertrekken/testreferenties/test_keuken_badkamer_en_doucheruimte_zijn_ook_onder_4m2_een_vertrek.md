@@ -2,8 +2,9 @@
 
 Een keuken, badkamer en doucheruimte zijn ook onder de 4 m² een vertrek.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1;
-wettekst, Bijlage I onder A, toelichting rubriek 1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.1
+- wettekst, Bijlage I onder A, toelichting rubriek 1
 
 ## Rapport
 

@@ -2,8 +2,9 @@
 
 De punten voor een energielabel hangen af van de labelklasse.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.4.4; wettekst,
-Bijlage I onder A, onderdeel 4.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.4.4
+- wettekst, Bijlage I onder A, onderdeel 4.1
 
 ## Rapport
 

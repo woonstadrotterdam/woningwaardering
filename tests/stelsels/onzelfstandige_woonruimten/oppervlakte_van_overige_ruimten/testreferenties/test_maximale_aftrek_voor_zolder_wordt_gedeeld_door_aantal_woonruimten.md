@@ -2,8 +2,9 @@
 
 De maximale aftrek van 5 punten voor een gemeenschappelijke zolder zonder vaste trap wordt gedeeld door het aantal onzelfstandige woonruimten.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.2.2.3;
-wettekst, Bijlage I onder B, toelichting rubriek 2.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.2.2.3
+- wettekst, Bijlage I onder B, toelichting rubriek 2
 
 ## Rapport
 

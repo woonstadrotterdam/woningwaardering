@@ -2,12 +2,14 @@
 
 Een energieprestatie zonder soort telt niet mee.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.3.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.3
 
 Zonder geldige energieprestatie bepaalt het bouwjaar de punten per m².
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.4.5; wettekst,
-Bijlage I onder B, onderdeel 4.1.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.4.5
+- wettekst, Bijlage I onder B, onderdeel 4.1
 
 ## Rapport
 

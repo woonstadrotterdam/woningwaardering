@@ -2,15 +2,16 @@
 
 Een carport die alleen door onzelfstandige woonruimten op hetzelfde adres wordt gedeeld, wordt in deze rubriek als Type II gewaardeerd.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.2; wettekst,
-Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B,
-toelichting, inleiding).
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.2
+- wettekst, Bijlage I onder A, toelichting rubriek 10 (via Bijlage I onder B, toelichting, inleiding)
 
 De punten van een parkeerplek worden na de verdeling over de adressen
 gedeeld door het aantal onzelfstandige woonruimten op het adres.
 
-Bron: implementatietoelichting onzelfstandige woonruimten, 2.10.4; wettekst,
-Bijlage I onder B, toelichting rubriek 10.
+Bron:
+- implementatietoelichting onzelfstandige woonruimten, 2.10.4
+- wettekst, Bijlage I onder B, toelichting rubriek 10
 
 ## Rapport
 

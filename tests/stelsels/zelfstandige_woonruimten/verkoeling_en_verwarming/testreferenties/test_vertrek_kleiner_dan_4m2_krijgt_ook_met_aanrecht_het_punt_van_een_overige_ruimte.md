@@ -2,10 +2,11 @@
 
 Een verwarmde ruimte die als vertrek is aangeleverd maar kleiner is dan 4 m², krijgt ook met een aanrecht alleen het punt van een overige ruimte.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.2.1.2;
-implementatietoelichting zelfstandige woonruimten, 2.3.2; wettekst,
-Bijlage I onder A, toelichting rubriek 1; wettekst, Bijlage I onder A,
-toelichting rubriek 3.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.2.1.2
+- implementatietoelichting zelfstandige woonruimten, 2.3.2
+- wettekst, Bijlage I onder A, toelichting rubriek 1
+- wettekst, Bijlage I onder A, toelichting rubriek 3
 
 ## Rapport
 

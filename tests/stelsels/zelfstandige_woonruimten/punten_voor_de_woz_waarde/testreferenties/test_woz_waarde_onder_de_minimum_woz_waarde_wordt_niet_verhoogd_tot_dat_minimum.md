@@ -2,8 +2,9 @@
 
 Een vastgestelde WOZ-waarde die lager is dan de minimum WOZ-waarde van € 85.806, wordt niet tot dat minimum verhoogd.
 
-Bron: implementatietoelichting zelfstandige woonruimten, 2.11.1; wettekst,
-Bijlage I onder A, onderdeel 11.1.
+Bron:
+- implementatietoelichting zelfstandige woonruimten, 2.11.1
+- wettekst, Bijlage I onder A, onderdeel 11.1
 
 ## Rapport
 
