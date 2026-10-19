@@ -29,7 +29,7 @@ from woningwaardering.vera.referentiedata import (
 
 def voorbeeld1_json_input_path() -> Path:
     """Pad naar het JSON input-voorbeeld zoals gebruikt in docs/tests."""
-    return Path("tests/data/generiek/input/37101000032.json")
+    return Path("tests/docs/37101000032.json")
 
 
 def voorbeeld2_python_eenheid() -> EenhedenEenheid:

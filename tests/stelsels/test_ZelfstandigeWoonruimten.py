@@ -15,7 +15,7 @@ from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten
 )
 
 MODELLEN = sorted(
-    (Path(__file__).parents[1] / "data/zelfstandige_woonruimten/input").glob("*.json")
+    (Path(__file__).parent / "modellen/zelfstandige_woonruimten").glob("*.json")
 )
 
 

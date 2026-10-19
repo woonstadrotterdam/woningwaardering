@@ -1,5 +1,4 @@
 from collections.abc import Callable, Iterable
-from pathlib import Path
 from warnings import WarningMessage
 
 import pytest
@@ -18,9 +17,6 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
-
-BASE_DIR = Path(__file__).parent.parent
-DATA_DIR = BASE_DIR / "tests/data"
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -100,30 +96,6 @@ def vergelijk_met_testreferentie(
         )
 
     return _vergelijk
-
-
-@pytest.fixture(
-    params=[
-        str(p) for p in (DATA_DIR / "zelfstandige_woonruimten/input").glob("*.json")
-    ]
-)
-def zelfstandige_woonruimten_inputmodel(request):
-    file_path = request.param
-    with open(file_path, "r+") as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-    return eenheid
-
-
-@pytest.fixture(
-    params=[
-        str(p) for p in (DATA_DIR / "onzelfstandige_woonruimten/input").glob("*.json")
-    ]
-)
-def onzelfstandige_woonruimten_inputmodel(request):
-    file_path = request.param
-    with open(file_path, "r+") as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-    return eenheid
 
 
 @pytest.fixture()
