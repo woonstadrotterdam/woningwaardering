@@ -41,6 +41,20 @@ Hiermee worden hooks voor `git commit` en `git push` geïnstalleerd (zoals in [`
 
 Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen of pushen; bij twijfel `uv run pre-commit install` opnieuw uitvoeren.
 
+## Agent skills
+
+We gebruiken de [Matt Pocock-skills](https://github.com/mattpocock/skills) als Claude Code-plugin. De versie staat vast in [`.claude/settings.json`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.claude/settings.json) (`ref` bij de marketplace `mattpocock`), omdat die moet passen bij de bestanden die `/setup-matt-pocock-skills` in de repo zet.
+
+Installeer de plugin eenmalig per clone:
+
+```bash
+claude plugin install mattpocock-skills@mattpocock --scope project
+```
+
+Installeer de skills niet daarnaast als officiële plugin (`mattpocock-skills@claude-plugins-official`) of via `npx skills add -g`; dan staan ze dubbel of laadt een andere versie.
+
+Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHANGELOG.md), zet de nieuwe tag in `ref`, draai zo nodig `/setup-matt-pocock-skills` opnieuw en commit de settings en de bestanden van de setup-skill samen.
+
 ## Tests en checks
 
 Met geïnstalleerde pre-commit-hooks draaien commit- en push-checks automatisch.

@@ -87,7 +87,9 @@ De verwachte output van de tests staat op twee plekken: de testreferenties (`tes
 
 ## Skills
 
-Gebruik [`skills/grill-me-with-docs/SKILL.md`](skills/grill-me-with-docs/SKILL.md) **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
+De [Matt Pocock-skills](https://github.com/mattpocock/skills) komen uit een Claude Code-plugin met een vastgezette versie; zie [Agent skills](docs/voor-ontwikkelaars/index.md#agent-skills) voor installeren en upgraden.
+
+Gebruik `/grill-with-docs` **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
 
 - plannen, ontwerpen, architectuur of refactor-voorstellen
 - domeinlogica, stelselgroepen, beleidsregel-interpretatie of VERA-modellering

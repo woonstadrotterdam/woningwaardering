@@ -26,7 +26,7 @@ repos:
         additional_dependencies:
           - prettier@2.8.1
         # Testreferenties worden alleen door de fixture vergelijk_met_testreferentie bijgewerkt.
-        exclude: "/testreferenties/"
+        exclude: '/testreferenties/|^\.claude/skills/'
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
