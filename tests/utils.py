@@ -1,18 +1,13 @@
 import difflib
 from collections import Counter
-from dataclasses import dataclass
-from datetime import date
 from decimal import Decimal
 from pathlib import Path
 from typing import Iterator
 
-import pytest
 from pytest import fail
 
 from woningwaardering.rapport import naar_rapport
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -128,25 +123,6 @@ def assert_output_model(
     assert_punten_op_twee_decimalen(resultaat)
 
 
-def laad_specifiek_input_en_output_model(
-    module_path: Path,
-    output_json_path: Path,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    file_name = output_json_path.name
-    input_path = module_path / f"input/{file_name}"
-    with open(input_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    with open(output_json_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
-
-
 def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterator[str]:
     green = "\x1b[92m"
     red = "\x1b[91m"
@@ -160,115 +136,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
         else diff
         for diff in diffresult
     )
-
-
-@dataclass
-class WarningConfig:
-    file: str
-    warnings: dict[type[Warning], str]
-
-
-def assert_stelselgroep_warnings(
-    warning_config: WarningConfig, peildatum: date, stelselgroep_class: Stelselgroep
-):
-    """
-    Generieke functie om warnings voor stelselgroepen te testen
-
-    Args:
-        warning_config (WarningConfig): WarningConfig object met waarschuwing test configuratie
-        peildatum (date): peildatum waarop de stelselgroep wordt gewaardeerd
-        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
-    """
-    with open(warning_config.file, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    with pytest.warns() as records:
-        stelselgroep = stelselgroep_class(peildatum=peildatum)
-        stelselgroep.waardeer(eenheid_input)
-
-        warning_message = [(r.category, str(r.message)) for r in records]
-        for warning_type, warning_message in warning_config.warnings.items():
-            assert any(
-                [
-                    warning_type == r.category and warning_message in str(r.message)
-                    for r in records
-                ]
-            ), f"Geen {warning_type} met message '{warning_message}' geraised"
-
-
-def assert_stelselgroep_output(
-    input_en_output_model: tuple[
-        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
-    ],
-    peildatum: date,
-    stelselgroep_class: Stelselgroep,
-):
-    eenheid_input, eenheid_output = input_en_output_model
-    normaliseer_ruimte_namen(eenheid_input)
-
-    stelselgroep = stelselgroep_class(peildatum=peildatum)
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    assert isinstance(
-        resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
-    ), "Resultaat is geen WoningwaarderingResultatenWoningwaarderingResultaat"
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        stelselgroep.stelselgroep,
-    )
-
-
-def assert_stelselgroep_specifiek_output(
-    specifieke_input_en_output_model: tuple[
-        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
-    ],
-    peildatum: date,
-    stelselgroep_class: Stelselgroep,
-):
-    """
-    Generieke functie om specifieke output voor stelselgroepen te testen
-
-    Args:
-        specifieke_input_en_output_model (tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]): Tuple van input en verwachte output
-        peildatum (date): peildatum
-        stelselgroep_class (Stelselgroep): Class van de stelselgroep om te testen
-    """
-    eenheid_input, eenheid_output = specifieke_input_en_output_model
-    stelselgroep = stelselgroep_class(peildatum=peildatum)
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        stelselgroep.stelselgroep,
-    )
-
-
-def maak_specifieke_input_en_output_model_fixture(base_path: Path) -> pytest.fixture:
-    """
-    Factory functie die een pytest fixture maakt voor het laden van specifieke test cases.
-
-    Args:
-        base_path (Path): Pad naar de directory waarin de test file zich bevindt
-
-    Returns:
-        pytest.fixture: Een pytest fixture die een tuple van input en output model retourneert
-    """
-
-    @pytest.fixture(params=[str(p) for p in (base_path / "output").rglob("*.json")])
-    def specifieke_input_en_output_model(request):
-        current_file_path = Path(request.fspath).parent
-        output_file_path = request.param
-        return laad_specifiek_input_en_output_model(
-            current_file_path, Path(output_file_path)
-        )
-
-    return specifieke_input_en_output_model
 
 
 def assert_unieke_criterium_ids(
@@ -408,3 +275,159 @@ def assert_punten_afgerond_op_kwarten(
             assert (
                 remainder == 0.0
             ), f"Groep '{groep.criterium_groep.naam}' heeft punten {groep.punten} die niet zijn afgerond op kwarten"
+
+
+def assert_invarianten_van_groep(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> None:
+    """Controleer de eigenschappen die voor elke gewaardeerde stelselgroep gelden."""
+    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat(groepen=[groep])
+    assert_unieke_criterium_ids(resultaat)
+    assert_som_bovenliggend_criterium(resultaat)
+    assert_punten_afgerond_op_kwarten(resultaat)
+    assert_punten_op_twee_decimalen(resultaat)
+
+
+def punten_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef de punten van elke waardering met punten, op naam van het criterium."""
+    punten: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in punten, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "punten_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        punten[naam] = waardering.punten
+    return punten
+
+
+def punten_per_bovenliggende(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str | None, dict[str, float]]:
+    """Geef de punten per waardering, gegroepeerd op de naam van het bovenliggende criterium.
+
+    Een waardering direct onder de stelselgroep staat onder de sleutel `None`.
+    """
+    namen = {
+        waardering.criterium.id: waardering.criterium.naam
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+    }
+    punten: dict[str | None, dict[str, float]] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.punten is None or waardering.criterium is None:
+            continue
+        bovenliggende = waardering.criterium.bovenliggende_criterium
+        groepsnaam = namen[bovenliggende.id] if bovenliggende else None
+        naam = waardering.criterium.naam or ""
+        onderliggend = punten.setdefault(groepsnaam, {})
+        assert (
+            naam not in onderliggend
+        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        onderliggend[naam] = waardering.punten
+    return punten
+
+
+def aantal_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef het aantal van elke waardering met een aantal, op naam van het criterium.
+
+    Bedoeld voor stelselgroepen waarin een waardering geen eigen punten heeft,
+    zoals de oppervlakte van vertrekken: daar is het aantal de oppervlakte in m²
+    en staan de punten op de stelselgroep (`groep.punten`).
+    """
+    aantallen: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in aantallen, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "aantal_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        aantallen[naam] = waardering.aantal
+    return aantallen
+
+
+def aantal_per_bovenliggende(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str | None, dict[str, float]]:
+    """Geef het aantal per waardering, gegroepeerd op de naam van het bovenliggende criterium.
+
+    Een waardering direct onder de stelselgroep staat onder de sleutel `None`.
+    """
+    namen = {
+        waardering.criterium.id: waardering.criterium.naam
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+    }
+    aantallen: dict[str | None, dict[str, float]] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.aantal is None or waardering.criterium is None:
+            continue
+        bovenliggende = waardering.criterium.bovenliggende_criterium
+        groepsnaam = namen[bovenliggende.id] if bovenliggende else None
+        naam = waardering.criterium.naam or ""
+        onderliggend = aantallen.setdefault(groepsnaam, {})
+        assert (
+            naam not in onderliggend
+        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        onderliggend[naam] = waardering.aantal
+    return aantallen
+
+
+def opslagpercentage_per_naam(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> dict[str, float]:
+    """Geef het opslagpercentage van elke waardering met een opslag, op naam van het criterium."""
+    opslagpercentages: dict[str, float] = {}
+    for waardering in groep.woningwaarderingen or []:
+        if waardering.opslagpercentage is None or waardering.criterium is None:
+            continue
+        naam = waardering.criterium.naam or ""
+        assert naam not in opslagpercentages, (
+            f"De naam '{naam}' komt meer dan één keer voor; "
+            "opslagpercentage_per_naam kan deze waarderingen niet onderscheiden."
+        )
+        opslagpercentages[naam] = waardering.opslagpercentage
+    return opslagpercentages
+
+
+def zolders_met_aftrek(
+    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+) -> list[str]:
+    """Geef de id's van de zolderruimten met een aftrek voor een zolder zonder vaste trap.
+
+    De aftrek staat direct onder de stelselgroep en heet voor elke zolderruimte
+    hetzelfde; alleen het criterium-id noemt de zolderruimte.
+    """
+    achtervoegsel = "__correctie_zolder_zonder_vaste_trap"
+    return [
+        waardering.criterium.id.removesuffix(achtervoegsel).rsplit("__", 1)[-1]
+        for waardering in groep.woningwaarderingen or []
+        if waardering.criterium is not None
+        and waardering.criterium.id is not None
+        and waardering.criterium.id.endswith(achtervoegsel)
+    ]
+
+
+def lees_model(pad: Path) -> tuple[EenhedenEenheid, str]:
+    """Geef de eenheid en de beschrijving van een model op stelselniveau.
+
+    De beschrijving staat in een Markdown-bestand met dezelfde naam naast de
+    JSON; ze is verplicht, zoals de docstring bij een waarderingstest.
+    """
+    beschrijving = pad.with_suffix(".md")
+    if not beschrijving.exists():
+        fail(
+            f"{pad.name} heeft geen beschrijving. Beschrijf in {beschrijving.name} "
+            "wat het model laat zien.",
+            pytrace=False,
+        )
+    eenheid = EenhedenEenheid.model_validate_json(pad.read_text())
+    return eenheid, beschrijving.read_text().strip()

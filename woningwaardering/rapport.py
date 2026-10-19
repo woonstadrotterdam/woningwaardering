@@ -21,7 +21,7 @@ _STELSELGROEPEN_MET_SUBTOTAAL_AANTAL = frozenset(
     }
 )
 
-# Kolombreedtes voor tabeloutput (zie docs/voor-ontwikkelaars/testing.md)
+# Kolombreedtes voor tabeloutput
 W_NAAM = 60
 W_GETAL = 10  # rechts uitgelijnd, bijv. "205000.00"
 W_EENHEID = 3  # links uitgelijnd na het getal, bijv. "EUR" / "m²" / "st"
