@@ -81,10 +81,15 @@ def _wettekst() -> dict[str, set[str]]:
     """Geef de onderdelen en de rubrieken van de toelichting van bijlage I, onder A en B."""
     wettekst = ET.parse(WETTEKST)
     bijlage = next(
-        element
-        for element in wettekst.iter("bijlage")
-        if element.get("label") == "Bijlage I"
+        (
+            element
+            for element in wettekst.iter("bijlage")
+            if element.get("label") == "Bijlage I"
+        ),
+        None,
     )
+    if bijlage is None:
+        raise ValueError(f"{WETTEKST.name} is niet te lezen: geen Bijlage I gevonden")
     nummers: dict[str, set[str]] = {}
     for onder, divisie in zip("AB", bijlage.findall("divisie")):
         nummers[f"{onder} onderdeel"] = {
@@ -102,6 +107,13 @@ def _wettekst() -> dict[str, set[str]]:
         nummers[f"artikel {artikel.get('label', '').removeprefix('Artikel ')}"] = {
             _tekst(nummer) for nummer in artikel.iter("lidnr")
         }
+    # Een andere structuur van de XML geeft hier één melding, in plaats van een
+    # melding voor elke bronverwijzing naar de wettekst.
+    soorten = ["A onderdeel", "A rubriek", "B onderdeel", "B rubriek"]
+    if leeg := [soort for soort in soorten if not nummers.get(soort)]:
+        raise ValueError(
+            f"{WETTEKST.name} is niet te lezen: geen {', '.join(leeg)} gevonden"
+        )
     return nummers
 
 
