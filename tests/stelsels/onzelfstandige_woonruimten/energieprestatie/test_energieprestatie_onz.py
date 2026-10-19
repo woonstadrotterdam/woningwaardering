@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import pytest
 
 from tests.input import ruimte
-from tests.utils import aantal_per_naam, assert_stelselgroep_output, punten_per_naam
+from tests.utils import aantal_per_naam, punten_per_naam
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
     Energieprestatie,
 )
@@ -29,16 +29,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def energieprestatie(peildatum):
     return Energieprestatie(peildatum=peildatum)
-
-
-def test_Energieprestatie_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        Energieprestatie,
-    )
 
 
 # De oppervlakte waarover de punten gelden

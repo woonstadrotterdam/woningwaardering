@@ -1,15 +1,13 @@
 import difflib
 from collections import Counter
-from datetime import date
 from decimal import Decimal
+from pathlib import Path
 from typing import Iterator
 
 from pytest import fail
 
 from woningwaardering.rapport import naar_rapport
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels.stelselgroep import Stelselgroep
-from woningwaardering.stelsels.utils import normaliseer_ruimte_namen
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -137,31 +135,6 @@ def kleur_diff(diffresult: list[str], use_loguru_colors: bool = True) -> Iterato
         if diff.startswith("-")
         else diff
         for diff in diffresult
-    )
-
-
-def assert_stelselgroep_output(
-    input_en_output_model: tuple[
-        EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat
-    ],
-    peildatum: date,
-    stelselgroep_class: Stelselgroep,
-):
-    eenheid_input, eenheid_output = input_en_output_model
-    normaliseer_ruimte_namen(eenheid_input)
-
-    stelselgroep = stelselgroep_class(peildatum=peildatum)
-
-    resultaat = WoningwaarderingResultatenWoningwaarderingResultaat()
-    assert isinstance(
-        resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
-    ), "Resultaat is geen WoningwaarderingResultatenWoningwaarderingResultaat"
-    resultaat.groepen = [stelselgroep.waardeer(eenheid_input)]
-
-    assert_output_model(
-        resultaat,
-        eenheid_output,
-        stelselgroep.stelselgroep,
     )
 
 
@@ -441,3 +414,20 @@ def zolders_met_aftrek(
         and waardering.criterium.id is not None
         and waardering.criterium.id.endswith(achtervoegsel)
     ]
+
+
+def lees_model(pad: Path) -> tuple[EenhedenEenheid, str]:
+    """Geef de eenheid en de beschrijving van een model op stelselniveau.
+
+    De beschrijving staat in een Markdown-bestand met dezelfde naam naast de
+    JSON; ze is verplicht, zoals de docstring bij een waarderingstest.
+    """
+    beschrijving = pad.with_suffix(".md")
+    if not beschrijving.exists():
+        fail(
+            f"{pad.name} heeft geen beschrijving. Beschrijf in {beschrijving.name} "
+            "wat het model laat zien.",
+            pytrace=False,
+        )
+    eenheid = EenhedenEenheid.model_validate_json(pad.read_text())
+    return eenheid, beschrijving.read_text().strip()

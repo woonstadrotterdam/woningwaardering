@@ -8,7 +8,6 @@ import pytest
 
 from tests.input import meergezinswoning_van_79_m2, woz_eenheden_voor_149_punten
 from tests.utils import (
-    assert_stelselgroep_output,
     opslagpercentage_per_naam,
     punten_per_naam,
 )
@@ -22,16 +21,6 @@ from woningwaardering.vera.referentiedata import Eenheidmonument
 @pytest.fixture()
 def prijsopslag_monumenten_en_nieuwbouw(peildatum):
     return PrijsopslagMonumentenEnNieuwbouw(peildatum=peildatum)
-
-
-def test_PrijsopslagMonumentenEnNieuwbouw_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        PrijsopslagMonumentenEnNieuwbouw,
-    )
 
 
 # Rijksmonumenten

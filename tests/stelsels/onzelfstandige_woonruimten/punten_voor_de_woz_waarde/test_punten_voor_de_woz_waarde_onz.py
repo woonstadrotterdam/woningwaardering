@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tests.utils import assert_stelselgroep_output, punten_per_naam
+from tests.utils import punten_per_naam
 from woningwaardering.stelsels.onzelfstandige_woonruimten import PuntenVoorDeWozWaarde
 from woningwaardering.vera.bvg.generated import (
     EenhedenAdresseerbaarObjectBasisregistratie,
@@ -19,16 +19,6 @@ from woningwaardering.vera.bvg.generated import (
 @pytest.fixture()
 def punten_voor_de_woz_waarde(peildatum):
     return PuntenVoorDeWozWaarde(peildatum=peildatum)
-
-
-def test_PuntenVoorDeWozWaarde_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        PuntenVoorDeWozWaarde,
-    )
 
 
 # Punten naar het gemiddelde van het COROP-gebied

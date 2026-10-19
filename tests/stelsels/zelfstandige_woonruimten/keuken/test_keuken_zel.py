@@ -5,7 +5,6 @@ import pytest
 from tests.input import aanrecht, element, ruimte
 from tests.utils import (
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_bovenliggende,
     punten_per_naam,
 )
@@ -24,14 +23,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def keuken(peildatum):
     return Keuken(peildatum=peildatum)
-
-
-def test_Keuken_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        Keuken,
-    )
 
 
 # Lengte van het aanrecht

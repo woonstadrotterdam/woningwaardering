@@ -7,6 +7,7 @@ import pytest
 from tests.peildatum import REFERENTIE_PEILDATUM
 from tests.testreferenties import (
     BIJWERKOPTIE,
+    Uitkomst,
     assert_geen_onverwachte_waarschuwingen,
     maak_testreferentie,
     pad_van_testreferentie,
@@ -15,7 +16,6 @@ from tests.testreferenties import (
 from tests.utils import assert_invarianten_van_groep
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
-    WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 
@@ -49,15 +49,17 @@ def peildatum():
 def vergelijk_met_testreferentie(
     request: pytest.FixtureRequest, recwarn: pytest.WarningsRecorder
 ) -> Callable[..., None]:
-    """Geef de functie waarmee een waarderingstest afsluit.
+    """Geef de functie waarmee een waarderingstest of een modeltest afsluit.
 
-    De functie doet drie dingen, in deze volgorde:
+    De uitkomst is een stelselgroep (waarderingstest) of het hele stelsel (model op
+    stelselniveau, met de beschrijving van het model). De functie doet drie dingen,
+    in deze volgorde:
 
     1. Ze faalt bij een `UserWarning` die de test niet heeft meegegeven.
     2. Ze controleert de invarianten die voor elke gewaardeerde stelselgroep
        gelden, zie `assert_invarianten_van_groep`.
-    3. Ze vergelijkt de waardering met de testreferentie van de test. Wijkt de
-       waardering af of ontbreekt de testreferentie, dan faalt de test.
+    3. Ze vergelijkt de uitkomst met de testreferentie van de test. Wijkt de
+       uitkomst af of ontbreekt de testreferentie, dan faalt de test.
        Bijwerken kan alleen met `task genereer-test-output`.
 
     Het is een fixture omdat de testreferentie de naam, de docstring en de
@@ -68,8 +70,9 @@ def vergelijk_met_testreferentie(
 
     def _vergelijk(
         eenheid: EenhedenEenheid,
-        groep: WoningwaarderingResultatenWoningwaarderingGroep,
+        uitkomst: Uitkomst,
         waarschuwingen: Iterable[WarningMessage] = (),
+        beschrijving: str | None = None,
     ) -> None:
         # Een test heeft één testreferentie; een tweede aanroep zou de eerste
         # overschrijven.
@@ -81,10 +84,18 @@ def vergelijk_met_testreferentie(
         waarschuwingen = list(waarschuwingen)
 
         assert_geen_onverwachte_waarschuwingen(recwarn, waarschuwingen)
-        assert_invarianten_van_groep(groep)
+        groepen = (
+            uitkomst.groepen or []
+            if isinstance(uitkomst, WoningwaarderingResultatenWoningwaarderingResultaat)
+            else [uitkomst]
+        )
+        for groep in groepen:
+            assert_invarianten_van_groep(groep)
         vergelijk_of_werk_bij(
             pad_van_testreferentie(request.node),
-            maak_testreferentie(request.node, eenheid, groep, waarschuwingen),
+            maak_testreferentie(
+                request.node, eenheid, uitkomst, waarschuwingen, beschrijving
+            ),
             bijwerken=request.config.getoption(BIJWERKOPTIE),
         )
 
@@ -105,35 +116,6 @@ def zelfstandige_woonruimten_inputmodel(request):
 
 @pytest.fixture(
     params=[
-        str(p)
-        for p in (DATA_DIR / "zelfstandige_woonruimten/output").rglob("*.json")
-        if ".unverified" not in str(p)
-    ]
-)
-def zelfstandige_woonruimten_input_en_outputmodel(
-    request,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    output_file_path = request.param
-    file_name = Path(output_file_path).name
-    input_file_path = DATA_DIR / "zelfstandige_woonruimten/input" / file_name
-
-    # get input model
-    with open(input_file_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    # get output model
-    with open(output_file_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
-
-
-@pytest.fixture(
-    params=[
         str(p) for p in (DATA_DIR / "onzelfstandige_woonruimten/input").glob("*.json")
     ]
 )
@@ -142,35 +124,6 @@ def onzelfstandige_woonruimten_inputmodel(request):
     with open(file_path, "r+") as f:
         eenheid = EenhedenEenheid.model_validate_json(f.read())
     return eenheid
-
-
-@pytest.fixture(
-    params=[
-        str(p)
-        for p in (DATA_DIR / "onzelfstandige_woonruimten/output").rglob("*.json")
-        if ".unverified" not in str(p)
-    ]
-)
-def onzelfstandige_woonruimten_input_en_outputmodel(
-    request,
-) -> tuple[EenhedenEenheid, WoningwaarderingResultatenWoningwaarderingResultaat]:
-    output_file_path = request.param
-    file_name = Path(output_file_path).name
-    input_file_path = DATA_DIR / "onzelfstandige_woonruimten/input" / file_name
-
-    # get input model
-    with open(input_file_path, "r+") as f:
-        eenheid_input = EenhedenEenheid.model_validate_json(f.read())
-
-    # get output model
-    with open(output_file_path, "r+") as f:
-        eenheid_output = (
-            WoningwaarderingResultatenWoningwaarderingResultaat.model_validate_json(
-                f.read()
-            )
-        )
-
-    return eenheid_input, eenheid_output
 
 
 @pytest.fixture()

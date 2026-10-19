@@ -7,7 +7,6 @@ from types import SimpleNamespace
 import pytest
 
 from tests.utils import (
-    assert_stelselgroep_output,
     opslagpercentage_per_naam,
     punten_per_naam,
 )
@@ -21,16 +20,6 @@ from woningwaardering.vera.referentiedata import Eenheidmonument
 @pytest.fixture()
 def prijsopslag_monumenten(peildatum):
     return PrijsopslagMonumenten(peildatum=peildatum)
-
-
-def test_PrijsopslagMonumenten_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        PrijsopslagMonumenten,
-    )
 
 
 # Rijksmonumenten

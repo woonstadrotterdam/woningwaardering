@@ -1,4 +1,3 @@
-from tests.utils import assert_output_model
 from woningwaardering import Woningwaardering
 from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
@@ -23,15 +22,6 @@ def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte(
     )
 
 
-def test_WoningwaarderingGeneriekOnzelfstandigeWoonruimte_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    eenheid_input, verwachte_output = onzelfstandige_woonruimten_input_en_outputmodel
-    woningwaardering = Woningwaardering(peildatum=peildatum)
-    resultaat = woningwaardering.waardeer(eenheid_input)
-    assert_output_model(resultaat, verwachte_output)
-
-
 def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
     zelfstandige_woonruimten_inputmodel, peildatum
 ):
@@ -47,12 +37,3 @@ def test_WoningwaarderingGeneriekZelfstandigeWoonruimte(
         == Woningwaarderingstelsel.zelfstandige_woonruimten
         for groepresultaat in resultaat.groepen
     )
-
-
-def test_WoningwaarderingGeneriekZelfstandigeWoonruimte_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    eenheid_input, verwachte_output = zelfstandige_woonruimten_input_en_outputmodel
-    woningwaardering = Woningwaardering(peildatum=peildatum)
-    resultaat = woningwaardering.waardeer(eenheid_input)
-    assert_output_model(resultaat, verwachte_output)

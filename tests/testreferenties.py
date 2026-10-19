@@ -1,6 +1,8 @@
-"""Testreferenties: het rapport en de output-JSON waarmee een waarderingstest vergelijkt.
+"""Testreferenties: het rapport en de output-JSON waarmee een test vergelijkt.
 
-Een testreferentie staat in `testreferenties/<testnaam>.md` naast de testmodule. Zie
+Een waarderingstest vergelijkt de uitkomst van één stelselgroep, een test van een
+model op stelselniveau die van het hele stelsel. Een testreferentie staat in
+`testreferenties/<testnaam>.md` naast de testmodule. Zie
 docs/voor-ontwikkelaars/testing.md voor de afspraken.
 """
 
@@ -20,6 +22,12 @@ from woningwaardering.rapport import naar_rapport
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
+    WoningwaarderingResultatenWoningwaarderingResultaat,
+)
+
+Uitkomst = (
+    WoningwaarderingResultatenWoningwaarderingGroep
+    | WoningwaarderingResultatenWoningwaarderingResultaat
 )
 
 # Alleen `task genereer-test-output` geeft deze optie mee aan pytest. Zonder de
@@ -60,10 +68,15 @@ def _json_blok(model: BaseModel, *, alleen_ingevuld: bool = False) -> list[str]:
     ]
 
 
-def _rapport_blok(groep: WoningwaarderingResultatenWoningwaarderingGroep) -> list[str]:
-    rapport = naar_rapport(groep).get_string()
+def _rapport_blok(uitkomst: Uitkomst, eenheid: EenhedenEenheid) -> list[str]:
+    if isinstance(uitkomst, WoningwaarderingResultatenWoningwaarderingResultaat):
+        rapport = naar_rapport(uitkomst, eenheid_id=eenheid.id).get_string()
+        return ["```text", rapport, "```"]
+    rapport = naar_rapport(uitkomst).get_string()
     if not rapport:
-        stelselgroep = groep.criterium_groep and groep.criterium_groep.stelselgroep
+        stelselgroep = (
+            uitkomst.criterium_groep and uitkomst.criterium_groep.stelselgroep
+        )
         naam = stelselgroep.naam if stelselgroep else "deze stelselgroep"
         return [f"Geen waarderingen voor {naam}."]
     return ["```text", rapport, "```"]
@@ -72,10 +85,14 @@ def _rapport_blok(groep: WoningwaarderingResultatenWoningwaarderingGroep) -> lis
 def maak_testreferentie(
     node: pytest.Function,
     eenheid: EenhedenEenheid,
-    groep: WoningwaarderingResultatenWoningwaarderingGroep,
+    uitkomst: Uitkomst,
     waarschuwingen: Iterable[WarningMessage],
+    beschrijving: str | None = None,
 ) -> str:
-    """Stel de tekst van een testreferentie samen."""
+    """Stel de tekst van een testreferentie samen.
+
+    De beschrijving van een model op stelselniveau komt na de docstring van de test.
+    """
     docstring = inspect.getdoc(node.function)
     if not docstring:
         pytest.fail(
@@ -90,10 +107,11 @@ def maak_testreferentie(
             "",
             docstring,
             "",
+            *([beschrijving, ""] if beschrijving else []),
             *([f"Dit geval: {toelichting.args[0]}", ""] if toelichting else []),
             "## Rapport",
             "",
-            *_rapport_blok(groep),
+            *_rapport_blok(uitkomst, eenheid),
             "",
             "## Waarschuwingen",
             "",
@@ -110,7 +128,7 @@ def maak_testreferentie(
             "",
             "## Output",
             "",
-            *_json_blok(groep),
+            *_json_blok(uitkomst),
             "",
         ]
     )
@@ -168,33 +186,43 @@ def assert_geen_onverwachte_waarschuwingen(
     )
 
 
-def _gevallen_per_testfunctie(testmodule: Path) -> dict[str, set[str]]:
-    """Geef per testfunctie de id's van de gevallen uit `pytest.param(..., id=...)`."""
+def _gevallen_per_testfunctie(testmodule: Path) -> dict[str, set[str] | None]:
+    """Geef per testfunctie de id's van de gevallen uit `pytest.param(..., id=...)`.
+
+    Staat een id niet letterlijk in de code, zoals bij de modellen op stelselniveau,
+    dan zijn de gevallen hier niet te kennen: de functie krijgt dan None.
+    """
     testfuncties = [
         node
         for node in ast.parse(testmodule.read_text()).body
         if isinstance(node, ast.FunctionDef) and node.name.startswith("test_")
     ]
-    return {
-        testfunctie.name: {
-            keyword.value.value
+    gevallen: dict[str, set[str] | None] = {}
+    for testfunctie in testfuncties:
+        ids = [
+            keyword.value
             for decorator in testfunctie.decorator_list
             for call in ast.walk(decorator)
             if isinstance(call, ast.Call)
             for keyword in call.keywords
             if keyword.arg == "id"
-            and isinstance(keyword.value, ast.Constant)
-            and isinstance(keyword.value.value, str)
-        }
-        for testfunctie in testfuncties
-    }
+        ]
+        letterlijk = all(
+            isinstance(id_, ast.Constant) and isinstance(id_.value, str) for id_ in ids
+        )
+        gevallen[testfunctie.name] = (
+            {id_.value for id_ in ids if isinstance(id_, ast.Constant)}
+            if letterlijk
+            else None
+        )
+    return gevallen
 
 
 def verweesde_testreferenties(tests_map: Path) -> list[Path]:
     """Geef de testreferenties waar geen test meer bij hoort."""
     verweesd = []
     for testreferenties_map in sorted(tests_map.rglob(MAP)):
-        gevallen: dict[str, set[str]] = {}
+        gevallen: dict[str, set[str] | None] = {}
         for testmodule in testreferenties_map.parent.glob("test_*.py"):
             gevallen.update(_gevallen_per_testfunctie(testmodule))
 
@@ -202,11 +230,13 @@ def verweesde_testreferenties(tests_map: Path) -> list[Path]:
             naam = _GELDIGE_TESTNAAM.match(pad.stem)
             functie = naam.group("functie") if naam else None
             geval = naam.group("geval") if naam else None
-            if (
-                pad.suffix != ".md"
-                or functie not in gevallen
-                or (geval is None) != (not gevallen[functie])
-                or (geval is not None and geval not in gevallen[functie])
+            if pad.suffix != ".md" or functie not in gevallen:
+                verweesd.append(pad)
+                continue
+            bekend = gevallen[functie]
+            if bekend is not None and (
+                (geval is None) != (not bekend)
+                or (geval is not None and geval not in bekend)
             ):
                 verweesd.append(pad)
     return verweesd

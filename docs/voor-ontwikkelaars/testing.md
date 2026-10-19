@@ -20,9 +20,9 @@ Een privéfunctie van een stelselgroep test je via een waarderingstest: die blij
 
 ### Model op stelselniveau
 
-Een model onder `tests/data/<stelsel>/input/` wordt door het hele stelsel gewaardeerd en per stelselgroep vergeleken met de verwachte output in `output/`. Kies het voor een beleidsregel die over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/zelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`.
+Een model is een JSON onder `tests/data/<stelsel>/input/`, met een beschrijving in een Markdown-bestand met dezelfde naam. Het hele stelsel waardeert het model, en `tests/stelsels/test_<Stelsel>.py` vergelijkt de uitkomst met een testreferentie, met de beschrijving bovenaan en de waarschuwingen die het model oproept. Kies het voor een beleidsregel die over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/data/onzelfstandige_woonruimten/input/parkeerruimten_en_laadpalen.json`.
 
-Reken de verwachte output van een nieuw model met de hand na, zoals in stap 1 van een waarderingstest. Een model op stelselniveau moet zonder waarschuwing te waarderen zijn. Een scenario dat een `UserWarning` oproept, hoort daarom in een waarderingstest.
+Reken de verwachte output van een nieuw model met de hand na, zoals in stap 1 van een waarderingstest.
 
 ## Een waarderingstest schrijven
 

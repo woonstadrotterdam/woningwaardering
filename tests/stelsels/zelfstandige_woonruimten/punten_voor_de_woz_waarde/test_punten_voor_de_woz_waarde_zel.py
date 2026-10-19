@@ -13,7 +13,6 @@ from tests.input import (
 from tests.utils import (
     aantal_per_bovenliggende,
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_naam,
 )
 from woningwaardering.stelsels.zelfstandige_woonruimten import PuntenVoorDeWozWaarde
@@ -50,16 +49,6 @@ def vervanger_voor_package_monumenten(monkeypatch):
     """
     monkeypatch.setitem(
         sys.modules, "monumenten", SimpleNamespace(MonumentenClient=None)
-    )
-
-
-def test_PuntenVoorDeWozWaarde_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        PuntenVoorDeWozWaarde,
     )
 
 

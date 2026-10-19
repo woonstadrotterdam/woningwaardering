@@ -5,7 +5,6 @@ import pytest
 from tests.input import element, ruimte
 from tests.utils import (
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_bovenliggende,
     punten_per_naam,
 )
@@ -25,16 +24,6 @@ from woningwaardering.vera.referentiedata import (
 def gemeenschappelijke_binnenruimten_gedeeld_met_meerdere_adressen(peildatum):
     return GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen(
         peildatum=peildatum
-    )
-
-
-def test_GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        GemeenschappelijkeBinnenruimtenGedeeldMetMeerdereAdressen,
     )
 
 

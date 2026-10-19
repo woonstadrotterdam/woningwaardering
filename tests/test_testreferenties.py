@@ -28,10 +28,23 @@ def test_verweesde_testreferenties(tmp_path):
         ")\n"
         "def test_tabel(waarde):\n"
         "    pass\n"
+        "\n"
+        "\n"
+        "@pytest.mark.parametrize(\n"
+        '    "pad", [pytest.param(pad, id=pad.stem) for pad in MODELLEN]\n'
+        ")\n"
+        "def test_model(pad):\n"
+        "    pass\n"
     )
     testreferenties = tmp_path / MAP
     testreferenties.mkdir()
-    bij_een_test = ["test_enkel.md", "test_tabel[een].md", "test_tabel[twee].md"]
+    # Bij test_model staan de id's niet letterlijk in de code; elk geval telt.
+    bij_een_test = [
+        "test_enkel.md",
+        "test_tabel[een].md",
+        "test_tabel[twee].md",
+        "test_model[12006000004].md",
+    ]
     verweesd = [
         "test_verwijderd.md",
         "test_tabel[drie].md",

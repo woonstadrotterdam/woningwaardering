@@ -4,7 +4,7 @@ from datetime import date
 
 import pytest
 
-from tests.utils import assert_stelselgroep_output, punten_per_naam
+from tests.utils import punten_per_naam
 from woningwaardering.stelsels.zelfstandige_woonruimten.energieprestatie import (
     Energieprestatie,
 )
@@ -27,16 +27,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def energieprestatie(peildatum):
     return Energieprestatie(peildatum=peildatum)
-
-
-def test_Energieprestatie_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        Energieprestatie,
-    )
 
 
 # Energielabel en energie-index

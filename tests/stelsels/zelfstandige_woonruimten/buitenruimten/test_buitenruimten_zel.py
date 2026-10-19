@@ -3,7 +3,7 @@
 import pytest
 
 from tests.input import ruimte
-from tests.utils import assert_stelselgroep_output, punten_per_naam
+from tests.utils import punten_per_naam
 from woningwaardering.stelsels.zelfstandige_woonruimten import Buitenruimten
 from woningwaardering.vera.bvg.generated import EenhedenEenheid, EenhedenRuimte
 from woningwaardering.vera.referentiedata import Ruimtedetailsoort, Ruimtesoort
@@ -12,14 +12,6 @@ from woningwaardering.vera.referentiedata import Ruimtedetailsoort, Ruimtesoort
 @pytest.fixture()
 def buitenruimten(peildatum):
     return Buitenruimten(peildatum=peildatum)
-
-
-def test_Buitenruimten_output(zelfstandige_woonruimten_input_en_outputmodel, peildatum):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        Buitenruimten,
-    )
 
 
 # Privé-buitenruimten

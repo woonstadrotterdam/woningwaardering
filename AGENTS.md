@@ -71,7 +71,7 @@ uv run pre-commit run --all-files --hook-stage pre-push
 
 ### Verwachte output
 
-De verwachte output van de tests staat op drie plekken: de testreferenties van waarderingstests (`tests/**/testreferenties/*.md`), `tests/data/**/output/` en `tests/docs/output_json_*.json`. `task genereer-test-output` overschrijft ze alle drie. Daarna slaagt elke vergelijking, ook als de output fout is: een groene suite zegt dan alleen dat de verwachte output is meegeschoven, niet dat de code klopt.
+De verwachte output van de tests staat op twee plekken: de testreferenties (`tests/**/testreferenties/*.md`) en `tests/docs/output_json_*.json`. `task genereer-test-output` overschrijft ze allebei. Daarna slaagt elke vergelijking, ook als de output fout is: een groene suite zegt dan alleen dat de verwachte output is meegeschoven, niet dat de code klopt.
 
 - Draai `task genereer-test-output` wanneer uit de taak blijkt dat de output gaat wijzigen (punten, namen, criterium-id's, rapport), zoals bij een bugfix voor verkeerde punten, of wanneer de gebruiker vooraf heeft gezegd dat de output mag wijzigen. Een nieuwe test heeft nog geen verwachte output en valt hier ook onder.
 - Bekijk daarna de diff: alleen de verwachte output die de taak hoort te raken is gewijzigd. Is er meer gewijzigd, zet die bestanden dan terug.

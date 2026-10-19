@@ -5,7 +5,6 @@ import pytest
 from tests.input import element, ruimte
 from tests.utils import (
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_bovenliggende,
     punten_per_naam,
 )
@@ -23,16 +22,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def gemeenschappelijke_parkeerruimten(peildatum):
     return GemeenschappelijkeParkeerruimten(peildatum=peildatum)
-
-
-def test_GemeenschappelijkeParkeerruimten_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        GemeenschappelijkeParkeerruimten,
-    )
 
 
 # Type parkeerplek

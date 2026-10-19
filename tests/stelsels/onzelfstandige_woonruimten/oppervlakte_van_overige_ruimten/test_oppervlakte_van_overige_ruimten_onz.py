@@ -6,7 +6,6 @@ from tests.input import element, elementen, ruimte
 from tests.utils import (
     aantal_per_bovenliggende,
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_naam,
     zolders_met_aftrek,
 )
@@ -24,16 +23,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def oppervlakte_van_overige_ruimten(peildatum):
     return OppervlakteVanOverigeRuimten(peildatum=peildatum)
-
-
-def test_OppervlakteVanOverigeRuimten_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        OppervlakteVanOverigeRuimten,
-    )
 
 
 # Gemeenschappelijke overige ruimten

@@ -7,7 +7,6 @@ import pytest
 from tests.input import elementen, ruimte, zorgwoning_van_71_m2
 from tests.utils import (
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_bovenliggende,
     punten_per_naam,
 )
@@ -26,16 +25,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def bijzondere_voorzieningen(peildatum):
     return BijzondereVoorzieningen(peildatum=peildatum)
-
-
-def test_BijzondereVoorzieningen_output(
-    zelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        zelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        BijzondereVoorzieningen,
-    )
 
 
 # Zorgwoning

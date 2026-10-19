@@ -5,7 +5,6 @@ import pytest
 from tests.input import ruimte
 from tests.utils import (
     aantal_per_naam,
-    assert_stelselgroep_output,
     punten_per_naam,
 )
 from woningwaardering.stelsels.onzelfstandige_woonruimten import (
@@ -22,16 +21,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def aftrekpunten(peildatum):
     return Aftrekpunten(peildatum=peildatum)
-
-
-def test_Aftrekpunten_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        Aftrekpunten,
-    )
 
 
 # Oppervlakte van vertrekken minder dan 8 m²

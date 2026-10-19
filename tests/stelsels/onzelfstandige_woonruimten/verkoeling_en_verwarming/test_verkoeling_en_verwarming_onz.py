@@ -4,7 +4,6 @@ import pytest
 
 from tests.input import aanrecht, element, ruimte
 from tests.utils import (
-    assert_stelselgroep_output,
     punten_per_bovenliggende,
     punten_per_naam,
 )
@@ -22,16 +21,6 @@ from woningwaardering.vera.referentiedata import (
 @pytest.fixture()
 def verkoeling_en_verwarming(peildatum):
     return VerkoelingEnVerwarming(peildatum=peildatum)
-
-
-def test_VerkoelingEnVerwarming_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    assert_stelselgroep_output(
-        onzelfstandige_woonruimten_input_en_outputmodel,
-        peildatum,
-        VerkoelingEnVerwarming,
-    )
 
 
 # Verwarming en verkoelingsfunctie in privéruimten
