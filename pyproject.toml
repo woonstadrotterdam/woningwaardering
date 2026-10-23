@@ -56,6 +56,12 @@ omit = [
     "woningwaardering/vera/*",
     ]
 
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"logging".msg = "Gebruik loguru; zie docs/voor-ontwikkelaars/logging.md"
+
+[tool.ruff.lint]
+extend-select = ["TID251"]
+
 [project.optional-dependencies]
 test = [
     "pre-commit>=3.3",
