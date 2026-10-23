@@ -4,8 +4,6 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 
 ## Wat Lees Je Wanneer
 
-Lees alleen wat bij de taak hoort.
-
 | Als de taak raakt aan                                                                                    | Lees dan eerst                                                                                                                |
 | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en de bronnen onder [Domeinregels](#domeinregels)                   |
@@ -14,9 +12,8 @@ Lees alleen wat bij de taak hoort.
 | Naamgeving                                                                                               | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                       |
 | Warnings of logging                                                                                      | `docs/voor-ontwikkelaars/logging.md` en `docs/index.md`                                                                       |
 | Installatie, repository-opzet of releases                                                                | `docs/voor-ontwikkelaars/index.md` en `releases.md`                                                                           |
-| Doel, disclaimer en actuele beleidsboek- en VERA-versies                                                 | `README.md` en `pyproject.toml`                                                                                               |
 | Domeintermen in code, docs of comments                                                                   | `GLOSSARY.md`                                                                                                                 |
-| Typefout, formatting of eenduidige testfix zonder domeinvraag                                            | Niets extra                                                                                                                   |
+| Triviale fix: typefout, formatting of eenduidige testfix zonder domeinvraag                              | Niets extra                                                                                                                   |
 
 ## Omgeving En Commands
 
