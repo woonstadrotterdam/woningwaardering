@@ -6,7 +6,7 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 
 | Als de taak raakt aan                                                                                    | Lees dan eerst                                                                                                                |
 | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en de bronnen onder [Domeinregels](#domeinregels)                   |
+| Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en `docs/voor-ontwikkelaars/bronnen.md`                             |
 | Outputstructuur, criterium-id's of builders                                                              | `docs/voor-ontwikkelaars/criteriumstrategie.md`, `docs/index.md` en de inline voorbeeld-output in `docs/aan-de-slag/index.md` |
 | Tests of testdata                                                                                        | `docs/voor-ontwikkelaars/testing.md` en `data.md`                                                                             |
 | Naamgeving                                                                                               | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                       |
@@ -74,7 +74,7 @@ Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale 
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Sla grillen over bij een triviale fix. Tijdens het grillen zijn wettekst, beleidsboek en implementatietoelichting feiten die je zelf opzoekt en citeert volgens [Domeinregels](#domeinregels).
+Sla grillen over bij een triviale fix. Zoek tijdens het grillen zelf op wat wettekst, beleidsboek en implementatietoelichting zeggen, en citeer dat volgens [`bronnen.md`](docs/voor-ontwikkelaars/bronnen.md).
 
 Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
@@ -108,12 +108,7 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 
 ## Domeinregels
 
-- Volg voor puntberekeningen de volgorde van autoriteit in [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md). Vermeld tegenstrijdigheden tussen bronnen.
-- Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
-- Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
-- Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
-- Rapporteer alleen een uitkomst van de huurprijscheck die de skill `huurprijscheck` of de gebruiker gaf.
-- Geef bij een citaat uit een online bron, ook in antwoorden aan de gebruiker, de link naar de pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), zodat de lezer op de tekst reageert en niet op jouw samenvatting.
+- Lees bij puntberekeningen en bij elk citaat uit wettekst of beleidsboek eerst [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md): de volgorde van autoriteit, waar je elke bron vindt en hoe je citeert.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
