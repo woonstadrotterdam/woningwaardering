@@ -26,7 +26,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen g
 - Wettekst: zoek en citeer eerst in de lokale XML-kopie en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
 - Online beleidsboek: check en citeer de actuele HTML-pagina's.
 - Implementatietoelichting: check naast de toelichting altijd ook het online beleidsboek.
-- Citeer letterlijk, met regelnummer of artikel. Geef bij een citaat uit een online bron, ook in antwoorden aan de gebruiker, de link naar de pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), zodat de lezer op de tekst reageert en niet op een samenvatting.
+- Citeer letterlijk, met paragraafnummer (beleidsboek en implementatietoelichting) of artikel en lid (wettekst). Geef bij een citaat in een PR, issue of antwoord aan de gebruiker de link naar de online pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), ook als je uit de lokale XML-kopie citeert, zodat de lezer op de tekst reageert en niet op een samenvatting.
 - Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck`.
 
 ## Projectgrenzen

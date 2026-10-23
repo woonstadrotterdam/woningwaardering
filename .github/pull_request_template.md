@@ -34,12 +34,13 @@
 
 - ☐ Beleidsboek Huurcommissie (online, actueel)
 - ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
+- ☐ Huurprijscheck (wettekst en beleidsboek niet sluitend; datum, tijdvak en input staan in de implementatietoelichting)
 
 **Link:** <!-- pagina van het online beleidsboek of artikel van de wettekst waar de quote staat -->
 
 **Quote:**
 
-> Relevante tekst uit de gekozen bron (met paragraaf-/artikelnummer)
+> Relevante tekst uit de gekozen bron (met paragraaf- of artikelnummer)
 
 **Opmerking (optioneel):** toelichting op de gemaakte keuze of interpretatie.
 
