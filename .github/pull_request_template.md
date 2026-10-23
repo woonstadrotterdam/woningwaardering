@@ -35,6 +35,8 @@
 - ☐ Beleidsboek Huurcommissie (online, actueel)
 - ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
 
+**Link:** <!-- pagina van het online beleidsboek of artikel van de wettekst waar de quote staat -->
+
 **Quote:**
 
 > Relevante tekst uit de gekozen bron (met paragraaf-/artikelnummer)

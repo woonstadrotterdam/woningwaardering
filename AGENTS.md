@@ -114,6 +114,8 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 - Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
 - Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
+- Elke wijziging in domeinlogica citeert het regelnummer of artikel van de bron in het codecommentaar en in de sectie Bronverwijzing van de pull request.
+- Geef bij elk citaat uit een online bron, in de pull request en in antwoorden aan de gebruiker, ook de link naar de pagina waar de tekst staat, zo specifiek als de bron toelaat: de rubriekpagina van het online beleidsboek of het artikel in de online wettekst.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
