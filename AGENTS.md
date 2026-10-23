@@ -64,6 +64,7 @@ De verwachte output van de tests staat op twee plekken: de testreferenties (`tes
 - Geef de PR-titel de vorm van een Conventional Commit, zoals bij commitberichten. Het type bepaalt het label en daarmee de rubriek in de release notes; zie [releases.md](docs/voor-ontwikkelaars/releases.md#labels-en-release-notes).
 - Gebruik de PR-template in [`.github/pull_request_template.md`](.github/pull_request_template.md).
 - Vervang `☐` door `☑` bij invullen; gebruik geen GitHub-task-syntax (`- [ ]` / `- [x]`) — die telt mee als PR-tasks op GitHub.
+- Push je naar een branch met een open pull request, werk dan in dezelfde beurt de titel en beschrijving bij als die de wijziging nog niet dekken. Pas alleen aan wat door de push verandert en laat tekst van anderen staan.
 
 ## Skills
 
