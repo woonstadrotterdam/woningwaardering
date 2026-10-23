@@ -13,11 +13,11 @@ description: >-
 
 De huurprijscheck is de rekentool van de Huurcommissie. Hij heeft geen API; `scripts/huurprijscheck.py` bedient de wizard via HTTP en leest veldnamen en keuzes uit de pagina zelf. Het script gebruikt alleen de standaardbibliotheek.
 
-## Regels
+## Uitgangspunten
 
 - De huurprijscheck staat in de volgorde van autoriteit onder wettekst en online beleidsboek (zie `docs/voor-ontwikkelaars/bronnen.md`). Is de wettekst eenduidig, dan blijft die leidend, ook als de tool iets anders berekent; meld het verschil dan.
 - Rapporteer alleen wat het script heeft teruggegeven. Lukt het doorrekenen niet, zeg dat en vraag de gebruiker de tool zelf te controleren.
-- Gebruik fictieve gegevens en vul WOZ-waarde en energielabel zelf in. Zoek alleen een adres op wanneer de uitkomst van de regio afhangt, en gebruik dan een adres dat de gebruiker geeft of dat al in een model onder `tests/stelsels/modellen/` staat.
+- Gebruik fictieve gegevens en vul WOZ-waarde en energielabel zelf in, zodat er geen persoonsgegevens of echte adressen naar een externe dienst gaan. Zoek alleen een adres op wanneer de uitkomst van de regio afhangt, en gebruik dan een adres dat de gebruiker geeft of dat al in een model onder `tests/stelsels/modellen/` staat.
 - Het is een publieke dienst: reken één scenario tegelijk door, niet in een lus over testdata.
 
 ## Werkwijze
@@ -25,13 +25,13 @@ De huurprijscheck is de rekentool van de Huurcommissie. Hij heeft geen API; `scr
 Roep het script aan vanuit de root van de repository. Elk commando drukt de velden van de huidige pagina af, de links die je kunt volgen en de puntentelling tot nu toe.
 
 ```bash
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py start zelfstandig
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende regime=39 wozValue=300000 wozReferenceDate=1-1-2025 energyPerformanceType="Energielabel vanaf 2021" energyPerformanceNewLabel="Label C" houseType=1
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies Woonkamer
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py vul size=20 heated=Ja
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies "Woonkamer Toevoegen"
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende
-python .claude/skills/huurprijscheck/scripts/huurprijscheck.py resultaat
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py start zelfstandig
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende regime=39 wozValue=300000 wozReferenceDate=1-1-2025 energyPerformanceType="Energielabel vanaf 2021" energyPerformanceNewLabel="Label C" houseType=1
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies Woonkamer
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py vul size=20 heated=Ja
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies "Woonkamer Toevoegen"
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende
+uv run python .claude/skills/huurprijscheck/scripts/huurprijscheck.py resultaat
 ```
 
 | Commando                                     | Wat het doet                                                                                                                                                        |
@@ -46,11 +46,11 @@ python .claude/skills/huurprijscheck/scripts/huurprijscheck.py resultaat
 
 Een veld benoem je met het laatste deel van de naam uit de veldenlijst (`size` voor `rooms.123.size`). Een keuze geef je als waarde (`heated=1`) of als label (`heated=Ja`). Ga af op de vraag in de middelste kolom, niet op de veldnaam: `serviceFlat` is bijvoorbeeld de vraag naar voorzieningen voor personen met een handicap.
 
-Isoleer de regel die je onderzoekt: reken hetzelfde scenario twee keer door met één verschil en vergelijk de regel in de puntentelling waar het om gaat. Houd de rest van het scenario zo klein mogelijk.
+Isoleer de beleidsregel die je onderzoekt: reken hetzelfde scenario twee keer door met één verschil en vergelijk de post in de puntentelling waar het om gaat. Houd de rest van het scenario zo klein mogelijk.
 
 ## Valkuilen
 
-- De wizard loopt in vaste stappen: woning of woonruimte, binnenruimtes, buitenruimtes, bijzonderheden, resultaat. Het tijdvak (`regime`) bepaalt welke regels gelden; kies het tijdvak van de peildatum.
+- De wizard loopt in vaste stappen: woning of woonruimte, binnenruimtes, buitenruimtes, bijzonderheden, resultaat. Het tijdvak (`regime`) bepaalt welke beleidsregels gelden; kies het tijdvak van de peildatum.
 - De wizard houdt je niet tegen bij ontbrekende gegevens. Controleer daarom met `resultaat` of er bovenaan een melding staat dat gegevens ontbreken; de puntentelling is dan onvolledig.
 - De peildatum van de WOZ-waarde moet bij het tijdvak horen: per tijdvak accepteert de wizard twee peildata, anders meldt het resultaat een ongeldige peildatum.
 - Bij het energielabel moet `energyPerformanceType` passen bij het veld dat je invult (`Energielabel vanaf 2021` hoort bij `energyPerformanceNewLabel`). Anders meldt het resultaat dat het energielabel ontbreekt.
@@ -64,4 +64,4 @@ Isoleer de regel die je onderzoekt: reken hetzelfde scenario twee keer door met 
 
 ## Vastleggen
 
-Leg een uitkomst die een implementatiekeuze onderbouwt vast in de relevante pagina van `docs/implementatietoelichtingen/`: de datum van de controle, het tijdvak, de ingevulde gegevens en de regels uit de puntentelling waar het om gaat.
+Leg een uitkomst die een implementatiekeuze onderbouwt vast in de relevante pagina van `docs/implementatietoelichtingen/`: de datum van de controle, het tijdvak, de ingevulde gegevens en de posten uit de puntentelling waar het om gaat.
