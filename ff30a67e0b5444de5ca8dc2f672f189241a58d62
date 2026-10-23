@@ -1,0 +1,253 @@
+{
+  "blameprompt_version": "1.0.1",
+  "receipts": [
+    {
+      "id": "c906c810-7fea-4913-bc10-5387eed39c6d",
+      "provider": "claude",
+      "model": "claude-opus-5-5",
+      "session_id": "df3ff0d3-b357-4b4e-8324-c284cfe1d741",
+      "prompt_summary": "Please create a test issue",
+      "response_summary": "I created the test issue [#437](https://github.com/woonstadrotterdam/woningwaardering/issues/437), titled \"test: testissue (mag gesloten worden)\". The repo is public, so anyone can see it. I didn't add any labels.\n\nThis repo's workflow usually adds a Jira placeholder for each new issue. Since this one is only a test, I didn't create it. I can make the Jira placeholder if you want, or close #437 once you've checked it.",
+      "prompt_hash": "sha256:c0e694d2ee47779d2b6c5ae29447d05402bb5fc01e3e9634f4d9a560fc3dc3eb",
+      "message_count": 5,
+      "cost_usd": 0.0,
+      "timestamp": "2026-10-23T07:52:48.448Z",
+      "session_start": "2026-10-23T07:52:48.431Z",
+      "session_end": "2026-10-23T07:53:06.265Z",
+      "session_duration_secs": 17,
+      "ai_response_time_secs": 4.016,
+      "prompt_submitted_at": "2026-10-23T07:52:48.530940Z",
+      "prompt_duration_secs": 22,
+      "accepted_lines": 0,
+      "overridden_lines": 0,
+      "user": "Ben Verhees <ben.verhees@woonstadrotterdam.nl>",
+      "file_path": ".cursor/skills",
+      "line_range": [
+        0,
+        0
+      ],
+      "files_changed": [
+        {
+          "path": ".cursor/skills",
+          "line_range": [
+            0,
+            0
+          ],
+          "deletions": 1
+        },
+        {
+          "path": ".gitignore",
+          "line_range": [
+            167,
+            169
+          ],
+          "blob_hash": "b0eb6e2f32d0e66b7a0da038eca354511ece6d62",
+          "additions": 3
+        },
+        {
+          "path": "AGENTS.md",
+          "line_range": [
+            7,
+            126
+          ],
+          "blob_hash": "a6c045ee7caa6f30f80639c04df3d64ec958a958",
+          "additions": 19,
+          "deletions": 5
+        },
+        {
+          "path": "CLAUDE.md",
+          "line_range": [
+            0,
+            0
+          ],
+          "deletions": 2
+        },
+        {
+          "path": "CONTEXT.md",
+          "line_range": [
+            0,
+            0
+          ],
+          "deletions": 122
+        },
+        {
+          "path": "docs/voor-ontwikkelaars/index.md",
+          "line_range": [
+            48,
+            49
+          ],
+          "blob_hash": "9e1a6376a2f0690fd470466955d4a631109db4e9",
+          "additions": 2
+        }
+      ],
+      "prompt_number": 1,
+      "total_additions": 24,
+      "total_deletions": 130,
+      "tools_used": [
+        "Bash"
+      ],
+      "conversation": [
+        {
+          "turn": 0,
+          "role": "user",
+          "content": "Please create a test issue"
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "content": "Bash(command: \"cat docs/agents/issue-tracker.md docs/agents/triage-labels.md; gh repo view woon...\")",
+          "tool_name": "Bash"
+        },
+        {
+          "turn": 2,
+          "role": "tool",
+          "content": "Bash(command: \"gh issue create --repo woonstadrotterdam/woningwaardering --title \"test: testiss...\")",
+          "tool_name": "Bash"
+        },
+        {
+          "turn": 3,
+          "role": "assistant",
+          "content": "I created the test issue [#437](https://github.com/woonstadrotterdam/woningwaardering/issues/437), titled \"test: testissue (mag gesloten worden)\". The repo is public, so anyone can see it. I didn't add any labels.\n\nThis repo's workflow usually adds a Jira placeholder for each new issue. Since this one is only a test, I didn't create it. I can make the Jira placeholder if you want, or close #437 once you've checked it."
+        }
+      ],
+      "prompt_quality": {
+        "score": 45,
+        "rating": "Poor",
+        "issues": [
+          "no_file_reference"
+        ],
+        "category": "code_generation"
+      }
+    },
+    {
+      "id": "59633213-91b8-47bc-8e92-5943e25a3e35",
+      "provider": "claude",
+      "model": "claude-opus-5-5",
+      "session_id": "df3ff0d3-b357-4b4e-8324-c284cfe1d741",
+      "prompt_summary": "delete the test issue",
+      "response_summary": "I couldn't delete [#437](https://github.com/woonstadrotterdam/woningwaardering/issues/437) because only repo admins can delete issues on GitHub, and your account isn't one. Instead I closed it as \"not planned\" with the comment \"Testissue, niet nodig.\" It's still visible on the public repo. If you want it removed completely, a repo admin can delete it from the issue page or with `gh issue delete 437`.",
+      "prompt_hash": "sha256:4f2fc7c0e6105084045f9f6feba47c09ea47ea14b32ccd1ab6e53130fcdf6b4e",
+      "message_count": 12,
+      "cost_usd": 0.01972635,
+      "input_tokens": 26,
+      "output_tokens": 307,
+      "cache_read_tokens": 46707,
+      "cache_creation_tokens": 275,
+      "timestamp": "2026-10-23T07:53:37.244Z",
+      "session_start": "2026-10-23T07:52:48.431Z",
+      "session_end": "2026-10-23T07:53:54.046Z",
+      "session_duration_secs": 65,
+      "ai_response_time_secs": 3.7976,
+      "prompt_submitted_at": "2026-10-23T07:53:37.368891Z",
+      "prompt_duration_secs": 20,
+      "user": "Ben Verhees <ben.verhees@woonstadrotterdam.nl>",
+      "file_path": "",
+      "line_range": [
+        0,
+        0
+      ],
+      "parent_receipt_id": "c906c810-7fea-4913-bc10-5387eed39c6d",
+      "prompt_number": 2,
+      "tools_used": [
+        "Bash"
+      ],
+      "conversation": [
+        {
+          "turn": 0,
+          "role": "user",
+          "content": "delete the test issue"
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "content": "Bash(command: \"gh issue view 437 --repo woonstadrotterdam/woningwaardering --json title,author,...\")",
+          "tool_name": "Bash"
+        },
+        {
+          "turn": 2,
+          "role": "assistant",
+          "content": "I couldn't delete it: GitHub only lets repo admins delete issues, and your account isn't one. Closing it as \"not planned\" is the next best option and can be undone."
+        },
+        {
+          "turn": 3,
+          "role": "tool",
+          "content": "Bash(command: \"gh issue close 437 --repo woonstadrotterdam/woningwaardering --reason \"not plann...\")",
+          "tool_name": "Bash"
+        }
+      ],
+      "prompt_quality": {
+        "score": 47,
+        "rating": "Poor",
+        "issues": [
+          "no_file_reference"
+        ],
+        "category": "file_operation"
+      }
+    },
+    {
+      "id": "114270fb-048d-43ad-b60c-fb16117f6ad7",
+      "provider": "claude",
+      "model": "claude-opus-5-5",
+      "session_id": "df3ff0d3-b357-4b4e-8324-c284cfe1d741",
+      "prompt_summary": "But I am a repo admin",
+      "response_summary": "You're right, and I was wrong earlier: the API shows you have admin rights on the repo. But I retried and GitHub still refuses the delete with the same error, so the block comes from somewhere other than your repo role.\n\nThe most likely cause is the organisation setting \"Allow members to delete issues\" being turned off for `woonstadrotterdam`. When it's off, only organisation owners can delete issues, even if you're a repo admin. I haven't confirmed this; an org owner can check it under the organisation's **Settings → Member privileges**.\n\nYou have two ways to get it deleted:\n- **Through the web page:** open [#437](https://github.com/woonstadrotterdam/woningwaardering/issues/437) and use \"Delete issue\" at the bottom of the right sidebar. If that option isn't there, the org setting is the cause.\n- **Through an org owner:** ask one to delete it, or to turn that setting on so I can retry.\n\nUntil then, #437 stays closed as \"not planned\".",
+      "prompt_hash": "sha256:6b41e3f8ba6662a6c0e188ad5ee88f08a1b8d0d8a93841f961bf42e55b329b91",
+      "message_count": 19,
+      "cost_usd": 0.02023725,
+      "input_tokens": 26,
+      "output_tokens": 328,
+      "cache_read_tokens": 47410,
+      "cache_creation_tokens": 271,
+      "timestamp": "2026-10-23T07:56:58.317Z",
+      "session_start": "2026-10-23T07:52:48.431Z",
+      "session_end": "2026-10-23T07:57:42.360Z",
+      "session_duration_secs": 293,
+      "ai_response_time_secs": 4.325875,
+      "prompt_submitted_at": "2026-10-23T07:57:00.799415Z",
+      "prompt_duration_secs": 49,
+      "user": "Ben Verhees <ben.verhees@woonstadrotterdam.nl>",
+      "file_path": "",
+      "line_range": [
+        0,
+        0
+      ],
+      "parent_receipt_id": "59633213-91b8-47bc-8e92-5943e25a3e35",
+      "prompt_number": 3,
+      "tools_used": [
+        "Bash"
+      ],
+      "conversation": [
+        {
+          "turn": 0,
+          "role": "user",
+          "content": "But I am a repo admin"
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "content": "Bash(command: \"gh api repos/woonstadrotterdam/woningwaardering --jq .permissions; gh auth statu...\")",
+          "tool_name": "Bash"
+        },
+        {
+          "turn": 2,
+          "role": "assistant",
+          "content": "You're right, I was wrong earlier: the API shows you have admin rights on the repo. Let me try the delete once more to rule out a one-off error."
+        },
+        {
+          "turn": 3,
+          "role": "tool",
+          "content": "Bash(command: \"gh issue delete 437 --repo woonstadrotterdam/woningwaardering --yes\")",
+          "tool_name": "Bash"
+        }
+      ],
+      "prompt_quality": {
+        "score": 41,
+        "rating": "Poor",
+        "issues": [
+          "no_file_reference"
+        ],
+        "category": "other"
+      }
+    }
+  ]
+}
