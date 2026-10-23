@@ -76,7 +76,12 @@ Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale 
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Check tijdens het grillen tegen `GLOSSARY.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+Sla grillen over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag). Tijdens het grillen:
+
+- Toets termen aan `GLOSSARY.md`.
+- Citeer de bron letterlijk met regelnummer of artikel en met de link naar de pagina (zie [Domeinregels](#domeinregels)), zodat de gebruiker op de tekst reageert en niet op jouw samenvatting.
+- Toets elk antwoord aan de code en reken een randgeval door, zoals een ruimte die door drie onzelfstandige woonruimten wordt gedeeld of een waarde precies op een drempel in een lookuptabel.
+- Vul nooit zelf een uitkomst van de huurprijscheck in.
 
 Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
