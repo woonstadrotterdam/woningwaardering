@@ -33,8 +33,7 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
     - implementatietoelichting onzelfstandige woonruimten, 2.5.2
     - wettekst, Bijlage I onder B, onderdeel 5.1
     """
-    # Per klasse de ondergrens en 1 mm onder de volgende grens, plus een ruim
-    # aanrecht van 3 m of meer.
+    # Per klasse de ondergrens en 1 mm onder de volgende grens.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
@@ -50,7 +49,7 @@ def test_punten_voor_de_lengte_van_het_aanrecht(keuken, vergelijk_met_testrefere
                 Ruimtedetailsoort.keuken, naam="Keuken4", elementen=[aanrecht(2999)]
             ),
             ruimte(
-                Ruimtedetailsoort.keuken, naam="Keuken5", elementen=[aanrecht(3500)]
+                Ruimtedetailsoort.keuken, naam="Keuken5", elementen=[aanrecht(3000)]
             ),
         ]
     )
@@ -83,12 +82,12 @@ def test_aanrecht_van_5m_of_meer_krijgt_13_punten_bij_minimaal_8_woonruimten(
     - implementatietoelichting onzelfstandige woonruimten, 2.5.2
     - wettekst, Bijlage I onder B, onderdeel 5.1
     """
-    # Een aanrecht boven de 5 m, gedeeld met precies de 8 woonruimten waarbij 13 punten gelden.
+    # Een aanrecht van precies 5 m, gedeeld met precies de 8 woonruimten waarbij 13 punten gelden.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.keuken,
-                elementen=[aanrecht(5500)],
+                elementen=[aanrecht(5000)],
                 gedeeld_met_aantal_onzelfstandige_woonruimten=8,
             )
         ]
