@@ -1,122 +1,94 @@
-# Projectcontext
+# Woningwaardering
 
-Dit project is een open-source Python-package voor het berekenen van punten volgens het woningwaarderingsstelsel (WWS). De package vertaalt gepubliceerde beleidsregels van de Nederlandse Huurcommissie naar herleidbare Python-code en gebruikt de VERA-standaard voor input en output.
+Een open-source Python-package die woonruimten waardeert volgens het woningwaarderingsstelsel (WWS), op basis van de beleidsregels van de Huurcommissie en de VERA-standaard. Bronnen, autoriteitsvolgorde en projectgrenzen staan in [docs/voor-ontwikkelaars/bronnen.md](docs/voor-ontwikkelaars/bronnen.md).
 
-De primaire context is de publieke `woningwaardering`-package. Lokale of organisatie-interne datastromen vallen buiten deze context, tenzij ze expliciet in de repositorydocumentatie zijn opgenomen.
+## Waarderen
 
-## Bronnen Van Waarheid
+**Woningwaardering**:
+De berekening van punten voor een woonruimte volgens het WWS.
 
-- `README.md` beschrijft het doel, de juridische disclaimer, de actuele beleidsboekreferentie en de gebruikte VERA-versies.
-- `pyproject.toml` bevat de package-metadata, Python-versie en vastgelegde VERA-databronnen.
-- `docs/aan-de-slag/index.md` beschrijft gebruik, warnings-gedrag en outputstructuur voor gebruikers.
-- `docs/voor-ontwikkelaars/` bevat ontwikkelaarsafspraken over installatie, repository-structuur, naamgeving, tests, data, logging, releases en de criteriumstrategie (builders).
-- `docs/implementatietoelichtingen/` legt per stelselgroep vast welke beleidsboekregels wel of niet zijn geïmplementeerd en waarom.
-- Het online beleidsboek van de Huurcommissie is de officiële, actuele bron: [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). Hiermee worden de HTML-pagina's bedoeld waarnaar deze pagina's doorlinken. De PDF-versie is een momentopname die gedurende het jaar kan achterlopen op de HTML-versie.
-- [Wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) (Besluit huurprijzen woonruimte). Een lokale XML-kopie van deze versie staat in `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml`.
-- De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/) van de Huurcommissie ([zelfstandig](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte), [onzelfstandig](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte)).
+**WWS**:
+Het woningwaarderingsstelsel: het puntensysteem waarmee de kwaliteit van woonruimte wordt gewaardeerd.
 
-Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen geldt de volgende volgorde van autoriteit: **wettekst > online beleidsboek > huurprijscheck > implementatietoelichting**. De implementatietoelichting is een kopie van het online beleidsboek en kan achterlopen; bij twijfel of tegenstrijdigheid is de hoger geplaatste bron leidend. Tegenstrijdigheden moeten altijd worden vermeld. Zie de definities _Beleidsboek_, _Huurprijscheck_ en _Implementatietoelichting_ hieronder voor hun relatie.
+**Woonruimte**:
+De woning of wooneenheid die gewaardeerd wordt, zelfstandig of onzelfstandig.
 
-Agents kunnen de huurprijscheck niet raadplegen. Als wettekst en beleidsboek niet sluitend zijn, verzinnen ze geen tooluitkomst: vraag een mens de huurprijscheck te controleren en leg die uitkomst vast in de implementatietoelichting.
+**Eenheid**:
+De digitale representatie van een woonruimte in het VERA BVG-model, waarop de waardering gebaseerd wordt.
 
-## Projectgrenzen
+**Stelsel**:
+Het waarderingsregime voor zelfstandige of onzelfstandige woonruimten; bepaalt welke stelselgroepen gelden.
 
-- De package berekent woningwaarderingen op basis van een digitale representatie van een woonruimte.
-- De berekening volgt het beleidsboek van de Huurcommissie.
-- De input en output volgen de VERA-standaard, met de concrete versies vastgelegd in `pyproject.toml`.
-- Aan berekeningen en output kunnen geen rechten worden ontleend. Gebruikers moeten documentatie, implementatietoelichtingen en openstaande issues raadplegen om resultaten goed te interpreteren.
-- Wanneer VERA of beschikbare inputdata een beleidsregel niet volledig kan dragen, wordt de gekozen interpretatie in de implementatietoelichtingen beschreven.
+**Stelselgroep**:
+Een onderdeel van het WWS waarop afzonderlijk punten worden berekend, zoals energieprestatie of sanitair.
 
-## Begrippen
+**Peildatum**:
+De datum waarop de waardering wordt bepaald en waartegen geldigheid van regels en energielabel wordt getoetst.
 
-### Woningwaardering
+**Toe te rekenen aantal**:
+Het aandeel van een hoeveelheid dat aan de huurder is toe te rekenen: het aantal gedeeld door het aantal woonruimten of adressen waarmee gedeeld wordt (1 bij privé).
+_Vermijd_: toegerekend aantal
 
-De berekening van punten voor een woonruimte volgens het WWS. In dit project verwijst `Woningwaardering` ook naar de publieke API-klasse waarmee gebruikers een VERA-eenheid laten waarderen.
+**Maximering**:
+Een waardering die een maximum oplegt aan de punten van één of meer andere waarderingen.
 
-### WWS
+## Output-structuur
 
-Het woningwaarderingsstelsel: het puntensysteem waarmee de kwaliteit van woonruimte wordt gewaardeerd. De package implementeert regels uit de beleidsboeken van de Huurcommissie.
+**Waardering**:
+Eén regel in de uitkomst van een stelselgroep; draagt `punten` en `aantal` en verwijst naar een criterium.
 
-### Woonruimte
+**Criterium**:
+De identiteit, naam en plek in de hiërarchie van een waardering; heeft zelf nooit punten.
 
-De woning of wooneenheid die we waarderen. De package onderscheidt stelsels voor zelfstandige en onzelfstandige woonruimten.
+**Criterium-id**:
+Een pad-id die de plek van een criterium in de hiërarchie beschrijft.
 
-### Eenheid
+**Subgroep**:
+Een groeperend criterium binnen een stelselgroep; geen stelselgroep, ook als het dezelfde naam draagt als een stelselgroep.
 
-De digitale representatie van een woonruimte in het VERA BVG-model, meestal `EenhedenEenheid`. Een eenheid bevat de gegevens waarop we de waardering baseren.
+**Bovenliggende / onderliggende**:
+De relatie tussen waarderingen via `bovenliggendeCriterium`; een waardering zonder bovenliggende staat _direct onder de stelselgroep_, waarderingen met dezelfde bovenliggende staan _op hetzelfde niveau_.
+_Vermijd_: ouder, kind, parent, child, sibling, knoop, node, leaf, wortel, root, boom, tree
 
-### Stelsel
+**Rij**:
+Eén waardering zoals weergegeven in het tekstrapport.
 
-Een waarderingsregime voor zelfstandige of onzelfstandige woonruimten. In code heten deze stelsels `zelfstandige_woonruimten` en `onzelfstandige_woonruimten`, conform de VERA-referentiedata `Woningwaarderingstelsel`. Een stelsel bepaalt welke stelselgroepen worden toegepast en welke regels geldig zijn.
+## Bronnen
 
-### Stelselgroep
+**Beleidsboek**:
+De door de Huurcommissie gepubliceerde uitleg van de wettekst van het WWS; bedoeld wordt de actuele online HTML-versie.
+_Vermijd_: PDF-beleidsboek (als bron van waarheid)
 
-Een onderdeel van het WWS waarop afzonderlijk punten worden berekend, zoals energieprestatie, buitenruimten of sanitair. De package volgt hiervoor de VERA-referentiedata `Woningwaarderingstelselgroep`.
+**Wettekst**:
+Het Besluit huurprijzen woonruimte, de hoogste bron van autoriteit voor puntberekeningen.
 
-### Peildatum
+**Huurprijscheck**:
+De rekentool van de Huurcommissie voor de maximale huurprijs; bron van autoriteit wanneer wettekst en beleidsboek niet sluitend zijn.
 
-De datum waarop de waardering wordt bepaald. De peildatum bepaalt onder meer of de berekening en het bijbehorende energielabel op die datum geldig zijn.
+**Implementatietoelichting**:
+Onze markdown-kopie van het beleidsboek per stelselgroep, met doorhalingen en interpretaties van hoe regels in code zijn vertaald.
 
-### Beleidsboek
+## VERA
 
-De door de Huurcommissie gepubliceerde uitleg van de [wet van het WWS](https://wetten.overheid.nl/BWBR0003237/2026-01-01). Het online beleidsboek bestaat uit de actuele HTML-pagina's voor [zelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte) en [onzelfstandige woonruimte](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte). De PDF-versie is een momentopname en kan gedurende het jaar achterlopen op de HTML-versie. De tekst van het beleidsboek vormt de inhoudelijke basis voor de implementatie, maar kan ruimte laten voor interpretatie of botsen met technische beperkingen.
+**VERA**:
+De sectorstandaard van Aedes voor gegevensuitwisseling in de corporatiesector, gebruikt voor input, output en referentiedata.
 
-### Huurprijscheck
+**BVG**:
+Het VERA-domein voor vastgoed- en eenheidsgegevens.
 
-De rekentool van de Huurcommissie voor de maximale huurprijs. Als wettekst en beleidsboek niet sluitend zijn, is de huurprijscheck de volgende bron van autoriteit; is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt. Agents kunnen deze tool niet bedienen: een mens controleert de huurprijscheck en legt het resultaat vast in de implementatietoelichting.
+**Referentiedata**:
+Door VERA gepubliceerde enumeraties en codetabellen, zoals `Woningwaarderingstelsel` en `Woningwaarderingstelselgroep`.
 
-### Implementatietoelichting
+**Modeluitbreiding**:
+Een lokale uitbreiding op de VERA-modellen voor informatie die de standaard niet bevat maar het WWS wel nodig heeft.
 
-Een markdown-kopie van het online beleidsboek met onze interpretaties en doorhalingen. Per stelselgroep leggen we vast hoe beleidsboekregels zijn vertaald naar code. Niet-geïmplementeerde passages worden doorgestreept; keuzes en interpretaties lichten we toe in aparte blokken. Deze toelichtingen staan in `docs/implementatietoelichtingen/`. De kopie kan achterlopen op het online beleidsboek; raadpleeg daarom bij puntberekeningen altijd ook het actuele online beleidsboek, de wettekst en — waar die zijn vastgelegd — de uitkomsten van de huurprijscheck. Wijkt een hoger geplaatste bron af, dan is die leidend en is de afwijking een signaal dat onze toelichting moet worden bijgewerkt.
+**Lookuptabel**:
+Tabulaire regeldata of constanten die nodig zijn voor puntberekeningen.
 
-### VERA
+## Waarschuwingen
 
-De sectorstandaard van Aedes voor gegevensuitwisseling in de corporatiesector. Dit project gebruikt VERA voor de structuur van input, output en referentiedata.
+**UserWarning**:
+Een waarschuwing voor incomplete of onjuiste inputdata.
 
-### BVG
-
-Het VERA-domein voor vastgoed- en eenheidsgegevens. De gegenereerde BVG-modellen vormen de basis voor de inputmodellen van de package.
-
-### Referentiedata
-
-Door VERA gepubliceerde enumeraties en codetabellen, zoals `Woningwaarderingstelsel` en `Woningwaarderingstelselgroep`. Naamgeving in code volgt deze referentiedata zo veel mogelijk.
-
-### Modeluitbreiding
-
-Een lokale uitbreiding op gegenereerde VERA-modellen wanneer de standaard onvoldoende informatie bevat voor de WWS-implementatie. Deze uitbreidingen worden toegelicht in `docs/implementatietoelichtingen/datamodel-uitbreidingen.md`.
-
-### Lookuptabel
-
-Een CSV-bestand met constanten of tabulaire regeldata die nodig zijn voor puntberekeningen. CSV wordt gebruikt wanneer tabeldata in code, JSON of YAML minder leesbaar zou zijn.
-
-### Criterium-id
-
-Een samengestelde identifier voor een criterium in de output. Het is een pad-id: de id wordt afgeleid uit de plek in de hiërarchie, waarbij elk segment met `__` aan de id van het bovenliggende criterium wordt gekoppeld. Zie `docs/index.md` voor de gebruikersgerichte uitleg van de outputstructuur en `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de builders.
-
-### bovenliggendeCriterium
-
-Verwijzing van een waardering naar het bovenliggende criterium binnen dezelfde stelselgroep (JSON: `bovenliggendeCriterium`). Dit veld gebruikt het generieke VERA-"Sleutels"-referentietype (`id`, `idExtern`, `idGegevensbeheerder`), zoals ook `EenheidSleutels` of `AdresSleutels` dat doen voor andere entiteiten. Zie `Structuurterminologie` hieronder voor hoe deze relatie de hiërarchie opbouwt.
-
-### Maximering
-
-Een waardering waarop een maximum van toepassing is. Als die waardering zelf gedeeld wordt én de naam een numeriek puntental bevat (bijv. `Maximaal 4 punten`), heet die in de output `Maximering` (of `Maximering voor …` wanneer het onderwerp onderscheidend is). Beschrijvende maximeringen zonder puntental (bijv. `Maximaal evenveel punten als aanrecht`) blijven ongewijzigd. Een maximering die alleen op het al gedeelde totaal geldt (zoals buitenruimten max. 15) behoudt ook het puntental in de naam.
-
-### Toe te rekenen aantal
-
-Het aandeel van een hoeveelheid dat aan de huurder is toe te rekenen: `aantal / deler`. De `deler` is het aantal onzelfstandige woonruimten en het aantal adressen met toegang en gebruiksrecht, of 1 bij privé. Gebruik deze formulering, niet “toegerekend”.
-
-### Structuurterminologie
-
-De samenhang tussen waarderingen in de output loopt via een keten van `bovenliggendeCriterium`-verwijzingen: elke waardering heeft een `criterium`, en een criterium kan onderliggende criteria hebben. Het onderscheid tussen beide is scherp: een **criterium** draagt de identiteit, naam en plek in de hiërarchie (`id`, `naam`, `bovenliggendeCriterium`, `meeteenheid`) en heeft nooit punten; `punten` en `aantal` zitten op de **waardering**. Een groeperende waardering (zoals een gedeeld-met-laag of subgroep) is daarom in essentie een criterium zonder punten. Over het algemeen dragen groeperende waarderingen geen punten, maar bij uitzondering doet een subgroep dat wel — bijvoorbeeld in de oppervlakte-stelselgroepen, waar de punten over het afgeronde groepstotaal op de subgroep of de stelselgroep zelf worden gezet; het criterium-object blijft ook dan puntenloos. Een **subgroep** is een groeperend criterium binnen een stelselgroep — het is géén stelselgroep, maar kan wel dezelfde naam dragen als de subgroep in een gemeenschappelijke stelselgroep wordt gewaardeerd (bijvoorbeeld 'Oppervlakte van vertrekken' binnen 'Gemeenschappelijke vertrekken, overige ruimten en voorzieningen'). Beschrijf de structuur met deze domeintaal — **waardering**, **criterium**, **subgroep**, **bovenliggende** en **onderliggende** — en niet met informatica-boomjargon als "knoop", "node", "leaf", "wortel", "root", "boom", "kind", "ouder", "sibling" of "tree". De waardering boven een andere is de _bovenliggende_; een waardering zonder bovenliggende staat _direct onder de stelselgroep_. Twee waarderingen met dezelfde bovenliggende (of beide direct onder de stelselgroep) staan _op hetzelfde niveau_. In het tekstrapport is elke waardering één **rij**.
-
-### UserWarning
-
-Een waarschuwing voor incomplete of onjuiste inputdata. De package faalt standaard op `UserWarning`, zodat gebruikers op de hoogte worden gebracht van de incomplete of onjusiste inputdata. Gebruikers kunnen het warningfilter aanpassen zodat er alsnog een woningwaarderingresultaat volgt.
-
-### DeprecationWarning
-
-Een waarschuwing voor verouderde input die nog wel wordt geaccepteerd. In tegenstelling tot `UserWarning` leidt dit niet tot een error; de waarschuwing wordt wel getoond en gelogd.
-
-## Werkafspraak Voor Nieuwe Domeintermen
-
-Voeg alleen termen toe aan dit bestand als ze betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen. Implementatiedetails horen in de ontwikkelaarsdocs of in codecommentaar, niet in deze projectcontext.
+**DeprecationWarning**:
+Een waarschuwing voor verouderde input die nog wel wordt geaccepteerd.

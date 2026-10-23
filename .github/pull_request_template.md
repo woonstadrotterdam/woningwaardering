@@ -25,7 +25,7 @@
 <!-- Alleen invullen als 'Domeinlogica / puntberekening' is aangevinkt; anders overslaan.
      Domeinlogica omvat onder meer wijzigingen in woningwaardering/stelsels/, waarschuwings-
      of foutgedrag, lookup-tabellen, modeluitbreidingen en tests met gewijzigde verwachte punten.
-     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie `CONTEXT.md`).
+     Lees eerst de relevante implementatietoelichting; check daarna tegen het online beleidsboek en wettekst (zie `docs/voor-ontwikkelaars/bronnen.md`).
      Herhaal het onderstaande blok per gewijzigde domeinregel. -->
 
 ### [Stelselgroep / onderwerp]

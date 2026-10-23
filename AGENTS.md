@@ -11,7 +11,7 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 - Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`.
 - Check en citeer de actuele HTML-pagina's van het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Gebruik voor de wettekst eerst de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` om te zoeken en citeren. Verifieer deze daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
-- Pas daarna code aan. Zie `GLOSSARY.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
+- Pas daarna code aan. Zie `docs/voor-ontwikkelaars/bronnen.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
 - Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `naamgeving.md`, `data.md` en `logging.md`.
 
 ## Omgeving En Commands
@@ -119,11 +119,11 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 - Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/`.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.
-- Werk `GLOSSARY.md` alleen bij wanneer een domeinterm of projectgrens duurzaam verduidelijkt is.
+- Werk `GLOSSARY.md` alleen bij wanneer een domeinterm duurzaam verduidelijkt is. Neem alleen termen op die betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen; houd definities op één à twee zinnen, zonder implementatiedetails (die horen in `docs/voor-ontwikkelaars/` of codecommentaar).
 
 ## Domeinregels
 
-- Behandel voor puntberekeningen de volgorde van autoriteit in `GLOSSARY.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Behandel voor puntberekeningen de volgorde van autoriteit in `docs/voor-ontwikkelaars/bronnen.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
