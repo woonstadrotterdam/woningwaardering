@@ -14,6 +14,13 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 
 Infer the repo from `git remote -v`; `gh` does this automatically when run inside a clone.
 
+## Issue content
+
+- Write titles and bodies in Dutch, using the vocabulary from `GLOSSARY.md`. This includes the headings of skill templates (e.g. the `/to-spec` spec).
+- Prefix domain issues with the affected stelsel(s) and stelselgroep: `[ZEL] …`, `[ONZ] …` or `[ZEL/ONZ] Sanitair: …`.
+- For domain logic, add a **Bronnen** section that quotes the wettekst and/or the online beleidsboek verbatim, with article/paragraph number (see `docs/voor-ontwikkelaars/bronnen.md`). State explicitly what is a package assumption rather than a rule from the source, and where VERA data or the input model falls short.
+- When an issue changes expected output (points, criterium-id's, rapport), say so, since that decides whether `task genereer-test-output` is in scope.
+
 ## Pull requests as a triage surface
 
 **PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag.)_

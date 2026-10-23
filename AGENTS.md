@@ -35,7 +35,7 @@ Codeconventies staan in [`CODING_STANDARDS.md`](CODING_STANDARDS.md) en worden b
 
 ## Tests
 
-- Na code- of testwijzigingen: draai pytest en beide pre-commit-stappen voordat je de taak afrondt of de gebruiker vraagt om te committen:
+- Na code- of testwijzigingen: draai pytest en beide pre-commit-stappen vóór elke commit en voordat je de taak afrondt:
 
 ```bash
 uv run python -m pytest
@@ -76,6 +76,11 @@ Check tijdens het grillen tegen `GLOSSARY.md`, implementatietoelichtingen, onlin
 
 Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
+Waar een skill botst met dit bestand, gaat dit bestand voor:
+
+- `/pr`: volg de PR-template. Zet de visual en het voor/na-bewijs uit `/pr` onder **Samenvatting**, met het oordeel one-way/two-way door.
+- Issues en specs (`/to-spec`, `/to-tickets`, `/triage`): volg de conventies in `docs/agents/issue-tracker.md`.
+
 ## Agent skills
 
 ### Issue tracker
@@ -109,7 +114,7 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 ## Git En Veiligheid
 
 - Revert geen bestaande wijzigingen die je niet zelf hebt gemaakt.
-- Commit of push alleen wanneer de gebruiker daar expliciet om vraagt.
+- Push alleen wanneer de gebruiker daar expliciet om vraagt.
 - Schrijf commitberichten als [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/) met een Nederlandse omschrijving, bijvoorbeeld `fix(onz): corrigeer maximale huurprijs bij 106 punten`. De scope is optioneel en benoemt het geraakte onderdeel (bijv. `stelsels`, `sanitair`, `rapport`, `deps`). Eén logische wijziging per commit; verwijs in de footer naar een gerelateerde issue met `Closes #N` of `Refs #N`.
 - Voeg geen lokale, niet-gecommitte of organisatie-interne datastromen toe aan de publieke projectcontext.
 - Commit geen secrets, credentials of lokale configuratiebestanden.
