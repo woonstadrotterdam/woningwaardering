@@ -43,17 +43,13 @@ Na wijzigingen in `.pre-commit-config.yaml` volstaat meestal opnieuw committen o
 
 ## Agent skills
 
-We gebruiken de [Matt Pocock-skills](https://github.com/mattpocock/skills) als Claude Code-plugin. De versie staat vast in [`.claude/settings.json`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.claude/settings.json) (`ref` bij de marketplace `mattpocock`), omdat die moet passen bij de bestanden die `/setup-matt-pocock-skills` in de repo zet.
+We gebruiken de [Matt Pocock-skills](https://github.com/mattpocock/skills), vastgezet op een tag. De skills staan gecommit in `.claude/skills/`; de versie per skill staat in `skills-lock.json`. Die versie moet passen bij de bestanden die `/setup-matt-pocock-skills` in de repo zet (`docs/agents/` en het blok `## Agent skills` in `AGENTS.md`). Claude Code en Cursor lezen de skills direct uit `.claude/skills/`; je hoeft niets te installeren.
 
-Installeer de plugin eenmalig per clone:
+De agentinstructies staan alleen in [`AGENTS.md`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/AGENTS.md); er is geen `CLAUDE.md`. Claude Code leest `AGENTS.md` direct vanaf v2.1.277, dus houd Claude Code bijgewerkt (`claude update`).
 
-```bash
-claude plugin install mattpocock-skills@mattpocock --scope project
-```
+Installeer de skills niet daarnaast als Claude Code-plugin of via `npx skills add -g`; dan staan ze dubbel of laadt een andere versie. [`.claude/settings.json`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.claude/settings.json) zet de plugins `mattpocock-skills@mattpocock` en `mattpocock-skills@claude-plugins-official` daarom uit.
 
-Installeer de skills niet daarnaast als officiële plugin (`mattpocock-skills@claude-plugins-official`) of via `npx skills add -g`; dan staan ze dubbel of laadt een andere versie.
-
-Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHANGELOG.md), zet de nieuwe tag in `ref`, draai zo nodig `/setup-matt-pocock-skills` opnieuw en commit de settings en de bestanden van de setup-skill samen.
+Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHANGELOG.md), installeer de nieuwe tag met `npx skills add mattpocock/skills#<tag> -a claude-code`, draai zo nodig `/setup-matt-pocock-skills` opnieuw en commit `.claude/skills/`, `skills-lock.json` en de bestanden van de setup-skill samen.
 
 ## Tests en checks
 

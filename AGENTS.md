@@ -4,14 +4,14 @@ Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen
 
 ## Eerst Lezen
 
-- Lees `CONTEXT.md` voor de gedeelde domeintaal.
+- Lees `GLOSSARY.md` voor de gedeelde domeintaal.
 - Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
 - Lees `docs/index.md` voor de gebruikersgerichte uitleg van warnings en outputstructuur.
 - Lees `docs/voor-ontwikkelaars/` voor repository-opzet, lookup-tabellen, logging/warnings en de criteriumstrategie.
 - Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`.
 - Check en citeer de actuele HTML-pagina's van het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Gebruik voor de wettekst eerst de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` om te zoeken en citeren. Verifieer deze daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
-- Pas daarna code aan. Zie `CONTEXT.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
+- Pas daarna code aan. Zie `GLOSSARY.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
 - Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `naamgeving.md`, `data.md` en `logging.md`.
 
 ## Omgeving En Commands
@@ -87,7 +87,7 @@ De verwachte output van de tests staat op twee plekken: de testreferenties (`tes
 
 ## Skills
 
-De [Matt Pocock-skills](https://github.com/mattpocock/skills) komen uit een Claude Code-plugin met een vastgezette versie; zie [Agent skills](docs/voor-ontwikkelaars/index.md#agent-skills) voor installeren en upgraden.
+De [Matt Pocock-skills](https://github.com/mattpocock/skills) staan vastgezet op een tag in `.claude/skills/`; zie [Agent skills](docs/voor-ontwikkelaars/index.md#agent-skills) voor upgraden.
 
 Gebruik `/grill-with-docs` **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
 
@@ -96,7 +96,21 @@ Gebruik `/grill-with-docs` **vroeg en proactief** wanneer de taak meer is dan ee
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+Stel eerst verhelderende vragen (één tegelijk) en check tegen `GLOSSARY.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+
+## Agent skills
+
+### Issue tracker
+
+Issues staan als GitHub issues in `woonstadrotterdam/woningwaardering` (`gh` CLI). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Standaardlabels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/domain.md`.
 
 ## Documentatie
 
@@ -105,11 +119,11 @@ Stel eerst verhelderende vragen (één tegelijk) en check tegen `CONTEXT.md`, im
 - Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/`.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.
-- Werk `CONTEXT.md` alleen bij wanneer een domeinterm of projectgrens duurzaam verduidelijkt is.
+- Werk `GLOSSARY.md` alleen bij wanneer een domeinterm of projectgrens duurzaam verduidelijkt is.
 
 ## Domeinregels
 
-- Behandel voor puntberekeningen de volgorde van autoriteit in `CONTEXT.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Behandel voor puntberekeningen de volgorde van autoriteit in `GLOSSARY.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
