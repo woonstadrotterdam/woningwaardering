@@ -75,30 +75,67 @@ jobs:
             }
             core.info(`Titel: ${pr.title} | toegevoegd: ${nieuw} | verwijderd: ${vervallen}`);
 
-      # Zet `impact eindgebruiker` zodra de verwachte testoutput wijzigt: dan ziet een
-      # gebruiker na upgraden andere output. Het label blijft staan als die wijziging
-      # later wegvalt, omdat ook een mens of agent het zet bij impact zonder outputwijziging.
+      # Zet `impact eindgebruiker` zodra een bestaande test bij gelijke input andere output
+      # geeft: dan ziet een gebruiker na upgraden iets anders. Een nieuwe test, of een
+      # gewijzigde beschrijving, bron of input in een test, verandert voor gebruikers niets.
+      # Het label blijft staan als de wijziging later wegvalt, omdat ook een mens of agent
+      # het zet bij impact zonder outputwijziging.
       - if: github.event.action != 'edited'
         uses: actions/github-script@v9
         with:
           script: |
             const IMPACT = "impact eindgebruiker";
-            const VERWACHTE_OUTPUT =
-              /^tests\/(.+\/)?testreferenties\/[^/]+\.md$|^tests\/docs\/output_json_[^/]+\.json$/;
+            const TESTREFERENTIE = /^tests\/(.+\/)?testreferenties\/[^/]+\.md$/;
+            const OUTPUT_JSON = /^tests\/docs\/output_json_[^/]+\.json$/;
+            const OUTPUTSECTIES = ["Output", "Rapport", "Waarschuwingen"];
 
             const pr = context.payload.pull_request;
             if (pr.labels.some((label) => label.name === IMPACT)) return;
+
+            // De lijst gewijzigde bestanden vergelijkt met de merge-base; doe dat hier ook.
+            const { data: vergelijking } = await github.rest.repos.compareCommits({
+              ...context.repo,
+              base: pr.base.sha,
+              head: pr.head.sha,
+            });
+            const mergeBase = vergelijking.merge_base_commit.sha;
+
+            const inhoud = async (path, ref) => {
+              const { data } = await github.rest.repos.getContent({
+                ...context.repo,
+                path,
+                ref,
+                mediaType: { format: "raw" },
+              });
+              return data;
+            };
+            // Tekst van een sectie `## <naam>` tot de volgende sectie.
+            const sectie = (tekst, naam) =>
+              tekst.split(/^## /m).find((deel) => deel.startsWith(`${naam}\n`)) ?? "";
+
+            const outputGewijzigd = async (bestand) => {
+              if (OUTPUT_JSON.test(bestand.filename)) return true;
+              if (!TESTREFERENTIE.test(bestand.filename)) return false;
+              const oud = await inhoud(bestand.filename, mergeBase);
+              const nieuw = await inhoud(bestand.filename, pr.head.sha);
+              if (sectie(oud, "Input") !== sectie(nieuw, "Input")) return false;
+              return OUTPUTSECTIES.some((naam) => sectie(oud, naam) !== sectie(nieuw, naam));
+            };
 
             const bestanden = await github.paginate(github.rest.pulls.listFiles, {
               ...context.repo,
               pull_number: pr.number,
             });
-            const gewijzigd = bestanden.filter((bestand) => VERWACHTE_OUTPUT.test(bestand.filename));
-            if (gewijzigd.length === 0) return;
+            for (const bestand of bestanden) {
+              // Alleen bestaande tests: nieuwe, verwijderde en hernoemde tests tellen niet.
+              if (bestand.status !== "modified") continue;
+              if (!(await outputGewijzigd(bestand))) continue;
 
-            await github.rest.issues.addLabels({
-              ...context.repo,
-              issue_number: pr.number,
-              labels: [IMPACT],
-            });
-            core.info(`Verwachte output gewijzigd: ${gewijzigd.map((bestand) => bestand.filename)}`);
+              await github.rest.issues.addLabels({
+                ...context.repo,
+                issue_number: pr.number,
+                labels: [IMPACT],
+              });
+              core.info(`Output gewijzigd bij gelijke input: ${bestand.filename}`);
+              return;
+            }

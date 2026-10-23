@@ -20,7 +20,7 @@ Infer the repo from `git remote -v`; `gh` does this automatically when run insid
 - Prefix domain issues with the affected stelsel(s) and stelselgroep: `[ZEL] …`, `[ONZ] …` or `[ZEL/ONZ] Sanitair: …`.
 - For domain logic, add a **Bronnen** section that quotes the wettekst and/or the online beleidsboek verbatim, with article/paragraph number (see `docs/voor-ontwikkelaars/bronnen.md`). State explicitly what is a package assumption rather than a rule from the source, and where VERA data or the input model falls short.
 - When an issue changes expected output (points, criterium-id's, rapport), say so, since that decides whether `task genereer-test-output` is in scope.
-- Add the label `impact eindgebruiker` when the issue will change what users see after upgrading (see `docs/voor-ontwikkelaars/releases.md`), so reviewers know the work needs an intensive review.
+- Add the label `impact eindgebruiker` when the issue will change, for users after upgrading: punten of huurprijs, criteriumnamen of criterium-id's, rapport, warnings of errors, or the publieke API of input (see `docs/voor-ontwikkelaars/releases.md`). On an issue it is an estimate; the PR confirms it. Reviewers use it to decide how intensively to review.
 
 ## Pull requests as a triage surface
 
