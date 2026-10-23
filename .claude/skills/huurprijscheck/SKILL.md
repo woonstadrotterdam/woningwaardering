@@ -82,4 +82,4 @@ Rapporteer per testreferentie: de beleidsregel, punten en huurprijs van package 
 
 ## Vastleggen
 
-Leg een uitkomst die een implementatiekeuze onderbouwt vast in de relevante pagina van `docs/implementatietoelichtingen/`: de datum van de controle, het tijdvak, de ingevulde gegevens en de posten uit de puntentelling waar het om gaat.
+Onderbouwt de huurprijscheck een implementatiekeuze, omdat wettekst en beleidsboek niet sluitend zijn of omdat tool en wettekst botsen, leg dat dan vast in een note in de relevante pagina van `docs/implementatietoelichtingen/`, zoals de bestaande notes: link naar de huurprijscheck, het scenario, de punten per post en welke kant de package volgt. Noem ook de datum en het tijdvak, want de tool kan veranderen en rekent per tijdvak anders. Een review-uitkomst die geen nieuwe keuze onderbouwt, blijft in het reviewrapport.
