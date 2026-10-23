@@ -65,14 +65,16 @@ De verwachte output van de tests staat op twee plekken: de testreferenties (`tes
 
 De [Matt Pocock-skills](https://github.com/mattpocock/skills) staan vastgezet op een tag in `.claude/skills/`; zie [Agent skills](docs/voor-ontwikkelaars/index.md#agent-skills) voor upgraden.
 
-Gebruik `/grill-with-docs` **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. Triggers (niet exhaustief):
+Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale wijziging. `/grill-with-docs` kan alleen de gebruiker starten; als agent start je zelf de skills die het aanroept: `grilling` en `domain-modeling`. Triggers (niet exhaustief):
 
 - plannen, ontwerpen, architectuur of refactor-voorstellen
 - domeinlogica, stelselgroepen, beleidsregel-interpretatie of VERA-modellering
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Stel eerst verhelderende vragen (één tegelijk) en check tegen `GLOSSARY.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+Check tijdens het grillen tegen `GLOSSARY.md`, implementatietoelichtingen, online beleidsboek/wettekst en code. Sla over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag).
+
+Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
 ## Agent skills
 

@@ -51,6 +51,8 @@ Installeer de skills niet daarnaast als Claude Code-plugin of via `npx skills ad
 
 Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHANGELOG.md), installeer de nieuwe tag met `npx skills add mattpocock/skills#<tag> -a claude-code`, draai zo nodig `/setup-matt-pocock-skills` opnieuw en commit `.claude/skills/`, `skills-lock.json` en de bestanden van de setup-skill samen.
 
+Repo-specifieke aanvullingen op de skills staan in de sectie `## Skills` van `AGENTS.md` en in `docs/agents/domain.md`, nooit in `.claude/skills/` (die map wordt bij upgraden overschreven). `/setup-matt-pocock-skills` schrijft `docs/agents/domain.md` opnieuw: controleer na het draaien de diff en herstel de repo-specifieke leeslijst.
+
 ## Tests en checks
 
 Met geïnstalleerde pre-commit-hooks draaien commit- en push-checks automatisch.
