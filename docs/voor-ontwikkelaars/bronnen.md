@@ -27,7 +27,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen g
 - Online beleidsboek: check en citeer de actuele HTML-pagina's.
 - Implementatietoelichting: check naast de toelichting altijd ook het online beleidsboek.
 - Citeer letterlijk, met regelnummer of artikel. Geef bij een citaat uit een online bron, ook in antwoorden aan de gebruiker, de link naar de pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), zodat de lezer op de tekst reageert en niet op een samenvatting.
-- Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill [`huurprijscheck`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.claude/skills/huurprijscheck/SKILL.md). Lukt dat niet, vraag dan een mens de huurprijscheck te controleren. Rapporteer alleen een uitkomst die de skill of een mens gaf, en leg die vast in de implementatietoelichting.
+- Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck`.
 
 ## Projectgrenzen
 
