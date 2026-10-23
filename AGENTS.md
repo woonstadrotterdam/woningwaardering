@@ -1,18 +1,22 @@
 # Instructies Voor Agents
 
-Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen direct invloed hebben op woningwaarderingen. Lees eerst de relevante context en wijzig alleen wat nodig is voor de taak.
+Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen direct invloed hebben op woningwaarderingen. Wijzig alleen wat nodig is voor de taak.
 
-## Eerst Lezen
+## Wat Lees Je Wanneer
 
-- Lees `GLOSSARY.md` voor de gedeelde domeintaal.
-- Lees `README.md` voor doel, disclaimer en actuele beleidsboek- en VERA-ankers.
-- Lees `docs/index.md` voor de gebruikersgerichte uitleg van warnings en outputstructuur.
-- Lees `docs/voor-ontwikkelaars/` voor repository-opzet, lookup-tabellen, logging/warnings en de criteriumstrategie.
-- Lees bij wijzigingen in domeinlogica eerst de relevante pagina's in `docs/implementatietoelichtingen/`.
-- Check en citeer de actuele HTML-pagina's van het online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
-- Gebruik voor de wettekst eerst de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` om te zoeken en citeren. Verifieer deze daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
-- Pas daarna code aan. Zie `docs/voor-ontwikkelaars/bronnen.md` voor de relatie tussen deze bronnen. Dit geldt onder meer voor stelsels, gedeelde logica, lookup-tabellen en waarschuwingen die punten raken.
-- Lees bij ontwikkelwerk de relevante pagina in `docs/voor-ontwikkelaars/`, vooral `naamgeving.md`, `data.md` en `logging.md`.
+Lees alleen wat bij de taak hoort.
+
+| Als de taak raakt aan                                                                                    | Lees dan eerst                                                                                                                |
+| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en de bronnen onder [Domeinregels](#domeinregels)                   |
+| Outputstructuur, criterium-id's of builders                                                              | `docs/voor-ontwikkelaars/criteriumstrategie.md`, `docs/index.md` en de inline voorbeeld-output in `docs/aan-de-slag/index.md` |
+| Tests of testdata                                                                                        | `docs/voor-ontwikkelaars/testing.md` en `data.md`                                                                             |
+| Naamgeving                                                                                               | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                       |
+| Warnings of logging                                                                                      | `docs/voor-ontwikkelaars/logging.md` en `docs/index.md`                                                                       |
+| Installatie, repository-opzet of releases                                                                | `docs/voor-ontwikkelaars/index.md` en `releases.md`                                                                           |
+| Doel, disclaimer en actuele beleidsboek- en VERA-versies                                                 | `README.md` en `pyproject.toml`                                                                                               |
+| Domeintermen in code, docs of comments                                                                   | `GLOSSARY.md`                                                                                                                 |
+| Typefout, formatting of eenduidige testfix zonder domeinvraag                                            | Niets extra                                                                                                                   |
 
 ## Omgeving En Commands
 
@@ -106,7 +110,10 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 
 ## Domeinregels
 
-- Behandel voor puntberekeningen de volgorde van autoriteit in `docs/voor-ontwikkelaars/bronnen.md`: [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) > online beleidsboek ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)) > huurprijscheck > implementatietoelichting. Agents kunnen de huurprijscheck niet raadplegen; als wettekst en beleidsboek niet sluitend zijn, vraag een mens de tool te controleren en leg de uitkomst vast in de implementatietoelichting. Check zowel onze implementatietoelichting als het actuele online beleidsboek, omdat onze kopie kan achterlopen. Indien er tegenstrijdigheden in deze bronnen staan, vermeld dit.
+- Volg voor puntberekeningen de volgorde van autoriteit in [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md), ook voor de huurprijscheck. Vermeld tegenstrijdigheden tussen bronnen.
+- Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
+- Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
+- Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
