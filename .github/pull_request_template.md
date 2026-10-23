@@ -22,11 +22,18 @@
 
 ## Impact op eindgebruiker
 
-<!-- Ziet een gebruiker na upgraden iets anders: punten, huurprijs, criteria, rapport, warnings/errors of API?
-     Bij ja krijgt de PR het label `impact eindgebruiker` (zie docs/voor-ontwikkelaars/releases.md). -->
+<!-- Ziet een gebruiker na upgraden iets anders? Bij ja krijgt de PR het label `impact eindgebruiker`
+     (zie docs/voor-ontwikkelaars/releases.md). Noem per aangevinkte soort wat er concreet verandert, bijvoorbeeld:
+     ☑ Punten of huurprijs: [ZEL] Sanitair, toilet met fontein in badkamer: 3,75 → 2,75 punten
+     ☑ Warnings of errors: nieuwe UserWarning bij ontbrekende `afmetingen.hoogte` (was: error) -->
 
-- ☐ Ja — wat merkt de gebruiker?
 - ☐ Nee
+- ☐ Ja, dit verandert voor de gebruiker:
+  - ☐ Punten of huurprijs
+  - ☐ Criteriumnamen of criterium-id's
+  - ☐ Rapport
+  - ☐ Warnings of errors
+  - ☐ Publieke API of input
 
 ## Bronverwijzing
 
