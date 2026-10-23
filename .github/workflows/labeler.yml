@@ -1,7 +1,7 @@
 name: "Pull Request Labeler"
 on:
   pull_request_target:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
 
 permissions: {}
 
@@ -13,8 +13,9 @@ jobs:
     steps:
       # Labelt op het Conventional Commits-type in de PR-titel, of op de prefix van
       # de branchnaam als de titel geen type heeft. De labels bepalen de rubriek in
-      # de release notes (.github/release.yml).
-      - uses: actions/github-script@v9
+      # de release notes (.github/release.yml). Een push verandert de titel niet.
+      - if: github.event.action != 'synchronize'
+        uses: actions/github-script@v9
         with:
           script: |
             const LABEL_PER_TYPE = {
@@ -73,3 +74,31 @@ jobs:
               await github.rest.issues.addLabels({ ...issue, labels: nieuw });
             }
             core.info(`Titel: ${pr.title} | toegevoegd: ${nieuw} | verwijderd: ${vervallen}`);
+
+      # Zet `impact eindgebruiker` zodra de verwachte testoutput wijzigt: dan ziet een
+      # gebruiker na upgraden andere output. Het label blijft staan als die wijziging
+      # later wegvalt, omdat ook een mens of agent het zet bij impact zonder outputwijziging.
+      - if: github.event.action != 'edited'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const IMPACT = "impact eindgebruiker";
+            const VERWACHTE_OUTPUT =
+              /^tests\/(.+\/)?testreferenties\/[^/]+\.md$|^tests\/docs\/output_json_[^/]+\.json$/;
+
+            const pr = context.payload.pull_request;
+            if (pr.labels.some((label) => label.name === IMPACT)) return;
+
+            const bestanden = await github.paginate(github.rest.pulls.listFiles, {
+              ...context.repo,
+              pull_number: pr.number,
+            });
+            const gewijzigd = bestanden.filter((bestand) => VERWACHTE_OUTPUT.test(bestand.filename));
+            if (gewijzigd.length === 0) return;
+
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: pr.number,
+              labels: [IMPACT],
+            });
+            core.info(`Verwachte output gewijzigd: ${gewijzigd.map((bestand) => bestand.filename)}`);

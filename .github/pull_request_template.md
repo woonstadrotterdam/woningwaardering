@@ -20,6 +20,14 @@
 - ☐ CI / tooling / build
 - ☐ Overig
 
+## Impact op eindgebruiker
+
+<!-- Ziet een gebruiker na upgraden iets anders: punten, huurprijs, criteria, rapport, warnings/errors of API?
+     Bij ja krijgt de PR het label `impact eindgebruiker` (zie docs/voor-ontwikkelaars/releases.md). -->
+
+- ☐ Ja — wat merkt de gebruiker?
+- ☐ Nee
+
 ## Bronverwijzing
 
 <!-- Alleen invullen als 'Domeinlogica / puntberekening' is aangevinkt; anders overslaan.

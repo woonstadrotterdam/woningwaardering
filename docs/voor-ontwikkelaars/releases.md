@@ -62,3 +62,5 @@ De changelog deelt pull requests in op label; de rubrieken staan in [.github/rel
 Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. Het type `revert` krijgt geen label en komt onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
 
 Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.
+
+Het label `impact eindgebruiker` staat los van de release notes: het markeert een wijziging die gebruikers na upgraden merken, zoals andere punten, huurprijs, criteria of criterium-id's, rapport, warnings of errors, of een gewijzigde publieke API. Zo'n pull request vraagt intensieve review. De workflow zet het label zodra de verwachte testoutput wijzigt (testreferenties of `tests/docs/output_json_*.json`); bij impact zonder outputwijziging zet je het met de hand. Op een issue zet je het bij triage, als inschatting.
