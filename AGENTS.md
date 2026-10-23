@@ -77,12 +77,7 @@ Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale 
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Sla grillen over bij triviale fixes (typo's, formatting, eenduidige testfixes zonder domeinvraag). Tijdens het grillen:
-
-- Toets termen aan `GLOSSARY.md`.
-- Citeer de bron letterlijk met regelnummer of artikel en met de link naar de pagina (zie [Domeinregels](#domeinregels)), zodat de gebruiker op de tekst reageert en niet op jouw samenvatting.
-- Toets elk antwoord aan de code en reken een randgeval door, zoals een ruimte die door drie onzelfstandige woonruimten wordt gedeeld of een waarde precies op een drempel in een lookuptabel.
-- Vul nooit zelf een uitkomst van de huurprijscheck in; reken het scenario door met de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md) of vraag de gebruiker de tool te controleren.
+Sla grillen over bij een triviale fix. Tijdens het grillen zijn wettekst, beleidsboek en implementatietoelichting feiten die je zelf opzoekt en citeert volgens [Domeinregels](#domeinregels).
 
 Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
@@ -121,8 +116,7 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 - Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
 - Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md).
-- Elke wijziging in domeinlogica citeert het regelnummer of artikel van de bron in het codecommentaar en in de sectie Bronverwijzing van de pull request.
-- Geef bij elk citaat uit een online bron, in de pull request en in antwoorden aan de gebruiker, ook de link naar de pagina waar de tekst staat, zo specifiek als de bron toelaat: de rubriekpagina van het online beleidsboek of het artikel in de online wettekst.
+- Geef bij een citaat uit een online bron, ook in antwoorden aan de gebruiker, de link naar de pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), zodat de lezer op de tekst reageert en niet op jouw samenvatting.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
