@@ -67,12 +67,14 @@ Isoleer de beleidsregel die je onderzoekt: reken hetzelfde scenario twee keer do
 
 Bij code-review controleer je de wijziging met de huurprijscheck, ook als wettekst en beleidsboek eenduidig zijn. Je toetst of de package hetzelfde rekent; de volgorde van autoriteit blijft gelijk.
 
-1. Bepaal van welke beleidsregels de diff het gedrag verandert. Zijn dat er meer dan tien, reken dan niets door en meld welke het zijn: de agent die `/code-review` draait, legt de keuze aan de gebruiker voor. Zo blijft het bij losse scenario's en wordt het geen lus over een publieke dienst.
-2. Kies per beleidsregel één scenario: het geval op of net naast de grens die de beleidsregel stelt (drempel, afronding, maximum, net wel of niet meetellen), want daar zitten implementatiefouten het vaakst. Heeft de beleidsregel geen grens, neem dan het geval dat de wijziging verandert. Baseer de input op de sectie Input van een geraakte testreferentie en reken het geïsoleerd door, zoals onder Werkwijze.
-3. Vergelijk punten en huurprijs bij gelijke input met de output van de package: de sectie Output of Rapport van de testreferentie als die precies dit scenario dekt, anders de package zelf, gedraaid op dezelfde input. Een verschil in bediening van de wizard telt niet; een veld dat de wizard of de package mist wel.
+1. Bepaal welke testreferenties de diff toevoegt of waarvan de output wijzigt, en bij welke beleidsregel elk hoort. Zijn het er meer dan tien, reken dan niets door en meld welke het zijn: de agent die `/code-review` draait, legt de keuze aan de gebruiker voor. Zo blijft het bij losse scenario's en wordt het geen lus over een publieke dienst.
+2. Reken per testreferentie de sectie Input door in de huurprijscheck. Een test bevat al alleen de input die de beleidsregel raakt, en controleert een grens op of één kleinste stap naast die grens (zie `docs/voor-ontwikkelaars/testing.md`); je hoeft het scenario dus niet zelf te kiezen of te isoleren.
+3. Vergelijk punten en huurprijs met de sectie Output of Rapport van dezelfde testreferentie. Een verschil in bediening van de wizard telt niet; een veld dat de wizard of de package mist wel.
 4. Zoek bij een verschil op wat wettekst en beleidsboek zeggen, citeer ze volgens `docs/voor-ontwikkelaars/bronnen.md` en geef je oordeel welke kant klopt. Een verschil is een bevinding om te wegen, geen harde fout: is de wettekst eenduidig, dan wint die.
 
-Rapporteer per beleidsregel: het scenario en de input, punten en huurprijs van package en huurprijscheck, en je oordeel. Kan de wizard een beleidsregel niet uitdrukken, meld dan dat hij niet te toetsen is en waarom. De review is klaar wanneer elke beleidsregel uit stap 1 een uitkomst of zo'n reden heeft.
+Verandert de diff het gedrag van een beleidsregel zonder dat een test die beleidsregel of haar grens controleert, meld dan de ontbrekende test in plaats van zelf een scenario te bedenken.
+
+Rapporteer per testreferentie: de beleidsregel, punten en huurprijs van package en huurprijscheck, en je oordeel. Kan de wizard de input niet uitdrukken, meld dan dat de test niet te toetsen is en waarom. De review is klaar wanneer elke testreferentie uit stap 1 een uitkomst of zo'n reden heeft en elke ontbrekende test is gemeld.
 
 ## Vastleggen
 
