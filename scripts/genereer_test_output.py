@@ -20,7 +20,8 @@ def _write_text_if_changed(path: Path, content: str) -> bool:
 
 
 def _genereer_docs_outputs(peildatum: date) -> int:
-    from tests.docs._examples import (
+    # Inline: tests is pas importeerbaar nadat main() de repo-root aan sys.path toevoegt.
+    from tests.docs._examples import (  # noqa: PLC0415
         voorbeeld1_json_input_path,
         voorbeeld2_python_eenheid,
     )
@@ -64,7 +65,8 @@ def main() -> int:
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
 
-    from tests.peildatum import REFERENTIE_PEILDATUM
+    # Inline: tests is pas importeerbaar na de sys.path-aanpassing hierboven.
+    from tests.peildatum import REFERENTIE_PEILDATUM  # noqa: PLC0415
 
     warnings.filterwarnings("ignore", category=UserWarning)
 

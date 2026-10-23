@@ -18,7 +18,7 @@ Deze standaarden worden bij review afgedwongen (`/code-review`). Mechanische reg
 
 ## Imports
 
-- Houd imports bovenaan het bestand; voeg geen inline imports toe, tenzij een circulaire import dat afdwingt en dit in een comment staat.
+- Houd imports bovenaan het bestand. Een inline import mag alleen wanneer de import bovenaan niet kan, zoals bij een circulaire import of een optionele dependency; ruff (PLC0415) dwingt dit af. Zet de reden in een comment boven de import, met `# noqa: PLC0415` op de importregel.
 
 ## Comments
 

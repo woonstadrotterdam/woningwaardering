@@ -60,7 +60,7 @@ omit = [
 "logging".msg = "Gebruik loguru; zie docs/voor-ontwikkelaars/logging.md"
 
 [tool.ruff.lint]
-extend-select = ["TID251"]
+extend-select = ["TID251", "PLC0415"]
 
 [project.optional-dependencies]
 test = [
