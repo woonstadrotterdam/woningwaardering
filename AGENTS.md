@@ -28,30 +28,10 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) voor in
 
 ## Codeconventies
 
-- Volg de VERA-referentiedata voor naamgeving van stelsels en stelselgroepen.
-- Plaats stelselgroep-logica in de map van het juiste stelsel onder `woningwaardering/stelsels/`.
-- Plaats logica die door meerdere stelsels gedeeld wordt in `woningwaardering/stelsels/gedeelde_logica/`.
-- Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py` (`met_onderliggend` / `met_subgroep` / `gedeeld_met`); zie `docs/voor-ontwikkelaars/criteriumstrategie.md` voor de criteriumstrategie.
-- Behandel gegenereerde code onder `woningwaardering/vera/` terughoudend. Wijzig deze alleen via de bestaande scripts of wanneer de taak daar expliciet om vraagt.
-- Gebruik bestaande patronen voor stelsels, stelselgroepen, criterium-id's en lookup-tabellen voordat je nieuwe abstraheringen toevoegt.
-- Houd imports bovenaan het bestand; voeg geen inline imports toe.
-- Gebruik `warnings.warn(..., UserWarning)` voor gebruikersgerichte waarschuwingen over incomplete of onjuiste input, volgens de bestaande warning-semantiek.
-- Gebruik `loguru` voor logging volgens `docs/voor-ontwikkelaars/logging.md`.
-- Gebruik comments vooral om beleidsregels herleidbaar te maken: neem waar mogelijk de relevante tekst uit het beleidsboek, de implementatietoelichting of de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01) letterlijk op bij de bijbehorende code, met vermelding van het regelnummer/artikel.
-- Schrijf comments voor de lezer van de huidige code, niet voor de reviewer van de wijziging: verwijs niet naar verwijderde of oude code ("dit is niet meer nodig", "voorheen gebeurde hier X"). Zulke uitleg hoort in het commitbericht of de PR-beschrijving.
+Codeconventies staan in [`CODING_STANDARDS.md`](CODING_STANDARDS.md) en worden bij review afgedwongen. Houd tijdens het implementeren in elk geval rekening met:
 
-```python
-# 2.2.2.3 Zolderruimte zonder vaste trap
-# Als een zolderruimte geen vertrek is maar wel als overige ruimte kan worden
-# aangemerkt en er is geen vaste trap naar de zolder, dan worden er 5 punten
-# afgetrokken van de waarde die aan het vloeroppervlak wordt toegekend.
-if (
-    ruimte.detail_soort == Ruimtedetailsoort.zolder
-    and heeft_bouwkundig_element(ruimte, Bouwkundigelementdetailsoort.vlizotrap)
-    and classificeer_ruimte(ruimte) == Ruimtesoort.overige_ruimten
-):
-    ...
-```
+- Citeer bij beleidslogica de bron (beleidsboek, implementatietoelichting of wettekst) letterlijk in een comment, met regelnummer/artikel; zie het voorbeeld in `CODING_STANDARDS.md`.
+- Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py`; zie `docs/voor-ontwikkelaars/criteriumstrategie.md`.
 
 ## Tests
 
@@ -63,11 +43,7 @@ uv run pre-commit run --all-files
 uv run pre-commit run --all-files --hook-stage pre-push
 ```
 
-- Voeg passende tests toe bij nieuwe of gewijzigde code.
 - Lees [testing.md](docs/voor-ontwikkelaars/testing.md) voordat je een test schrijft of wijzigt: daar staat welke soort test je nodig hebt en hoe je hem opbouwt.
-- Spiegel de package-structuur waar praktisch: tests voor `woningwaardering/.../module.py` horen onder `tests/.../test_module.py`.
-- Laat testfuncties beginnen met `test_`.
-- Test geen gegenereerde VERA-code alleen om coverage te verhogen.
 
 ### Verwachte output
 
