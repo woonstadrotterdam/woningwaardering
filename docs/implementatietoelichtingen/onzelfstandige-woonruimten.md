@@ -777,6 +777,9 @@ Om punten te krijgen in de rubriek ‘keuken’ moet er in de ruimte een aantal 
 
 \* Er worden 13 punten toegekend mits er _minimaal_ 8 onzelfstandige wooneenheden toegang en gebruiksrecht hebben tot de keuken.
 
+> [!NOTE]
+> De package volgt de grenzen van de [wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieB) (Bijlage I onder B, onderdeel 5.1): "3 m en meer 10 punten" en "5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en gebruiksrecht hebben tot deze keuken) 13 punten". Een aanrecht van precies 3 meter krijgt daarom 10 punten, en een aanrecht van precies 5 meter bij minimaal 8 onzelfstandige woonruimten 13 punten. De tabel hierboven ("Meer dan 3 meter", "Meer dan 5 meter") sluit de grenswaarde uit; daarin wijkt de package af van het beleidsboek.
+
 Een aanrecht met spoelbak dat korter is dan 1 meter voldoet niet aan de basisvoorzieningen en krijgt daarom géén punten in de rubriek keuken. Wel kan de spoelbak als wastafel nog
 één punt krijgen in de rubriek sanitair. Een aanrecht zonder onderkasten kan ook als wastafel gewaardeerd worden.
 

@@ -20,7 +20,7 @@ KEUKEN
     - Keuken4
       - Lengte aanrecht                                            2999.00 mm     7.00 pt
     - Keuken5
-      - Lengte aanrecht                                            3500.00 mm    10.00 pt
+      - Lengte aanrecht                                            3000.00 mm    10.00 pt
                                                                                 ------
   Totaal                                                                         32.00 pt
 ```
@@ -170,7 +170,7 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 3500.0
+          "lengte": 3000.0
         }
       ]
     }
@@ -306,7 +306,7 @@ Geen.
       }
     },
     {
-      "aantal": 3500.0,
+      "aantal": 3000.0,
       "criterium": {
         "id": "keuken__prive__keuken5__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",
