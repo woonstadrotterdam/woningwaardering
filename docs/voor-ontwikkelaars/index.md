@@ -51,7 +51,14 @@ Installeer de skills niet daarnaast als Claude Code-plugin of via `npx skills ad
 
 Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHANGELOG.md), installeer de nieuwe tag met `npx skills add mattpocock/skills#<tag> -a claude-code`, draai zo nodig `/setup-matt-pocock-skills` opnieuw en commit `.claude/skills/`, `skills-lock.json` en de bestanden van de setup-skill samen.
 
-We gebruiken niet alle skills uit de set. `setup-pre-commit`, `migrate-to-shoehorn`, `setup-ts-deep-modules` en `scaffold-exercises` zijn bedoeld voor JavaScript/TypeScript-projecten of cursusmateriaal en staan bewust niet in de repo. Een agent kan ze uit zichzelf starten, dus verwijder ze na het upgraden weer uit `.claude/skills/` en `skills-lock.json`.
+We gebruiken niet alle skills uit de set. Deze staan bewust niet in de repo; verwijder ze na het upgraden weer uit `.claude/skills/` en `skills-lock.json`:
+
+- `setup-pre-commit`, `migrate-to-shoehorn`, `setup-ts-deep-modules` en `scaffold-exercises`: bedoeld voor JavaScript/TypeScript-projecten of cursusmateriaal.
+- `claude-handoff`, `loop-me`, `writing-beats`, `writing-fragments` en `writing-shape`: nog in ontwikkeling bij Matt Pocock; de writing-skills zijn bovendien voor artikelen.
+- `teach`, `git-guardrails-claude-code`, `wizard` en `grill-me`: persoonlijk, eenmalige setup of bedoeld voor werk buiten een repo. Installeer ze zo nodig globaal.
+- `prototype`: bedoeld voor UI en state-modellen; een interpretatie van een beleidsregel toetsen we met tests en de huurprijscheck.
+
+`/ask-matt` en `/wayfinder` noemen sommige van deze skills nog; die verwijzingen laten we staan, omdat we de skills uit `skills-lock.json` niet wijzigen.
 
 Repo-specifieke aanvullingen op de skills staan in de sectie `## Skills` van `AGENTS.md`, in `docs/agents/domain.md` en in `docs/agents/issue-tracker.md` (sectie `## Issue content`), nooit in de skills uit `skills-lock.json` (een upgrade overschrijft die). Skills van deze repo zelf, zoals `huurprijscheck`, staan ernaast in `.claude/skills/` en staan niet in `skills-lock.json`. Controleer na een upgrade dat ze er nog staan. `/setup-matt-pocock-skills` schrijft `docs/agents/` opnieuw: controleer na het draaien de diff en herstel de repo-specifieke leeslijst en issueconventies.
 
