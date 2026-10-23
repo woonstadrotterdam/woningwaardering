@@ -118,12 +118,12 @@ def test_aanrecht_van_5m_of_meer_krijgt_10_punten_bij_minder_dan_8_woonruimten(
     - implementatietoelichting onzelfstandige woonruimten, 2.5.2
     - wettekst, Bijlage I onder B, onderdeel 5.1
     """
-    # Een aanrecht boven de 5 m, gedeeld met 7 woonruimten: één minder dan de 8 waarbij 13 punten gelden.
+    # Een aanrecht van precies 5 m, gedeeld met 7 woonruimten: één minder dan de 8 waarbij 13 punten gelden.
     eenheid = EenhedenEenheid(
         ruimten=[
             ruimte(
                 Ruimtedetailsoort.keuken,
-                elementen=[aanrecht(5500)],
+                elementen=[aanrecht(5000)],
                 gedeeld_met_aantal_onzelfstandige_woonruimten=7,
             )
         ]
