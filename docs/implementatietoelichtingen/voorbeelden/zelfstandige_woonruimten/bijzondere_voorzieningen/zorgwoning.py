@@ -32,7 +32,6 @@ def get_eenheid():
 
     eenheid.doelgroep = Doelgroep.zorg
 
-
     eenheid.woz_eenheden = [
         EenhedenWozEenheid(
             waardepeildatum=date(2023, 1, 1),
@@ -41,7 +40,7 @@ def get_eenheid():
         EenhedenWozEenheid(
             waardepeildatum=date(2024, 1, 1),
             vastgestelde_waarde=310000.0,
-        )
+        ),
     ]
 
     eenheid.energieprestaties = [
