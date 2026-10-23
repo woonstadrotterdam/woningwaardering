@@ -53,7 +53,7 @@ Upgraden: lees de [changelog](https://github.com/mattpocock/skills/blob/main/CHA
 
 We gebruiken niet alle skills uit de set. `setup-pre-commit`, `migrate-to-shoehorn`, `setup-ts-deep-modules` en `scaffold-exercises` zijn bedoeld voor JavaScript/TypeScript-projecten of cursusmateriaal en staan bewust niet in de repo. Een agent kan ze uit zichzelf starten, dus verwijder ze na het upgraden weer uit `.claude/skills/` en `skills-lock.json`.
 
-Repo-specifieke aanvullingen op de skills staan in de sectie `## Skills` van `AGENTS.md`, in `docs/agents/domain.md` en in `docs/agents/issue-tracker.md` (sectie `## Issue content`), nooit in `.claude/skills/` (die map wordt bij upgraden overschreven). `/setup-matt-pocock-skills` schrijft `docs/agents/` opnieuw: controleer na het draaien de diff en herstel de repo-specifieke leeslijst en issueconventies.
+Repo-specifieke aanvullingen op de skills staan in de sectie `## Skills` van `AGENTS.md`, in `docs/agents/domain.md` en in `docs/agents/issue-tracker.md` (sectie `## Issue content`), nooit in `.claude/skills/` (die map wordt bij upgraden overschreven). Skills van deze repo zelf, zoals `huurprijscheck`, staan in `skills/`; `AGENTS.md` verwijst ernaar. `/setup-matt-pocock-skills` schrijft `docs/agents/` opnieuw: controleer na het draaien de diff en herstel de repo-specifieke leeslijst en issueconventies.
 
 ## Tests en checks
 
