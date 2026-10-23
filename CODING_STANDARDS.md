@@ -9,7 +9,7 @@ Deze standaarden worden bij review afgedwongen (`/code-review`). Mechanische reg
 - Plaats logica die door meerdere stelsels gedeeld wordt in `woningwaardering/stelsels/gedeelde_logica/`.
 - Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py` (`met_onderliggend` / `met_subgroep` / `gedeeld_met`); zie [criteriumstrategie.md](docs/voor-ontwikkelaars/criteriumstrategie.md).
 - Gebruik bestaande patronen voor stelsels, stelselgroepen, criterium-id's en lookup-tabellen voordat je nieuwe abstraheringen toevoegt.
-- `woningwaardering/vera/bvg/generated.py` en `woningwaardering/vera/referentiedata/` zijn gegenereerd. Bewerk ze niet met de hand, want de generator overschrijft handmatige wijzigingen; draai in plaats daarvan `task genereer-vera-bvg-modellen` of `task genereer-vera-referentiedata`. De modeluitbreidingen in `woningwaardering/vera/bvg/model_uitbreidingen/` zijn handgeschreven en mag je wel bewerken.
+- `woningwaardering/vera/bvg/generated.py` en `woningwaardering/vera/referentiedata/` zijn gegenereerd. Bewerk ze niet met de hand, want de generator overschrijft handmatige wijzigingen; draai in plaats daarvan `task genereer-vera-bvg-modellen` of `task genereer-vera-referentiedata`. De modeluitbreidingen in `woningwaardering/vera/bvg/model_uitbreidingen/` zijn handgeschreven: bewerk ze daar en draai daarna `task genereer-vera-bvg-modellen`, die ze samenvoegt in `generated.py`.
 
 ## Waarschuwingen en logging
 
