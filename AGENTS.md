@@ -1,19 +1,21 @@
 # Instructies Voor Agents
 
-Werk in dit project voorzichtig met domeinlogica: kleine regelwijzigingen kunnen direct invloed hebben op woningwaarderingen. Wijzig alleen wat nodig is voor de taak.
+Werk in dit project voorzichtig met domeinlogica: kleine codewijzigingen kunnen direct invloed hebben op woningwaarderingen. Wijzig alleen wat nodig is voor de taak.
 
 ## Wat Lees Je Wanneer
 
-| Als de taak raakt aan                                                                                    | Lees dan eerst                                                                                                                |
-| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Puntberekening, stelsel, stelselgroep, gedeelde logica, lookuptabel of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en `docs/voor-ontwikkelaars/bronnen.md`                             |
-| Outputstructuur, criterium-id's of builders                                                              | `docs/voor-ontwikkelaars/criteriumstrategie.md`, `docs/index.md` en de inline voorbeeld-output in `docs/aan-de-slag/index.md` |
-| Tests of testdata                                                                                        | `docs/voor-ontwikkelaars/testing.md` en `data.md`                                                                             |
-| Naamgeving                                                                                               | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                       |
-| Warnings of logging                                                                                      | `docs/voor-ontwikkelaars/logging.md` en `docs/index.md`                                                                       |
-| Installatie, repository-opzet of releases                                                                | `docs/voor-ontwikkelaars/index.md` en `releases.md`                                                                           |
-| Domeintermen in code, docs of comments                                                                   | `GLOSSARY.md`                                                                                                                 |
-| Triviale fix: typefout, formatting of eenduidige testfix zonder domeinvraag                              | Niets extra                                                                                                                   |
+| Als de taak raakt aan                                                                       | Lees dan eerst                                                                                                                       |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Puntberekening, stelsel, stelselgroep, gedeelde logica of een waarschuwing die punten raakt | De relevante pagina in `docs/implementatietoelichtingen/` en `docs/voor-ontwikkelaars/bronnen.md`                                    |
+| Citaat uit wettekst of beleidsboek                                                          | `docs/voor-ontwikkelaars/bronnen.md`: de volgorde van autoriteit, waar je elke bron vindt en hoe je citeert                          |
+| VERA-modellen, modeluitbreiding, referentiedata of lookuptabel                              | `docs/voor-ontwikkelaars/data.md`                                                                                                    |
+| Outputstructuur, criterium-id's of builders                                                 | `docs/voor-ontwikkelaars/criteriumstrategie.md` en `docs/aan-de-slag/index.md` (sectie Criterium-id's en de inline voorbeeld-output) |
+| Tests of testdata                                                                           | `docs/voor-ontwikkelaars/testing.md`                                                                                                 |
+| Naamgeving                                                                                  | `docs/voor-ontwikkelaars/naamgeving.md`                                                                                              |
+| Warnings of logging                                                                         | `docs/voor-ontwikkelaars/logging.md` en `docs/aan-de-slag/index.md` (sectie Warnings)                                                |
+| Installatie, repository-opzet of releases                                                   | `docs/voor-ontwikkelaars/index.md` en `docs/voor-ontwikkelaars/releases.md`                                                          |
+| Domeintermen in code, docs of comments                                                      | `GLOSSARY.md`                                                                                                                        |
+| Triviale fix: typefout, formatting of eenduidige testfix zonder domeinvraag                 | Niets extra                                                                                                                          |
 
 ## Omgeving En Commands
 
@@ -31,7 +33,7 @@ Zie [docs/voor-ontwikkelaars/index.md](docs/voor-ontwikkelaars/index.md) voor in
 
 Codeconventies staan in [`CODING_STANDARDS.md`](CODING_STANDARDS.md) en worden bij review afgedwongen. Houd tijdens het implementeren in elk geval rekening met:
 
-- Citeer bij beleidslogica de bron (beleidsboek, implementatietoelichting of wettekst) letterlijk in een comment, met regelnummer/artikel; zie het voorbeeld in `CODING_STANDARDS.md`.
+- Citeer bij beleidslogica de bron in een comment bij de code, zoals [`bronnen.md`](docs/voor-ontwikkelaars/bronnen.md) voorschrijft; zie het voorbeeld in `CODING_STANDARDS.md`.
 - Bouw de output van een stelselgroep op met de builders in `woningwaardering/stelsels/builders.py`; zie `docs/voor-ontwikkelaars/criteriumstrategie.md`.
 
 ## Tests
@@ -74,7 +76,7 @@ Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale 
 - nieuwe features, gedragswijzigingen, waarschuwingen of onduidelijke requirements
 - terminologie, projectgrenzen of documentatie die moet worden aangescherpt
 
-Sla grillen over bij een triviale fix. Zoek tijdens het grillen zelf op wat wettekst, beleidsboek en implementatietoelichting zeggen, en citeer dat volgens [`bronnen.md`](docs/voor-ontwikkelaars/bronnen.md).
+Sla grillen over bij een triviale fix. Wettekst, beleidsboek en implementatietoelichting zijn feiten die je tijdens het grillen opzoekt; citeer ze volgens [`bronnen.md`](docs/voor-ontwikkelaars/bronnen.md).
 
 Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
@@ -108,7 +110,6 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 
 ## Domeinregels
 
-- Lees bij puntberekeningen en bij elk citaat uit wettekst of beleidsboek eerst [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md): de volgorde van autoriteit, waar je elke bron vindt en hoe je citeert.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.
 - Vermeld in gebruikersgerichte voorbeelden wanneer `warnings.simplefilter("default", UserWarning)` nodig is om incomplete input als warning in plaats van error te behandelen.
