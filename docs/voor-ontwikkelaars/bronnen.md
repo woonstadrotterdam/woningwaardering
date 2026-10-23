@@ -27,7 +27,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen g
 - Online beleidsboek: check en citeer de actuele HTML-pagina's.
 - Implementatietoelichting: check naast de toelichting altijd ook het online beleidsboek.
 - Citeer letterlijk, met paragraafnummer (beleidsboek en implementatietoelichting) of artikel en lid (wettekst). Geef bij een citaat in een PR, issue of antwoord aan de gebruiker de link naar de online pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), ook als je uit de lokale XML-kopie citeert, zodat de lezer op de tekst reageert en niet op een samenvatting.
-- Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck`.
+- Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill `huurprijscheck`. Bij code-review rekent een agent de wijziging ook door wanneer ze wel uitsluitsel geven, als controle op de package; de volgorde van autoriteit blijft gelijk.
 
 ## Projectgrenzen
 

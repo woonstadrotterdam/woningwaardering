@@ -83,6 +83,7 @@ Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied da
 Waar een skill botst met dit bestand, gaat dit bestand voor:
 
 - `/pr`: volg de PR-template. Zet de visual en het voor/na-bewijs uit `/pr` onder **Samenvatting**, met het oordeel one-way/two-way door. Beantwoord de Blast Radius onder **Impact op eindgebruiker**: vink de soorten aan en noem per soort wat er concreet verandert. Zet bij ja het label `impact eindgebruiker`, zodat reviewers zien dat de PR intensieve review vraagt.
+- `/code-review`: kan de diff punten of huurprijs veranderen, start dan naast de Standards- en Spec-subagent een derde subagent die de wijziging doorrekent volgens de skill `huurprijscheck` (sectie **Bij code-review**), ook als wettekst en beleidsboek eenduidig zijn. Zet zijn rapport onder `## Huurprijscheck`.
 - Issues en specs (`/to-spec`, `/to-tickets`, `/triage`): volg de conventies in `docs/agents/issue-tracker.md`.
 
 ## Agent skills

@@ -4,8 +4,9 @@ description: >-
   Rekent een scenario door in de huurprijscheck van de Huurcommissie (zelfstandige en
   onzelfstandige woonruimte) met een script dat de online wizard bedient, en leest de
   puntentelling per rubriek uit. Gebruik wanneer wettekst en online beleidsboek geen uitsluitsel
-  geven over een beleidsregel, of wanneer de gebruiker vraagt wat de huurprijscheck voor een
-  situatie berekent of of de package daarmee overeenkomt. Niet voor het doorrekenen van grote
+  geven over een beleidsregel, bij code-review van een wijziging die punten of huurprijs kan
+  veranderen, of wanneer de gebruiker vraagt wat de huurprijscheck voor een situatie berekent of
+  of de package daarmee overeenkomt. Niet voor het doorrekenen van grote
   aantallen woonruimten.
 ---
 
@@ -61,6 +62,17 @@ Isoleer de beleidsregel die je onderzoekt: reken hetzelfde scenario twee keer do
 - Keuzes en veldnamen verschillen tussen zelfstandig en onzelfstandig en per tijdvak. Lees ze uit `toon` in plaats van ze over te nemen uit een eerder scenario; bij een onbekende keuze noemt het script de geldige keuzes.
 - De puntentelling die `toon`, `vul` en `kies` afdrukken is een tussenstand zonder opslagen. Gebruik `resultaat` voor de uitkomst.
 - Het script leest de formulieren zoals de site ze nu opbouwt. Geeft een commando geen velden of geen puntentelling meer terug, dan is de site gewijzigd: meld dat en vraag de gebruiker de tool zelf te controleren.
+
+## Bij code-review
+
+Bij code-review controleer je de wijziging met de huurprijscheck, ook als wettekst en beleidsboek eenduidig zijn. Je toetst of de package hetzelfde rekent; de volgorde van autoriteit blijft gelijk.
+
+1. Bepaal welke beleidsregels de diff raakt.
+2. Kies per beleidsregel één scenario, afgeleid van de sectie Input van een geraakte testreferentie. Reken het geïsoleerd door, zoals onder Werkwijze. Neem hooguit vijf scenario's per review, want het is een publieke dienst; kies bij meer dan vijf de beleidsregels met de grootste puntenimpact.
+3. Vergelijk punten en huurprijs bij gelijke input met de output van de package (sectie Output of Rapport van de testreferentie in de nieuwe versie). Een verschil in bediening van de wizard telt niet; een veld dat de wizard of de package mist wel.
+4. Zoek bij een verschil op wat wettekst en beleidsboek zeggen, citeer ze volgens `docs/voor-ontwikkelaars/bronnen.md` en geef je oordeel welke kant klopt. Een verschil is een bevinding om te wegen, geen harde fout: is de wettekst eenduidig, dan wint die.
+
+Rapporteer per beleidsregel: het scenario en de input, punten en huurprijs van package en huurprijscheck, en je oordeel. Kan de wizard een beleidsregel niet uitdrukken, meld dan dat hij niet te toetsen is en waarom. De review is klaar wanneer elke geraakte beleidsregel een uitkomst of zo'n reden heeft.
 
 ## Vastleggen
 
