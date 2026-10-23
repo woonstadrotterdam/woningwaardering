@@ -38,7 +38,7 @@ def get_eenheid():
                 Installatiesoort.inbouw_kookplaat_inductie,
                 Installatiesoort.eenhandsmengkraan,
                 Installatiesoort.inbouw_koelkast,
-            ]
+            ],
         ),
         EenhedenRuimte(
             naam="Ruimte B",
@@ -50,7 +50,7 @@ def get_eenheid():
             installaties=[
                 Installatiesoort.hangend_toilet,
                 Installatiesoort.wastafel,
-            ]
+            ],
         ),
     ]
 

@@ -5,11 +5,13 @@ default_install_hook_types:
 
 # default_stages: [commit]
 
-exclude: (wettelijke-documenten|docs)
+# docs/ is uitgesloten, behalve de Python-voorbeelden die in de implementatietoelichtingen worden opgenomen.
+# De verwachte output in tests/docs/*.json wordt alleen door `task genereer-test-output` bijgewerkt.
+exclude: ^wettelijke-documenten/|^docs/(?!implementatietoelichtingen/voorbeelden/.*\.py$)|^tests/docs/.*\.json$
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.5.3
+    rev: v0.15.6
     hooks:
       - id: ruff
         types_or: [python, pyi, jupyter]
@@ -26,7 +28,7 @@ repos:
         additional_dependencies:
           - prettier@2.8.1
         # Testreferenties worden alleen door de fixture vergelijk_met_testreferentie bijgewerkt.
-        exclude: "/testreferenties/"
+        exclude: '/testreferenties/|^\.claude/skills/'
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -71,7 +73,7 @@ repos:
           - "unidecode>=1.3"
         description: "Mypy is an optional static type checker for Python."
         args: ["--strict", "--allow-untyped-decorators"]
-        exclude: "tests"
+        exclude: ^(tests|docs)/
         stages:
           - "pre-push"
           - "manual"

@@ -31,7 +31,7 @@ def get_eenheid():
                 )
             ],
             gedeeld_met_aantal_onzelfstandige_woonruimten=2,
-        )   
+        )
     ]
 
     eenheid.woningwaarderingstelsel = Woningwaarderingstelsel.onzelfstandige_woonruimten
