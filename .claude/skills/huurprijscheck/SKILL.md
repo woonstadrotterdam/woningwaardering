@@ -25,13 +25,13 @@ De huurprijscheck is de rekentool van de Huurcommissie. Hij heeft geen API; `scr
 Roep het script aan vanuit de root van de repository. Elk commando drukt de velden van de huidige pagina af, de links die je kunt volgen en de puntentelling tot nu toe.
 
 ```bash
-python skills/huurprijscheck/scripts/huurprijscheck.py start zelfstandig
-python skills/huurprijscheck/scripts/huurprijscheck.py volgende regime=39 wozValue=300000 wozReferenceDate=1-1-2025 energyPerformanceType="Energielabel vanaf 2021" energyPerformanceNewLabel="Label C" houseType=1
-python skills/huurprijscheck/scripts/huurprijscheck.py kies Woonkamer
-python skills/huurprijscheck/scripts/huurprijscheck.py vul size=20 heated=Ja
-python skills/huurprijscheck/scripts/huurprijscheck.py kies "Woonkamer Toevoegen"
-python skills/huurprijscheck/scripts/huurprijscheck.py volgende
-python skills/huurprijscheck/scripts/huurprijscheck.py resultaat
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py start zelfstandig
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende regime=39 wozValue=300000 wozReferenceDate=1-1-2025 energyPerformanceType="Energielabel vanaf 2021" energyPerformanceNewLabel="Label C" houseType=1
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies Woonkamer
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py vul size=20 heated=Ja
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py kies "Woonkamer Toevoegen"
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py volgende
+python .claude/skills/huurprijscheck/scripts/huurprijscheck.py resultaat
 ```
 
 | Commando                                     | Wat het doet                                                                                                                                                        |

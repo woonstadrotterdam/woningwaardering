@@ -108,11 +108,11 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 
 ## Domeinregels
 
-- Volg voor puntberekeningen de volgorde van autoriteit in [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md), ook voor de huurprijscheck. Vermeld tegenstrijdigheden tussen bronnen.
+- Volg voor puntberekeningen de volgorde van autoriteit in [`docs/voor-ontwikkelaars/bronnen.md`](docs/voor-ontwikkelaars/bronnen.md). Vermeld tegenstrijdigheden tussen bronnen.
 - Wettekst: zoek en citeer eerst in de lokale XML-kopie `wettelijke-documenten/BWBR0003237_2026-01-01_0.xml` en verifieer daarna tegen de officiële [online wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01), die leidend blijft.
 - Online beleidsboek: check en citeer de actuele HTML-pagina's ([zelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte), [onzelfstandig](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte)), niet de PDF-versie die gedurende het jaar kan achterlopen.
 - Implementatietoelichting: onze kopie kan achterlopen op het online beleidsboek; check daarom altijd beide.
-- Huurprijscheck: geven wettekst en beleidsboek geen uitsluitsel, reken het scenario dan door met de skill [`huurprijscheck`](skills/huurprijscheck/SKILL.md).
+- Rapporteer alleen een uitkomst van de huurprijscheck die de skill `huurprijscheck` of de gebruiker gaf.
 - Geef bij een citaat uit een online bron, ook in antwoorden aan de gebruiker, de link naar de pagina waar de tekst staat (de rubriekpagina van het online beleidsboek of het artikel in de online wettekst), zodat de lezer op de tekst reageert en niet op jouw samenvatting.
 - Maak expliciet wanneer VERA-data of het inputmodel onvoldoende is om een beleidsregel volledig te implementeren.
 - Verander waarschuwing- of errorlogica niet stilzwijgend.

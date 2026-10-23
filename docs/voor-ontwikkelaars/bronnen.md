@@ -21,7 +21,7 @@ Controleer deze bronnen bij wijzigingen in domeinlogica. Voor puntberekeningen g
 - De huurprijscheck is pas leidend als wettekst en beleidsboek niet sluitend zijn; is de wettekst wél eenduidig, dan blijft die leidend, ook als de tool afwijkt.
 - Tegenstrijdigheden tussen bronnen moeten altijd worden vermeld.
 
-Als wettekst en beleidsboek niet sluitend zijn, rekenen agents het scenario door met de skill [`huurprijscheck`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/skills/huurprijscheck/SKILL.md). Lukt dat niet, dan vragen ze een mens de huurprijscheck te controleren; ze vullen nooit zelf een uitkomst in. Leg de uitkomst vast in de implementatietoelichting.
+Als wettekst en beleidsboek niet sluitend zijn, rekenen agents het scenario door met de skill [`huurprijscheck`](https://github.com/woonstadrotterdam/woningwaardering/blob/main/.claude/skills/huurprijscheck/SKILL.md). Lukt dat niet, dan vragen ze een mens de huurprijscheck te controleren; ze vullen nooit zelf een uitkomst in. Leg de uitkomst vast in de implementatietoelichting.
 
 ## Projectgrenzen
 
