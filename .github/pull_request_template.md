@@ -10,7 +10,10 @@
 
 ## Samenvatting
 
-<!-- Wat verandert en waarom? -->
+<!-- Wat verandert en waarom? Veranderen punten of huurprijs, zet dan per situatie één rij in een tabel,
+     met de test waarvan de testreferentie de input bevat. Bijvoorbeeld:
+     | Situatie                                        | Voor | Na   | Test     |
+     | [ZEL] Sanitair, toilet met fontein in badkamer  | 3,75 | 2,75 | `test_…` | -->
 
 ## Soort wijziging
 
@@ -23,8 +26,8 @@
 ## Impact op eindgebruiker
 
 <!-- Ziet een gebruiker na upgraden iets anders? Bij ja krijgt de PR het label `impact eindgebruiker`
-     (zie docs/voor-ontwikkelaars/releases.md). Noem per aangevinkte soort wat er concreet verandert, bijvoorbeeld:
-     ☑ Punten of huurprijs: [ZEL] Sanitair, toilet met fontein in badkamer: 3,75 → 2,75 punten
+     (zie docs/voor-ontwikkelaars/releases.md). Punten en huurprijs staan in de tabel onder
+     Samenvatting; noem bij de andere aangevinkte soorten wat er verandert. Bijvoorbeeld:
      ☑ Warnings of errors: nieuwe UserWarning bij ontbrekende `afmetingen.hoogte` (was: error) -->
 
 - ☐ Nee

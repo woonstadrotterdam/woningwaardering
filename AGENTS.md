@@ -56,7 +56,7 @@ De verwachte output van de tests staat op twee plekken: de testreferenties (`tes
 - Bekijk daarna de diff: alleen de verwachte output die de taak hoort te raken is gewijzigd. Is er meer gewijzigd, zet die bestanden dan terug.
 - Wijkt een test af terwijl de taak geen outputwijziging voorziet: herstel de code en laat de verwachte output zoals hij was. Kom je er niet uit, laat de test dan rood en meld welke test afwijkt, wat er verschilt en wat volgens jou de oorzaak is.
 - Werk verwachte output alleen bij met `task genereer-test-output`; bewerk die bestanden niet met de hand. Een bestand verwijderen mag alleen wanneer de bijbehorende test of het bijbehorende model bewust is verwijderd of hernoemd.
-- Meld in je eindbericht en in de PR-beschrijving welke verwachte output is gewijzigd en waarom.
+- Meld in je eindbericht en in de PR-beschrijving (onder **Samenvatting**) welke verwachte output is gewijzigd en waarom.
 
 ## Pull Requests
 
@@ -82,7 +82,7 @@ Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied da
 
 Waar een skill botst met dit bestand, gaat dit bestand voor:
 
-- `/pr`: volg de PR-template. Zet de visual en het voor/na-bewijs uit `/pr` onder **Samenvatting**, met het oordeel one-way/two-way door. Beantwoord de Blast Radius onder **Impact op eindgebruiker**: vink de soorten aan en noem per soort wat er concreet verandert. Zet bij ja het label `impact eindgebruiker`, zodat reviewers zien dat de PR intensieve review vraagt.
+- `/pr`: volg de PR-template, geef elk feit één plek en schrijf alleen wat een reviewer niet uit de diff haalt. **Samenvatting** zegt in één of twee zinnen wat er verandert en waarom; een visual uit `/pr` alleen als de codewijziging in de diff niet te overzien is. Veranderen punten of huurprijs, dan is het voor/na-bewijs uit `/pr` een tabel onder de Samenvatting met per situatie één rij: situatie, voor, na en de test die het vastlegt, zodat de reviewer de input in de testreferentie vindt. Alleen daar staan getallen voor en na. Verandert een situatie die geen test heeft, voeg dan een test toe of noem haar onder de tabel als situatie zonder test. Beantwoord de Blast Radius uit `/pr` onder **Impact op eindgebruiker**: vink de soorten aan en noem bij de andere soorten wat er verandert. Zet bij ja het label `impact eindgebruiker`, zodat reviewers zien dat de PR intensieve review vraagt. Het oordeel one-way/two-way door uit `/pr` laat je weg: wat na een release niet terug kan, is impact op de eindgebruiker of een breaking change, en die hebben al een label. De afweging tussen bronnen staat alleen onder **Bronverwijzing**.
 - `/code-review`: kan de diff punten of huurprijs veranderen, start dan naast de Standards- en Spec-subagent een derde subagent die de wijziging doorrekent volgens de skill `huurprijscheck` (sectie **Bij code-review**), ook als wettekst en beleidsboek eenduidig zijn. Zet zijn rapport onder `## Huurprijscheck`.
 - Issues en specs (`/to-spec`, `/to-tickets`, `/triage`): volg de conventies in `docs/agents/issue-tracker.md`.
 
