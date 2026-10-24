@@ -1,16 +1,19 @@
-## Samenvatting
-
-<!-- Wat verandert en waarom? -->
-<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
-
 ## Gerelateerde issue(s)
 
+<!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
 <!-- Kies één optie. Gebruik Closes/Fixes/Resolves #123 als het issue met deze PR wordt opgelost. -->
 
 - ☐ Gerelateerde issue: <!-- bijv. Closes #123 of #456 -->
 - ☐ Geen gerelateerde issue — waarom is deze PR nodig?
 
 <!-- Indien geen issue: leg hier kort uit waarom deze wijziging nodig is. -->
+
+## Samenvatting
+
+<!-- Wat verandert en waarom? Veranderen punten of huurprijs, zet dan per situatie één rij in een tabel,
+     met de test waarvan de testreferentie de input bevat. Bijvoorbeeld:
+     | Situatie                                        | Voor | Na   | Test     |
+     | [ZEL] Sanitair, toilet met fontein in badkamer  | 3,75 | 2,75 | `test_…` | -->
 
 ## Soort wijziging
 
@@ -19,6 +22,21 @@
 - ☐ Stijl / refactor (geen gedragswijziging)
 - ☐ CI / tooling / build
 - ☐ Overig
+
+## Impact op eindgebruiker
+
+<!-- Ziet een gebruiker na upgraden iets anders? Bij ja krijgt de PR het label `impact eindgebruiker`
+     (zie docs/voor-ontwikkelaars/releases.md). Punten en huurprijs staan in de tabel onder
+     Samenvatting; noem bij de andere aangevinkte soorten wat er verandert. Bijvoorbeeld:
+     ☑ Warnings of errors: nieuwe UserWarning bij ontbrekende `afmetingen.hoogte` (was: error) -->
+
+- ☐ Nee
+- ☐ Ja, dit verandert voor de gebruiker:
+  - ☐ Punten of huurprijs
+  - ☐ Criteriumnamen of criterium-id's
+  - ☐ Rapport
+  - ☐ Warnings of errors
+  - ☐ Publieke API of input
 
 ## Bronverwijzing
 
@@ -34,10 +52,13 @@
 
 - ☐ Beleidsboek Huurcommissie (online, actueel)
 - ☐ Wettekst ([wetten.overheid.nl](https://wetten.overheid.nl/BWBR0003237/2026-01-01))
+- ☐ Huurprijscheck (wettekst en beleidsboek niet sluitend; datum, tijdvak en input staan in de implementatietoelichting)
+
+**Link:** <!-- pagina van het online beleidsboek of artikel van de wettekst waar de quote staat -->
 
 **Quote:**
 
-> Relevante tekst uit de gekozen bron (met paragraaf-/artikelnummer)
+> Relevante tekst uit de gekozen bron (met paragraaf- of artikelnummer)
 
 **Opmerking (optioneel):** toelichting op de gemaakte keuze of interpretatie.
 
