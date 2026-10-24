@@ -56,9 +56,8 @@ We gebruiken niet alle skills uit de set. Deze staan bewust niet in de repo. Een
 - `setup-pre-commit`, `migrate-to-shoehorn`, `setup-ts-deep-modules` en `scaffold-exercises`: bedoeld voor JavaScript/TypeScript-projecten of cursusmateriaal.
 - `claude-handoff`, `loop-me`, `writing-beats`, `writing-fragments` en `writing-shape`: nog in ontwikkeling bij Matt Pocock; de writing-skills zijn bovendien voor artikelen.
 - `teach`, `git-guardrails-claude-code`, `wizard` en `grill-me`: persoonlijk, eenmalige setup of bedoeld voor werk buiten een repo.
-- `prototype`: voor ontwerpvragen over UI, state of businesslogica met wegwerpcode; een interpretatie van een beleidsregel toetsen we met tests en de huurprijscheck.
 
-`/ask-matt` en `/wayfinder` verwijzen naar enkele van deze skills, en `/wayfinder` roept `prototype` aan voor een ticket van het type `prototype`. Die verwijzingen laten we staan, omdat we de skills uit `skills-lock.json` niet wijzigen.
+`/ask-matt` verwijst naar enkele van deze skills. Die verwijzingen laten we staan, omdat we de skills uit `skills-lock.json` niet wijzigen.
 
 Repo-specifieke aanvullingen op de skills staan in de sectie `## Skills` van `AGENTS.md`, in `docs/agents/domain.md` en in `docs/agents/issue-tracker.md` (sectie `## Issue content`), nooit in de skills uit `skills-lock.json` (een upgrade overschrijft die). Skills van deze repo zelf, zoals `huurprijscheck`, staan ernaast in `.claude/skills/` en staan niet in `skills-lock.json`. Controleer na een upgrade dat ze er nog staan. `/setup-matt-pocock-skills` schrijft `docs/agents/` opnieuw: controleer na het draaien de diff en herstel de repo-specifieke leeslijst en issueconventies.
 
