@@ -59,6 +59,8 @@ De changelog deelt pull requests in op label; de rubrieken staan in [.github/rel
 | `chore`, `build`, `ci`, `refactor`, `test`, `style`, `perf` | `chore`           | Overige wijzigingen      |
 | `!` achter het type                                         | `breaking change` | Breaking Changes         |
 
+`docs` is voor documentatie die gebruikers en ontwikkelaars van de package lezen. Een wijziging aan agentinstructies en skills (`AGENTS.md`, `CLAUDE.md`, `.claude/`, `docs/agents/`) is ontwikkeltooling en krijgt het type `chore` met scope `agents`, bijvoorbeeld `chore(agents): …`.
+
 Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. Het type `revert` krijgt geen label en komt onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
 
 Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.
