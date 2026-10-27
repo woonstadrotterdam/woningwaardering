@@ -59,6 +59,10 @@ De changelog deelt pull requests in op label; de rubrieken staan in [.github/rel
 | `chore`, `build`, `ci`, `refactor`, `test`, `style`, `perf` | `chore`           | Overige wijzigingen      |
 | `!` achter het type                                         | `breaking change` | Breaking Changes         |
 
+`docs` is voor documentatie die gebruikers en ontwikkelaars van de package lezen. Een wijziging aan agentinstructies en skills (`AGENTS.md`, `CLAUDE.md`, `.claude/`, `docs/agents/`) is ontwikkeltooling en krijgt het type `chore` met scope `agents`, bijvoorbeeld `chore(agents): …`.
+
 Heeft de titel geen bekend type, dan telt de prefix van de branchnaam, bijvoorbeeld `fix/` of `feature/`. Het type `revert` krijgt geen label en komt onder Overige wijzigingen, net als een pull request zonder type in titel én branchnaam.
 
 Pas je de titel aan, dan vervangt de workflow het label dat uit de oude titel volgde. Labels die je met de hand zet, blijven staan; zet zo ook `ignore for release notes`.
+
+Het label `impact eindgebruiker` staat los van de release notes: het markeert een wijziging die gebruikers na upgraden merken in punten of huurprijs, criteriumnamen of criterium-id's, rapport, warnings of errors, of de publieke API of input. Zo'n pull request vraagt intensieve review. De workflow zet het label zodra een bestaande test bij gelijke input andere output geeft: de sectie Input van een testreferentie is gelijk gebleven en Output, Rapport of Waarschuwingen is gewijzigd, of `tests/docs/output_json_*.json` is gewijzigd. Een nieuwe test of een gewijzigde beschrijving, bron of input in een test zet het label niet. Bij impact die geen test raakt, zoals een nieuwe warning zonder test of een API-wijziging, zet je het met de hand. Op een issue zet je het bij triage, als inschatting.

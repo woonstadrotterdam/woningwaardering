@@ -47,7 +47,7 @@ def get_eenheid():
         EenhedenWozEenheid(
             waardepeildatum=date(2024, 1, 1),
             vastgestelde_waarde=310000.0,
-        )
+        ),
     ]
 
     eenheid.adresseerbaar_object_basisregistratie = (
