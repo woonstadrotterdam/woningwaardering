@@ -1,4 +1,4 @@
-Controlegeval bij het zorgwoningmodel: dezelfde woning uit 2017 zonder doelgroep zorg haalt de 110 punten voor het nieuwbouwminimum niet en krijgt geen minimum van 40 punten voor de WOZ-waarde (implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst, Bijlage I onder A, onderdeel 11.2).
+Controlegeval bij het zorgwoningmodel: dezelfde woning uit 2017 zonder doelgroep zorg haalt de 110 punten voor het nieuwbouwminimum niet en krijgt geen minimum van 40 punten voor de WOZ-waarde (implementatietoelichting zelfstandige woonruimten, 2.11.5; wettekst, Bijlage I onder A, onderdeel 11.2). Zonder doelgroep zorg vervallen ook de 3 punten van rubriek 9 (2.9.4).
 
 Handberekening, peildatum 1 juli 2026:
 

@@ -68,8 +68,7 @@ def test_het_nieuwbouwminimum_is_in_het_hele_stelsel_gelijk_aan_dat_van_de_losse
         eenheid.model_copy(deep=True)
     )
 
-    assert woz_in_stelsel.punten == 40.0
-    assert losse_woz.punten == 40.0
+    assert woz_in_stelsel.punten == losse_woz.punten == 40.0
 
 
 def test_bij_elke_testreferentie_van_een_model_hoort_een_model():
