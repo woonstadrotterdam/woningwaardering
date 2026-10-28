@@ -148,6 +148,6 @@ def test_minimum_van_40_punten_geldt_vanaf_110_punten_voor_de_rubrieken_1_tot_en
     )
 
     assert (
-        stelselgroep._bereken_minimum_punten_nieuwbouw(eenheid, resultaat)
+        stelselgroep._bereken_minimum_punten_nieuwbouw(eenheid, resultaat, Decimal("0"))
         == verwacht_minimum
     )
