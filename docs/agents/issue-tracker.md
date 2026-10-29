@@ -21,6 +21,8 @@ Infer the repo from `git remote -v`; `gh` does this automatically when run insid
 - Give every domain issue that describes one change the sections of `.github/ISSUE_TEMPLATE/domeinlogica.md`, without its comments, also a `/to-tickets` ticket: its "What to build" goes under **Samenvatting**, its parent and blockers under **Relatie met andere issues**. A `/to-spec` spec and a `/wayfinder` ticket describe a plan or a question, not one change, and keep their own template.
 - For domain logic, add a **Bronnen** section that quotes the wettekst and/or the online beleidsboek verbatim, with article/paragraph number (see `docs/voor-ontwikkelaars/bronnen.md`). State explicitly what is a package assumption rather than a rule from the source, and where VERA data or the input model falls short.
 - When an issue changes expected output (points, criterium-id's, rapport), say so, since that decides whether `task genereer-test-output` is in scope.
+- Write every formula with brackets, for example `35% × (87 + 25)` instead of `35% van 87 + 25`.
+- Mark numbers in a table as an example, unless they come from the huurprijscheck. For each row, name the input (a helper from `tests/input.py` or a huurprijscheck input) that produces the number. If nobody can name that input, the number is not a requirement.
 - Add the label `impact eindgebruiker` when the issue will change, for users after upgrading: punten of huurprijs, criteriumnamen of criterium-id's, rapport, warnings of errors, or the publieke API of input (see `docs/voor-ontwikkelaars/releases.md`). On an issue it is an estimate; the PR confirms it. Reviewers use it to decide how intensively to review.
 
 ## Pull requests as a triage surface

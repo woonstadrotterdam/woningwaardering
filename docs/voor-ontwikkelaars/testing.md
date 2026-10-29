@@ -22,7 +22,9 @@ Een privéfunctie van een stelselgroep test je via een waarderingstest: die blij
 
 Een model is een JSON onder `tests/stelsels/modellen/<stelsel>/`, met een beschrijving in een Markdown-bestand met dezelfde naam. Het hele stelsel waardeert het model, en `tests/stelsels/test_<Stelsel>.py` vergelijkt de uitkomst met een testreferentie, met de beschrijving bovenaan en de waarschuwingen die het model oproept. Kies het voor een beleidsregel die over meer dan één stelselgroep gaat. Een laadpaal op een parkeerplek komt bijvoorbeeld in rubriek 10 óf in rubriek 12 terecht; dat een plek niet in beide punten krijgt, is alleen zichtbaar wanneer beide rubrieken in dezelfde uitkomst staan. Zie `tests/stelsels/modellen/onzelfstandige_woonruimten/parkeerruimten_en_laadpalen.json`.
 
-Reken de verwachte output van een nieuw model met de hand na, zoals in stap 1 van een waarderingstest.
+Controleer één keer met de hand dat de uitkomst klopt, maar alleen voor de beleidsregel waar het model over gaat. De punten van de andere rubrieken neem je over uit het rapport (`task toon-rapport -- <model.json>`). Gaat het model bijvoorbeeld over het minimum van 40 WOZ-punten, dan controleer je of de woning de 110 punten haalt en 40 WOZ-punten krijgt, niet hoeveel punten de keuken krijgt.
+
+Beschrijf in het Markdown-bestand in één of twee zinnen wat het model laat zien.
 
 ## Een waarderingstest schrijven
 
