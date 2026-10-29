@@ -1,0 +1,1 @@
+Zorgwoning uit 2017 die de 110 punten voor het nieuwbouwminimum alleen haalt met de 35%-verhoging van rubriek 12 (2.11.5). Rubriek 1 t/m 10 geven samen 87 punten en de verhoging 40, samen 127: de woning krijgt minimaal 40 punten voor de WOZ-waarde.

@@ -1,0 +1,1 @@
+Controlegeval bij het zorgwoningmodel: dezelfde woning zonder doelgroep zorg komt voor rubriek 1 t/m 10 en 12 op 84 punten, minder dan 110, en krijgt geen minimum van 40 punten voor de WOZ-waarde (2.11.5).

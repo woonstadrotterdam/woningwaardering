@@ -1516,6 +1516,11 @@ Als aan alle van de volgende eisen wordt voldaan geldt een minimale waardering v
 > [!NOTE]
 > We passen deze regeling niet specifiek toe voor 'hoogniveau renovatie', maar voor bouwjaar 2015-2019.
 
+> [!NOTE]
+> De wettekst ([Bijlage I, onder A, onderdeel 11.2](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI)) zegt: «Indien een woning is gebouwd in het kalenderjaar 2015, 2016, 2017, 2018 of 2019 en het totaal aantal punten na saldering van de punten van de onderdelen 1 tot en met 10 en 12, 110 of meer is, worden minimaal 40 punten toegekend.»
+>
+> Rubriek 12 wordt in de package pas na de WOZ-waarde gewaardeerd. Voor de 110-puntentoets berekenen we de punten van rubriek 12 daarom apart: de aanbelfunctie, de laadpalen en de 35%-verhoging van een zorgwoning. De verhoging rekent daarbij over de rubrieken 1 tot en met 11.1: de rubrieken 1 tot en met 10 plus de WOZ-punten vóór het minimum (zie [paragraaf 2.12](#212-rubriek-12-bijzondere-voorzieningen), voetnoot 13). De punten die de woning in rubriek 12 krijgt, veranderen hierdoor niet.
+
 Indien aan een van deze eisen niet wordt voldaan geldt de 'gewone' berekening zoals uitgelegd in paragraaf 2.11.2.
 
 [^9]: Hiermee worden de toen geldende eisen uit het Bouwbesluit 2012 bedoeld. Dit type verbouw wordt ook wel hoogniveaurenovatie genoemd.
