@@ -62,7 +62,7 @@ De docstring is verplicht en bestaat uit twee delen, soms drie:
 
 De asserts laten zien hoe de beleidsregel uitpakt; de docstring bevat geen berekening. Ook de punten en waarschuwingen van rubrieken die de beleidsregel niet raakt, leg je niet uit. Heb je die uitleg toch nodig om de test te begrijpen, dan is het scenario te groot: geef alleen de input mee die de beleidsregel raakt. De afronding van het totaal op een kwart punt hoort bij de uitkomst; je legt haar alleen uit als de test daarover gaat.
 
-Volgt de package een beleidsregel niet, of legt de test gedrag vast dat wettekst en beleidsboek niet beschrijven, dan staat die keuze in de implementatietoelichting: doorgestreept of in een toelichtingsblok. Staat ze er nog niet, vul de implementatietoelichting dan aan in dezelfde pull request. Een test van een waarschuwing omdat input ontbreekt, waarna het onderdeel geen punten krijgt, heeft geen bron: de test controleert de waarschuwing zelf.
+Volgt de package een beleidsregel niet, of legt de test gedrag vast dat wettekst en beleidsboek niet beschrijven, dan staat die keuze in de implementatietoelichting, zoals [de index daarvan](../implementatietoelichtingen/index.md) beschrijft. Staat ze er nog niet, vul de implementatietoelichting dan aan in dezelfde pull request. Een test van een waarschuwing omdat input ontbreekt, waarna het onderdeel geen punten krijgt, heeft geen bron: de test controleert de waarschuwing zelf.
 
 ### Input
 

@@ -78,7 +78,7 @@ Grill **vroeg en proactief** wanneer de taak meer is dan een eenduidige, lokale 
 
 Sla grillen over bij een triviale fix. Wettekst, beleidsboek en implementatietoelichting zijn feiten die je tijdens het grillen opzoekt; citeer ze volgens [`bronnen.md`](docs/voor-ontwikkelaars/bronnen.md).
 
-Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken, met letterlijk geciteerde bron (beleidsboek/wettekst), in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
+Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied dan aan de betreffende pagina in `docs/implementatietoelichtingen/` bij te werken als [`docs/implementatietoelichtingen/index.md`](docs/implementatietoelichtingen/index.md) daar een doorhaling of note verwacht, in plaats van een ADR. ADR's zijn voor technische en architectuurbeslissingen.
 
 Waar een skill botst met dit bestand, gaat dit bestand voor:
 
@@ -105,7 +105,7 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 
 - Controleer bij elke gedrags-, beleids- of datamodelwijziging of documentatie moet worden bijgewerkt.
 - Let bij output-wijzigingen (punten, criteria, naming, ID-structuur) op `docs/aan-de-slag/index.md`: die bevat inline voorbeeld-output (JSON en rapport) en wordt niet automatisch meegenomen bij wijzigingen.
-- Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/`.
+- Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/` waar [`docs/implementatietoelichtingen/index.md`](docs/implementatietoelichtingen/index.md) een doorhaling of note verwacht.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.
 - Werk `GLOSSARY.md` alleen bij wanneer een domeinterm duurzaam verduidelijkt is. Neem alleen termen op die betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen; houd definities op één à twee zinnen, zonder implementatiedetails (die horen in `docs/voor-ontwikkelaars/` of codecommentaar).
