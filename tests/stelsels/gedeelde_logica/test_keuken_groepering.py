@@ -1,24 +1,16 @@
-from pathlib import Path
-
+from tests.input import aanrecht
+from tests.input import ruimte as maak_ruimte
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.keuken.keuken import waardeer_keuken
-from woningwaardering.vera.bvg.generated import EenhedenEenheid
 from woningwaardering.vera.referentiedata import (
+    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
 
-INPUT = (
-    Path(__file__).parents[2]
-    / "data/zelfstandige_woonruimten/stelselgroepen/keuken/input/aanrecht_1.json"
-)
-
 
 def test_waardeer_keuken_groepeert_per_ruimte():
-    with INPUT.open() as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-
-    ruimte = eenheid.ruimten[0]
+    ruimte = maak_ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(1000)])
     waarderingsgroep_builder = WaarderingsgroepBuilder(
         Woningwaarderingstelsel.zelfstandige_woonruimten,
         Woningwaarderingstelselgroep.keuken,
@@ -46,10 +38,7 @@ def test_waardeer_keuken_groepeert_per_ruimte():
 
 
 def test_waardeer_keuken_gebruikt_subtotaal_bij_meerdere_aanrechten():
-    with INPUT.open() as f:
-        eenheid = EenhedenEenheid.model_validate_json(f.read())
-
-    ruimte = eenheid.ruimten[0]
+    ruimte = maak_ruimte(Ruimtedetailsoort.keuken, elementen=[aanrecht(1000)])
     extra_aanrecht = ruimte.bouwkundige_elementen[0].model_copy(deep=True)
     extra_aanrecht.id = "aanrecht_extra"
     extra_aanrecht.lengte = 900

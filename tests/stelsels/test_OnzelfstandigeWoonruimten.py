@@ -1,27 +1,52 @@
-from tests.utils import assert_output_model
+"""Modellen op stelselniveau, onzelfstandige woonruimten.
+
+Zie docs/voor-ontwikkelaars/testing.md onder "Model op stelselniveau".
+"""
+
+import warnings
+from pathlib import Path
+
+import pytest
+
+from tests.testreferenties import MAP
+from tests.utils import lees_model
 from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
     OnzelfstandigeWoonruimten,
 )
-from woningwaardering.vera.bvg.generated import (
-    WoningwaarderingResultatenWoningwaarderingResultaat,
+
+MODELLEN = sorted(
+    (Path(__file__).parent / "modellen/onzelfstandige_woonruimten").glob("*.json")
 )
 
 
-def test_OnzelfstandigeWoonruimten(onzelfstandige_woonruimten_inputmodel, peildatum):
-    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=peildatum)
-    resultaat = onzelfstandige_woonruimten.waardeer(
-        onzelfstandige_woonruimten_inputmodel
+@pytest.mark.parametrize("pad", [pytest.param(pad, id=pad.stem) for pad in MODELLEN])
+def test_model_onzelfstandige_woonruimten(pad, peildatum, vergelijk_met_testreferentie):
+    """Het stelsel onzelfstandige woonruimten waardeert het model zoals de testreferentie het vastlegt."""
+    eenheid, beschrijving = lees_model(pad)
+
+    # Alle waarschuwingen van het model komen in de testreferentie.
+    with warnings.catch_warnings(record=True) as opgevangen:
+        warnings.simplefilter("always", UserWarning)
+        # De kopie houdt de input in de testreferentie zoals het model hem geeft.
+        resultaat = OnzelfstandigeWoonruimten(peildatum=peildatum).waardeer(
+            eenheid.model_copy(deep=True)
+        )
+    waarschuwingen = [w for w in opgevangen if issubclass(w.category, UserWarning)]
+
+    vergelijk_met_testreferentie(
+        eenheid, resultaat, waarschuwingen, beschrijving=beschrijving
     )
-    assert isinstance(
-        resultaat, WoningwaarderingResultatenWoningwaarderingResultaat
-    ), f"Resultaat is geen instance van WoningwaarderingResultatenWoningwaarderingResultaat, {type(resultaat) = }"
-    assert resultaat.punten is not None
 
 
-def test_OnzelfstandigeWoonruimtes_output(
-    onzelfstandige_woonruimten_input_en_outputmodel, peildatum
-):
-    eenheid_input, verwachte_output = onzelfstandige_woonruimten_input_en_outputmodel
-    onzelfstandige_woonruimten = OnzelfstandigeWoonruimten(peildatum=peildatum)
-    resultaat = onzelfstandige_woonruimten.waardeer(eenheid_input)
-    assert_output_model(resultaat, verwachte_output)
+def test_bij_elke_testreferentie_van_een_model_hoort_een_model():
+    """Bij elke testreferentie van een model hoort een model.
+
+    Is een model bewust verwijderd of hernoemd, verwijder dan ook zijn testreferentie.
+    """
+    verwacht = {
+        f"test_model_onzelfstandige_woonruimten[{pad.stem}].md" for pad in MODELLEN
+    }
+    testreferenties = (Path(__file__).parent / MAP).glob(
+        "test_model_onzelfstandige_woonruimten[[]*].md"
+    )
+    assert sorted(pad.name for pad in testreferenties if pad.name not in verwacht) == []

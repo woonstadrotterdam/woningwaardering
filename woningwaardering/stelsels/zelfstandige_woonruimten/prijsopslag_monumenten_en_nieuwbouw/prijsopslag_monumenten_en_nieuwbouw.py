@@ -5,7 +5,6 @@ from typing import Iterator
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 
-from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
@@ -142,7 +141,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.warning(
                     "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
                 )
-                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+                # Inline: ZelfstandigeWoonruimten importeert deze stelselgroep (circulaire import).
+                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (  # noqa: PLC0415
                     ZelfstandigeWoonruimten,
                 )
 
@@ -178,12 +178,3 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
         else:
             logger.debug(f"Eenheid ({eenheid.id}) is geen nieuwbouw.")
         return None
-
-
-if __name__ == "__main__":  # pragma: no cover
-    with DevelopmentContext(
-        instance=PrijsopslagMonumentenEnNieuwbouw(peildatum=date(2026, 7, 1)),
-        strict=False,  # False is log warnings, True is raise warnings
-        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/generiek/input/37101000032.json")

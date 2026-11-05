@@ -1,5 +1,8 @@
 from decimal import Decimal
 
+import pytest
+
+from tests.input import element, ruimte
 from tests.peildatum import REFERENTIE_PEILDATUM
 from woningwaardering.stelsels import utils
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
@@ -13,6 +16,9 @@ from woningwaardering.vera.bvg.generated import (
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
 from woningwaardering.vera.referentiedata import (
+    Bouwkundigelementdetailsoort,
+    Doelgroep,
+    Ruimtedetailsoort,
     Woningwaarderingstelsel,
     Woningwaarderingstelselgroep,
 )
@@ -119,3 +125,111 @@ def test_corrigeer_woz_punten_cap_bij_nieuwbouw_zonder_minimum():
     segmenten = [w.segment for w in builder.alle_waarderingen()]
     assert "maximering_woz_punten" in segmenten
     assert "nieuwbouw_minimum_punten" not in segmenten
+
+
+@pytest.mark.parametrize(
+    ("overige_punten", "verwacht_minimum"),
+    [
+        pytest.param(110.0, Decimal("40"), id="precies_110_punten"),
+        pytest.param(109.75, Decimal("0"), id="een_kwart_punt_onder_110_punten"),
+    ],
+)
+def test_minimum_van_40_punten_geldt_vanaf_110_punten_voor_de_rubrieken_1_tot_en_met_10_en_12(
+    overige_punten, verwacht_minimum
+):
+    """Het minimum van 40 punten voor de WOZ-waarde geldt vanaf 110 punten voor de rubrieken 1 tot en met 10 en 12.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
+    eenheid = EenhedenEenheid(id="test", bouwjaar=2016)
+    resultaat = _maak_resultaat_met_overige_punten(
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 60.0),
+        (Woningwaarderingstelselgroep.keuken, 30.0),
+        (Woningwaarderingstelselgroep.sanitair, overige_punten - 90.0),
+    )
+
+    assert (
+        stelselgroep._bereken_minimum_punten_nieuwbouw(
+            # Zonder WOZ-punten: het minimum hangt hier alleen van rubriek 1-10 af.
+            eenheid,
+            resultaat,
+            Decimal("0"),
+        )
+        == verwacht_minimum
+    )
+
+
+@pytest.mark.parametrize(
+    ("woz_punten", "verwacht_minimum"),
+    [
+        pytest.param(Decimal("27.5"), Decimal("40"), id="met_woz_punten_110_of_meer"),
+        pytest.param(Decimal("0"), Decimal("0"), id="zonder_woz_punten_onder_110"),
+    ],
+)
+def test_de_verhoging_van_een_zorgwoning_in_de_110_puntentoets_rekent_over_de_rubrieken_1_tot_en_met_11_1(
+    woz_punten, verwacht_minimum
+):
+    """De 35%-verhoging van een zorgwoning telt mee in de 110-puntentoets van het nieuwbouwminimum en rekent over de rubrieken 1 tot en met 11.1.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
+    - wettekst, Bijlage I onder A, onderdeel 12
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
+    # Een zorgwoning uit 2016 met 80 punten voor rubriek 1-10.
+    eenheid = EenhedenEenheid(id="test", bouwjaar=2016, doelgroep=Doelgroep.zorg)
+    resultaat = _maak_resultaat_met_overige_punten(
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 80.0),
+    )
+
+    # Met WOZ-punten: 80 + 35% × (80 + 27,5) = 80 + 37,75 = 117,75, dus minimum.
+    # Zonder WOZ-punten: 80 + 35% × 80 = 80 + 28 = 108, dus geen minimum.
+    assert (
+        stelselgroep._bereken_minimum_punten_nieuwbouw(eenheid, resultaat, woz_punten)
+        == verwacht_minimum
+    )
+
+
+@pytest.mark.parametrize(
+    ("aantal_laadpalen", "verwacht_minimum"),
+    [
+        pytest.param(1, Decimal("40"), id="met_laadpaal"),
+        pytest.param(0, Decimal("0"), id="zonder_laadpaal"),
+    ],
+)
+def test_een_laadpaal_in_rubriek_12_telt_mee_in_de_110_puntentoets(
+    aantal_laadpalen, verwacht_minimum
+):
+    """Een laadpaal die in rubriek 12 punten krijgt, telt mee in de 110-puntentoets van het nieuwbouwminimum.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.5
+    - wettekst, Bijlage I onder A, onderdeel 11.2
+    - wettekst, Bijlage I onder A, onderdeel 12
+    """
+    stelselgroep = PuntenVoorDeWozWaarde(peildatum=REFERENTIE_PEILDATUM)
+    # Een privé-parkeerplek met laadpaal krijgt geen punten in rubriek 10, dus 2 punten in rubriek 12.
+    eenheid = EenhedenEenheid(
+        id="test",
+        bouwjaar=2016,
+        ruimten=[
+            ruimte(
+                Ruimtedetailsoort.carport,
+                elementen=[element(Bouwkundigelementdetailsoort.laadpaal)]
+                * aantal_laadpalen,
+            )
+        ],
+    )
+    resultaat = _maak_resultaat_met_overige_punten(
+        (Woningwaarderingstelselgroep.oppervlakte_van_vertrekken, 108.0),
+    )
+
+    # 108 + 2 = 110: precies op de drempel.
+    assert (
+        stelselgroep._bereken_minimum_punten_nieuwbouw(eenheid, resultaat, Decimal("0"))
+        == verwacht_minimum
+    )

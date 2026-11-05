@@ -121,7 +121,7 @@ for item in active_data:
             f"Dubbele soort/naam combinatie: {item['soort']}.{item['code']} {item['naam']}"
         )
         logger.info(
-            f"Variabele naam \"{item['variabele']}\" wordt vervangen door \"{item['variabele']} {item['code']}\""
+            f'Variabele naam "{item["variabele"]}" wordt vervangen door "{item["variabele"]} {item["code"]}"'
         )
         item["variabele"] += " " + item["code"]
 
@@ -284,7 +284,7 @@ domein_to_soorten = defaultdict(set)  # Use a defaultdict for faster lookup
 for item in active_data:
     if not item["informatiedomein"]:
         logger.warning(
-            f"\"{item['soort']} {item['naam']}\" heeft geen informatiedomein. Default domein \"Vastgoed\" wordt gebruikt."
+            f'"{item["soort"]} {item["naam"]}" heeft geen informatiedomein. Default domein "Vastgoed" wordt gebruikt.'
         )
         item["informatiedomein"] = "Vastgoed"
     for domein in string.capwords(item["informatiedomein"]).split(", "):

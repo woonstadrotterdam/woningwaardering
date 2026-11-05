@@ -29,7 +29,7 @@ from woningwaardering.vera.referentiedata import (
 
 def voorbeeld1_json_input_path() -> Path:
     """Pad naar het JSON input-voorbeeld zoals gebruikt in docs/tests."""
-    return Path("tests/data/generiek/input/37101000032.json")
+    return Path("tests/docs/37101000032.json")
 
 
 def voorbeeld2_python_eenheid() -> EenhedenEenheid:
@@ -54,9 +54,15 @@ def voorbeeld2_python_eenheid() -> EenhedenEenheid:
             )
         ],
         woz_eenheden=[
-            EenhedenWozEenheid(waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=618000),
-            EenhedenWozEenheid(waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=643000),
-            EenhedenWozEenheid(waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=694000),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2022, 1, 1), vastgestelde_waarde=618000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2023, 1, 1), vastgestelde_waarde=643000
+            ),
+            EenhedenWozEenheid(
+                waardepeildatum=date(2024, 1, 1), vastgestelde_waarde=694000
+            ),
         ],
         energieprestaties=[
             EenhedenEnergieprestatie(
@@ -102,4 +108,3 @@ def voorbeeld2_python_eenheid() -> EenhedenEenheid:
             ),
         ],
     )
-

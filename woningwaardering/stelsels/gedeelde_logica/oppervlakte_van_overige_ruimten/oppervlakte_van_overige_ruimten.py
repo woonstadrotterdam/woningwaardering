@@ -28,7 +28,7 @@ from woningwaardering.vera.referentiedata import (
 def bereken_oppervlakte_punten(
     totaal_oppervlakte: Decimal, punten_per_m2: Decimal
 ) -> Decimal:
-    # 2.2.2.1 / 2.1.1.1: waardering op hele m² (afronden op het totaal), daarna
+    # 2.2.2.1 / 2.2.1.1: waardering op hele m² (afronden op het totaal), daarna
     # vermenigvuldigen met het aantal punten per m².
     return rond_af(totaal_oppervlakte, decimalen=0) * punten_per_m2
 

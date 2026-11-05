@@ -7,8 +7,10 @@ import pandas as pd
 from loguru import logger
 
 from woningwaardering.stelsels import utils
-from woningwaardering.stelsels._dev_utils import DevelopmentContext
 from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
+from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
+    waardeer_bijzondere_voorzieningen,
+)
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
     ontbrekende_relevante_woz_toelichting,
@@ -19,6 +21,7 @@ from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     EenhedenEenheidadres,
     EenhedenWozEenheid,
+    WoningwaarderingResultatenWoningwaarderingCriteriumGroep,
     WoningwaarderingResultatenWoningwaarderingGroep,
     WoningwaarderingResultatenWoningwaarderingResultaat,
 )
@@ -90,7 +93,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             logger.warning(
                 "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
             )
-            from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+            # Inline: ZelfstandigeWoonruimten importeert deze stelselgroep (circulaire import).
+            from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (  # noqa: PLC0415
                 ZelfstandigeWoonruimten,
             )
 
@@ -272,7 +276,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         woz_punten = woz_punten_onafgerond
 
         minimum_woz_punten = self._bereken_minimum_punten_nieuwbouw(
-            eenheid, woningwaardering_resultaat
+            eenheid, woningwaardering_resultaat, woz_punten
         )
 
         # §2.11.5 [ZEL]: nieuwbouwminimum; na toepassing geen cap (§2.11.7, 26,6%).
@@ -529,6 +533,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woz_punten_onafgerond: Decimal,
     ) -> Decimal:
         """
         Berekent de minimum punten voor steselgroep WOZ-waarde bij nieuwbouw of hoogniveau renovatie.
@@ -536,6 +541,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         Args:
             eenheid (EenhedenEenheid): De eenheid.
             woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            woz_punten_onafgerond (Decimal): Som van onafgeronde onderdelen I en II (rubriek 11.1).
 
         Returns:
             Decimal: De minimum punten voor stelselgroep WOZ-waarde.
@@ -556,25 +562,21 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # behaald dan worden, voor het aantal punten voor de WOZ-waarde,
         # minimaal 40 punten toegekend.
         if bouwjaar and 2015 <= bouwjaar <= 2019:
-            punten_critische_stelselgroepen = sum(
-                groep.punten or 0.0
-                for groep in woningwaardering_resultaat.groepen or []
-                if groep.punten
-                and groep.criterium_groep
-                and groep.criterium_groep.stelselgroep
-                in (
-                    Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,  # 1
-                    Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,  # 2
-                    Woningwaarderingstelselgroep.verkoeling_en_verwarming,  # 3
-                    Woningwaarderingstelselgroep.energieprestatie,  # 4
-                    Woningwaarderingstelselgroep.keuken,  # 5
-                    Woningwaarderingstelselgroep.sanitair,  # 6
-                    Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten,  # 7
-                    Woningwaarderingstelselgroep.buitenruimten,  # 8
-                    Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,  # 9
-                    Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,  # 10
-                    Woningwaarderingstelselgroep.bijzondere_voorzieningen,  # 12
-                )
+            punten_rubrieken_1_tot_en_met_10 = sum(
+                (
+                    Decimal(str(groep.punten))
+                    for groep in self._groepen_rubrieken_1_tot_en_met_10(
+                        woningwaardering_resultaat
+                    )
+                    if groep.punten
+                ),
+                Decimal("0"),
+            )
+            punten_rubriek_12 = self._punten_rubriek_12(
+                eenheid, woningwaardering_resultaat, woz_punten_onafgerond
+            )
+            punten_critische_stelselgroepen = (
+                punten_rubrieken_1_tot_en_met_10 + punten_rubriek_12
             )
             logger.debug(
                 f"Eenheid ({eenheid.id}): nieuwbouw of hoogniveau renovatie in de jaren 2015-2019. Punten voor de stelselgroepen 1 t/m 10 en 12: {punten_critische_stelselgroepen}"
@@ -586,6 +588,82 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
 
         return minimum_punten
+
+    @staticmethod
+    def _groepen_rubrieken_1_tot_en_met_10(
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> list[WoningwaarderingResultatenWoningwaarderingGroep]:
+        """Geeft de groepen van de rubrieken 1 tot en met 10 uit het resultaat."""
+        return [
+            groep
+            for groep in woningwaardering_resultaat.groepen or []
+            if groep.criterium_groep
+            and groep.criterium_groep.stelselgroep
+            in (
+                Woningwaarderingstelselgroep.oppervlakte_van_vertrekken,  # 1
+                Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten,  # 2
+                Woningwaarderingstelselgroep.verkoeling_en_verwarming,  # 3
+                Woningwaarderingstelselgroep.energieprestatie,  # 4
+                Woningwaarderingstelselgroep.keuken,  # 5
+                Woningwaarderingstelselgroep.sanitair,  # 6
+                Woningwaarderingstelselgroep.woonvoorzieningen_voor_gehandicapten,  # 7
+                Woningwaarderingstelselgroep.buitenruimten,  # 8
+                Woningwaarderingstelselgroep.gemeenschappelijke_vertrekken_overige_ruimten_en_voorzieningen,  # 9
+                Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten,  # 10
+            )
+        ]
+
+    def _punten_rubriek_12(
+        self,
+        eenheid: EenhedenEenheid,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+        woz_punten_onafgerond: Decimal,
+    ) -> Decimal:
+        """Berekent de punten van rubriek 12 voor de 110-puntentoets van het nieuwbouwminimum.
+
+        Rubriek 12 wordt in het stelsel pas na deze stelselgroep gewaardeerd, dus
+        berekenen we haar hier met dezelfde logica als de stelselgroep Bijzondere
+        voorzieningen. De 35%-verhoging rekent over de rubrieken 1 tot en met
+        11.1: de rubrieken 1 tot en met 10 plus de WOZ-punten vóór het minimum.
+
+        Args:
+            eenheid (EenhedenEenheid): De eenheid.
+            woningwaardering_resultaat (WoningwaarderingResultatenWoningwaarderingResultaat): woningwaardering resultaten.
+            woz_punten_onafgerond (Decimal): Som van onafgeronde onderdelen I en II (rubriek 11.1).
+
+        Returns:
+            Decimal: De punten van rubriek 12, afgerond op een kwart punt.
+        """
+        # Wettekst, Bijlage I onder A, onderdeel 11.2: "het totaal aantal punten na
+        # saldering van de punten van de onderdelen 1 tot en met 10 en 12, 110 of
+        # meer". Onderdeel 12: "Uitsluitend bij zorgwoningen bij: 35% van de
+        # ingevolge de onderdelen 1 tot en met 11.1 toegekende punten."
+        woz_groep_11_1 = WoningwaarderingResultatenWoningwaarderingGroep(
+            criteriumGroep=WoningwaarderingResultatenWoningwaarderingCriteriumGroep(
+                stelsel=self.stelsel,
+                stelselgroep=self.stelselgroep,
+            ),
+            punten=float(utils.rond_af_op_kwart(woz_punten_onafgerond)),
+        )
+        resultaat_tot_en_met_11_1 = WoningwaarderingResultatenWoningwaarderingResultaat(
+            stelsel=woningwaardering_resultaat.stelsel,
+            groepen=[
+                *self._groepen_rubrieken_1_tot_en_met_10(woningwaardering_resultaat),
+                woz_groep_11_1,
+            ],
+        )
+        builder = WaarderingsgroepBuilder(
+            self.stelsel, Woningwaarderingstelselgroep.bijzondere_voorzieningen
+        )
+        waardeer_bijzondere_voorzieningen(
+            peildatum=self.peildatum,
+            eenheid=eenheid,
+            stelselgroepen_zonder_opslag=[],
+            stelsel=self.stelsel,
+            waarderingsgroep_builder=builder,
+            woningwaardering_resultaat=resultaat_tot_en_met_11_1,
+        )
+        return Decimal(str(builder.build().punten or 0))
 
     def _bepaal_factor_onderdeel_II(
         self,
@@ -690,12 +768,3 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         )
 
         return True
-
-
-if __name__ == "__main__":  # pragma: no cover
-    with DevelopmentContext(
-        instance=PuntenVoorDeWozWaarde(peildatum=date(2026, 7, 1)),
-        strict=False,  # False is log warnings, True is raise warnings
-        log_level="DEBUG",  # DEBUG, INFO, WARNING, ERROR
-    ) as context:
-        context.waardeer("tests/data/generiek/input/37101000032.json")

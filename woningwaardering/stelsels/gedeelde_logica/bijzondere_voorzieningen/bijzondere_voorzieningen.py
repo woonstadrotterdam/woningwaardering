@@ -107,7 +107,8 @@ def _opslag_zorgwoning(
             "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
         )
         if stelsel == Woningwaarderingstelsel.zelfstandige_woonruimten:
-            from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+            # Inline: ZelfstandigeWoonruimten importeert deze stelselgroep (circulaire import).
+            from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (  # noqa: PLC0415
                 ZelfstandigeWoonruimten,
             )
 
@@ -119,7 +120,8 @@ def _opslag_zorgwoning(
             )
 
         elif stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
-            from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (
+            # Inline: OnzelfstandigeWoonruimten importeert deze stelselgroep (circulaire import).
+            from woningwaardering.stelsels.onzelfstandige_woonruimten.onzelfstandige_woonruimten import (  # noqa: PLC0415
                 OnzelfstandigeWoonruimten,
             )
 
