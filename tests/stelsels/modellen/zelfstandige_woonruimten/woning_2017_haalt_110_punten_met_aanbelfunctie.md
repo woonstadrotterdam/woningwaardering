@@ -1,0 +1,1 @@
+Woning uit 2017 die met rubriek 1 t/m 10 op 109,75 punten komt en de 110 punten voor het nieuwbouwminimum alleen haalt met de aanbelfunctie van rubriek 12 (0,25 punt): de woning krijgt minimaal 40 punten voor de WOZ-waarde (2.11.5).

@@ -1,0 +1,1 @@
+Controlegeval bij het aanbelfunctiemodel: dezelfde woning zonder aanbelfunctie blijft op 109,75 punten voor rubriek 1 t/m 10 en 12, net onder 110, en krijgt geen minimum van 40 punten voor de WOZ-waarde (2.11.5).
