@@ -1,0 +1,1 @@
+Zorgwoning die ook zonder de 35%-verhoging boven 187 punten komt, maar waarvan de WOZ-punten met de verhoging in de waardering onder 33% blijven: de cap op de WOZ topt niet af (2.11.7). De verhoging rekent over de WOZ-punten vóór de cap (2.12.1).
