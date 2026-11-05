@@ -26,6 +26,12 @@ tasks:
       - uv run python scripts/genereer_test_output.py
       - uv run python -m pytest --no-cov --update-testreferenties
 
+  toon-rapport:
+    desc: Print het rapport van één model op stelselniveau (gebruik `task toon-rapport -- <model.json>`)
+    silent: true
+    cmds:
+      - uv run python scripts/toon_rapport.py {{.CLI_ARGS}}
+
   genereer-corop-data:
     desc: Genereer COROP data
     cmds:
