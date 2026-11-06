@@ -649,6 +649,9 @@ De labelklasse (A++++ t/m G) bepaalt het aantal punten voor de energieprestatie.
 | 2,4 < EI ≤ 2,7             | -0,10              |
 | EI > 2,7                   | -0,15              |
 
+> [!NOTE]
+> De wettekst ([Bijlage I, onder B, rubriek 4.1](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI)) begrenst de hoogste klasse met "EI < 0,6" en de volgende met "0,6 < EI ≤ 0,8", zodat een energie-index van precies 0,6 in geen klasse valt. De package volgt het beleidsboek: een energie-index van 0,6 valt in "EI ≤ 0,6".
+
 #### 2.4.5 Punten energieprestatie zonder geldig energielabel of energie-index
 
 Als een woonruimte geen (geldig) energielabel of energie-index heeft, bepaalt het bouwjaar van de woning het aantal punten voor de energieprestatie. Hierbij gaat de Huurcommissie uit van het bouwjaar dat bekend is uit de Basisadministratie Adressen en Gebouwen (hierna: de BAG). Hiervoor kan het [WOZ-waardeloket](https://www.wozwaardeloket.nl) worden geraadpleegd. Bij de start van de verhuur moet verhuurder een geldig energielabel kunnen overleggen, indien dit niet kan plaatsvinden kan een huurder een melding maken bij de Inspectie Leefomgeving en Transport.
