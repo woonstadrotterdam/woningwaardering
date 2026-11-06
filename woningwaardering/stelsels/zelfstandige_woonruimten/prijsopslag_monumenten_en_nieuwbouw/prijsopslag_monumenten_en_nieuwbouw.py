@@ -141,7 +141,8 @@ class PrijsopslagMonumentenEnNieuwbouw(Stelselgroep):
                 logger.warning(
                     "Geen woningwaardering resultaat gevonden: Woningwaarderingresultaat wordt aangemaakt"
                 )
-                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (
+                # Inline: ZelfstandigeWoonruimten importeert deze stelselgroep (circulaire import).
+                from woningwaardering.stelsels.zelfstandige_woonruimten.zelfstandige_woonruimten import (  # noqa: PLC0415
                     ZelfstandigeWoonruimten,
                 )
 

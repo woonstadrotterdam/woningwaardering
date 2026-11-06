@@ -325,7 +325,8 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
         EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
     """
     try:
-        from monumenten import MonumentenClient
+        # Inline: monumenten is een optionele dependency (woningwaardering[monumenten]).
+        from monumenten import MonumentenClient  # noqa: PLC0415
 
         has_monumenten = True
     except ImportError:

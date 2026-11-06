@@ -73,9 +73,9 @@ def vergelijk_met_testreferentie(
         # Een test heeft één testreferentie; een tweede aanroep zou de eerste
         # overschrijven.
         nonlocal aangeroepen
-        assert (
-            not aangeroepen
-        ), "Roep vergelijk_met_testreferentie één keer per test aan."
+        assert not aangeroepen, (
+            "Roep vergelijk_met_testreferentie één keer per test aan."
+        )
         aangeroepen = True
         waarschuwingen = list(waarschuwingen)
 

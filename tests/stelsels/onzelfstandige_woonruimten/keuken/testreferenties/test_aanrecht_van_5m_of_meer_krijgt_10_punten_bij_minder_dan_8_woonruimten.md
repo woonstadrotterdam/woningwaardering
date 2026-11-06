@@ -19,7 +19,7 @@ Bron:
 KEUKEN
   Gedeeld met 7 onzelfstandige woonruimten
     - Keuken
-      - Lengte aanrecht                                            5500.00 mm     1.43 pt
+      - Lengte aanrecht                                            5000.00 mm     1.43 pt
   Afronding op kwartpunten                                                        0.07 pt
                                                                                 ------
   Totaal                                                                          1.50 pt
@@ -58,7 +58,7 @@ Geen.
             "code": "AAN",
             "naam": "Aanrecht"
           },
-          "lengte": 5500.0
+          "lengte": 5000.0
         }
       ],
       "gedeeldMetAantalOnzelfstandigeWoonruimten": 7
@@ -99,7 +99,7 @@ Geen.
       }
     },
     {
-      "aantal": 5500.0,
+      "aantal": 5000.0,
       "criterium": {
         "id": "keuken__gedeeld_met_7_onzelfstandige_woonruimten__keuken__lengte_aanrecht_aanrecht",
         "naam": "Lengte aanrecht",

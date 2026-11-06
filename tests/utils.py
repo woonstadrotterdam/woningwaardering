@@ -27,12 +27,12 @@ def get_stelselgroep_resultaten(
         for groep in resultaat.groepen or []
         if groep.criterium_groep.stelselgroep == stelselgroep
     ]
-    assert (
-        len(resultaten) < 2
-    ), f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {resultaten}"
-    assert (
-        len(resultaten) == 1
-    ), f"Geen stelselgroepresultaat gevonden voor: {stelselgroep.naam}"
+    assert len(resultaten) < 2, (
+        f"Meer dan 1 stelselgroepresultaat gevonden voor {stelselgroep.naam}: {resultaten}"
+    )
+    assert len(resultaten) == 1, (
+        f"Geen stelselgroepresultaat gevonden voor: {stelselgroep.naam}"
+    )
     return resultaten
 
 
@@ -272,9 +272,9 @@ def assert_punten_afgerond_op_kwarten(
         # Check groepstotaal
         if groep.punten is not None:
             remainder = round((groep.punten % 0.25) * 100) / 100
-            assert (
-                remainder == 0.0
-            ), f"Groep '{groep.criterium_groep.naam}' heeft punten {groep.punten} die niet zijn afgerond op kwarten"
+            assert remainder == 0.0, (
+                f"Groep '{groep.criterium_groep.naam}' heeft punten {groep.punten} die niet zijn afgerond op kwarten"
+            )
 
 
 def assert_invarianten_van_groep(
@@ -325,9 +325,9 @@ def punten_per_bovenliggende(
         groepsnaam = namen[bovenliggende.id] if bovenliggende else None
         naam = waardering.criterium.naam or ""
         onderliggend = punten.setdefault(groepsnaam, {})
-        assert (
-            naam not in onderliggend
-        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        assert naam not in onderliggend, (
+            f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        )
         onderliggend[naam] = waardering.punten
     return punten
 
@@ -374,9 +374,9 @@ def aantal_per_bovenliggende(
         groepsnaam = namen[bovenliggende.id] if bovenliggende else None
         naam = waardering.criterium.naam or ""
         onderliggend = aantallen.setdefault(groepsnaam, {})
-        assert (
-            naam not in onderliggend
-        ), f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        assert naam not in onderliggend, (
+            f"De naam '{naam}' komt meer dan één keer voor onder '{groepsnaam}'."
+        )
         onderliggend[naam] = waardering.aantal
     return aantallen
 

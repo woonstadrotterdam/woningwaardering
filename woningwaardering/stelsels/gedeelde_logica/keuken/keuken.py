@@ -236,19 +236,22 @@ def _punten_voor_aanrechtlengte(
 ) -> Decimal:
     # 2.5.2 Punten voor basisvoorzieningen keuken
     # Zelfstandig: Tussen 1 en 2 meter → 4; Langer dan 2 meter → 7
-    # Onzelfstandig: Tussen 1 en 2 meter → 4; Tussen 2 en 3 meter → 7;
-    # Meer dan 3 meter → 10; Meer dan 5 meter* → 13
-    # * Er worden 13 punten toegekend mits er minimaal 8 onzelfstandige
-    # wooneenheden toegang en gebruiksrecht hebben tot de keuken.
+    # Onzelfstandig volgt de tabel van de wettekst, Bijlage I onder B,
+    # onderdeel 5.1:
+    # 1 tot 2 m 4 punten; 2 tot 3 m 7 punten; 3 m en meer 10 punten;
+    # 5 m en meer (indien er minimaal 8 onzelfstandige woonruimten toegang en
+    # gebruiksrecht hebben tot deze keuken) 13 punten
+    # Het beleidsboek schrijft 'Meer dan 3 meter' en 'Meer dan 5 meter' en sluit
+    # daarmee de grenswaarde uit; de package volgt de wettekst.
     if lengte < AANRECHT_MINIMALE_LENGTE_MM:
         return Decimal("0")
     if stelsel == Woningwaarderingstelsel.onzelfstandige_woonruimten:
         if (
-            lengte > 5000
+            lengte >= 5000
             and (ruimte.gedeeld_met_aantal_onzelfstandige_woonruimten or 0) >= 8
         ):
             return Decimal("13")
-        if lengte > 3000:
+        if lengte >= 3000:
             return Decimal("10")
         if lengte >= 2000:
             return Decimal("7")
