@@ -669,6 +669,9 @@ Energie-index en punten per soort woning
 | 2,4 < EI ≤ 2,7                                                     | - 9                                | - 9                                 |
 | EI > 2,7                                                           | - 15                               | - 15                                |
 
+> [!NOTE]
+> De wettekst ([Bijlage I, onder A, rubriek 4.1](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI)) begrenst de hoogste klasse met "EI < 0,6" en de volgende met "0,6 < EI ≤ 0,8", zodat een energie-index van precies 0,6 in geen klasse valt. De package volgt het beleidsboek: een energie-index van 0,6 valt in "EI ≤ 0,6".
+
 \* Artikel 10d (energieprestatie) van de Uhw (amendement De Hoop, 36496, nr. 40) schrijft dwingend voor wat de puntentoekenning voor label E, F en G moet zijn. Abusievelijk is in het Bhw een schrijffout ontstaan bij label E. Daar is in het WWS -5 opgenomen, waar de wet -4 voorschrijft. Nu de wet leidend is, wordt tot een wijzigingsbesluit dit oplost, via de afwijkingsmogelijkheid van artikel 5, tweede lid, van het Bhw woonruimte gebruik gemaakt om de juiste punten voor energielabel E toe te kennen, zijnde -4.
 
 #### 2.4.5 Punten energieprestatie zonder geldig energielabel of energie-index
