@@ -90,6 +90,9 @@ In de voorgaande paragrafen wordt gesproken over de maximale huurprijzen. De hie
 
 De maximale huurprijzen worden elk jaar per 1 januari geïndexeerd. Een overzicht van de maximale huurprijzen per 1 januari 2026 is te vinden in Bijlage 1 van dit beleidsboek.
 
+> [!NOTE]
+> De tabel in [Bijlage 2 van het online beleidsboek](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-onzelfstandige-woonruimte/bijlage-2-maximale-huurprijsgrenzen-voor-onzelfstandige-woningen) geeft bij 158 punten "1128,2". Wij volgen de bedragen uit [bijlage II van de Uitvoeringsregeling huurprijzen woonruimte](https://wetten.overheid.nl/BWBR0015386/2026-01-01#BijlageII), waar volgens artikel 12, eerste lid, van het Besluit huurprijzen woonruimte de maximale huurprijsgrenzen worden vastgesteld: "158 1128,27".
+
 ## Hoofdstuk 2 – Het woningwaarderingsstelsel voor een onzelfstandige woning
 
 In dit hoofdstuk wordt toegelicht waarvoor een onzelfstandige woning punten kan krijgen, wanneer er een prijsopslag van toepassing is en hoe de commissie in de praktijk met de regels omgaat. Zo wordt duidelijk welke voorwaarden gelden en hoe de maximale huurprijs uiteindelijk wordt berekend.
