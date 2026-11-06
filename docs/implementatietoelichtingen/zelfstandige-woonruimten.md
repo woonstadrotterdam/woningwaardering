@@ -213,6 +213,9 @@ De indexatie van de socialesectorgrens en vrijesectorgrens vindt jaarlijks per 1
 
 De maximale huurprijzen worden elk jaar per 1 januari geïndexeerd, zodat deze gelijk valt met de hiervoor beschreven indexaties.[^5] Een overzicht van de maximale huurprijzen per 1 januari 2026 is te vinden in Bijlage 3 van dit beleidsboek.
 
+> [!NOTE]
+> De tabel in [Bijlage 3 van het online beleidsboek](https://www.huurcommissie.nl/support/beleidsboeken/waarderingsstelsel-zelfstandige-woonruimte/bijlage-3-maximale-huurprijsgrenzen-voor-zelfstandige-woningen) geeft bij 113 punten "726,95". Wij volgen de bedragen uit [bijlage I van de Uitvoeringsregeling huurprijzen woonruimte](https://wetten.overheid.nl/BWBR0015386/2026-01-01#BijlageI), waar volgens artikel 12, eerste lid, van het Besluit huurprijzen woonruimte de maximale huurprijsgrenzen worden vastgesteld: "113 726,90".
+
 [^5]: Vóór 1 juli 2024 werden de maximale huurprijzen jaarlijks per 1 juli van elk kalenderjaar geïndexeerd.
 
 ## Hoofdstuk 2 - Het woningwaarderingsstelsel voor een zelfstandige woning
