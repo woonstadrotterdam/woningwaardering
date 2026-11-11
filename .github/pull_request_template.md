@@ -22,18 +22,10 @@
 <!-- Wat verandert en waarom? Wijkt de PR af van een acceptatiecriterium van het issue, zeg dan welk criterium en waarom.
      Veranderen punten of huurprijs, toon dan per situatie voor en na met de test
      waarvan de testreferentie de input bevat, in de vorm uit docs/agents/voor-en-na.md. Bijvoorbeeld:
-     |       | Situatie                                       | Voor | Na       |
-     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer | 3,75 | **2,75** |
+     Doorgerekend met de huurprijscheck op 1 november 2026, tijdvak 1 januari 2026 - 31 december 2026.
+     |       | Situatie                                       | Voor | Na       | Huurprijscheck |
+     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer | 3,75 | **2,75** | gelijk         |
      - A: `test_…` -->
-
-## Huurprijscheck
-
-<!-- Alleen invullen als punten of huurprijs veranderen; anders weglaten.
-     Reken elke situatie uit de Samenvatting door met de skill huurprijscheck, en noem de datum en het tijdvak.
-     Geef per situatie (met de letter uit de Samenvatting): gelijk, of het verschil met de reden.
-     Kan de huurprijscheck de input niet uitdrukken, zeg dan waarom. Bijvoorbeeld:
-     - **A:** gelijk aan de huurprijscheck.
-     - **B:** de huurprijscheck geeft 44,25 WOZ-punten, de package 42,50. De huurprijscheck rekent met 12 m² per plek, de package met de werkelijke m² (zie Bronverwijzing). -->
 
 ## Soort wijziging
 
