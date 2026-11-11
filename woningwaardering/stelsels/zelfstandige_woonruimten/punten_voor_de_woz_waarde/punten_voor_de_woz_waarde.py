@@ -526,7 +526,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 f"Eenheid ({eenheid.id}): Oppervlakte parkeerplekken Type I van {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam} is {parkeerplekken_oppervlakte}m2"
             )
 
-        totaal = oppervlakte + Decimal(str(parkeerplekken_oppervlakte))
+        totaal = oppervlakte + parkeerplekken_oppervlakte
         return utils.rond_af(totaal, decimalen=0)
 
     def _bereken_minimum_punten_nieuwbouw(

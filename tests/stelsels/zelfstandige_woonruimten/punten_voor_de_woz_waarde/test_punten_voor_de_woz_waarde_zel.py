@@ -345,7 +345,7 @@ def test_parkeerplek_type_i_bij_een_adres_telt_mee_in_onderdeel_ii(
     - implementatietoelichting zelfstandige woonruimten, 2.11.2
     - wettekst, Bijlage I onder A, onderdeel 11.1
 
-    Een parkeerplek type I bij één adres hoort in rubriek 10, en haar deler is 1.
+    Een parkeerplek type I die bij één adres hoort, krijgt in rubriek 10 punten met deler 1.
 
     Bron:
     - implementatietoelichting zelfstandige woonruimten, 2.10.2
@@ -411,6 +411,7 @@ def test_parkeerplek_in_een_uitpandige_afgesloten_parkeergarage_telt_mee_in_onde
         ],
         ruimten=[
             ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=20.0),
+            # Gedeeld met meer adressen, zodat ook de deler zichtbaar is.
             ruimte(
                 Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
                 oppervlakte=12.5,
@@ -494,6 +495,7 @@ def test_parkeerplek_type_ii_telt_niet_mee_in_onderdeel_ii(
         ],
         ruimten=[
             ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.0),
+            # Een parkeerplek type II die in rubriek 10 wel punten krijgt.
             ruimte(
                 Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex,
                 oppervlakte=15.0,

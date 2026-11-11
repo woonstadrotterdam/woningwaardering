@@ -1461,9 +1461,9 @@ Onderdeel II:
 - Tel de punten van de twee onderdelen bij elkaar op en rond volgens de instructie van [paragraaf 2.1.4](#214-algemene-rekenregel-afronding-per-rubriek) af op een kwart punt. Dit is het puntenaantal voor de WOZwaarde.
 
 > [!NOTE]
-> In onderdeel II telt een parkeerplek mee als zij in [rubriek 10](#210-gemeenschappelijke-parkeerruimten) als type I punten krijgt: een `PIP` of `PUP` van minimaal 12 m², ook als de plek bij één adres hoort. Een plek kleiner dan 12 m² is volgens [2.10.3](#2103-punten-per-soort-parkeerplek) geen parkeerplek en telt niet mee.
+> In onderdeel II telt een parkeerplek mee als zij in [rubriek 10](#210-gemeenschappelijke-parkeerruimten) als type I punten krijgt, ook als de plek bij één adres hoort.
 >
-> Wij delen de oppervlakte van een plek door het aantal adressen dat toegang heeft, net als de punten in rubriek 10. Bij één adres is de deler 1. Ontbreekt `Eenhedenruimte.gedeeld_met_aantal_adressen`, dan is de deler ook 1.
+> De bronnen zeggen niet dat de oppervlakte van een plek gedeeld wordt. Wij delen haar door dezelfde deler als de punten in rubriek 10: het aantal adressen dat toegang heeft. Bij één adres is de deler 1. Ontbreekt `Eenhedenruimte.gedeeld_met_aantal_adressen`, dan is de deler ook 1.
 >
 > Een plek telt mee met haar werkelijke oppervlakte, niet met de standaardmaat van 12 m². De wettekst telt "het aantal m2 van de vertrekken, de overige ruimten en parkeerplekken" (Bijlage I onder A, onderdeel 11.1). Het beleidsboek staat de standaardmaat toe, maar verplicht haar niet.
 

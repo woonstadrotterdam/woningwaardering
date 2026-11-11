@@ -6,7 +6,7 @@ Bron:
 - implementatietoelichting zelfstandige woonruimten, 2.11.2
 - wettekst, Bijlage I onder A, onderdeel 11.1
 
-Een parkeerplek type I bij één adres hoort in rubriek 10, en haar deler is 1.
+Een parkeerplek type I die bij één adres hoort, krijgt in rubriek 10 punten met deler 1.
 
 Bron:
 - implementatietoelichting zelfstandige woonruimten, 2.10.2
