@@ -334,6 +334,187 @@ def test_onderdeel_ii_rekent_met_de_oppervlakte_van_vertrekken_overige_ruimten_e
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
+def test_parkeerplek_type_i_bij_een_adres_telt_mee_in_onderdeel_ii(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    vervanger_voor_package_monumenten,
+):
+    """In onderdeel II telt ook de oppervlakte mee van een parkeerplek type I die bij één adres hoort.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder A, onderdeel 11.1
+
+    Een parkeerplek type I bij één adres hoort in rubriek 10, en haar deler is 1.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.2
+    - wettekst, Bijlage I onder A, toelichting rubriek 10
+    """
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2025, 1, 1), vastgestelde_waarde=300000
+            ),
+        ],
+        ruimten=[
+            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.0),
+            # Een parkeerplek die alleen dit adres gebruikt.
+            ruimte(
+                Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+                oppervlakte=15.0,
+                gedeeld_met_aantal_adressen=1,
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
+
+    # 30 (woonkamer) + 15 / 1 adres (parkeerplek) = 45 m²
+    assert aantal_per_naam(groep)["Oppervlakte van vertrekken en overige ruimten"] == (
+        45.0
+    )
+    # € 300.000 / 45 m² / € 268
+    assert punten_per_naam(groep)["Onderdeel II"] == 24.88
+    assert groep.punten == 42.5
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_parkeerplek_in_een_uitpandige_afgesloten_parkeergarage_telt_mee_in_onderdeel_ii(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    vervanger_voor_package_monumenten,
+):
+    """In onderdeel II telt ook de oppervlakte mee van een parkeerplek in een uitpandige afgesloten parkeergarage.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder A, onderdeel 11.1
+
+    Een parkeerplek in een afgesloten parkeergarage is type I, of de garage nu
+    in- of uitpandig is.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.10.3
+    - wettekst, Bijlage I onder A, onderdeel 10
+    """
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2025, 1, 1), vastgestelde_waarde=300000
+            ),
+        ],
+        ruimten=[
+            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=20.0),
+            ruimte(
+                Ruimtedetailsoort.parkeerplek_in_uitpandige_afgesloten_parkeergarage,
+                oppervlakte=12.5,
+                gedeeld_met_aantal_adressen=4,
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
+
+    # 20 (woonkamer) + 12,5 / 4 adressen (parkeerplek) = 23,125, afgerond 23 m²
+    assert aantal_per_naam(groep)["Oppervlakte van vertrekken en overige ruimten"] == (
+        23.0
+    )
+    # € 300.000 / 23 m² / € 268
+    assert punten_per_naam(groep)["Onderdeel II"] == 48.67
+    assert groep.punten == 66.25
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_parkeerplek_type_i_zonder_aantal_adressen_telt_in_onderdeel_ii_mee_als_niet_gedeeld(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    vervanger_voor_package_monumenten,
+):
+    """Een parkeerplek type I zonder aantal adressen telt in onderdeel II mee als niet gedeeld.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    """
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2025, 1, 1), vastgestelde_waarde=300000
+            ),
+        ],
+        ruimten=[
+            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.0),
+            # Zonder `gedeeld_met_aantal_adressen`.
+            ruimte(
+                Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage,
+                oppervlakte=15.0,
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
+
+    # 30 (woonkamer) + 15 / 1 (parkeerplek) = 45 m²
+    assert aantal_per_naam(groep)["Oppervlakte van vertrekken en overige ruimten"] == (
+        45.0
+    )
+    assert groep.punten == 42.5
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
+def test_parkeerplek_type_ii_telt_niet_mee_in_onderdeel_ii(
+    punten_voor_de_woz_waarde,
+    vergelijk_met_testreferentie,
+    vervanger_voor_package_monumenten,
+):
+    """In onderdeel II telt de oppervlakte van een parkeerplek type II niet mee.
+
+    Bron:
+    - implementatietoelichting zelfstandige woonruimten, 2.11.2
+    - wettekst, Bijlage I onder A, onderdeel 11.1
+    """
+    eenheid = EenhedenEenheid(
+        id="eenheid",
+        woz_eenheden=[
+            EenhedenWozEenheid(
+                waardepeildatum=date(2025, 1, 1), vastgestelde_waarde=300000
+            ),
+        ],
+        ruimten=[
+            ruimte(Ruimtedetailsoort.woonkamer, oppervlakte=30.0),
+            ruimte(
+                Ruimtedetailsoort.parkeerplek_buiten_met_dak_behorend_bij_complex,
+                oppervlakte=15.0,
+                gedeeld_met_aantal_adressen=1,
+            ),
+        ],
+    )
+
+    with pytest.warns(UserWarning) as waarschuwingen:
+        # De package zet `monumenten` op de eenheid die zij waardeert. De kopie
+        # houdt de input in de testreferentie zoals de test hem opgeeft.
+        groep = punten_voor_de_woz_waarde.waardeer(eenheid.model_copy())
+
+    # Alleen de woonkamer: 30 m²
+    assert aantal_per_naam(groep)["Oppervlakte van vertrekken en overige ruimten"] == (
+        30.0
+    )
+    assert groep.punten == 55.0
+    vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
+
+
 # Kleine nieuwbouwwoningen in het COROP-gebied Amsterdam of Utrecht
 
 
