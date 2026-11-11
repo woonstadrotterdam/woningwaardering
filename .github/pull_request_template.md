@@ -23,9 +23,11 @@
      Veranderen punten of huurprijs, toon dan per situatie voor en na met de test
      waarvan de testreferentie de input bevat, in de vorm uit docs/agents/voor-en-na.md. Bijvoorbeeld:
      Doorgerekend met de huurprijscheck op 1 november 2026, tijdvak 1 januari 2026 - 31 december 2026.
-     |       | Situatie                                       | Voor | Na       | Huurprijscheck |
-     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer | 3,75 | **2,75** | gelijk         |
-     - A: `test_…` -->
+     |       | Situatie                                                                  | Voor  | Na        | Huurprijscheck |
+     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer                            | 3,75  | **2,75**  | gelijk         |
+     | **B** | [ZEL] Punten voor de WOZ-waarde, woonkamer 30 m², `PIP` 15 m² bij 1 adres | 55,00 | **42,50** | 44,25          |
+     - A: `test_…`
+     - B: `test_…`. De huurprijscheck rekent met 12 m² per plek, de package met de werkelijke 15 m². -->
 
 ## Soort wijziging
 
