@@ -15,7 +15,7 @@ Een note, het gemarkeerde blok zoals hieronder, legt een keuze van de package va
 - waar wettekst en beleidsboek een keuze openlaten die de package invult;
 - waar bronnen elkaar tegenspreken; de note citeert dan de afwijkende bron letterlijk en zegt welke bron de package volgt.
 
-Een note noemt alleen wat afwijkt van of ontbreekt in de beleidsboektekst erboven; waar de code die tekst volgt, is de tekst zelf de toelichting. Rekenvolgorde en andere codedetails staan in codecommentaar, een controle met de huurprijscheck in de pull request. De huurprijscheck staat alleen in een note als hij de bron is, omdat wettekst en beleidsboek niet sluitend zijn (zie [bronnen](../voor-ontwikkelaars/bronnen.md)).
+Een note noemt alleen wat afwijkt van of ontbreekt in de beleidsboektekst erboven; waar de code die tekst volgt, is de tekst zelf de toelichting. Rekenvolgorde en andere codedetails staan in codecommentaar, een controle met de huurprijscheck in de pull request. De huurprijscheck staat alleen in een note als hij de bron is, omdat wettekst en beleidsboek niet sluitend zijn (zie [bronnen](../voor-ontwikkelaars/bronnen.md)), of als de package bewust een andere uitkomst geeft dan de huurprijscheck. De note noemt dan de datum en het tijdvak van de meting.
 
 > [!NOTE]
 > Dit is een tekstblok waarmee commentaar van een developer wordt aangegeven in het beleidsboek.

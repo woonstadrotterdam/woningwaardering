@@ -19,10 +19,12 @@
 
 ## Samenvatting
 
-<!-- Wat verandert en waarom? Veranderen punten of huurprijs, toon dan per situatie voor en na met de test
+<!-- Wat verandert en waarom? Wijkt de PR af van een acceptatiecriterium van het issue, zeg dan welk criterium en waarom.
+     Veranderen punten of huurprijs, toon dan per situatie voor en na met de test
      waarvan de testreferentie de input bevat, in de vorm uit docs/agents/voor-en-na.md. Bijvoorbeeld:
-     | Situatie                                        | Voor | Na       | Test     |
-     | [ZEL] Sanitair, toilet met fontein in badkamer  | 3,75 | **2,75** | `test_…` | -->
+     |       | Situatie                                       | Voor | Na       |
+     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer | 3,75 | **2,75** |
+     - A: `test_…` -->
 
 ## Soort wijziging
 
