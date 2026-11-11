@@ -1466,6 +1466,8 @@ Onderdeel II:
 > De bronnen zeggen niet dat de oppervlakte van een plek gedeeld wordt. Wij delen haar door dezelfde deler als de punten in rubriek 10: het aantal adressen dat toegang heeft. Bij één adres is de deler 1. Ontbreekt `Eenhedenruimte.gedeeld_met_aantal_adressen`, dan is de deler ook 1.
 >
 > Een plek telt mee met haar werkelijke oppervlakte, niet met de standaardmaat van 12 m². De wettekst telt "het aantal m2 van de vertrekken, de overige ruimten en parkeerplekken" (Bijlage I onder A, onderdeel 11.1). Het beleidsboek staat de standaardmaat toe, maar verplicht haar niet.
+>
+> De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte) rekent wel met 12 m² per plek. Hij heeft geen veld voor de oppervlakte van een parkeerplek. Daardoor geeft de package bewust een andere uitkomst bij een plek die niet 12 m² is. Gemeten op 11 november 2026, tijdvak 1 januari 2026 - 31 december 2026: een woonkamer van 30 m² en een `PIP` van 15 m² bij één adres krijgen in de huurprijscheck 44,25 WOZ-punten (30 + 12 = 42 m²) en in de package 42,50 WOZ-punten (30 + 15 = 45 m²).
 
 {==
 
