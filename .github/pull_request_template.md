@@ -26,6 +26,15 @@
      | **A** | [ZEL] Sanitair, toilet met fontein in badkamer | 3,75 | **2,75** |
      - A: `test_…` -->
 
+## Huurprijscheck
+
+<!-- Alleen invullen als punten of huurprijs veranderen; anders weglaten.
+     Reken elke situatie uit de Samenvatting door met de skill huurprijscheck, en noem de datum en het tijdvak.
+     Geef per situatie (met de letter uit de Samenvatting): gelijk, of het verschil met de reden.
+     Kan de huurprijscheck de input niet uitdrukken, zeg dan waarom. Bijvoorbeeld:
+     - **A:** gelijk aan de huurprijscheck.
+     - **B:** de huurprijscheck geeft 44,25 WOZ-punten, de package 42,50. De huurprijscheck rekent met 12 m² per plek, de package met de werkelijke m² (zie Bronverwijzing). -->
+
 ## Soort wijziging
 
 - ☐ Domeinlogica / puntberekening (vul **Bronverwijzing** hieronder in)
@@ -80,5 +89,6 @@
 - ☐ Relevante implementatietoelichting geraadpleegd (bij domeinlogica)
 - ☐ Bronverwijzing ingevuld (bij domeinlogica)
 - ☐ Tests toegevoegd/aangepast (bij gewijzigde domeinlogica)
+- ☐ Doorgerekend met de huurprijscheck (bij gewijzigde punten of huurprijs)
 - ☐ Waarschuwings- of errorlogica bewust gecontroleerd (indien van toepassing)
 - ☐ Documentatie geüpdatet
