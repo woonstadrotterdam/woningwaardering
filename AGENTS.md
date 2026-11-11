@@ -15,6 +15,7 @@ Werk in dit project voorzichtig met domeinlogica: kleine codewijzigingen kunnen 
 | Warnings of logging                                                                         | `docs/voor-ontwikkelaars/logging.md` en `docs/aan-de-slag/index.md` (sectie Warnings)                                                |
 | Installatie, repository-opzet of releases                                                   | `docs/voor-ontwikkelaars/index.md` en `docs/voor-ontwikkelaars/releases.md`                                                          |
 | Domeintermen in code, docs of comments                                                      | `GLOSSARY.md`                                                                                                                        |
+| Issue of PR schrijven                                                                       | De template in `.github/` en [`docs/agents/voor-en-na.md`](docs/agents/voor-en-na.md)                                                |
 | Triviale fix: typefout, formatting of eenduidige testfix zonder domeinvraag                 | Niets extra                                                                                                                          |
 
 ## Omgeving En Commands
@@ -82,7 +83,7 @@ Is de interpretatie of implementatiestatus van een beleidsregel beslist, bied da
 
 Waar een skill botst met dit bestand, gaat dit bestand voor:
 
-- `/pr`: volg de PR-template, geef elk feit één plek en schrijf alleen wat een reviewer niet uit de diff haalt. **Samenvatting** zegt in één of twee zinnen wat er verandert en waarom; een visual uit `/pr` alleen als de codewijziging in de diff niet te overzien is. Veranderen punten of huurprijs, dan is het voor/na-bewijs uit `/pr` een tabel onder de Samenvatting met per situatie één rij: situatie, voor, na en de test die het vastlegt, zodat de reviewer de input in de testreferentie vindt. Alleen daar staan getallen voor en na. Verandert een situatie die geen test heeft, voeg dan een test toe of noem haar onder de tabel als situatie zonder test. Beantwoord de Blast Radius uit `/pr` onder **Impact op eindgebruiker**: vink de soorten aan en noem bij de andere soorten wat er verandert. Zet bij ja het label `impact eindgebruiker`, zodat reviewers zien dat de PR intensieve review vraagt. Het oordeel one-way/two-way door uit `/pr` laat je weg: wat na een release niet terug kan, is impact op de eindgebruiker of een breaking change, en die hebben al een label. De afweging tussen bronnen staat alleen onder **Bronverwijzing**.
+- `/pr`: volg [`docs/agents/pull-requests.md`](docs/agents/pull-requests.md).
 - `/code-review`: kan de diff punten of huurprijs veranderen, start dan naast de Standards- en Spec-subagent een derde subagent die de wijziging doorrekent volgens de skill `huurprijscheck` (sectie **Bij code-review**), ook als wettekst en beleidsboek eenduidig zijn. Zet zijn rapport onder `## Huurprijscheck`.
 - `/prototype`: toets een interpretatie van een beleidsregel met tests en de huurprijscheck; een prototype is voor ontwerpvragen over code.
 - Issues en specs (`/to-spec`, `/to-tickets`, `/triage`): volg de conventies in `docs/agents/issue-tracker.md`.
@@ -107,6 +108,7 @@ Single-context: `GLOSSARY.md` + `docs/adr/` in de repo-root. See `docs/agents/do
 - Let bij output-wijzigingen (punten, criteria, naming, ID-structuur) op `docs/aan-de-slag/index.md`: die bevat inline voorbeeld-output (JSON en rapport) en wordt niet automatisch meegenomen bij wijzigingen.
 - Leg implementatiekeuzes rond beleidsboekregels vast in `docs/implementatietoelichtingen/` waar [`docs/implementatietoelichtingen/index.md`](docs/implementatietoelichtingen/index.md) een doorhaling of note verwacht.
 - Leg ontwikkelaarsafspraken vast in `docs/voor-ontwikkelaars/`.
+- Schrijf eigen tekst (issues, PR's, docs, notes in de implementatietoelichtingen, codecommentaar) volgens ASD-STE100 Simplified Technical English; in Nederlandse tekst gelden de schrijfregels, niet de woordenlijst: korte zinnen, actieve vorm, één woord, één betekenis. Voor een domeinterm is dat woord de term uit `GLOSSARY.md`. Citaten uit wettekst en beleidsboek blijven letterlijk. Pas bestaande tekst alleen aan als je hem toch wijzigt.
 - Houd documentatie kort en verwijs naar bestaande bronnen in plaats van dezelfde uitleg op meerdere plekken te dupliceren.
 - Werk `GLOSSARY.md` alleen bij wanneer een domeinterm duurzaam verduidelijkt is. Neem alleen termen op die betekenisvol zijn voor domeinexperts of terugkerend nodig zijn om code en documentatie te begrijpen; houd definities op één à twee zinnen, zonder implementatiedetails (die horen in `docs/voor-ontwikkelaars/` of codecommentaar).
 
