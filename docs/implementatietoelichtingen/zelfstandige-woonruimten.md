@@ -1029,6 +1029,11 @@ Een badruimte in een woning heeft een 1 bad/douchecombinatie (7 punten). Daarnaa
 
 ==}
 
+> [!NOTE]
+> De package begrenst de punten voor extra voorzieningen per bad- of doucheruimte: op de punten voor het bad, de douche en de bad/douche in die ruimte. Een bad of douche in een andere ruimte telt niet mee voor dit maximum. Het voorbeeld hierboven telt de douche in de slaapkamer wel mee (11 punten), maar de uitkomst hangt daar niet van af: 5,75 punten is ook minder dan de 7 punten van de badruimte zelf. De wettekst zegt niet of het maximum per ruimte of voor de hele woning geldt: "Er kan maximaal het extra aantal punten worden toegekend dat reeds voor douche, bad en/of bad/douche is verkregen." ([Bhw, bijlage I, onder A, rubriek 6.2](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieA_Divisie_Divisie6_Divisie6.2)).
+>
+> Omdat wettekst en beleidsboek dit niet beslissen, volgt de package de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte), die ook per ruimte begrenst. Voorbeeld: een badkamer met een wastafel (1 punt), een douche (4 punten) en extra voorzieningen van samen 6 punten, en een slaapkamer met een douche (4 punten). Package en huurprijscheck geven de badkamer 1 + 4 + 4 = 9 punten en rubriek 6 in totaal 13 punten. Met een maximum voor de hele woning zou het 15 punten zijn. Gemeten op 15 oktober 2026, tijdvak 1 januari 2026 - 31 december 2026.
+
 ### 2.7 ~~Rubriek 7: Woonvoorzieningen voor personen met een handicap~~
 
 {==
