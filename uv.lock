@@ -11,8 +11,11 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
+exclude-newer = "2026-11-05T09:12:17.458533Z"
 exclude-newer-span = "P1W"
+
+[options.exclude-newer-package]
+monumenten = false
 
 [[package]]
 name = "aiocache"
@@ -259,12 +262,12 @@ name = "black"
 version = "26.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "mypy-extensions" },
-    { name = "packaging" },
-    { name = "pathspec" },
-    { name = "platformdirs" },
-    { name = "pytokens" },
+    { name = "click", marker = "sys_platform != 'emscripten'" },
+    { name = "mypy-extensions", marker = "sys_platform != 'emscripten'" },
+    { name = "packaging", marker = "sys_platform != 'emscripten'" },
+    { name = "pathspec", marker = "sys_platform != 'emscripten'" },
+    { name = "platformdirs", marker = "sys_platform != 'emscripten'" },
+    { name = "pytokens", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e1/c5/61175d618685d42b005847464b8fb4743a67b1b8fdb75e50e5a96c31a27a/black-26.3.1.tar.gz", hash = "sha256:2c50f5063a9641c7eed7795014ba37b0f5fa227f3d408b968936e24bc0566b07", size = 666155, upload-time = "2026-03-12T03:36:03.593Z" }
 wheels = [
@@ -840,7 +843,7 @@ name = "jinxed"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ansicon" },
+    { name = "ansicon", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/20/d0/59b2b80e7a52d255f9e0ad040d2e826342d05580c4b1d7d7747cfb8db731/jinxed-1.3.0.tar.gz", hash = "sha256:1593124b18a41b7a3da3b078471442e51dbad3d77b4d4f2b0c26ab6f7d660dbf", size = 80981, upload-time = "2024-07-31T22:39:18.854Z" }
 wheels = [
@@ -959,18 +962,20 @@ wheels = [
 
 [[package]]
 name = "monumenten"
-version = "2.0.1"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiocache" },
     { name = "aiohttp" },
     { name = "geopandas" },
     { name = "pandas" },
+    { name = "shapely" },
     { name = "tqdm" },
+    { name = "truststore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0e/3c/59577a45ca2b38757b384e1a0c4573b7431ffeb34d46c39e268c38409136/monumenten-2.0.1.tar.gz", hash = "sha256:2a5de948ba734aa3469a183aa46f6d98541f5acfa580a6188c4898e6339fbfed", size = 32030, upload-time = "2026-03-05T09:07:05.776Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/63/a8/44673f70c7cb98f40b41b012bd4f645df99b6699a36d2dd851c6c0caa280/monumenten-3.0.0.tar.gz", hash = "sha256:52a1cd5cc13190e84c926af3351f86a959418cfdfd710c5bd556d019b14243bc", size = 220155, upload-time = "2026-11-12T05:43:37.33Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/90/5d1aa44664e96b62590643d298961d06e563576d88b94917cdb5d3d63ee3/monumenten-2.0.1-py3-none-any.whl", hash = "sha256:4831d6b7a23705fdd569e207341216a9eb2f1ea2774b5f33ba41a0ad1072a78a", size = 19862, upload-time = "2026-03-05T09:07:04.633Z" },
+    { url = "https://files.pythonhosted.org/packages/e7/48/ed4b2a178464980ef72ad139243f1a4e8269b0ee6b677e1c4b6f40aa5e23/monumenten-3.0.0-py3-none-any.whl", hash = "sha256:fb60df3fcdfc4346f537c590a0ad5232b26eaa022cacbb4a0443fdb24d7d2ac6", size = 50331, upload-time = "2026-11-12T05:43:36.068Z" },
 ]
 
 [[package]]
@@ -2022,6 +2027,15 @@ wheels = [
 ]
 
 [[package]]
+name = "truststore"
+version = "0.10.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/9f/c5201d42a484c061e528825fc8e2d565f5abd50a4ced6fb7d29c4ec99b2b/truststore-0.10.5.tar.gz", hash = "sha256:30d36967ccaded5cbb38d602c433f53600036c79d502f4533a49b60a03bbefcd", size = 28091, upload-time = "2026-10-12T22:27:31.808Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/e9/3a7820be2bb0fe53b6bc9c3be26d3d1158004e4c3ab953aa6840b955b1e9/truststore-0.10.5-py3-none-any.whl", hash = "sha256:9aaaedaefaf06d8b206278cf8b5012bc897f485a874503501e12d776df78951c", size = 19017, upload-time = "2026-10-12T22:27:30.377Z" },
+]
+
+[[package]]
 name = "typeguard"
 version = "4.5.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2194,7 +2208,7 @@ requires-dist = [
     { name = "jinja2", marker = "extra == 'dev'", specifier = ">=3.1" },
     { name = "libcst", marker = "extra == 'dev'", specifier = "==1.4" },
     { name = "loguru", specifier = ">=0.7" },
-    { name = "monumenten", marker = "extra == 'monumenten'", specifier = ">=2.0.1" },
+    { name = "monumenten", marker = "extra == 'monumenten'", specifier = ">=3.0.0" },
     { name = "pandas", specifier = ">=2.2" },
     { name = "pre-commit", marker = "extra == 'test'", specifier = ">=3.3" },
     { name = "pydantic", specifier = ">=2.10" },

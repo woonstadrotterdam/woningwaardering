@@ -132,8 +132,9 @@ def test_rijksmonument_telt_alleen_met_de_rce_als_bron(
         _ClientMetAntwoord,
         {
             BAG_ID: [
-                # Alleen het Kadaster noemt dit rijksmonument.
-                {"code": "RIJ", "naam": "Rijksmonument", "bron": ["Kadaster"]},
+                # Alleen het Kadaster noemt dit rijksmonument. De package
+                # monumenten geeft `bron` als string, bijvoorbeeld "RCE, Kadaster".
+                {"code": "RIJ", "naam": "Rijksmonument", "bron": "Kadaster"},
                 {"code": "GEM", "naam": "Gemeentelijk monument"},
             ]
         },
