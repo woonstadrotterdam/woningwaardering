@@ -86,12 +86,7 @@ class Energieprestatie(Stelselgroep):
             warnings.warn(f"Eenheid ({eenheid.id}): geen ruimten gevonden")
             return waarderingsgroep_builder.build()
 
-        if eenheid.monumenten is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
-                UserWarning,
-            )
-            eenheid = utils.update_eenheid_monumenten(eenheid)
+        eenheid = utils.vul_monumenten_aan(eenheid)
 
         oppervlakte_van_vertrekken = self._oppervlakte_vertrekken(eenheid)
 

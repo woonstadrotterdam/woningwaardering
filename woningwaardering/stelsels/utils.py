@@ -314,94 +314,121 @@ def voeg_stelselgroep_afronding_toe(
     ]
 
 
-def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
-    """
-    Voegt monumentale statussen toe aan een eenheid d.m.v. aanroepen API's.
+def vul_monumenten_aan(eenheid: EenhedenEenheid) -> EenhedenEenheid:
+    """Vult `monumenten` aan als het veld niet is gespecificeerd.
+
+    Is `monumenten` gespecificeerd, dan verandert de functie niets. Anders haalt de
+    functie de monumentstatus op met de optionele package monumenten. Blijft de
+    monumentstatus onbekend, dan volgt één `UserWarning` en krijgt de eenheid een
+    lege lijst. Na de eerste aanroep is `monumenten` dus altijd een lijst, en roept
+    woningwaardering de package monumenten één keer per eenheid aan.
 
     Args:
-        eenheid (EenhedenEenheid): De eenheid waarvoor de monumentale status wordt opgehaald
+        eenheid (EenhedenEenheid): De eenheid waarvoor de functie de monumentstatus bepaalt
 
     Returns:
-        EenhedenEenheid: De met monumentale statussen bijgewerkte eenheid
+        EenhedenEenheid: De eenheid met een lijst in `monumenten`
     """
+    if eenheid.monumenten is not None:
+        return eenheid
+
+    eenheid.monumenten = []
+    niet_gespecificeerd = f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd"
+    specificeer = (
+        "Specificeer 'monumenten', met een lege lijst als de eenheid geen "
+        "monumentstatus heeft."
+    )
+
     try:
         # Inline: monumenten is een optionele dependency (woningwaardering[monumenten]).
         from monumenten import MonumentenClient  # noqa: PLC0415
-
-        has_monumenten = True
     except ImportError:
-        has_monumenten = False
         warnings.warn(
-            "Package 'monumenten' is niet geïnstalleerd. Monumentale status wordt niet automatisch bijgewerkt. "
-            "Installeer met: pip install woningwaardering[monumenten]",
+            f"{niet_gespecificeerd} en de package 'monumenten' is niet geïnstalleerd. "
+            f"{specificeer} Of installeer woningwaardering[monumenten]: dan haalt "
+            "woningwaardering de monumentstatus zelf op.",
             UserWarning,
         )
         return eenheid
 
-    if not has_monumenten:
-        return eenheid
-
-    eenheid.monumenten = eenheid.monumenten or []
-    try:
-        if (
-            eenheid.adresseerbaar_object_basisregistratie is None
-            or eenheid.adresseerbaar_object_basisregistratie.bag_identificatie is None
-        ):
-            logger.warning(f"Eenheid ({eenheid.id}): Geen bag_identificatie gevonden")
-            return eenheid
-
-        logger.debug(
-            f"Eenheid ({eenheid.id}): Monumentale statussen worden opgehaald voor eenheid met bag_identificatie {eenheid.adresseerbaar_object_basisregistratie.bag_identificatie}"
-        )
-        bag_verblijfsobject_ids = [
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
-        ]
-
-        async def _get_monuments() -> Any:
-            async with MonumentenClient() as client:
-                return await client.process_from_list(
-                    bag_verblijfsobject_ids,
-                    to_vera=True,
-                )
-
-        # Voer de async context manager uit in een synchrone context
-        monumenten = asyncio.run(_get_monuments()).get(
-            eenheid.adresseerbaar_object_basisregistratie.bag_identificatie, []
-        )
-
-        if monumenten:
-            logger.info(
-                f"Eenheid ({eenheid.id}): Monumentale statussen gevonden: {', '.join(monument['naam'] for monument in monumenten)}"
-            )
-            eenheid.monumenten = [
-                EenheidmonumentReferentiedata(
-                    code=monument["code"], naam=monument["naam"]
-                )
-                for monument in monumenten
-                if monument["code"] != Eenheidmonument.rijksmonument.code
-                or "RCE" in (monument.get("bron") or [])
-            ]
-        elif monumenten is not None:
-            logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")
-    except Exception as e:
+    bag_identificatie = (
+        eenheid.adresseerbaar_object_basisregistratie.bag_identificatie
+        if eenheid.adresseerbaar_object_basisregistratie is not None
+        else None
+    )
+    if not bag_identificatie:
         warnings.warn(
-            f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}",
+            f"{niet_gespecificeerd} en de eenheid heeft geen BAG-identificatie om de "
+            f"monumentstatus mee op te halen. {specificeer}",
             UserWarning,
         )
         return eenheid
+
+    logger.debug(
+        f"Eenheid ({eenheid.id}): woningwaardering haalt de monumentstatus op met de "
+        f"package 'monumenten' voor BAG-identificatie {bag_identificatie}"
+    )
+    monumenten = _haal_monumentstatus_op(MonumentenClient, bag_identificatie)
+    if isinstance(monumenten, str):
+        warnings.warn(
+            f"{niet_gespecificeerd} en de package 'monumenten' kon de monumentstatus "
+            f"niet bepalen: {monumenten}. Woningwaardering waardeert de eenheid zonder "
+            "monumentstatus. Een opslag voor een monument kan daardoor ontbreken. "
+            f"{specificeer}",
+            UserWarning,
+        )
+        return eenheid
+
+    eenheid.monumenten = [
+        EenheidmonumentReferentiedata(code=monument["code"], naam=monument["naam"])
+        for monument in monumenten
+        if monument["code"] != Eenheidmonument.rijksmonument.code
+        or "RCE" in (monument.get("bron") or "")
+    ]
+    logger.info(
+        f"Eenheid ({eenheid.id}): monumentstatus opgehaald: "
+        f"{', '.join(monument.naam or '' for monument in eenheid.monumenten) or 'geen'}"
+    )
+    return eenheid
+
+
+def _haal_monumentstatus_op(
+    monumenten_client: Any, bag_identificatie: str
+) -> list[dict[str, Any]] | str:
+    """Geeft de monumenten van een verblijfsobject, of de reden waarom de package
+    monumenten de monumentstatus niet kon bepalen.
+
+    Args:
+        monumenten_client (Any): De class `MonumentenClient` van de package monumenten
+        bag_identificatie (str): De BAG-identificatie van het verblijfsobject
+
+    Returns:
+        list[dict[str, Any]] | str: De monumenten in VERA-vorm, of de reden
+    """
+
+    async def _verwerk() -> Any:
+        async with monumenten_client() as client:
+            return await client.process_from_list([bag_identificatie], to_vera=True)
+
+    # De package monumenten geeft zelf een `UserWarning`, bijvoorbeeld als een bron
+    # geen antwoord gaf. Met de standaardfilter van woningwaardering wordt die
+    # warning een error. Deze functie vangt de warnings daarom op en geeft hun
+    # tekst als reden.
+    with warnings.catch_warnings(record=True) as meldingen:
+        warnings.simplefilter("always")
+        try:
+            antwoord = asyncio.run(_verwerk())
+        except Exception as fout:
+            return f"de aanroep mislukte: {fout}"
 
     # De package monumenten geeft `None` als een bron geen antwoord gaf.
-    # De warning staat buiten het try-blok: met de standaardfilter wordt hij
-    # een error, en `except Exception` mag die error niet opvangen.
+    monumenten: list[dict[str, Any]] | None = antwoord.get(bag_identificatie)
     if monumenten is None:
-        warnings.warn(
-            f"Eenheid ({eenheid.id}): de package 'monumenten' kon de monumentstatus "
-            "niet bepalen, omdat een bron geen antwoord gaf. Woningwaardering "
-            "waardeert de eenheid zonder monumentstatus. Een opslag voor een monument kan "
-            "daardoor ontbreken.",
-            UserWarning,
+        return (
+            "; ".join(str(melding.message) for melding in meldingen)
+            or "de package gaf geen antwoord voor deze BAG-identificatie"
         )
-    return eenheid
+    return monumenten
 
 
 def weergavenaam(ruimte: EenhedenRuimte) -> str:
