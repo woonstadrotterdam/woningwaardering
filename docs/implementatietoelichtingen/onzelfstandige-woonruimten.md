@@ -363,7 +363,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > [!NOTE]
 > De maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige woonruimten.
 >
-> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
+> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder. Wettekst en beleidsboek zeggen niet hoeveel punten de zolder zelf waard is. De package volgt hier de zin over de afronding, net als bij [zelfstandige woonruimten, 2.2.2.3](zelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap).
 >
 > Voorbeeld (4 onzelfstandige woonruimten):
 >
