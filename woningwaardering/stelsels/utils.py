@@ -381,11 +381,24 @@ def update_eenheid_monumenten(eenheid: EenhedenEenheid) -> EenhedenEenheid:
                 if monument["code"] != Eenheidmonument.rijksmonument.code
                 or "RCE" in (monument.get("bron") or [])
             ]
-        else:
+        elif monumenten is not None:
             logger.debug(f"Eenheid ({eenheid.id}): Geen monumentale statussen gevonden")
     except Exception as e:
         warnings.warn(
             f"Monumentale statussen konden niet worden opgehaald m.b.v. API: {e}",
+            UserWarning,
+        )
+        return eenheid
+
+    # De package monumenten geeft `None` als een bron geen antwoord gaf.
+    # De warning staat buiten het try-blok: met de standaardfilter wordt hij
+    # een error, en `except Exception` mag die error niet opvangen.
+    if monumenten is None:
+        warnings.warn(
+            f"Eenheid ({eenheid.id}): de package 'monumenten' kon de monumentstatus "
+            "niet bepalen, omdat een bron geen antwoord gaf. Woningwaardering "
+            "waardeert de eenheid zonder monumentstatus. Een opslag voor een monument kan "
+            "daardoor ontbreken.",
             UserWarning,
         )
     return eenheid
