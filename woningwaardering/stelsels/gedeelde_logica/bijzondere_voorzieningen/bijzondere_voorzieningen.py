@@ -150,8 +150,10 @@ def _opslag_zorgwoning(
     )
 
     if uitgesloten_criterium_ids:
-        # Voor zelfstandige zorgwoningen telt rubriek 11.2 niet mee in de 35%-grondslag
-        # (§2.12 voetnoot 13), dus trekken we die onderliggende criteria hier af.
+        # Voor zelfstandige zorgwoningen tellen rubriek 11.2 (§2.12 voetnoot 13) en
+        # 11.3 niet mee in de 35%-grondslag. Wettekst, Bijlage I onder A, onderdeel
+        # 12: "35% van de ingevolge de onderdelen 1 tot en met 11.1 toegekende
+        # punten". Daarom trekken we die onderliggende criteria hier af.
         puntentotaal -= sum(
             (
                 Decimal(str(waardering.punten))
@@ -165,6 +167,9 @@ def _opslag_zorgwoning(
             ),
             start=Decimal("0"),
         )
+        # 2.1.4 / 2.11.2: de punten van 11.1 (onderdeel I + II) liggen op een kwart
+        # punt. De andere rubrieken liggen daar al op, dus ronden we het totaal af.
+        puntentotaal = utils.rond_af_op_kwart(puntentotaal)
 
     grondslag_label = (
         "1 tot en met 11.1" if uitgesloten_criterium_ids else "1 tot en met 11"

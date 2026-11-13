@@ -1,0 +1,1 @@
+Woning waarbij de cap op de WOZ geldt en de aanbelfunctie van rubriek 12 (0,25 punt) meetelt in het maximum van 33% en in het afgetopte totaal: dat komt op 187 punten, dus valt de woning niet terug op 186 punten (2.11.7).

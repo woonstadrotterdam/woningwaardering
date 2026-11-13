@@ -1577,6 +1577,9 @@ Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het
 > [!NOTE]
 > Rubriek 11.3 toetst de **woningwaardering** zonder cap aan 187 punten: dat is dezelfde waardering als in artikel 2 (huurprijsgrens bij 186 punten) en de slotopmerking van bijlage I. Eerst de rubrieken (2.1.4), inclusief de WOZ-rubriek ná kwartafronding van I+II (2.11.2), daarna het woningtotaal op hele punten (2.1.5). De 33%-grondslag blijft die som van kwartpunten. We ronden de WOZ-rubriek niet apart op hele punten af voordat we optellen.
 
+> [!NOTE]
+> De wettekst ([Bijlage I, onder A, onderdeel 11.3](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI)) noemt bij «de waardering van de woning» geen onderdelen. We rekenen rubriek 12 mee: de toets aan 187 punten, het maximum van 33% en de terugval op 186 punten rekenen met de rubrieken 1 tot en met 10 en 12 als overige punten. Dat past bij de slotopmerking van bijlage I, die het puntentotaal per woning afrondt «met inbegrip van de bij zorgwoningen geldende toeslag», en bij het aandeel van 26,6% hierboven, dat rubriek 12 in het totaal meetelt.
+
 **Rekenvoorbeeld 1:** _door toepassing van de cap op de WOZ wordt het aantal punten in rubriek WOZ-waarde verlaagd van 134 naar 66. Het totale puntenaantal blijft boven de 187 punten._
 
 |                                      | WOZ-  punten   | Punten in de  overige  rubrieken   | Totaal  puntenaantal   | Vrije sector?   |
@@ -1608,7 +1611,7 @@ Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het
 ==}
 
 > [!TIP]
-> Dit voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op 'zorg' te zetten. De extra attributen in het model (zoals de WOZ-waarde, energielabel, ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11.
+> Dit voorbeeld toont hoe een zorgwoning wordt aangegeven door de doelgroep op 'zorg' te zetten. De extra attributen in het model (zoals de WOZ-waarde, energielabel, ruimtegegevens, etc.) zijn van belang omdat de 35% opslag voor zorgwoningen wordt berekend over het totale puntenaantal van de rubrieken 1 t/m 11.1.
 > /// tab | JSON
 >
 ```json
@@ -1629,6 +1632,9 @@ Deze laatste twee gevallen zijn niet expliciet in de wet uitgezonderd, omdat het
 > ///
 
 Als sprake is van een zorgwoning, dan wordt het puntentotaal die de woning krijgt op basis van de rubrieken 1 t/m 11.1 van het Bhw met 35% verhoogd.[^13] Dit heeft een hoger puntenaantal als gevolg en telt daarom mee in het bepalen van de huursector waarin de woonruimte valt.
+
+> [!NOTE]
+> De verhoging rekent over de WOZ-punten van 11.1 vóór de cap op de WOZ (11.3), zoals ze ook vóór het nieuwbouwminimum rekent (voetnoot 13). Wettekst en beleidsboek zijn hier niet sluitend. [Bijlage I, onder A, onderdeel 12](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI) noemt «35% van de ingevolge de onderdelen 1 tot en met 11.1 toegekende punten», maar de [toelichting bij rubriek 12 in de wettekst](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI) zegt: «Indien er sprake is van een zorgwoning wordt het puntentotaal van de waardering volgens de rubrieken 1 tot en met 11 van het woningwaarderingsstelsel met 35% verhoogd.» Voetnoot 13 noemt alleen rubriek 11.2. We volgen de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/zelfstandige-woonruimte) (gemeten op 5 november 2026, tijdvak 1 januari 2026 - 31 december 2026): een zorgwoning met 84 punten voor de rubrieken 1 tot en met 10 en 81 WOZ-punten krijgt daar 57,75 punten verhoging (35% van 165 punten), 69 WOZ-punten na de cap en 211 punten in totaal.
 
 [^13]: Dit betekent dat punten die eventueel worden toegekend op basis van rubriek 11.2 (paragraaf 2.11.5 van dit hoofdstuk) niet worden meegenomen in de berekening.
 
