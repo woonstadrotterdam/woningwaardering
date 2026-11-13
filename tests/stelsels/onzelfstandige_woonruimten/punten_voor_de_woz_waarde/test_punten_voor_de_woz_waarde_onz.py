@@ -247,24 +247,35 @@ def test_woonplaatscode_zonder_corop_gebied_krijgt_met_waarschuwing_geen_waarder
     vergelijk_met_testreferentie(eenheid, groep, waarschuwingen)
 
 
-def test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_geen_waardering(
+def test_woonplaatsnaam_die_afwijkt_van_de_locatieserver_krijgt_met_waarschuwing_geen_waardering(
     punten_voor_de_woz_waarde, vergelijk_met_testreferentie, monkeypatch
 ):
-    """Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
+    """Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die de PDOK Locatieserver bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
     Bron:
     - implementatietoelichting onzelfstandige woonruimten, 2.11.2
     """
-    # Het antwoord van het Kadaster op 1013GS 22, zodat de test zonder netwerk draait.
-    antwoord_van_het_kadaster = SimpleNamespace(
+    # Het antwoord van de PDOK Locatieserver op 1013GS 22, zodat de test zonder netwerk draait.
+    antwoord_van_de_locatieserver = SimpleNamespace(
         raise_for_status=lambda: None,
-        json=lambda: [{"identificatie": "3594", "naam": "Amsterdam"}],
+        json=lambda: {
+            "response": {
+                "docs": [
+                    {
+                        "woonplaatscode": "3594",
+                        "woonplaatsnaam": "Amsterdam",
+                        "postcode": "1013GS",
+                        "huisnummer": 22,
+                    }
+                ]
+            }
+        },
     )
     monkeypatch.setattr(
-        "woningwaardering.stelsels.utils.requests.post",
-        lambda *args, **kwargs: antwoord_van_het_kadaster,
+        "woningwaardering.stelsels.utils.requests.get",
+        lambda *args, **kwargs: antwoord_van_de_locatieserver,
     )
-    # Zonder woonplaatscode vraagt de package het Kadaster; dat geeft Amsterdam, de eenheid noemt Rotterdam.
+    # Zonder woonplaatscode vraagt de package de Locatieserver; die geeft Amsterdam, de eenheid noemt Rotterdam.
     eenheid = EenhedenEenheid(
         id="eenheid",
         adres=EenhedenEenheidadres(

@@ -2,6 +2,7 @@ from collections.abc import Callable, Iterable
 from warnings import WarningMessage
 
 import pytest
+import requests
 
 from tests.peildatum import REFERENTIE_PEILDATUM
 from tests.testreferenties import (
@@ -34,6 +35,18 @@ def pytest_configure(config: pytest.Config) -> None:
         "toelichting(tekst): waarom dit geval van een geparametriseerde waarderingstest "
         "bestaat; de tekst komt in de testreferentie",
     )
+
+
+@pytest.fixture(autouse=True)
+def geen_externe_aanroepen(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Tests mogen niet afhangen van externe diensten: mock de aanroep in de test."""
+
+    def weiger_aanroep(self, method, url, *args, **kwargs):
+        raise AssertionError(
+            f"Test doet een externe aanroep ({method} {url}); mock deze aanroep."
+        )
+
+    monkeypatch.setattr(requests.Session, "request", weiger_aanroep)
 
 
 @pytest.fixture()
