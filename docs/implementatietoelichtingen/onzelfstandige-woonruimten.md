@@ -1479,6 +1479,12 @@ Het waarderingsstelsel voor onzelfstandige woonruimten kent een rubriek voor aft
 
 ~~Wat een hoofd woonvertrek is kan per situatie verschillen. Bij een hoofd woonvertrek gaat het hierbij om het belangrijkste vertrek binnen de woning.~~
 
+> [!NOTE]
+> De wettekst ([Bhw, bijlage I onder B, rubriek 13](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieB)) zegt: “Wanneer de totale oppervlakte van vertrekken onder rubriek 1 minder is dan 8 m²”. Wettekst en beleidsboek laten twee dingen open; de package vult ze als volgt in:
+>
+> 1. **Geen afronding op hele m².** De grens geldt voor de som van de oppervlakten (per vertrek op twee decimalen), niet voor de oppervlakte van rubriek 1 afgerond op hele m². Rubriek 13 noemt geen afronding; die staat bij rubriek 1 als rekenregel voor de punten ([toelichting onder A, rubriek 1](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieA_Divisie_Divisie1): “De afronding van de oppervlakte van alle vertrekken samen vindt plaats op hele vierkante meters na saldering van de oppervlakte van alle vertrekken”). Bij 7,60 m² aan vertrekken geeft rubriek 1 dus 8 punten én rubriek 13 −4 punten.
+> 2. **Toe te rekenen oppervlakte.** Een vertrek dat met onzelfstandige woonruimten op hetzelfde adres wordt gedeeld, telt mee met de toe te rekenen oppervlakte: 14 m² gedeeld door 2 is 7 m², dus −4 punten. Rubriek 13 zegt niet “toe te rekenen”; rubriek 4 doet dat wel (“Punten per m² die volgens rubriek 1 zijn toe te rekenen aan de huurder”). De package leest “onder rubriek 1” als de toerekening die [de toelichting onder B bij rubriek 1](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieB_Divisie_Divisie1) uitrekent: “Het aantal m² dat volgens rubriek 1 aan de huurder is toe te rekenen is 10 m² + (40 m²/4) = 20 m².”
+
 > [!TIP]
 > Dit voorbeeld toont hoe aftrekpunten worden toegepast voor een woning met minder dan 8 m2 oppervlakte voor Rubriek 1.
 > /// tab | JSON
