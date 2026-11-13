@@ -84,8 +84,11 @@ dev = [
     "tomli>=2.2",
 ]
 monumenten = [
-    "monumenten>=2.0.1"
+    "monumenten>=3.0.0"
 ]
 
 [tool.uv]
 exclude-newer = "1 week"
+# monumenten is een package van Woonstad Rotterdam zelf. Een nieuwe release
+# hoeft daarom niet een week te wachten.
+exclude-newer-package = { monumenten = false }

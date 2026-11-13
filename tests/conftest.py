@@ -1,3 +1,4 @@
+import sys
 from collections.abc import Callable, Iterable
 from warnings import WarningMessage
 
@@ -34,6 +35,18 @@ def pytest_configure(config: pytest.Config) -> None:
         "toelichting(tekst): waarom dit geval van een geparametriseerde waarderingstest "
         "bestaat; de tekst komt in de testreferentie",
     )
+
+
+@pytest.fixture(autouse=True)
+def monumenten_niet_geinstalleerd(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Laat elke test werken alsof de package monumenten niet is geïnstalleerd.
+
+    De extra `dev` installeert monumenten. Zonder deze fixture roept een test
+    zonder `monumenten` in de input de live API aan. Een test die de package
+    nodig heeft, vervangt hem zelf in `sys.modules`.
+    """
+    # Met `None` in `sys.modules` geeft `import monumenten` een ImportError.
+    monkeypatch.setitem(sys.modules, "monumenten", None)
 
 
 @pytest.fixture()

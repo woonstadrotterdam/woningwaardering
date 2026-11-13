@@ -8,7 +8,7 @@ Geen waarderingen voor Prijsopslag monumenten.
 
 ## Waarschuwingen
 
-- UserWarning: Eenheid (eenheid): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.
+- UserWarning: Eenheid (eenheid): 'monumenten' is niet gespecificeerd en de eenheid heeft geen BAG-identificatie om de monumentstatus mee op te halen. Specificeer 'monumenten', met een lege lijst als de eenheid geen monumentstatus heeft.
 
 ## Input
 
