@@ -1,3 +1,6 @@
+<!-- Schrijf volgens ASD-STE100, met de termen uit GLOSSARY.md (zie AGENTS.md, sectie Documentatie). Pas de lengte aan de wijziging aan: een eenvoudige PR blijft kort.
+     Schrijf in de hele PR "vóór deze PR" en "na deze PR", ook onder Ook gewijzigd. -->
+
 ## Gerelateerde issue(s)
 
 <!-- Vink opties aan met ☑ (niet met - [x]; GitHub telt dat als PR-tasks). -->
@@ -8,12 +11,23 @@
 
 <!-- Indien geen issue: leg hier kort uit waarom deze wijziging nodig is. -->
 
+## Context
+
+<!-- Wat moet een reviewer weten die de code niet kent: welk deel van het package raakt dit
+     (bij domeinlogica: welke stelselgroep en welke rekenstap), en wat betekenen de codes die je gebruikt?
+     Neem de Context van het issue over en pas hem aan de PR aan. Bij een kleine PR is één zin genoeg. -->
+
 ## Samenvatting
 
-<!-- Wat verandert en waarom? Veranderen punten of huurprijs, zet dan per situatie één rij in een tabel,
-     met de test waarvan de testreferentie de input bevat. Bijvoorbeeld:
-     | Situatie                                        | Voor | Na   | Test     |
-     | [ZEL] Sanitair, toilet met fontein in badkamer  | 3,75 | 2,75 | `test_…` | -->
+<!-- Wat verandert en waarom? Wijkt de PR af van een acceptatiecriterium van het issue, zeg dan welk criterium en waarom.
+     Veranderen punten of huurprijs, toon dan per situatie voor en na met de test
+     waarvan de testreferentie de input bevat, in de vorm uit docs/agents/voor-en-na.md. Bijvoorbeeld:
+     Doorgerekend met de huurprijscheck op 1 november 2026, tijdvak 1 januari 2026 - 31 december 2026.
+     |       | Situatie                                                                  | Voor  | Na        | Huurprijscheck |
+     | **A** | [ZEL] Sanitair, toilet met fontein in badkamer                            | 3,75  | **2,75**  | gelijk         |
+     | **B** | [ZEL] Punten voor de WOZ-waarde, woonkamer 30 m², `PIP` 15 m² bij 1 adres | 55,00 | **42,50** | 44,25          |
+     - A: `test_…`
+     - B: `test_…`. De huurprijscheck rekent met 12 m² per plek, de package met de werkelijke 15 m². -->
 
 ## Soort wijziging
 
@@ -69,5 +83,6 @@
 - ☐ Relevante implementatietoelichting geraadpleegd (bij domeinlogica)
 - ☐ Bronverwijzing ingevuld (bij domeinlogica)
 - ☐ Tests toegevoegd/aangepast (bij gewijzigde domeinlogica)
+- ☐ Doorgerekend met de huurprijscheck (bij gewijzigde punten of huurprijs)
 - ☐ Waarschuwings- of errorlogica bewust gecontroleerd (indien van toepassing)
 - ☐ Documentatie geüpdatet
