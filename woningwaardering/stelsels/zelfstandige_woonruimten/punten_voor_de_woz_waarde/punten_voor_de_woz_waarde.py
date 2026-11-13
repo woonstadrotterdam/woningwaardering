@@ -11,6 +11,11 @@ from woningwaardering.stelsels.builders import WaarderingsgroepBuilder
 from woningwaardering.stelsels.gedeelde_logica.bijzondere_voorzieningen import (
     waardeer_bijzondere_voorzieningen,
 )
+from woningwaardering.stelsels.gedeelde_logica.parkeerruimten import (
+    TYPE_I,
+    parkeertype,
+    voldoet_aan_oppervlakte_eis,
+)
 from woningwaardering.stelsels.gedeelde_logica.punten_voor_de_woz_waarde import (
     meest_recente_relevante_woz_eenheid,
     ontbrekende_relevante_woz_toelichting,
@@ -30,7 +35,6 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 from woningwaardering.vera.referentiedata.meeteenheid import Meeteenheid
-from woningwaardering.vera.referentiedata.ruimtedetailsoort import Ruimtedetailsoort
 
 LOOKUP_TABEL_FOLDER = (
     "stelsels/zelfstandige_woonruimten/punten_voor_de_woz_waarde/lookup_tabellen"
@@ -500,33 +504,29 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             f"Eenheid ({eenheid.id}): Oppervlakte stelselgroepen van {Woningwaarderingstelselgroep.oppervlakte_van_vertrekken.naam} plus {Woningwaarderingstelselgroep.oppervlakte_van_overige_ruimten.naam} is {oppervlakte}m2"
         )
 
-        # In dit onderdeel van de berekening dient ook het aantal m2 van parkeerplekken uit rubriek 10,
-        # voor zover het een parkeerplek type I (een parkeerplek in een afgesloten parkeergarage behorende tot het complex) betreft, te worden meegenomen.
-        # Hiervoor kan de standaard maatvoering van 12 m2 per plaats gehanteerd worden.
+        # Wettekst, Bijlage I onder A, onderdeel 11.1:
+        # "die waarde, gedeeld door het aantal m2 van de vertrekken, de overige
+        # ruimten en parkeerplekken, bedoeld in de rubrieken 1,2 en10 voor zover
+        # het parkeerplek type I betreft"
+        # Een plek telt mee als zij in rubriek 10 als type I punten krijgt, met
+        # dezelfde deler als daar. Zij telt met haar werkelijke oppervlakte, niet
+        # met de standaardmaat van 12 m² (zie de note onder 2.11.2).
         parkeerplekken_oppervlakte = sum(
-            [
+            (
                 Decimal(str(ruimte.oppervlakte))
                 * Decimal(str(ruimte.aantal or 1))
-                / (Decimal(str(ruimte.gedeeld_met_aantal_adressen or 2)))
+                / utils.deler(ruimte)
                 for ruimte in (eenheid.ruimten or [])
-                if ruimte.detail_soort
-                in [
-                    Ruimtedetailsoort.parkeerplek_in_inpandige_afgesloten_parkeergarage
-                ]  # Type I
-                and utils.gedeeld_met_adressen(
-                    ruimte
-                )  # valt anders niet onder rubriek 10
-                and ruimte.oppervlakte
-                and Decimal(str(ruimte.oppervlakte))
-                >= 12  # valt anders niet onder rubriek 10
-            ]
+                if parkeertype(ruimte) == TYPE_I and voldoet_aan_oppervlakte_eis(ruimte)
+            ),
+            start=Decimal("0"),
         )
         if parkeerplekken_oppervlakte > 0:
             logger.info(
                 f"Eenheid ({eenheid.id}): Oppervlakte parkeerplekken Type I van {Woningwaarderingstelselgroep.gemeenschappelijke_parkeerruimten.naam} is {parkeerplekken_oppervlakte}m2"
             )
 
-        totaal = oppervlakte + Decimal(str(parkeerplekken_oppervlakte))
+        totaal = oppervlakte + parkeerplekken_oppervlakte
         return utils.rond_af(totaal, decimalen=0)
 
     def _bereken_minimum_punten_nieuwbouw(

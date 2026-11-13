@@ -17,12 +17,12 @@ SAMENVATTING parkeerruimten_en_laadpalen
   Sanitair                                                                       10.00 pt
   Gemeenschappelijke parkeerruimten                                              27.75 pt
   Gemeenschappelijke vertrekken, overige ruimten en voorzieningen
-  Punten voor de WOZ-waarde                                                      30.50 pt
+  Punten voor de WOZ-waarde                                                      27.00 pt
   Bijzondere voorzieningen                                                        6.00 pt
   Prijsopslag monumenten en nieuwbouw
                                                                                 ------
-  Totaal afgerond op hele punten                                                165.00 pt
-  Maximaal redelijke huur                                          1083.88 EUR
+  Totaal afgerond op hele punten                                                162.00 pt
+  Maximaal redelijke huur                                          1063.32 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                             15.74 m²
@@ -96,12 +96,12 @@ PUNTEN VOOR DE WOZ-WAARDE
   WOZ-waarde op waardepeildatum 01-01-2024                       264000.00 EUR
   Onderdeel I                                                                    17.22 pt
     - Factor I                                                    15329.00 EUR
-  Onderdeel II                                                                   13.30 pt
-    - Oppervlakte van vertrekken en overige ruimten                  82.00 m²
+  Onderdeel II                                                                    9.74 pt
+    - Oppervlakte van vertrekken en overige ruimten                 112.00 m²
     - Factor II                                                     242.00 EUR
-  Afronding op kwartpunten                                                       -0.02 pt
+  Afronding op kwartpunten                                                        0.04 pt
                                                                                 ------
-  Totaal                                                                         30.50 pt
+  Totaal                                                                         27.00 pt
 
 BIJZONDERE VOORZIENINGEN
   Privé
@@ -1207,7 +1207,7 @@ Geen.
           "naam": "Punten voor de WOZ-waarde"
         }
       },
-      "punten": 30.5,
+      "punten": 27.0,
       "woningwaarderingen": [
         {
           "aantal": 264000.0,
@@ -1246,10 +1246,10 @@ Geen.
             "id": "punten_voor_de_woz_waarde__onderdeel_II",
             "naam": "Onderdeel II"
           },
-          "punten": 13.3
+          "punten": 9.74
         },
         {
-          "aantal": 82.0,
+          "aantal": 112.0,
           "criterium": {
             "id": "punten_voor_de_woz_waarde__onderdeel_II__oppervlakte_vertrekken_en_overige_ruimten",
             "naam": "Oppervlakte van vertrekken en overige ruimten",
@@ -1281,7 +1281,7 @@ Geen.
             "id": "punten_voor_de_woz_waarde__afronding_op_kwartpunten",
             "naam": "Afronding op kwartpunten"
           },
-          "punten": -0.02
+          "punten": 0.04
         }
       ]
     },
@@ -1337,13 +1337,13 @@ Geen.
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 1083.88,
-  "punten": 165.0,
+  "maximaleHuur": 1063.32,
+  "punten": 162.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 1083.88
+  "maximaleHuurInclusiefOpslag": 1063.32
 }
 ```
