@@ -363,7 +363,7 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > [!NOTE]
 > De maximumaftrek van 5 punten wordt gedeeld door het aantal onzelfstandige woonruimten.
 >
-> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder.
+> De punten die de zolder waard is, zijn de punten die zij aan het afgeronde totaal toevoegt: het afgeronde totaal min het afgeronde totaal zonder de zolder. Wettekst en beleidsboek zeggen niet hoeveel punten de zolder zelf waard is. De package volgt hier de zin over de afronding, net als bij [zelfstandige woonruimten, 2.2.2.3](zelfstandige-woonruimten.md#2223-zolderruimte-zonder-vaste-trap).
 >
 > Voorbeeld (4 onzelfstandige woonruimten):
 >
@@ -990,6 +990,9 @@ De badruimte voldoet aan de eisen voor de waardering van extra sanitaire voorzie
 Omdat de badkamer wordt gedeeld door 4 onzelfstandige wooneenheden is het puntenaantal per woonruimte: 6 / 4 = 1,5 punt.
 
 ==}
+
+> [!NOTE]
+> De package begrenst de punten voor extra voorzieningen per bad- of doucheruimte: op de punten voor het bad, de douche en de bad/douche in die ruimte. Een bad of douche in een andere ruimte telt niet mee voor dit maximum. Wettekst en beleidsboek zeggen niet of het maximum per ruimte of voor de hele woonruimte geldt; zie de note bij [zelfstandige woonruimten, 2.6.2](zelfstandige-woonruimten.md#262-punten-voor-extra-sanitaire-voorzieningen). De package volgt de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte), die ook per ruimte begrenst. Voorbeeld: een privé badkamer met een bad en een aparte douche (samen 6 punten) en extra voorzieningen van samen 7 punten, en een privé slaapkamer met een douche (3 punten). Package en huurprijscheck geven rubriek 6 in totaal 16 punten. Met een maximum over beide ruimten zou het 17 punten zijn. Gemeten op 6 oktober 2026, tijdvak 1 januari 2026 - 31 december 2026.
 
 ### ~~2.7 Rubriek 7: Woonvoorzieningen voor personen met een handicap~~
 
