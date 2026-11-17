@@ -16,14 +16,15 @@ Infer the repo from `git remote -v`; `gh` does this automatically when run insid
 
 ## Issue content
 
-- Write titles and bodies in Dutch, using the vocabulary from `GLOSSARY.md`. This includes the headings of skill templates (e.g. the `/to-spec` spec).
+- Write titles and bodies in Dutch. This includes the headings of skill templates (e.g. the `/to-spec` spec).
 - Prefix domain issues with the affected stelsel(s) and stelselgroep: `[ZEL] …`, `[ONZ] …` or `[ZEL/ONZ] Sanitair: …`.
-- Give every domain issue that describes one change the sections of `.github/ISSUE_TEMPLATE/domeinlogica.md`, without its comments, also a `/to-tickets` ticket: its "What to build" goes under **Samenvatting**, its parent and blockers under **Relatie met andere issues**. A `/to-spec` spec and a `/wayfinder` ticket describe a plan or a question, not one change, and keep their own template.
+- Give every domain issue that describes one change the sections of `.github/ISSUE_TEMPLATE/domeinlogica.md`: follow its comments, but leave them out of the body. This holds for a `/to-tickets` ticket too: its "What to build" goes under **Samenvatting**, its parent and blockers under **Relatie met andere issues**. A `/to-spec` spec and a `/wayfinder` ticket describe a plan or a question, not one change, and keep their own template.
+- Link a rubric number to the name of its stelselgroep once, then use the name.
 - For domain logic, add a **Bronnen** section that quotes the wettekst and/or the online beleidsboek verbatim, with article/paragraph number (see `docs/voor-ontwikkelaars/bronnen.md`). State explicitly what is a package assumption rather than a rule from the source, and where VERA data or the input model falls short.
 - Let an acceptance criterion ask for a note in the implementatietoelichting only where `docs/implementatietoelichtingen/index.md` expects one, and name the deviation, choice or contradiction the note records.
 - When an issue changes expected output (points, criterium-id's, rapport), say so, since that decides whether `task genereer-test-output` is in scope.
 - Write every formula with brackets, for example `35% × (87 + 25)` instead of `35% van 87 + 25`.
-- Mark numbers in a table as an example, unless they come from the huurprijscheck. For each row, name the input (a helper from `tests/input.py` or a huurprijscheck input) that produces the number. If nobody can name that input, the number is not a requirement.
+- Mark the before-and-after numbers (see [`voor-en-na.md`](voor-en-na.md)) as an example, unless they come from the huurprijscheck. For each situation, name the input (a helper from `tests/input.py` or a huurprijscheck input) that produces the number. If nobody can name that input, the number is not a requirement.
 - Add the label `impact eindgebruiker` when the issue will change, for users after upgrading: punten of huurprijs, criteriumnamen of criterium-id's, rapport, warnings of errors, or the publieke API of input (see `docs/voor-ontwikkelaars/releases.md`). On an issue it is an estimate; the PR confirms it. Reviewers use it to decide how intensively to review.
 
 ## Pull requests as a triage surface

@@ -4,8 +4,8 @@ description: >-
   Rekent een scenario door in de huurprijscheck van de Huurcommissie (zelfstandige en
   onzelfstandige woonruimte) met een script dat de online wizard bedient, en leest de
   puntentelling per rubriek uit. Gebruik wanneer wettekst en online beleidsboek geen uitsluitsel
-  geven over een beleidsregel, bij code-review van een wijziging die punten of huurprijs kan
-  veranderen, of wanneer de gebruiker vraagt wat de huurprijscheck voor een situatie berekent of
+  geven over een beleidsregel, bij code-review of het schrijven van een PR die punten of huurprijs
+  kan veranderen, of wanneer de gebruiker vraagt wat de huurprijscheck voor een situatie berekent of
   of de package daarmee overeenkomt. Niet voor het doorrekenen van grote
   aantallen woonruimten.
 ---
@@ -82,4 +82,4 @@ Rapporteer per testreferentie: de beleidsregel, punten en huurprijs van package 
 
 ## Vastleggen
 
-Onderbouwt de huurprijscheck een implementatiekeuze, omdat wettekst en beleidsboek niet sluitend zijn of omdat tool en wettekst botsen, leg dat dan vast in een note in de relevante pagina van `docs/implementatietoelichtingen/`, zoals de bestaande notes: link naar de huurprijscheck, het scenario, de punten per post en welke kant de package volgt. Noem ook de datum en het tijdvak, want de tool kan veranderen en rekent per tijdvak anders. Een review-uitkomst die geen nieuwe keuze onderbouwt, blijft in het reviewrapport.
+Onderbouwt de huurprijscheck een implementatiekeuze, omdat wettekst en beleidsboek niet sluitend zijn of omdat tool en wettekst botsen, leg dat dan vast in een note in de relevante pagina van `docs/implementatietoelichtingen/`, zoals de bestaande notes: link naar de huurprijscheck, het scenario, de punten per post en welke kant de package volgt. Noem ook de datum en het tijdvak, want de tool kan veranderen en rekent per tijdvak anders. Geeft de package bewust een andere uitkomst dan de huurprijscheck, leg dat ook vast in een note (zie `docs/implementatietoelichtingen/index.md`). Elke andere uitkomst van de doorrekening staat in de PR, bij de situatie in het overzicht vóór en na (zie `docs/agents/voor-en-na.md`).

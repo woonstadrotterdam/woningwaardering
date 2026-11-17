@@ -5,8 +5,14 @@ title: "[ZEL/ONZ] Stelselgroep: "
 labels: needs-triage
 ---
 
-<!-- Vul elke sectie in die van toepassing is en laat de rest weg; Samenvatting en Acceptatiecriteria zijn altijd nodig.
-     Gebruik de termen uit GLOSSARY.md. Voorbeeld: #429. -->
+<!-- Vul elke sectie in die van toepassing is en laat de rest weg; Context, Samenvatting en Acceptatiecriteria zijn altijd nodig.
+     Schrijf volgens ASD-STE100, met de termen uit GLOSSARY.md (zie AGENTS.md, sectie Documentatie). Pas de lengte aan de wijziging aan: een eenvoudig issue blijft kort.
+     Schrijf in het hele issue "nu" en "voorgesteld", zoals in de kop Huidig en voorgesteld gedrag. -->
+
+### Context
+
+<!-- Wat moet een lezer weten die de code niet kent: welke stelselgroep en welke rekenstap raakt dit,
+     en wat betekenen de codes die je gebruikt? -->
 
 ### Samenvatting
 
@@ -23,12 +29,13 @@ labels: needs-triage
 
 ### Huidig en voorgesteld gedrag
 
-<!-- Een minimaal voorbeeld met punten of huurprijs nu en straks, bijvoorbeeld in een tabel. -->
+<!-- Minimale voorbeelden met de punten voor en na de wijziging, in de vorm uit docs/agents/voor-en-na.md. -->
 
 ### Gevolgen voor bestaand gedrag
 
 <!-- Welke eerdere beslissingen, tests en verwachte output wijzigen er? Verandert er iets voor gebruikers na upgraden
-     (punten of huurprijs, criteriumnamen of -id's, rapport, warnings of errors, publieke API of input)? -->
+     (punten of huurprijs, criteriumnamen of -id's, rapport, warnings of errors, publieke API of input)?
+     Blijft iets bewust hetzelfde terwijl een lezer een wijziging zou verwachten, zeg dat dan ook. -->
 
 ### Acceptatiecriteria
 
