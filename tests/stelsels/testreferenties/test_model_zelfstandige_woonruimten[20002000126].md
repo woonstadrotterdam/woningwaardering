@@ -22,7 +22,7 @@ SAMENVATTING 20002000126
   Prijsopslag monumenten en nieuwbouw
                                                                                 ------
   Totaal afgerond op hele punten                                                113.00 pt
-  Maximaal redelijke huur                                           726.95 EUR
+  Maximaal redelijke huur                                           726.90 EUR
 
 OPPERVLAKTE VAN VERTREKKEN
   Keuken                                                             15.74 m²
@@ -851,13 +851,13 @@ Geen.
       "opslagpercentage": 0.0
     }
   ],
-  "maximaleHuur": 726.95,
+  "maximaleHuur": 726.9,
   "punten": 113.0,
   "stelsel": {
     "code": "ZEL",
     "naam": "Zelfstandige woonruimten"
   },
   "huurprijsopslag": 0.0,
-  "maximaleHuurInclusiefOpslag": 726.95
+  "maximaleHuurInclusiefOpslag": 726.9
 }
 ```
