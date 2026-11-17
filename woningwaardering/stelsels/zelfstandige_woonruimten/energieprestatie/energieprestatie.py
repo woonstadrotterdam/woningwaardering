@@ -238,12 +238,7 @@ class Energieprestatie(Stelselgroep):
 
         energieprestatie = energieprestatie_met_geldig_label(self.peildatum, eenheid)
 
-        if eenheid.monumenten is None:
-            warnings.warn(
-                f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
-                UserWarning,
-            )
-            eenheid = utils.update_eenheid_monumenten(eenheid)
+        eenheid = utils.vul_monumenten_aan(eenheid)
 
         pandsoort = (
             Pandsoort.meergezinswoning

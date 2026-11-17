@@ -7,7 +7,6 @@ from woningwaardering.stelsels.builders import (
     WaarderingBuilder,
     WaarderingsgroepBuilder,
 )
-from woningwaardering.stelsels.utils import update_eenheid_monumenten
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
 )
@@ -199,19 +198,3 @@ def opslag_beschermd_stads_of_dorpsgezicht(
     )
     waardering.opslagpercentage = 0.05
     return waardering
-
-
-def check_monumenten_attribuut(eenheid: EenhedenEenheid) -> None:
-    """Controleert of het monumenten-attribuut correct is gespecificeerd.
-
-    Geeft een waarschuwing als het attribuut None is en zoekt vervolgens de monumentstatus op basis van de gegevens in de eenheid.
-
-    Args:
-        eenheid (EenhedenEenheid): De te controleren eenheid
-    """
-    if eenheid.monumenten is None:
-        warnings.warn(
-            f"Eenheid ({eenheid.id}): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.",
-            UserWarning,
-        )
-        update_eenheid_monumenten(eenheid)

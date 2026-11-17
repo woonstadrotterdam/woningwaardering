@@ -9,12 +9,12 @@ from woningwaardering.stelsels.builders import (
     WaarderingsgroepBuilder,
 )
 from woningwaardering.stelsels.gedeelde_logica.prijsopslag_monumenten import (
-    check_monumenten_attribuut,
     opslag_beschermd_stads_of_dorpsgezicht,
     opslag_gemeentelijk_of_provinciaal_monument,
     opslag_rijksmonument,
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
+from woningwaardering.stelsels.utils import vul_monumenten_aan
 from woningwaardering.vera.bvg.generated import (
     EenhedenEenheid,
     WoningwaarderingResultatenWoningwaarderingGroep,
@@ -78,7 +78,7 @@ class PrijsopslagMonumenten(Stelselgroep):
         eenheid: EenhedenEenheid,
         waarderingsgroep_builder: WaarderingsgroepBuilder,
     ) -> Iterator[WaarderingBuilder | None]:
-        check_monumenten_attribuut(eenheid)
+        vul_monumenten_aan(eenheid)
 
         yield opslag_rijksmonument(
             peildatum,
