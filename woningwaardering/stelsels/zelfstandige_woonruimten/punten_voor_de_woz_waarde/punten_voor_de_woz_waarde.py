@@ -42,6 +42,10 @@ DATUM_FORMAT = "%d-%m-%Y"
 NIEUWBOUW_MINIMUM_PUNTEN_ID = "nieuwbouw_minimum_punten"
 # Volledige pad-id voor andere stelselgroepen; niet zelf reconstrueren.
 NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID = f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{NIEUWBOUW_MINIMUM_PUNTEN_ID}"
+# Criterium-id-segment voor rubriek 11.3 (cap op de WOZ).
+MAXIMERING_WOZ_PUNTEN_ID = "maximering_woz_punten"
+# Volledige pad-id voor andere stelselgroepen; niet zelf reconstrueren.
+MAXIMERING_WOZ_PUNTEN_CRITERIUM_ID = f"{Woningwaarderingstelselgroep.punten_voor_de_woz_waarde.name}__{MAXIMERING_WOZ_PUNTEN_ID}"
 
 
 class PuntenVoorDeWozWaarde(Stelselgroep):
@@ -262,9 +266,9 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             1. Onafgeronde onderdelen I + II.
             2. Nieuwbouwminimum (2015-2019, ≥110 punten op rubrieken 1-10/12) wanneer
                WOZ < 40 punten; daarna geen cap (26,6% → geen aftopping).
-            3. Anders: 33%-cap wanneer de woningwaardering zonder cap (rubrieksom
-               ná 2.1.4, daarna 2.1.5) ≥ 187 punten, tenzij COROP of minimum
-               WOZ-waarde van toepassing is.
+            3. Anders: 33%-cap wanneer de woningwaardering zonder cap (rubrieken
+               1-10, 11.1 en 12; rubrieksom ná 2.1.4, daarna 2.1.5) ≥ 187 punten,
+               tenzij COROP of minimum WOZ-waarde van toepassing is.
 
         Args:
             waarderingsgroep_builder (WaarderingsgroepBuilder): Builder voor deze stelselgroep.
@@ -292,14 +296,15 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # kwartpunten. De 33%-grondslag gebruikt die som; niet tussentijds op hele punten
         # afronden. De WOZ-rubriek volgt 2.11.2: I+II niet tussentijds afronden, de som
         # op een kwart punt.
-        overige_punten = sum(
-            (
-                Decimal(str(groep.punten))
-                for groep in woningwaardering_resultaat.groepen or []
-                if groep.punten
-            ),
-            Decimal("0"),
-        )
+        # Wettekst, Bijlage I onder A, onderdeel 11.3: "Het aandeel van de punten voor
+        # de WOZ-waarde in de waardering van de woning is niet groter dan 33 procent."
+        # De waardering van de woning omvat rubriek 12 (slotopmerking bijlage I: "met
+        # inbegrip van de bij zorgwoningen geldende toeslag"); zie de implementatie-
+        # toelichting, 2.11.7. Rubriek 12 wordt pas na deze stelselgroep gewaardeerd,
+        # dus berekenen we haar hier, met de verhoging over 1 t/m 11.1 (vóór de cap).
+        overige_punten = self._punten_rubrieken_1_tot_en_met_10(
+            woningwaardering_resultaat
+        ) + self._punten_rubriek_12(eenheid, woningwaardering_resultaat, woz_punten)
 
         woz_punten_rubriek = utils.rond_af_op_kwart(woz_punten)
         totaal_kwartpunten_zonder_cap = overige_punten + woz_punten_rubriek
@@ -311,8 +316,10 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         correctie_punten = self._cap_punten(eenheid, woz_punten, overige_punten)
 
         if correctie_punten is not None:
-            totaal_kwartpunten_met_cap = (
-                totaal_kwartpunten_zonder_cap + correctie_punten
+            # De WOZ-rubriek na de cap, zoals de woning haar krijgt: de correctie
+            # rekent vanaf de onafgeronde onderdelen I + II, de som op een kwart punt.
+            totaal_kwartpunten_met_cap = overige_punten + utils.rond_af_op_kwart(
+                woz_punten + correctie_punten
             )
             waardering_met_cap = utils.rond_af(totaal_kwartpunten_met_cap, 0)
 
@@ -331,7 +338,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                 )
                 correctie_punten = Decimal("186") - totaal_kwartpunten_zonder_cap
                 waarderingsgroep_builder.met_onderliggend(
-                    id="maximering_woz_punten",
+                    id=MAXIMERING_WOZ_PUNTEN_ID,
                     naam="Maximering WOZ-punten tot 186 punten totaal",
                     punten=float(correctie_punten),
                 )
@@ -340,7 +347,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
                     f"Eenheid ({eenheid.id}) wordt gewaardeerd met maximaal 33% van het totale puntenaantal van de eenheid door de cap op de WOZ voor {self.stelselgroep.naam}"
                 )
                 waarderingsgroep_builder.met_onderliggend(
-                    id="maximering_woz_punten",
+                    id=MAXIMERING_WOZ_PUNTEN_ID,
                     naam="Maximering WOZ-punten tot 33% van totaal",
                     punten=float(correctie_punten),
                 )
@@ -363,7 +370,7 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         Args:
             eenheid (EenhedenEenheid): De eenheid.
             woz_punten (Decimal): Het aantal punten voor de stelselgroep WOZ-waarde.
-            overige_punten (Decimal): Het totaal aantal punten van alle groepen behalve de stelselgroep WOZ-waarde.
+            overige_punten (Decimal): Het totaal aantal punten van de rubrieken 1 tot en met 10 en 12.
 
         Returns:
             Decimal | None: De correctiepunten voor de stelselgroep WOZ-waarde.
@@ -562,15 +569,8 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
         # behaald dan worden, voor het aantal punten voor de WOZ-waarde,
         # minimaal 40 punten toegekend.
         if bouwjaar and 2015 <= bouwjaar <= 2019:
-            punten_rubrieken_1_tot_en_met_10 = sum(
-                (
-                    Decimal(str(groep.punten))
-                    for groep in self._groepen_rubrieken_1_tot_en_met_10(
-                        woningwaardering_resultaat
-                    )
-                    if groep.punten
-                ),
-                Decimal("0"),
+            punten_rubrieken_1_tot_en_met_10 = self._punten_rubrieken_1_tot_en_met_10(
+                woningwaardering_resultaat
             )
             punten_rubriek_12 = self._punten_rubriek_12(
                 eenheid, woningwaardering_resultaat, woz_punten_onafgerond
@@ -613,18 +613,35 @@ class PuntenVoorDeWozWaarde(Stelselgroep):
             )
         ]
 
+    @classmethod
+    def _punten_rubrieken_1_tot_en_met_10(
+        cls,
+        woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
+    ) -> Decimal:
+        """Geeft de som van de punten van de rubrieken 1 tot en met 10 uit het resultaat."""
+        return sum(
+            (
+                Decimal(str(groep.punten))
+                for groep in cls._groepen_rubrieken_1_tot_en_met_10(
+                    woningwaardering_resultaat
+                )
+                if groep.punten
+            ),
+            Decimal("0"),
+        )
+
     def _punten_rubriek_12(
         self,
         eenheid: EenhedenEenheid,
         woningwaardering_resultaat: WoningwaarderingResultatenWoningwaarderingResultaat,
         woz_punten_onafgerond: Decimal,
     ) -> Decimal:
-        """Berekent de punten van rubriek 12 voor de 110-puntentoets van het nieuwbouwminimum.
+        """Berekent de punten van rubriek 12 voor het nieuwbouwminimum en de cap op de WOZ.
 
         Rubriek 12 wordt in het stelsel pas na deze stelselgroep gewaardeerd, dus
         berekenen we haar hier met dezelfde logica als de stelselgroep Bijzondere
         voorzieningen. De 35%-verhoging rekent over de rubrieken 1 tot en met
-        11.1: de rubrieken 1 tot en met 10 plus de WOZ-punten vóór het minimum.
+        11.1: de rubrieken 1 tot en met 10 plus de WOZ-punten vóór minimum en cap.
 
         Args:
             eenheid (EenhedenEenheid): De eenheid.

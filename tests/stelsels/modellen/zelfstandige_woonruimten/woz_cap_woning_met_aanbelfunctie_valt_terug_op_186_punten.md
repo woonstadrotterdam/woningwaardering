@@ -1,0 +1,1 @@
+Woning die met rubriek 1 t/m 11 op 186,25 punten komt en alleen met de aanbelfunctie van rubriek 12 (0,25 punt) boven 186 punten uitkomt: de cap op de WOZ geldt en de woning valt terug op 186 punten (2.11.7).

@@ -8,6 +8,7 @@ from woningwaardering.stelsels.gedeelde_logica import (
 )
 from woningwaardering.stelsels.stelselgroep import Stelselgroep
 from woningwaardering.stelsels.zelfstandige_woonruimten.punten_voor_de_woz_waarde.punten_voor_de_woz_waarde import (
+    MAXIMERING_WOZ_PUNTEN_CRITERIUM_ID,
     NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
 )
 from woningwaardering.vera.bvg.generated import (
@@ -20,8 +21,13 @@ from woningwaardering.vera.referentiedata import (
     Woningwaarderingstelselgroep,
 )
 
+# Wettekst, Bijlage I onder A, onderdeel 12: "35% van de ingevolge de onderdelen 1
+# tot en met 11.1 toegekende punten". Het nieuwbouwminimum (11.2) en de cap op de
+# WOZ (11.3) tellen dus niet mee in de grondslag; zie de implementatietoelichting,
+# 2.12.1.
 UITGESLOTEN_ZORGWONING_GRONDSLAG_CRITERIUM_IDS = [
     NIEUWBOUW_MINIMUM_PUNTEN_CRITERIUM_ID,
+    MAXIMERING_WOZ_PUNTEN_CRITERIUM_ID,
 ]
 
 
