@@ -24,7 +24,7 @@ PUNTEN VOOR DE WOZ-WAARDE
 ## Waarschuwingen
 
 - UserWarning: Eenheid (eenheid): 'energieprestaties' is None
-- UserWarning: Eenheid (eenheid): 'monumenten' is niet gespecificeerd. Indien de eenheid geen monumentstatus heeft, geef dit dan expliciet aan door een lege lijst toe te wijzen aan het 'monumenten'-attribuut.
+- UserWarning: Eenheid (eenheid): 'monumenten' is niet gespecificeerd en de eenheid heeft geen BAG-identificatie om de monumentstatus mee op te halen. Specificeer 'monumenten', met een lege lijst als de eenheid geen monumentstatus heeft.
 - UserWarning: Eenheid (eenheid) heeft geen pandsoort Eengezinswoning of Meergezinswoning en komt daarom niet in aanmerking voor waardering onder stelselgroep Energieprestatie.
 - UserWarning: Eenheid (eenheid) kan niet gewaardeerd worden voor stelselgroep Keuken omdat er geen keuken is gevonden.
 - UserWarning: Eenheid (eenheid): geen bouwjaar gevonden. Kan niet bepalen of woning onder nieuwbouw valt.

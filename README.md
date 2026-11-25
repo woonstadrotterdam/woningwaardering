@@ -157,11 +157,13 @@ pip install woningwaardering
 
 Vervolgens kun je de package importeren en gebruiken op verschillende manieren.
 
-De woningwaardering package kan op basis van data van het Kadaster en Cultureel Erfgoed de monumentale status van een woning bepalen. Deze functionaliteit is optioneel en kan worden geïnstalleerd met
+De woningwaardering package kan de monumentstatus van een woning bepalen met data van de Rijksdienst voor het Cultureel Erfgoed (RCE), het Kadaster, de BAG en de provincies Noord-Holland en Drenthe. Deze functionaliteit is optioneel. Installeer haar met:
 
 ```bash
 pip install woningwaardering[monumenten]
 ```
+
+Is `monumenten` niet gespecificeerd in de input van een eenheid, dan haalt de package de monumentstatus op met de BAG-identificatie van de eenheid. Kan de package de monumentstatus niet bepalen, dan volgt een `UserWarning`. Specificeer `monumenten`, met een lege lijst als de eenheid geen monumentstatus heeft, om het ophalen over te slaan.
 
 <!--installatie-end-->
 
