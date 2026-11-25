@@ -1,6 +1,6 @@
-# test_woonplaatsnaam_die_afwijkt_van_het_kadaster_krijgt_met_waarschuwing_geen_waardering
+# test_woonplaatsnaam_die_afwijkt_van_de_locatieserver_krijgt_met_waarschuwing_geen_waardering
 
-Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die het Kadaster bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
+Een eenheid waarvan de opgegeven woonplaatsnaam afwijkt van de woonplaats die de PDOK Locatieserver bij postcode en huisnummer geeft, krijgt met een waarschuwing geen waardering voor de WOZ-waarde.
 
 Bron:
 - implementatietoelichting onzelfstandige woonruimten, 2.11.2

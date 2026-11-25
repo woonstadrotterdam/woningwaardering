@@ -72,6 +72,10 @@ Ontbreekt er een functie voor wat je nodig hebt, voeg hem dan toe aan `tests/inp
 
 Fixtures zijn bedoeld voor context en niet voor scenario's: de stelselgroep (`sanitair`), de `peildatum` en `vergelijk_met_testreferentie`. Een scenario dat in een fixture staat, is in de test niet meer te lezen.
 
+### Externe aanroepen
+
+Tests hangen niet af van externe diensten. Een fixture in `tests/conftest.py` laat elke aanroep via `requests` falen; mock de aanroep in de test, zoals in `tests/stelsels/utils/test_get_woonplaats.py`.
+
 ### Asserts
 
 Assert met de helpers uit `tests/utils.py` de waarderingen die de beleidsregel raakt, plus het totaal (`groep.punten`); de overige waarderingen staan in de testreferentie. Raakt de beleidsregel elke waardering in het scenario, vergelijk dan de hele uitkomst; het totaal heeft dan geen eigen assert nodig. Heeft een waardering geen eigen punten, zoals bij de oppervlakte van vertrekken, assert dan het aantal en het totaal op de stelselgroep. Hoe je op een verwachte waarde komt, mag als commentaar bij de assert staan.
