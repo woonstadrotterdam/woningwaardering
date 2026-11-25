@@ -1,0 +1,1 @@
+Zorgwoning die pas met de 35%-verhoging van rubriek 12 boven 187 punten komt: de cap op de WOZ geldt en het maximum van 33% rekent met de rubrieken 1 t/m 10 en 12 (2.11.7). De verhoging rekent over de WOZ-punten vóór de cap (2.12.1).
