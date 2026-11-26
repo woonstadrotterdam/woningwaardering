@@ -374,6 +374,8 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > 5. 15,75 − 1,25 = **14,50**
 >
 > In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de waarderingen van de ruimten eronder (via de gedeeld-met-laag) en de correctie op hetzelfde niveau als het subtotaal; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
+>
+> De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) waardeert een zolder zonder vaste trap over de oppervlakte vóór de afronding op hele m². Bij een oppervlakte die geen heel aantal m² is, geeft hij daardoor een andere uitkomst. Voorbeeld: een privé zolder van 13,40 m² met een `vlizotrap`. De package rekent (13 × 0,75) − 5 = 4,75 punten. De huurprijscheck geeft 5 punten: (13,40 × 0,75) − 5 = 5,05, afgerond op een kwart punt. De package volgt de wettekst: "Waardering in punten vindt na saldering en afronding plaats." ([Bhw, bijlage I, onder A, rubriek 2](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieA_Divisie_Divisie2), via de inleiding van de toelichting onder B). Gemeten op 26 november 2026, tijdvak 1 januari 2026 - 31 december 2026.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
