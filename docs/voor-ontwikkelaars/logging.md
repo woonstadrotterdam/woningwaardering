@@ -23,6 +23,8 @@ In stelselgroepen genereren we gebruikerswaarschuwingen met `warnings.warn()`, b
 warnings.warn("Dit is een warning", UserWarning)
 ```
 
+Geef geen `stacklevel` mee. Het filter in `woningwaardering/_setup.py` maakt alleen een error van een `UserWarning` van een module van woningwaardering. Met een `stacklevel` hoort de warning bij de module van de aanroeper, en wordt hij geen error.
+
 Het gebruikersgedrag (`UserWarning` → standaard error, `simplefilter`, `DeprecationWarning`) staat in [Aan de slag](../aan-de-slag/index.md#warnings).
 
 Alle waarschuwingen die met `warnings.warn()` worden gegenereerd, loggen we via `logger.warning()` (als logging aanstaat) en tonen we via de standaardfoutuitvoer (_stderr_).
