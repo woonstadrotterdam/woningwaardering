@@ -377,6 +377,8 @@ Als een zolderruimte niet voldoet aan de vereisten voor waardering als een ‘ve
 > 5. 15,75 − 1,25 = **14,50**
 >
 > In de [huurprijschecktool](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) wijkt dit af: hetzelfde scenario zonder vlizotrap geeft rubriek 2 = **15,75** (consistent met [§2.2.2.1](#2221-rekenregels-vertrekken)), maar mét vlizotrap **10,00** — alsof de tool per categorie afrondt en de volle 5 punten aftrekt. Omdat wettekst en tool botsen, volgen wij de wettekst (gedeelde cap). Bij een vlizotrap staat één subtotaal direct onder de stelselgroep, met de waarderingen van de ruimten eronder (via de gedeeld-met-laag) en de correctie op hetzelfde niveau als het subtotaal; het subtotaal draagt punten, geen aantal. Zie `criteriumstrategie.md` en [#403](https://github.com/woonstadrotterdam/woningwaardering/issues/403).
+>
+> De [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte) waardeert een zolder zonder vaste trap over de oppervlakte vóór de afronding op hele m². Bij een oppervlakte die geen heel aantal m² is, geeft hij daardoor een andere uitkomst. Voorbeeld: een privé zolder van 13,40 m² met een `vlizotrap`. De package rekent (13 × 0,75) − 5 = 4,75 punten. De huurprijscheck geeft 5 punten: (13,40 × 0,75) − 5 = 5,05, afgerond op een kwart punt. De package volgt de wettekst: "Waardering in punten vindt na saldering en afronding plaats." ([Bhw, bijlage I, onder A, rubriek 2](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieA_Divisie_Divisie2), via de inleiding van de toelichting onder B). Gemeten op 26 november 2026, tijdvak 1 januari 2026 - 31 december 2026.
 
 ##### ~~2.2.2.4 Toegang ruimte via zolderruimte~~
 
@@ -996,6 +998,11 @@ De badruimte voldoet aan de eisen voor de waardering van extra sanitaire voorzie
 Omdat de badkamer wordt gedeeld door 4 onzelfstandige wooneenheden is het puntenaantal per woonruimte: 6 / 4 = 1,5 punt.
 
 ==}
+
+> [!NOTE]
+> De package begrenst de punten voor extra voorzieningen per bad- of doucheruimte: op de punten voor het bad, de douche en de bad/douche in die ruimte. Een bad of douche in een andere ruimte telt niet mee voor dit maximum. De wettekst zegt niet of het maximum per ruimte of voor de hele woonruimte geldt: "(tot maximaal het aantal punten extra dat reeds voor douche, bad en bad/douche is verkregen)" ([Bhw, bijlage I, onder B, rubriek 6.2](https://wetten.overheid.nl/BWBR0003237/2026-01-01#BijlageI_DivisieB)).
+>
+> Omdat wettekst en beleidsboek dit niet beslissen, volgt de package de [huurprijscheck](https://huurprijscheck.huurcommissie.nl/onzelfstandige-woonruimte), die ook per ruimte begrenst. Voorbeeld: een privé badkamer met een wastafel (1 punt), een bad en een aparte douche (samen 6 punten) en extra voorzieningen van samen 7 punten, en een privé slaapkamer met een douche (3 punten). Package en huurprijscheck geven de badkamer 1 + 6 + 6 = 13 punten en rubriek 6 in totaal 16 punten. Met een maximum over beide ruimten zou het 17 punten zijn. Gemeten op 6 oktober 2026, tijdvak 1 januari 2026 - 31 december 2026.
 
 ### ~~2.7 Rubriek 7: Woonvoorzieningen voor personen met een handicap~~
 
