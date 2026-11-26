@@ -60,8 +60,15 @@ def initialize() -> None:
     setup_locale()
     setup_timezone()
     sys.excepthook = handle_unhandled_exception
-    warnings.simplefilter("once", UserWarning)  # TODO: bepalen of dit wenselijk is
-    warnings.simplefilter("error", UserWarning)
+    # Een `UserWarning` van woningwaardering zelf wordt een error. Een warning van
+    # een andere package of van de applicatie volgt de filters van de applicatie.
+    # Het filter kijkt naar de module die `warnings.warn` aanroept. Geef daarom
+    # geen `stacklevel` mee: dan hoort de warning bij de module van de aanroeper.
+    warnings.filterwarnings(
+        "error",
+        category=UserWarning,
+        module=r"woningwaardering(\.|$)",
+    )
     # Toon package-DeprecationWarnings (bijv. verouderde input-aliassen) zonder
     # ze tot error te promoveren — in tegenstelling tot UserWarning.
     warnings.filterwarnings(
